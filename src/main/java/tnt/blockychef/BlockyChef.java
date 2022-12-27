@@ -2,6 +2,7 @@ package tnt.blockychef;
 
 import dev.toma.configuration.Configuration;
 import dev.toma.configuration.config.format.ConfigFormats;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
@@ -27,5 +28,9 @@ public final class BlockyChef {
 
     private void setup(FMLCommonSetupEvent event) {
 
+    }
+
+    public static ResourceLocation resource(String path) {
+        return new ResourceLocation(MODID, path);
     }
 }

@@ -30,7 +30,6 @@ public final class Registry {
     @ObjectHolder(value = "blockychef:cucumber", registryName = "item")
     public static final Item CUCUMBER = null;
 
-    private static final Item.Properties DEFAULT_ITEM_PROPERTIES = new Item.Properties().tab(CreativeTabs.BLOCKY_CHEF);
     private static List<Block> blockEntries = new ArrayList<>();
 
     @SubscribeEvent
@@ -60,8 +59,8 @@ public final class Registry {
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {
-        helper.register("tomato", new ItemNameBlockItem(TOMATO_CROPS, DEFAULT_ITEM_PROPERTIES));
-        helper.register("cucumber", new ItemNameBlockItem(CUCUMBER_CROPS, DEFAULT_ITEM_PROPERTIES));
+        helper.register("tomato", new ItemNameBlockItem(TOMATO_CROPS, new Item.Properties()));
+        helper.register("cucumber", new ItemNameBlockItem(CUCUMBER_CROPS, new Item.Properties()));
     }
 
     @FunctionalInterface // Registers blocks and schedules itemBlock registration

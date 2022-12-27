@@ -5,5 +5,7 @@
   "item.blockychef.tomato": "Tomato",
   "item.blockychef.cucumber": "Cucumber",
 
+  "config.screen.blockychef": "BlockyChef Configuration",
+
   "itemGroup.blockychef.main": "BlockyChef"
 }
