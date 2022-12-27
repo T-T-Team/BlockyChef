@@ -3,5 +3,7 @@
   "block.blockychef.cucumber_crops": "Tomato Crops",
 
   "item.blockychef.tomato": "Tomato",
-  "item.blockychef.cucumber": "Cucumber"
+  "item.blockychef.cucumber": "Cucumber",
+
+  "itemGroup.blockychef.main": "BlockyChef"
 }
