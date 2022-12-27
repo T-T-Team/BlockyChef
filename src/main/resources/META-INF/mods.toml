@@ -5,13 +5,13 @@ license="All rights reserved"
 [[mods]]
 modId="blockychef"
 version="${file.jarVersion}"
-displayName="Example Mod"
+displayName="Blocky Chef"
 #updateJSONURL="https://change.me.example.invalid/updates.json"
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/"
 logoFile="icon.png"
 authors="Toma,Tomano"
 description='''
-desc
+Advanced cooking mod
 '''
 
 [[dependencies.blockychef]]
