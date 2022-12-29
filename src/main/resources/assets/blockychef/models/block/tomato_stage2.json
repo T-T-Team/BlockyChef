@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/crop",
   "textures": {
-    "crop": "blockychef:block/tomato_stage2"
+    "crop": "blockychef:block/tomato2"
   }
 }

@@ -23,12 +23,16 @@ public final class Registry {
     public static final CropsBlock TOMATO_CROPS = null;
     @ObjectHolder(value = "blockychef:cucumber_crops", registryName = "block")
     public static final CropsBlock CUCUMBER_CROPS = null;
+    @ObjectHolder(value = "blockychef:bell_pepper_crops", registryName = "block")
+    public static final CropsBlock BELL_PEPPER_CROPS = null;
 
     // Items ---
     @ObjectHolder(value = "blockychef:tomato", registryName = "item")
     public static final Item TOMATO = null;
     @ObjectHolder(value = "blockychef:cucumber", registryName = "item")
     public static final Item CUCUMBER = null;
+    @ObjectHolder(value = "blockychef:bell_pepper", registryName = "item")
+    public static final Item BELL_PEPPER = null;
 
     private static List<Block> blockEntries = new ArrayList<>();
 
@@ -56,11 +60,13 @@ public final class Registry {
     private static void registerBlocks(BlockRegistryHelper helper) {
         helper.register("tomato_crops", new CropsBlock(() -> TOMATO), false);
         helper.register("cucumber_crops", new CropsBlock(() -> CUCUMBER), false);
+        helper.register("bell_pepper_crops", new CropsBlock(() -> BELL_PEPPER), false);
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {
         helper.register("tomato", new ItemNameBlockItem(TOMATO_CROPS, new Item.Properties()));
         helper.register("cucumber", new ItemNameBlockItem(CUCUMBER_CROPS, new Item.Properties()));
+        helper.register("bell_pepper", new ItemNameBlockItem(BELL_PEPPER_CROPS, new Item.Properties()));
     }
 
     @FunctionalInterface // Registers blocks and schedules itemBlock registration

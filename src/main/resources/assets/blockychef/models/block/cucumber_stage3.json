@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/crop",
   "textures": {
-    "crop": "blockychef:block/cucumber_stage3"
+    "crop": "blockychef:block/cucumber3"
   }
 }
