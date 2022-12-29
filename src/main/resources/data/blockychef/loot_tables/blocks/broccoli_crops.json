@@ -12,7 +12,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "blockychef:bell_pepper"
+          "name": "blockychef:broccoli"
         }
       ]
     },
@@ -21,7 +21,7 @@
       "bonus_rolls": 0,
       "conditions": [
         {
-          "block": "blockychef:bell_pepper_crops",
+          "block": "blockychef:broccoli_crops",
           "condition": "minecraft:block_state_property",
           "properties": {
             "age": "7"
@@ -42,7 +42,7 @@
               }
             }
           ],
-          "name": "blockychef:bell_pepper"
+          "name": "blockychef:broccoli"
         }
       ]
     }

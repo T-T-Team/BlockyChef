@@ -25,6 +25,12 @@ public final class Registry {
     public static final CropsBlock CUCUMBER_CROPS = null;
     @ObjectHolder(value = "blockychef:bell_pepper_crops", registryName = "block")
     public static final CropsBlock BELL_PEPPER_CROPS = null;
+    @ObjectHolder(value = "blockychef:black_pepper_crops", registryName = "block")
+    public static final CropsBlock BLACK_PEPPER_CROPS = null;
+    @ObjectHolder(value = "blockychef:blueberry_crops", registryName = "block")
+    public static final CropsBlock BLUEBERRY_CROPS = null;
+    @ObjectHolder(value = "blockychef:broccoli_crops", registryName = "block")
+    public static final CropsBlock BROCCOLI_CROPS = null;
 
     // Items ---
     @ObjectHolder(value = "blockychef:tomato", registryName = "item")
@@ -33,6 +39,12 @@ public final class Registry {
     public static final Item CUCUMBER = null;
     @ObjectHolder(value = "blockychef:bell_pepper", registryName = "item")
     public static final Item BELL_PEPPER = null;
+    @ObjectHolder(value = "blockychef:black_pepper", registryName = "item")
+    public static final Item BLACK_PEPPER = null;
+    @ObjectHolder(value = "blockychef:blueberry", registryName = "item")
+    public static final Item BLUEBERRY = null;
+    @ObjectHolder(value = "blockychef:broccoli", registryName = "item")
+    public static final Item BROCCOLI = null;
 
     private static List<Block> blockEntries = new ArrayList<>();
 
@@ -61,12 +73,18 @@ public final class Registry {
         helper.register("tomato_crops", new CropsBlock(() -> TOMATO), false);
         helper.register("cucumber_crops", new CropsBlock(() -> CUCUMBER), false);
         helper.register("bell_pepper_crops", new CropsBlock(() -> BELL_PEPPER), false);
+        helper.register("black_pepper_crops", new CropsBlock(() -> BLACK_PEPPER), false);
+        helper.register("blueberry_crops", new CropsBlock(() -> BLUEBERRY), false);
+        helper.register("broccoli_crops", new CropsBlock(() -> BROCCOLI), false);
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {
         helper.register("tomato", new ItemNameBlockItem(TOMATO_CROPS, new Item.Properties()));
         helper.register("cucumber", new ItemNameBlockItem(CUCUMBER_CROPS, new Item.Properties()));
         helper.register("bell_pepper", new ItemNameBlockItem(BELL_PEPPER_CROPS, new Item.Properties()));
+        helper.register("black_pepper", new ItemNameBlockItem(BLACK_PEPPER_CROPS, new Item.Properties()));
+        helper.register("blueberry", new ItemNameBlockItem(BLUEBERRY_CROPS, new Item.Properties()));
+        helper.register("broccoli", new ItemNameBlockItem(BROCCOLI_CROPS, new Item.Properties()));
     }
 
     @FunctionalInterface // Registers blocks and schedules itemBlock registration

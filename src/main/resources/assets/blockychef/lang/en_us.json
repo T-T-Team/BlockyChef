@@ -2,10 +2,16 @@
   "block.blockychef.tomato_crops": "Tomato Crops",
   "block.blockychef.cucumber_crops": "Cucumber Crops",
   "block.blockychef.bell_pepper_crops": "Bell Pepper Crops",
+  "block.blockychef.black_pepper_crops": "Black Pepper Crops",
+  "block.blockychef.blueberry_crops": "Blueberry Crops",
+  "block.blockychef.broccoli_crops": "Broccoli Crops",
 
   "item.blockychef.tomato": "Tomato",
   "item.blockychef.cucumber": "Cucumber",
   "item.blockychef.bell_pepper": "Bell Pepper",
+  "item.blockychef.black_pepper": "Black Pepper",
+  "item.blockychef.blueberry": "Blueberry",
+  "item.blockychef.broccoli": "Broccoli",
 
   "config.screen.blockychef": "BlockyChef Configuration",
 

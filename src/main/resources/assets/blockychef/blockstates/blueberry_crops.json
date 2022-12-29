@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "blockychef:block/blueberry0"
+    },
+    "age=1": {
+      "model": "blockychef:block/blueberry0"
+    },
+    "age=2": {
+      "model": "blockychef:block/blueberry1"
+    },
+    "age=3": {
+      "model": "blockychef:block/blueberry1"
+    },
+    "age=4": {
+      "model": "blockychef:block/blueberry2"
+    },
+    "age=5": {
+      "model": "blockychef:block/blueberry2"
+    },
+    "age=6": {
+      "model": "blockychef:block/blueberry2"
+    },
+    "age=7": {
+      "model": "blockychef:block/blueberry3"
+    }
+  }
+}
