@@ -35,6 +35,14 @@ public final class Registry {
     public static final CropsBlock CABBAGE_CROPS = null;
     @ObjectHolder(value = "blockychef:chilli_pepper_crops", registryName = "block")
     public static final CropsBlock CHILLI_PEPPER_CROPS = null;
+    @ObjectHolder(value = "blockychef:corn_crops", registryName = "block")
+    public static final CropsBlock CORN_CROPS = null;
+    @ObjectHolder(value = "blockychef:garlic_crops", registryName = "block")
+    public static final CropsBlock GARLIC_CROPS = null;
+    @ObjectHolder(value = "blockychef:leek_crops", registryName = "block")
+    public static final CropsBlock LEEK_CROPS = null;
+    @ObjectHolder(value = "blockychef:lettuce_crops", registryName = "block")
+    public static final CropsBlock LETTUCE_CROPS = null;
 
     // Items ---
     @ObjectHolder(value = "blockychef:tomato", registryName = "item")
@@ -53,6 +61,14 @@ public final class Registry {
     public static final Item CABBAGE = null;
     @ObjectHolder(value = "blockychef:chilli_pepper", registryName = "item")
     public static final Item CHILLI_PEPPER = null;
+    @ObjectHolder(value = "blockychef:corn", registryName = "item")
+    public static final Item CORN = null;
+    @ObjectHolder(value = "blockychef:garlic", registryName = "item")
+    public static final Item GARLIC = null;
+    @ObjectHolder(value = "blockychef:leek", registryName = "item")
+    public static final Item LEEK = null;
+    @ObjectHolder(value = "blockychef:lettuce", registryName = "item")
+    public static final Item LETTUCE = null;
 
     private static List<Block> blockEntries = new ArrayList<>();
 
@@ -86,6 +102,10 @@ public final class Registry {
         helper.register("broccoli_crops", new CropsBlock(() -> BROCCOLI), false);
         helper.register("cabbage_crops", new CropsBlock(() -> CABBAGE), false);
         helper.register("chilli_pepper_crops", new CropsBlock(() -> CHILLI_PEPPER), false);
+        helper.register("corn_crops", new CropsBlock(() -> CORN), false);
+        helper.register("garlic_crops", new CropsBlock(() -> GARLIC), false);
+        helper.register("leek_crops", new CropsBlock(() -> LEEK), false);
+        helper.register("lettuce_crops", new CropsBlock(() -> LETTUCE), false);
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {
@@ -97,6 +117,10 @@ public final class Registry {
         helper.register("broccoli", new ItemNameBlockItem(BROCCOLI_CROPS, new Item.Properties()));
         helper.register("cabbage", new ItemNameBlockItem(CABBAGE_CROPS, new Item.Properties()));
         helper.register("chilli_pepper", new ItemNameBlockItem(CHILLI_PEPPER_CROPS, new Item.Properties()));
+        helper.register("corn", new ItemNameBlockItem(CORN_CROPS, new Item.Properties()));
+        helper.register("garlic", new ItemNameBlockItem(GARLIC_CROPS, new Item.Properties()));
+        helper.register("leek", new ItemNameBlockItem(LEEK_CROPS, new Item.Properties()));
+        helper.register("lettuce", new ItemNameBlockItem(LETTUCE_CROPS, new Item.Properties()));
     }
 
     @FunctionalInterface // Registers blocks and schedules itemBlock registration

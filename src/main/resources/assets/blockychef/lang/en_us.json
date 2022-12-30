@@ -7,6 +7,10 @@
   "block.blockychef.broccoli_crops": "Broccoli Crops",
   "block.blockychef.cabbage_crops": "Cabbage Crops",
   "block.blockychef.chilli_pepper_crops": "Chilli Pepper Crops",
+  "block.blockychef.corn_crops": "Corn Crops",
+  "block.blockychef.garlic_crops": "Garlic Crops",
+  "block.blockychef.leek_crops": "Leek Crops",
+  "block.blockychef.lettuce_crops": "Lettuce Crops",
 
   "item.blockychef.tomato": "Tomato",
   "item.blockychef.cucumber": "Cucumber",
@@ -16,6 +20,10 @@
   "item.blockychef.broccoli": "Broccoli",
   "item.blockychef.cabbage": "Cabbage",
   "item.blockychef.chilli_pepper": "Chilli Pepper",
+  "item.blockychef.corn": "Corn",
+  "item.blockychef.garlic": "Garlic",
+  "item.blockychef.leek": "Leek",
+  "item.blockychef.lettuce": "Lettuce",
 
   "config.screen.blockychef": "BlockyChef Configuration",
 
