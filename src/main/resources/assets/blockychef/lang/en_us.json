@@ -5,6 +5,7 @@
   "block.blockychef.black_pepper_crops": "Black Pepper Crops",
   "block.blockychef.blueberry_crops": "Blueberry Crops",
   "block.blockychef.broccoli_crops": "Broccoli Crops",
+  "block.blockychef.cabbage_crops": "Cabbage Crops",
 
   "item.blockychef.tomato": "Tomato",
   "item.blockychef.cucumber": "Cucumber",
@@ -12,6 +13,7 @@
   "item.blockychef.black_pepper": "Black Pepper",
   "item.blockychef.blueberry": "Blueberry",
   "item.blockychef.broccoli": "Broccoli",
+  "item.blockychef.cabbage": "Cabbage",
 
   "config.screen.blockychef": "BlockyChef Configuration",
 
