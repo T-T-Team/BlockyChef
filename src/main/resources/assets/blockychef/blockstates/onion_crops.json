@@ -1,0 +1,124 @@
+{
+  "variants": {
+    "age=0,weeds=0": {
+      "model": "blockychef:block/onion/onion_0_0"
+    },
+    "age=0,weeds=1": {
+      "model": "blockychef:block/onion/onion_0_1"
+    },
+    "age=0,weeds=2": {
+      "model": "blockychef:block/onion/onion_0_2"
+    },
+    "age=0,weeds=3": {
+      "model": "blockychef:block/onion/onion_0_3"
+    },
+    "age=0,weeds=4": {
+      "model": "blockychef:block/onion/onion_0_4"
+    },
+    "age=1,weeds=0": {
+      "model": "blockychef:block/onion/onion_0_0"
+    },
+    "age=1,weeds=1": {
+      "model": "blockychef:block/onion/onion_0_1"
+    },
+    "age=1,weeds=2": {
+      "model": "blockychef:block/onion/onion_0_2"
+    },
+    "age=1,weeds=3": {
+      "model": "blockychef:block/onion/onion_0_3"
+    },
+    "age=1,weeds=4": {
+      "model": "blockychef:block/onion/onion_0_4"
+    },
+    "age=2,weeds=0": {
+      "model": "blockychef:block/onion/onion_1_0"
+    },
+    "age=2,weeds=1": {
+      "model": "blockychef:block/onion/onion_1_1"
+    },
+    "age=2,weeds=2": {
+      "model": "blockychef:block/onion/onion_1_2"
+    },
+    "age=2,weeds=3": {
+      "model": "blockychef:block/onion/onion_1_3"
+    },
+    "age=2,weeds=4": {
+      "model": "blockychef:block/onion/onion_1_4"
+    },
+    "age=3,weeds=0": {
+      "model": "blockychef:block/onion/onion_1_0"
+    },
+    "age=3,weeds=1": {
+      "model": "blockychef:block/onion/onion_1_1"
+    },
+    "age=3,weeds=2": {
+      "model": "blockychef:block/onion/onion_1_2"
+    },
+    "age=3,weeds=3": {
+      "model": "blockychef:block/onion/onion_1_3"
+    },
+    "age=3,weeds=4": {
+      "model": "blockychef:block/onion/onion_1_4"
+    },
+    "age=4,weeds=0": {
+      "model": "blockychef:block/onion/onion_2_0"
+    },
+    "age=4,weeds=1": {
+      "model": "blockychef:block/onion/onion_2_1"
+    },
+    "age=4,weeds=2": {
+      "model": "blockychef:block/onion/onion_2_2"
+    },
+    "age=4,weeds=3": {
+      "model": "blockychef:block/onion/onion_2_3"
+    },
+    "age=4,weeds=4": {
+      "model": "blockychef:block/onion/onion_2_4"
+    },
+    "age=5,weeds=0": {
+      "model": "blockychef:block/onion/onion_2_0"
+    },
+    "age=5,weeds=1": {
+      "model": "blockychef:block/onion/onion_2_1"
+    },
+    "age=5,weeds=2": {
+      "model": "blockychef:block/onion/onion_2_2"
+    },
+    "age=5,weeds=3": {
+      "model": "blockychef:block/onion/onion_2_3"
+    },
+    "age=5,weeds=4": {
+      "model": "blockychef:block/onion/onion_2_4"
+    },
+    "age=6,weeds=0": {
+      "model": "blockychef:block/onion/onion_2_0"
+    },
+    "age=6,weeds=1": {
+      "model": "blockychef:block/onion/onion_2_1"
+    },
+    "age=6,weeds=2": {
+      "model": "blockychef:block/onion/onion_2_2"
+    },
+    "age=6,weeds=3": {
+      "model": "blockychef:block/onion/onion_2_3"
+    },
+    "age=6,weeds=4": {
+      "model": "blockychef:block/onion/onion_2_4"
+    },
+    "age=7,weeds=0": {
+      "model": "blockychef:block/onion/onion_3_0"
+    },
+    "age=7,weeds=1": {
+      "model": "blockychef:block/onion/onion_3_1"
+    },
+    "age=7,weeds=2": {
+      "model": "blockychef:block/onion/onion_3_2"
+    },
+    "age=7,weeds=3": {
+      "model": "blockychef:block/onion/onion_3_3"
+    },
+    "age=7,weeds=4": {
+      "model": "blockychef:block/onion/onion_3_4"
+    }
+  }
+}
