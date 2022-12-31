@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "weeds=0": {
+      "model": "blockychef:block/weeds/weeds0"
+    },
+    "weeds=1": {
+      "model": "blockychef:block/weeds/weeds1"
+    },
+    "weeds=2": {
+      "model": "blockychef:block/weeds/weeds2"
+    },
+    "weeds=3": {
+      "model": "blockychef:block/weeds/weeds3"
+    },
+    "weeds=4": {
+      "model": "blockychef:block/weeds/weeds4"
+    }
+  }
+}

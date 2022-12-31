@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "item/generated",
   "textures": {
-    "layer0": "blockychef:item/bell_pepper"
+    "layer0": "blockychef:block/bell_pepper"
   }
 }

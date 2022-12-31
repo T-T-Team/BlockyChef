@@ -11,6 +11,7 @@ import net.minecraftforge.registries.ObjectHolder;
 import net.minecraftforge.registries.RegisterEvent;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.CropsBlock;
+import tnt.blockychef.common.block.WeedsBlock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,8 @@ import java.util.List;
 public final class Registry {
 
     // Blocks ---
+    @ObjectHolder(value = "blockychef:weeds", registryName = "block")
+    public static final WeedsBlock WEEDS = null;
     @ObjectHolder(value = "blockychef:tomato_crops", registryName = "block")
     public static final CropsBlock TOMATO_CROPS = null;
     @ObjectHolder(value = "blockychef:cucumber_crops", registryName = "block")
@@ -94,6 +97,7 @@ public final class Registry {
     }
 
     private static void registerBlocks(BlockRegistryHelper helper) {
+        helper.register("weeds", new WeedsBlock(), false);
         helper.register("tomato_crops", new CropsBlock(() -> TOMATO), false);
         helper.register("cucumber_crops", new CropsBlock(() -> CUCUMBER), false);
         helper.register("bell_pepper_crops", new CropsBlock(() -> BELL_PEPPER), false);

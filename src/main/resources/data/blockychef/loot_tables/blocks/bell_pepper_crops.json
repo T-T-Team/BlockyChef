@@ -21,8 +21,8 @@
       "bonus_rolls": 0,
       "conditions": [
         {
-          "block": "blockychef:bell_pepper_crops",
           "condition": "minecraft:block_state_property",
+          "block": "blockychef:bell_pepper_crops",
           "properties": {
             "age": "7"
           }
@@ -33,9 +33,9 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "function": "minecraft:apply_bonus",
               "enchantment": "minecraft:fortune",
               "formula": "minecraft:binomial_with_bonus_count",
-              "function": "minecraft:apply_bonus",
               "parameters": {
                 "extra": 2,
                 "probability": 0.5714286
