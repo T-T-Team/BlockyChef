@@ -22,8 +22,9 @@ public abstract class FarmBlockMixin extends Block {
     // Handles addition of weeds
     @Inject(method = "randomTick", at = @At("RETURN"))
     private void blockychef$farmBlockRandomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random, CallbackInfo ci) {
-        if (!level.isClientSide && level.isEmptyBlock(pos.above())) {
-            level.setBlock(pos, Registry.WEEDS.defaultBlockState(), 2);
+        BlockPos above = pos.above();
+        if (!level.isClientSide && level.isEmptyBlock(above)) {
+            level.setBlock(above, Registry.WEEDS.defaultBlockState(), 2);
         }
     }
 }

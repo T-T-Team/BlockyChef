@@ -72,7 +72,7 @@ public class GenerateCropsModels {
                     object.addProperty("parent", MODEL_TYPE.modelFile);
                     object.addProperty("render_type", "cutout");
                     JsonObject texturesJson = new JsonObject();
-                    texturesJson.addProperty("crop", "blockychef:block/" + CROP_TEXTURE_NAME_PROVIDER.apply(cropAge));
+                    texturesJson.addProperty("crop", CROP_TEXTURE_NAME_PROVIDER.apply(cropAge));
                     texturesJson.addProperty("weeds", "blockychef:block/weed" + weedAge);
                     object.add("textures", texturesJson);
                     try (FileWriter writer = new FileWriter(modelFile)) {
@@ -190,8 +190,8 @@ public class GenerateCropsModels {
 
     public enum CropsModelType {
 
-        DEFAULT("blockychef:block/weeds_crops"),
-        CROSS("blockychef:block/weeds_crops_cross");
+        DEFAULT("blockychef:block/weed_crops"),
+        CROSS("blockychef:block/weed_crops_cross");
 
         private final String modelFile;
 
