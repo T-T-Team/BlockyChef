@@ -16,10 +16,10 @@ import java.util.function.IntFunction;
 public class GenerateCropsModels {
 
     // Script arguments
-    private static final String CROPS_NAME = "soybeans";
+    private static final String CROPS_NAME = "tea";
     private static final String CROPS_SUFFIX = "_crops";
     private static final int LOOT_TABLE_BONUS = 2;
-    private static final CropsModelType MODEL_TYPE = CropsModelType.CROSS;
+    private static final CropsModelType MODEL_TYPE = CropsModelType.DEFAULT;
     private static final IntFunction<String> CROP_TEXTURE_NAME_PROVIDER = ageIndex -> "blockychef:block/" + CROPS_NAME + ageIndex;
     private static final Runnable[] TASKS = {
             GenerateCropsModels::generateItemModel,

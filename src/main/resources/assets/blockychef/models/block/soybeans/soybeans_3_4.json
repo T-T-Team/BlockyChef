@@ -1,5 +1,5 @@
 {
-  "parent": "blockychef:block/weed_crops_cross",
+  "parent": "blockychef:block/weed_crops",
   "render_type": "cutout",
   "textures": {
     "crop": "blockychef:block/soybeans3",
