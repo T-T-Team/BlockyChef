@@ -58,6 +58,11 @@ public final class Registry {
     public static final CropsBlock STRAWBERRY_CROPS = null;
     @ObjectHolder(value = "blockychef:turmeric_crops", registryName = "block")
     public static final CropsBlock TURMERIC_CROPS = null;
+    @ObjectHolder(value = "blockychef:pineapple_crops", registryName = "block")
+    public static final CropsBlock PINEAPPLE_CROPS = null;
+    @ObjectHolder(value = "blockychef:portobello_crops", registryName = "block")
+    public static final CropsBlock PORTOBELLO_CROPS = null;
+
 
     // Items ---
     @ObjectHolder(value = "blockychef:tomato", registryName = "item")
@@ -96,6 +101,10 @@ public final class Registry {
     public static final Item STRAWBERRY = null;
     @ObjectHolder(value = "blockychef:turmeric", registryName = "item")
     public static final Item TURMERIC = null;
+    @ObjectHolder(value = "blockychef:pineapple", registryName = "item")
+    public static final Item PINEAPPLE = null;
+    @ObjectHolder(value = "blockychef:portobello", registryName = "item")
+    public static final Item PORTOBELLO = null;
 
     private static List<Block> blockEntries = new ArrayList<>();
 
@@ -140,6 +149,8 @@ public final class Registry {
         helper.register("spring_onion_crops", new CropsBlock(() -> SPRING_ONION), false);
         helper.register("strawberry_crops", new CropsBlock(() -> STRAWBERRY), false);
         helper.register("turmeric_crops", new CropsBlock(() -> TURMERIC), false);
+        helper.register("pineapple_crops", new CropsBlock(() -> PINEAPPLE), false);
+        helper.register("portobello_crops", new CropsBlock(() -> PORTOBELLO), false);
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {
@@ -161,6 +172,8 @@ public final class Registry {
         helper.register("spring_onion", new ItemNameBlockItem(SPRING_ONION_CROPS, new Item.Properties()));
         helper.register("strawberry", new ItemNameBlockItem(STRAWBERRY_CROPS, new Item.Properties()));
         helper.register("turmeric", new ItemNameBlockItem(TURMERIC_CROPS, new Item.Properties()));
+        helper.register("pineapple", new ItemNameBlockItem(PINEAPPLE_CROPS, new Item.Properties()));
+        helper.register("portobello", new ItemNameBlockItem(PORTOBELLO_CROPS, new Item.Properties()));
     }
 
     @FunctionalInterface // Registers blocks and schedules itemBlock registration
