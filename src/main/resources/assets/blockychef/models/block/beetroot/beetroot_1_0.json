@@ -1,0 +1,8 @@
+{
+  "parent": "blockychef:block/weed_crops",
+  "render_type": "cutout",
+  "textures": {
+    "crop": "minecraft:block/beetroots_stage1",
+    "weeds": "blockychef:block/weed0"
+  }
+}

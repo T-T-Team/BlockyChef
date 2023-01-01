@@ -5,6 +5,10 @@ import dev.toma.configuration.config.Configurable;
 public final class WeedsConfig {
 
     @Configurable
+    @Configurable.Comment("Vanilla crops will be replaced with custom variant with weeds")
+    public boolean replaceVanillaCrops = true;
+
+    @Configurable
     @Configurable.Comment("Weeds will be placed and grow on empty farmlands")
     public boolean placeOnRawFarmland = true;
 

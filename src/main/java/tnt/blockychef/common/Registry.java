@@ -3,7 +3,11 @@ package tnt.blockychef.common;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -11,7 +15,7 @@ import net.minecraftforge.registries.ObjectHolder;
 import net.minecraftforge.registries.RegisterEvent;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.CropsBlock;
-import tnt.blockychef.common.block.WeedsBlock;
+import tnt.blockychef.common.block.WeedsGrowingBlock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +25,15 @@ public final class Registry {
 
     // Blocks ---
     @ObjectHolder(value = "blockychef:weeds", registryName = "block")
-    public static final WeedsBlock WEEDS = null;
+    public static final WeedsGrowingBlock WEEDS = null;
+    @ObjectHolder(value = "blockychef:wheat_crops", registryName = "block")
+    public static final CropsBlock WHEAT_CROPS = null;
+    @ObjectHolder(value = "blockychef:potato_crops", registryName = "block")
+    public static final CropsBlock POTATO_CROPS = null;
+    @ObjectHolder(value = "blockychef:carrot_crops", registryName = "block")
+    public static final CropsBlock CARROT_CROPS = null;
+    @ObjectHolder(value = "blockychef:beetroot_crops", registryName = "block")
+    public static final CropsBlock BEETROOT_CROPS = null;
     @ObjectHolder(value = "blockychef:tomato_crops", registryName = "block")
     public static final CropsBlock TOMATO_CROPS = null;
     @ObjectHolder(value = "blockychef:cucumber_crops", registryName = "block")
@@ -159,7 +171,11 @@ public final class Registry {
     }
 
     private static void registerBlocks(BlockRegistryHelper helper) {
-        helper.register("weeds", new WeedsBlock(), false);
+        helper.register("weeds", new WeedsGrowingBlock(BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP)), false);
+        helper.register("wheat_crops", new CropsBlock(() -> Items.WHEAT_SEEDS), false);
+        helper.register("potato_crops", new CropsBlock(() -> Items.POTATO), false);
+        helper.register("carrot_crops", new CropsBlock(() -> Items.CARROT), false);
+        helper.register("beetroot_crops", new CropsBlock(() -> Items.BEETROOT_SEEDS), false);
         helper.register("tomato_crops", new CropsBlock(() -> TOMATO), false);
         helper.register("cucumber_crops", new CropsBlock(() -> CUCUMBER), false);
         helper.register("bell_pepper_crops", new CropsBlock(() -> BELL_PEPPER), false);

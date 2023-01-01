@@ -11,12 +11,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.IntFunction;
+import java.util.function.UnaryOperator;
 
 @SuppressWarnings("ResultOfMethodCallIgnored")
 public class GenerateCropsModels {
 
     // Script arguments
-    private static final String CROPS_NAME = "tea";
+    private static final String CROPS_NAME = "wheat";
     private static final String CROPS_SUFFIX = "_crops";
     private static final int LOOT_TABLE_BONUS = 2;
     private static final CropsModelType MODEL_TYPE = CropsModelType.DEFAULT;
@@ -27,6 +28,9 @@ public class GenerateCropsModels {
             GenerateCropsModels::generateBlockstateFile,
             GenerateCropsModels::generateLootTableModelFile
     };
+    private static final int MAX_AGE_INDEX = 8;
+    private static final int MAX_AGE_MODEL_INDEX = 8;
+    private static final UnaryOperator<Integer> AGE_INDEX_PROVIDER = UnaryOperator.identity();
 
     // Utils
     private static final File ASSETS_DIRECTORY = new File("./src/main/resources/assets/blockychef");
@@ -62,7 +66,7 @@ public class GenerateCropsModels {
     }
 
     private static void generateBlockModels() {
-        for (int cropAge = 0; cropAge < 4; cropAge++) {
+        for (int cropAge = 0; cropAge < MAX_AGE_MODEL_INDEX; cropAge++) {
             for (int weedAge = 0; weedAge < 5; weedAge++) {
                 File modelFile = new File(BLOCK_MODELS, CROPS_NAME + "/" + CROPS_NAME + "_" + cropAge + "_" + weedAge + ".json");
                 try {
@@ -90,9 +94,9 @@ public class GenerateCropsModels {
         JsonObject variants = new JsonObject();
         rootObject.add("variants", variants);
         List<Variant> variantsList = new ArrayList<>();
-        for (int cropAge = 0; cropAge < 8; cropAge++) {
+        for (int cropAge = 0; cropAge < MAX_AGE_INDEX; cropAge++) {
             for (int weedAge = 0; weedAge < 5; weedAge++) {
-                String modelPath = CROPS_NAME + "/" + CROPS_NAME + "_" + getAgeModelIndex(cropAge) + "_" + weedAge;
+                String modelPath = CROPS_NAME + "/" + CROPS_NAME + "_" + AGE_INDEX_PROVIDER.apply(cropAge) + "_" + weedAge;
                 Variant variant = new Variant(cropAge, weedAge, modelPath);
                 variantsList.add(variant);
             }

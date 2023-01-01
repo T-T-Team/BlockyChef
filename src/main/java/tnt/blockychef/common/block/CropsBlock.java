@@ -2,36 +2,34 @@ package tnt.blockychef.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.monster.Ravager;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.PlantType;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.Registry;
 
-public class CropsBlock extends BushBlock implements BonemealableBlock {
+public class CropsBlock extends WeedsGrowingBlock implements BonemealableBlock {
 
     private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[] {
             Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D),
@@ -48,8 +46,12 @@ public class CropsBlock extends BushBlock implements BonemealableBlock {
 
     public CropsBlock(SeedProvider provider) {
         super(Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP));
-        this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0).setValue(WeedsBlock.WEEDS_AGE, 0));
         this.seedProvider = provider;
+    }
+
+    @Override
+    protected BlockState createDefaultState(BlockState base) {
+        return super.createDefaultState(base).setValue(AGE, 0);
     }
 
     @Nullable
@@ -57,9 +59,9 @@ public class CropsBlock extends BushBlock implements BonemealableBlock {
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         BlockState state = super.getStateForPlacement(ctx);
         BlockState oldState = ctx.getLevel().getBlockState(ctx.getClickedPos());
-        if (oldState.getBlock() instanceof WeedsBlock) {
-            int age = oldState.getValue(WeedsBlock.WEEDS_AGE);
-            state = state.setValue(WeedsBlock.WEEDS_AGE, age);
+        if (oldState.getBlock() instanceof WeedsGrowingBlock) {
+            int age = oldState.getValue(WEEDS_AGE);
+            state = state.setValue(WEEDS_AGE, age);
         }
         return state;
     }
@@ -70,18 +72,14 @@ public class CropsBlock extends BushBlock implements BonemealableBlock {
     }
 
     @Override
-    protected boolean mayPlaceOn(BlockState state, BlockGetter getter, BlockPos pos) {
-        return state.is(Blocks.FARMLAND);
-    }
-
-    @Override
-    public PlantType getPlantType(BlockGetter level, BlockPos pos) {
-        return PlantType.CROP;
-    }
-
-    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(AGE).add(WeedsBlock.WEEDS_AGE);
+        super.createBlockStateDefinition(builder);
+        builder.add(AGE);
+    }
+
+    @Override
+    public boolean canBeReplaced(BlockState p_60470_, BlockPlaceContext p_60471_) {
+        return false;
     }
 
     public int getMaxAge() {
@@ -97,28 +95,12 @@ public class CropsBlock extends BushBlock implements BonemealableBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        ItemStack stack = player.getItemInHand(hand);
-        int weedsAge = state.getValue(WeedsBlock.WEEDS_AGE);
-        if (stack.getItem() instanceof HoeItem && weedsAge > 0) {
-            if (!level.isClientSide) {
-                stack.hurtAndBreak(weedsAge, player, p -> p.broadcastBreakEvent(hand));
-                level.setBlock(pos, state.setValue(WeedsBlock.WEEDS_AGE, 0), 2);
-            } else {
-                player.playSound(SoundEvents.HOE_TILL, 1.0F, 1.0F);
-            }
-            return InteractionResult.SUCCESS;
-        }
-        return InteractionResult.PASS;
-    }
-
-    @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean flag) {
         if (!state.is(oldState.getBlock())) {
             super.onRemove(state, level, pos, oldState, flag);
             if (BlockyChef.config.weeds.placeOnRawFarmland) {
                 if (level.getBlockState(pos.below()).is(Blocks.FARMLAND)) {
-                    level.setBlock(pos, Registry.WEEDS.defaultBlockState().setValue(WeedsBlock.WEEDS_AGE, state.getValue(WeedsBlock.WEEDS_AGE)), 2);
+                    level.setBlock(pos, Registry.WEEDS.defaultBlockState().setValue(WEEDS_AGE, state.getValue(WEEDS_AGE)), 2);
                 }
             }
         }
@@ -137,14 +119,14 @@ public class CropsBlock extends BushBlock implements BonemealableBlock {
                 }
             }
         }
-        if (this.areWeedsMaxAge(state)) {
+        if (areWeedsMaxAge(state)) {
             float destroyChance = BlockyChef.config.weeds.weedsCropKillChance;
             if (random.nextFloat() < destroyChance) {
                 level.destroyBlock(pos, false);
             }
         } else if (random.nextFloat() < BlockyChef.config.weeds.weedsGrowthChance) { // Weeds growth chance
-            int age = state.getValue(WeedsBlock.WEEDS_AGE);
-            level.setBlock(pos, state.setValue(WeedsBlock.WEEDS_AGE, age + 1), 2);
+            int age = state.getValue(WEEDS_AGE);
+            level.setBlock(pos, state.setValue(WEEDS_AGE, age + 1), 2);
         }
     }
 
@@ -155,7 +137,7 @@ public class CropsBlock extends BushBlock implements BonemealableBlock {
 
     @Override
     public boolean isValidBonemealTarget(LevelReader reader, BlockPos pos, BlockState state, boolean flag) {
-        return !this.isMaxAge(state);
+        return !BlockyChef.config.crops.restrictBonemealUsage && !this.isMaxAge(state);
     }
 
     @Override
@@ -169,13 +151,12 @@ public class CropsBlock extends BushBlock implements BonemealableBlock {
     }
 
     public void growCrops(Level level, BlockPos pos, BlockState state) {
-        int i = this.getAge(state) + this.getBonemealAgeIncrease(level);
-        int j = this.getMaxAge();
-        if (i > j) {
-            i = j;
+        int targetAge = this.getAge(state) + this.getBonemealAgeIncrease(level);
+        int maxAge = this.getMaxAge();
+        if (targetAge > maxAge) {
+            targetAge = maxAge;
         }
-
-        level.setBlock(pos, state.setValue(AGE, i), 2);
+        level.setBlock(pos, state.setValue(AGE, targetAge), 2);
     }
 
     protected int getBonemealAgeIncrease(Level p_52262_) {
@@ -200,8 +181,9 @@ public class CropsBlock extends BushBlock implements BonemealableBlock {
         return this.seedProvider.getSeedItem();
     }
 
-    public boolean areWeedsMaxAge(BlockState state) {
-        return state.getValue(WeedsBlock.WEEDS_AGE) == 4;
+    @Override
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player) {
+        return new ItemStack(this.getBaseSeedId());
     }
 
     protected static float getGrowthSpeed(Block block, BlockGetter blockGetter, BlockPos pos) {

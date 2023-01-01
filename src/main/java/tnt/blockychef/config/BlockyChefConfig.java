@@ -10,4 +10,8 @@ public final class BlockyChefConfig {
     @Configurable
     @Configurable.Comment("Weeds configuration")
     public WeedsConfig weeds = new WeedsConfig();
+
+    @Configurable
+    @Configurable.Comment("Crops configuration")
+    public CropsConfig crops = new CropsConfig();
 }
