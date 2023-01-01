@@ -46,6 +46,18 @@ public final class Registry {
     public static final CropsBlock LEEK_CROPS = null;
     @ObjectHolder(value = "blockychef:lettuce_crops", registryName = "block")
     public static final CropsBlock LETTUCE_CROPS = null;
+    @ObjectHolder(value = "blockychef:onion_crops", registryName = "block")
+    public static final CropsBlock ONION_CROPS = null;
+    @ObjectHolder(value = "blockychef:parsley_crops", registryName = "block")
+    public static final CropsBlock PARSLEY_CROPS = null;
+    @ObjectHolder(value = "blockychef:raspberry_crops", registryName = "block")
+    public static final CropsBlock RASPBERRY_CROPS = null;
+    @ObjectHolder(value = "blockychef:spring_onion_crops", registryName = "block")
+    public static final CropsBlock SPRING_ONION_CROPS = null;
+    @ObjectHolder(value = "blockychef:strawberry_crops", registryName = "block")
+    public static final CropsBlock STRAWBERRY_CROPS = null;
+    @ObjectHolder(value = "blockychef:turmeric_crops", registryName = "block")
+    public static final CropsBlock TURMERIC_CROPS = null;
 
     // Items ---
     @ObjectHolder(value = "blockychef:tomato", registryName = "item")
@@ -72,6 +84,18 @@ public final class Registry {
     public static final Item LEEK = null;
     @ObjectHolder(value = "blockychef:lettuce", registryName = "item")
     public static final Item LETTUCE = null;
+    @ObjectHolder(value = "blockychef:onion", registryName = "item")
+    public static final Item ONION = null;
+    @ObjectHolder(value = "blockychef:parsley", registryName = "item")
+    public static final Item PARSLEY = null;
+    @ObjectHolder(value = "blockychef:raspberry", registryName = "item")
+    public static final Item RASPBERRY = null;
+    @ObjectHolder(value = "blockychef:spring_onion", registryName = "item")
+    public static final Item SPRING_ONION = null;
+    @ObjectHolder(value = "blockychef:strawberry", registryName = "item")
+    public static final Item STRAWBERRY = null;
+    @ObjectHolder(value = "blockychef:turmeric", registryName = "item")
+    public static final Item TURMERIC = null;
 
     private static List<Block> blockEntries = new ArrayList<>();
 
@@ -110,6 +134,12 @@ public final class Registry {
         helper.register("garlic_crops", new CropsBlock(() -> GARLIC), false);
         helper.register("leek_crops", new CropsBlock(() -> LEEK), false);
         helper.register("lettuce_crops", new CropsBlock(() -> LETTUCE), false);
+        helper.register("onion_crops", new CropsBlock(() -> ONION), false);
+        helper.register("parsley_crops", new CropsBlock(() -> PARSLEY), false);
+        helper.register("raspberry_crops", new CropsBlock(() -> RASPBERRY), false);
+        helper.register("spring_onion_crops", new CropsBlock(() -> SPRING_ONION), false);
+        helper.register("strawberry_crops", new CropsBlock(() -> STRAWBERRY), false);
+        helper.register("turmeric_crops", new CropsBlock(() -> TURMERIC), false);
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {
@@ -125,6 +155,12 @@ public final class Registry {
         helper.register("garlic", new ItemNameBlockItem(GARLIC_CROPS, new Item.Properties()));
         helper.register("leek", new ItemNameBlockItem(LEEK_CROPS, new Item.Properties()));
         helper.register("lettuce", new ItemNameBlockItem(LETTUCE_CROPS, new Item.Properties()));
+        helper.register("onion", new ItemNameBlockItem(ONION_CROPS, new Item.Properties()));
+        helper.register("parsley", new ItemNameBlockItem(PARSLEY_CROPS, new Item.Properties()));
+        helper.register("raspberry", new ItemNameBlockItem(RASPBERRY_CROPS, new Item.Properties()));
+        helper.register("spring_onion", new ItemNameBlockItem(SPRING_ONION_CROPS, new Item.Properties()));
+        helper.register("strawberry", new ItemNameBlockItem(STRAWBERRY_CROPS, new Item.Properties()));
+        helper.register("turmeric", new ItemNameBlockItem(TURMERIC_CROPS, new Item.Properties()));
     }
 
     @FunctionalInterface // Registers blocks and schedules itemBlock registration

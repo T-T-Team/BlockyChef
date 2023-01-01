@@ -14,7 +14,7 @@ import java.util.List;
 @SuppressWarnings("ResultOfMethodCallIgnored")
 public class GenerateCropsModels {
 
-    private static final String CROPS_NAME = "bell_pepper";
+    private static final String CROPS_NAME = "turmeric";
     private static final String CROPS_SUFFIX = "_crops";
     private static final int LOOT_TABLE_BONUS = 2;
 

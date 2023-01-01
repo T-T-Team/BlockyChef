@@ -12,6 +12,12 @@
   "block.blockychef.garlic_crops": "Garlic Crops",
   "block.blockychef.leek_crops": "Leek Crops",
   "block.blockychef.lettuce_crops": "Lettuce Crops",
+  "block.blockychef.onion_crops": "Onion Crops",
+  "block.blockychef.parsley_crops": "Parsley Crops",
+  "block.blockychef.raspberry_crops": "Raspberry Crops",
+  "block.blockychef.spring_onion_crops": "Spring Onion Crops",
+  "block.blockychef.strawberry_crops": "Strawberry Crops",
+  "block.blockychef.turmeric_crops": "Turmeric Crops",
 
   "item.blockychef.tomato": "Tomato",
   "item.blockychef.cucumber": "Cucumber",
@@ -25,6 +31,12 @@
   "item.blockychef.garlic": "Garlic",
   "item.blockychef.leek": "Leek",
   "item.blockychef.lettuce": "Lettuce",
+  "item.blockychef.onion": "Onion",
+  "item.blockychef.parsley": "Parsley",
+  "item.blockychef.raspberry": "Raspberry",
+  "item.blockychef.spring_onion": "Spring Onion",
+  "item.blockychef.strawberry": "Strawberry",
+  "item.blockychef.turmeric": "Turmeric",
 
   "config.screen.blockychef": "BlockyChef Configuration",
 
