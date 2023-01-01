@@ -19,6 +19,7 @@
   "block.blockychef.strawberry_crops": "Strawberry Crops",
   "block.blockychef.turmeric_crops": "Turmeric Crops",
   "block.blockychef.pineapple_crops": "Pineapple Crops",
+  "block.blockychef.portobello_crops": "Portobello Crops",
 
   "item.blockychef.tomato": "Tomato",
   "item.blockychef.cucumber": "Cucumber",
@@ -39,6 +40,7 @@
   "item.blockychef.strawberry": "Strawberry",
   "item.blockychef.turmeric": "Turmeric",
   "item.blockychef.pineapple": "Pineapple",
+  "item.blockychef.portobello": "Portobello",
 
   "config.screen.blockychef": "BlockyChef Configuration",
 
