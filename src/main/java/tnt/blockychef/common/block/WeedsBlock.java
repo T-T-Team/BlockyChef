@@ -5,6 +5,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
@@ -33,7 +34,7 @@ public class WeedsBlock extends BushBlock {
     public static final IntegerProperty WEEDS_AGE = IntegerProperty.create("weeds", 0, 4);
 
     public WeedsBlock() {
-        super(Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP));
+        super(Properties.of(Material.REPLACEABLE_PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP));
         this.registerDefaultState(this.stateDefinition.any().setValue(WeedsBlock.WEEDS_AGE, 0));
     }
 
@@ -55,6 +56,11 @@ public class WeedsBlock extends BushBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(WeedsBlock.WEEDS_AGE);
+    }
+
+    @Override
+    public boolean canBeReplaced(BlockState p_60470_, BlockPlaceContext p_60471_) {
+        return true;
     }
 
     @Override

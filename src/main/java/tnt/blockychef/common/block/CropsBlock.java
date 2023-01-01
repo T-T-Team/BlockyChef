@@ -4,8 +4,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.monster.Ravager;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
@@ -17,6 +21,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.PlantType;
@@ -76,10 +81,25 @@ public class CropsBlock extends BushBlock implements BonemealableBlock {
     }
 
     @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (!level.isClientSide) {
+            ItemStack stack = player.getItemInHand(hand);
+            int weedsAge = state.getValue(WeedsBlock.WEEDS_AGE);
+            if (stack.getItem() instanceof HoeItem && weedsAge > 0) {
+                stack.hurtAndBreak(weedsAge, player, p -> p.broadcastBreakEvent(hand));
+                level.setBlock(pos, state.setValue(WeedsBlock.WEEDS_AGE, 0), 2);
+            }
+        }
+        return InteractionResult.PASS;
+    }
+
+    @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean flag) {
         if (!state.is(oldState.getBlock())) {
             super.onRemove(state, level, pos, oldState, flag);
-            level.setBlock(pos, Registry.WEEDS.defaultBlockState().setValue(WeedsBlock.WEEDS_AGE, state.getValue(WeedsBlock.WEEDS_AGE)), 2);
+            if (level.getBlockState(pos.below()).is(Blocks.FARMLAND)) {
+                level.setBlock(pos, Registry.WEEDS.defaultBlockState().setValue(WeedsBlock.WEEDS_AGE, state.getValue(WeedsBlock.WEEDS_AGE)), 2);
+            }
         }
     }
 
@@ -99,7 +119,7 @@ public class CropsBlock extends BushBlock implements BonemealableBlock {
         if (this.areWeedsMaxAge(state)) {
             float destroyChance = 0.05F;
             if (random.nextFloat() < destroyChance) {
-                level.destroyBlock(pos, false); // TODO replace with empty weeds block
+                level.destroyBlock(pos, false);
             }
         } else if (random.nextFloat() < WeedsBlock.WEEDS_GROWTH) { // Weeds growth chance
             int age = state.getValue(WeedsBlock.WEEDS_AGE);
