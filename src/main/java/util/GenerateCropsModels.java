@@ -29,8 +29,8 @@ public class GenerateCropsModels {
             GenerateCropsModels::generateLootTableModelFile
     };
     private static final int MAX_AGE_INDEX = 8;
-    private static final int MAX_AGE_MODEL_INDEX = 8;
-    private static final UnaryOperator<Integer> AGE_INDEX_PROVIDER = UnaryOperator.identity();
+    private static final int MAX_AGE_MODEL_INDEX = 4;
+    private static final UnaryOperator<Integer> AGE_INDEX_PROVIDER = GenerateCropsModels::getAgeModelIndex;
 
     // Utils
     private static final File ASSETS_DIRECTORY = new File("./src/main/resources/assets/blockychef");
