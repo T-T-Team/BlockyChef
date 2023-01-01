@@ -12,6 +12,7 @@ import net.minecraft.world.entity.monster.Ravager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
@@ -26,6 +27,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.PlantType;
+import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.Registry;
 
 public class CropsBlock extends BushBlock implements BonemealableBlock {
@@ -47,6 +49,18 @@ public class CropsBlock extends BushBlock implements BonemealableBlock {
         super(Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP));
         this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0).setValue(WeedsBlock.WEEDS_AGE, 0));
         this.seedProvider = provider;
+    }
+
+    @Nullable
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        BlockState state = super.getStateForPlacement(ctx);
+        BlockState oldState = ctx.getLevel().getBlockState(ctx.getClickedPos());
+        if (oldState.getBlock() instanceof WeedsBlock) {
+            int age = oldState.getValue(WeedsBlock.WEEDS_AGE);
+            state = state.setValue(WeedsBlock.WEEDS_AGE, age);
+        }
+        return state;
     }
 
     @Override

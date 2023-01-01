@@ -10,14 +10,25 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.IntFunction;
 
 @SuppressWarnings("ResultOfMethodCallIgnored")
 public class GenerateCropsModels {
 
-    private static final String CROPS_NAME = "turmeric";
+    // Script arguments
+    private static final String CROPS_NAME = "blueberry";
     private static final String CROPS_SUFFIX = "_crops";
     private static final int LOOT_TABLE_BONUS = 2;
+    private static final CropsModelType MODEL_TYPE = CropsModelType.CROSS;
+    private static final IntFunction<String> CROP_TEXTURE_NAME_PROVIDER = ageIndex -> "blockychef:block/" + CROPS_NAME + ageIndex;
+    private static final Runnable[] TASKS = {
+            GenerateCropsModels::generateItemModel,
+            GenerateCropsModels::generateBlockModels,
+            GenerateCropsModels::generateBlockstateFile,
+            GenerateCropsModels::generateLootTableModelFile
+    };
 
+    // Utils
     private static final File ASSETS_DIRECTORY = new File("./src/main/resources/assets/blockychef");
     private static final File DATA_DIRECTORY = new File("./src/main/resources/data/blockychef");
     private static final File ITEM_MODELS = new File(ASSETS_DIRECTORY, "models/item");
@@ -27,10 +38,9 @@ public class GenerateCropsModels {
     private static final Gson GSON = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
 
     public static void main(String[] args) {
-        generateItemModel();
-        generateBlockModels();
-        generateBlockstateFile();
-        generateLootTableModelFile();
+        for (Runnable runnable : TASKS) {
+            runnable.run();
+        }
     }
 
     private static void generateItemModel() {
@@ -59,10 +69,10 @@ public class GenerateCropsModels {
                     modelFile.getParentFile().mkdirs();
                     modelFile.createNewFile();
                     JsonObject object = new JsonObject();
-                    object.addProperty("parent", "blockychef:block/weed_crops");
+                    object.addProperty("parent", MODEL_TYPE.modelFile);
                     object.addProperty("render_type", "cutout");
                     JsonObject texturesJson = new JsonObject();
-                    texturesJson.addProperty("crop", "blockychef:block/" + CROPS_NAME + cropAge);
+                    texturesJson.addProperty("crop", "blockychef:block/" + CROP_TEXTURE_NAME_PROVIDER.apply(cropAge));
                     texturesJson.addProperty("weeds", "blockychef:block/weed" + weedAge);
                     object.add("textures", texturesJson);
                     try (FileWriter writer = new FileWriter(modelFile)) {
@@ -177,4 +187,16 @@ public class GenerateCropsModels {
     }
 
     private record Variant(int ageModelIndex, int weedAgeModelIndex, String modelPath) {}
+
+    public enum CropsModelType {
+
+        DEFAULT("blockychef:block/weeds_crops"),
+        CROSS("blockychef:block/weeds_crops_cross");
+
+        private final String modelFile;
+
+        CropsModelType(String modelFile) {
+            this.modelFile = modelFile;
+        }
+    }
 }

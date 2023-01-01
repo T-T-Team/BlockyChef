@@ -1,0 +1,99 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "#crop"
+	},
+	"elements": [
+		{
+			"from": [3.5, -1, 0],
+			"to": [3.5, 15, 16],
+			"shade": false,
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#weeds"}
+			}
+		},
+		{
+			"from": [12.5, -1, 0],
+			"to": [12.5, 15, 16],
+			"shade": false,
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#weeds"}
+			}
+		},
+		{
+			"from": [0, -1, 3.5],
+			"to": [16, 15, 3.5],
+			"shade": false,
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#weeds"}
+			}
+		},
+		{
+			"from": [0, -1, 12.5],
+			"to": [16, 15, 12.5],
+			"shade": false,
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#weeds"}
+			}
+		},
+		{
+			"from": [-8, -1, 11.32],
+			"to": [8, 15, 11.32],
+			"shade": false,
+			"rotation": {"angle": 45, "axis": "y", "origin": [0, 0, 0]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#crop"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#weeds"}
+			}
+		},
+		{
+			"from": [4, -1, 0],
+			"to": [20, 15, 0],
+			"shade": false,
+			"rotation": {"angle": -45, "axis": "y", "origin": [0, 0, 0]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#weeds"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#weeds"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "weeds",
+			"origin": [0, 0, 0],
+			"color": 0,
+			"children": [0, 1, 2, 3]
+		},
+		4,
+		5
+	]
+}
