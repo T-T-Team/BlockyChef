@@ -17,6 +17,7 @@
   "block.blockychef.raspberry_crops": "Raspberry Crops",
   "block.blockychef.spring_onion_crops": "Spring Onion Crops",
   "block.blockychef.strawberry_crops": "Strawberry Crops",
+  "block.blockychef.turmeric_crops": "Turmeric Crops",
 
   "item.blockychef.tomato": "Tomato",
   "item.blockychef.cucumber": "Cucumber",
@@ -35,6 +36,7 @@
   "item.blockychef.raspberry": "Raspberry",
   "item.blockychef.spring_onion": "Spring Onion",
   "item.blockychef.strawberry": "Strawberry",
+  "item.blockychef.turmeric": "Turmeric",
 
   "config.screen.blockychef": "BlockyChef Configuration",
 
