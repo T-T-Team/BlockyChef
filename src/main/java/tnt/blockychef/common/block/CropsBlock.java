@@ -2,6 +2,7 @@ package tnt.blockychef.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -82,13 +83,16 @@ public class CropsBlock extends BushBlock implements BonemealableBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (!level.isClientSide) {
-            ItemStack stack = player.getItemInHand(hand);
-            int weedsAge = state.getValue(WeedsBlock.WEEDS_AGE);
-            if (stack.getItem() instanceof HoeItem && weedsAge > 0) {
+        ItemStack stack = player.getItemInHand(hand);
+        int weedsAge = state.getValue(WeedsBlock.WEEDS_AGE);
+        if (stack.getItem() instanceof HoeItem && weedsAge > 0) {
+            if (!level.isClientSide) {
                 stack.hurtAndBreak(weedsAge, player, p -> p.broadcastBreakEvent(hand));
                 level.setBlock(pos, state.setValue(WeedsBlock.WEEDS_AGE, 0), 2);
+            } else {
+                player.playSound(SoundEvents.HOE_TILL, 1.0F, 1.0F);
             }
+            return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
     }
