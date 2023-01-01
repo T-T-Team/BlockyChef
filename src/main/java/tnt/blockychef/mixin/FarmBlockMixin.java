@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.Registry;
 
 @Mixin(FarmBlock.class)
@@ -22,6 +23,8 @@ public abstract class FarmBlockMixin extends Block {
     // Handles addition of weeds
     @Inject(method = "randomTick", at = @At("RETURN"))
     private void blockychef$farmBlockRandomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random, CallbackInfo ci) {
+        if (!BlockyChef.config.weeds.placeOnRawFarmland)
+            return;
         BlockPos above = pos.above();
         if (!level.isClientSide && level.isEmptyBlock(above)) {
             level.setBlock(above, Registry.WEEDS.defaultBlockState(), 2);

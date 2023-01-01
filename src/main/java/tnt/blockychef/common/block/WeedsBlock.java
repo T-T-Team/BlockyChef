@@ -20,6 +20,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.PlantType;
+import tnt.blockychef.BlockyChef;
 
 public class WeedsBlock extends BushBlock {
 
@@ -30,7 +31,6 @@ public class WeedsBlock extends BushBlock {
             Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D),
             Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)
     };
-    public static final float WEEDS_GROWTH = 0.025F;
     public static final IntegerProperty WEEDS_AGE = IntegerProperty.create("weeds", 0, 4);
 
     public WeedsBlock() {
@@ -67,7 +67,7 @@ public class WeedsBlock extends BushBlock {
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (!level.isAreaLoaded(pos, 1)) return;
         if (!areWeedsMaxAge(state)) {
-            if (random.nextFloat() < WEEDS_GROWTH) { // Weeds growth chance
+            if (random.nextFloat() < BlockyChef.config.weeds.weedsGrowthChance) { // Weeds growth chance
                 int age = state.getValue(WeedsBlock.WEEDS_AGE);
                 level.setBlock(pos, state.setValue(WeedsBlock.WEEDS_AGE, age + 1), 2);
             }

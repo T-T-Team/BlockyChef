@@ -28,6 +28,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.PlantType;
 import org.jetbrains.annotations.Nullable;
+import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.Registry;
 
 public class CropsBlock extends BushBlock implements BonemealableBlock {
@@ -115,8 +116,10 @@ public class CropsBlock extends BushBlock implements BonemealableBlock {
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean flag) {
         if (!state.is(oldState.getBlock())) {
             super.onRemove(state, level, pos, oldState, flag);
-            if (level.getBlockState(pos.below()).is(Blocks.FARMLAND)) {
-                level.setBlock(pos, Registry.WEEDS.defaultBlockState().setValue(WeedsBlock.WEEDS_AGE, state.getValue(WeedsBlock.WEEDS_AGE)), 2);
+            if (BlockyChef.config.weeds.placeOnRawFarmland) {
+                if (level.getBlockState(pos.below()).is(Blocks.FARMLAND)) {
+                    level.setBlock(pos, Registry.WEEDS.defaultBlockState().setValue(WeedsBlock.WEEDS_AGE, state.getValue(WeedsBlock.WEEDS_AGE)), 2);
+                }
             }
         }
     }
@@ -135,11 +138,11 @@ public class CropsBlock extends BushBlock implements BonemealableBlock {
             }
         }
         if (this.areWeedsMaxAge(state)) {
-            float destroyChance = 0.05F;
+            float destroyChance = BlockyChef.config.weeds.weedsCropKillChance;
             if (random.nextFloat() < destroyChance) {
                 level.destroyBlock(pos, false);
             }
-        } else if (random.nextFloat() < WeedsBlock.WEEDS_GROWTH) { // Weeds growth chance
+        } else if (random.nextFloat() < BlockyChef.config.weeds.weedsGrowthChance) { // Weeds growth chance
             int age = state.getValue(WeedsBlock.WEEDS_AGE);
             level.setBlock(pos, state.setValue(WeedsBlock.WEEDS_AGE, age + 1), 2);
         }
