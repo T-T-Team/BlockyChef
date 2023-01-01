@@ -20,6 +20,10 @@
   "block.blockychef.turmeric_crops": "Turmeric Crops",
   "block.blockychef.pineapple_crops": "Pineapple Crops",
   "block.blockychef.portobello_crops": "Portobello Crops",
+  "block.blockychef.beans_crops": "Beans Crops",
+  "block.blockychef.peanuts_crops": "Peanuts Crops",
+  "block.blockychef.peas_crops": "Peas Crops",
+  "block.blockychef.soybeans_crops": "Soybeans Crops",
 
   "item.blockychef.tomato": "Tomato",
   "item.blockychef.cucumber": "Cucumber",
@@ -41,6 +45,10 @@
   "item.blockychef.turmeric": "Turmeric",
   "item.blockychef.pineapple": "Pineapple",
   "item.blockychef.portobello": "Portobello",
+  "item.blockychef.beans": "Beans",
+  "item.blockychef.peanuts": "Peanuts",
+  "item.blockychef.peas": "Peas",
+  "item.blockychef.soybeans": "Soybeans",
 
   "config.screen.blockychef": "BlockyChef Configuration",
 

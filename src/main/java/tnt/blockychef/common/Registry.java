@@ -62,6 +62,14 @@ public final class Registry {
     public static final CropsBlock PINEAPPLE_CROPS = null;
     @ObjectHolder(value = "blockychef:portobello_crops", registryName = "block")
     public static final CropsBlock PORTOBELLO_CROPS = null;
+    @ObjectHolder(value = "blockychef:beans_crops", registryName = "block")
+    public static final CropsBlock BEANS_CROPS = null;
+    @ObjectHolder(value = "blockychef:peanuts_crops", registryName = "block")
+    public static final CropsBlock PEANUTS_CROPS = null;
+    @ObjectHolder(value = "blockychef:peas_crops", registryName = "block")
+    public static final CropsBlock PEAS_CROPS = null;
+    @ObjectHolder(value = "blockychef:soybeans_crops", registryName = "block")
+    public static final CropsBlock SOYBEANS_CROPS = null;
 
 
     // Items ---
@@ -105,6 +113,15 @@ public final class Registry {
     public static final Item PINEAPPLE = null;
     @ObjectHolder(value = "blockychef:portobello", registryName = "item")
     public static final Item PORTOBELLO = null;
+    @ObjectHolder(value = "blockychef:beans", registryName = "item")
+    public static final Item BEANS = null;
+    @ObjectHolder(value = "blockychef:peanuts", registryName = "item")
+    public static final Item PEANUTS = null;
+    @ObjectHolder(value = "blockychef:peas", registryName = "item")
+    public static final Item PEAS = null;
+    @ObjectHolder(value = "blockychef:soybeans", registryName = "item")
+    public static final Item SOYBEANS = null;
+
 
     private static List<Block> blockEntries = new ArrayList<>();
 
@@ -151,6 +168,10 @@ public final class Registry {
         helper.register("turmeric_crops", new CropsBlock(() -> TURMERIC), false);
         helper.register("pineapple_crops", new CropsBlock(() -> PINEAPPLE), false);
         helper.register("portobello_crops", new CropsBlock(() -> PORTOBELLO), false);
+        helper.register("beans_crops", new CropsBlock(() -> BEANS), false);
+        helper.register("peanuts_crops", new CropsBlock(() -> PEANUTS), false);
+        helper.register("peas_crops", new CropsBlock(() -> PEAS), false);
+        helper.register("soybeans_crops", new CropsBlock(() -> SOYBEANS), false);
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {
@@ -174,6 +195,10 @@ public final class Registry {
         helper.register("turmeric", new ItemNameBlockItem(TURMERIC_CROPS, new Item.Properties()));
         helper.register("pineapple", new ItemNameBlockItem(PINEAPPLE_CROPS, new Item.Properties()));
         helper.register("portobello", new ItemNameBlockItem(PORTOBELLO_CROPS, new Item.Properties()));
+        helper.register("beans", new ItemNameBlockItem(BEANS_CROPS, new Item.Properties()));
+        helper.register("peanuts", new ItemNameBlockItem(PEANUTS_CROPS, new Item.Properties()));
+        helper.register("peas", new ItemNameBlockItem(PEAS_CROPS, new Item.Properties()));
+        helper.register("soybeans", new ItemNameBlockItem(SOYBEANS_CROPS, new Item.Properties()));
     }
 
     @FunctionalInterface // Registers blocks and schedules itemBlock registration
