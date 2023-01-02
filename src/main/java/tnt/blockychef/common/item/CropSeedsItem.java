@@ -16,7 +16,7 @@ public class CropSeedsItem extends ItemNameBlockItem implements IPlantable {
 
     @Override
     public BlockState getPlant(BlockGetter level, BlockPos pos) {
-        return this.block.defaultBlockState();
+        return this.getBlock().defaultBlockState();
     }
 
     @Override
