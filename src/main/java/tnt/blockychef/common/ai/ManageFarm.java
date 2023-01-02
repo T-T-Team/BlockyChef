@@ -1,6 +1,7 @@
 package tnt.blockychef.common.ai;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -15,6 +16,7 @@ import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.memory.WalkTarget;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -32,17 +34,20 @@ import tnt.blockychef.common.block.WeedsGrowingBlock;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class ManageFarm extends Behavior<Villager> {
 
+    private static final Set<Item> VILLAGER_WANTED_ITEMS = ImmutableSet.of(Items.BREAD, Items.POTATO, Items.CARROT, Items.WHEAT, Items.WHEAT_SEEDS, Items.BEETROOT, Items.BEETROOT_SEEDS);
     private final List<BlockPos> validFarmFields = new ArrayList<>();
     private final List<BlockPos> toWeedFields = new ArrayList<>();
+    private final List<BlockPos> unplantedFields = new ArrayList<>();
     private Action action;
     private long nextStartTime;
     private int workTime;
 
     public ManageFarm() {
-        super(ImmutableMap.of(MemoryModuleType.LOOK_TARGET, MemoryStatus.VALUE_ABSENT, MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT, MemoryModuleType.SECONDARY_JOB_SITE, MemoryStatus.VALUE_PRESENT));
+        super(ImmutableMap.of(MemoryModuleType.LOOK_TARGET, MemoryStatus.VALUE_ABSENT, MemoryModuleType.WALK_TARGET, MemoryStatus.VALUE_ABSENT, MemoryModuleType.SECONDARY_JOB_SITE, MemoryStatus.VALUE_PRESENT), 200, 1000);
     }
 
     @Override
@@ -56,9 +61,11 @@ public class ManageFarm extends Behavior<Villager> {
         BlockPos.MutableBlockPos mutable = villager.blockPosition().mutable();
         this.toWeedFields.clear();
         this.validFarmFields.clear();
-        for(int x = -1; x <= 1; ++x) {
-            for(int y = -1; y <= 1; ++y) {
-                for(int z = -1; z <= 1; ++z) {
+        this.unplantedFields.clear();
+        int searchRange = 3;
+        for(int x = -searchRange; x <= searchRange; ++x) {
+            for(int y = -searchRange; y <= searchRange; ++y) {
+                for(int z = -searchRange; z <= searchRange; ++z) {
                     mutable.set(villager.getX() + x, villager.getY() + y, villager.getZ() + z);
                     BlockPos pos = mutable.immutable();
                     BlockState state = level.getBlockState(pos);
@@ -73,6 +80,8 @@ public class ManageFarm extends Behavior<Villager> {
                                 if (cropsBlock.isMaxAge(state)) {
                                     this.validFarmFields.add(pos);
                                 }
+                            } else if (plant == Registry.WEEDS) {
+                                this.unplantedFields.add(pos);
                             }
                         } else if (plant instanceof CropBlock cropBlock) { // Vanilla compat
                             if (cropBlock.isMaxAge(state)) {
@@ -83,7 +92,7 @@ public class ManageFarm extends Behavior<Villager> {
                 }
             }
         }
-        this.action = this.getAction(level);
+        this.action = this.getAction(null, level.getRandom(), villager);
         return this.action != null;
     }
 
@@ -109,73 +118,56 @@ public class ManageFarm extends Behavior<Villager> {
     protected void tick(ServerLevel level, Villager villager, long levelTime) {
         if (this.action == null || this.action.pos().closerToCenterThan(villager.position(), 1)) {
             if (this.action != null && levelTime > this.nextStartTime) {
-                BlockState blockstate = level.getBlockState(this.action.pos);
+                BlockState blockstate = level.getBlockState(this.action.pos());
                 Block plant = blockstate.getBlock();
-                Block soil = level.getBlockState(this.action.pos.below()).getBlock();
-                if (this.action.isWeeding()) {
-                    if (plant instanceof WeedsGrowingBlock) {
-                        int weedsAge = blockstate.getValue(WeedsGrowingBlock.WEEDS_AGE);
-                        if (weedsAge > 0) {
-                            WeedsGrowingBlock.trimWeeds(this.action.pos, blockstate, level);
-                        }
-                    }
-                    this.resetAction(level, villager, levelTime);
-                } else {
-                    if (this.isFullyGrown(plant, blockstate)) {
-                        level.destroyBlock(this.action.pos, true, villager);
-                    }
-
-                    blockstate = level.getBlockState(this.action.pos);
-                    plant = blockstate.getBlock();
-                    if ((blockstate.isAir() || blockstate.canBeReplaced()) && soil instanceof FarmBlock && !villager.getInventory().isEmpty()) {
-                        SimpleContainer simplecontainer = villager.getInventory();
-                        for(int i = 0; i < simplecontainer.getContainerSize(); ++i) {
-                            ItemStack itemstack = simplecontainer.getItem(i);
-                            boolean flag = false;
-                            if (!itemstack.isEmpty()) {
-                                if (itemstack.is(Items.WHEAT_SEEDS)) {
-                                    BlockState blockstate1 = Registry.WHEAT_CROPS.defaultBlockState();
-                                    level.setBlockAndUpdate(this.action.pos, blockstate1);
-                                    level.gameEvent(GameEvent.BLOCK_PLACE, this.action.pos, GameEvent.Context.of(villager, blockstate1));
-                                    flag = true;
-                                } else if (itemstack.is(Items.POTATO)) {
-                                    BlockState blockstate2 = Registry.POTATO_CROPS.defaultBlockState();
-                                    level.setBlockAndUpdate(this.action.pos, blockstate2);
-                                    level.gameEvent(GameEvent.BLOCK_PLACE, this.action.pos, GameEvent.Context.of(villager, blockstate2));
-                                    flag = true;
-                                } else if (itemstack.is(Items.CARROT)) {
-                                    BlockState blockstate3 = Registry.CARROT_CROPS.defaultBlockState();
-                                    level.setBlockAndUpdate(this.action.pos, blockstate3);
-                                    level.gameEvent(GameEvent.BLOCK_PLACE, this.action.pos, GameEvent.Context.of(villager, blockstate3));
-                                    flag = true;
-                                } else if (itemstack.is(Items.BEETROOT_SEEDS)) {
-                                    BlockState blockstate4 = Registry.BEETROOT_CROPS.defaultBlockState();
-                                    level.setBlockAndUpdate(this.action.pos, blockstate4);
-                                    level.gameEvent(GameEvent.BLOCK_PLACE, this.action.pos, GameEvent.Context.of(villager, blockstate4));
-                                    flag = true;
-                                } else if (itemstack.getItem() instanceof IPlantable plantable) {
-                                    if (plantable.getPlantType(level, this.action.pos) == PlantType.CROP) {
-                                        BlockState plantState = plantable.getPlant(level, this.action.pos);
-                                        level.setBlock(this.action.pos, plantState, 3);
-                                        flag = true;
-                                    }
-                                }
-                            }
-
-                            if (flag) {
-                                level.playSound(null, this.action.pos.getX(), this.action.pos.getY(), this.action.pos.getZ(), SoundEvents.CROP_PLANTED, SoundSource.BLOCKS, 1.0F, 1.0F);
-                                itemstack.shrink(1);
-                                if (itemstack.isEmpty()) {
-                                    simplecontainer.setItem(i, ItemStack.EMPTY);
-                                }
-                                break;
+                Block soil = level.getBlockState(this.action.pos().below()).getBlock();
+                switch (this.action.type()) {
+                    case WEED -> {
+                        this.toWeedFields.remove(this.action.pos());
+                        if (plant instanceof WeedsGrowingBlock) {
+                            int weedsAge = blockstate.getValue(WeedsGrowingBlock.WEEDS_AGE);
+                            if (weedsAge > 0) {
+                                WeedsGrowingBlock.trimWeeds(this.action.pos(), blockstate, level);
                             }
                         }
-                    }
-
-                    if (!this.isFullyGrown(plant, blockstate)) {
-                        this.validFarmFields.remove(this.action.pos);
                         this.resetAction(level, villager, levelTime);
+                    }
+                    case PLANT -> {
+                        ItemStack seeds = this.getAnySeeds(level, villager);
+                        this.unplantedFields.remove(this.action.pos());
+                        if (!seeds.isEmpty()) {
+                            BlockState seedState = this.getSeedState(level, seeds);
+                            if (seedState != null) {
+                                level.setBlockAndUpdate(this.action.pos(), seedState);
+                                level.gameEvent(GameEvent.BLOCK_PLACE, this.action.pos(), GameEvent.Context.of(villager, seedState));
+                                level.playSound(null, this.action.pos().getX(), this.action.pos().getY(), this.action.pos().getZ(), SoundEvents.CROP_PLANTED, SoundSource.BLOCKS, 1.0F, 1.0F);
+                                seeds.shrink(1);
+                            }
+                        }
+                        this.resetAction(level, villager, levelTime);
+                    }
+                    case HARVEST -> {
+                        if (this.isFullyGrown(plant, blockstate)) {
+                            level.destroyBlock(this.action.pos(), true, villager);
+                        }
+                        blockstate = level.getBlockState(this.action.pos());
+                        plant = blockstate.getBlock();
+                        if ((blockstate.isAir() || blockstate.canBeReplaced()) && soil instanceof FarmBlock && !villager.getInventory().isEmpty()) {
+                            ItemStack itemstack = this.getAnySeeds(level, villager);
+                            if (!itemstack.isEmpty()) {
+                                BlockState seedState = this.getSeedState(level, itemstack);
+                                if (seedState != null) {
+                                    level.setBlockAndUpdate(this.action.pos(), seedState);
+                                    level.gameEvent(GameEvent.BLOCK_PLACE, this.action.pos(), GameEvent.Context.of(villager, seedState));
+                                    level.playSound(null, this.action.pos().getX(), this.action.pos().getY(), this.action.pos().getZ(), SoundEvents.CROP_PLANTED, SoundSource.BLOCKS, 1.0F, 1.0F);
+                                    itemstack.shrink(1);
+                                }
+                            }
+                        }
+                        if (!this.isFullyGrown(plant, blockstate)) {
+                            this.validFarmFields.remove(this.action.pos());
+                            this.resetAction(level, villager, levelTime);
+                        }
                     }
                 }
             }
@@ -183,13 +175,55 @@ public class ManageFarm extends Behavior<Villager> {
         }
     }
 
+    private ItemStack getAnySeeds(@Nullable ServerLevel level, Villager villager) {
+        SimpleContainer container = villager.getInventory();
+        ItemStack stack = ItemStack.EMPTY;
+        for (int i = 0; i < container.getContainerSize(); i++) {
+            ItemStack itemStack = container.getItem(i);
+            if (!itemStack.isEmpty()) {
+                if (VILLAGER_WANTED_ITEMS.contains(itemStack.getItem())) {
+                    stack = itemStack;
+                    break;
+                }
+                if (itemStack.getItem() instanceof IPlantable plantable) {
+                    if (level == null || plantable.getPlantType(level, this.action.pos()) == PlantType.CROP) {
+                        stack = itemStack;
+                        break;
+                    }
+                }
+            }
+        }
+        return stack;
+    }
+
+    private BlockState getSeedState(ServerLevel level, ItemStack stack) {
+        if (stack.is(Items.WHEAT_SEEDS)) {
+            return Registry.WHEAT_CROPS.defaultBlockState();
+        }
+        if (stack.is(Items.POTATO)) {
+            return Registry.POTATO_CROPS.defaultBlockState();
+        }
+        if (stack.is(Items.CARROT)) {
+            return Registry.CARROT_CROPS.defaultBlockState();
+        }
+        if (stack.is(Items.BEETROOT_SEEDS)) {
+            return Registry.BEETROOT_CROPS.defaultBlockState();
+        }
+        if (stack.getItem() instanceof IPlantable plantable) {
+            if (plantable.getPlantType(level, this.action.pos()) == PlantType.CROP) {
+                return plantable.getPlant(level, this.action.pos());
+            }
+        }
+        return null;
+    }
+
     @Override
     protected boolean canStillUse(ServerLevel serverLevel, Villager villager, long levelTime) {
-        return this.workTime < 500;
+        return this.workTime < 1000;
     }
 
     private void resetAction(ServerLevel level, Villager villager, long levelTime) {
-        this.action = this.getAction(level);
+        this.action = this.getAction(level, level.getRandom(), villager);
         if (this.action != null) {
             this.nextStartTime = levelTime + 20L;
             Brain<?> brain = villager.getBrain();
@@ -199,15 +233,21 @@ public class ManageFarm extends Behavior<Villager> {
     }
 
     @Nullable
-    private Action getAction(ServerLevel level) {
-        RandomSource random = level.getRandom();
+    private Action getAction(ServerLevel level, RandomSource random, Villager villager) {
         if (!this.toWeedFields.isEmpty()) {
             BlockPos pos = this.toWeedFields.get(random.nextInt(this.toWeedFields.size()));
-            return new Action(pos, true);
+            return new Action(pos, ActionType.WEED);
+        }
+        if (!this.unplantedFields.isEmpty()) {
+            ItemStack seeds = this.getAnySeeds(level, villager);
+            if (!seeds.isEmpty()) {
+                BlockPos pos = this.unplantedFields.get(random.nextInt(this.unplantedFields.size()));
+                return new Action(pos, ActionType.PLANT);
+            }
         }
         if (!this.validFarmFields.isEmpty()) {
             BlockPos pos = this.validFarmFields.get(random.nextInt(this.validFarmFields.size()));
-            return new Action(pos, false);
+            return new Action(pos, ActionType.HARVEST);
         }
         return null;
     }
@@ -222,5 +262,11 @@ public class ManageFarm extends Behavior<Villager> {
         return false;
     }
 
-    private record Action(BlockPos pos, boolean isWeeding) {}
+    private record Action(BlockPos pos, ActionType type) {}
+
+    private enum ActionType {
+        WEED,
+        PLANT,
+        HARVEST
+    }
 }
