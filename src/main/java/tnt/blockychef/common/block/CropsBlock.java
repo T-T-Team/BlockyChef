@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -28,6 +29,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.Registry;
+
+import java.util.function.UnaryOperator;
 
 public class CropsBlock extends WeedsGrowingBlock implements BonemealableBlock {
 
@@ -45,7 +48,15 @@ public class CropsBlock extends WeedsGrowingBlock implements BonemealableBlock {
     private final SeedProvider seedProvider;
 
     public CropsBlock(SeedProvider provider) {
-        super(Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP));
+        this(provider, UnaryOperator.identity());
+    }
+
+    public CropsBlock(SeedProvider provider, UnaryOperator<Properties> propertyExtender) {
+        this(provider, propertyExtender.apply(Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP)));
+    }
+
+    protected CropsBlock(SeedProvider provider, Properties properties) {
+        super(properties);
         this.seedProvider = provider;
     }
 
@@ -95,13 +106,11 @@ public class CropsBlock extends WeedsGrowingBlock implements BonemealableBlock {
     }
 
     @Override
-    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean flag) {
-        if (!state.is(oldState.getBlock())) {
-            super.onRemove(state, level, pos, oldState, flag);
-            if (BlockyChef.config.weeds.placeOnRawFarmland) {
-                if (level.getBlockState(pos.below()).is(Blocks.FARMLAND)) {
-                    level.setBlock(pos, Registry.WEEDS.defaultBlockState().setValue(WEEDS_AGE, state.getValue(WEEDS_AGE)), 2);
-                }
+    public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {
+        super.playerDestroy(level, player, pos, state, blockEntity, stack);
+        if (BlockyChef.config.weeds.placeOnRawFarmland) {
+            if (level.getBlockState(pos.below()).is(Blocks.FARMLAND)) {
+                level.setBlock(pos, Registry.WEEDS.defaultBlockState().setValue(WEEDS_AGE, state.getValue(WEEDS_AGE)), 2);
             }
         }
     }
