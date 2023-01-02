@@ -16,6 +16,7 @@ import net.minecraftforge.registries.RegisterEvent;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.CropsBlock;
 import tnt.blockychef.common.block.WeedsGrowingBlock;
+import tnt.blockychef.common.item.CropSeedsItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -206,33 +207,33 @@ public final class Registry {
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {
-        helper.register("tomato", new ItemNameBlockItem(TOMATO_CROPS, new Item.Properties()));
-        helper.register("cucumber", new ItemNameBlockItem(CUCUMBER_CROPS, new Item.Properties()));
-        helper.register("bell_pepper", new ItemNameBlockItem(BELL_PEPPER_CROPS, new Item.Properties()));
-        helper.register("black_pepper", new ItemNameBlockItem(BLACK_PEPPER_CROPS, new Item.Properties()));
-        helper.register("blueberry", new ItemNameBlockItem(BLUEBERRY_CROPS, new Item.Properties()));
-        helper.register("broccoli", new ItemNameBlockItem(BROCCOLI_CROPS, new Item.Properties()));
-        helper.register("cabbage", new ItemNameBlockItem(CABBAGE_CROPS, new Item.Properties()));
-        helper.register("chilli_pepper", new ItemNameBlockItem(CHILLI_PEPPER_CROPS, new Item.Properties()));
-        helper.register("corn", new ItemNameBlockItem(CORN_CROPS, new Item.Properties()));
-        helper.register("garlic", new ItemNameBlockItem(GARLIC_CROPS, new Item.Properties()));
-        helper.register("leek", new ItemNameBlockItem(LEEK_CROPS, new Item.Properties()));
-        helper.register("lettuce", new ItemNameBlockItem(LETTUCE_CROPS, new Item.Properties()));
-        helper.register("onion", new ItemNameBlockItem(ONION_CROPS, new Item.Properties()));
-        helper.register("parsley", new ItemNameBlockItem(PARSLEY_CROPS, new Item.Properties()));
-        helper.register("raspberry", new ItemNameBlockItem(RASPBERRY_CROPS, new Item.Properties()));
-        helper.register("spring_onion", new ItemNameBlockItem(SPRING_ONION_CROPS, new Item.Properties()));
-        helper.register("strawberry", new ItemNameBlockItem(STRAWBERRY_CROPS, new Item.Properties()));
-        helper.register("turmeric", new ItemNameBlockItem(TURMERIC_CROPS, new Item.Properties()));
-        helper.register("pineapple", new ItemNameBlockItem(PINEAPPLE_CROPS, new Item.Properties()));
-        helper.register("portobello", new ItemNameBlockItem(PORTOBELLO_CROPS, new Item.Properties()));
-        helper.register("beans", new ItemNameBlockItem(BEANS_CROPS, new Item.Properties()));
-        helper.register("peanuts", new ItemNameBlockItem(PEANUTS_CROPS, new Item.Properties()));
-        helper.register("peas", new ItemNameBlockItem(PEAS_CROPS, new Item.Properties()));
-        helper.register("soybeans", new ItemNameBlockItem(SOYBEANS_CROPS, new Item.Properties()));
-        helper.register("basil", new ItemNameBlockItem(BASIL_CROPS, new Item.Properties()));
-        helper.register("ginger", new ItemNameBlockItem(GINGER_CROPS, new Item.Properties()));
-        helper.register("tea", new ItemNameBlockItem(TEA_CROPS, new Item.Properties()));
+        helper.register("tomato", new CropSeedsItem(TOMATO_CROPS, new Item.Properties()));
+        helper.register("cucumber", new CropSeedsItem(CUCUMBER_CROPS, new Item.Properties()));
+        helper.register("bell_pepper", new CropSeedsItem(BELL_PEPPER_CROPS, new Item.Properties()));
+        helper.register("black_pepper", new CropSeedsItem(BLACK_PEPPER_CROPS, new Item.Properties()));
+        helper.register("blueberry", new CropSeedsItem(BLUEBERRY_CROPS, new Item.Properties()));
+        helper.register("broccoli", new CropSeedsItem(BROCCOLI_CROPS, new Item.Properties()));
+        helper.register("cabbage", new CropSeedsItem(CABBAGE_CROPS, new Item.Properties()));
+        helper.register("chilli_pepper", new CropSeedsItem(CHILLI_PEPPER_CROPS, new Item.Properties()));
+        helper.register("corn", new CropSeedsItem(CORN_CROPS, new Item.Properties()));
+        helper.register("garlic", new CropSeedsItem(GARLIC_CROPS, new Item.Properties()));
+        helper.register("leek", new CropSeedsItem(LEEK_CROPS, new Item.Properties()));
+        helper.register("lettuce", new CropSeedsItem(LETTUCE_CROPS, new Item.Properties()));
+        helper.register("onion", new CropSeedsItem(ONION_CROPS, new Item.Properties()));
+        helper.register("parsley", new CropSeedsItem(PARSLEY_CROPS, new Item.Properties()));
+        helper.register("raspberry", new CropSeedsItem(RASPBERRY_CROPS, new Item.Properties()));
+        helper.register("spring_onion", new CropSeedsItem(SPRING_ONION_CROPS, new Item.Properties()));
+        helper.register("strawberry", new CropSeedsItem(STRAWBERRY_CROPS, new Item.Properties()));
+        helper.register("turmeric", new CropSeedsItem(TURMERIC_CROPS, new Item.Properties()));
+        helper.register("pineapple", new CropSeedsItem(PINEAPPLE_CROPS, new Item.Properties()));
+        helper.register("portobello", new CropSeedsItem(PORTOBELLO_CROPS, new Item.Properties()));
+        helper.register("beans", new CropSeedsItem(BEANS_CROPS, new Item.Properties()));
+        helper.register("peanuts", new CropSeedsItem(PEANUTS_CROPS, new Item.Properties()));
+        helper.register("peas", new CropSeedsItem(PEAS_CROPS, new Item.Properties()));
+        helper.register("soybeans", new CropSeedsItem(SOYBEANS_CROPS, new Item.Properties()));
+        helper.register("basil", new CropSeedsItem(BASIL_CROPS, new Item.Properties()));
+        helper.register("ginger", new CropSeedsItem(GINGER_CROPS, new Item.Properties()));
+        helper.register("tea", new CropSeedsItem(TEA_CROPS, new Item.Properties()));
     }
 
     @FunctionalInterface // Registers blocks and schedules itemBlock registration
