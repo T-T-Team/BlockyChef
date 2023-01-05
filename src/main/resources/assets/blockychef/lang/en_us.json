@@ -27,6 +27,9 @@
   "block.blockychef.basil_crops": "Basil Crops",
   "block.blockychef.ginger_crops": "Ginger Crops",
   "block.blockychef.tea_crops": "Tea Crops",
+  "block.blockychef.grapes_crops": "Grapes Crops",
+  "block.blockychef.rice_crops": "Rice Crops",
+  "block.blockychef.oat_crops": "Oat Crops",
 
   "item.blockychef.tomato": "Tomato",
   "item.blockychef.cucumber": "Cucumber",
@@ -55,6 +58,9 @@
   "item.blockychef.basil": "Basil",
   "item.blockychef.ginger": "Ginger",
   "item.blockychef.tea": "Tea",
+  "item.blockychef.grapes": "Grapes",
+  "item.blockychef.rice": "Rice",
+  "item.blockychef.oat": "Oat",
 
   "config.screen.blockychef": "BlockyChef Configuration",
 

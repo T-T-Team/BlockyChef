@@ -89,6 +89,12 @@ public final class Registry {
     public static final CropsBlock GINGER_CROPS = null;
     @ObjectHolder(value = "blockychef:tea_crops", registryName = "block")
     public static final CropsBlock TEA_CROPS = null;
+    @ObjectHolder(value = "blockychef:grapes_crops", registryName = "block")
+    public static final CropsBlock GRAPES_CROPS = null;
+    @ObjectHolder(value = "blockychef:rice_crops", registryName = "block")
+    public static final CropsBlock RICE_CROPS = null;
+    @ObjectHolder(value = "blockychef:oat_crops", registryName = "block")
+    public static final CropsBlock OAT_CROPS = null;
 
 
     // Items ---
@@ -146,6 +152,12 @@ public final class Registry {
     public static final Item GINGER = null;
     @ObjectHolder(value = "blockychef:tea", registryName = "item")
     public static final Item TEA = null;
+    @ObjectHolder(value = "blockychef:grapes", registryName = "item")
+    public static final Item GRAPES = null;
+    @ObjectHolder(value = "blockychef:rice", registryName = "item")
+    public static final Item RICE = null;
+    @ObjectHolder(value = "blockychef:oat", registryName = "item")
+    public static final Item OAT = null;
 
 
     private static List<Block> blockEntries = new ArrayList<>();
@@ -204,6 +216,9 @@ public final class Registry {
         helper.register("basil_crops", new CropsBlock(() -> BASIL), false);
         helper.register("ginger_crops", new CropsBlock(() -> GINGER), false);
         helper.register("tea_crops", new CropsBlock(() -> TEA), false);
+        helper.register("grapes_crops", new CropsBlock(() -> GRAPES), false);
+        helper.register("rice_crops", new CropsBlock(() -> RICE), false);
+        helper.register("oat_crops", new CropsBlock(() -> OAT), false);
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {
@@ -234,6 +249,9 @@ public final class Registry {
         helper.register("basil", new CropSeedsItem(BASIL_CROPS, new Item.Properties()));
         helper.register("ginger", new CropSeedsItem(GINGER_CROPS, new Item.Properties()));
         helper.register("tea", new CropSeedsItem(TEA_CROPS, new Item.Properties()));
+        helper.register("grapes", new CropSeedsItem(GRAPES_CROPS, new Item.Properties()));
+        helper.register("rice", new CropSeedsItem(RICE_CROPS, new Item.Properties()));
+        helper.register("oat", new CropSeedsItem(OAT_CROPS, new Item.Properties()));
     }
 
     @FunctionalInterface // Registers blocks and schedules itemBlock registration

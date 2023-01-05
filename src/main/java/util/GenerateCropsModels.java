@@ -17,7 +17,7 @@ import java.util.function.UnaryOperator;
 public class GenerateCropsModels {
 
     // Script arguments
-    private static final String CROPS_NAME = "wheat";
+    private static final String CROPS_NAME = "rice";
     private static final String CROPS_SUFFIX = "_crops";
     private static final int LOOT_TABLE_BONUS = 2;
     private static final CropsModelType MODEL_TYPE = CropsModelType.DEFAULT;

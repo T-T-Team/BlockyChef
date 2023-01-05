@@ -1,0 +1,8 @@
+{
+  "parent": "blockychef:block/weed_crops",
+  "render_type": "cutout",
+  "textures": {
+    "crop": "blockychef:block/grapes3",
+    "weeds": "blockychef:block/weed1"
+  }
+}
