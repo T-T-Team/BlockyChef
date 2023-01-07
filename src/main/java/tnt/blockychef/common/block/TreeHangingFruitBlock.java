@@ -48,7 +48,7 @@ public class TreeHangingFruitBlock extends BushBlock implements BonemealableBloc
 
     @Override
     public boolean isValidBonemealTarget(LevelReader reader, BlockPos pos, BlockState state, boolean clientside) {
-        return !clientside && !BlockyChef.config.crops.restrictBonemealUsage && !this.isRipe(state);
+        return !BlockyChef.config.crops.restrictBonemealUsage && !this.isRipe(state);
     }
 
     @Override
@@ -59,10 +59,9 @@ public class TreeHangingFruitBlock extends BushBlock implements BonemealableBloc
     @Override
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
         int age = state.getValue(AGE);
-        int added = 1 + random.nextInt(2);
-        int nextAge = age + added;
-        if (nextAge > 3) {
-            nextAge = 3;
+        int nextAge = age + 1;
+        if (nextAge > 2) {
+            nextAge = 2;
         }
         level.setBlock(pos, state.setValue(AGE, nextAge), 2);
     }
@@ -81,7 +80,7 @@ public class TreeHangingFruitBlock extends BushBlock implements BonemealableBloc
                 return InteractionResult.SUCCESS;
             }
         }
-        return InteractionResult.CONSUME;
+        return super.use(state, level, pos, player, hand, hitResult);
     }
 
     @Override
@@ -89,8 +88,8 @@ public class TreeHangingFruitBlock extends BushBlock implements BonemealableBloc
         if (!DecayingGrowingBlock.canTick(level, pos)) return;
         if (this.isRipe(state)) {
             if (random.nextFloat() < 0.1F) {
-                dropResources(state, level, pos);
                 level.setBlock(pos, state.setValue(AGE, 0), 2);
+                level.destroyBlock(pos, true);
             }
         } else {
             float growthChance = 0.05F;
