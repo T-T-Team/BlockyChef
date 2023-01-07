@@ -1,6 +1,7 @@
 package tnt.blockychef.common.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
@@ -39,6 +40,13 @@ public class TreeHangingFruitBlock extends BushBlock implements BonemealableBloc
     @Override
     protected boolean mayPlaceOn(BlockState state, BlockGetter getter, BlockPos pos) {
         return state.is(BlockTags.LEAVES);
+    }
+
+    public boolean canSurvive(BlockState state, LevelReader reader, BlockPos pos) {
+        BlockPos blockpos = pos.above();
+        if (state.getBlock() == this)
+            return reader.getBlockState(blockpos).canSustainPlant(reader, blockpos, Direction.DOWN, this);
+        return this.mayPlaceOn(reader.getBlockState(blockpos), reader, blockpos);
     }
 
     @Override
