@@ -30,6 +30,7 @@
   "block.blockychef.grapes_crops": "Grapes Crops",
   "block.blockychef.rice_crops": "Rice Crops",
   "block.blockychef.oat_crops": "Oat Crops",
+  "block.blockychef.almond_fruit": "Almond Fruit",
 
   "item.blockychef.tomato": "Tomato",
   "item.blockychef.cucumber": "Cucumber",
@@ -61,6 +62,7 @@
   "item.blockychef.grapes": "Grapes",
   "item.blockychef.rice": "Rice",
   "item.blockychef.oat": "Oat",
+  "item.blockychef.almond": "Almond",
 
   "config.screen.blockychef": "BlockyChef Configuration",
 

@@ -15,7 +15,7 @@ import java.util.List;
 @SuppressWarnings("ResultOfMethodCallIgnored")
 public class GenerateFruitModels {
 
-    private static final String FRUIT_NAME = "";
+    private static final String FRUIT_NAME = "almond";
     private static final String FRUIT_SUFFIX = "_fruit";
     private static final int LOOT_BONUS = 2;
     private static final ModelVariant MODEL_VARIANT = ModelVariant.SMALL;

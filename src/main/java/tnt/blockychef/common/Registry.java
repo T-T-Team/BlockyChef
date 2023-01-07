@@ -15,6 +15,7 @@ import net.minecraftforge.registries.RegisterEvent;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.CropsBlock;
 import tnt.blockychef.common.block.DecayingGrowingBlock;
+import tnt.blockychef.common.block.TreeHangingFruitBlock;
 import tnt.blockychef.common.item.CropSeedsItem;
 
 import java.util.ArrayList;
@@ -218,6 +219,7 @@ public final class Registry {
         helper.register("grapes_crops", new CropsBlock(() -> GRAPES), false);
         helper.register("rice_crops", new CropsBlock(() -> RICE), false);
         helper.register("oat_crops", new CropsBlock(() -> OAT), false);
+        helper.register("almond_fruit", new TreeHangingFruitBlock(), false);
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {
@@ -251,6 +253,7 @@ public final class Registry {
         helper.register("grapes", new CropSeedsItem(GRAPES_CROPS, new Item.Properties()));
         helper.register("rice", new CropSeedsItem(RICE_CROPS, new Item.Properties()));
         helper.register("oat", new CropSeedsItem(OAT_CROPS, new Item.Properties()));
+        helper.register("almond", new Item(new Item.Properties()));
     }
 
     @FunctionalInterface // Registers blocks and schedules itemBlock registration
