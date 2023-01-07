@@ -3,6 +3,7 @@ package tnt.blockychef.mixin;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -34,9 +35,12 @@ public abstract class BlockItemMixin extends Item {
         if (BlockyChef.config.decay.replaceVanillaCrops) {
             Block block = ((BlockItem) (Object) this).getBlock();
             Supplier<Block> replacement = REPLACEMENTS.get(block);
+            Level level = context.getLevel();
             if (replacement != null) {
                 BlockState state = replacement.get().getStateForPlacement(context);
-                ci.setReturnValue(state);
+                if (state.canSurvive(level, context.getClickedPos())) {
+                    ci.setReturnValue(state);
+                }
             }
         }
     }
