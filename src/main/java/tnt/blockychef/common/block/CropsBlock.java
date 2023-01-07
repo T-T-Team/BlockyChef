@@ -4,6 +4,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.monster.Ravager;
 import net.minecraft.world.entity.player.Player;
@@ -23,6 +25,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -113,6 +116,22 @@ public class CropsBlock extends DecayingGrowingBlock implements BonemealableBloc
                 level.setBlock(pos, Registry.WEEDS.defaultBlockState().setValue(this.getDecayProperty(), state.getValue(this.getDecayProperty())), 2);
             }
         }
+    }
+
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        InteractionResult result = super.use(state, level, pos, player, hand, hitResult);
+        if (result.consumesAction()) {
+            return result;
+        }
+        if (!level.isClientSide) {
+            if (this.isMaxAge(state)) {
+                dropResources(state, level, pos);
+                level.setBlock(pos, state.setValue(AGE, 0), 2);
+                return InteractionResult.SUCCESS;
+            }
+        }
+        return InteractionResult.PASS;
     }
 
     @Override
