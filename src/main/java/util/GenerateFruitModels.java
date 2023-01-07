@@ -75,7 +75,7 @@ public class GenerateFruitModels {
                 object.addProperty("parent", "blockychef:block/" + MODEL_VARIANT.path);
                 object.addProperty("render_type", "cutout");
                 JsonObject texturesJson = new JsonObject();
-                texturesJson.addProperty("fruit", "blockychef:block/" + FRUIT_NAME + "/" + FRUIT_NAME + fruitAge);
+                texturesJson.addProperty("fruit", "blockychef:block/" + FRUIT_NAME + fruitAge);
                 object.add("textures", texturesJson);
                 try (FileWriter writer = new FileWriter(modelFile)) {
                     writer.write(GSON.toJson(object));
