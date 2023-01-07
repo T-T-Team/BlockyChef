@@ -18,7 +18,8 @@ public abstract class VillagerGoalPackagesMixin {
                     value = "INVOKE",
                     target = "Lcom/google/common/collect/ImmutableList;of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList;"
             ),
-            index = 4
+            index = 4,
+            remap = false
     )
     @SuppressWarnings("unchecked")
     private static <E> E blockychef$replaceFarmingTask(E e1) {

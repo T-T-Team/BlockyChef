@@ -31,7 +31,7 @@ public abstract class BlockItemMixin extends Item {
 
     @Inject(method = "getPlacementState", at = @At("HEAD"), cancellable = true)
     private void blockyChef$getPlacementStateWithReplacements(BlockPlaceContext context, CallbackInfoReturnable<BlockState> ci) {
-        if (BlockyChef.config.weeds.replaceVanillaCrops) {
+        if (BlockyChef.config.decay.replaceVanillaCrops) {
             Block block = ((BlockItem) (Object) this).getBlock();
             Supplier<Block> replacement = REPLACEMENTS.get(block);
             if (replacement != null) {

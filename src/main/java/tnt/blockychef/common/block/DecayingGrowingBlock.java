@@ -7,7 +7,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.ItemStack;
@@ -17,7 +16,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -27,9 +25,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.PlantType;
 import tnt.blockychef.BlockyChef;
-import tnt.blockychef.common.Registry;
 
-public class WeedsGrowingBlock extends BushBlock {
+public class DecayingGrowingBlock extends BushBlock {
 
     private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[] {
             Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D),
@@ -40,14 +37,43 @@ public class WeedsGrowingBlock extends BushBlock {
     };
     public static final IntegerProperty WEEDS_AGE = IntegerProperty.create("weeds", 0, 4);
 
-    public WeedsGrowingBlock(Properties properties) {
+    public DecayingGrowingBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.createDefaultState(this.stateDefinition.any()));
     }
 
+    public IntegerProperty getDecayProperty() {
+        return WEEDS_AGE;
+    }
+
+    public int getMaxDecayValue() {
+        return 4;
+    }
+
+    protected void decay(ServerLevel level, BlockPos pos, BlockState state, RandomSource random) {
+        if (this.canDecay(level, pos, state, random)) {
+            this.tryDecay(level, pos, state, random);
+        }
+    }
+
+    protected boolean canDecay(ServerLevel level, BlockPos pos, BlockState state, RandomSource random) {
+        return !this.isFullyDecayed(state);
+    }
+
+    protected void tryDecay(ServerLevel level, BlockPos pos, BlockState state, RandomSource random) {
+        if (random.nextFloat() < this.getDecayGrowthChance(level, pos, state, random)) {
+            int decay = state.getValue(this.getDecayProperty());
+            level.setBlock(pos, state.setValue(this.getDecayProperty(), decay + 1), 2);
+        }
+    }
+
+    protected float getDecayGrowthChance(ServerLevel level, BlockPos pos, BlockState state, RandomSource random) {
+        return BlockyChef.config.decay.plantDecayProgressChance;
+    }
+
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
-        return SHAPE_BY_AGE[state.getValue(WEEDS_AGE)];
+        return SHAPE_BY_AGE[state.getValue(this.getDecayProperty())];
     }
 
     @Override
@@ -62,7 +88,7 @@ public class WeedsGrowingBlock extends BushBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(WeedsGrowingBlock.WEEDS_AGE);
+        builder.add(this.getDecayProperty());
     }
 
     @Override
@@ -73,12 +99,7 @@ public class WeedsGrowingBlock extends BushBlock {
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (!level.isAreaLoaded(pos, 1)) return;
-        if (!areWeedsMaxAge(state)) {
-            if (random.nextFloat() < BlockyChef.config.weeds.weedsGrowthChance) { // Weeds growth chance
-                int age = state.getValue(WeedsGrowingBlock.WEEDS_AGE);
-                level.setBlock(pos, state.setValue(WeedsGrowingBlock.WEEDS_AGE, age + 1), 2);
-            }
-        }
+        this.decay(level, pos, state, random);
     }
 
     @Override
@@ -89,7 +110,7 @@ public class WeedsGrowingBlock extends BushBlock {
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         ItemStack stack = player.getItemInHand(hand);
-        int weedsAge = state.getValue(WEEDS_AGE);
+        int weedsAge = state.getValue(this.getDecayProperty());
         if (stack.getItem() instanceof HoeItem && weedsAge > 0) {
             if (!level.isClientSide) {
                 stack.hurtAndBreak(weedsAge, player, p -> p.broadcastBreakEvent(hand));
@@ -101,19 +122,26 @@ public class WeedsGrowingBlock extends BushBlock {
     }
 
     protected BlockState createDefaultState(BlockState base) {
-        return base.setValue(WEEDS_AGE, 0);
+        return base.setValue(this.getDecayProperty(), 0);
     }
 
     public static void trimWeeds(BlockPos pos, BlockState state, Level level) {
+        if (!(state.getBlock() instanceof DecayingGrowingBlock block)) {
+            return;
+        }
         if (!level.isClientSide) {
-            level.setBlock(pos, state.setValue(WEEDS_AGE, 0), 2);
+            level.setBlock(pos, state.setValue(block.getDecayProperty(), 0), 2);
             level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.HOE_TILL, SoundSource.BLOCKS, 1.0F, 1.0F);
         } else {
             level.addDestroyBlockEffect(pos, Blocks.GRASS.defaultBlockState());
         }
     }
 
-    public static boolean areWeedsMaxAge(BlockState state) {
-        return state.getValue(WeedsGrowingBlock.WEEDS_AGE) == 4;
+    public static boolean canTick(Level level, BlockPos pos) {
+        return level.isAreaLoaded(pos, 1);
+    }
+
+    public boolean isFullyDecayed(BlockState state) {
+        return state.getValue(this.getDecayProperty()) == this.getMaxDecayValue();
     }
 }

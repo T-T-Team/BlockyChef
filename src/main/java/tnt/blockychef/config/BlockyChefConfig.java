@@ -9,7 +9,7 @@ public final class BlockyChefConfig {
 
     @Configurable
     @Configurable.Comment("Weeds configuration")
-    public WeedsConfig weeds = new WeedsConfig();
+    public PlantDecay decay = new PlantDecay();
 
     @Configurable
     @Configurable.Comment("Crops configuration")

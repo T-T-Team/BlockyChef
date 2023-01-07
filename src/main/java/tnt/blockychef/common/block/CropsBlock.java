@@ -32,7 +32,7 @@ import tnt.blockychef.common.Registry;
 
 import java.util.function.UnaryOperator;
 
-public class CropsBlock extends WeedsGrowingBlock implements BonemealableBlock {
+public class CropsBlock extends DecayingGrowingBlock implements BonemealableBlock {
 
     private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[] {
             Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D),
@@ -70,9 +70,9 @@ public class CropsBlock extends WeedsGrowingBlock implements BonemealableBlock {
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         BlockState state = super.getStateForPlacement(ctx);
         BlockState oldState = ctx.getLevel().getBlockState(ctx.getClickedPos());
-        if (oldState.getBlock() instanceof WeedsGrowingBlock) {
-            int age = oldState.getValue(WEEDS_AGE);
-            state = state.setValue(WEEDS_AGE, age);
+        if (oldState.getBlock() instanceof DecayingGrowingBlock) {
+            int age = oldState.getValue(this.getDecayProperty());
+            state = state.setValue(this.getDecayProperty(), age);
         }
         return state;
     }
@@ -108,9 +108,9 @@ public class CropsBlock extends WeedsGrowingBlock implements BonemealableBlock {
     @Override
     public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {
         super.playerDestroy(level, player, pos, state, blockEntity, stack);
-        if (BlockyChef.config.weeds.placeOnRawFarmland) {
+        if (BlockyChef.config.decay.placeOnRawFarmland) {
             if (level.getBlockState(pos.below()).is(Blocks.FARMLAND)) {
-                level.setBlock(pos, Registry.WEEDS.defaultBlockState().setValue(WEEDS_AGE, state.getValue(WEEDS_AGE)), 2);
+                level.setBlock(pos, Registry.WEEDS.defaultBlockState().setValue(this.getDecayProperty(), state.getValue(this.getDecayProperty())), 2);
             }
         }
     }
@@ -128,14 +128,14 @@ public class CropsBlock extends WeedsGrowingBlock implements BonemealableBlock {
                 }
             }
         }
-        if (areWeedsMaxAge(state)) {
-            float destroyChance = BlockyChef.config.weeds.weedsCropKillChance;
+        if (isFullyDecayed(state)) {
+            float destroyChance = BlockyChef.config.decay.plantDecayKillChance;
             if (random.nextFloat() < destroyChance) {
                 level.destroyBlock(pos, false);
             }
-        } else if (random.nextFloat() < BlockyChef.config.weeds.weedsGrowthChance) { // Weeds growth chance
-            int age = state.getValue(WEEDS_AGE);
-            level.setBlock(pos, state.setValue(WEEDS_AGE, age + 1), 2);
+        } else if (random.nextFloat() < BlockyChef.config.decay.plantDecayProgressChance) {
+            int age = state.getValue(this.getDecayProperty());
+            level.setBlock(pos, state.setValue(this.getDecayProperty(), age + 1), 2);
         }
     }
 

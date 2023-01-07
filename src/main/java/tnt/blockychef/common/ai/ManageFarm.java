@@ -29,7 +29,7 @@ import net.minecraftforge.common.PlantType;
 import net.minecraftforge.event.ForgeEventFactory;
 import tnt.blockychef.common.Registry;
 import tnt.blockychef.common.block.CropsBlock;
-import tnt.blockychef.common.block.WeedsGrowingBlock;
+import tnt.blockychef.common.block.DecayingGrowingBlock;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -72,8 +72,8 @@ public class ManageFarm extends Behavior<Villager> {
                     Block plant = state.getBlock();
                     Block soil = level.getBlockState(pos.below()).getBlock();
                     if (soil instanceof FarmBlock) {
-                        if (plant instanceof WeedsGrowingBlock) {
-                            int weedsLevel = state.getValue(WeedsGrowingBlock.WEEDS_AGE);
+                        if (plant instanceof DecayingGrowingBlock block) {
+                            int weedsLevel = state.getValue(block.getDecayProperty());
                             if (weedsLevel > 0) {
                                 this.toWeedFields.add(pos);
                             } else if (plant instanceof CropsBlock cropsBlock) {
@@ -124,10 +124,10 @@ public class ManageFarm extends Behavior<Villager> {
                 switch (this.action.type()) {
                     case WEED -> {
                         this.toWeedFields.remove(this.action.pos());
-                        if (plant instanceof WeedsGrowingBlock) {
-                            int weedsAge = blockstate.getValue(WeedsGrowingBlock.WEEDS_AGE);
+                        if (plant instanceof DecayingGrowingBlock block) {
+                            int weedsAge = blockstate.getValue(block.getDecayProperty());
                             if (weedsAge > 0) {
-                                WeedsGrowingBlock.trimWeeds(this.action.pos(), blockstate, level);
+                                DecayingGrowingBlock.trimWeeds(this.action.pos(), blockstate, level);
                             }
                         }
                         this.resetAction(level, villager, levelTime);

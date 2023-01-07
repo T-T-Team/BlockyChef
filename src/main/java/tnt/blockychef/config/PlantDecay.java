@@ -2,7 +2,7 @@ package tnt.blockychef.config;
 
 import dev.toma.configuration.config.Configurable;
 
-public final class WeedsConfig {
+public final class PlantDecay {
 
     @Configurable
     @Configurable.Comment("Vanilla crops will be replaced with custom variant with weeds")
@@ -16,11 +16,11 @@ public final class WeedsConfig {
     @Configurable.DecimalRange(min = 0.0F, max = 1.0F)
     @Configurable.Gui.NumberFormat("0.0###")
     @Configurable.Comment("Chance that weeds will grow on each random tick call")
-    public float weedsGrowthChance = 0.025F;
+    public float plantDecayProgressChance = 0.025F;
 
     @Configurable
     @Configurable.DecimalRange(min = 0.0F, max = 1.0F)
     @Configurable.Gui.NumberFormat("0.0###")
     @Configurable.Comment("Chance that weeds will kill crops on each random tick call")
-    public float weedsCropKillChance = 0.05F;
+    public float plantDecayKillChance = 0.05F;
 }
