@@ -1,0 +1,7 @@
+{
+  "parent": "blockychef:block/tree_fruit_large",
+  "render_type": "cutout",
+  "textures": {
+    "fruit": "blockychef:block/avocado0"
+  }
+}

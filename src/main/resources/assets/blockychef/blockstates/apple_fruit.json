@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "blockychef:block/apple/apple_0"
+    },
+    "age=1": {
+      "model": "blockychef:block/apple/apple_1"
+    },
+    "age=2": {
+      "model": "blockychef:block/apple/apple_2"
+    }
+  }
+}
