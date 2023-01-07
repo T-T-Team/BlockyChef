@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "blockychef:block/chilli_pepper"
+    "layer0": "blockychef:item/chilli_pepper"
   }
 }

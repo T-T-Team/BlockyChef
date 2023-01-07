@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "blockychef:block/grapes"
+    "layer0": "blockychef:item/grapes"
   }
 }

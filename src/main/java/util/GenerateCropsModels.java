@@ -54,7 +54,7 @@ public class GenerateCropsModels {
             JsonObject modelContent = new JsonObject();
             modelContent.addProperty("parent", "item/generated");
             JsonObject textures = new JsonObject();
-            textures.addProperty("layer0", "blockychef:block/" + CROPS_NAME);
+            textures.addProperty("layer0", "blockychef:item/" + CROPS_NAME);
             modelContent.add("textures", textures);
             String rawContent = GSON.toJson(modelContent);
             try (FileWriter writer = new FileWriter(itemModelFile)) {
