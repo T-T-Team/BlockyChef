@@ -119,6 +119,16 @@ public class GenerateFruitModels {
             root.add("functions", functions);
             JsonArray pools = new JsonArray();
             root.add("pools", pools);
+            JsonObject pool1 = new JsonObject();
+            pool1.addProperty("rolls", 1);
+            pool1.addProperty("bonus_rolls", 0);
+            JsonArray pool1entries = new JsonArray();
+            pool1.add("entries", pool1entries);
+            JsonObject pool1entry1 = new JsonObject();
+            pool1entry1.addProperty("type", "minecraft:item");
+            pool1entry1.addProperty("name", "blockychef:" + FRUIT_NAME);
+            pool1entries.add(pool1entry1);
+            pools.add(pool1);
             JsonObject pool2 = new JsonObject();
             pool2.addProperty("rolls", 1);
             pool2.addProperty("bonus_rolls", 0);
