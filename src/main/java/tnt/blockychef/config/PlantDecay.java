@@ -23,4 +23,8 @@ public final class PlantDecay {
     @Configurable.Gui.NumberFormat("0.0###")
     @Configurable.Comment("Chance that weeds will kill crops on each random tick call")
     public float plantDecayKillChance = 0.05F;
+
+    @Configurable
+    @Configurable.Comment("Will cause fruit plant to be inrecoveably destroyed when decayed")
+    public boolean destroyFruitOnDecay = true;
 }
