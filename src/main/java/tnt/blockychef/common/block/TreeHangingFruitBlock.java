@@ -22,11 +22,18 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import tnt.blockychef.BlockyChef;
 
 public class TreeHangingFruitBlock extends BushBlock implements BonemealableBlock {
 
     public static final IntegerProperty AGE = BlockStateProperties.AGE_2;
+    public static final VoxelShape[] SHAPES = {
+            Block.box(6.5, 11.0, 6.5,  9.5, 16.0,  9.5),
+            Block.box(5.0,  8.0, 5.0, 11.0, 16.0, 11.0),
+            Block.box(4.0,  6.0, 4.0, 12.0, 16.0, 12.0)
+    };
 
     public TreeHangingFruitBlock() {
         super(Properties.of(Material.PLANT).destroyTime(0.6F).sound(SoundType.CROP).randomTicks().noCollission());
@@ -35,6 +42,11 @@ public class TreeHangingFruitBlock extends BushBlock implements BonemealableBloc
 
     public boolean isRipe(BlockState state) {
         return state.getValue(AGE) == 2;
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
+        return SHAPES[state.getValue(AGE)];
     }
 
     @Override
