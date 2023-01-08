@@ -33,6 +33,7 @@
   "block.blockychef.almond_fruit": "Almond Fruit",
   "block.blockychef.apple_fruit": "Apple Fruit",
   "block.blockychef.avocado_fruit": "Avocado Fruit",
+  "block.blockychef.banana_fruit": "Banana Fruit",
 
   "item.blockychef.tomato": "Tomato",
   "item.blockychef.cucumber": "Cucumber",
@@ -67,6 +68,7 @@
   "item.blockychef.almond": "Almond",
   "item.blockychef.apple": "Apple",
   "item.blockychef.avocado": "Avocado",
+  "item.blockychef.banana": "Banana",
 
   "config.screen.blockychef": "BlockyChef Configuration",
 
