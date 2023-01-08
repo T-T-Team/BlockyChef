@@ -223,6 +223,7 @@ public final class Registry {
         helper.register("apple_fruit", new TreeHangingFruitBlock(), false);
         helper.register("avocado_fruit", new TreeHangingFruitBlock(), false);
         helper.register("banana_fruit", new TreeHangingFruitBlock(), false);
+        helper.register("black_olives_fruit", new TreeHangingFruitBlock(), false);
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {
@@ -260,6 +261,7 @@ public final class Registry {
         helper.register("apple", new Item(new Item.Properties()));
         helper.register("avocado", new Item(new Item.Properties()));
         helper.register("banana", new Item(new Item.Properties()));
+        helper.register("black_olives", new Item(new Item.Properties()));
     }
 
     @FunctionalInterface // Registers blocks and schedules itemBlock registration
