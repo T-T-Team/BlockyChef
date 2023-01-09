@@ -38,6 +38,7 @@
   "block.blockychef.cherry_fruit": "Cherry Fruit",
   "block.blockychef.coconut_fruit": "Coconut Fruit",
   "block.blockychef.green_olives_fruit": "Green Olives Fruit",
+  "block.blockychef.hazelnut_fruit": "Hazelnut Fruit",
 
   "item.blockychef.tomato": "Tomato",
   "item.blockychef.cucumber": "Cucumber",
@@ -77,6 +78,7 @@
   "item.blockychef.cherry": "Cherry",
   "item.blockychef.coconut": "Coconut",
   "item.blockychef.green_olives": "Green Olives",
+  "item.blockychef.hazelnut": "Hazelnut",
 
   "config.screen.blockychef": "BlockyChef Configuration",
 

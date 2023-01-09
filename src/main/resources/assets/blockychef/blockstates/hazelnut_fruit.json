@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "blockychef:block/hazelnut/hazelnut_0"
+    },
+    "age=1": {
+      "model": "blockychef:block/hazelnut/hazelnut_1"
+    },
+    "age=2": {
+      "model": "blockychef:block/hazelnut/hazelnut_2"
+    }
+  }
+}

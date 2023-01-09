@@ -12,7 +12,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "blockychef:ginger"
+          "name": "blockychef:hazelnut"
         }
       ]
     },
@@ -22,9 +22,9 @@
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "blockychef:ginger_crops",
+          "block": "blockychef:hazelnut_fruit",
           "properties": {
-            "age": "7"
+            "age": "2"
           }
         }
       ],
@@ -42,7 +42,7 @@
               }
             }
           ],
-          "name": "blockychef:ginger"
+          "name": "blockychef:hazelnut"
         }
       ]
     }
