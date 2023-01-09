@@ -1,0 +1,7 @@
+{
+  "parent": "blockychef:block/tree_fruit_medium",
+  "render_type": "cutout",
+  "textures": {
+    "fruit": "blockychef:block/lime2"
+  }
+}
