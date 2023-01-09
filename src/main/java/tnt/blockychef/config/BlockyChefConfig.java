@@ -4,7 +4,7 @@ import dev.toma.configuration.config.Config;
 import dev.toma.configuration.config.Configurable;
 import tnt.blockychef.BlockyChef;
 
-@Config(id = BlockyChef.MODID)
+@Config(id = BlockyChef.MODID, filename = "blockychef/blockychef")
 public final class BlockyChefConfig {
 
     @Configurable
@@ -14,4 +14,8 @@ public final class BlockyChefConfig {
     @Configurable
     @Configurable.Comment("Crops configuration")
     public CropsConfig crops = new CropsConfig();
+
+    @Configurable
+    @Configurable.Comment("Thirst configuration")
+    public ThirstConfig thirst = new ThirstConfig();
 }

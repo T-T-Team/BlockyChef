@@ -1,5 +1,8 @@
 package tnt.blockychef.common;
 
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -17,6 +20,7 @@ import tnt.blockychef.common.block.CropsBlock;
 import tnt.blockychef.common.block.DecayingGrowingBlock;
 import tnt.blockychef.common.block.TreeHangingFruitBlock;
 import tnt.blockychef.common.item.CropSeedsItem;
+import tnt.blockychef.common.thirst.ThirstMobEffect;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -159,6 +163,12 @@ public final class Registry {
     @ObjectHolder(value = "blockychef:oat", registryName = "item")
     public static final Item OAT = null;
 
+    // Effects ---
+    @ObjectHolder(value = "blockychef:thirst", registryName = "mob_effect")
+    public static final MobEffect THIRST = null;
+
+    // Damage Sources ---
+    public static final DamageSource DEHYDRATATION = new DamageSource("blockychef.dehydratation").bypassArmor().bypassMagic();
 
     private static List<Block> blockEntries = new ArrayList<>();
 
@@ -181,6 +191,7 @@ public final class Registry {
             }
             blockEntries = null;
         });
+        event.register(ForgeRegistries.MOB_EFFECTS.getRegistryKey(), Registry::registerMobEffects);
     }
 
     private static void registerBlocks(BlockRegistryHelper helper) {
@@ -268,6 +279,10 @@ public final class Registry {
         helper.register("cherry", new Item(new Item.Properties()));
         helper.register("coconut", new Item(new Item.Properties()));
         helper.register("green_olives", new Item(new Item.Properties()));
+    }
+
+    private static void registerMobEffects(RegisterEvent.RegisterHelper<MobEffect> helper) {
+        helper.register("thirst", new ThirstMobEffect(MobEffectCategory.HARMFUL, 0x97AF5D));
     }
 
     @FunctionalInterface // Registers blocks and schedules itemBlock registration
