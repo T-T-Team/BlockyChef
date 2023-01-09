@@ -68,7 +68,7 @@ public class TreeHangingFruitBlock extends BushBlock implements BonemealableBloc
 
     @Override
     public boolean isValidBonemealTarget(LevelReader reader, BlockPos pos, BlockState state, boolean clientside) {
-        return !BlockyChef.config.crops.restrictBonemealUsage && !this.isRipe(state);
+        return !this.isRipe(state);
     }
 
     @Override

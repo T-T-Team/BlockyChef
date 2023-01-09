@@ -165,7 +165,7 @@ public class CropsBlock extends DecayingGrowingBlock implements BonemealableBloc
 
     @Override
     public boolean isValidBonemealTarget(LevelReader reader, BlockPos pos, BlockState state, boolean flag) {
-        return !BlockyChef.config.crops.restrictBonemealUsage && !this.isMaxAge(state);
+        return !this.isMaxAge(state);
     }
 
     @Override

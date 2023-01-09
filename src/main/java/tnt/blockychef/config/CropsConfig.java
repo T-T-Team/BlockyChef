@@ -5,6 +5,6 @@ import dev.toma.configuration.config.Configurable;
 public class CropsConfig {
 
     @Configurable
-    @Configurable.Comment("Crops from this mod won't be bonemealable")
+    @Configurable.Comment("Bonemeal usage will be removed")
     public boolean restrictBonemealUsage = true;
 }
