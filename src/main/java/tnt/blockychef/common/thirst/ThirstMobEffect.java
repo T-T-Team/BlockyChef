@@ -12,10 +12,16 @@ public class ThirstMobEffect extends MobEffect {
     }
 
     @Override
+    public boolean isDurationEffectTick(int duration, int amplifier) {
+        return true;
+    }
+
+    @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
         if (entity instanceof Player player) {
             player.getCapability(PlayerThirstStatsProvider.CAPABILITY).ifPresent(stats -> {
-                stats.addExhaustion(0.005F * (amplifier + 1));
+                float oldExh = stats.getExhaustionLevel();
+                stats.setExhaustionLevel(oldExh + 0.005F * (amplifier + 1));
             });
         }
     }
