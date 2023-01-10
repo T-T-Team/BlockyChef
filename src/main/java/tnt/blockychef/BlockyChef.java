@@ -18,6 +18,7 @@ import tnt.blockychef.common.thirst.DrinkConsumeHandler;
 import tnt.blockychef.common.thirst.DrinkLoader;
 import tnt.blockychef.common.thirst.PlayerThirstStatsProvider;
 import tnt.blockychef.config.BlockyChefConfig;
+import tnt.blockychef.integrations.Integrations;
 import tnt.blockychef.network.NetworkManager;
 
 @Mod(BlockyChef.MODID)
@@ -41,6 +42,7 @@ public final class BlockyChef {
     private void setup(FMLCommonSetupEvent event) {
         DrinkLoader.loadData();
         NetworkManager.Registry.register();
+        Integrations.accept(layer -> layer.setup(event));
     }
 
     private void attachPlayerCapabilities(AttachCapabilitiesEvent<Entity> event) {
