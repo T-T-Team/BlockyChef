@@ -242,6 +242,7 @@ public final class Registry {
         helper.register("lemon_fruit", new TreeHangingFruitBlock(), false);
         helper.register("lime_fruit", new TreeHangingFruitBlock(), false);
         helper.register("orange_fruit", new TreeHangingFruitBlock(), false);
+        helper.register("peach_fruit", new TreeHangingFruitBlock(), false);
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {
@@ -287,6 +288,7 @@ public final class Registry {
         helper.register("lemon", new Item(new Item.Properties()));
         helper.register("lime", new Item(new Item.Properties()));
         helper.register("orange", new Item(new Item.Properties()));
+        helper.register("peach", new Item(new Item.Properties()));
     }
 
     private static void registerMobEffects(RegisterEvent.RegisterHelper<MobEffect> helper) {

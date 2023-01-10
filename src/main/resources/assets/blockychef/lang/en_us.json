@@ -42,6 +42,7 @@
   "block.blockychef.lemon_fruit": "Lemon Fruit",
   "block.blockychef.lime_fruit": "Lime Fruit",
   "block.blockychef.orange_fruit": "Orange Fruit",
+  "block.blockychef.peach_fruit": "Peach Fruit",
 
   "item.blockychef.tomato": "Tomato",
   "item.blockychef.cucumber": "Cucumber",
@@ -85,6 +86,7 @@
   "item.blockychef.lemon": "Lemon",
   "item.blockychef.lime": "Lime",
   "item.blockychef.orange": "Orange",
+  "item.blockychef.peach": "Peach",
 
   "config.screen.blockychef": "BlockyChef Configuration",
 
