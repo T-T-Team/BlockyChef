@@ -9,7 +9,7 @@ public class PlayerThirstStats implements ThirstStats {
 
     private final Player player;
     private int hydration = 20;
-    private float saturation;
+    private float saturation = 5.0F;
     private float exhaustion;
     private int tickTimer;
 
