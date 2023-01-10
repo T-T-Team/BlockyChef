@@ -12,12 +12,18 @@ import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 import org.joml.Matrix4f;
 import tnt.blockychef.common.Registry;
 import tnt.blockychef.common.thirst.PlayerThirstStatsProvider;
+import tnt.blockychef.integrations.Integrations;
 import tnt.blockychef.util.RenderHelper;
 
 public class ThirstOverlay implements IGuiOverlay {
 
     public static final ResourceLocation TEXTURE = new ResourceLocation("blockychef:textures/icon/hydration_level.png");
     private final RandomSource random = RandomSource.create();
+    private final OverlayRenderer renderer;
+
+    public ThirstOverlay() {
+        this.renderer = Integrations.shouldRenderFancyOverlay() ? this::renderFancy : this::renderDefault;
+    }
 
     @Override
     public void render(ForgeGui gui, PoseStack poseStack, float partialTick, int screenWidth, int screenHeight) {
@@ -36,11 +42,21 @@ public class ThirstOverlay implements IGuiOverlay {
         RenderSystem.enableTexture();
         RenderSystem.setShaderTexture(0, TEXTURE);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        this.renderer.renderOverlay(player, gui, poseStack, partialTick, screenWidth, screenHeight);
+        RenderSystem.disableBlend();
+        minecraft.getProfiler().pop();
+    }
+
+    private void renderFancy(Player player, ForgeGui gui, PoseStack poseStack, float partialTick, int screenWidth, int screenHeight) {
+        // TODO implementation when Appleskin is present
+        this.renderDefault(player, gui, poseStack, partialTick, screenWidth, screenHeight);
+    }
+
+    private void renderDefault(Player player, ForgeGui gui, PoseStack poseStack, float partialTick, int screenWidth, int screenHeight) {
         int left = screenWidth / 2 + 91;
         int top = screenHeight - gui.rightHeight;
         gui.rightHeight += 10;
         this.random.setSeed(gui.getGuiTicks() * 312871L);
-
         player.getCapability(PlayerThirstStatsProvider.CAPABILITY).ifPresent(stats -> {
             int level = stats.getHydrationLevel();
             for (int i = 0; i < 10; ++i) {
@@ -71,7 +87,10 @@ public class ThirstOverlay implements IGuiOverlay {
                 RenderHelper.texturedBlit(pose, x, y, x + 9, y + 9, gui.getBlitOffset(), (texIndex1 * 9) / 54.0F, 0.0F, (texIndex2 * 9) / 54.0F, 1.0F);
             }
         });
-        RenderSystem.disableBlend();
-        minecraft.getProfiler().pop();
+    }
+
+    @FunctionalInterface
+    private interface OverlayRenderer {
+        void renderOverlay(Player player, ForgeGui gui, PoseStack stack, float partialTick, int screenWidth, int screenHeight);
     }
 }

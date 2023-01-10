@@ -20,7 +20,7 @@ public final class BlockyChefClient {
 
         modBus.addListener(this::setup);
         modBus.addListener(this::registerGuiOverlays);
-        if (Integrations.exists(Integrations.APPLESKIN)) {
+        if (Integrations.shouldExpandFoodTooltips()) {
             modBus.addListener(ThirstTooltipHandler::registerTooltipFactory);
             forgeEventBus.addListener(ThirstTooltipHandler::gatherTooltipComponents);
         }

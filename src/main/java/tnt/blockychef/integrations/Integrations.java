@@ -25,6 +25,14 @@ public class Integrations {
         return implementationLayers.containsKey(modId);
     }
 
+    public static boolean shouldExpandFoodTooltips() {
+        return exists(APPLESKIN);
+    }
+
+    public static boolean shouldRenderFancyOverlay() {
+        return exists(APPLESKIN);
+    }
+
     private static void registerIntegrationLayer(String modId, Supplier<ModIntegrationLayer> supplier) {
         if (ModList.get().isLoaded(modId)) {
             implementationLayers.put(modId, supplier.get());
