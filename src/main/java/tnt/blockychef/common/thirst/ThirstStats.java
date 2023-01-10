@@ -8,7 +8,7 @@ import net.minecraftforge.common.util.INBTSerializable;
 @AutoRegisterCapability
 public interface ThirstStats extends INBTSerializable<CompoundTag> {
 
-    void tick(Player player);
+    void tick();
 
     void drink(DrinkStats stats, Player player);
 
@@ -23,4 +23,6 @@ public interface ThirstStats extends INBTSerializable<CompoundTag> {
     float getExhaustionLevel();
 
     void setExhaustionLevel(float exhaustion);
+
+    void sendClientData();
 }

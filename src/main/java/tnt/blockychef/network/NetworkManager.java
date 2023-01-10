@@ -6,6 +6,7 @@ import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import tnt.blockychef.BlockyChef;
+import tnt.blockychef.network.packet.S2C_SendThirstData;
 
 import java.util.function.Function;
 
@@ -30,7 +31,7 @@ public final class NetworkManager {
         private static byte id;
 
         public static void register() {
-
+            register(S2C_SendThirstData.class, S2C_SendThirstData::new);
         }
 
         private static <T extends Packet> void register(Class<T> aClass, Function<FriendlyByteBuf, T> decoder) {

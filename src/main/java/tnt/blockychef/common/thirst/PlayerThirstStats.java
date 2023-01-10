@@ -1,9 +1,12 @@
 package tnt.blockychef.common.thirst;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.player.Player;
 import tnt.blockychef.common.Registry;
+import tnt.blockychef.network.NetworkManager;
+import tnt.blockychef.network.packet.S2C_SendThirstData;
 
 public class PlayerThirstStats implements ThirstStats {
 
@@ -18,7 +21,7 @@ public class PlayerThirstStats implements ThirstStats {
     }
 
     @Override
-    public void tick(Player player) {
+    public void tick() {
         Difficulty difficulty = player.level.getDifficulty();
         if (this.exhaustion > 4.0F) {
             this.exhaustion -= 4.0F;
@@ -94,5 +97,12 @@ public class PlayerThirstStats implements ThirstStats {
         this.saturation = nbt.getFloat("saturation");
         this.exhaustion = nbt.getFloat("exhaustion");
         this.tickTimer = nbt.getInt("timer");
+    }
+
+    @Override
+    public void sendClientData() {
+        if (!player.level.isClientSide) {
+            NetworkManager.dispatchClientPacket((ServerPlayer) player, new S2C_SendThirstData(this.serializeNBT()));
+        }
     }
 }
