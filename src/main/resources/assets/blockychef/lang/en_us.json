@@ -46,6 +46,7 @@
   "block.blockychef.pear_fruit": "Pear Fruit",
   "block.blockychef.plum_fruit": "Plum Fruit",
   "block.blockychef.vanilla_fruit": "Vanilla Fruit",
+  "block.blockychef.walnut_fruit": "Walnut Fruit",
 
   "item.blockychef.tomato": "Tomato",
   "item.blockychef.cucumber": "Cucumber",
@@ -93,6 +94,7 @@
   "item.blockychef.pear": "Pear",
   "item.blockychef.plum": "Plum",
   "item.blockychef.vanilla": "Vanilla",
+  "item.blockychef.walnut": "Walnut",
 
   "config.screen.blockychef": "BlockyChef Configuration",
 

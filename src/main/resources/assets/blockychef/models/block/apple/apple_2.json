@@ -1,5 +1,5 @@
 {
-  "parent": "blockychef:block/tree_fruit_medium",
+  "parent": "blockychef:block/tree_fruit_small",
   "render_type": "cutout",
   "textures": {
     "fruit": "blockychef:block/apple2"
