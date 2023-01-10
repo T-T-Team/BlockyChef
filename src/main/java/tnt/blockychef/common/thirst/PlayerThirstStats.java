@@ -82,6 +82,14 @@ public class PlayerThirstStats implements ThirstStats {
     }
 
     @Override
+    public void addExhaustion(float exhaustion) {
+        if (!player.getAbilities().invulnerable && !player.level.isClientSide) {
+            this.exhaustion = Math.min(40.0F, this.exhaustion + exhaustion);
+            sendClientData();
+        }
+    }
+
+    @Override
     public CompoundTag serializeNBT() {
         CompoundTag tag = new CompoundTag();
         tag.putInt("hydration", this.hydration);

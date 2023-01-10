@@ -24,5 +24,7 @@ public interface ThirstStats extends INBTSerializable<CompoundTag> {
 
     void setExhaustionLevel(float exhaustion);
 
+    void addExhaustion(float exhaustion);
+
     void sendClientData();
 }

@@ -20,9 +20,10 @@ public final class BlockyChefClient {
 
         modBus.addListener(this::setup);
         modBus.addListener(this::registerGuiOverlays);
-        modBus.addListener(ThirstTooltipHandler::registerTooltipFactory);
-
-        forgeEventBus.addListener(ThirstTooltipHandler::gatherTooltipComponents);
+        if (Integrations.exists(Integrations.APPLESKIN)) {
+            modBus.addListener(ThirstTooltipHandler::registerTooltipFactory);
+            forgeEventBus.addListener(ThirstTooltipHandler::gatherTooltipComponents);
+        }
     }
 
     private void setup(FMLClientSetupEvent event) {
