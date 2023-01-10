@@ -13,7 +13,7 @@ public abstract class Packet {
 
     public final void handle(Supplier<NetworkEvent.Context> contextSupplier) {
         NetworkEvent.Context context = contextSupplier.get();
-        this.handle(context);
+        context.enqueueWork(() -> this.handle(context));
         context.setPacketHandled(true);
     }
 }
