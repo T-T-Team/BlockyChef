@@ -26,23 +26,27 @@ public abstract class PlayerMixin extends LivingEntity {
         super(p_20966_, p_20967_);
     }
 
+    @SuppressWarnings("InvalidInjectorMethodSignature")
     @Inject(method = "checkMovementStatistics", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;causeFoodExhaustion(F)V", ordinal = 0), locals = LocalCapture.CAPTURE_FAILHARD)
-    private void blockychef$addThirstExhaustionFromSwimming(double x, double y, double z, CallbackInfo ci, double d, int i) {
+    private void blockychef$addThirstExhaustionFromSwimming(double x, double y, double z, CallbackInfo ci, int i) {
         addExhaustion(0.01F * i * 0.01F);
     }
 
+    @SuppressWarnings("InvalidInjectorMethodSignature")
     @Inject(method = "checkMovementStatistics", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;causeFoodExhaustion(F)V", ordinal = 1), locals = LocalCapture.CAPTURE_FAILHARD)
-    private void blockychef$addThirstExhaustionFromUnderwaterWalking(double x, double y, double z, CallbackInfo ci, double d, int j) {
+    private void blockychef$addThirstExhaustionFromUnderwaterWalking(double x, double y, double z, CallbackInfo ci, int j) {
         addExhaustion(0.01F * j * 0.01F);
     }
 
+    @SuppressWarnings("InvalidInjectorMethodSignature")
     @Inject(method = "checkMovementStatistics", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;causeFoodExhaustion(F)V", ordinal = 2), locals = LocalCapture.CAPTURE_FAILHARD)
-    private void blockychef$addThirstExhaustionFromWaterWalking(double x, double y, double z, CallbackInfo ci, double d, int k) {
+    private void blockychef$addThirstExhaustionFromWaterWalking(double x, double y, double z, CallbackInfo ci, int k) {
         addExhaustion(0.01F * k * 0.01F);
     }
 
+    @SuppressWarnings("InvalidInjectorMethodSignature")
     @Inject(method = "checkMovementStatistics", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;causeFoodExhaustion(F)V", ordinal = 3), locals = LocalCapture.CAPTURE_FAILHARD)
-    private void blockychef$addThirstExhaustionFromSprinting(double x, double y, double z, CallbackInfo ci, double d, int l) {
+    private void blockychef$addThirstExhaustionFromSprinting(double x, double y, double z, CallbackInfo ci, int l) {
         addExhaustion(0.01F * l * 0.01F);
     }
 
