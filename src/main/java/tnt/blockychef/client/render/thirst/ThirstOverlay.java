@@ -17,7 +17,7 @@ import tnt.blockychef.util.RenderHelper;
 
 public class ThirstOverlay implements IGuiOverlay {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation("blockychef:textures/icon/hydration_level.png");
+    public static final ResourceLocation TEXTURE = new ResourceLocation("blockychef:textures/icon/hydration_icons.png");
     private final RandomSource random = RandomSource.create();
     private final OverlayRenderer renderer;
 
@@ -74,17 +74,23 @@ public class ThirstOverlay implements IGuiOverlay {
                 }
 
                 Matrix4f pose = poseStack.last().pose();
-                int icon;
+                float txSize = 255.0F;
+                int bg1 = offset;
+                int bg2 = bg1 + 1;
+                float v2 = 9.0F / txSize;
+                int iconIndex;
+                RenderHelper.texturedBlit(pose, x, y, x + 9, y + 9, gui.getBlitOffset(), (bg1 * 9) / txSize, 0.0F, (bg2 * 9) / txSize, v2);
                 if (idx < level) {
-                    icon = 0;
+                    iconIndex = 1;
                 } else if (idx == level) {
-                    icon = 1;
+                    iconIndex = 2;
                 } else {
-                    icon = 2;
+                    iconIndex = -1;
                 }
-                int texIndex1 = offset + icon;
-                int texIndex2 = texIndex1 + 1;
-                RenderHelper.texturedBlit(pose, x, y, x + 9, y + 9, gui.getBlitOffset(), (texIndex1 * 9) / 54.0F, 0.0F, (texIndex2 * 9) / 54.0F, 1.0F);
+                if (iconIndex >= 0) {
+                    int icon = offset + iconIndex;
+                    RenderHelper.texturedBlit(pose, x, y, x + 9, y + 9, gui.getBlitOffset(), (icon * 9) / txSize, 0.0F, ((icon + 1) * 9) / txSize, v2);
+                }
             }
         });
     }
