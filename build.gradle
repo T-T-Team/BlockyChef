@@ -65,12 +65,14 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 repositories {
     flatDir { dir 'libs' }
     maven { url 'https://www.cursemaven.com' }
+    maven { url "https://maven.ryanliptak.com/" }
 }
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
     implementation fg.deobf("curse.maven:configuration-444699:${configuration_version}")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    implementation fg.deobf("squeek.appleskin:appleskin-forge:${appleskin_version}")
 }
 
 jar {
