@@ -74,7 +74,7 @@ public class ThirstOverlay implements IGuiOverlay {
                 }
 
                 Matrix4f pose = poseStack.last().pose();
-                float txSize = 255.0F;
+                float txSize = 256.0F;
                 int bg1 = offset;
                 int bg2 = bg1 + 1;
                 float v2 = 9.0F / txSize;
