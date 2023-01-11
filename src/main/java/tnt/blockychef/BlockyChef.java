@@ -13,9 +13,11 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import tnt.blockychef.client.BlockyChefClient;
 import tnt.blockychef.common.thirst.DrinkConsumeHandler;
-import tnt.blockychef.common.thirst.DrinkLoader;
+import tnt.blockychef.common.thirst.ConfigDrinkLoader;
 import tnt.blockychef.common.thirst.PlayerThirstStatsProvider;
 import tnt.blockychef.config.BlockyChefConfig;
 import tnt.blockychef.integrations.Integrations;
@@ -25,6 +27,7 @@ import tnt.blockychef.network.NetworkManager;
 public final class BlockyChef {
 
     public static final String MODID = "blockychef";
+    public static final Logger LOGGER = LogManager.getLogger("Blockychef");
     public static BlockyChefConfig config;
 
     public BlockyChef() {
@@ -40,7 +43,7 @@ public final class BlockyChef {
     }
 
     private void setup(FMLCommonSetupEvent event) {
-        DrinkLoader.loadData();
+        ConfigDrinkLoader.loadData();
         NetworkManager.Registry.register();
         Integrations.accept(layer -> layer.setup(event));
     }

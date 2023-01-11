@@ -13,10 +13,13 @@ public final class DrinkConsumeHandler {
         LivingEntity entity = event.getEntity();
         if (entity instanceof Player player) {
             ItemStack stack = event.getItem();
-            Optional<DrinkStats> optional = DrinkLoader.getStats(stack.getItem());
-            optional.ifPresent(stats -> {
-                // TODO apply stats
-            });
+            DrinkStats stats = DrinkStats.getDrinkStatistics(stack);
+            if (!stats.isEmpty()) {
+                player.getCapability(PlayerThirstStatsProvider.CAPABILITY).ifPresent(thirstStats -> {
+                    thirstStats.drink(stats, player);
+                    thirstStats.sendClientData();
+                });
+            }
         }
     }
 }

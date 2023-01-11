@@ -12,7 +12,12 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
+import tnt.blockychef.BlockyChef;
+import tnt.blockychef.common.Registry;
 import tnt.blockychef.util.CodecHelper;
 
 import java.io.File;
@@ -22,8 +27,9 @@ import java.io.IOException;
 import java.util.*;
 import java.util.function.Supplier;
 
-public final class DrinkLoader {
+public final class ConfigDrinkLoader {
 
+    public static final Marker MARKER = MarkerManager.getMarker("DrinkProviderLoader");
     private static final File FILE = new File("./config/blockychef/drinks.json");
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
     private static final Map<Item, DrinkStats> LOADED_STATS = new HashMap<>();
@@ -40,7 +46,7 @@ public final class DrinkLoader {
                 List<CompatDrinkable> defaultDrinks = new ArrayList<>();
                 initVanillaDrinkables(defaultDrinks);
                 DataResult<JsonElement> dataResult = CODEC.encodeStart(JsonOps.INSTANCE, defaultDrinks);
-                Optional<JsonElement> optional = dataResult.result();
+                Optional<JsonElement> optional = dataResult.resultOrPartial(str -> BlockyChef.LOGGER.error(MARKER, str));
                 if (optional.isPresent()) {
                     JsonElement element = optional.get();
                     String raw = GSON.toJson(element);
@@ -54,7 +60,7 @@ public final class DrinkLoader {
                 element = JsonParser.parseReader(reader);
             }
             DataResult<List<CompatDrinkable>> dataResult = CODEC.parse(JsonOps.INSTANCE, element);
-            Optional<List<CompatDrinkable>> optional = dataResult.result();
+            Optional<List<CompatDrinkable>> optional = dataResult.resultOrPartial(str -> BlockyChef.LOGGER.error(MARKER, str));
             optional.ifPresent(list -> list.forEach(drinkable -> LOADED_STATS.put(drinkable.item(), drinkable.holder().toDrink())));
         } catch (IOException e) {
             throw new RuntimeException("Drink file load failed", e);
@@ -66,7 +72,11 @@ public final class DrinkLoader {
     }
 
     private static void initVanillaDrinkables(List<CompatDrinkable> list) {
-        //list.add(new CompatDrinkStatsHolder(2, DrinkStats.calculateSaturationForWaterLevel(2, 2), new RandomEffect(0.3F, new EffectProvider())));
+        list.add(new CompatDrinkable(Items.POTION, new CompatDrinkStatsHolder(
+                2,
+                DrinkStats.calculateSaturationForHydrationLevel(4, 1),
+                new RandomEffect(0.3F, new EffectProvider(Registry.THIRST, 600, 0))
+        )));
     }
 
     private record CompatDrinkable(Item item, CompatDrinkStatsHolder holder) {

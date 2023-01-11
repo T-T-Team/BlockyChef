@@ -50,6 +50,9 @@ public class PlayerThirstStats implements ThirstStats {
     public void drink(DrinkStats stats, Player player) {
         this.hydration = Math.min(20, this.hydration + stats.hydrationLevel());
         this.saturation = Math.min(this.saturation + stats.hydrationLevel() * stats.saturation() * 2.0F, this.hydration);
+        if (!player.level.isClientSide) {
+            stats.onConsume().accept(player);
+        }
     }
 
     @Override
