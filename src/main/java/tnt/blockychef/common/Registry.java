@@ -20,6 +20,7 @@ import tnt.blockychef.common.block.CropsBlock;
 import tnt.blockychef.common.block.DecayingGrowingBlock;
 import tnt.blockychef.common.block.TreeHangingFruitBlock;
 import tnt.blockychef.common.item.CropSeedsItem;
+import tnt.blockychef.common.thirst.HydrationMobEffect;
 import tnt.blockychef.common.thirst.ThirstMobEffect;
 
 import java.util.ArrayList;
@@ -166,6 +167,8 @@ public final class Registry {
     // Effects ---
     @ObjectHolder(value = "blockychef:thirst", registryName = "mob_effect")
     public static final MobEffect THIRST = null;
+    @ObjectHolder(value = "blockychef:hydration", registryName = "mob_effect")
+    public static final MobEffect HYDRATION = null;
 
     // Damage Sources ---
     public static final DamageSource DEHYDRATATION = new DamageSource("blockychef.dehydratation").bypassArmor().bypassMagic();
@@ -301,6 +304,7 @@ public final class Registry {
 
     private static void registerMobEffects(RegisterEvent.RegisterHelper<MobEffect> helper) {
         helper.register("thirst", new ThirstMobEffect(MobEffectCategory.HARMFUL, 0x97AF5D));
+        helper.register("hydration", new HydrationMobEffect(MobEffectCategory.BENEFICIAL, 0x3080E8));
     }
 
     @FunctionalInterface // Registers blocks and schedules itemBlock registration

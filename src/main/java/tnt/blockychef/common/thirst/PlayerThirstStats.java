@@ -30,6 +30,7 @@ public class PlayerThirstStats implements ThirstStats {
             } else if (difficulty != Difficulty.PEACEFUL) {
                 this.hydration = Math.max(this.hydration - 1, 0);
             }
+            this.sendClientData();
         }
         if (this.hydration <= 0) {
             ++this.tickTimer;
