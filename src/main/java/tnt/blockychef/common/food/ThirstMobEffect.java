@@ -1,9 +1,10 @@
-package tnt.blockychef.common.thirst;
+package tnt.blockychef.common.food;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import tnt.blockychef.common.thirst.PlayerThirstStatsProvider;
 
 public class ThirstMobEffect extends MobEffect {
 

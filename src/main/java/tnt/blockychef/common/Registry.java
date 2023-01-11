@@ -20,8 +20,8 @@ import tnt.blockychef.common.block.CropsBlock;
 import tnt.blockychef.common.block.DecayingGrowingBlock;
 import tnt.blockychef.common.block.TreeHangingFruitBlock;
 import tnt.blockychef.common.item.CropSeedsItem;
-import tnt.blockychef.common.thirst.HydrationMobEffect;
-import tnt.blockychef.common.thirst.ThirstMobEffect;
+import tnt.blockychef.common.food.HydrationMobEffect;
+import tnt.blockychef.common.food.ThirstMobEffect;
 
 import java.util.ArrayList;
 import java.util.List;
