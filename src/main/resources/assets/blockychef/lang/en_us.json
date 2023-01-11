@@ -97,6 +97,23 @@
   "item.blockychef.walnut": "Walnut",
 
   "config.screen.blockychef": "BlockyChef Configuration",
+  "config.blockychef.option.decay": "Plant Decay Config",
+  "config.blockychef.option.replaceVanillaCrops": "Replace vanilla crops",
+  "config.blockychef.option.placeOnRawFarmland": "Place weeds on raw farmland",
+  "config.blockychef.option.plantDecayProgressChance": "Crops decay progress chance",
+  "config.blockychef.option.plantDecayKillChance": "Crops decay kill chance",
+  "config.blockychef.option.destroyFruitOnDecay": "Destroy fruit on decay",
+  "config.blockychef.option.crops": "Crops Config",
+  "config.blockychef.option.restrictBonemealUsage": "Restrict bonemeal usage",
+  "config.blockychef.option.thirst": "Thirst Config",
+  "config.blockychef.option.thirstFromFreshWaterChance": "Fresh water thirst chance",
+  "config.blockychef.option.thirstFromSaltWaterChance": "Salt water thirst chance",
 
-  "itemGroup.blockychef.main": "BlockyChef"
+  "itemGroup.blockychef.main": "BlockyChef",
+
+  "effect.blockychef.thirst": "Thirst",
+  "effect.blockychef.hydration": "Hydration",
+
+  "death.attack.blockychef.dehydratation": "%s has died due to dehydratation",
+  "death.attack.blockychef.dehydratation.player": "%1$s has died due to dehydratation whilst fighting %2$s"
 }
