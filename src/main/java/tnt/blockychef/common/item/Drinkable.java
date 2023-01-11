@@ -1,8 +1,8 @@
 package tnt.blockychef.common.item;
 
-import tnt.blockychef.common.thirst.DrinkStats;
+import tnt.blockychef.common.thirst.DrinkProperties;
 
 public interface Drinkable {
 
-    DrinkStats getStats();
+    DrinkProperties getStats();
 }

@@ -32,7 +32,7 @@ public final class ConfigDrinkLoader {
     public static final Marker MARKER = MarkerManager.getMarker("DrinkProviderLoader");
     private static final File FILE = new File("./config/blockychef/drinks.json");
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-    private static final Map<Item, DrinkStats> LOADED_STATS = new HashMap<>();
+    private static final Map<Item, DrinkProperties> LOADED_STATS = new HashMap<>();
     private static final Codec<List<CompatDrinkable>> CODEC = CompatDrinkable.CODEC.listOf()
             .fieldOf("drinks").codec();
 
@@ -67,14 +67,14 @@ public final class ConfigDrinkLoader {
         }
     }
 
-    public static Optional<DrinkStats> getStats(Item item) {
+    public static Optional<DrinkProperties> getStats(Item item) {
         return Optional.ofNullable(LOADED_STATS.get(item));
     }
 
     private static void initVanillaDrinkables(List<CompatDrinkable> list) {
         list.add(new CompatDrinkable(Items.POTION, new CompatDrinkStatsHolder(
                 2,
-                DrinkStats.calculateSaturationForHydrationLevel(4, 1),
+                DrinkProperties.calculateSaturationForHydrationLevel(4, 1),
                 new RandomEffect(0.3F, new EffectProvider(Registry.THIRST, 600, 0))
         )));
     }
@@ -108,15 +108,18 @@ public final class ConfigDrinkLoader {
             this(hydrationLevel, saturation, Arrays.asList(effects));
         }
 
-        public DrinkStats toDrink() {
-            return new DrinkStats(this.hydrationLevel, this.saturation, player -> {
-                RandomSource source = player.getRandom();
-                this.effectChances.forEach(eff -> {
-                    if (source.nextFloat() < eff.chance()) {
-                        player.addEffect(eff.provider().get());
-                    }
-                });
-            });
+        public DrinkProperties toDrink() {
+            return DrinkProperties.Builder.create()
+                    .stats(this.hydrationLevel, this.saturation)
+                    .onDrink(player -> {
+                        RandomSource source = player.getRandom();
+                        this.effectChances.forEach(eff -> {
+                            if (source.nextFloat() < eff.chance()) {
+                                player.addEffect(eff.provider().get());
+                            }
+                        });
+                    })
+                    .build();
         }
     }
 

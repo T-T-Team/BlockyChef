@@ -10,7 +10,7 @@ public interface ThirstStats extends INBTSerializable<CompoundTag> {
 
     void tick();
 
-    void drink(DrinkStats stats, Player player);
+    void drink(DrinkProperties stats, Player player);
 
     int getHydrationLevel();
 

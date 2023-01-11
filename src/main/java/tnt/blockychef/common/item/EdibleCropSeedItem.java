@@ -1,19 +1,19 @@
 package tnt.blockychef.common.item;
 
 import net.minecraft.world.level.block.Block;
-import tnt.blockychef.common.thirst.DrinkStats;
+import tnt.blockychef.common.thirst.DrinkProperties;
 
 public class EdibleCropSeedItem extends CropSeedsItem implements Drinkable {
 
-    private final DrinkStats stats;
+    private final DrinkProperties stats;
 
-    public EdibleCropSeedItem(Block block, DrinkStats stats, Properties properties) {
+    public EdibleCropSeedItem(Block block, DrinkProperties stats, Properties properties) {
         super(block, properties);
         this.stats = stats;
     }
 
     @Override
-    public DrinkStats getStats() {
+    public DrinkProperties getStats() {
         return stats;
     }
 }
