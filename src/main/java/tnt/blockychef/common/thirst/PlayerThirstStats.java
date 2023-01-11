@@ -2,6 +2,7 @@ package tnt.blockychef.common.thirst;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.player.Player;
 import tnt.blockychef.common.Registry;
@@ -48,8 +49,8 @@ public class PlayerThirstStats implements ThirstStats {
 
     @Override
     public void drink(DrinkStats stats, Player player) {
-        this.hydration = Math.min(20, this.hydration + stats.hydrationLevel());
-        this.saturation = Math.min(this.saturation + stats.hydrationLevel() * stats.saturation() * 2.0F, this.hydration);
+        this.hydration = Mth.clamp(this.hydration + stats.hydrationLevel(), 0, 20);
+        this.saturation = Mth.clamp(this.saturation + stats.hydrationLevel() * stats.saturation() * 2.0F, 0.0F, this.hydration);
         if (!player.level.isClientSide) {
             stats.onConsume().accept(player);
         }
