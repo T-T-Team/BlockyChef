@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -28,7 +29,7 @@ public final class BlockyChefClient {
         modBus.addListener(this::registerGuiOverlays);
         if (Integrations.shouldExpandFoodTooltips()) {
             modBus.addListener(ThirstTooltipHandler::registerTooltipFactory);
-            forgeEventBus.addListener(ThirstTooltipHandler::gatherTooltipComponents);
+            forgeEventBus.addListener(EventPriority.LOWEST, ThirstTooltipHandler::gatherTooltipComponents);
         }
         forgeEventBus.addListener(this::tickClient);
     }
