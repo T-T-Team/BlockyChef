@@ -12,6 +12,7 @@
     "BlockItemMixin",
     "VillagerGoalPackagesMixin",
     "VillagerMixin",
-    "PlayerMixin"
+    "PlayerMixin",
+    "ItemMixin"
   ]
 }

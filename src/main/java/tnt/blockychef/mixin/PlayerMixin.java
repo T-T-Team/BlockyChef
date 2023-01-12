@@ -47,7 +47,7 @@ public abstract class PlayerMixin extends LivingEntity {
     @SuppressWarnings("InvalidInjectorMethodSignature")
     @Inject(method = "checkMovementStatistics", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;causeFoodExhaustion(F)V", ordinal = 3), locals = LocalCapture.CAPTURE_FAILHARD)
     private void blockychef$addThirstExhaustionFromSprinting(double x, double y, double z, CallbackInfo ci, int l) {
-        addExhaustion(0.01F * l * 0.01F);
+        addExhaustion(0.1F * l * 0.01F);
     }
 
     private void addExhaustion(float exhaustion) {

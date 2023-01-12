@@ -82,7 +82,7 @@ public class ThirstOverlay implements IGuiOverlay {
             this.renderExhaustion(poseStack, stats.getExhaustionLevel(), left, top, gui.getBlitOffset());
             setupRender();
             this.renderHydrationOverlay(poseStack, gui, hydration, saturation, isThirsty, false, left, top, 1.0F);
-            // TODO render saturation overlay
+            this.renderSaturation(poseStack, gui, hydration, saturation, isThirsty, false, left, top, 1.0F);
             float smoothAlpha = lastAlpha + (alpha - lastAlpha) * partialTick;
             this.renderHeldItemStats(poseStack, gui, player, stats, isThirsty, left, top, smoothAlpha);
         });
@@ -109,10 +109,10 @@ public class ThirstOverlay implements IGuiOverlay {
 
             int offset = 0;
             if (thirsty) {
-                offset = 6;
+                offset = 3;
             }
             if (isLoss) {
-                offset = 3;
+                offset = 6;
             }
 
             if (saturationLevel <= 0.0F && gui.getGuiTicks() % (hydrationLevel * 3 + 1) == 0) {
@@ -144,6 +144,33 @@ public class ThirstOverlay implements IGuiOverlay {
         }
     }
 
+    private void renderSaturation(PoseStack stack, ForgeGui gui, int hydration, float saturation, boolean thirsty, boolean isLoss, int left, int top, float alpha) {
+        this.random.setSeed(gui.getGuiTicks() * 312871L);
+        int intSat = Mth.ceil(saturation / 2.0F);
+        for (int i = 0; i < intSat; i++) {
+            int x = left - i * 8 - 9;
+            int y = top;
+            if (saturation <= 0.0F && gui.getGuiTicks() % (hydration * 3 + 1) == 0) {
+                y = top + (random.nextInt(3) - 1);
+            }
+            float saturationValue = (saturation / 2.0F) - i;
+            int offset = isLoss ? 8 : thirsty ? 4 : 0;
+            int icon = 0;
+            if (saturationValue >= 1.0F) {
+                icon = 3;
+            } else if (saturationValue > 0.5F) {
+                icon = 2;
+            } else if (saturationValue > 0.25F) {
+                icon = 1;
+            }
+            setAlpha(alpha);
+            float u1 = (offset + icon) * 9 / 256.0F;
+            float u2 = u1 + 9.0F / 256.0F;
+            RenderHelper.texturedBlit(stack.last().pose(), x, y, x + 9, y + 9, gui.getBlitOffset(), u1, 9.0F / 256.0F, u2, 18.0F / 256.0F);
+            resetAlpha();
+        }
+    }
+
     private void renderExhaustion(PoseStack stack, float exhaustion, int left, int top, int z) {
         float value = exhaustion / 4.0F;
         setAlpha(0.75F);
@@ -160,7 +187,10 @@ public class ThirstOverlay implements IGuiOverlay {
             return;
         int itemHydration = properties.getHydration();
         int hydration = Mth.clamp(stats.getHydrationLevel() + itemHydration, 0, 20);
+        float itemSaturation = properties.getSaturation() * properties.getSaturation() * 2.0F;
+        float saturation = Mth.clamp(stats.getSaturationLevel() + itemSaturation, 0, hydration);
         this.renderHydrationOverlay(stack, gui, hydration, stats.getSaturationLevel(), thirsty, itemHydration < 0, left, top, alpha);
+        this.renderSaturation(stack, gui, stats.getHydrationLevel(), saturation, thirsty, itemSaturation < 0, left, top, alpha);
     }
 
     public static void tick() {
@@ -171,7 +201,7 @@ public class ThirstOverlay implements IGuiOverlay {
         } else if (alphaUnmodified <= -0.5F) {
             fadeMultiplier = 1;
         }
-        alpha = Mth.clamp(alphaUnmodified, 0.0F, 1.0F) * 0.65F;
+        alpha = Mth.clamp(alphaUnmodified, 0.0F, 1.0F) * Integrations.getAlphaForHudHydrationOverlay();
     }
 
     @FunctionalInterface

@@ -13,6 +13,7 @@ public class Integrations {
     public static final String APPLESKIN = "appleskin";
 
     private static final Map<String, ModIntegrationLayer> implementationLayers = new HashMap<>();
+    private static float cachedHydrationOverlayValue = -1.0F;
 
     static {
         registerIntegrationLayer(APPLESKIN, AppleskinIntegration::new);
@@ -32,6 +33,16 @@ public class Integrations {
 
     public static boolean shouldRenderFancyOverlay() {
         return exists(APPLESKIN) || BlockyChefClient.CLIENT.config.forceFancyThirstOverlay;
+    }
+
+    public static float getAlphaForHudHydrationOverlay() {
+        if (cachedHydrationOverlayValue < 0) {
+            float val = (float) implementationLayers.values().stream()
+                    .mapToDouble(ModIntegrationLayer::getMaxHudAlphaForHydrationOverlay)
+                    .max().orElse(0.65F);
+            return val < 0.0F ? 0.65F : val;
+        }
+        return cachedHydrationOverlayValue;
     }
 
     private static void registerIntegrationLayer(String modId, Supplier<ModIntegrationLayer> supplier) {

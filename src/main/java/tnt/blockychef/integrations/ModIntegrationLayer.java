@@ -11,4 +11,8 @@ public interface ModIntegrationLayer {
     void setup(FMLClientSetupEvent event);
 
     void setup(FMLCommonSetupEvent event);
+
+    default float getMaxHudAlphaForHydrationOverlay() {
+        return -1.0F;
+    }
 }

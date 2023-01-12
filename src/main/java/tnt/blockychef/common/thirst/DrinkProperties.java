@@ -5,6 +5,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import tnt.blockychef.common.item.Drinkable;
 
 import java.util.Objects;
@@ -56,6 +57,8 @@ public final class DrinkProperties {
 
     public static DrinkPropertiesHolder getDrinkStatistics(ItemStack stack) {
         Item item = stack.getItem();
+        if (item == Items.AIR)
+            return NONE_HOLDER;
         Optional<DrinkPropertiesHolder> optional = ConfigDrinkLoader.getStatsHolder(item);
         if (optional.isPresent()) {
             DrinkPropertiesHolder holder = optional.get();

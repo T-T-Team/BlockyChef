@@ -19,8 +19,8 @@ import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.CropsBlock;
 import tnt.blockychef.common.block.DecayingGrowingBlock;
 import tnt.blockychef.common.block.TreeHangingFruitBlock;
-import tnt.blockychef.common.food.Drinks;
-import tnt.blockychef.common.food.Foods;
+import tnt.blockychef.common.food.DrinkList;
+import tnt.blockychef.common.food.FoodList;
 import tnt.blockychef.common.item.CropSeedsItem;
 import tnt.blockychef.common.food.HydrationMobEffect;
 import tnt.blockychef.common.food.ThirstMobEffect;
@@ -256,7 +256,7 @@ public final class Registry {
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {
-        helper.register("tomato", new EdibleCropSeedItem(TOMATO_CROPS, new Item.Properties().food(Foods.TOMATO), Drinks.TOMATO));
+        helper.register("tomato", new EdibleCropSeedItem(TOMATO_CROPS, new Item.Properties().food(FoodList.TOMATO), DrinkList.TOMATO));
         helper.register("cucumber", new CropSeedsItem(CUCUMBER_CROPS, new Item.Properties()));
         helper.register("bell_pepper", new CropSeedsItem(BELL_PEPPER_CROPS, new Item.Properties()));
         helper.register("black_pepper", new CropSeedsItem(BLACK_PEPPER_CROPS, new Item.Properties()));
