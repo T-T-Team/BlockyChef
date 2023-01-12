@@ -14,7 +14,7 @@ public final class DrinkConsumeHandler {
             DrinkProperties stats = DrinkProperties.getDrinkStatistics(stack);
             if (!stats.isEmpty()) {
                 player.getCapability(PlayerThirstStatsProvider.CAPABILITY).ifPresent(thirstStats -> {
-                    thirstStats.drink(stats, player);
+                    thirstStats.drink(stats);
                     thirstStats.sendClientData();
                 });
             }

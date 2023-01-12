@@ -38,6 +38,13 @@ public enum FoodQuality {
         return quality;
     }
 
+    public static void setFoodQuality(ItemStack stack, FoodQuality quality) {
+        CompoundTag tag = stack.getOrCreateTag();
+        CompoundTag food = tag.getCompound("blockychef.quality");
+        food.putInt("qualityIndex", quality.ordinal());
+        tag.put("blockychef.quality", food);
+    }
+
     public FoodProperties apply(FoodProperties food, ItemStack stack) {
         return this.foodTransformer.apply(food, stack);
     }

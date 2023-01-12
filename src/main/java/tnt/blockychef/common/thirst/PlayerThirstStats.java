@@ -48,12 +48,17 @@ public class PlayerThirstStats implements ThirstStats {
     }
 
     @Override
-    public void drink(DrinkProperties stats, Player player) {
+    public void drink(DrinkProperties stats) {
         this.hydration = Mth.clamp(this.hydration + stats.getHydration(), 0, 20);
         this.saturation = Mth.clamp(this.saturation + stats.getHydration() * stats.getSaturation() * 2.0F, 0.0F, this.hydration);
         if (!player.level.isClientSide) {
             stats.onConsumed(player);
         }
+    }
+
+    @Override
+    public boolean canDrink(DrinkProperties stats) {
+        return this.hydration < 20 || stats.isAlwaysDrinkable();
     }
 
     @Override

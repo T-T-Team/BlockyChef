@@ -1,7 +1,6 @@
 package tnt.blockychef.common.thirst;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.AutoRegisterCapability;
 import net.minecraftforge.common.util.INBTSerializable;
 
@@ -10,7 +9,9 @@ public interface ThirstStats extends INBTSerializable<CompoundTag> {
 
     void tick();
 
-    void drink(DrinkProperties stats, Player player);
+    boolean canDrink(DrinkProperties stats);
+
+    void drink(DrinkProperties stats);
 
     int getHydrationLevel();
 
