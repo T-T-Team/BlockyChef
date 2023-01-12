@@ -5,6 +5,7 @@ import dev.toma.configuration.config.format.ConfigFormats;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -29,6 +30,7 @@ public final class BlockyChefClient {
             modBus.addListener(ThirstTooltipHandler::registerTooltipFactory);
             forgeEventBus.addListener(ThirstTooltipHandler::gatherTooltipComponents);
         }
+        forgeEventBus.addListener(this::tickClient);
     }
 
     private void setup(FMLClientSetupEvent event) {
@@ -37,5 +39,12 @@ public final class BlockyChefClient {
 
     private void registerGuiOverlays(RegisterGuiOverlaysEvent event) {
         event.registerAbove(new ResourceLocation("minecraft:food_level"), "thirst", new ThirstOverlay());
+    }
+
+    private void tickClient(TickEvent.ClientTickEvent event) {
+        if (event.phase != TickEvent.Phase.END) {
+            return;
+        }
+        ThirstOverlay.tick();
     }
 }
