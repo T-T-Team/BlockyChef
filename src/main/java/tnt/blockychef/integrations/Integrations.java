@@ -1,6 +1,7 @@
 package tnt.blockychef.integrations;
 
 import net.minecraftforge.fml.ModList;
+import tnt.blockychef.client.BlockyChefClient;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +31,7 @@ public class Integrations {
     }
 
     public static boolean shouldRenderFancyOverlay() {
-        return exists(APPLESKIN);
+        return exists(APPLESKIN) || BlockyChefClient.CLIENT.config.forceFancyThirstOverlay;
     }
 
     private static void registerIntegrationLayer(String modId, Supplier<ModIntegrationLayer> supplier) {

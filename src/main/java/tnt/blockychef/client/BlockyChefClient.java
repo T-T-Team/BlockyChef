@@ -1,5 +1,7 @@
 package tnt.blockychef.client;
 
+import dev.toma.configuration.Configuration;
+import dev.toma.configuration.config.format.ConfigFormats;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -14,7 +16,10 @@ public final class BlockyChefClient {
 
     public static final BlockyChefClient CLIENT = new BlockyChefClient();
 
+    public BlockyChefClientConfig config;
+
     public void constructClient() {
+        config = Configuration.registerConfig(BlockyChefClientConfig.class, ConfigFormats.yaml()).getConfigInstance();
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
 
