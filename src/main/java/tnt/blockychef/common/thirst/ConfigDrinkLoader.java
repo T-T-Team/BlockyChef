@@ -62,7 +62,7 @@ public final class ConfigDrinkLoader {
             }
             DataResult<List<CompatDrinkable>> dataResult = CODEC.parse(JsonOps.INSTANCE, element);
             Optional<List<CompatDrinkable>> optional = dataResult.resultOrPartial(str -> BlockyChef.LOGGER.error(MARKER, str));
-            optional.ifPresent(list -> list.forEach(drinkable -> LOADED_STATS.put(drinkable.item(), drinkable.holder().toDrink())));
+            optional.ifPresent(list -> list.forEach(drinkable -> LOADED_STATS.put(drinkable.item(), drinkable.holder().asDrinkPropertyHolder())));
         } catch (IOException e) {
             throw new RuntimeException("Drink file load failed", e);
         }
@@ -73,11 +73,10 @@ public final class ConfigDrinkLoader {
     }
 
     private static void initVanillaDrinkables(List<CompatDrinkable> list) {
-        list.add(new CompatDrinkable(Items.POTION, new CompatDrinkStatsHolder(
-                2,
-                DrinkProperties.calculateSaturationForHydrationLevel(4, 1),
-                new RandomEffect(0.3F, new EffectProvider(Registry.THIRST, 600, 0))
-        )));
+        new DefaultDrinkBuilder(Items.POTION)
+                .stats(2, 1)
+                .addEffect(0.3F, Registry.THIRST)
+                .buildAndExport(list);
     }
 
     private record CompatDrinkable(Item item, CompatDrinkStatsHolder holder) {
@@ -88,43 +87,30 @@ public final class ConfigDrinkLoader {
         ).apply(instance, CompatDrinkable::new));
     }
 
-    private static final class CompatDrinkStatsHolder {
+    private record CompatDrinkStatsHolder(int hydrationLevel, float saturation, List<RandomEffect> effectChances) {
 
-        public static final Codec<CompatDrinkStatsHolder> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                Codec.INT.fieldOf("hydration").forGetter(t -> t.hydrationLevel),
-                Codec.FLOAT.fieldOf("saturation").forGetter(t -> t.saturation),
-                RandomEffect.CODEC.listOf().optionalFieldOf("effects", Collections.emptyList()).forGetter(t -> t.effectChances)
-        ).apply(instance, CompatDrinkStatsHolder::new));
-        private final int hydrationLevel;
-        private final float saturation;
-        private final List<RandomEffect> effectChances;
+            public static final Codec<CompatDrinkStatsHolder> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                    Codec.INT.fieldOf("hydration").forGetter(t -> t.hydrationLevel),
+                    Codec.FLOAT.fieldOf("saturation").forGetter(t -> t.saturation),
+                    RandomEffect.CODEC.listOf().optionalFieldOf("effects", Collections.emptyList()).forGetter(t -> t.effectChances)
+            ).apply(instance, CompatDrinkStatsHolder::new));
 
-        public CompatDrinkStatsHolder(int hydrationLevel, float saturation, List<RandomEffect> effectChances) {
-            this.hydrationLevel = hydrationLevel;
-            this.saturation = saturation;
-            this.effectChances = effectChances;
+        public DrinkProperties.DrinkPropertiesHolder asDrinkPropertyHolder() {
+                DrinkProperties properties = DrinkProperties.Builder.create()
+                        .stats(this.hydrationLevel, this.saturation)
+                        .onDrink(player -> {
+                            RandomSource source = player.getRandom();
+                            this.effectChances.forEach(eff -> {
+                                if (source.nextFloat() < eff.chance()) {
+                                    player.addEffect(eff.provider().get());
+                                }
+                            });
+                        })
+                        .build();
+                ItemStack returning = ItemStack.EMPTY;
+                return new DrinkProperties.DrinkPropertiesHolder(properties, returning);
+            }
         }
-
-        public CompatDrinkStatsHolder(int hydrationLevel, float saturation, RandomEffect... effects) {
-            this(hydrationLevel, saturation, Arrays.asList(effects));
-        }
-
-        public DrinkProperties.DrinkPropertiesHolder toDrink() {
-            DrinkProperties properties = DrinkProperties.Builder.create()
-                    .stats(this.hydrationLevel, this.saturation)
-                    .onDrink(player -> {
-                        RandomSource source = player.getRandom();
-                        this.effectChances.forEach(eff -> {
-                            if (source.nextFloat() < eff.chance()) {
-                                player.addEffect(eff.provider().get());
-                            }
-                        });
-                    })
-                    .build();
-            ItemStack returning = ItemStack.EMPTY; // TODO
-            return new DrinkProperties.DrinkPropertiesHolder(properties, returning);
-        }
-    }
 
     private record RandomEffect(float chance, EffectProvider provider) {
 
@@ -145,6 +131,50 @@ public final class ConfigDrinkLoader {
         @Override
         public MobEffectInstance get() {
             return new MobEffectInstance(this.effect, this.duration, this.amplifier);
+        }
+    }
+
+    private static final class DefaultDrinkBuilder {
+
+        private final Item target;
+        private int hydration;
+        private float saturation;
+        private final List<RandomEffect> effects = new ArrayList<>();
+
+        public DefaultDrinkBuilder(Item target) {
+            this.target = target;
+        }
+
+        public DefaultDrinkBuilder stats(int hydration, float saturation) {
+            this.hydration = hydration;
+            this.saturation = saturation;
+            return this;
+        }
+
+        public DefaultDrinkBuilder stats(int hydration, int saturation) {
+            return this.stats(hydration, DrinkProperties.calculateSaturationForHydrationLevel(hydration, saturation));
+        }
+
+        public DefaultDrinkBuilder stats(int hydration) {
+            return this.stats(hydration, hydration);
+        }
+
+        public DefaultDrinkBuilder addEffect(float chance, MobEffect effect, int duration, int amplifier) {
+            this.effects.add(new RandomEffect(chance, new EffectProvider(effect, duration, amplifier)));
+            return this;
+        }
+
+        public DefaultDrinkBuilder addEffect(float chance, MobEffect effect, int duration) {
+            return this.addEffect(chance, effect, duration, 0);
+        }
+
+        public DefaultDrinkBuilder addEffect(float chance, MobEffect effect) {
+            return this.addEffect(chance, effect, 600);
+        }
+
+        public void buildAndExport(List<CompatDrinkable> out) {
+            CompatDrinkable drinkable = new CompatDrinkable(this.target, new CompatDrinkStatsHolder(this.hydration, this.saturation, this.effects));
+            out.add(drinkable);
         }
     }
 }
