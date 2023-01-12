@@ -3,7 +3,6 @@ package tnt.blockychef.common.item;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -42,25 +41,6 @@ public class EdibleCropSeedItem extends CropSeedsItem implements Drinkable {
                             return InteractionResultHolder.fail(stack);
                         })
                         .orElse(InteractionResultHolder.pass(stack));
-            }
-        }
-        return result;
-    }
-
-    @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
-        DrinkProperties properties = this.getStats();
-        ItemStack result = super.finishUsingItem(stack, level, entity);
-        if (!properties.isEmpty()) {
-            DrinkProperties adjusted = DrinkProperties.adjustStats(properties, stack);
-            if (entity instanceof Player player) {
-                if (!this.isEdible() && !player.getAbilities().instabuild) {
-                    result.shrink(1);
-                }
-                player.getCapability(PlayerThirstStatsProvider.CAPABILITY).ifPresent(stats -> {
-                    stats.drink(adjusted);
-                    stats.sendClientData();
-                });
             }
         }
         return result;

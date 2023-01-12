@@ -12,6 +12,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.Marker;
@@ -32,7 +33,7 @@ public final class ConfigDrinkLoader {
     public static final Marker MARKER = MarkerManager.getMarker("DrinkProviderLoader");
     private static final File FILE = new File("./config/blockychef/drinks.json");
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-    private static final Map<Item, DrinkProperties> LOADED_STATS = new HashMap<>();
+    private static final Map<Item, DrinkProperties.DrinkPropertiesHolder> LOADED_STATS = new HashMap<>();
     private static final Codec<List<CompatDrinkable>> CODEC = CompatDrinkable.CODEC.listOf()
             .fieldOf("drinks").codec();
 
@@ -67,7 +68,7 @@ public final class ConfigDrinkLoader {
         }
     }
 
-    public static Optional<DrinkProperties> getStats(Item item) {
+    public static Optional<DrinkProperties.DrinkPropertiesHolder> getStatsHolder(Item item) {
         return Optional.ofNullable(LOADED_STATS.get(item));
     }
 
@@ -108,8 +109,8 @@ public final class ConfigDrinkLoader {
             this(hydrationLevel, saturation, Arrays.asList(effects));
         }
 
-        public DrinkProperties toDrink() {
-            return DrinkProperties.Builder.create()
+        public DrinkProperties.DrinkPropertiesHolder toDrink() {
+            DrinkProperties properties = DrinkProperties.Builder.create()
                     .stats(this.hydrationLevel, this.saturation)
                     .onDrink(player -> {
                         RandomSource source = player.getRandom();
@@ -120,6 +121,8 @@ public final class ConfigDrinkLoader {
                         });
                     })
                     .build();
+            ItemStack returning = ItemStack.EMPTY; // TODO
+            return new DrinkProperties.DrinkPropertiesHolder(properties, returning);
         }
     }
 

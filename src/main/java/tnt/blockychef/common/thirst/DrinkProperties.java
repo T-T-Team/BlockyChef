@@ -17,6 +17,7 @@ public final class DrinkProperties {
     public static final DrinkProperties NONE = Builder.create().onDrink(p -> {
         throw new UnsupportedOperationException("Operation on empty drink properties");
     }).build();
+    public static final DrinkPropertiesHolder NONE_HOLDER = new DrinkPropertiesHolder(NONE, ItemStack.EMPTY);
     private final int hydrationLevel;
     private final float saturation;
     private final boolean alwaysDrinkable;
@@ -53,16 +54,20 @@ public final class DrinkProperties {
         return wantedSaturationLevel / (waterLevel * 2.0F);
     }
 
-    public static DrinkProperties getDrinkStatistics(ItemStack stack) {
+    public static DrinkPropertiesHolder getDrinkStatistics(ItemStack stack) {
         Item item = stack.getItem();
-        Optional<DrinkProperties> optional = ConfigDrinkLoader.getStats(item);
+        Optional<DrinkPropertiesHolder> optional = ConfigDrinkLoader.getStatsHolder(item);
         if (optional.isPresent()) {
-            return adjustStats(optional.get(), stack);
+            DrinkPropertiesHolder holder = optional.get();
+            DrinkProperties properties = adjustStats(holder.properties(), stack);
+            return new DrinkPropertiesHolder(properties, holder.returningItem());
         }
         if (item instanceof Drinkable drinkable) {
-            return adjustStats(drinkable.getStats(), stack);
+            DrinkProperties properties = drinkable.getStats();
+            ItemStack returning = drinkable.getReturningItem();
+            return new DrinkPropertiesHolder(adjustStats(properties, stack), returning);
         }
-        return NONE;
+        return NONE_HOLDER;
     }
 
     public static DrinkProperties adjustStats(DrinkProperties stats, ItemStack stack) {
@@ -121,4 +126,6 @@ public final class DrinkProperties {
             return new DrinkProperties(this);
         }
     }
+
+    public record DrinkPropertiesHolder(DrinkProperties properties, ItemStack returningItem) {}
 }
