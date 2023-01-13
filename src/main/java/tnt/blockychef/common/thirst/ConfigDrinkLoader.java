@@ -74,8 +74,11 @@ public final class ConfigDrinkLoader {
 
     private static void initVanillaDrinkables(List<CompatDrinkable> list) {
         new DefaultDrinkBuilder(Items.POTION)
-                .stats(2, 1)
+                .stats(2)
                 .addEffect(0.3F, Registry.THIRST)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.COOKED_BEEF)
+                .hydrationLoss(2)
                 .buildAndExport(list);
     }
 
@@ -157,6 +160,10 @@ public final class ConfigDrinkLoader {
 
         public DefaultDrinkBuilder stats(int hydration) {
             return this.stats(hydration, hydration);
+        }
+
+        public DefaultDrinkBuilder hydrationLoss(int hydration) {
+            return this.stats(-hydration, 0.0F);
         }
 
         public DefaultDrinkBuilder addEffect(float chance, MobEffect effect, int duration, int amplifier) {

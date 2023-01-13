@@ -26,7 +26,7 @@ public final class DrinkProperties {
 
     private DrinkProperties(Builder builder) {
         this.hydrationLevel = builder.hydration;
-        this.saturation = builder.saturation;
+        this.saturation = Math.max(builder.saturation, 0.0F);
         this.alwaysDrinkable = builder.alwaysDrinkable;
         this.onConsumed = builder.onDrink;
     }

@@ -9,6 +9,10 @@ import java.util.Map;
 public final class FoodList {
 
     public static final Map<FoodProperties, FoodProperties> FOOD_OVERRIDES = new IdentityHashMap<>();
+
+    // Vanilla overrides
+    public static final FoodProperties COOKED_BEEF = food(2, 2).build();
+    // Blockychef foods
     public static final FoodProperties TOMATO = food(1, 1).build();
 
     private static FoodProperties.Builder food(int nutrition, int saturation) {
@@ -19,6 +23,6 @@ public final class FoodList {
     }
 
     static {
-        FOOD_OVERRIDES.put(Foods.COOKED_BEEF, TOMATO);
+        FOOD_OVERRIDES.put(Foods.COOKED_BEEF, COOKED_BEEF);
     }
 }
