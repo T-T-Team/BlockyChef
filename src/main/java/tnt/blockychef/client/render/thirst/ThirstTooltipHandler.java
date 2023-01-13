@@ -49,7 +49,7 @@ public final class ThirstTooltipHandler {
 
         @Override
         public int getWidth(Font font) {
-            int hydration = tooltip.hydrationLevel * 9;
+            int hydration = tooltip.hydrationLevel / 2 * 9;
             if (tooltip.hydrationDescriptor != null) {
                 hydration += font.width(tooltip.hydrationDescriptor);
             }
@@ -79,25 +79,18 @@ public final class ThirstTooltipHandler {
             RenderSystem.defaultBlendFunc();
             int offsetX = x;
             int offsetY = y;
-            int hydration = properties.getHydration();
-            offsetX += (tooltip.hydrationLevel - 1) * 9;
+            int hydrationValue = Math.abs(tooltip.hydrationLevel);
+            boolean negative = tooltip.hydrationLevel < 0;
+            offsetX += (Math.abs(tooltip.hydrationLevel) - 1) / 2 * 9;
 
             RenderSystem.setShaderTexture(0, ThirstOverlay.TEXTURE);
-            for (int i = 0; i < tooltip.hydrationLevel * 2; i += 2) {
-                if (hydration < 0) {
-                    GuiComponent.blit(poseStack, offsetX, offsetY, z, 54, 0, 9, 9, 256, 256);
-                } else if (hydration > i + 1) {
-                    GuiComponent.blit(poseStack, offsetX, offsetY, z, 0, 0, 9, 9, 256, 256);
-                } else if (hydration == i + 1) {
-                    GuiComponent.blit(poseStack, offsetX, offsetY, z, 0, 0, 9, 9, 256, 256);
+            for (int i = 0; i < hydrationValue; i += 2) {
+                GuiComponent.blit(poseStack, offsetX, offsetY, z, negative ? 54 : 0, 0, 9, 9, 256, 256);
+                if (i == hydrationValue - 1) {
+                    GuiComponent.blit(poseStack, offsetX, offsetY, z, negative ? 72 : 18, 0, 9, 9, 256, 256);
                 } else {
-                    RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.5F);
-                    GuiComponent.blit(poseStack, offsetX, offsetY, z, 0, 0, 9, 9, 256, 256);
-                    RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+                    GuiComponent.blit(poseStack, offsetX, offsetY, z, negative ? 63 : 9, 0, 9, 9, 256, 256);
                 }
-                RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.25F);
-                GuiComponent.blit(poseStack, offsetX, offsetY, z, hydration - 1 == i ? 18 : 9, 27, 9, 9, 256, 256);
-                RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
                 offsetX -= 9;
             }
             if (tooltip.hydrationDescriptor != null) {
@@ -129,6 +122,10 @@ public final class ThirstTooltipHandler {
             this.stack = stack;
 
             this.hydrationLevel = properties.getHydration();
+            if (Math.abs(this.hydrationLevel) > 20) {
+                this.hydrationLevel = 1;
+                this.hydrationDescriptor = "x" + properties.getHydration();
+            }
         }
     }
 }

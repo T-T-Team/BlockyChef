@@ -80,6 +80,14 @@ public final class ConfigDrinkLoader {
         new DefaultDrinkBuilder(Items.COOKED_BEEF)
                 .hydrationLoss(2)
                 .buildAndExport(list);
+
+        // For testing only, TODO rework
+        new DefaultDrinkBuilder(Items.MILK_BUCKET)
+                .stats(30)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.MELON_SLICE)
+                .stats(5, 10)
+                .buildAndExport(list);
     }
 
     private record CompatDrinkable(Item item, CompatDrinkStatsHolder holder) {
