@@ -211,10 +211,11 @@ public class ThirstOverlay implements IGuiOverlay {
             return;
         }
         int itemHydration = properties.getHydration();
-        float itemSaturation = properties.getSaturation() * properties.getSaturation() * 2.0F;
+        float itemSaturation = properties.getSaturation();
         this.renderHydrationOverlay(stack, gui, playerHydration, itemHydration, playerSaturation, thirsty, left, top, alpha);
         this.renderSaturation(stack, gui, playerHydration, playerSaturation, thirsty, left, top, 1.0F);
-        this.renderSaturation(stack, gui, playerHydration, playerSaturation + (itemHydration * itemSaturation * 2.0F), thirsty, left, top, alpha);
+        float addedSaturation = Math.min(playerHydration + itemHydration, playerSaturation + (itemHydration * itemSaturation * 2.0F));
+        this.renderSaturation(stack, gui, playerHydration, addedSaturation, thirsty, left, top, alpha);
     }
 
     public static void tick() {
