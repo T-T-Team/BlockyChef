@@ -9,13 +9,12 @@ import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.minecraftforge.client.event.RenderTooltipEvent;
-import org.joml.Matrix4f;
 import tnt.blockychef.common.thirst.DrinkProperties;
-import tnt.blockychef.util.RenderHelper;
 
 public final class ThirstTooltipHandler {
 
@@ -44,7 +43,7 @@ public final class ThirstTooltipHandler {
 
         @Override
         public int getHeight() {
-            return 20;
+            return this.tooltip.renderSaturation ? 20 : 13;
         }
 
         @Override
@@ -53,7 +52,7 @@ public final class ThirstTooltipHandler {
             if (tooltip.hydrationDescriptor != null) {
                 hydration += font.width(tooltip.hydrationDescriptor);
             }
-            int saturation = tooltip.saturationLevel * 7;
+            int saturation = tooltip.saturationLevel / 2 * 7;
             if (tooltip.saturationDescriptor != null) {
                 saturation += font.width(tooltip.saturationDescriptor);
             }
@@ -72,8 +71,6 @@ public final class ThirstTooltipHandler {
             if (screen == null) {
                 return;
             }
-            DrinkProperties properties = tooltip.properties;
-
             RenderSystem.enableDepthTest();
             RenderSystem.enableBlend();
             RenderSystem.defaultBlendFunc();
@@ -83,6 +80,7 @@ public final class ThirstTooltipHandler {
             boolean negative = tooltip.hydrationLevel < 0;
             offsetX += (Math.abs(tooltip.hydrationLevel) - 1) / 2 * 9;
 
+            // Hydration icons
             RenderSystem.setShaderTexture(0, ThirstOverlay.TEXTURE);
             for (int i = 0; i < hydrationValue; i += 2) {
                 GuiComponent.blit(poseStack, offsetX, offsetY, z, negative ? 54 : 0, 0, 9, 9, 256, 256);
@@ -93,12 +91,46 @@ public final class ThirstTooltipHandler {
                 }
                 offsetX -= 9;
             }
+            // Hydration text
             if (tooltip.hydrationDescriptor != null) {
                 offsetX += 18;
                 poseStack.pushPose();
                 poseStack.translate(offsetX, offsetY, z);
                 poseStack.scale(0.75F, 0.75F, 0.75F);
                 font.drawShadow(poseStack, tooltip.hydrationDescriptor, 2, 2, 0xFFAAAAAA, false);
+                poseStack.popPose();
+            }
+
+            if (!this.tooltip.renderSaturation) {
+                return;
+            }
+            // Saturation icons
+            RenderSystem.setShaderTexture(0, ThirstOverlay.TEXTURE);
+            int saturationValue = tooltip.saturationLevel;
+            offsetX = x;
+            offsetY += 10;
+            offsetX += (tooltip.saturationLevel - 1) / 2 * 7;
+            for (int i = 0; i < saturationValue; i += 2) {
+                GuiComponent.blit(poseStack, offsetX, offsetY, z, 0, 27, 7, 7, 256, 256);
+                float value = (saturationValue - i) / 2.0F;
+                if (value >= 1.0F) {
+                    GuiComponent.blit(poseStack, offsetX, offsetY, z, 28, 27, 7, 7, 256, 256);
+                } else if (value > 0.5F) {
+                    GuiComponent.blit(poseStack, offsetX, offsetY, z, 21, 27, 7, 7, 256, 256);
+                } else if (value > 0.25F) {
+                    GuiComponent.blit(poseStack, offsetX, offsetY, z, 14, 27, 7, 7, 256, 256);
+                } else {
+                    GuiComponent.blit(poseStack, offsetX, offsetY, z, 7, 27, 7, 7, 256, 256);
+                }
+                offsetX -= 7;
+            }
+            // Saturation text
+            if (tooltip.saturationDescriptor != null) {
+                offsetX += 14;
+                poseStack.pushPose();
+                poseStack.translate(offsetX, offsetY, z);
+                poseStack.scale(0.75f, 0.75f, 0.75f);
+                font.drawShadow(poseStack, tooltip.saturationDescriptor, 2, 1, 0xFFAAAAAA, false);
                 poseStack.popPose();
             }
         }
@@ -110,21 +142,28 @@ public final class ThirstTooltipHandler {
 
     private static class ThirstTooltip implements TooltipComponent {
 
-        private final DrinkProperties properties;
         private final ItemStack stack;
         private int hydrationLevel;
         private int saturationLevel;
         private String hydrationDescriptor;
         private String saturationDescriptor;
+        private boolean renderSaturation = true;
 
         public ThirstTooltip(DrinkProperties properties, ItemStack stack) {
-            this.properties = properties;
             this.stack = stack;
 
             this.hydrationLevel = properties.getHydration();
             if (Math.abs(this.hydrationLevel) > 20) {
                 this.hydrationLevel = 1;
                 this.hydrationDescriptor = "x" + properties.getHydration();
+            }
+
+            this.saturationLevel = Mth.ceil(properties.getHydration() * properties.getSaturation() * 2.0F);
+            if (saturationLevel > 20.0F) {
+                this.saturationDescriptor = "x" + saturationLevel;
+                this.saturationLevel = 1;
+            } else if (this.saturationLevel <= 0.0F) {
+                this.renderSaturation = false;
             }
         }
     }
