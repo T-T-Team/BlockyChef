@@ -1,15 +1,14 @@
-package tnt.blockychef.common.food;
+package tnt.blockychef.common.effect;
 
-import net.minecraft.world.effect.InstantenousMobEffect;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import tnt.blockychef.common.thirst.PlayerThirstStatsProvider;
 
-public class HydrationMobEffect extends MobEffect {
+public class ThirstMobEffect extends MobEffect {
 
-    public HydrationMobEffect(MobEffectCategory category, int color) {
+    public ThirstMobEffect(MobEffectCategory category, int color) {
         super(category, color);
     }
 
@@ -22,8 +21,8 @@ public class HydrationMobEffect extends MobEffect {
     public void applyEffectTick(LivingEntity entity, int amplifier) {
         if (entity instanceof Player player) {
             player.getCapability(PlayerThirstStatsProvider.CAPABILITY).ifPresent(stats -> {
-                stats.setHydrationLevel(Math.min(20, stats.getHydrationLevel() + 1));
-                stats.setSaturationLevel(Math.min(stats.getHydrationLevel(), stats.getSaturationLevel() + 2.0F));
+                float oldExh = stats.getExhaustionLevel();
+                stats.setExhaustionLevel(oldExh + 0.01F * (amplifier + 1));
             });
         }
     }
