@@ -27,9 +27,9 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
 import net.minecraftforge.event.ForgeEventFactory;
-import tnt.blockychef.common.Registry;
 import tnt.blockychef.common.block.CropsBlock;
 import tnt.blockychef.common.block.DecayingGrowingBlock;
+import tnt.blockychef.common.init.BlockyChefBlocks;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -80,7 +80,7 @@ public class ManageFarm extends Behavior<Villager> {
                                 if (cropsBlock.isMaxAge(state)) {
                                     this.validFarmFields.add(pos);
                                 }
-                            } else if (plant == Registry.WEEDS) {
+                            } else if (plant == BlockyChefBlocks.WEEDS) {
                                 this.unplantedFields.add(pos);
                             }
                         } else if (plant instanceof CropBlock cropBlock) { // Vanilla compat
@@ -198,16 +198,16 @@ public class ManageFarm extends Behavior<Villager> {
 
     private BlockState getSeedState(ServerLevel level, ItemStack stack) {
         if (stack.is(Items.WHEAT_SEEDS)) {
-            return Registry.WHEAT_CROPS.defaultBlockState();
+            return BlockyChefBlocks.WHEAT_CROPS.defaultBlockState();
         }
         if (stack.is(Items.POTATO)) {
-            return Registry.POTATO_CROPS.defaultBlockState();
+            return BlockyChefBlocks.POTATO_CROPS.defaultBlockState();
         }
         if (stack.is(Items.CARROT)) {
-            return Registry.CARROT_CROPS.defaultBlockState();
+            return BlockyChefBlocks.CARROT_CROPS.defaultBlockState();
         }
         if (stack.is(Items.BEETROOT_SEEDS)) {
-            return Registry.BEETROOT_CROPS.defaultBlockState();
+            return BlockyChefBlocks.BEETROOT_CROPS.defaultBlockState();
         }
         if (stack.getItem() instanceof IPlantable plantable) {
             if (plantable.getPlantType(level, this.action.pos()) == PlantType.CROP) {

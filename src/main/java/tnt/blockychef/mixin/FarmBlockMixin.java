@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.Registry;
+import tnt.blockychef.common.init.BlockyChefBlocks;
 
 @Mixin(FarmBlock.class)
 public abstract class FarmBlockMixin extends Block {
@@ -27,7 +28,7 @@ public abstract class FarmBlockMixin extends Block {
             return;
         BlockPos above = pos.above();
         if (!level.isClientSide && level.isEmptyBlock(above)) {
-            level.setBlock(above, Registry.WEEDS.defaultBlockState(), 2);
+            level.setBlock(above, BlockyChefBlocks.WEEDS.defaultBlockState(), 2);
         }
     }
 }

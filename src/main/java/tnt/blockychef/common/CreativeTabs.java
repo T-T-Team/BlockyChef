@@ -7,6 +7,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import tnt.blockychef.BlockyChef;
+import tnt.blockychef.common.init.BlockyChefItems;
 
 @Mod.EventBusSubscriber(modid = BlockyChef.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class CreativeTabs {
@@ -14,7 +15,7 @@ public final class CreativeTabs {
     @SubscribeEvent
     public static void registerCreativeTabs(CreativeModeTabEvent.Register event) {
         event.registerCreativeModeTab(BlockyChef.resource("main"), builder -> builder
-                .icon(() -> new ItemStack(Registry.TOMATO))
+                .icon(() -> new ItemStack(BlockyChefItems.TOMATO))
                 .title(Component.translatable("itemGroup.blockychef.main"))
                 .displayItems((featureFlags, output, hasOp) -> ForgeRegistries.ITEMS.getValues().stream()
                         .filter(item -> ForgeRegistries.ITEMS.getKey(item).getNamespace().equals(BlockyChef.MODID))

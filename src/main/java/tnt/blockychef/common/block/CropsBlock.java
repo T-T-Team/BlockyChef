@@ -32,6 +32,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.Registry;
+import tnt.blockychef.common.init.BlockyChefBlocks;
 
 import java.util.function.UnaryOperator;
 
@@ -113,7 +114,7 @@ public class CropsBlock extends DecayingGrowingBlock implements BonemealableBloc
         super.playerDestroy(level, player, pos, state, blockEntity, stack);
         if (BlockyChef.config.decay.placeOnRawFarmland) {
             if (level.getBlockState(pos.below()).is(Blocks.FARMLAND)) {
-                level.setBlock(pos, Registry.WEEDS.defaultBlockState().setValue(this.getDecayProperty(), state.getValue(this.getDecayProperty())), 2);
+                level.setBlock(pos, BlockyChefBlocks.WEEDS.defaultBlockState().setValue(this.getDecayProperty(), state.getValue(this.getDecayProperty())), 2);
             }
         }
     }

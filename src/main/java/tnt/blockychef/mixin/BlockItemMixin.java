@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.Registry;
+import tnt.blockychef.common.init.BlockyChefBlocks;
 
 import java.util.IdentityHashMap;
 import java.util.Map;
@@ -46,9 +47,9 @@ public abstract class BlockItemMixin extends Item {
     }
 
     static {
-        REPLACEMENTS.put(Blocks.POTATOES, () -> Registry.POTATO_CROPS);
-        REPLACEMENTS.put(Blocks.CARROTS, () -> Registry.CARROT_CROPS);
-        REPLACEMENTS.put(Blocks.BEETROOTS, () -> Registry.BEETROOT_CROPS);
-        REPLACEMENTS.put(Blocks.WHEAT, () -> Registry.WHEAT_CROPS);
+        REPLACEMENTS.put(Blocks.POTATOES, () -> BlockyChefBlocks.POTATO_CROPS);
+        REPLACEMENTS.put(Blocks.CARROTS, () -> BlockyChefBlocks.CARROT_CROPS);
+        REPLACEMENTS.put(Blocks.BEETROOTS, () -> BlockyChefBlocks.BEETROOT_CROPS);
+        REPLACEMENTS.put(Blocks.WHEAT, () -> BlockyChefBlocks.WHEAT_CROPS);
     }
 }
