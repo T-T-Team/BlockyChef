@@ -27,10 +27,10 @@ import java.util.Optional;
 public class DryingRackBlock extends FullHorizontalAxisBlock implements EntityBlock {
 
     public static final VoxelShape[] HITBOX = {
-            Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0), // NORTH
-            Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0), // SOUTH
-            Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0), // WEST
-            Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0)  // EAST
+            Block.box(0.0, 13.0, 14.0, 16.0, 16.0, 16.0), // NORTH
+            Block.box(0.0, 13.0, 0.0, 16.0, 16.0, 2.0), // SOUTH
+            Block.box(14.0, 13.0, 0.0, 16.0, 16.0, 16.0), // WEST
+            Block.box(0.0, 13.0, 0.0, 2.0, 16.0, 16.0)  // EAST
     };
 
     public DryingRackBlock() {
@@ -38,7 +38,7 @@ public class DryingRackBlock extends FullHorizontalAxisBlock implements EntityBl
     }
 
     public DryingRackBlock(Material material) {
-        super(Properties.of(material).strength(1.4F).noCollission());
+        super(Properties.of(material).strength(1.4F).noOcclusion());
     }
 
     @Override
