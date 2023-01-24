@@ -14,7 +14,7 @@ import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL11;
-import tnt.blockychef.common.Registry;
+import tnt.blockychef.common.init.BlockyChefMobEffects;
 import tnt.blockychef.common.thirst.DrinkProperties;
 import tnt.blockychef.common.thirst.PlayerThirstStatsProvider;
 import tnt.blockychef.common.thirst.ThirstStats;
@@ -76,7 +76,7 @@ public class ThirstOverlay implements IGuiOverlay {
         int left = screenWidth / 2 + 91;
         int top = screenHeight - gui.rightHeight;
         gui.rightHeight += 10;
-        boolean isThirsty = player.hasEffect(Registry.THIRST);
+        boolean isThirsty = player.hasEffect(BlockyChefMobEffects.THIRST);
         player.getCapability(PlayerThirstStatsProvider.CAPABILITY).ifPresent(stats -> {
             this.renderExhaustion(poseStack, stats.getExhaustionLevel(), left, top, gui.getBlitOffset());
             setupRender();
@@ -89,7 +89,7 @@ public class ThirstOverlay implements IGuiOverlay {
         int left = screenWidth / 2 + 91;
         int top = screenHeight - gui.rightHeight;
         gui.rightHeight += 10;
-        boolean thirsty = player.hasEffect(Registry.THIRST);
+        boolean thirsty = player.hasEffect(BlockyChefMobEffects.THIRST);
         player.getCapability(PlayerThirstStatsProvider.CAPABILITY).ifPresent(stats -> {
             int hydration = stats.getHydrationLevel();
             float saturation = stats.getSaturationLevel();

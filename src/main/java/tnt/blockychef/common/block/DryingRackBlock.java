@@ -4,12 +4,34 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
+import tnt.blockychef.common.block.entity.DryingRackBlockEntity;
+import tnt.blockychef.common.init.BlockyChefBlockEntities;
+import tnt.blockychef.util.Helper;
 
-public class DryingRackBlock extends FullHorizontalAxisBlock {
+import java.util.Optional;
+
+public class DryingRackBlock extends FullHorizontalAxisBlock implements EntityBlock {
+
+    public static final VoxelShape[] HITBOX = {
+            Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0), // NORTH
+            Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0), // SOUTH
+            Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0), // WEST
+            Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0)  // EAST
+    };
 
     public DryingRackBlock() {
         this(Material.WOOD);
@@ -20,8 +42,55 @@ public class DryingRackBlock extends FullHorizontalAxisBlock {
     }
 
     @Override
+    public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
+        int index = state.getValue(FACING).ordinal() - 2;
+        return HITBOX[index];
+    }
+
+    @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        // TODO implement
+        if (!level.isClientSide) {
+            Optional<DryingRackBlockEntity> optional = level.getBlockEntity(pos, BlockyChefBlockEntities.DRYING_RACK);
+            return optional.map(dryingRack -> {
+                ItemStack stack = player.getItemInHand(hand);
+                if (dryingRack.hasItem()) {
+                    dryingRack.clearInventoryAndProcessRecipe(player);
+                } else if (!stack.isEmpty()) { // TODO validate item can be dried
+                    ItemStack insertionItem = stack.copy();
+                    insertionItem.setCount(1);
+                    dryingRack.setItem(insertionItem);
+                    if (!player.getAbilities().instabuild) {
+                        stack.shrink(1);
+                    }
+                }
+                return InteractionResult.SUCCESS;
+            }).orElse(InteractionResult.PASS);
+        }
         return InteractionResult.PASS;
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState replacementState, boolean someValue) {
+        if (!state.is(replacementState.getBlock())) {
+            if (!level.isClientSide) {
+                BlockEntity blockEntity = level.getBlockEntity(pos);
+                if (blockEntity instanceof DryingRackBlockEntity dryingRack) {
+                    dryingRack.clearInventoryAndProcessRecipe(null);
+                }
+            }
+        }
+        super.onRemove(state, level, pos, replacementState, someValue);
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return BlockyChefBlockEntities.DRYING_RACK.create(pos, state);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        return level.isClientSide ? null : Helper.createBlockEntityTicker(type, BlockyChefBlockEntities.DRYING_RACK, DryingRackBlockEntity::tick);
     }
 }

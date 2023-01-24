@@ -18,7 +18,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 import tnt.blockychef.BlockyChef;
-import tnt.blockychef.common.Registry;
+import tnt.blockychef.common.init.BlockyChefMobEffects;
 import tnt.blockychef.util.CodecHelper;
 
 import java.io.File;
@@ -75,7 +75,7 @@ public final class ConfigDrinkLoader {
     private static void initVanillaDrinkables(List<CompatDrinkable> list) {
         new DefaultDrinkBuilder(Items.POTION)
                 .stats(2)
-                .addEffect(0.3F, Registry.THIRST)
+                .addEffect(0.3F, BlockyChefMobEffects.THIRST)
                 .buildAndExport(list);
         new DefaultDrinkBuilder(Items.COOKED_BEEF)
                 .hydrationLoss(2)
