@@ -3,6 +3,7 @@ package tnt.blockychef.common.init;
 import net.minecraftforge.registries.ObjectHolder;
 import tnt.blockychef.common.block.CropsBlock;
 import tnt.blockychef.common.block.DecayingGrowingBlock;
+import tnt.blockychef.common.block.DryingRackBlock;
 
 public final class BlockyChefBlocks {
 
@@ -76,4 +77,6 @@ public final class BlockyChefBlocks {
     public static final CropsBlock RICE_CROPS = null;
     @ObjectHolder(value = "blockychef:oat_crops", registryName = "block")
     public static final CropsBlock OAT_CROPS = null;
+    @ObjectHolder(value = "blockychef:drying_rack", registryName = "block")
+    public static final DryingRackBlock DRYING_RACK = null;
 }
