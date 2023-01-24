@@ -18,6 +18,7 @@ import net.minecraftforge.registries.RegisterEvent;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.CropsBlock;
 import tnt.blockychef.common.block.DecayingGrowingBlock;
+import tnt.blockychef.common.block.DryingRackBlock;
 import tnt.blockychef.common.block.TreeHangingFruitBlock;
 import tnt.blockychef.common.food.DrinkList;
 import tnt.blockychef.common.food.FoodList;
@@ -253,6 +254,7 @@ public final class Registry {
         helper.register("plum_fruit", new TreeHangingFruitBlock(), false);
         helper.register("vanilla_fruit", new TreeHangingFruitBlock(), false);
         helper.register("walnut_fruit", new TreeHangingFruitBlock(), false);
+        helper.register("drying_rack", new DryingRackBlock());
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {
