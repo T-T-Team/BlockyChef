@@ -6,6 +6,9 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -25,6 +28,7 @@ import tnt.blockychef.common.effect.HydrationMobEffect;
 import tnt.blockychef.common.effect.ThirstMobEffect;
 import tnt.blockychef.common.food.DrinkList;
 import tnt.blockychef.common.food.FoodList;
+import tnt.blockychef.common.food.recipe.DryingRecipe;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 import tnt.blockychef.common.init.BlockyChefItems;
 import tnt.blockychef.common.item.CropSeedsItem;
@@ -62,6 +66,18 @@ public final class Registry {
         });
         event.register(ForgeRegistries.BLOCK_ENTITY_TYPES.getRegistryKey(), Registry::registerBlockEntities);
         event.register(ForgeRegistries.MOB_EFFECTS.getRegistryKey(), Registry::registerMobEffects);
+        event.register(ForgeRegistries.RECIPE_TYPES.getRegistryKey(), helper -> {
+            RecipeTypeRegistryHelper registryHelper = id -> {
+                helper.register(id, new RecipeType<>() {
+                    @Override
+                    public String toString() {
+                        return BlockyChef.MODID + ":" + id;
+                    }
+                });
+            };
+            registerRecipeTypes(registryHelper);
+        });
+        event.register(ForgeRegistries.RECIPE_SERIALIZERS.getRegistryKey(), Registry::registerRecipeSerializers);
     }
 
     private static void registerBlocks(BlockRegistryHelper helper) {
@@ -179,6 +195,14 @@ public final class Registry {
         helper.register("hydration", new HydrationMobEffect(MobEffectCategory.BENEFICIAL, 0x3080E8));
     }
 
+    private static void registerRecipeTypes(RecipeTypeRegistryHelper helper) {
+        helper.register("drying_recipe");
+    }
+
+    private static void registerRecipeSerializers(RegisterEvent.RegisterHelper<RecipeSerializer<?>> helper) {
+        helper.register("drying", new DryingRecipe.Serializer());
+    }
+
     @FunctionalInterface // Registers blocks and schedules itemBlock registration
     private interface BlockRegistryHelper {
         void register(String name, Block block, boolean createItem);
@@ -186,5 +210,10 @@ public final class Registry {
         default void register(String name, Block block) {
             register(name, block, true);
         }
+    }
+
+    @FunctionalInterface
+    private interface RecipeTypeRegistryHelper {
+        void register(String id);
     }
 }
