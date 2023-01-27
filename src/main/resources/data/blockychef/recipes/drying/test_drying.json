@@ -4,8 +4,7 @@
     "item": "minecraft:apple"
   },
   "output": {
-    "item": "blockychef:tomato"
+    "item": "blockychef:rice"
   },
-  "dryingTime": 400,
-  "experience": 300
+  "dryingTime": 400
 }

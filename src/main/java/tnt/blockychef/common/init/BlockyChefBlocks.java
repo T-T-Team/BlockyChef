@@ -77,6 +77,10 @@ public final class BlockyChefBlocks {
     public static final CropsBlock RICE_CROPS = null;
     @ObjectHolder(value = "blockychef:oat_crops", registryName = "block")
     public static final CropsBlock OAT_CROPS = null;
+    @ObjectHolder(value = "blockychef:mustard_crops", registryName = "block")
+    public static final CropsBlock MUSTARD_CROPS = null;
+    @ObjectHolder(value = "blockychef:coffee_crops", registryName = "block")
+    public static final CropsBlock COFFEE_CROPS = null;
     @ObjectHolder(value = "blockychef:drying_rack", registryName = "block")
     public static final DryingRackBlock DRYING_RACK = null;
 }

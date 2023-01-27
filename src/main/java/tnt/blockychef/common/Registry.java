@@ -116,6 +116,8 @@ public final class Registry {
         helper.register("grapes_crops", new CropsBlock(() -> BlockyChefItems.GRAPES), false);
         helper.register("rice_crops", new CropsBlock(() -> BlockyChefItems.RICE), false);
         helper.register("oat_crops", new CropsBlock(() -> BlockyChefItems.OAT), false);
+        helper.register("mustard_crops", new CropsBlock(() -> BlockyChefItems.MUSTARD), false);
+        helper.register("coffee_crops", new CropsBlock(() -> BlockyChefItems.COFFEE), false);
         helper.register("almond_fruit", new TreeHangingFruitBlock(), false);
         helper.register("apple_fruit", new TreeHangingFruitBlock(), false);
         helper.register("avocado_fruit", new TreeHangingFruitBlock(), false);
@@ -167,6 +169,8 @@ public final class Registry {
         helper.register("grapes", new CropSeedsItem(BlockyChefBlocks.GRAPES_CROPS, new Item.Properties()));
         helper.register("rice", new CropSeedsItem(BlockyChefBlocks.RICE_CROPS, new Item.Properties()));
         helper.register("oat", new CropSeedsItem(BlockyChefBlocks.OAT_CROPS, new Item.Properties()));
+        helper.register("mustard", new CropSeedsItem(BlockyChefBlocks.MUSTARD_CROPS, new Item.Properties()));
+        helper.register("coffee", new CropSeedsItem(BlockyChefBlocks.COFFEE_CROPS, new Item.Properties()));
         helper.register("almond", new Item(new Item.Properties()));
         helper.register("apple", new Item(new Item.Properties()));
         helper.register("avocado", new Item(new Item.Properties()));

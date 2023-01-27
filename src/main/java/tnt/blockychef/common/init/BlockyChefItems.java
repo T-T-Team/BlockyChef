@@ -65,4 +65,8 @@ public final class BlockyChefItems {
     public static final Item RICE = null;
     @ObjectHolder(value = "blockychef:oat", registryName = "item")
     public static final Item OAT = null;
+    @ObjectHolder(value = "blockychef:mustard", registryName = "item")
+    public static final Item MUSTARD = null;
+    @ObjectHolder(value = "blockychef:coffee", registryName = "item")
+    public static final Item COFFEE = null;
 }

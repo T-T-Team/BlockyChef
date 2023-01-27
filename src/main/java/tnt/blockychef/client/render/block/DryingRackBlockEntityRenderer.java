@@ -28,10 +28,10 @@ public class DryingRackBlockEntityRenderer implements BlockEntityRenderer<Drying
             return;
 
         Direction direction = dryingRack.getBlockState().getValue(DryingRackBlock.FACING);
-        float itemRenderScale = 0.4F;
+        float itemRenderScale = 0.5F;
         float yRotation = direction.get2DDataValue() * 90.0F;
         poseStack.pushPose();
-        poseStack.translate(0.0, 0.8, 0.0);
+        poseStack.translate(0.0, 0.7, 0.0);
         // Could be propably done in a better way
         switch (direction) {
             case NORTH -> poseStack.translate(0.5, 0.0, 0.85);
