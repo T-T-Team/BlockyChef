@@ -49,13 +49,13 @@ public class DryingRackBlock extends FullHorizontalAxisBlock implements EntityBl
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (!level.isClientSide) {
-            Optional<DryingRackBlockEntity> optional = level.getBlockEntity(pos, BlockyChefBlockEntities.DRYING_RACK);
-            return optional.map(dryingRack -> {
-                ItemStack stack = player.getItemInHand(hand);
-                if (dryingRack.hasItem()) {
-                    dryingRack.clearInventoryAndProcessRecipe(player);
-                } else if (!stack.isEmpty()) { // TODO validate item can be dried
+        Optional<DryingRackBlockEntity> optional = level.getBlockEntity(pos, BlockyChefBlockEntities.DRYING_RACK);
+        return optional.map(dryingRack -> {
+            ItemStack stack = player.getItemInHand(hand);
+            if (dryingRack.hasItem()) {
+                dryingRack.clearInventoryAndProcessRecipe(player);
+            } else if (dryingRack.isValidInput(stack, level)) {
+                if (!level.isClientSide) {
                     ItemStack insertionItem = stack.copy();
                     insertionItem.setCount(1);
                     dryingRack.setItem(insertionItem);
@@ -64,9 +64,9 @@ public class DryingRackBlock extends FullHorizontalAxisBlock implements EntityBl
                     }
                 }
                 return InteractionResult.SUCCESS;
-            }).orElse(InteractionResult.PASS);
-        }
-        return InteractionResult.PASS;
+            }
+            return InteractionResult.PASS;
+        }).orElse(InteractionResult.PASS);
     }
 
     @Override

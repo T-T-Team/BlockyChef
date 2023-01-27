@@ -1,17 +1,30 @@
 package tnt.blockychef.common.block.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
+import tnt.blockychef.common.food.recipe.DryingRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
+import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.util.Helper;
 
-public class DryingRackBlockEntity extends InventoryBlockEntity {
+import java.util.List;
+import java.util.Optional;
+
+public class DryingRackBlockEntity extends RecipeRemberingBlockEntity {
+
+    private DryingRecipe recipe;
+    private int ticksDrying;
 
     public DryingRackBlockEntity(BlockPos pos, BlockState state) {
         super(BlockyChefBlockEntities.DRYING_RACK, pos, state);
@@ -22,28 +35,86 @@ public class DryingRackBlockEntity extends InventoryBlockEntity {
         return new ItemStackHandler(1);
     }
 
+    public boolean isValidInput(ItemStack stack, Level level) {
+        RecipeManager manager = level.getRecipeManager();
+        List<DryingRecipe> recipeList = manager.getAllRecipesFor(BlockyChefRecipeTypes.DRYING_RECIPE);
+        if (stack.isEmpty())
+            return false;
+        for (DryingRecipe dryingRecipe : recipeList) {
+            if (dryingRecipe.isValidInput(stack)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void setItem(ItemStack stack) {
-        this.inventoryHandler.setStackInSlot(0, stack);
+        inventoryHandler.setStackInSlot(0, stack);
+        updateRecipes();
+        setChanged();
     }
 
     public boolean hasItem() {
-        return !this.inventoryHandler.getStackInSlot(0).isEmpty();
+        return !inventoryHandler.getStackInSlot(0).isEmpty();
     }
 
     public void clearInventoryAndProcessRecipe(@Nullable Player player) {
+        if (level.isClientSide)
+            return;
         if (player == null) {
-            // TODO drop exp on ground
+            getRecipesToAwardAndPopExperience((ServerLevel) level, Vec3.atCenterOf(worldPosition));
             Helper.dropInventoryContents(level, worldPosition, inventoryHandler);
         } else {
             ItemStack stack = inventoryHandler.getStackInSlot(0);
             if (!stack.isEmpty()) {
                 Helper.giveItem(player, stack);
             }
-            // TODO implement exp
+            awardUsedRecipesAndPopExperience((ServerPlayer) player);
         }
+        setChanged();
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, DryingRackBlockEntity dryingRack) {
-        // TODO tick drying recipes
+        if (dryingRack.recipe != null) {
+            if (dryingRack.ticksDrying++ >= dryingRack.recipe.getDryingTime()) {
+                dryingRack.completeRecipe();
+            }
+        }
+    }
+
+    @Override
+    public void load(CompoundTag tag) {
+        super.load(tag);
+        this.updateRecipes();
+    }
+
+    private void updateRecipes() {
+        ItemStack stack = inventoryHandler.getStackInSlot(0);
+        if (stack.isEmpty()) {
+            clearRecipe();
+        } else {
+            RecipeManager manager = level.getRecipeManager();
+            Optional<DryingRecipe> optional = manager.getRecipeFor(BlockyChefRecipeTypes.DRYING_RECIPE, this, level);
+            optional.ifPresent(recipe -> {
+                clearRecipe();
+                this.recipe = recipe;
+            });
+        }
+    }
+
+    private void clearRecipe() {
+        recipe = null;
+        ticksDrying = 0;
+    }
+
+    private void completeRecipe() {
+        ticksDrying = 0;
+        if (recipe != null) {
+            ItemStack result = recipe.assemble(this);
+            storeRecipe(recipe);
+            inventoryHandler.setStackInSlot(0, result);
+            setChanged();
+        }
+        updateRecipes();
     }
 }

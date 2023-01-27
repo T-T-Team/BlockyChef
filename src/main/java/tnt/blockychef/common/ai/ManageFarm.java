@@ -59,9 +59,9 @@ public class ManageFarm extends Behavior<Villager> {
             return false;
         }
         BlockPos.MutableBlockPos mutable = villager.blockPosition().mutable();
-        this.toWeedFields.clear();
-        this.validFarmFields.clear();
-        this.unplantedFields.clear();
+        toWeedFields.clear();
+        validFarmFields.clear();
+        unplantedFields.clear();
         int searchRange = 3;
         for(int x = -searchRange; x <= searchRange; ++x) {
             for(int y = -searchRange; y <= searchRange; ++y) {
@@ -75,33 +75,33 @@ public class ManageFarm extends Behavior<Villager> {
                         if (plant instanceof DecayingGrowingBlock block) {
                             int weedsLevel = state.getValue(block.getDecayProperty());
                             if (weedsLevel > 0) {
-                                this.toWeedFields.add(pos);
+                                toWeedFields.add(pos);
                             } else if (plant instanceof CropsBlock cropsBlock) {
                                 if (cropsBlock.isMaxAge(state)) {
-                                    this.validFarmFields.add(pos);
+                                    validFarmFields.add(pos);
                                 }
                             } else if (plant == BlockyChefBlocks.WEEDS) {
-                                this.unplantedFields.add(pos);
+                                unplantedFields.add(pos);
                             }
                         } else if (plant instanceof CropBlock cropBlock) { // Vanilla compat
                             if (cropBlock.isMaxAge(state)) {
-                                this.validFarmFields.add(pos);
+                                validFarmFields.add(pos);
                             }
                         }
                     }
                 }
             }
         }
-        this.action = this.getAction(null, level.getRandom(), villager);
-        return this.action != null;
+        action = getAction(null, level.getRandom(), villager);
+        return action != null;
     }
 
     @Override
     protected void start(ServerLevel level, Villager villager, long levelTime) {
-        if (levelTime > this.nextStartTime && this.action != null) {
+        if (levelTime > nextStartTime && action != null) {
             Brain<?> brain = villager.getBrain();
-            brain.setMemory(MemoryModuleType.LOOK_TARGET, new BlockPosTracker(this.action.pos()));
-            brain.setMemory(MemoryModuleType.WALK_TARGET, new WalkTarget(new BlockPosTracker(this.action.pos()), 0.5F, 1));
+            brain.setMemory(MemoryModuleType.LOOK_TARGET, new BlockPosTracker(action.pos()));
+            brain.setMemory(MemoryModuleType.WALK_TARGET, new WalkTarget(new BlockPosTracker(action.pos()), 0.5F, 1));
         }
     }
 
@@ -110,8 +110,8 @@ public class ManageFarm extends Behavior<Villager> {
         Brain<?> brain = villager.getBrain();
         brain.eraseMemory(MemoryModuleType.LOOK_TARGET);
         brain.eraseMemory(MemoryModuleType.WALK_TARGET);
-        this.nextStartTime = levelTime + 40L;
-        this.workTime = 0;
+        nextStartTime = levelTime + 40L;
+        workTime = 0;
     }
 
     @Override

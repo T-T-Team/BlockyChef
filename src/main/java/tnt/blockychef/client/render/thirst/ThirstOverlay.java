@@ -49,7 +49,7 @@ public class ThirstOverlay implements IGuiOverlay {
         setupRender();
         RenderSystem.setShaderTexture(0, TEXTURE);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        this.renderer.renderOverlay(player, gui, poseStack, partialTick, screenWidth, screenHeight);
+        renderer.renderOverlay(player, gui, poseStack, partialTick, screenWidth, screenHeight);
         RenderSystem.disableBlend();
         minecraft.getProfiler().pop();
     }
@@ -78,10 +78,10 @@ public class ThirstOverlay implements IGuiOverlay {
         gui.rightHeight += 10;
         boolean isThirsty = player.hasEffect(BlockyChefMobEffects.THIRST);
         player.getCapability(PlayerThirstStatsProvider.CAPABILITY).ifPresent(stats -> {
-            this.renderExhaustion(poseStack, stats.getExhaustionLevel(), left, top, gui.getBlitOffset());
+            renderExhaustion(poseStack, stats.getExhaustionLevel(), left, top, gui.getBlitOffset());
             setupRender();
             float smoothAlpha = lastAlpha + (alpha - lastAlpha) * partialTick;
-            this.renderHeldItemStats(poseStack, gui, player, stats, isThirsty, left, top, smoothAlpha);
+            renderHeldItemStats(poseStack, gui, player, stats, isThirsty, left, top, smoothAlpha);
         });
     }
 
@@ -93,7 +93,7 @@ public class ThirstOverlay implements IGuiOverlay {
         player.getCapability(PlayerThirstStatsProvider.CAPABILITY).ifPresent(stats -> {
             int hydration = stats.getHydrationLevel();
             float saturation = stats.getSaturationLevel();
-            this.renderHydrationOverlay(poseStack, gui, hydration, 0, saturation, thirsty, left, top, 1.0F);
+            renderHydrationOverlay(poseStack, gui, hydration, 0, saturation, thirsty, left, top, 1.0F);
         });
     }
 
@@ -103,7 +103,7 @@ public class ThirstOverlay implements IGuiOverlay {
         int playerHydration = Math.min(hydrationLevel, hydrationLevel + extraHydration);
         int z = gui.getBlitOffset();
         int j = 0;
-        this.random.setSeed(gui.getGuiTicks() * 312871L);
+        random.setSeed(gui.getGuiTicks() * 312871L);
         for (int i = 0; i < 10; ++i) {
             int idx = i * 2 + 1;
             int x = left - i * 8 - 9;
@@ -140,7 +140,7 @@ public class ThirstOverlay implements IGuiOverlay {
         if (!isLoss) {
             return;
         }
-        this.random.setSeed(gui.getGuiTicks() * 312871L);
+        random.setSeed(gui.getGuiTicks() * 312871L);
         for (int i = 9; i >= j; --i) {
             int idx = i * 2 + 1;
             int x = left - i * 8 - 9;
@@ -167,7 +167,7 @@ public class ThirstOverlay implements IGuiOverlay {
     private void renderSaturation(PoseStack stack, ForgeGui gui, int hydration, float saturation, boolean thirsty, int left, int top, float alpha) {
         int intSat = Mth.ceil(Math.min(saturation, 20.0F) / 2.0F);
         int z = gui.getBlitOffset();
-        this.random.setSeed(gui.getGuiTicks() * 312871L);
+        random.setSeed(gui.getGuiTicks() * 312871L);
         for (int i = 0; i < intSat; i++) {
             int x = left - i * 8 - 9;
             int y = top;
@@ -206,16 +206,16 @@ public class ThirstOverlay implements IGuiOverlay {
         int playerHydration = stats.getHydrationLevel();
         float playerSaturation = stats.getSaturationLevel();
         if (properties.isEmpty()) {
-            this.renderHydrationOverlay(stack, gui, playerHydration, 0, playerSaturation, thirsty, left, top, 1.0F);
-            this.renderSaturation(stack, gui, playerHydration, playerSaturation, thirsty, left, top, 1.0F);
+            renderHydrationOverlay(stack, gui, playerHydration, 0, playerSaturation, thirsty, left, top, 1.0F);
+            renderSaturation(stack, gui, playerHydration, playerSaturation, thirsty, left, top, 1.0F);
             return;
         }
         int itemHydration = properties.getHydration();
         float itemSaturation = properties.getSaturation();
-        this.renderHydrationOverlay(stack, gui, playerHydration, itemHydration, playerSaturation, thirsty, left, top, alpha);
-        this.renderSaturation(stack, gui, playerHydration, playerSaturation, thirsty, left, top, 1.0F);
+        renderHydrationOverlay(stack, gui, playerHydration, itemHydration, playerSaturation, thirsty, left, top, alpha);
+        renderSaturation(stack, gui, playerHydration, playerSaturation, thirsty, left, top, 1.0F);
         float addedSaturation = Math.min(playerHydration + itemHydration, playerSaturation + (itemHydration * itemSaturation * 2.0F));
-        this.renderSaturation(stack, gui, playerHydration, addedSaturation, thirsty, left, top, alpha);
+        renderSaturation(stack, gui, playerHydration, addedSaturation, thirsty, left, top, alpha);
     }
 
     public static void tick() {

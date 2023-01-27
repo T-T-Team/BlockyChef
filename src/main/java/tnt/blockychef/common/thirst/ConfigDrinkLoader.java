@@ -108,10 +108,10 @@ public final class ConfigDrinkLoader {
 
         public DrinkProperties.DrinkPropertiesHolder asDrinkPropertyHolder() {
                 DrinkProperties properties = DrinkProperties.Builder.create()
-                        .stats(this.hydrationLevel, this.saturation)
+                        .stats(hydrationLevel, saturation)
                         .onDrink(player -> {
                             RandomSource source = player.getRandom();
-                            this.effectChances.forEach(eff -> {
+                            effectChances.forEach(eff -> {
                                 if (source.nextFloat() < eff.chance()) {
                                     player.addEffect(eff.provider().get());
                                 }
@@ -141,7 +141,7 @@ public final class ConfigDrinkLoader {
 
         @Override
         public MobEffectInstance get() {
-            return new MobEffectInstance(this.effect, this.duration, this.amplifier);
+            return new MobEffectInstance(effect, duration, amplifier);
         }
     }
 
@@ -163,15 +163,15 @@ public final class ConfigDrinkLoader {
         }
 
         public DefaultDrinkBuilder stats(int hydration, int saturation) {
-            return this.stats(hydration, DrinkProperties.calculateSaturationForHydrationLevel(hydration, saturation));
+            return stats(hydration, DrinkProperties.calculateSaturationForHydrationLevel(hydration, saturation));
         }
 
         public DefaultDrinkBuilder stats(int hydration) {
-            return this.stats(hydration, hydration);
+            return stats(hydration, hydration);
         }
 
         public DefaultDrinkBuilder hydrationLoss(int hydration) {
-            return this.stats(-hydration, 0.0F);
+            return stats(-hydration, 0.0F);
         }
 
         public DefaultDrinkBuilder addEffect(float chance, MobEffect effect, int duration, int amplifier) {

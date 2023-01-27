@@ -39,7 +39,7 @@ public class DecayingGrowingBlock extends BushBlock {
 
     public DecayingGrowingBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.createDefaultState(this.stateDefinition.any()));
+        this.registerDefaultState(createDefaultState(stateDefinition.any()));
     }
 
     public IntegerProperty getDecayProperty() {

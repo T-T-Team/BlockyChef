@@ -51,6 +51,6 @@ public abstract class PlayerMixin extends LivingEntity {
     }
 
     private void addExhaustion(float exhaustion) {
-        this.getCapability(PlayerThirstStatsProvider.CAPABILITY).ifPresent(stats -> stats.addExhaustion(exhaustion));
+        getCapability(PlayerThirstStatsProvider.CAPABILITY).ifPresent(stats -> stats.addExhaustion(exhaustion));
     }
 }

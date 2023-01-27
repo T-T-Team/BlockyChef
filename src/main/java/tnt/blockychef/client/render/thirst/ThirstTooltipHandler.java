@@ -43,7 +43,7 @@ public final class ThirstTooltipHandler {
 
         @Override
         public int getHeight() {
-            return this.tooltip.renderSaturation ? 20 : 13;
+            return tooltip.renderSaturation ? 20 : 13;
         }
 
         @Override
@@ -101,7 +101,7 @@ public final class ThirstTooltipHandler {
                 poseStack.popPose();
             }
 
-            if (!this.tooltip.renderSaturation) {
+            if (!tooltip.renderSaturation) {
                 return;
             }
             // Saturation icons

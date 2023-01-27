@@ -75,8 +75,8 @@ public class CropsBlock extends DecayingGrowingBlock implements BonemealableBloc
         BlockState state = super.getStateForPlacement(ctx);
         BlockState oldState = ctx.getLevel().getBlockState(ctx.getClickedPos());
         if (oldState.getBlock() instanceof DecayingGrowingBlock) {
-            int age = oldState.getValue(this.getDecayProperty());
-            state = state.setValue(this.getDecayProperty(), age);
+            int age = oldState.getValue(getDecayProperty());
+            state = state.setValue(getDecayProperty(), age);
         }
         return state;
     }
@@ -106,7 +106,7 @@ public class CropsBlock extends DecayingGrowingBlock implements BonemealableBloc
     }
 
     public boolean isMaxAge(BlockState p_52308_) {
-        return p_52308_.getValue(AGE) >= this.getMaxAge();
+        return p_52308_.getValue(AGE) >= getMaxAge();
     }
 
     @Override
@@ -114,7 +114,7 @@ public class CropsBlock extends DecayingGrowingBlock implements BonemealableBloc
         super.playerDestroy(level, player, pos, state, blockEntity, stack);
         if (BlockyChef.config.decay.placeOnRawFarmland) {
             if (level.getBlockState(pos.below()).is(Blocks.FARMLAND)) {
-                level.setBlock(pos, BlockyChefBlocks.WEEDS.defaultBlockState().setValue(this.getDecayProperty(), state.getValue(this.getDecayProperty())), 2);
+                level.setBlock(pos, BlockyChefBlocks.WEEDS.defaultBlockState().setValue(getDecayProperty(), state.getValue(this.getDecayProperty())), 2);
             }
         }
     }
@@ -126,7 +126,7 @@ public class CropsBlock extends DecayingGrowingBlock implements BonemealableBloc
             return result;
         }
         if (!level.isClientSide) {
-            if (this.isMaxAge(state)) {
+            if (isMaxAge(state)) {
                 dropResources(state, level, pos);
                 level.setBlock(pos, state.setValue(AGE, 0), 2);
                 return InteractionResult.SUCCESS;
@@ -139,8 +139,8 @@ public class CropsBlock extends DecayingGrowingBlock implements BonemealableBloc
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (!level.isAreaLoaded(pos, 1)) return;
         if (level.getRawBrightness(pos, 0) >= 9) {
-            int i = this.getAge(state);
-            if (i < this.getMaxAge()) {
+            int i = getAge(state);
+            if (i < getMaxAge()) {
                 float f = getGrowthSpeed(this, level, pos);
                 if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, pos, state, random.nextInt((int)(25.0F / f) + 1) == 0)) {
                     level.setBlock(pos, state.setValue(AGE, i + 1), 2);
@@ -154,19 +154,19 @@ public class CropsBlock extends DecayingGrowingBlock implements BonemealableBloc
                 level.destroyBlock(pos, false);
             }
         } else if (random.nextFloat() < BlockyChef.config.decay.plantDecayProgressChance) {
-            int age = state.getValue(this.getDecayProperty());
-            level.setBlock(pos, state.setValue(this.getDecayProperty(), age + 1), 2);
+            int age = state.getValue(getDecayProperty());
+            level.setBlock(pos, state.setValue(getDecayProperty(), age + 1), 2);
         }
     }
 
     @Override
     public ItemStack getCloneItemStack(BlockGetter getter, BlockPos pos, BlockState state) {
-        return new ItemStack(this.getBaseSeedId());
+        return new ItemStack(getBaseSeedId());
     }
 
     @Override
     public boolean isValidBonemealTarget(LevelReader reader, BlockPos pos, BlockState state, boolean flag) {
-        return !this.isMaxAge(state);
+        return !isMaxAge(state);
     }
 
     @Override
@@ -176,12 +176,12 @@ public class CropsBlock extends DecayingGrowingBlock implements BonemealableBloc
 
     @Override
     public void performBonemeal(ServerLevel level, RandomSource source, BlockPos pos, BlockState state) {
-        this.growCrops(level, pos, state);
+        growCrops(level, pos, state);
     }
 
     public void growCrops(Level level, BlockPos pos, BlockState state) {
-        int targetAge = this.getAge(state) + this.getBonemealAgeIncrease(level);
-        int maxAge = this.getMaxAge();
+        int targetAge = getAge(state) + getBonemealAgeIncrease(level);
+        int maxAge = getMaxAge();
         if (targetAge > maxAge) {
             targetAge = maxAge;
         }
@@ -207,12 +207,12 @@ public class CropsBlock extends DecayingGrowingBlock implements BonemealableBloc
     }
 
     protected ItemLike getBaseSeedId() {
-        return this.seedProvider.getSeedItem();
+        return seedProvider.getSeedItem();
     }
 
     @Override
     public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player) {
-        return new ItemStack(this.getBaseSeedId());
+        return new ItemStack(getBaseSeedId());
     }
 
     protected static float getGrowthSpeed(Block block, BlockGetter blockGetter, BlockPos pos) {

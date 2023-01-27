@@ -46,11 +46,11 @@ public enum FoodQuality {
     }
 
     public FoodProperties apply(FoodProperties food, ItemStack stack) {
-        return this.foodTransformer.apply(food, stack);
+        return foodTransformer.apply(food, stack);
     }
 
     public DrinkProperties apply(DrinkProperties drink, ItemStack stack) {
-        return this.drinkTransformer.apply(drink, stack);
+        return drinkTransformer.apply(drink, stack);
     }
 
     @FunctionalInterface

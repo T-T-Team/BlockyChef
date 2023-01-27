@@ -24,26 +24,26 @@ public class PlayerThirstStats implements ThirstStats {
     @Override
     public void tick() {
         Difficulty difficulty = player.level.getDifficulty();
-        if (this.exhaustion > 4.0F) {
-            this.exhaustion -= 4.0F;
-            if (this.saturation > 0.0F) {
-                this.saturation = Math.max(this.saturation - 1.0F, 0.0F);
+        if (exhaustion > 4.0F) {
+            exhaustion -= 4.0F;
+            if (saturation > 0.0F) {
+                saturation = Math.max(saturation - 1.0F, 0.0F);
             } else if (difficulty != Difficulty.PEACEFUL) {
-                this.hydration = Math.max(this.hydration - 1, 0);
+                hydration = Math.max(hydration - 1, 0);
             }
-            this.sendClientData();
+            sendClientData();
         }
-        if (this.hydration <= 0) {
-            ++this.tickTimer;
-            if (this.tickTimer >= 80) {
+        if (hydration <= 0) {
+            ++tickTimer;
+            if (tickTimer >= 80) {
                 if (player.getHealth() > 10.0F || difficulty == Difficulty.HARD || player.getHealth() > 1.0F && difficulty == Difficulty.NORMAL) {
                     player.hurt(Registry.DEHYDRATATION, 1.0F);
                 }
 
-                this.tickTimer = 0;
+                tickTimer = 0;
             }
         } else {
-            this.tickTimer = 0;
+            tickTimer = 0;
         }
     }
 

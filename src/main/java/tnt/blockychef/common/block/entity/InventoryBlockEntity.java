@@ -36,8 +36,8 @@ public abstract class InventoryBlockEntity extends BlockEntity {
         super.load(tag);
         if (this.serializeInventoryContents()) {
             if (this.inventoryHandler instanceof INBTSerializable<?>) {
-                CompoundTag inv = ((INBTSerializable<CompoundTag>) this.inventoryHandler).serializeNBT();
-                tag.put("inventory", inv);
+                CompoundTag inv = tag.contains("inventory", Tag.TAG_COMPOUND) ? tag.getCompound("inventory") : new CompoundTag();
+                ((INBTSerializable<CompoundTag>) this.inventoryHandler).deserializeNBT(inv);
             }
         }
     }
@@ -48,8 +48,8 @@ public abstract class InventoryBlockEntity extends BlockEntity {
         super.saveAdditional(tag);
         if (this.serializeInventoryContents()) {
             if (this.inventoryHandler instanceof INBTSerializable<?>) {
-                CompoundTag inv = tag.contains("inventory", Tag.TAG_COMPOUND) ? tag.getCompound("inventory") : new CompoundTag();
-                ((INBTSerializable<CompoundTag>) this.inventoryHandler).deserializeNBT(inv);
+                CompoundTag inv = ((INBTSerializable<CompoundTag>) this.inventoryHandler).serializeNBT();
+                tag.put("inventory", inv);
             }
         }
     }

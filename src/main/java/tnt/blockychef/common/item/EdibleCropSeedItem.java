@@ -29,7 +29,7 @@ public class EdibleCropSeedItem extends CropSeedsItem implements Drinkable {
         ItemStack stack = player.getItemInHand(hand);
         InteractionResult interactionResult = result.getResult();
         if (interactionResult == InteractionResult.FAIL) { // when player cannot eat
-            DrinkProperties drinkProps = this.getStats();
+            DrinkProperties drinkProps = getStats();
             if (!drinkProps.isEmpty()) {
                 DrinkProperties properties = DrinkProperties.adjustStats(drinkProps, stack);
                 return player.getCapability(PlayerThirstStatsProvider.CAPABILITY)
