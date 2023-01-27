@@ -153,7 +153,7 @@ public class CropsBlock extends DecayingGrowingBlock implements BonemealableBloc
             if (random.nextFloat() < destroyChance) {
                 level.destroyBlock(pos, false);
             }
-        } else if (random.nextFloat() < BlockyChef.config.decay.plantDecayProgressChance) {
+        } else if (level.getBlockState(pos.below()).is(Blocks.FARMLAND) && random.nextFloat() < BlockyChef.config.decay.plantDecayProgressChance) {
             int age = state.getValue(getDecayProperty());
             level.setBlock(pos, state.setValue(getDecayProperty(), age + 1), 2);
         }
