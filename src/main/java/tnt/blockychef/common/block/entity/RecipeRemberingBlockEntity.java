@@ -9,16 +9,18 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import tnt.blockychef.common.food.recipe.AbstractFoodRecipe;
 
 import java.util.List;
 
-public abstract class RecipeRemberingBlockEntity extends InventoryBlockEntityWithContainerWrapper {
+public abstract class RecipeRemberingBlockEntity<R extends AbstractFoodRecipe<?>> extends InventoryBlockEntityWithContainerWrapper {
 
     private final Object2IntOpenHashMap<ResourceLocation> recipesUsed = new Object2IntOpenHashMap<>();
 
@@ -51,20 +53,20 @@ public abstract class RecipeRemberingBlockEntity extends InventoryBlockEntityWit
         this.recipesUsed.clear();
     }
 
+    @SuppressWarnings("unchecked")
     public List<Recipe<?>> getRecipesToAwardAndPopExperience(ServerLevel level, Vec3 position) {
         List<Recipe<?>> list = Lists.newArrayList();
-
         for(Object2IntMap.Entry<ResourceLocation> entry : this.recipesUsed.object2IntEntrySet()) {
-            level.getRecipeManager().byKey(entry.getKey()).ifPresent((p_155023_) -> {
-                list.add(p_155023_);
-                createExperience(level, position, entry.getIntValue(), ((AbstractCookingRecipe)p_155023_).getExperience());
+            level.getRecipeManager().byKey(entry.getKey()).ifPresent(recipe -> {
+                list.add(recipe);
+                createExperience(level, position, entry.getIntValue(), ((R) recipe).getExperience());
             });
         }
 
         return list;
     }
 
-    public void storeRecipe(Recipe<?> recipe) {
+    public void storeRecipe(R recipe) {
         this.recipesUsed.addTo(recipe.getId(), 1);
     }
 

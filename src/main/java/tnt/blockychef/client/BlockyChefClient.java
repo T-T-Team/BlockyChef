@@ -3,6 +3,7 @@ package tnt.blockychef.client;
 import dev.toma.configuration.Configuration;
 import dev.toma.configuration.config.format.ConfigFormats;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
@@ -10,8 +11,10 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import tnt.blockychef.client.render.block.DryingRackBlockEntityRenderer;
 import tnt.blockychef.client.render.thirst.ThirstOverlay;
 import tnt.blockychef.client.render.thirst.ThirstTooltipHandler;
+import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.integrations.Integrations;
 
 public final class BlockyChefClient {
@@ -27,6 +30,7 @@ public final class BlockyChefClient {
 
         modBus.addListener(this::setup);
         modBus.addListener(this::registerGuiOverlays);
+        modBus.addListener(this::registerBlockEntityRenderers);
         if (Integrations.shouldExpandFoodTooltips()) {
             modBus.addListener(ThirstTooltipHandler::registerTooltipFactory);
             forgeEventBus.addListener(EventPriority.LOWEST, ThirstTooltipHandler::gatherTooltipComponents);
@@ -40,6 +44,10 @@ public final class BlockyChefClient {
 
     private void registerGuiOverlays(RegisterGuiOverlaysEvent event) {
         event.registerAbove(new ResourceLocation("minecraft:food_level"), "thirst", new ThirstOverlay());
+    }
+
+    private void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(BlockyChefBlockEntities.DRYING_RACK, DryingRackBlockEntityRenderer::new);
     }
 
     private void tickClient(TickEvent.ClientTickEvent event) {

@@ -1,13 +1,18 @@
 package tnt.blockychef.common.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -45,6 +50,36 @@ public class DryingRackBlock extends FullHorizontalAxisBlock implements EntityBl
     public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
         int index = state.getValue(FACING).ordinal() - 2;
         return HITBOX[index];
+    }
+
+    @Override
+    public BlockState updateShape(BlockState state, Direction direction, BlockState newState, LevelAccessor accessor, BlockPos pos1, BlockPos pos2) {
+        return direction.getOpposite() == state.getValue(FACING) && !state.canSurvive(accessor, pos1) ? Blocks.AIR.defaultBlockState() : state;
+    }
+
+    @Override
+    public boolean canSurvive(BlockState state, LevelReader reader, BlockPos pos) {
+        Direction direction = state.getValue(FACING);
+        BlockState attached = reader.getBlockState(pos.relative(direction.getOpposite()));
+        return attached.isFaceSturdy(reader, pos, direction);
+    }
+
+    @Override
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext placementCtx) {
+        BlockState state = defaultBlockState();
+        Level level = placementCtx.getLevel();
+        BlockPos pos = placementCtx.getClickedPos();
+        Direction[] directions = placementCtx.getNearestLookingDirections();
+        for (Direction direction : directions) {
+            if (direction.getAxis().isHorizontal()) {
+                Direction attachDir = direction.getOpposite();
+                state = state.setValue(FACING, attachDir);
+                if (state.canSurvive(level, pos)) {
+                    return state;
+                }
+            }
+        }
+        return null;
     }
 
     @Override

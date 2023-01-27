@@ -21,7 +21,7 @@ import tnt.blockychef.util.Helper;
 import java.util.List;
 import java.util.Optional;
 
-public class DryingRackBlockEntity extends RecipeRemberingBlockEntity {
+public class DryingRackBlockEntity extends RecipeRemberingBlockEntity<DryingRecipe> implements SynchronizableBlockEntity {
 
     private DryingRecipe recipe;
     private int ticksDrying;
@@ -51,6 +51,7 @@ public class DryingRackBlockEntity extends RecipeRemberingBlockEntity {
     public void setItem(ItemStack stack) {
         inventoryHandler.setStackInSlot(0, stack);
         updateRecipes();
+        Helper.sendBlockEntityClientData(this);
         setChanged();
     }
 
@@ -67,8 +68,9 @@ public class DryingRackBlockEntity extends RecipeRemberingBlockEntity {
         } else {
             ItemStack stack = inventoryHandler.getStackInSlot(0);
             if (!stack.isEmpty()) {
-                Helper.giveItem(player, stack);
+                Helper.giveItem(player, stack.copy());
             }
+            setItem(ItemStack.EMPTY);
             awardUsedRecipesAndPopExperience((ServerPlayer) player);
         }
         setChanged();
@@ -79,6 +81,8 @@ public class DryingRackBlockEntity extends RecipeRemberingBlockEntity {
             if (dryingRack.ticksDrying++ >= dryingRack.recipe.getDryingTime()) {
                 dryingRack.completeRecipe();
             }
+        } else {
+            dryingRack.updateRecipes();
         }
     }
 
@@ -88,11 +92,27 @@ public class DryingRackBlockEntity extends RecipeRemberingBlockEntity {
         this.updateRecipes();
     }
 
+    @Override
+    public void encodeBlockEntityData(CompoundTag tag) {
+        ItemStack stack = inventoryHandler.getStackInSlot(0);
+        if (!stack.isEmpty()) {
+            tag.put("item", stack.serializeNBT());
+        }
+    }
+
+    @Override
+    public void decodeBlockEntityData(CompoundTag tag) {
+        ItemStack stack = tag.contains("item") ? ItemStack.of(tag.getCompound("item")) : ItemStack.EMPTY;
+        inventoryHandler.setStackInSlot(0, stack);
+    }
+
     private void updateRecipes() {
         ItemStack stack = inventoryHandler.getStackInSlot(0);
         if (stack.isEmpty()) {
             clearRecipe();
         } else {
+            if (level == null)
+                return;
             RecipeManager manager = level.getRecipeManager();
             Optional<DryingRecipe> optional = manager.getRecipeFor(BlockyChefRecipeTypes.DRYING_RECIPE, this, level);
             optional.ifPresent(recipe -> {
@@ -112,8 +132,7 @@ public class DryingRackBlockEntity extends RecipeRemberingBlockEntity {
         if (recipe != null) {
             ItemStack result = recipe.assemble(this);
             storeRecipe(recipe);
-            inventoryHandler.setStackInSlot(0, result);
-            setChanged();
+            setItem(result);
         }
         updateRecipes();
     }

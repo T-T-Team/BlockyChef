@@ -2,10 +2,12 @@ package tnt.blockychef.network;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.network.NetworkDirection;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import tnt.blockychef.BlockyChef;
+import tnt.blockychef.network.packet.S2C_SendBlockEntityData;
 import tnt.blockychef.network.packet.S2C_SendThirstData;
 
 import java.util.function.Function;
@@ -23,7 +25,11 @@ public final class NetworkManager {
     }
 
     public static void dispatchClientPacket(ServerPlayer serverPlayerRef, Packet packet) {
-        CHANNEL.sendTo(packet, serverPlayerRef.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
+        CHANNEL.send(PacketDistributor.PLAYER.with(() -> serverPlayerRef), packet);
+    }
+
+    public static void dispatchClientLevelPacket(Level level, Packet packet) {
+        CHANNEL.send(PacketDistributor.DIMENSION.with(level::dimension), packet);
     }
 
     public static final class Registry {
@@ -32,6 +38,7 @@ public final class NetworkManager {
 
         public static void register() {
             register(S2C_SendThirstData.class, S2C_SendThirstData::new);
+            register(S2C_SendBlockEntityData.class, S2C_SendBlockEntityData::new);
         }
 
         private static <T extends Packet> void register(Class<T> aClass, Function<FriendlyByteBuf, T> decoder) {

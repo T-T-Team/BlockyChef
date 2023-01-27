@@ -12,6 +12,11 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.IItemHandler;
 import tnt.blockychef.common.block.entity.InventoryBlockEntity;
+import tnt.blockychef.common.block.entity.SynchronizableBlockEntity;
+import tnt.blockychef.network.NetworkManager;
+import tnt.blockychef.network.packet.S2C_SendBlockEntityData;
+
+import java.util.Objects;
 
 public final class Helper {
 
@@ -52,5 +57,12 @@ public final class Helper {
         if (!inventory.add(stack)) {
             Containers.dropItemStack(player.level, player.getX(), player.getY(), player.getZ(), stack);
         }
+    }
+
+    public static <B extends BlockEntity & SynchronizableBlockEntity> void sendBlockEntityClientData(B blockEntity) {
+        Level level = Objects.requireNonNull(blockEntity, "blockEntity cannot be null").getLevel();
+        if (level == null || level.isClientSide)
+            return;
+        NetworkManager.dispatchClientLevelPacket(level, S2C_SendBlockEntityData.createUpdatePacket(blockEntity));
     }
 }
