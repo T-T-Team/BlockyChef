@@ -12,7 +12,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "blockychef:tea"
+          "name": "blockychef:tea_leaf"
         }
       ]
     },
@@ -42,7 +42,7 @@
               }
             }
           ],
-          "name": "blockychef:tea"
+          "name": "blockychef:tea_leaf"
         }
       ]
     }

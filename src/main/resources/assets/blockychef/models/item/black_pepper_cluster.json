@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "blockychef:item/rice"
+    "layer0": "blockychef:item/black_pepper_cluster"
   }
 }

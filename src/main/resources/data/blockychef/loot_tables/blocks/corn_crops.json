@@ -12,7 +12,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "blockychef:corn"
+          "name": "blockychef:corn_cob"
         }
       ]
     },
@@ -42,7 +42,7 @@
               }
             }
           ],
-          "name": "blockychef:corn"
+          "name": "blockychef:corn_cob"
         }
       ]
     }

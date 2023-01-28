@@ -12,7 +12,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "blockychef:oat"
+          "name": "blockychef:oat_crop"
         }
       ]
     },
@@ -42,7 +42,7 @@
               }
             }
           ],
-          "name": "blockychef:oat"
+          "name": "blockychef:oat_crop"
         }
       ]
     }

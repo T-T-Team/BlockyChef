@@ -12,7 +12,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "blockychef:black_pepper"
+          "name": "blockychef:black_pepper_cluster"
         }
       ]
     },
@@ -42,7 +42,7 @@
               }
             }
           ],
-          "name": "blockychef:black_pepper"
+          "name": "blockychef:black_pepper_cluster"
         }
       ]
     }

@@ -12,7 +12,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "blockychef:peas"
+          "name": "blockychef:pea_pod"
         }
       ]
     },
@@ -42,7 +42,7 @@
               }
             }
           ],
-          "name": "blockychef:peas"
+          "name": "blockychef:pea_pod"
         }
       ]
     }

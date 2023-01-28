@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "blockychef:item/coffee"
+    "layer0": "blockychef:item/portobello_mushroom"
   }
 }

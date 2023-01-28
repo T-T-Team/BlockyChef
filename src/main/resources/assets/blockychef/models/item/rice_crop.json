@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "blockychef:item/peas"
+    "layer0": "blockychef:item/rice_crop"
   }
 }

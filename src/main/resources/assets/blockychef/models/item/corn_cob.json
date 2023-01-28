@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "blockychef:item/ginger"
+    "layer0": "blockychef:item/corn_cob"
   }
 }

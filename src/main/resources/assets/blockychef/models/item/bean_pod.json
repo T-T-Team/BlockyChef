@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "blockychef:item/apple"
+    "layer0": "blockychef:item/bean_pod"
   }
 }

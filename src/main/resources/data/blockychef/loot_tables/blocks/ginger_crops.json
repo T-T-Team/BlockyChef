@@ -12,7 +12,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "blockychef:ginger"
+          "name": "blockychef:ginger_root"
         }
       ]
     },
@@ -42,7 +42,7 @@
               }
             }
           ],
-          "name": "blockychef:ginger"
+          "name": "blockychef:ginger_root"
         }
       ]
     }
