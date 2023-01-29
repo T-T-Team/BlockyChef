@@ -2,6 +2,8 @@ package tnt.blockychef.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.WorldGenRegion;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -190,6 +192,11 @@ public class CropsBlock extends DecayingGrowingBlock implements BonemealableBloc
 
     protected int getBonemealAgeIncrease(Level p_52262_) {
         return Mth.nextInt(p_52262_.random, 1, 3);
+    }
+
+    @Override
+    protected boolean mayPlaceOn(BlockState state, BlockGetter getter, BlockPos pos) {
+        return (getter instanceof WorldGenRegion && state.is(BlockTags.DIRT)) || state.is(Blocks.FARMLAND);
     }
 
     @Override
