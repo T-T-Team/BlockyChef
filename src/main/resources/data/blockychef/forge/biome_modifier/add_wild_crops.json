@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
   "biomes": "#forge:is_plains",
-  "features": "blockychef:wild_crops",
+  "features": "#blockychef:wild_plains_crops",
   "step": "vegetal_decoration"
 }

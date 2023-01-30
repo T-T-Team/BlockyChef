@@ -123,6 +123,10 @@ public class CropsBlock extends DecayingGrowingBlock implements BonemealableBloc
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (!this.canSurvive(state, level, pos)) {
+            level.destroyBlock(pos, true, player);
+            return InteractionResult.SUCCESS;
+        }
         InteractionResult result = super.use(state, level, pos, player, hand, hitResult);
         if (result.consumesAction()) {
             return result;
