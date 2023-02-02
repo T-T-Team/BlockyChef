@@ -87,8 +87,15 @@ public class DryingRackBlockEntity extends RecipeRemberingBlockEntity<DryingReci
     }
 
     @Override
+    protected void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
+        tag.putInt("ticksDrying", ticksDrying);
+    }
+
+    @Override
     public void load(CompoundTag tag) {
         super.load(tag);
+        ticksDrying = tag.getInt("ticksDrying");
         this.updateRecipes();
     }
 
