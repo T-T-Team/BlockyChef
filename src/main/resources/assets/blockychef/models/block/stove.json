@@ -1,5 +1,6 @@
 {
 	"parent": "block/block",
+	"render_type": "translucent",
 	"ambientocclusion": false,
 	"textures": {
 		"0": "minecraft:block/gray_concrete",

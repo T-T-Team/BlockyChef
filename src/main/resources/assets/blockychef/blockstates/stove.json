@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "blockychef:block/stove"
+    },
+    "facing=east": {
+      "model": "blockychef:block/stove",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "blockychef:block/stove",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "blockychef:block/stove",
+      "y": 270
+    }
+  }
+}

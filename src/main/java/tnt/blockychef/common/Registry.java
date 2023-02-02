@@ -18,10 +18,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
 import tnt.blockychef.BlockyChef;
-import tnt.blockychef.common.block.CropsBlock;
-import tnt.blockychef.common.block.DecayingGrowingBlock;
-import tnt.blockychef.common.block.DryingRackBlock;
-import tnt.blockychef.common.block.TreeHangingFruitBlock;
+import tnt.blockychef.common.block.*;
 import tnt.blockychef.common.block.entity.DryingRackBlockEntity;
 import tnt.blockychef.common.effect.HydrationMobEffect;
 import tnt.blockychef.common.effect.ThirstMobEffect;
@@ -135,6 +132,7 @@ public final class Registry {
         helper.register("vanilla_fruit", new TreeHangingFruitBlock(), false);
         helper.register("walnut_fruit", new TreeHangingFruitBlock(), false);
         helper.register("drying_rack", new DryingRackBlock());
+        helper.register("stove", new FullHorizontalAxisBlock(BlockBehaviour.Properties.of(Material.STONE).noOcclusion()) {});
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {
