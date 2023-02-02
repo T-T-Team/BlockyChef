@@ -133,6 +133,7 @@ public final class Registry {
         helper.register("walnut_fruit", new TreeHangingFruitBlock(), false);
         helper.register("drying_rack", new DryingRackBlock());
         helper.register("stove", new FullHorizontalAxisBlock(BlockBehaviour.Properties.of(Material.STONE).noOcclusion()) {});
+        helper.register("oak_cutting_board", new FullHorizontalAxisBlock(BlockBehaviour.Properties.of(Material.WOOD).noOcclusion()) {});
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {
