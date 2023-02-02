@@ -135,6 +135,7 @@ public final class Registry {
         helper.register("stove", new FullHorizontalAxisBlock(BlockBehaviour.Properties.of(Material.STONE).noOcclusion()) {});
         helper.register("oak_cutting_board", new FullHorizontalAxisBlock(BlockBehaviour.Properties.of(Material.WOOD).noOcclusion()) {});
         helper.register("mortar_and_pestle", new FullHorizontalAxisBlock(BlockBehaviour.Properties.of(Material.STONE).noOcclusion()) {});
+        helper.register("oak_mixing_bowl", new FullHorizontalAxisBlock(BlockBehaviour.Properties.of(Material.WOOD).noOcclusion()) {});
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {
