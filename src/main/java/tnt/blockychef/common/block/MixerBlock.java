@@ -11,9 +11,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 
-public class StoveBlock extends FullHorizontalAxisBlock {
+public class MixerBlock extends FullHorizontalAxisBlock {
 
-    public StoveBlock() {
+    public MixerBlock() {
         super(Properties.of(Material.STONE).sound(SoundType.STONE).strength(3.0F).noOcclusion());
     }
 
