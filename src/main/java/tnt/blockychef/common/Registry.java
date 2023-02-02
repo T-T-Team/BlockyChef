@@ -169,7 +169,6 @@ public final class Registry {
         helper.register("mustard_pods", new CropSeedsItem(BlockyChefBlocks.MUSTARD_CROPS, new Item.Properties()));
         helper.register("coffee_beans_cluster", new CropSeedsItem(BlockyChefBlocks.COFFEE_CROPS, new Item.Properties()));
         helper.register("almond", new Item(new Item.Properties()));
-        helper.register("apple", new Item(new Item.Properties()));
         helper.register("avocado", new Item(new Item.Properties()));
         helper.register("banana", new Item(new Item.Properties()));
         helper.register("black_olives", new Item(new Item.Properties()));
