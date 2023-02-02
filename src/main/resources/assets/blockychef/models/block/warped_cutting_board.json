@@ -1,6 +1,6 @@
 {
 	"parent": "blockychef:block/cutting_board",
 	"textures": {
-		"material": "minecraft:block/oak_planks"
+		"material": "minecraft:block/warped_planks"
 	}
 }

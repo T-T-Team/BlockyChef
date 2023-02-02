@@ -1,0 +1,6 @@
+{
+  "parent": "blockychef:block/mortar_and_pestle",
+  "textures": {
+    "material": "minecraft:block/chiseled_quartz_block"
+  }
+}

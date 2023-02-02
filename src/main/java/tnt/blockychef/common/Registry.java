@@ -134,8 +134,28 @@ public final class Registry {
         helper.register("drying_rack", new DryingRackBlock());
         helper.register("stove", new StoveBlock());
         helper.register("oak_cutting_board", new CuttingBoardBlock());
-        helper.register("mortar_and_pestle", new MortarAndPestleBlock());
+        helper.register("spruce_cutting_board", new CuttingBoardBlock());
+        helper.register("birch_cutting_board", new CuttingBoardBlock());
+        helper.register("jungle_cutting_board", new CuttingBoardBlock());
+        helper.register("acacia_cutting_board", new CuttingBoardBlock());
+        helper.register("dark_oak_cutting_board", new CuttingBoardBlock());
+        helper.register("mangrove_cutting_board", new CuttingBoardBlock());
+        helper.register("crimson_cutting_board", new CuttingBoardBlock());
+        helper.register("warped_cutting_board", new CuttingBoardBlock());
+        helper.register("granite_mortar_and_pestle", new MortarAndPestleBlock());
+        helper.register("andesite_mortar_and_pestle", new MortarAndPestleBlock());
+        helper.register("diorite_mortar_and_pestle", new MortarAndPestleBlock());
+        helper.register("quartz_mortar_and_pestle", new MortarAndPestleBlock());
+        helper.register("deepslate_mortar_and_pestle", new MortarAndPestleBlock());
         helper.register("oak_mixing_bowl", new MixingBowlBlock());
+        helper.register("spruce_mixing_bowl", new MixingBowlBlock());
+        helper.register("birch_mixing_bowl", new MixingBowlBlock());
+        helper.register("jungle_mixing_bowl", new MixingBowlBlock());
+        helper.register("acacia_mixing_bowl", new MixingBowlBlock());
+        helper.register("dark_oak_mixing_bowl", new MixingBowlBlock());
+        helper.register("mangrove_mixing_bowl", new MixingBowlBlock());
+        helper.register("crimson_mixing_bowl", new MixingBowlBlock());
+        helper.register("warped_mixing_bowl", new MixingBowlBlock());
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {
