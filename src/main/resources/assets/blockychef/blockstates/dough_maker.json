@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "blockychef:block/dough_maker"
+    },
+    "facing=east": {
+      "model": "blockychef:block/dough_maker",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "blockychef:block/dough_maker",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "blockychef:block/dough_maker",
+      "y": 270
+    }
+  }
+}
