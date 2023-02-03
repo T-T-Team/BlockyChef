@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "blockychef:block/pasta_machine"
+    },
+    "facing=east": {
+      "model": "blockychef:block/pasta_machine",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "blockychef:block/pasta_machine",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "blockychef:block/pasta_machine",
+      "y": 270
+    }
+  }
+}
