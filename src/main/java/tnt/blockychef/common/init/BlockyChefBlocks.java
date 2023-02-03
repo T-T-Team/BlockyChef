@@ -4,6 +4,7 @@ import net.minecraftforge.registries.ObjectHolder;
 import tnt.blockychef.common.block.CropsBlock;
 import tnt.blockychef.common.block.DecayingGrowingBlock;
 import tnt.blockychef.common.block.DryingRackBlock;
+import tnt.blockychef.common.block.StoveBlock;
 
 public final class BlockyChefBlocks {
 
@@ -83,4 +84,6 @@ public final class BlockyChefBlocks {
     public static final CropsBlock COFFEE_CROPS = null;
     @ObjectHolder(value = "blockychef:drying_rack", registryName = "block")
     public static final DryingRackBlock DRYING_RACK = null;
+    @ObjectHolder(value = "blockychef:stove", registryName = "block")
+    public static final StoveBlock STOVE = null;
 }
