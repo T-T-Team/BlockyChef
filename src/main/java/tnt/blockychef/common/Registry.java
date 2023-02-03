@@ -157,6 +157,7 @@ public final class Registry {
         helper.register("crimson_mixing_bowl", new MixingBowlBlock());
         helper.register("warped_mixing_bowl", new MixingBowlBlock());
         helper.register("mixer", new MixerBlock());
+        helper.register("meat_grinder", new MixerBlock());
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {

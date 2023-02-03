@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "blockychef:block/meat_grinder",
+      "y": 90
+    },
+    "facing=east": {
+      "model": "blockychef:block/meat_grinder",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "blockychef:block/meat_grinder",
+      "y": 270
+    },
+    "facing=west": {
+      "model": "blockychef:block/meat_grinder",
+      "y": 0
+    }
+  }
+}
