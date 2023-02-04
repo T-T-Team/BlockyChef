@@ -2,6 +2,7 @@ package tnt.blockychef.common;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,15 +21,23 @@ public final class CreativeTabs {
                 .icon(() -> new ItemStack(BlockyChefItems.TOMATO))
                 .title(Component.translatable("itemGroup.blockychef.items"))
                 .displayItems((featureFlags, output, hasOp) -> ForgeRegistries.ITEMS.getValues().stream()
-                        .filter(item -> ForgeRegistries.ITEMS.getKey(item).getNamespace().equals(BlockyChef.MODID) && !(item instanceof BlockItem))
+                        .filter(item -> isOurs(item) && !isBlock(item))
                         .forEach(output::accept))
         );
         event.registerCreativeModeTab(BlockyChef.resource("block"), builder -> builder
                 .icon(() -> new ItemStack(BlockyChefBlocks.STOVE))
                 .title(Component.translatable("itemGroup.blockychef.blocks"))
                 .displayItems((featureFlags, output, hasOp) -> ForgeRegistries.ITEMS.getValues().stream()
-                        .filter(item -> ForgeRegistries.ITEMS.getKey(item).getNamespace().equals(BlockyChef.MODID) && item instanceof BlockItem)
+                        .filter(item -> isOurs(item) && isBlock(item))
                         .forEach(output::accept))
         );
+    }
+
+    private static boolean isOurs(Item item) {
+        return ForgeRegistries.ITEMS.getKey(item).getNamespace().equals(BlockyChef.MODID);
+    }
+
+    private static boolean isBlock(Item item) {
+        return item.getClass().equals(BlockItem.class);
     }
 }
