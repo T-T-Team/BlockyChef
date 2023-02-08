@@ -161,6 +161,7 @@ public final class Registry {
         helper.register("pasta_machine", new PastaMachineBlock());
         helper.register("dough_maker", new DoughMakerBlock());
         helper.register("juicer", new JuicerBlock());
+        helper.register("teapot", new TeapotBlock());
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {
