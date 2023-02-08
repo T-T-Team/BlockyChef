@@ -162,6 +162,15 @@ public final class Registry {
         helper.register("dough_maker", new DoughMakerBlock());
         helper.register("juicer", new JuicerBlock());
         helper.register("teapot", new TeapotBlock());
+        helper.register("acacia_barrel", new BarrelBlock());
+        helper.register("birch_barrel", new BarrelBlock());
+        helper.register("crimson_barrel", new BarrelBlock());
+        helper.register("dark_oak_barrel", new BarrelBlock());
+        helper.register("jungle_barrel", new BarrelBlock());
+        helper.register("mangrove_barrel", new BarrelBlock());
+        helper.register("oak_barrel", new BarrelBlock());
+        helper.register("spruce_barrel", new BarrelBlock());
+        helper.register("warped_barrel", new BarrelBlock());
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {

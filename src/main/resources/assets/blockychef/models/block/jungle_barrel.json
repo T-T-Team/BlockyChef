@@ -1,0 +1,6 @@
+{
+  "parent": "blockychef:block/barrel",
+  "textures": {
+    "wood": "minecraft:block/jungle_planks"
+  }
+}
