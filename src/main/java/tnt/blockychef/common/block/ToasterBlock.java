@@ -9,12 +9,12 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class MixingBowlBlock extends FullHorizontalAxisBlock {
+public class ToasterBlock extends FullHorizontalAxisBlock {
 
-    private static final VoxelShape HITBOX = Block.box(4.0, 0.0, 4.0, 12.0, 6.0, 12.0);
+    private static final VoxelShape HITBOX = Block.box(3.0, 0.0, 3.0, 13.0, 8.0, 13.0);
 
-    public MixingBowlBlock() {
-        super(Properties.of(Material.WOOD).sound(SoundType.WOOD).strength(1.5F));
+    public ToasterBlock() {
+        super(Properties.of(Material.STONE).sound(SoundType.STONE).strength(1.5F));
     }
 
     @Override

@@ -14,7 +14,7 @@ public class TeapotBlock extends FullHorizontalAxisBlock {
     private static final VoxelShape HITBOX = Block.box(4.0, 0.0, 4.0, 12.0, 6.0, 12.0);
 
     public TeapotBlock() {
-        super(Properties.of(Material.STONE).sound(SoundType.STONE).strength(1.5F).noCollission());
+        super(Properties.of(Material.STONE).sound(SoundType.STONE).strength(1.5F));
     }
 
     @Override
