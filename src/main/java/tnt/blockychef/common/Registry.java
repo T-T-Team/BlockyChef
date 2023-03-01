@@ -173,6 +173,7 @@ public final class Registry {
         helper.register("warped_barrel", new BarrelBlock());
         helper.register("toaster", new ToasterBlock());
         helper.register("grill", new GrillBlock());
+        helper.register("grater", new GraterBlock());
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {
