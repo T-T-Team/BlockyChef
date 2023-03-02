@@ -9,12 +9,12 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class JuicerBlock extends FullHorizontalAxisBlock {
+public class PotBlock extends FullHorizontalAxisBlock {
 
-    private static final VoxelShape HITBOX = Block.box(4.0, 0.0, 4.0, 12.0, 4.0, 12.0);
+    private static final VoxelShape HITBOX = Block.box(4.0, 0.0, 4.0, 12.0, 7.0, 12.0);
 
-    public JuicerBlock() {
-        super(Properties.of(Material.STONE).sound(SoundType.STONE).strength(1.5F));
+    public PotBlock() {
+        super(Properties.of(Material.STONE).sound(SoundType.STONE).strength(1.5F).noOcclusion());
     }
 
     @Override

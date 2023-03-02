@@ -92,6 +92,9 @@
   "block.blockychef.toaster": "Toaster",
   "block.blockychef.grill": "Grill",
   "block.blockychef.grater": "Grater",
+  "block.blockychef.pot": "Pot",
+  "block.blockychef.pan": "Pan",
+  "block.blockychef.saucepan": "Saucepan",
 
   "item.blockychef.tomato": "Tomato",
   "item.blockychef.cucumber": "Cucumber",

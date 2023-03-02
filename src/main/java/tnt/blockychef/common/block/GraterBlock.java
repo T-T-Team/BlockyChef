@@ -11,7 +11,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class GraterBlock extends FullHorizontalAxisBlock {
 
-    private static final VoxelShape HITBOX = Block.box(5.0, 0.0, 5.0, 11.0, 10.0, 11.0);
+    private static final VoxelShape HITBOX = Block.box(5.0, 0.0, 5.0, 11.0, 9.0, 11.0);
 
     public GraterBlock() {
         super(Properties.of(Material.STONE).sound(SoundType.STONE).strength(1.5F).noOcclusion());

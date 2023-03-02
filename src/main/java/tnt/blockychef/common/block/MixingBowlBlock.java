@@ -11,7 +11,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class MixingBowlBlock extends FullHorizontalAxisBlock {
 
-    private static final VoxelShape HITBOX = Block.box(4.0, 0.0, 4.0, 12.0, 6.0, 12.0);
+    private static final VoxelShape HITBOX = Block.box(4.0, 0.0, 4.0, 12.0, 4.0, 12.0);
 
     public MixingBowlBlock() {
         super(Properties.of(Material.WOOD).sound(SoundType.WOOD).strength(1.5F));

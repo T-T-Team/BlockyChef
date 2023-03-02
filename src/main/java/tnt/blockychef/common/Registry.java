@@ -174,6 +174,9 @@ public final class Registry {
         helper.register("toaster", new ToasterBlock());
         helper.register("grill", new GrillBlock());
         helper.register("grater", new GraterBlock());
+        helper.register("pot", new PotBlock());
+        helper.register("pan", new PanBlock());
+        helper.register("saucepan", new SaucepanBlock());
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {

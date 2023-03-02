@@ -9,16 +9,17 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class JuicerBlock extends FullHorizontalAxisBlock {
+public class PanBlock extends FullHorizontalAxisBlock {
 
-    private static final VoxelShape HITBOX = Block.box(4.0, 0.0, 4.0, 12.0, 4.0, 12.0);
+    private static final VoxelShape HITBOX = Block.box(4.0, 0.0, 4.0, 12.0, 2.0, 12.0);
 
-    public JuicerBlock() {
-        super(Properties.of(Material.STONE).sound(SoundType.STONE).strength(1.5F));
+    public PanBlock() {
+        super(Properties.of(Material.STONE).sound(SoundType.STONE).strength(1.5F).noOcclusion());
     }
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter blockGetter, BlockPos pos, CollisionContext context) {
         return HITBOX;
     }
+
 }
