@@ -134,6 +134,7 @@ public final class Registry {
         helper.register("plum_fruit", new TreeHangingFruitBlock(), false);
         helper.register("vanilla_fruit", new TreeHangingFruitBlock(), false);
         helper.register("walnut_fruit", new TreeHangingFruitBlock(), false);
+
         helper.register("drying_rack", new DryingRackBlock());
         helper.register("stove", new StoveBlock());
         helper.register("oak_cutting_board", new CuttingBoardBlock());
@@ -190,6 +191,10 @@ public final class Registry {
         helper.register("plank_plank_cooking_table", new CookingTableBlock());
         helper.register("concrete_kitchen_cabinet", new KitchenCabinetBlock());
         helper.register("plank_kitchen_cabinet", new KitchenCabinetBlock());
+        helper.register("concrete_concrete_kitchen_counter_corner", new KitchenCounterCornerBlock());
+        helper.register("concrete_plank_kitchen_counter_corner", new KitchenCounterCornerBlock());
+        helper.register("plank_concrete_kitchen_counter_corner", new KitchenCounterCornerBlock());
+        helper.register("plank_plank_kitchen_counter_corner", new KitchenCounterCornerBlock());
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {

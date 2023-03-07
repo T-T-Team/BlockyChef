@@ -49,6 +49,7 @@
   "block.blockychef.plum_fruit": "Plum Fruit",
   "block.blockychef.vanilla_fruit": "Vanilla Fruit",
   "block.blockychef.walnut_fruit": "Walnut Fruit",
+
   "block.blockychef.drying_rack": "Drying Rack",
   "block.blockychef.stove": "Stove",
   "block.blockychef.oak_cutting_board": "Oak Cutting Board",
@@ -102,9 +103,13 @@
   "block.blockychef.concrete_concrete_cooking_table": "Cooking Table - Concrete/Concrete",
   "block.blockychef.concrete_plank_cooking_table": "Cooking Table - Concrete/Planks",
   "block.blockychef.plank_concrete_cooking_table": "Cooking Table - Planks/Concrete",
-  "block.blockychef.plank_plank_cooking_table": "Cooking Table - Planks/Plank",
+  "block.blockychef.plank_plank_cooking_table": "Cooking Table - Planks/Planks",
   "block.blockychef.concrete_kitchen_cabinet": "Kitchen Cabinet - Concrete",
-  "block.blockychef.plank_kitchen_cabinet": "Kitchen Cabinet - Plank",
+  "block.blockychef.plank_kitchen_cabinet": "Kitchen Cabinet - Planks",
+  "block.blockychef.concrete_concrete_kitchen_counter_corner": "Kitchen Counter Corner - Concrete/Concrete",
+  "block.blockychef.concrete_plank_kitchen_counter_corner": "Kitchen Counter Corner - Concrete/Planks",
+  "block.blockychef.plank_concrete_kitchen_counter_corner": "Kitchen Counter Corner - Planks/Concrete",
+  "block.blockychef.plank_plank_kitchen_counter_corner": "Kitchen Counter Corner - Planks/Planks",
 
   "item.blockychef.tomato": "Tomato",
   "item.blockychef.cucumber": "Cucumber",
