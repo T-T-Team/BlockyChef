@@ -91,4 +91,16 @@ public final class BlockyChefBlocks {
     public static final KitchenCounterBlock PC_KITCHEN_COUNTER = null;
     @ObjectHolder(value = "blockychef:plank_plank_kitchen_counter", registryName = "block")
     public static final KitchenCounterBlock PP_KITCHEN_COUNTER = null;
+    @ObjectHolder(value = "blockychef:concrete_kitchen_cabinet", registryName = "block")
+    public static final KitchenCabinetBlock C_KITCHEN_CABINET = null;
+    @ObjectHolder(value = "blockychef:plank_kitchen_cabinet", registryName = "block")
+    public static final KitchenCabinetBlock P_KITCHEN_CABINET = null;
+    @ObjectHolder(value = "blockychef:concrete_concrete_cooking_table", registryName = "block")
+    public static final CookingTableBlock CC_COOKING_TABLE = null;
+    @ObjectHolder(value = "blockychef:concrete_plank_cooking_table", registryName = "block")
+    public static final CookingTableBlock CP_COOKING_TABLE = null;
+    @ObjectHolder(value = "blockychef:plank_concrete_cooking_table", registryName = "block")
+    public static final CookingTableBlock PC_COOKING_TABLE = null;
+    @ObjectHolder(value = "blockychef:plank_plank_cooking_table", registryName = "block")
+    public static final CookingTableBlock PP_COOKING_TABLE = null;
 }

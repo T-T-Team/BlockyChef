@@ -19,7 +19,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.*;
+import tnt.blockychef.common.block.entity.CookingTableBlockEntity;
 import tnt.blockychef.common.block.entity.DryingRackBlockEntity;
+import tnt.blockychef.common.block.entity.KitchenCabinetBlockEntity;
 import tnt.blockychef.common.block.entity.KitchenCounterBlockEntity;
 import tnt.blockychef.common.effect.HydrationMobEffect;
 import tnt.blockychef.common.effect.ThirstMobEffect;
@@ -244,6 +246,8 @@ public final class Registry {
     private static void registerBlockEntities(RegisterEvent.RegisterHelper<BlockEntityType<?>> helper) {
         helper.register("drying_rack", BlockEntityType.Builder.of(DryingRackBlockEntity::new, BlockyChefBlocks.DRYING_RACK).build(null));
         helper.register("kitchen_counter", BlockEntityType.Builder.of(KitchenCounterBlockEntity::new, BlockyChefBlocks.CC_KITCHEN_COUNTER, BlockyChefBlocks.CP_KITCHEN_COUNTER, BlockyChefBlocks.PC_KITCHEN_COUNTER, BlockyChefBlocks.PP_KITCHEN_COUNTER).build(null));
+        helper.register("kitchen_cabinet", BlockEntityType.Builder.of(KitchenCabinetBlockEntity::new, BlockyChefBlocks.C_KITCHEN_CABINET, BlockyChefBlocks.P_KITCHEN_CABINET).build(null));
+        helper.register("cooking_table", BlockEntityType.Builder.of(CookingTableBlockEntity::new, BlockyChefBlocks.CC_COOKING_TABLE, BlockyChefBlocks.CP_COOKING_TABLE, BlockyChefBlocks.PC_COOKING_TABLE, BlockyChefBlocks.PP_COOKING_TABLE).build(null));
     }
 
     private static void registerMobEffects(RegisterEvent.RegisterHelper<MobEffect> helper) {

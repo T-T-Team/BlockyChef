@@ -15,7 +15,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import tnt.blockychef.client.render.block.DryingRackBlockEntityRenderer;
 import tnt.blockychef.client.render.thirst.ThirstOverlay;
 import tnt.blockychef.client.render.thirst.ThirstTooltipHandler;
-import tnt.blockychef.common.block.ColorableBlock;
+import tnt.blockychef.common.block.DyeableBlock;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 import tnt.blockychef.integrations.Integrations;
@@ -55,7 +55,11 @@ public final class BlockyChefClient {
     }
 
     private void registerBlockColors(RegisterColorHandlersEvent.Block event) {
-        event.register(ColorableBlock::getColor, BlockyChefBlocks.CC_KITCHEN_COUNTER, BlockyChefBlocks.CP_KITCHEN_COUNTER, BlockyChefBlocks.PC_KITCHEN_COUNTER, BlockyChefBlocks.PP_KITCHEN_COUNTER);
+        event.register(DyeableBlock::getColor,
+                BlockyChefBlocks.CC_KITCHEN_COUNTER, BlockyChefBlocks.CP_KITCHEN_COUNTER, BlockyChefBlocks.PC_KITCHEN_COUNTER, BlockyChefBlocks.PP_KITCHEN_COUNTER,
+                BlockyChefBlocks.C_KITCHEN_CABINET, BlockyChefBlocks.P_KITCHEN_CABINET,
+                BlockyChefBlocks.CC_COOKING_TABLE, BlockyChefBlocks.CP_COOKING_TABLE, BlockyChefBlocks.PC_COOKING_TABLE, BlockyChefBlocks.PP_COOKING_TABLE
+        );
     }
 
     private void tickClient(TickEvent.ClientTickEvent event) {

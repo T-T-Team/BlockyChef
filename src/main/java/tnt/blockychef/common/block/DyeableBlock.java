@@ -18,9 +18,9 @@ import tnt.blockychef.util.ColorHelper;
 
 import javax.annotation.Nullable;
 
-public abstract class ColorableBlock extends FullHorizontalAxisBlock {
+public abstract class DyeableBlock extends FullHorizontalAxisBlock {
 
-    public ColorableBlock(Properties properties) {
+    public DyeableBlock(Properties properties) {
         super(properties);
     }
 
@@ -44,6 +44,9 @@ public abstract class ColorableBlock extends FullHorizontalAxisBlock {
                 int layer = this.getLayerIndexFromInteraction(state, level, pos, player, hand, hitResult);
                 ColorHelper.setColor(colorHolder, layer, color, this.allowColorMixing());
                 level.sendBlockUpdated(pos, state, state, Block.UPDATE_ALL);
+                if (!player.isCreative()) {
+                    stack.shrink(1);
+                }
                 return InteractionResult.SUCCESS;
             }
         }
@@ -52,13 +55,13 @@ public abstract class ColorableBlock extends FullHorizontalAxisBlock {
 
     public static int getColor(BlockState state, @Nullable BlockAndTintGetter level, @Nullable BlockPos pos, int layerIndex) {
         if (level == null || pos == null) {
-            return 0;
+            return 0xFFFFFF;
         }
         BlockEntity entity = level.getBlockEntity(pos);
         if (entity instanceof IndexedColorHolder indexedColorHolder) {
             int color = indexedColorHolder.getColor(layerIndex);
             return color == Integer.MIN_VALUE ? 0xFFFFFF : color;
         }
-        return 0;
+        return 0xFFFFFF;
     }
 }

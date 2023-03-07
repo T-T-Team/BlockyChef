@@ -33,7 +33,7 @@ public final class ColorHelper {
             int r = getColorAsInt(diffused[0]);
             int g = getColorAsInt(diffused[1]);
             int b = getColorAsInt(diffused[2]);
-            i += getColorAsInt(Math.max(r, Math.max(g, b)));
+            i += Math.max(r, Math.max(g, b));
             colors[0] += r;
             colors[1] += g;
             colors[2] += b;
