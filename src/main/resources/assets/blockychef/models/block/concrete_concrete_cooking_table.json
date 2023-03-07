@@ -1,0 +1,7 @@
+{
+  "parent": "blockychef:block/cooking_table",
+  "textures": {
+    "top": "minecraft:block/white_concrete",
+    "bottom": "minecraft:block/white_concrete"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "blockychef:block/kitchen_cabinet",
+  "textures": {
+    "full": "blockychef:block/planks_monochrome"
+  }
+}

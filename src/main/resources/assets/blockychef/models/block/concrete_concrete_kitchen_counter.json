@@ -1,0 +1,7 @@
+{
+  "parent": "blockychef:block/kitchen_counter",
+  "textures": {
+    "top": "minecraft:block/white_concrete",
+    "bottom": "minecraft:block/white_concrete"
+  }
+}

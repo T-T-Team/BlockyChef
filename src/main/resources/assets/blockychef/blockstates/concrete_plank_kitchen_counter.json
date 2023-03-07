@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "blockychef:block/concrete_plank_kitchen_counter"
+    },
+    "facing=east": {
+      "model": "blockychef:block/concrete_plank_kitchen_counter",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "blockychef:block/concrete_plank_kitchen_counter",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "blockychef:block/concrete_plank_kitchen_counter",
+      "y": 270
+    }
+  }
+}

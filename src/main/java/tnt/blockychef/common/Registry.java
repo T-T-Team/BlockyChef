@@ -177,6 +177,16 @@ public final class Registry {
         helper.register("pot", new PotBlock());
         helper.register("pan", new PanBlock());
         helper.register("saucepan", new SaucepanBlock());
+        helper.register("concrete_concrete_kitchen_counter", new KitchenCounterBlock());
+        helper.register("concrete_plank_kitchen_counter", new KitchenCounterBlock());
+        helper.register("plank_concrete_kitchen_counter", new KitchenCounterBlock());
+        helper.register("plank_plank_kitchen_counter", new KitchenCounterBlock());
+        helper.register("concrete_concrete_cooking_table", new CookingTableBlock());
+        helper.register("concrete_plank_cooking_table", new CookingTableBlock());
+        helper.register("plank_concrete_cooking_table", new CookingTableBlock());
+        helper.register("plank_plank_cooking_table", new CookingTableBlock());
+        helper.register("concrete_kitchen_cabinet", new KitchenCabinetBlock());
+        helper.register("plank_kitchen_cabinet", new KitchenCabinetBlock());
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {

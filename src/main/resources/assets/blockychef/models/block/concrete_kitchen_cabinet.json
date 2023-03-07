@@ -1,0 +1,6 @@
+{
+  "parent": "blockychef:block/kitchen_cabinet",
+  "textures": {
+    "full": "minecraft:block/white_concrete"
+  }
+}
