@@ -30,6 +30,6 @@ public class KitchenCounterCornerBlock extends DyeableBlock implements EntityBlo
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return BlockyChefBlockEntities.KITCHEN_COUNTER.create(pos, state);
+        return BlockyChefBlockEntities.KITCHEN_COUNTER_CORNER.create(pos, state);
     }
 }

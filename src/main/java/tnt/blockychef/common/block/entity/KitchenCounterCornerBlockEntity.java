@@ -2,23 +2,22 @@ package tnt.blockychef.common.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.util.Helper;
 
 import java.util.Arrays;
 
-public abstract class ColorableBlockEntity extends InventoryBlockEntity implements SynchronizableBlockEntity, IndexedColorHolder {
+public class KitchenCounterCornerBlockEntity extends BlockEntity implements SynchronizableBlockEntity, IndexedColorHolder {
 
     private int[] colors;
 
-    public ColorableBlockEntity(BlockEntityType<? extends ColorableBlockEntity> type, BlockPos pos, BlockState state) {
-        super(type, pos, state);
-        this.colors = new int[this.getColorLayerCount()];
+    public KitchenCounterCornerBlockEntity(BlockPos pos, BlockState state) {
+        super(BlockyChefBlockEntities.KITCHEN_COUNTER_CORNER, pos, state);
+        this.colors = new int[2];
         Arrays.fill(this.colors, Integer.MIN_VALUE);
     }
-
-    public abstract int getColorLayerCount();
 
     @Override
     public int getColor(int index) {
@@ -36,25 +35,23 @@ public abstract class ColorableBlockEntity extends InventoryBlockEntity implemen
 
     @Override
     public void encodeBlockEntityData(CompoundTag tag) {
-        Helper.encodeInventory(this.inventoryHandler, tag);
-        tag.putIntArray("colors", this.colors);
+        tag.putIntArray("colors", colors);
     }
 
     @Override
     public void decodeBlockEntityData(CompoundTag tag) {
-        Helper.decodeInventory(this.inventoryHandler, tag);
-        this.colors = tag.getIntArray("colors");
+        colors = tag.getIntArray("colors");
     }
 
     @Override
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
-        tag.putIntArray("colors", colors);
+        encodeBlockEntityData(tag);
     }
 
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
-        colors = tag.getIntArray("colors");
+        decodeBlockEntityData(tag);
     }
 }
