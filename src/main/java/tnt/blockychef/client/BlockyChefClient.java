@@ -4,6 +4,7 @@ import dev.toma.configuration.Configuration;
 import dev.toma.configuration.config.format.ConfigFormats;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
@@ -14,7 +15,9 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import tnt.blockychef.client.render.block.DryingRackBlockEntityRenderer;
 import tnt.blockychef.client.render.thirst.ThirstOverlay;
 import tnt.blockychef.client.render.thirst.ThirstTooltipHandler;
+import tnt.blockychef.common.block.ColorableBlock;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
+import tnt.blockychef.common.init.BlockyChefBlocks;
 import tnt.blockychef.integrations.Integrations;
 
 public final class BlockyChefClient {
@@ -31,6 +34,7 @@ public final class BlockyChefClient {
         modBus.addListener(this::setup);
         modBus.addListener(this::registerGuiOverlays);
         modBus.addListener(this::registerBlockEntityRenderers);
+        modBus.addListener(this::registerBlockColors);
         if (Integrations.shouldExpandFoodTooltips()) {
             modBus.addListener(ThirstTooltipHandler::registerTooltipFactory);
             forgeEventBus.addListener(EventPriority.LOWEST, ThirstTooltipHandler::gatherTooltipComponents);
@@ -48,6 +52,10 @@ public final class BlockyChefClient {
 
     private void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(BlockyChefBlockEntities.DRYING_RACK, DryingRackBlockEntityRenderer::new);
+    }
+
+    private void registerBlockColors(RegisterColorHandlersEvent.Block event) {
+        event.register(ColorableBlock::getColor, BlockyChefBlocks.CC_KITCHEN_COUNTER, BlockyChefBlocks.CP_KITCHEN_COUNTER, BlockyChefBlocks.PC_KITCHEN_COUNTER, BlockyChefBlocks.PP_KITCHEN_COUNTER);
     }
 
     private void tickClient(TickEvent.ClientTickEvent event) {

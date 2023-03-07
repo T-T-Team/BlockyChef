@@ -1,10 +1,7 @@
 package tnt.blockychef.common.init;
 
 import net.minecraftforge.registries.ObjectHolder;
-import tnt.blockychef.common.block.CropsBlock;
-import tnt.blockychef.common.block.DecayingGrowingBlock;
-import tnt.blockychef.common.block.DryingRackBlock;
-import tnt.blockychef.common.block.StoveBlock;
+import tnt.blockychef.common.block.*;
 
 public final class BlockyChefBlocks {
 
@@ -86,4 +83,12 @@ public final class BlockyChefBlocks {
     public static final DryingRackBlock DRYING_RACK = null;
     @ObjectHolder(value = "blockychef:stove", registryName = "block")
     public static final StoveBlock STOVE = null;
+    @ObjectHolder(value = "blockychef:concrete_concrete_kitchen_counter", registryName = "block")
+    public static final KitchenCounterBlock CC_KITCHEN_COUNTER = null;
+    @ObjectHolder(value = "blockychef:concrete_plank_kitchen_counter", registryName = "block")
+    public static final KitchenCounterBlock CP_KITCHEN_COUNTER = null;
+    @ObjectHolder(value = "blockychef:plank_concrete_kitchen_counter", registryName = "block")
+    public static final KitchenCounterBlock PC_KITCHEN_COUNTER = null;
+    @ObjectHolder(value = "blockychef:plank_plank_kitchen_counter", registryName = "block")
+    public static final KitchenCounterBlock PP_KITCHEN_COUNTER = null;
 }

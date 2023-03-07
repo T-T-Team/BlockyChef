@@ -20,6 +20,7 @@ import net.minecraftforge.registries.RegisterEvent;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.*;
 import tnt.blockychef.common.block.entity.DryingRackBlockEntity;
+import tnt.blockychef.common.block.entity.KitchenCounterBlockEntity;
 import tnt.blockychef.common.effect.HydrationMobEffect;
 import tnt.blockychef.common.effect.ThirstMobEffect;
 import tnt.blockychef.common.food.DrinkList;
@@ -242,6 +243,7 @@ public final class Registry {
 
     private static void registerBlockEntities(RegisterEvent.RegisterHelper<BlockEntityType<?>> helper) {
         helper.register("drying_rack", BlockEntityType.Builder.of(DryingRackBlockEntity::new, BlockyChefBlocks.DRYING_RACK).build(null));
+        helper.register("kitchen_counter", BlockEntityType.Builder.of(KitchenCounterBlockEntity::new, BlockyChefBlocks.CC_KITCHEN_COUNTER, BlockyChefBlocks.CP_KITCHEN_COUNTER, BlockyChefBlocks.PC_KITCHEN_COUNTER, BlockyChefBlocks.PP_KITCHEN_COUNTER).build(null));
     }
 
     private static void registerMobEffects(RegisterEvent.RegisterHelper<MobEffect> helper) {

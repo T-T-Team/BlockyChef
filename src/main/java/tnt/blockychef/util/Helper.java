@@ -1,6 +1,8 @@
 package tnt.blockychef.util;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -10,6 +12,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandler;
 import tnt.blockychef.common.block.entity.InventoryBlockEntity;
 import tnt.blockychef.common.block.entity.SynchronizableBlockEntity;
@@ -64,5 +67,24 @@ public final class Helper {
         if (level == null || level.isClientSide)
             return;
         NetworkManager.dispatchClientLevelPacket(level, S2C_SendBlockEntityData.createUpdatePacket(blockEntity));
+    }
+
+    public static void encodeInventory(IItemHandler handler, CompoundTag tag) {
+        if (handler instanceof INBTSerializable<?> serializable) {
+            Tag invTag = serializable.serializeNBT();
+            if (invTag instanceof CompoundTag compoundTag) {
+                tag.put("inventory", compoundTag);
+            }
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public static void decodeInventory(IItemHandler handler, CompoundTag tag) {
+        if (handler instanceof INBTSerializable<?> serializable) {
+            INBTSerializable<CompoundTag> compoundTagINBTSerializable = (INBTSerializable<CompoundTag>) serializable;
+            if (tag.contains("inventory", Tag.TAG_COMPOUND)) {
+                compoundTagINBTSerializable.deserializeNBT(tag.getCompound("inventory"));
+            }
+        }
     }
 }
