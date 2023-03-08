@@ -251,6 +251,13 @@ public final class Registry {
         helper.register("kitchen_cabinet", BlockEntityType.Builder.of(KitchenCabinetBlockEntity::new, BlockyChefBlocks.C_KITCHEN_CABINET, BlockyChefBlocks.P_KITCHEN_CABINET).build(null));
         helper.register("cooking_table", BlockEntityType.Builder.of(CookingTableBlockEntity::new, BlockyChefBlocks.CC_COOKING_TABLE, BlockyChefBlocks.CP_COOKING_TABLE, BlockyChefBlocks.PC_COOKING_TABLE, BlockyChefBlocks.PP_COOKING_TABLE).build(null));
         helper.register("kitchen_counter_corner", BlockEntityType.Builder.of(KitchenCounterCornerBlockEntity::new, BlockyChefBlocks.CC_KITCHEN_COUNTER_CORNER, BlockyChefBlocks.CP_KITCHEN_COUNTER_CORNER, BlockyChefBlocks.PC_KITCHEN_COUNTER_CORNER, BlockyChefBlocks.PP_KITCHEN_COUNTER_CORNER).build(null));
+        helper.register("stove", BlockEntityType.Builder.of(StoveBlockEntity::new, BlockyChefBlocks.STOVE).build(null));
+        helper.register("dough_maker", BlockEntityType.Builder.of(DoughMakerBlockEntity::new, BlockyChefBlocks.DOUGH_MAKER).build(null));
+        helper.register("mixer", BlockEntityType.Builder.of(MixerBlockEntity::new, BlockyChefBlocks.MIXER).build(null));
+        helper.register("toaster", BlockEntityType.Builder.of(ToasterBlockEntity::new, BlockyChefBlocks.TOASTER).build(null));
+        helper.register("juicer", BlockEntityType.Builder.of(JuicerBlockEntity::new, BlockyChefBlocks.JUICER).build(null));
+        helper.register("grill", BlockEntityType.Builder.of(GrillBlockEntity::new, BlockyChefBlocks.GRILL).build(null));
+        helper.register("pasta_machine", BlockEntityType.Builder.of(PastaMachineBlockEntity::new, BlockyChefBlocks.PASTA_MACHINE).build(null));
     }
 
     private static void registerMobEffects(RegisterEvent.RegisterHelper<MobEffect> helper) {

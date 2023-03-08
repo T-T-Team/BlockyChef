@@ -83,6 +83,18 @@ public final class BlockyChefBlocks {
     public static final DryingRackBlock DRYING_RACK = null;
     @ObjectHolder(value = "blockychef:stove", registryName = "block")
     public static final StoveBlock STOVE = null;
+    @ObjectHolder(value = "blockychef:dough_maker", registryName = "block")
+    public static final DoughMakerBlock DOUGH_MAKER = null;
+    @ObjectHolder(value = "blockychef:mixer", registryName = "block")
+    public static final MixerBlock MIXER = null;
+    @ObjectHolder(value = "blockychef:toaster", registryName = "block")
+    public static final ToasterBlock TOASTER = null;
+    @ObjectHolder(value = "blockychef:juicer", registryName = "block")
+    public static final JuicerBlock JUICER = null;
+    @ObjectHolder(value = "blockychef:grill", registryName = "block")
+    public static final GrillBlock GRILL = null;
+    @ObjectHolder(value = "blockychef:pasta_machine", registryName = "block")
+    public static final PastaMachineBlock PASTA_MACHINE = null;
     @ObjectHolder(value = "blockychef:concrete_concrete_kitchen_counter", registryName = "block")
     public static final KitchenCounterBlock CC_KITCHEN_COUNTER = null;
     @ObjectHolder(value = "blockychef:concrete_plank_kitchen_counter", registryName = "block")
