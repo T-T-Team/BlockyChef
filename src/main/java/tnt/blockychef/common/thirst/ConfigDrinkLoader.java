@@ -74,19 +74,113 @@ public final class ConfigDrinkLoader {
 
     private static void initVanillaDrinkables(List<CompatDrinkable> list) {
         new DefaultDrinkBuilder(Items.POTION)
-                .stats(2)
-                .addEffect(0.3F, BlockyChefMobEffects.THIRST)
+                .stats(2, 2)
+                .addEffect(0.15F, BlockyChefMobEffects.THIRST, 300)
                 .buildAndExport(list);
         new DefaultDrinkBuilder(Items.COOKED_BEEF)
                 .hydrationLoss(2)
                 .buildAndExport(list);
-
-        // For testing only, TODO rework
+        new DefaultDrinkBuilder(Items.BREAD)
+                .hydrationLoss(3)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.SWEET_BERRIES)
+                .hydrationLoss(1)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.CARROT)
+                .hydrationLoss(1)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.GOLDEN_CARROT)
+                .hydrationLoss(1)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.POTATO)
+                .hydrationLoss(1)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.BAKED_POTATO)
+                .hydrationLoss(2)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.POISONOUS_POTATO)
+                .hydrationLoss(1)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.BEETROOT)
+                .hydrationLoss(1)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.DRIED_KELP)
+                .hydrationLoss(2)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.BEEF)
+                .hydrationLoss(1)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.COOKED_BEEF)
+                .hydrationLoss(2)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.PORKCHOP)
+                .hydrationLoss(1)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.COOKED_PORKCHOP)
+                .hydrationLoss(2)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.MUTTON)
+                .hydrationLoss(1)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.COOKED_MUTTON)
+                .hydrationLoss(2)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.CHICKEN)
+                .hydrationLoss(1)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.COOKED_CHICKEN)
+                .hydrationLoss(2)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.RABBIT)
+                .hydrationLoss(1)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.COOKED_RABBIT)
+                .hydrationLoss(2)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.COD)
+                .hydrationLoss(1)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.COOKED_COD)
+                .hydrationLoss(2)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.SALMON)
+                .hydrationLoss(1)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.COOKED_SALMON)
+                .hydrationLoss(2)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.TROPICAL_FISH)
+                .hydrationLoss(1)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.COOKIE)
+                .hydrationLoss(2)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.PUMPKIN_PIE)
+                .hydrationLoss(2)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.ROTTEN_FLESH)
+                .hydrationLoss(2)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.MUSHROOM_STEW)
+                .hydrationLoss(2)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.RABBIT_STEW)
+                .hydrationLoss(2)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.SUSPICIOUS_STEW)
+                .hydrationLoss(2)
+                .buildAndExport(list);
         new DefaultDrinkBuilder(Items.MILK_BUCKET)
-                .stats(30)
+                .stats(3)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.BREAD)
+                .hydrationLoss(1)
+                .buildAndExport(list);
+        new DefaultDrinkBuilder(Items.HONEY_BOTTLE)
+                .hydrationLoss(1)
                 .buildAndExport(list);
         new DefaultDrinkBuilder(Items.MELON_SLICE)
-                .stats(5, 10)
+                .stats(2, 1)
                 .buildAndExport(list);
     }
 

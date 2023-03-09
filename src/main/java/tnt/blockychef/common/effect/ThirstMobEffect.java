@@ -22,7 +22,7 @@ public class ThirstMobEffect extends MobEffect {
         if (entity instanceof Player player) {
             player.getCapability(PlayerThirstStatsProvider.CAPABILITY).ifPresent(stats -> {
                 float oldExh = stats.getExhaustionLevel();
-                stats.setExhaustionLevel(oldExh + 0.01F * (amplifier + 1));
+                stats.setExhaustionLevel(oldExh + 0.04F * (amplifier + 1));
             });
         }
     }
