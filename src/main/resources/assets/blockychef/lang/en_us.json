@@ -112,6 +112,9 @@
   "block.blockychef.concrete_plank_kitchen_counter_corner": "Kitchen Counter Corner - Concrete/Planks",
   "block.blockychef.plank_concrete_kitchen_counter_corner": "Kitchen Counter Corner - Planks/Concrete",
   "block.blockychef.plank_plank_kitchen_counter_corner": "Kitchen Counter Corner - Planks/Planks",
+  "block.blockychef.cinnamon_log": "Cinnamon Log",
+  "block.blockychef.cinnamon_stripped_log": "Stripped Cinnamon Log",
+  "block.blockychef.cinnamon_leaves": "Cinnamon Leaves",
 
   "item.blockychef.tomato": "Tomato",
   "item.blockychef.cucumber": "Cucumber",
@@ -162,6 +165,7 @@
   "item.blockychef.plum": "Plum",
   "item.blockychef.vanilla_pods": "Vanilla Pods",
   "item.blockychef.walnut": "Walnut",
+  "item.blockychef.cinnamon_bark": "Cinnamon Bark",
 
   "config.screen.blockychef": "BlockyChef Configuration",
   "config.blockychef.option.decay": "Plant Decay Config",

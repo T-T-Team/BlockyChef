@@ -250,6 +250,7 @@ public final class Registry {
         helper.register("peach", new Item(new Item.Properties().food(FoodList.PEACH)));
         helper.register("pear", new Item(new Item.Properties().food(FoodList.PEAR)));
         helper.register("plum", new Item(new Item.Properties().food(FoodList.PLUM)));
+        helper.register("cinnamon_bark", new Item(new Item.Properties()));
         helper.register("vanilla_pods", new DrinkableItem(new Item.Properties().food(FoodList.VANILLA_PODS), DrinkList.VANILLA_PODS));
         helper.register("walnut", new DrinkableItem(new Item.Properties().food(FoodList.WALNUT), DrinkList.WALNUT));
     }

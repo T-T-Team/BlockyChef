@@ -148,7 +148,7 @@ public class CropsBlock extends DecayingGrowingBlock implements BonemealableBloc
             int i = getAge(state);
             if (i < getMaxAge()) {
                 float f = getGrowthSpeed(this, level, pos);
-                if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, pos, state, random.nextInt((int)(25.0F / f) + 1) == 0)) {
+                if (net.minecraftforge.common.ForgeHooks.onCropsGrowPre(level, pos, state, random.nextInt((int)(60.0F / f) + 1) == 0)) {
                     level.setBlock(pos, state.setValue(AGE, i + 1), 2);
                     net.minecraftforge.common.ForgeHooks.onCropsGrowPost(level, pos, state);
                 }
