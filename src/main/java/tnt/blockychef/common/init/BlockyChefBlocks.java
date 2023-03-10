@@ -125,4 +125,13 @@ public final class BlockyChefBlocks {
     public static final KitchenCounterCornerBlock PC_KITCHEN_COUNTER_CORNER = null;
     @ObjectHolder(value = "blockychef:plank_plank_kitchen_counter_corner", registryName = "block")
     public static final KitchenCounterCornerBlock PP_KITCHEN_COUNTER_CORNER = null;
+    @ObjectHolder(value = "blockychef:concrete_concrete_kitchen_sink", registryName = "block")
+    public static final KitchenSinkBlock CC_KITCHEN_SINK = null;
+    @ObjectHolder(value = "blockychef:concrete_plank_kitchen_sink", registryName = "block")
+    public static final KitchenSinkBlock CP_KITCHEN_SINK = null;
+    @ObjectHolder(value = "blockychef:plank_concrete_kitchen_sink", registryName = "block")
+    public static final KitchenSinkBlock PC_KITCHEN_SINK = null;
+    @ObjectHolder(value = "blockychef:plank_plank_kitchen_sink", registryName = "block")
+    public static final KitchenSinkBlock PP_KITCHEN_SINK = null;
+
 }

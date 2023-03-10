@@ -93,7 +93,7 @@ public final class FoodList {
     public static final FoodProperties OAT = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties MUSTARD = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties COFFEE = food(1, 1).effect(HUNGER, PROBABILITY).build();
-    public static final FoodProperties EGGPLANT = food(1, 1).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties EGGPLANT = food(2, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties AVOCADO = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties BANANA = food(1, 1).build();
     public static final FoodProperties BLACK_OLIVES = food(1, 1).effect(HUNGER, PROBABILITY).build();

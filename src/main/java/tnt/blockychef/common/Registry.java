@@ -197,6 +197,10 @@ public final class Registry {
         helper.register("concrete_plank_kitchen_counter_corner", new KitchenCounterCornerBlock());
         helper.register("plank_concrete_kitchen_counter_corner", new KitchenCounterCornerBlock());
         helper.register("plank_plank_kitchen_counter_corner", new KitchenCounterCornerBlock());
+        helper.register("concrete_concrete_kitchen_sink", new KitchenSinkBlock());
+        helper.register("concrete_plank_kitchen_sink", new KitchenSinkBlock());
+        helper.register("plank_concrete_kitchen_sink", new KitchenSinkBlock());
+        helper.register("plank_plank_kitchen_sink", new KitchenSinkBlock());
         helper.register("cinnamon_log", new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.WOOD).strength(2.0F).sound(SoundType.WOOD)));
         helper.register("cinnamon_stripped_log", new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.WOOD).strength(2.0F).sound(SoundType.WOOD)));
         helper.register("cinnamon_leaves", new LeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isValidSpawn((p_61031_, p_61032_, p_61033_, p_61034_) -> p_61034_ == EntityType.OCELOT || p_61034_ == EntityType.PARROT).isSuffocating((p_61036_, p_61037_, p_61038_) -> false).isViewBlocking((p_61036_, p_61037_, p_61038_) -> false)));
@@ -258,6 +262,7 @@ public final class Registry {
     private static void registerBlockEntities(RegisterEvent.RegisterHelper<BlockEntityType<?>> helper) {
         helper.register("drying_rack", BlockEntityType.Builder.of(DryingRackBlockEntity::new, BlockyChefBlocks.DRYING_RACK).build(null));
         helper.register("kitchen_counter", BlockEntityType.Builder.of(KitchenCounterBlockEntity::new, BlockyChefBlocks.CC_KITCHEN_COUNTER, BlockyChefBlocks.CP_KITCHEN_COUNTER, BlockyChefBlocks.PC_KITCHEN_COUNTER, BlockyChefBlocks.PP_KITCHEN_COUNTER).build(null));
+        helper.register("kitchen_sink", BlockEntityType.Builder.of(KitchenSinkBlockEntity::new, BlockyChefBlocks.CC_KITCHEN_SINK, BlockyChefBlocks.CP_KITCHEN_SINK, BlockyChefBlocks.PC_KITCHEN_SINK, BlockyChefBlocks.PP_KITCHEN_SINK).build(null));
         helper.register("kitchen_cabinet", BlockEntityType.Builder.of(KitchenCabinetBlockEntity::new, BlockyChefBlocks.C_KITCHEN_CABINET, BlockyChefBlocks.P_KITCHEN_CABINET).build(null));
         helper.register("cooking_table", BlockEntityType.Builder.of(CookingTableBlockEntity::new, BlockyChefBlocks.CC_COOKING_TABLE, BlockyChefBlocks.CP_COOKING_TABLE, BlockyChefBlocks.PC_COOKING_TABLE, BlockyChefBlocks.PP_COOKING_TABLE).build(null));
         helper.register("kitchen_counter_corner", BlockEntityType.Builder.of(KitchenCounterCornerBlockEntity::new, BlockyChefBlocks.CC_KITCHEN_COUNTER_CORNER, BlockyChefBlocks.CP_KITCHEN_COUNTER_CORNER, BlockyChefBlocks.PC_KITCHEN_COUNTER_CORNER, BlockyChefBlocks.PP_KITCHEN_COUNTER_CORNER).build(null));

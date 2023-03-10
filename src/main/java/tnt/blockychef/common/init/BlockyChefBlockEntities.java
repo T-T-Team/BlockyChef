@@ -2,6 +2,7 @@ package tnt.blockychef.common.init;
 
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.ObjectHolder;
+import tnt.blockychef.common.block.KitchenSinkBlock;
 import tnt.blockychef.common.block.entity.*;
 
 public final class BlockyChefBlockEntities {
@@ -30,4 +31,6 @@ public final class BlockyChefBlockEntities {
     public static final BlockEntityType<GrillBlockEntity> GRILL = null;
     @ObjectHolder(value = "blockychef:pasta_machine", registryName = "block_entity_type")
     public static final BlockEntityType<PastaMachineBlockEntity> PASTA_MACHINE = null;
+    @ObjectHolder(value = "blockychef:kitchen_sink", registryName = "block_entity_type")
+    public static final BlockEntityType<KitchenSinkBlockEntity> KITCHEN_SINK = null;
 }
