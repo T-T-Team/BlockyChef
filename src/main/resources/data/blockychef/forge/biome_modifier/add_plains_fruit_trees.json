@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#forge:is_plains",
+  "features": "blockychef:tree/fruit_trees_plains",
+  "step": "vegetal_decoration"
+}

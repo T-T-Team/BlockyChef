@@ -214,6 +214,7 @@ public final class Registry {
         helper.register("cinnamon_leaves", new LeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).randomTicks().sound(SoundType.GRASS)
                 .noOcclusion().isValidSpawn(Registry::allowParrotOrOcelotSpawn).isSuffocating(Registry::alwaysFalse).isViewBlocking(Registry::alwaysFalse)));
         helper.register("cinnamon_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.CINNAMON_TREE)));
+        helper.register("apple_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.APPLE_TREE)));
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {

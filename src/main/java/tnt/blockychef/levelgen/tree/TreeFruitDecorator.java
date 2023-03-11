@@ -33,8 +33,9 @@ public class TreeFruitDecorator extends TreeDecorator {
         leaves.stream().filter(pos -> context.isAir(pos.below())).forEach(pos -> {
             float f = random.nextFloat();
             if (f < fruitProbability) {
-                BlockState state = fruitProvider.getState(random, pos);
-                context.setBlock(pos, state);
+                BlockPos placementPos = pos.below();
+                BlockState state = fruitProvider.getState(random, placementPos);
+                context.setBlock(placementPos, state);
             }
         });
     }
