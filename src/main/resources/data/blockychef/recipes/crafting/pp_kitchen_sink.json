@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#W#",
+    "#C#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:oak_planks"
+    },
+    "W": {
+      "item": "minecraft:water_bucket"
+    },
+    "C": {
+      "item": "minecraft:cauldron"
+    }
+  },
+  "result": {
+    "item": "blockychef:plank_plank_kitchen_sink"
+  }
+}

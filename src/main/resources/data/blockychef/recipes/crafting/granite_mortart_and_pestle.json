@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#L#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:polished_granite"
+    },
+    "L": {
+      "item": "minecraft:lever"
+    }
+  },
+  "result": {
+    "item": "blockychef:granite_mortar_and_pestle"
+  }
+}

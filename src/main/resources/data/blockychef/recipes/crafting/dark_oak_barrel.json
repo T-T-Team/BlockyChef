@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#_#",
+    "#i#",
+    "#_#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "_": {
+      "item": "minecraft:dark_oak_slab"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "blockychef:dark_oak_barrel"
+  }
+}

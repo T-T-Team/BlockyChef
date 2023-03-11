@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "_W_",
+    " _ "
+  ],
+  "key": {
+    "_": {
+      "item": "minecraft:dark_oak_slab"
+    },
+    "W": {
+      "item": "minecraft:wooden_shovel"
+    }
+  },
+  "result": {
+    "item": "blockychef:dark_oak_mixing_bowl"
+  }
+}

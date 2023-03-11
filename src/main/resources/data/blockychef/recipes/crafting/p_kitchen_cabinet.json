@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#C#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:oak_planks"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    }
+  },
+  "result": {
+    "item": "blockychef:plank_kitchen_cabinet"
+  }
+}

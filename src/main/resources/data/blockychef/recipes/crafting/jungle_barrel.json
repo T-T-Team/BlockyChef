@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#_#",
+    "#i#",
+    "#_#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:jungle_planks"
+    },
+    "_": {
+      "item": "minecraft:jungle_slab"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "blockychef:jungle_barrel"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "OCO",
+    "OCO"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:white_concrete"
+    },
+    "O": {
+      "item": "minecraft:oak_planks"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    }
+  },
+  "result": {
+    "item": "blockychef:concrete_plank_kitchen_counter"
+  }
+}

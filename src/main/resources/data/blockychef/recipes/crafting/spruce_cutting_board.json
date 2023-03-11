@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "___"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:iron_sword"
+    },
+    "_": {
+      "item": "minecraft:spruce_slab"
+    }
+  },
+  "result": {
+    "item": "blockychef:spruce_cutting_board"
+  }
+}

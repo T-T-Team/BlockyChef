@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#C#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:white_concrete"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    }
+  },
+  "result": {
+    "item": "blockychef:concrete_kitchen_cabinet"
+  }
+}

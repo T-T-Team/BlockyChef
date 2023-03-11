@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#_#",
+    "#i#",
+    "#_#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:warped_planks"
+    },
+    "_": {
+      "item": "minecraft:warped_slab"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "blockychef:warped_barrel"
+  }
+}

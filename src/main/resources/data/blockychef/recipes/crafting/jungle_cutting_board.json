@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "___"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:iron_sword"
+    },
+    "_": {
+      "item": "minecraft:jungle_slab"
+    }
+  },
+  "result": {
+    "item": "blockychef:jungle_cutting_board"
+  }
+}

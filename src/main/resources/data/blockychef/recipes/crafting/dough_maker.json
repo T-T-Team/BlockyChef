@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "IS#",
+    "B##"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:white_concrete"
+    },
+    "I": {
+      "item": "minecraft:iron_bars"
+    },
+    "S": {
+      "item": "minecraft:stone_button"
+    },
+    "B": {
+      "item": "minecraft:bucket"
+    }
+  },
+  "result": {
+    "item": "blockychef:dough_maker"
+  }
+}

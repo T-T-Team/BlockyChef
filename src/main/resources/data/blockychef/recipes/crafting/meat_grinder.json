@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " iL",
+    "iIi",
+    "i i"
+  ],
+  "key": {
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "L": {
+      "item": "minecraft:lever"
+    },
+    "I": {
+      "item": "minecraft:iron_bars"
+    }
+  },
+  "result": {
+    "item": "blockychef:meat_grinder"
+  }
+}

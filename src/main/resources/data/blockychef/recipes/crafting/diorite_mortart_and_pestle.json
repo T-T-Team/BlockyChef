@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#L#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:polished_diorite"
+    },
+    "L": {
+      "item": "minecraft:lever"
+    }
+  },
+  "result": {
+    "item": "blockychef:diorite_mortar_and_pestle"
+  }
+}

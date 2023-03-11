@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#I#",
+    " P ",
+    "iii"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:white_concrete"
+    },
+    "I": {
+      "item": "minecraft:iron_bars"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "blockychef:pasta_machine"
+  }
+}

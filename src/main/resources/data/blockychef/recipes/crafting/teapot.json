@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "IBI",
+    " i "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:heavy_weighted_pressure_plate"
+    },
+    "I": {
+      "item": "minecraft:iron_nugget"
+    },
+    "B": {
+      "item": "minecraft:bucket"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "blockychef:teapot"
+  }
+}

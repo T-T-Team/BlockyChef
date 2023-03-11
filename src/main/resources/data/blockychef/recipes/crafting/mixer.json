@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "S#S",
+    "WBW"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:glass_pane"
+    },
+    "S": {
+      "item": "minecraft:stone_button"
+    },
+    "W": {
+      "item": "minecraft:white_concrete"
+    },
+    "B": {
+      "item": "minecraft:black_concrete"
+    }
+  },
+  "result": {
+    "item": "blockychef:mixer"
+  }
+}

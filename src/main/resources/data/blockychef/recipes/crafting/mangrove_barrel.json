@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#_#",
+    "#i#",
+    "#_#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:mangrove_planks"
+    },
+    "_": {
+      "item": "minecraft:mangrove_slab"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "blockychef:mangrove_barrel"
+  }
+}

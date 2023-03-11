@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "WPW",
+    "WCW"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:oak_planks"
+    },
+    "W": {
+      "item": "minecraft:white_concrete"
+    },
+    "P": {
+      "item": "minecraft:water_bucket"
+    },
+    "C": {
+      "item": "minecraft:cauldron"
+    }
+  },
+  "result": {
+    "item": "blockychef:plank_concrete_kitchen_sink"
+  }
+}

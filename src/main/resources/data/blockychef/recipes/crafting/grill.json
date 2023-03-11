@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#I#",
+    "iMi",
+    "i i"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:white_concrete"
+    },
+    "I": {
+      "item": "minecraft:iron_bars"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "M": {
+      "item": "minecraft:magma_block"
+    }
+  },
+  "result": {
+    "item": "blockychef:grill"
+  }
+}

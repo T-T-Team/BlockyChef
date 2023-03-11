@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "W W",
+    "W W"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:oak_planks"
+    },
+    "W": {
+      "item": "minecraft:white_concrete"
+    }
+  },
+  "result": {
+    "item": "blockychef:plank_concrete_kitchen_counter_corner"
+  }
+}

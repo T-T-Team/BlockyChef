@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "# #",
+    "# #"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:white_concrete"
+    }
+  },
+  "result": {
+    "item": "blockychef:concrete_concrete_kitchen_counter_corner"
+  }
+}

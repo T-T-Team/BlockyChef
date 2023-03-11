@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#I#",
+    "#G#",
+    "#F#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:white_concrete"
+    },
+    "I": {
+      "item": "minecraft:iron_bars"
+    },
+    "G": {
+      "item": "minecraft:glass_pane"
+    },
+    "F": {
+      "item": "minecraft:furnace"
+    }
+  },
+  "result": {
+    "item": "blockychef:stove"
+  }
+}

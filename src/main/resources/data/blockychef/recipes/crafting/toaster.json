@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#I#",
+    "BSB"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:white_concrete"
+    },
+    "I": {
+      "item": "minecraft:iron_bars"
+    },
+    "B": {
+      "item": "minecraft:black_concrete"
+    },
+    "S": {
+      "item": "minecraft:stone_button"
+    }
+  },
+  "result": {
+    "item": "blockychef:toaster"
+  }
+}
