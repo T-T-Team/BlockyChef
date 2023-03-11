@@ -3,6 +3,7 @@ package tnt.blockychef.common.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -13,6 +14,7 @@ import net.minecraftforge.common.ToolAction;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 import tnt.blockychef.common.init.BlockyChefItems;
+import tnt.blockychef.util.Helper;
 
 public class CinnamonLogBlock extends RotatedPillarBlock {
 
@@ -35,9 +37,15 @@ public class CinnamonLogBlock extends RotatedPillarBlock {
 
     private void dropCinnamonBark(UseOnContext context, Level level) {
         BlockPos pos = context.getClickedPos();
-        Vec3 center = pos.getCenter();
+        Player player = context.getPlayer();
         int dropCount = 1 + level.random.nextInt(3);
-        ItemEntity entity = new ItemEntity(level, center.x, center.y, center.z, new ItemStack(BlockyChefItems.CINNAMON_BARK, dropCount));
-        level.addFreshEntity(entity);
+        ItemStack bark = new ItemStack(BlockyChefItems.CINNAMON_BARK, dropCount);
+        if (player != null) {
+            Helper.giveItem(player, bark);
+        } else {
+            Vec3 center = pos.getCenter();
+            ItemEntity entity = new ItemEntity(level, center.x, center.y, center.z, new ItemStack(BlockyChefItems.CINNAMON_BARK, dropCount));
+            level.addFreshEntity(entity);
+        }
     }
 }

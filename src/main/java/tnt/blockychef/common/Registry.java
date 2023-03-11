@@ -36,6 +36,7 @@ import tnt.blockychef.common.init.BlockyChefItems;
 import tnt.blockychef.common.item.CropSeedsItem;
 import tnt.blockychef.common.item.DrinkableItem;
 import tnt.blockychef.common.item.EdibleCropSeedItem;
+import tnt.blockychef.levelgen.tree.CinnamonTreeGrower;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -208,6 +209,7 @@ public final class Registry {
         helper.register("cinnamon_stripped_log", new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.WOOD).strength(2.0F).sound(SoundType.WOOD)));
         helper.register("cinnamon_leaves", new LeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).randomTicks().sound(SoundType.GRASS)
                 .noOcclusion().isValidSpawn(Registry::allowParrotOrOcelotSpawn).isSuffocating(Registry::alwaysFalse).isViewBlocking(Registry::alwaysFalse)));
+        helper.register("cinnamon_sapling", new TreeSaplingBlock(new CinnamonTreeGrower()));
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {
