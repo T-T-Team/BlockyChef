@@ -66,13 +66,22 @@ repositories {
     flatDir { dir 'libs' }
     maven { url 'https://www.cursemaven.com' }
     maven { url "https://maven.ryanliptak.com/" }
+    maven { url "https://maven.blamejared.com/" }
+    maven { url "https://modmaven.dev" }
 }
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
+    // Configuration
     implementation fg.deobf("curse.maven:configuration-444699:${configuration_version}")
+    // Mixin
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    // Appleskin
     implementation fg.deobf("squeek.appleskin:appleskin-forge:${appleskin_version}")
+    // JEI
+    compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}"))
+    compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}"))
+    runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}"))
 }
 
 jar {
