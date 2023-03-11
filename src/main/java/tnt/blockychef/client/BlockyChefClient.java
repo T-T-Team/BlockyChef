@@ -2,7 +2,9 @@ package tnt.blockychef.client;
 
 import dev.toma.configuration.Configuration;
 import dev.toma.configuration.config.format.ConfigFormats;
+import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.FoliageColor;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
@@ -18,6 +20,7 @@ import tnt.blockychef.client.render.thirst.ThirstTooltipHandler;
 import tnt.blockychef.common.block.DyeableBlock;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefBlocks;
+import tnt.blockychef.common.init.BlockyChefItems;
 import tnt.blockychef.integrations.Integrations;
 
 public final class BlockyChefClient {
@@ -35,6 +38,7 @@ public final class BlockyChefClient {
         modBus.addListener(this::registerGuiOverlays);
         modBus.addListener(this::registerBlockEntityRenderers);
         modBus.addListener(this::registerBlockColors);
+        modBus.addListener(this::registerItemColors);
         if (Integrations.shouldExpandFoodTooltips()) {
             modBus.addListener(ThirstTooltipHandler::registerTooltipFactory);
             forgeEventBus.addListener(EventPriority.LOWEST, ThirstTooltipHandler::gatherTooltipComponents);
@@ -69,6 +73,13 @@ public final class BlockyChefClient {
                 BlockyChefBlocks.GRILL,
                 BlockyChefBlocks.PASTA_MACHINE
         );
+        event.register((state, tintGetter, pos, layer) -> tintGetter != null && pos != null ? BiomeColors.getAverageFoliageColor(tintGetter, pos) : FoliageColor.getDefaultColor(),
+                BlockyChefBlocks.CINNAMON_LEAVES);
+    }
+
+    private void registerItemColors(RegisterColorHandlersEvent.Item event) {
+        event.register((itemStack, layer) -> FoliageColor.getDefaultColor(),
+                BlockyChefItems.CINNAMON_LEAVES);
     }
 
     private void tickClient(TickEvent.ClientTickEvent event) {

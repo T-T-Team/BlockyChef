@@ -1,5 +1,6 @@
 package tnt.blockychef.common.init;
 
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.ObjectHolder;
 
@@ -73,4 +74,8 @@ public final class BlockyChefItems {
     public static final Item EGGPLANT = null;
     @ObjectHolder(value = "blockychef:cinnamon_bark", registryName = "item")
     public static final Item CINNAMON_BARK = null;
+
+    // Block items
+    @ObjectHolder(value = "blockychef:cinnamon_leaves", registryName = "item")
+    public static final BlockItem CINNAMON_LEAVES = null;
 }
