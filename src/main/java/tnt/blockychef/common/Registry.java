@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -38,6 +39,7 @@ import tnt.blockychef.common.item.CropSeedsItem;
 import tnt.blockychef.common.item.DrinkableItem;
 import tnt.blockychef.common.item.EdibleCropSeedItem;
 import tnt.blockychef.levelgen.tree.SimpleTreeGrower;
+import tnt.blockychef.levelgen.tree.TreeFruitDecorator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,6 +85,7 @@ public final class Registry {
             registerRecipeTypes(registryHelper);
         });
         event.register(ForgeRegistries.RECIPE_SERIALIZERS.getRegistryKey(), Registry::registerRecipeSerializers);
+        event.register(ForgeRegistries.TREE_DECORATOR_TYPES.getRegistryKey(), Registry::registerTreeDecorators);
     }
 
     private static void registerBlocks(BlockRegistryHelper helper) {
@@ -293,6 +296,10 @@ public final class Registry {
 
     private static void registerRecipeSerializers(RegisterEvent.RegisterHelper<RecipeSerializer<?>> helper) {
         helper.register("drying", new DryingRecipe.Serializer());
+    }
+
+    private static void registerTreeDecorators(RegisterEvent.RegisterHelper<TreeDecoratorType<?>> helper) {
+        helper.register("fruit_decorator", new TreeDecoratorType<>(TreeFruitDecorator.CODEC));
     }
 
     private static boolean allowParrotOrOcelotSpawn(BlockState state, BlockGetter getter, BlockPos pos, EntityType<?> entityType) {
