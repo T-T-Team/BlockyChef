@@ -201,7 +201,7 @@ public final class Registry {
         helper.register("concrete_plank_kitchen_sink", new KitchenSinkBlock());
         helper.register("plank_concrete_kitchen_sink", new KitchenSinkBlock());
         helper.register("plank_plank_kitchen_sink", new KitchenSinkBlock());
-        helper.register("cinnamon_log", new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.WOOD).strength(2.0F).sound(SoundType.WOOD)));
+        helper.register("cinnamon_log", new CinnamonLogBlock(BlockBehaviour.Properties.of(Material.WOOD).strength(2.0F).sound(SoundType.WOOD)));
         helper.register("cinnamon_stripped_log", new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.WOOD).strength(2.0F).sound(SoundType.WOOD)));
         helper.register("cinnamon_leaves", new LeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isValidSpawn((p_61031_, p_61032_, p_61033_, p_61034_) -> p_61034_ == EntityType.OCELOT || p_61034_ == EntityType.PARROT).isSuffocating((p_61036_, p_61037_, p_61038_) -> false).isViewBlocking((p_61036_, p_61037_, p_61038_) -> false)));
     }

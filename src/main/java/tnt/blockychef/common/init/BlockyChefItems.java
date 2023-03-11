@@ -71,4 +71,6 @@ public final class BlockyChefItems {
     public static final Item COFFEE_BEANS_CLUSTER = null;
     @ObjectHolder(value = "blockychef:eggplant", registryName = "item")
     public static final Item EGGPLANT = null;
+    @ObjectHolder(value = "blockychef:cinnamon_bark", registryName = "item")
+    public static final Item CINNAMON_BARK = null;
 }

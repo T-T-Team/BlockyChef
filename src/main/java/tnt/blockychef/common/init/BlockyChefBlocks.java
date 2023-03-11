@@ -1,5 +1,6 @@
 package tnt.blockychef.common.init;
 
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraftforge.registries.ObjectHolder;
 import tnt.blockychef.common.block.*;
 
@@ -133,5 +134,6 @@ public final class BlockyChefBlocks {
     public static final KitchenSinkBlock PC_KITCHEN_SINK = null;
     @ObjectHolder(value = "blockychef:plank_plank_kitchen_sink", registryName = "block")
     public static final KitchenSinkBlock PP_KITCHEN_SINK = null;
-
+    @ObjectHolder(value = "blockychef:cinnamon_stripped_log", registryName = "block")
+    public static final RotatedPillarBlock CINNAMON_STRIPPED_LOG = null;
 }
