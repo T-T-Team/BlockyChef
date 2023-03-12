@@ -1,35 +1,62 @@
 {
-  "type": "minecraft:random_selector",
+  "type": "blockychef:weighted_selector",
   "config": {
-    "default": "blockychef:tree/orange",
     "features": [
       {
-        "chance": 0.16,
-        "feature": "blockychef:tree/almond"
+        "weight": 1,
+        "data": {
+          "feature": "blockychef:tree/orange",
+          "placement": []
+        }
       },
       {
-        "chance": 0.17,
-        "feature": "blockychef:tree/avocado"
+        "weight": 1,
+        "data": {
+          "feature": "blockychef:tree/almond",
+          "placement": []
+        }
       },
       {
-        "chance": 0.18,
-        "feature": "blockychef:tree/black_olives"
+        "weight": 1,
+        "data": {
+          "feature": "blockychef:tree/avocado",
+          "placement": []
+        }
       },
       {
-        "chance": 0.20,
-        "feature": "blockychef:tree/green_olives"
+        "weight": 1,
+        "data": {
+          "feature": "blockychef:tree/black_olives",
+          "placement": []
+        }
       },
       {
-        "chance": 0.22,
-        "feature": "blockychef:tree/lemon"
+        "weight": 1,
+        "data": {
+          "feature": "blockychef:tree/green_olives",
+          "placement": []
+        }
       },
       {
-        "chance": 0.24,
-        "feature": "blockychef:tree/lime"
+        "weight": 1,
+        "data": {
+          "feature": "blockychef:tree/lemon",
+          "placement": []
+        }
       },
       {
-        "chance": 0.25,
-        "feature": "blockychef:tree/peach"
+        "weight": 1,
+        "data": {
+          "feature": "blockychef:tree/lime",
+          "placement": []
+        }
+      },
+      {
+        "weight": 1,
+        "data": {
+          "feature": "blockychef:tree/peach",
+          "placement": []
+        }
       }
     ]
   }

@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -33,11 +34,13 @@ import tnt.blockychef.common.food.DrinkList;
 import tnt.blockychef.common.food.FoodList;
 import tnt.blockychef.common.food.recipe.DryingRecipe;
 import tnt.blockychef.common.init.BlockyChefBlocks;
-import tnt.blockychef.common.init.BlockyChefFeatures;
+import tnt.blockychef.common.init.BlockyChefTrees;
 import tnt.blockychef.common.init.BlockyChefItems;
 import tnt.blockychef.common.item.CropSeedsItem;
 import tnt.blockychef.common.item.DrinkableItem;
 import tnt.blockychef.common.item.EdibleCropSeedItem;
+import tnt.blockychef.levelgen.feature.WeightedFeatureConfiguration;
+import tnt.blockychef.levelgen.feature.WeightedSelectorFeature;
 import tnt.blockychef.levelgen.tree.SimpleTreeGrower;
 import tnt.blockychef.levelgen.tree.TreeFruitDecorator;
 
@@ -85,6 +88,7 @@ public final class Registry {
             registerRecipeTypes(registryHelper);
         });
         event.register(ForgeRegistries.RECIPE_SERIALIZERS.getRegistryKey(), Registry::registerRecipeSerializers);
+        event.register(ForgeRegistries.FEATURES.getRegistryKey(), Registry::registerFeatures);
         event.register(ForgeRegistries.TREE_DECORATOR_TYPES.getRegistryKey(), Registry::registerTreeDecorators);
     }
 
@@ -213,24 +217,24 @@ public final class Registry {
         helper.register("cinnamon_stripped_log", new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.WOOD).strength(2.0F).sound(SoundType.WOOD)));
         helper.register("cinnamon_leaves", new LeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).randomTicks().sound(SoundType.GRASS)
                 .noOcclusion().isValidSpawn(Registry::allowParrotOrOcelotSpawn).isSuffocating(Registry::alwaysFalse).isViewBlocking(Registry::alwaysFalse)));
-        helper.register("cinnamon_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.CINNAMON_TREE)));
-        helper.register("apple_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.APPLE_TREE)));
-        helper.register("pear_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.PEAR_TREE)));
-        helper.register("orange_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.ORANGE_TREE)));
-        helper.register("banana_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.BANANA_TREE)));
-        helper.register("almond_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.ALMOND_TREE)));
-        helper.register("avocado_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.AVOCADO_TREE)));
-        helper.register("black_olives_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.BLACK_OLIVES_TREE)));
-        helper.register("green_olives_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.GREEN_OLIVES_TREE)));
-        helper.register("lemon_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.LEMON_TREE)));
-        helper.register("lime_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.LIME_TREE)));
-        helper.register("peach_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.PEACH_TREE)));
-        helper.register("coconut_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.COCONUT_TREE)));
-        helper.register("vanilla_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.VANILLA_TREE)));
-        helper.register("cherry_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.CHERRY_TREE)));
-        helper.register("hazelnut_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.HAZELNUT_TREE)));
-        helper.register("plum_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.PLUM_TREE)));
-        helper.register("walnut_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.WALNUT_TREE)));
+        helper.register("cinnamon_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefTrees.CINNAMON_TREE)));
+        helper.register("apple_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefTrees.APPLE_TREE)));
+        helper.register("pear_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefTrees.PEAR_TREE)));
+        helper.register("orange_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefTrees.ORANGE_TREE)));
+        helper.register("banana_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefTrees.BANANA_TREE)));
+        helper.register("almond_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefTrees.ALMOND_TREE)));
+        helper.register("avocado_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefTrees.AVOCADO_TREE)));
+        helper.register("black_olives_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefTrees.BLACK_OLIVES_TREE)));
+        helper.register("green_olives_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefTrees.GREEN_OLIVES_TREE)));
+        helper.register("lemon_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefTrees.LEMON_TREE)));
+        helper.register("lime_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefTrees.LIME_TREE)));
+        helper.register("peach_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefTrees.PEACH_TREE)));
+        helper.register("coconut_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefTrees.COCONUT_TREE)));
+        helper.register("vanilla_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefTrees.VANILLA_TREE)));
+        helper.register("cherry_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefTrees.CHERRY_TREE)));
+        helper.register("hazelnut_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefTrees.HAZELNUT_TREE)));
+        helper.register("plum_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefTrees.PLUM_TREE)));
+        helper.register("walnut_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefTrees.WALNUT_TREE)));
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {
@@ -313,6 +317,10 @@ public final class Registry {
 
     private static void registerRecipeSerializers(RegisterEvent.RegisterHelper<RecipeSerializer<?>> helper) {
         helper.register("drying", new DryingRecipe.Serializer());
+    }
+
+    private static void registerFeatures(RegisterEvent.RegisterHelper<Feature<?>> helper) {
+        helper.register("weighted_selector", new WeightedSelectorFeature(WeightedFeatureConfiguration.CODEC));
     }
 
     private static void registerTreeDecorators(RegisterEvent.RegisterHelper<TreeDecoratorType<?>> helper) {

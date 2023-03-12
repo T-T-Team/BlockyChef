@@ -1,27 +1,48 @@
 {
-  "type": "minecraft:random_selector",
+  "type": "blockychef:weighted_selector",
   "config": {
-    "default": "blockychef:tree/apple",
     "features": [
       {
-        "chance": 0.17,
-        "feature": "blockychef:tree/pear"
+        "weight": 1,
+        "data": {
+          "feature": "blockychef:tree/apple",
+          "placement": []
+        }
       },
       {
-        "chance": 0.18,
-        "feature": "blockychef:tree/cherry"
+        "weight": 1,
+        "data": {
+          "feature": "blockychef:tree/pear",
+          "placement": []
+        }
       },
       {
-        "chance": 0.19,
-        "feature": "blockychef:tree/hazelnut"
+        "weight": 1,
+        "data": {
+          "feature": "blockychef:tree/cherry",
+          "placement": []
+        }
       },
       {
-        "chance": 0.22,
-        "feature": "blockychef:tree/plum"
+        "weight": 1,
+        "data": {
+          "feature": "blockychef:tree/hazelnut",
+          "placement": []
+        }
       },
       {
-        "chance": 0.25,
-        "feature": "blockychef:tree/walnut"
+        "weight": 1,
+        "data": {
+          "feature": "blockychef:tree/plum",
+          "placement": []
+        }
+      },
+      {
+        "weight": 1,
+        "data": {
+          "feature": "blockychef:tree/walnut",
+          "placement": []
+        }
       }
     ]
   }

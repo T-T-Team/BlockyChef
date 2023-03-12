@@ -1,15 +1,27 @@
 {
-  "type": "minecraft:random_selector",
+  "type": "blockychef:weighted_selector",
   "config": {
-    "default": "blockychef:tree/banana",
     "features": [
       {
-        "chance": 0.28,
-        "feature": "blockychef:tree/coconut"
+        "weight": 1,
+        "data": {
+          "feature": "blockychef:tree/banana",
+          "placement": []
+        }
       },
       {
-        "chance": 0.33,
-        "feature": "blockychef:tree/vanilla"
+        "weight": 1,
+        "data": {
+          "feature": "blockychef:tree/coconut",
+          "placement": []
+        }
+      },
+      {
+        "weight": 1,
+        "data": {
+          "feature": "blockychef:tree/vanilla",
+          "placement": []
+        }
       }
     ]
   }
