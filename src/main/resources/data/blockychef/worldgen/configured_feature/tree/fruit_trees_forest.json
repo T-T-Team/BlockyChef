@@ -4,23 +4,23 @@
     "default": "blockychef:tree/apple",
     "features": [
       {
-        "chance": 0.5,
+        "chance": 0.17,
         "feature": "blockychef:tree/pear"
       },
       {
-        "chance": 0.5,
+        "chance": 0.18,
         "feature": "blockychef:tree/cherry"
       },
       {
-        "chance": 0.5,
+        "chance": 0.19,
         "feature": "blockychef:tree/hazelnut"
       },
       {
-        "chance": 0.5,
+        "chance": 0.22,
         "feature": "blockychef:tree/plum"
       },
       {
-        "chance": 0.5,
+        "chance": 0.25,
         "feature": "blockychef:tree/walnut"
       }
     ]

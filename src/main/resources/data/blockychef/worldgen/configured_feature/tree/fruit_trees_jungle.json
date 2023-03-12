@@ -4,11 +4,11 @@
     "default": "blockychef:tree/banana",
     "features": [
       {
-        "chance": 0.1,
+        "chance": 0.28,
         "feature": "blockychef:tree/coconut"
       },
       {
-        "chance": 0.1,
+        "chance": 0.33,
         "feature": "blockychef:tree/vanilla"
       }
     ]

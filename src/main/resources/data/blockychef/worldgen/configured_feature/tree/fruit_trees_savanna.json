@@ -4,31 +4,31 @@
     "default": "blockychef:tree/orange",
     "features": [
       {
-        "chance": 0.1,
+        "chance": 0.16,
         "feature": "blockychef:tree/almond"
       },
       {
-        "chance": 0.1,
+        "chance": 0.17,
         "feature": "blockychef:tree/avocado"
       },
       {
-        "chance": 0.1,
+        "chance": 0.18,
         "feature": "blockychef:tree/black_olives"
       },
       {
-        "chance": 0.1,
+        "chance": 0.20,
         "feature": "blockychef:tree/green_olives"
       },
       {
-        "chance": 0.1,
+        "chance": 0.22,
         "feature": "blockychef:tree/lemon"
       },
       {
-        "chance": 0.1,
+        "chance": 0.24,
         "feature": "blockychef:tree/lime"
       },
       {
-        "chance": 0.1,
+        "chance": 0.25,
         "feature": "blockychef:tree/peach"
       }
     ]
