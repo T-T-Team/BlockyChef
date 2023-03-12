@@ -1,5 +1,5 @@
 {
-  "feature": "blockychef:tree/fruit_trees_plains",
+  "feature": "blockychef:tree/fruit_trees_savanna",
   "placement": [
     {
       "type": "minecraft:count",
@@ -8,7 +8,7 @@
         "distribution": [
           {
             "data": 0,
-            "weight": 29
+            "weight": 10
           },
           {
             "data": 1,

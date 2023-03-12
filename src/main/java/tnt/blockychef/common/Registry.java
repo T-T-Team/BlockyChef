@@ -215,6 +215,22 @@ public final class Registry {
                 .noOcclusion().isValidSpawn(Registry::allowParrotOrOcelotSpawn).isSuffocating(Registry::alwaysFalse).isViewBlocking(Registry::alwaysFalse)));
         helper.register("cinnamon_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.CINNAMON_TREE)));
         helper.register("apple_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.APPLE_TREE)));
+        helper.register("pear_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.PEAR_TREE)));
+        helper.register("orange_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.ORANGE_TREE)));
+        helper.register("banana_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.BANANA_TREE)));
+        helper.register("almond_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.ALMOND_TREE)));
+        helper.register("avocado_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.AVOCADO_TREE)));
+        helper.register("black_olives_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.BLACK_OLIVES_TREE)));
+        helper.register("green_olives_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.GREEN_OLIVES_TREE)));
+        helper.register("lemon_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.LEMON_TREE)));
+        helper.register("lime_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.LIME_TREE)));
+        helper.register("peach_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.PEACH_TREE)));
+        helper.register("coconut_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.COCONUT_TREE)));
+        helper.register("vanilla_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.VANILLA_TREE)));
+        helper.register("cherry_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.CHERRY_TREE)));
+        helper.register("hazelnut_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.HAZELNUT_TREE)));
+        helper.register("plum_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.PLUM_TREE)));
+        helper.register("walnut_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefFeatures.WALNUT_TREE)));
     }
 
     private static void registerItems(RegisterEvent.RegisterHelper<Item> helper) {

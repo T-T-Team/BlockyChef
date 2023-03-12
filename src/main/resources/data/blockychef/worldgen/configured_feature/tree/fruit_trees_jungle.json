@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": "blockychef:tree/banana",
+    "features": [
+      {
+        "chance": 0.1,
+        "feature": "blockychef:tree/coconut"
+      },
+      {
+        "chance": 0.1,
+        "feature": "blockychef:tree/vanilla"
+      }
+    ]
+  }
+}

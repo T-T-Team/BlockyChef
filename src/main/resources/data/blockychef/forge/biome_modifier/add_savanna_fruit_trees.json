@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_savanna",
+  "features": "blockychef:tree/fruit_trees_savanna",
+  "step": "vegetal_decoration"
+}
