@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#forge:is_swamp",
+  "features": "#blockychef:wild_swamp_crops",
+  "step": "vegetal_decoration"
+}

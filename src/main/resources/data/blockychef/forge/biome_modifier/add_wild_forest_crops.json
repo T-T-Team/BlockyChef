@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_forest",
+  "features": "#blockychef:wild_forest_crops",
+  "step": "vegetal_decoration"
+}

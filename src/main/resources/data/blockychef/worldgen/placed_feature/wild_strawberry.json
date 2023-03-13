@@ -1,9 +1,9 @@
 {
-  "feature": "blockychef:wild_wheat",
+  "feature": "blockychef:wild_strawberry",
   "placement": [
     {
       "type": "minecraft:rarity_filter",
-      "chance": 17
+      "chance": 5
     },
     {
       "type": "minecraft:in_square"

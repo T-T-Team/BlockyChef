@@ -20,7 +20,7 @@
           "to_place": {
             "type": "minecraft:simple_state_provider",
             "state": {
-              "Name": "blockychef:potato_crops",
+              "Name": "blockychef:garlic_crops",
               "Properties": {
                 "age": "7"
               }

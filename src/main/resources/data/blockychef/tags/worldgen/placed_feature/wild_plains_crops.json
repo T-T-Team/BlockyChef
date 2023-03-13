@@ -3,6 +3,18 @@
   "values": [
     "blockychef:wild_wheat",
     "blockychef:wild_potatoes",
-    "blockychef:wild_carrots"
+    "blockychef:wild_carrots",
+    "blockychef:wild_beetroot",
+    "blockychef:wild_bell_pepper",
+    "blockychef:wild_broccoli",
+    "blockychef:wild_cabbage",
+    "blockychef:wild_corn",
+    "blockychef:wild_cucumber",
+    "blockychef:wild_lettuce",
+    "blockychef:wild_oat",
+    "blockychef:wild_onion",
+    "blockychef:wild_parsley",
+    "blockychef:wild_peas",
+    "blockychef:wild_tomato"
   ]
 }

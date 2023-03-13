@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_savanna",
+  "features": "#blockychef:wild_savanna_crops",
+  "step": "vegetal_decoration"
+}

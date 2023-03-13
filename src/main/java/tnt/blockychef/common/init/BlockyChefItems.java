@@ -52,7 +52,7 @@ public final class BlockyChefItems {
     public static final Item PEANUT = null;
     @ObjectHolder(value = "blockychef:pea_pod", registryName = "item")
     public static final Item PEA_POD = null;
-    @ObjectHolder(value = "blockychef:soybean", registryName = "item")
+    @ObjectHolder(value = "blockychef:soybean_pod", registryName = "item")
     public static final Item SOYBEAN_POD = null;
     @ObjectHolder(value = "blockychef:basil", registryName = "item")
     public static final Item BASIL = null;
