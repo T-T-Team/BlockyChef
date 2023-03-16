@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:campfires",
+    "minecraft:fire",
+    "minecraft:soul_fire",
+    "minecraft:furnace",
+    "minecraft:blast_furnace",
+    "minecraft:smoker"
+  ]
+}
