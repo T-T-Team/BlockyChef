@@ -34,6 +34,7 @@ public final class DrinkList {
     public static final DrinkProperties MUSTARD = DrinkProperties.Builder.create().stats(-2, 0).build();
     public static final DrinkProperties COFFEE = DrinkProperties.Builder.create().stats(-1, 0).build();
     public static final DrinkProperties EGGPLANT = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties SPINACH_LEAF = DrinkProperties.Builder.create().stats(-1, 0).build();
     public static final DrinkProperties AVOCADO = DrinkProperties.Builder.create().stats(-1, 0).build();
     public static final DrinkProperties BANANA = DrinkProperties.Builder.create().stats(-1, 0).build();
     public static final DrinkProperties BLACK_OLIVES = DrinkProperties.Builder.create().stats(-1, 0).build();

@@ -17,9 +17,9 @@ import java.util.function.UnaryOperator;
 public class GenerateCropsModels {
 
     // Script arguments
-    private static final String CROPS_NAME = "eggplant";
+    private static final String CROPS_NAME = "spinach";
     private static final String CROPS_SUFFIX = "_crops";
-    private static final int LOOT_TABLE_BONUS = 2;
+    private static final int LOOT_TABLE_BONUS = 1;
     private static final CropsModelType MODEL_TYPE = CropsModelType.DEFAULT;
     private static final IntFunction<String> CROP_TEXTURE_NAME_PROVIDER = ageIndex -> "blockychef:block/" + CROPS_NAME + ageIndex;
     private static final Runnable[] TASKS = {

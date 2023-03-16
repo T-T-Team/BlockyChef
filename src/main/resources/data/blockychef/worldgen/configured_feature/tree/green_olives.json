@@ -4,13 +4,13 @@
     "decorators": [
       {
         "type": "blockychef:fruit_decorator",
-        "chance": 0.15,
+        "chance": 0.18,
         "fruitProvider": {
           "type": "minecraft:simple_state_provider",
           "state": {
             "Name": "blockychef:green_olives_fruit",
             "Properties": {
-              "age": "0"
+              "age": "2"
             }
           }
         }

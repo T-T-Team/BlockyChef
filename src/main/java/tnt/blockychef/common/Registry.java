@@ -131,6 +131,7 @@ public final class Registry {
         helper.register("mustard_crops", new CropsBlock(() -> BlockyChefItems.MUSTARD_PODS), false);
         helper.register("coffee_crops", new CropsBlock(() -> BlockyChefItems.COFFEE_BEANS_CLUSTER), false);
         helper.register("eggplant_crops", new CropsBlock(() -> BlockyChefItems.EGGPLANT), false);
+        helper.register("spinach_crops", new CropsBlock(() -> BlockyChefItems.SPINACH_LEAF), false);
         helper.register("almond_fruit", new TreeHangingFruitBlock(), false);
         helper.register("apple_fruit", new TreeHangingFruitBlock(), false);
         helper.register("avocado_fruit", new TreeHangingFruitBlock(), false);
@@ -271,6 +272,7 @@ public final class Registry {
         helper.register("mustard_pods", new EdibleCropSeedItem(BlockyChefBlocks.MUSTARD_CROPS, new Item.Properties().food(FoodList.MUSTARD), DrinkList.MUSTARD));
         helper.register("coffee_beans_cluster", new EdibleCropSeedItem(BlockyChefBlocks.COFFEE_CROPS, new Item.Properties().food(FoodList.COFFEE), DrinkList.COFFEE));
         helper.register("eggplant", new EdibleCropSeedItem(BlockyChefBlocks.EGGPLANT_CROPS, new Item.Properties().food(FoodList.EGGPLANT), DrinkList.EGGPLANT));
+        helper.register("spinach_leaf", new EdibleCropSeedItem(BlockyChefBlocks.SPINACH_CROPS, new Item.Properties().food(FoodList.SPINACH_LEAF), DrinkList.SPINACH_LEAF));
         helper.register("almond", new DrinkableItem(new Item.Properties().food(FoodList.ALMOND), DrinkList.ALMOND));
         helper.register("avocado", new DrinkableItem(new Item.Properties().food(FoodList.AVOCADO), DrinkList.AVOCADO));
         helper.register("banana", new DrinkableItem(new Item.Properties().food(FoodList.BANANA), DrinkList.BANANA));
