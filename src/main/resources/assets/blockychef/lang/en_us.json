@@ -191,6 +191,11 @@
   "item.blockychef.walnut": "Walnut",
   "item.blockychef.cinnamon_bark": "Cinnamon Bark",
 
+  "item.blockychef.shrimp": "Shrimp",
+  "item.blockychef.raw_shrimp": "Raw Shrimp",
+  "item.blockychef.fried_shrimp": "Fried Shrimp",
+  "item.blockychef.burnt_shrimp": "Burnt Shrimp",
+
   "config.screen.blockychef": "BlockyChef Configuration",
   "config.blockychef.option.decay": "Plant Decay Config",
   "config.blockychef.option.replaceVanillaCrops": "Replace vanilla crops",

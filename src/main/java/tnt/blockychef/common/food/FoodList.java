@@ -109,6 +109,9 @@ public final class FoodList {
     public static final FoodProperties PLUM = food(1, 1).build();
     public static final FoodProperties VANILLA_PODS = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties WALNUT = food(1, 1).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties SHRIMP = food(1, 1).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties RAW_SHRIMP = food(1, 1).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties FRIED_SHRIMP = food(2, 1).build();
 
     private static FoodProperties.Builder food(int nutrition, int saturation) {
         return new FoodProperties.Builder().nutrition(nutrition).saturationMod(saturation / (nutrition * 2.0F));
