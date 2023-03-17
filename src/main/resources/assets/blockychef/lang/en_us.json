@@ -202,7 +202,6 @@
   "config.blockychef.option.placeOnRawFarmland": "Place weeds on raw farmland",
   "config.blockychef.option.plantDecayProgressChance": "Crops decay progress chance",
   "config.blockychef.option.plantDecayKillChance": "Crops decay kill chance",
-  "config.blockychef.option.destroyFruitOnDecay": "Destroy fruit on decay",
   "config.blockychef.option.crops": "Crops Config",
   "config.blockychef.option.restrictBonemealUsage": "Restrict bonemeal usage",
   "config.blockychef.option.thirst": "Thirst Config",

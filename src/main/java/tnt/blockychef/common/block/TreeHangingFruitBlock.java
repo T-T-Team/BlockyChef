@@ -108,14 +108,7 @@ public class TreeHangingFruitBlock extends BushBlock implements BonemealableBloc
         if (!DecayingGrowingBlock.canTick(level, pos)) return;
         if (this.isRipe(state)) {
             if (!level.isClientSide && random.nextFloat() < 0.1F) {
-                boolean shouldDestroy = BlockyChef.config.decay.destroyFruitOnDecay;
-                if (shouldDestroy) {
-                    level.setBlock(pos, state.setValue(AGE, 0), 2);
-                    level.destroyBlock(pos, true);
-                } else {
-                    dropResources(state, level, pos);
-                    level.setBlock(pos, state.setValue(AGE, 0), 2);
-                }
+                level.setBlock(pos, state.setValue(AGE, 0), 2);
             }
         } else {
             float growthChance = 0.05F;
