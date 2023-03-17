@@ -290,6 +290,11 @@ public final class Registry {
         helper.register("cinnamon_bark", new Item(new Item.Properties()));
         helper.register("vanilla_pods", new DrinkableItem(new Item.Properties().food(FoodList.VANILLA_PODS), DrinkList.VANILLA_PODS));
         helper.register("walnut", new DrinkableItem(new Item.Properties().food(FoodList.WALNUT), DrinkList.WALNUT));
+
+        helper.register("shrimp", new Item(new Item.Properties().food(FoodList.SHRIMP)));
+        helper.register("raw_shrimp", new Item(new Item.Properties().food(FoodList.RAW_SHRIMP)));
+        helper.register("fried_shrimp", new DrinkableItem(new Item.Properties().food(FoodList.FRIED_SHRIMP), DrinkList.FRIED_SHRIMP));
+        helper.register("burnt_shrimp", new Item(new Item.Properties()));
     }
 
     private static void registerBlockEntities(RegisterEvent.RegisterHelper<BlockEntityType<?>> helper) {

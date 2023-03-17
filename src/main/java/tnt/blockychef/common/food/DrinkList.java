@@ -43,6 +43,7 @@ public final class DrinkList {
     public static final DrinkProperties ORANGE = DrinkProperties.Builder.create().stats(1, 1).build();
     public static final DrinkProperties VANILLA_PODS = DrinkProperties.Builder.create().stats(-1, 0).build();
     public static final DrinkProperties WALNUT = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties FRIED_SHRIMP = DrinkProperties.Builder.create().stats(-1, 0).build();
 
     private DrinkList() {}
 }
