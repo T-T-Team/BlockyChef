@@ -7,4 +7,6 @@ public final class BlockyChefRecipeSerializers {
 
     @ObjectHolder(value = "blockychef:drying", registryName = "recipe_serializer")
     public static final RecipeSerializer<?> DRYING_RECIPE_SERIALIZER = null;
+    @ObjectHolder(value = "blockychef:grating", registryName = "recipe_serializer")
+    public static final RecipeSerializer<?> GRATING_RECIPE_SERIALIZER = null;
 }

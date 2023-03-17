@@ -1,0 +1,12 @@
+{
+  "type": "blockychef:grating",
+  "input": {
+    "item": "minecraft:sugar_cane"
+  },
+  "output": {
+    "item": "minecraft:sugar",
+    "count": 3
+  },
+  "gratingAmount": 4,
+  "experience": 0.1
+}

@@ -101,6 +101,8 @@ public final class BlockyChefBlocks {
     public static final GrillBlock GRILL = null;
     @ObjectHolder(value = "blockychef:pasta_machine", registryName = "block")
     public static final PastaMachineBlock PASTA_MACHINE = null;
+    @ObjectHolder(value = "blockychef:grater", registryName = "block")
+    public static final GraterBlock GRATER = null;
     @ObjectHolder(value = "blockychef:concrete_concrete_kitchen_counter", registryName = "block")
     public static final KitchenCounterBlock CC_KITCHEN_COUNTER = null;
     @ObjectHolder(value = "blockychef:concrete_plank_kitchen_counter", registryName = "block")

@@ -33,4 +33,6 @@ public final class BlockyChefBlockEntities {
     public static final BlockEntityType<PastaMachineBlockEntity> PASTA_MACHINE = null;
     @ObjectHolder(value = "blockychef:kitchen_sink", registryName = "block_entity_type")
     public static final BlockEntityType<KitchenSinkBlockEntity> KITCHEN_SINK = null;
+    @ObjectHolder(value = "blockychef:grater", registryName = "block_entity_type")
+    public static final BlockEntityType<GraterBlockEntity> GRATER = null;
 }

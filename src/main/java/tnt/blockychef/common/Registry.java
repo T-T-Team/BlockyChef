@@ -33,6 +33,7 @@ import tnt.blockychef.common.effect.ThirstMobEffect;
 import tnt.blockychef.common.food.DrinkList;
 import tnt.blockychef.common.food.FoodList;
 import tnt.blockychef.common.food.recipe.DryingRecipe;
+import tnt.blockychef.common.food.recipe.GratingRecipe;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 import tnt.blockychef.common.init.BlockyChefTrees;
 import tnt.blockychef.common.init.BlockyChefItems;
@@ -306,6 +307,7 @@ public final class Registry {
         helper.register("juicer", BlockEntityType.Builder.of(JuicerBlockEntity::new, BlockyChefBlocks.JUICER).build(null));
         helper.register("grill", BlockEntityType.Builder.of(GrillBlockEntity::new, BlockyChefBlocks.GRILL).build(null));
         helper.register("pasta_machine", BlockEntityType.Builder.of(PastaMachineBlockEntity::new, BlockyChefBlocks.PASTA_MACHINE).build(null));
+        helper.register("grater", BlockEntityType.Builder.of(GraterBlockEntity::new, BlockyChefBlocks.GRATER).build(null));
     }
 
     private static void registerMobEffects(RegisterEvent.RegisterHelper<MobEffect> helper) {
@@ -315,10 +317,12 @@ public final class Registry {
 
     private static void registerRecipeTypes(RecipeTypeRegistryHelper helper) {
         helper.register("drying_recipe");
+        helper.register("grating_recipe");
     }
 
     private static void registerRecipeSerializers(RegisterEvent.RegisterHelper<RecipeSerializer<?>> helper) {
         helper.register("drying", new DryingRecipe.Serializer());
+        helper.register("grating", new GratingRecipe.Serializer());
     }
 
     private static void registerFeatures(RegisterEvent.RegisterHelper<Feature<?>> helper) {
