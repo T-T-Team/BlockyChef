@@ -66,6 +66,7 @@ public class GraterBlockEntity extends RecipeRemberingBlockEntity<GratingRecipe>
             Helper.dropInventoryContents(level, worldPosition, this);
         }
         setChanged();
+        Helper.sendBlockEntityClientData(this);
     }
 
     public boolean hasActiveRecipe() {
@@ -84,6 +85,10 @@ public class GraterBlockEntity extends RecipeRemberingBlockEntity<GratingRecipe>
             }
         }
         return false;
+    }
+
+    public float getGratingProgress() {
+        return recipe != null ? (float) this.gratingAmount / recipe.getGratingAmount() : 0.0F;
     }
 
     @Override
@@ -110,17 +115,20 @@ public class GraterBlockEntity extends RecipeRemberingBlockEntity<GratingRecipe>
         if (!stack.isEmpty()) {
             tag.put("item", stack.serializeNBT());
         }
+        tag.putInt("gratingAmount", gratingAmount);
     }
 
     @Override
     public void decodeBlockEntityData(CompoundTag tag) {
         ItemStack stack = tag.contains("item") ? ItemStack.of(tag.getCompound("item")) : ItemStack.EMPTY;
         inventoryHandler.setStackInSlot(0, stack);
+        gratingAmount = tag.getInt("gratingAmount");
     }
 
     private void setRecipe(GratingRecipe recipe) {
         this.recipe = recipe;
         this.gratingAmount = 0;
         setChanged();
+        Helper.sendBlockEntityClientData(this);
     }
 }

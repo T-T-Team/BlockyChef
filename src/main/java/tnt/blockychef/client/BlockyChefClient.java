@@ -15,6 +15,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import tnt.blockychef.client.render.block.DryingRackBlockEntityRenderer;
+import tnt.blockychef.client.render.block.GraterBlockEntityRenderer;
 import tnt.blockychef.client.render.thirst.ThirstOverlay;
 import tnt.blockychef.client.render.thirst.ThirstTooltipHandler;
 import tnt.blockychef.common.block.DyeableBlock;
@@ -56,6 +57,7 @@ public final class BlockyChefClient {
 
     private void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(BlockyChefBlockEntities.DRYING_RACK, DryingRackBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(BlockyChefBlockEntities.GRATER, GraterBlockEntityRenderer::new);
     }
 
     private void registerBlockColors(RegisterColorHandlersEvent.Block event) {
