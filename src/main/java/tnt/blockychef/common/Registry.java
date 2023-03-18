@@ -32,8 +32,10 @@ import tnt.blockychef.common.effect.HydrationMobEffect;
 import tnt.blockychef.common.effect.ThirstMobEffect;
 import tnt.blockychef.common.food.DrinkList;
 import tnt.blockychef.common.food.FoodList;
+import tnt.blockychef.common.food.recipe.CuttingBoardRecipe;
 import tnt.blockychef.common.food.recipe.DryingRecipe;
 import tnt.blockychef.common.food.recipe.GratingRecipe;
+import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 import tnt.blockychef.common.init.BlockyChefTrees;
 import tnt.blockychef.common.init.BlockyChefItems;
@@ -150,7 +152,6 @@ public final class Registry {
         helper.register("plum_fruit", new TreeHangingFruitBlock(), false);
         helper.register("vanilla_fruit", new TreeHangingFruitBlock(), false);
         helper.register("walnut_fruit", new TreeHangingFruitBlock(), false);
-
         helper.register("drying_rack", new DryingRackBlock());
         helper.register("stove", new StoveBlock());
         helper.register("oak_cutting_board", new CuttingBoardBlock());
@@ -313,6 +314,7 @@ public final class Registry {
         helper.register("grill", BlockEntityType.Builder.of(GrillBlockEntity::new, BlockyChefBlocks.GRILL).build(null));
         helper.register("pasta_machine", BlockEntityType.Builder.of(PastaMachineBlockEntity::new, BlockyChefBlocks.PASTA_MACHINE).build(null));
         helper.register("grater", BlockEntityType.Builder.of(GraterBlockEntity::new, BlockyChefBlocks.GRATER).build(null));
+        helper.register("cutting_board", BlockEntityType.Builder.of(CuttingBoardBlockEntity::new, BlockyChefBlocks.OAK_CUTTING_BOARD, BlockyChefBlocks.SPRUCE_CUTTING_BOARD, BlockyChefBlocks.BIRCH_CUTTING_BOARD, BlockyChefBlocks.JUNGLE_CUTTING_BOARD, BlockyChefBlocks.ACACIA_CUTTING_BOARD, BlockyChefBlocks.DARK_CUTTING_BOARD, BlockyChefBlocks.MANGROVE_CUTTING_BOARD, BlockyChefBlocks.CRIMSON_CUTTING_BOARD, BlockyChefBlocks.WARPED_CUTTING_BOARD).build(null));
     }
 
     private static void registerMobEffects(RegisterEvent.RegisterHelper<MobEffect> helper) {
@@ -323,11 +325,13 @@ public final class Registry {
     private static void registerRecipeTypes(RecipeTypeRegistryHelper helper) {
         helper.register("drying_recipe");
         helper.register("grating_recipe");
+        helper.register("cutting_board_recipe");
     }
 
     private static void registerRecipeSerializers(RegisterEvent.RegisterHelper<RecipeSerializer<?>> helper) {
         helper.register("drying", new DryingRecipe.Serializer());
         helper.register("grating", new GratingRecipe.Serializer());
+        helper.register("cutting_board", new CuttingBoardRecipe.Serializer());
     }
 
     private static void registerFeatures(RegisterEvent.RegisterHelper<Feature<?>> helper) {

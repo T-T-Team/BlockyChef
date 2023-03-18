@@ -19,7 +19,7 @@ import org.apache.logging.log4j.Marker;
 import org.apache.logging.log4j.MarkerManager;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.init.BlockyChefMobEffects;
-import tnt.blockychef.util.CodecHelper;
+import tnt.blockychef.util.SerializationHelper;
 
 import java.io.File;
 import java.io.FileReader;
@@ -187,7 +187,7 @@ public final class ConfigDrinkLoader {
     private record CompatDrinkable(Item item, CompatDrinkStatsHolder holder) {
 
         public static final Codec<CompatDrinkable> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                CodecHelper.registryEntry(ForgeRegistries.ITEMS).fieldOf("item").forGetter(CompatDrinkable::item),
+                SerializationHelper.registryEntry(ForgeRegistries.ITEMS).fieldOf("item").forGetter(CompatDrinkable::item),
                 CompatDrinkStatsHolder.CODEC.fieldOf("stats").forGetter(CompatDrinkable::holder)
         ).apply(instance, CompatDrinkable::new));
     }
@@ -228,7 +228,7 @@ public final class ConfigDrinkLoader {
     private record EffectProvider(MobEffect effect, int duration, int amplifier) implements Supplier<MobEffectInstance> {
 
         public static final Codec<EffectProvider> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                CodecHelper.registryEntry(ForgeRegistries.MOB_EFFECTS).fieldOf("effect").forGetter(EffectProvider::effect),
+                SerializationHelper.registryEntry(ForgeRegistries.MOB_EFFECTS).fieldOf("effect").forGetter(EffectProvider::effect),
                 Codec.INT.optionalFieldOf("duration", 600).forGetter(EffectProvider::duration),
                 Codec.INT.optionalFieldOf("amplifier", 0).forGetter(EffectProvider::amplifier)
         ).apply(instance, EffectProvider::new));

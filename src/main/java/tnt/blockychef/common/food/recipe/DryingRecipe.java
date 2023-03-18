@@ -18,6 +18,7 @@ import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.block.entity.DryingRackBlockEntity;
 import tnt.blockychef.common.init.BlockyChefRecipeSerializers;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
+import tnt.blockychef.util.SerializationHelper;
 
 public class DryingRecipe extends AbstractFoodRecipe<DryingRackBlockEntity> {
 
@@ -79,13 +80,7 @@ public class DryingRecipe extends AbstractFoodRecipe<DryingRackBlockEntity> {
         public DryingRecipe fromJson(ResourceLocation id, JsonObject json) {
             Ingredient ingredient = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "input"));
             JsonObject output = GsonHelper.getAsJsonObject(json, "output");
-            ResourceLocation itemId = new ResourceLocation(GsonHelper.getAsString(output, "item"));
-            Item item = ForgeRegistries.ITEMS.getValue(itemId);
-            if (item == Items.AIR) {
-                throw new JsonSyntaxException("Unknown item: " + itemId);
-            }
-            int count = GsonHelper.getAsInt(output, "count", 1);
-            ItemStack result = new ItemStack(item, count);
+            ItemStack result = SerializationHelper.resolveItemStackFromJson(output);
             int dryTime = GsonHelper.getAsInt(json, "dryingTime");
             float experience = GsonHelper.getAsFloat(json, "experience", 0.0F);
             return new DryingRecipe(id, ingredient, result, dryTime, experience);

@@ -143,4 +143,22 @@ public final class BlockyChefBlocks {
     public static final RotatedPillarBlock CINNAMON_STRIPPED_LOG = null;
     @ObjectHolder(value = "blockychef:cinnamon_leaves", registryName = "block")
     public static final LeavesBlock CINNAMON_LEAVES = null;
+    @ObjectHolder(value = "blockychef:oak_cutting_board", registryName = "block")
+    public static final CuttingBoardBlock OAK_CUTTING_BOARD = null;
+    @ObjectHolder(value = "blockychef:spruce_cutting_board", registryName = "block")
+    public static final CuttingBoardBlock SPRUCE_CUTTING_BOARD = null;
+    @ObjectHolder(value = "blockychef:birch_cutting_board", registryName = "block")
+    public static final CuttingBoardBlock BIRCH_CUTTING_BOARD = null;
+    @ObjectHolder(value = "blockychef:jungle_cutting_board", registryName = "block")
+    public static final CuttingBoardBlock JUNGLE_CUTTING_BOARD = null;
+    @ObjectHolder(value = "blockychef:acacia_cutting_board", registryName = "block")
+    public static final CuttingBoardBlock ACACIA_CUTTING_BOARD = null;
+    @ObjectHolder(value = "blockychef:dark_oak_cutting_board", registryName = "block")
+    public static final CuttingBoardBlock DARK_CUTTING_BOARD = null;
+    @ObjectHolder(value = "blockychef:mangrove_cutting_board", registryName = "block")
+    public static final CuttingBoardBlock MANGROVE_CUTTING_BOARD = null;
+    @ObjectHolder(value = "blockychef:crimson_cutting_board", registryName = "block")
+    public static final CuttingBoardBlock CRIMSON_CUTTING_BOARD = null;
+    @ObjectHolder(value = "blockychef:warped_cutting_board", registryName = "block")
+    public static final CuttingBoardBlock WARPED_CUTTING_BOARD = null;
 }
