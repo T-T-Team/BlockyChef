@@ -1,5 +1,6 @@
 package tnt.blockychef.common.food.recipe;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -41,6 +42,14 @@ public class CuttingBoardRecipe extends AbstractFoodRecipe<CuttingBoardBlockEnti
 
     public CuttingBoardSubRecipe getSubRecipe(RecipeProcessingType recipeProcessingType) {
         return subRecipeMap.get(recipeProcessingType);
+    }
+
+    public RecipeProcessingType getFirstProcessingType() {
+        return getRecipeProcessingTypes().get(0);
+    }
+
+    public List<RecipeProcessingType> getRecipeProcessingTypes() {
+        return ImmutableList.copyOf(subRecipeMap.keySet());
     }
 
     public boolean isValidInput(ItemStack stack) {
@@ -95,6 +104,14 @@ public class CuttingBoardRecipe extends AbstractFoodRecipe<CuttingBoardBlockEnti
             }
             int time = GsonHelper.getAsInt(entry, "time");
             return Pair.of(type, new CuttingBoardSubRecipe(outputItems, time));
+        }
+
+        public int getTime() {
+            return time;
+        }
+
+        public ItemStack[] getOutputs() {
+            return outputs;
         }
 
         public void encode(FriendlyByteBuf buffer) {

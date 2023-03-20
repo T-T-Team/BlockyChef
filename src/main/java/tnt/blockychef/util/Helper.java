@@ -1,11 +1,15 @@
 package tnt.blockychef.util;
 
+import com.google.common.collect.Multimap;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -18,14 +22,18 @@ import tnt.blockychef.common.block.entity.InventoryBlockEntity;
 import tnt.blockychef.common.block.entity.SynchronizableBlockEntity;
 import tnt.blockychef.network.NetworkManager;
 import tnt.blockychef.network.packet.S2C_SendBlockEntityData;
+import tnt.blockychef.util.function.TriConsumer;
 
-import java.util.Objects;
+import java.util.*;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.IntSupplier;
 
 public final class Helper {
 
     @SuppressWarnings("unchecked")
-    public static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createBlockEntityTicker(BlockEntityType<A> type1, BlockEntityType<E> type2, BlockEntityTicker<? super E> ticker) {
-        return type1 == type2 ? (BlockEntityTicker<A>) ticker : null;
+    public static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createBlockEntityTicker(BlockEntityType<A> typeToTest, BlockEntityType<E> wantedType, BlockEntityTicker<? super E> ticker) {
+        return typeToTest == wantedType ? (BlockEntityTicker<A>) ticker : null;
     }
 
     public static void dropInventoryContents(Level level, BlockPos pos) {
@@ -86,5 +94,51 @@ public final class Helper {
                 compoundTagINBTSerializable.deserializeNBT(tag.getCompound("inventory"));
             }
         }
+    }
+
+    public static boolean canFitItems(ItemStack[] items, Container container, int[] validSlots) {
+        NonNullList<ItemStack> inventory = NonNullList.withSize(validSlots.length, ItemStack.EMPTY);
+        for (int i = 0; i < inventory.size(); i++) {
+            int slotIndex = validSlots[i];
+            ItemStack stack = container.getItem(slotIndex);
+            inventory.set(i, stack);
+        }
+        return insertItems(items, inventory, inventory::size, NonNullList::get, NonNullList::set, validSlots);
+    }
+
+    public static void insertItems(ItemStack[] items, Container container, int[] outputSlots) {
+        insertItems(items, container, container::getContainerSize, Container::getItem, Container::setItem, outputSlots);
+    }
+
+    private static <T> boolean insertItems(ItemStack[] items, T t, IntSupplier maxSize, BiFunction<T, Integer, ItemStack> itemGetter, TriConsumer<T, Integer, ItemStack> itemSetter, int[] outputSlots) {
+        for (ItemStack itemStack : items) {
+            int limit = Math.min(maxSize.getAsInt(), itemStack.getMaxStackSize());
+            int toPlace = itemStack.getCount();
+            for (int i : outputSlots) {
+                ItemStack stack = itemGetter.apply(t, i);
+                if (stack.isEmpty()) {
+                    int placed = Math.min(limit, toPlace);
+                    ItemStack item = itemStack.copy();
+                    item.setCount(placed);
+                    itemSetter.accept(t, i, item);
+                    toPlace -= placed;
+                } else if (ItemStack.isSame(stack, itemStack)) {
+                    int placed = Math.min(toPlace, limit - stack.getCount());
+                    stack.setCount(stack.getCount() + placed);
+                    toPlace -= placed;
+                }
+                if (toPlace == 0) {
+                    break;
+                }
+            }
+            if (toPlace != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static int getSlotLimit(Container container, ItemStack stack) {
+        return Math.min(container.getMaxStackSize(), stack.getMaxStackSize());
     }
 }
