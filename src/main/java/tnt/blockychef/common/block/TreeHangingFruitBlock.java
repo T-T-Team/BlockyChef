@@ -108,6 +108,7 @@ public class TreeHangingFruitBlock extends BushBlock implements BonemealableBloc
         if (!DecayingGrowingBlock.canTick(level, pos)) return;
         if (this.isRipe(state)) {
             if (!level.isClientSide && random.nextFloat() < 0.1F) {
+                level.destroyBlock(pos, false);
                 level.setBlock(pos, state.setValue(AGE, 0), 2);
             }
         } else {

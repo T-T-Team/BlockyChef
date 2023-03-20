@@ -61,11 +61,11 @@ public final class FoodList {
     public static final FoodProperties CARROT = food(1, 1).effect(HUNGER, PROBABILITY).build();
     // Blockychef foods
     public static final FoodProperties TOMATO = food(1, 1).effect(HUNGER, PROBABILITY).build();
-    public static final FoodProperties CUCUMBER = food(1, 1).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties CUCUMBER = food(1, 1).alwaysEat().effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties ALMOND = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties BELL_PEPPER = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties BLACK_PEPPER = food(1, 1).effect(HUNGER, PROBABILITY).build();
-    public static final FoodProperties BLUEBERRY = food(1, 1).build();
+    public static final FoodProperties BLUEBERRY = food(1, 1).alwaysEat().build();
     public static final FoodProperties CHILLI_PEPPER = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties BROCCOLI = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties CABBAGE = food(1, 1).effect(HUNGER, PROBABILITY).build();
@@ -75,9 +75,9 @@ public final class FoodList {
     public static final FoodProperties LETTUCE = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties ONION = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties PARSLEY = food(1, 1).effect(HUNGER, PROBABILITY).build();
-    public static final FoodProperties RASPBERRY = food(1, 1).build();
+    public static final FoodProperties RASPBERRY = food(1, 1).alwaysEat().build();
     public static final FoodProperties SPRING_ONION = food(1, 1).effect(HUNGER, PROBABILITY).build();
-    public static final FoodProperties STRAWBERRY = food(1, 1).build();
+    public static final FoodProperties STRAWBERRY = food(1, 1).alwaysEat().build();
     public static final FoodProperties TURMERIC = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties PINEAPPLE = food(1, 1).build();
     public static final FoodProperties PORTOBELLO = food(1, 1).effect(HUNGER, PROBABILITY).build();
@@ -98,15 +98,15 @@ public final class FoodList {
     public static final FoodProperties AVOCADO = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties BANANA = food(1, 1).build();
     public static final FoodProperties BLACK_OLIVES = food(1, 1).effect(HUNGER, PROBABILITY).build();
-    public static final FoodProperties CHERRY = food(1, 1).build();
+    public static final FoodProperties CHERRY = food(1, 1).alwaysEat().build();
     public static final FoodProperties GREEN_OLIVES = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties HAZELNUT = food(1, 1).effect(HUNGER, PROBABILITY).build();
-    public static final FoodProperties LEMON = food(1, 1).effect(HUNGER, PROBABILITY).build();
-    public static final FoodProperties LIME = food(1, 1).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties LEMON = food(1, 1).alwaysEat().effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties LIME = food(1, 1).alwaysEat().effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties ORANGE = food(1, 1).build();
-    public static final FoodProperties PEACH = food(1, 1).build();
-    public static final FoodProperties PEAR = food(1, 1).build();
-    public static final FoodProperties PLUM = food(1, 1).build();
+    public static final FoodProperties PEACH = food(1, 1).alwaysEat().build();
+    public static final FoodProperties PEAR = food(1, 1).alwaysEat().build();
+    public static final FoodProperties PLUM = food(1, 1).alwaysEat().build();
     public static final FoodProperties VANILLA_PODS = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties WALNUT = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties SHRIMP = food(1, 1).effect(HUNGER, PROBABILITY).build();
