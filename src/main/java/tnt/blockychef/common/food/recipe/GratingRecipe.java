@@ -1,18 +1,15 @@
 package tnt.blockychef.common.food.recipe;
 
 import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.block.entity.GraterBlockEntity;
 import tnt.blockychef.common.init.BlockyChefRecipeSerializers;
@@ -47,12 +44,12 @@ public class GratingRecipe extends AbstractFoodRecipe<GraterBlockEntity> {
     }
 
     @Override
-    public ItemStack assemble(GraterBlockEntity container) {
-        return this.getResultItem().copy();
+    public ItemStack assemble(GraterBlockEntity container, RegistryAccess access) {
+        return this.getResultItem(access).copy();
     }
 
     @Override
-    public ItemStack getResultItem() {
+    public ItemStack getResultItem(RegistryAccess access) {
         return this.output;
     }
 

@@ -7,6 +7,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -63,12 +64,12 @@ public class CuttingBoardRecipe extends AbstractFoodRecipe<CuttingBoardBlockEnti
     }
 
     @Override
-    public ItemStack assemble(CuttingBoardBlockEntity board) {
+    public ItemStack assemble(CuttingBoardBlockEntity board, RegistryAccess access) {
         throw new UnsupportedOperationException(); // TODO implement
     }
 
     @Override
-    public ItemStack getResultItem() {
+    public ItemStack getResultItem(RegistryAccess access) {
         throw new UnsupportedOperationException();
     }
 

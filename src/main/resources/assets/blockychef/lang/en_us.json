@@ -216,6 +216,6 @@
   "effect.blockychef.thirst": "Thirst",
   "effect.blockychef.hydration": "Hydration",
 
-  "death.attack.blockychef.dehydratation": "%s has died due to dehydratation",
-  "death.attack.blockychef.dehydratation.player": "%1$s has died due to dehydratation whilst fighting %2$s"
+  "death.attack.blockychef.dehydration": "%s has died due to dehydration",
+  "death.attack.blockychef.dehydration.player": "%1$s has died due to dehydration whilst fighting %2$s"
 }

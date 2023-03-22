@@ -110,6 +110,7 @@ public final class Helper {
         insertItems(items, container, container::getContainerSize, Container::getItem, Container::setItem, outputSlots);
     }
 
+    // TODO prioritize merge of same items first
     private static <T> boolean insertItems(ItemStack[] items, T t, IntSupplier maxSize, BiFunction<T, Integer, ItemStack> itemGetter, TriConsumer<T, Integer, ItemStack> itemSetter, int[] outputSlots) {
         for (ItemStack itemStack : items) {
             int limit = Math.min(maxSize.getAsInt(), itemStack.getMaxStackSize());
@@ -136,9 +137,5 @@ public final class Helper {
             }
         }
         return true;
-    }
-
-    public static int getSlotLimit(Container container, ItemStack stack) {
-        return Math.min(container.getMaxStackSize(), stack.getMaxStackSize());
     }
 }

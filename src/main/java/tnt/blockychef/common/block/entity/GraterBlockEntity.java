@@ -56,7 +56,7 @@ public class GraterBlockEntity extends RecipeRemberingBlockEntity<GratingRecipe>
         if (hasActiveRecipe()) {
             if (++gratingAmount >= recipe.getGratingAmount()) {
                 storeRecipe(recipe);
-                ItemStack output = recipe.assemble(this);
+                ItemStack output = recipe.assemble(this, level.registryAccess());
                 setRecipe(null);
                 setItem(0, ItemStack.EMPTY);
                 Helper.giveItem(player, output);

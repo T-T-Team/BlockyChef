@@ -137,7 +137,7 @@ public class DryingRackBlockEntity extends RecipeRemberingBlockEntity<DryingReci
     private void completeRecipe() {
         ticksDrying = 0;
         if (recipe != null) {
-            ItemStack result = recipe.assemble(this);
+            ItemStack result = recipe.assemble(this, level.registryAccess());
             storeRecipe(recipe);
             setItem(result);
         }

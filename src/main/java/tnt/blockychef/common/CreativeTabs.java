@@ -20,14 +20,14 @@ public final class CreativeTabs {
         event.registerCreativeModeTab(BlockyChef.resource("item"), builder -> builder
                 .icon(() -> new ItemStack(BlockyChefItems.TOMATO))
                 .title(Component.translatable("itemGroup.blockychef.items"))
-                .displayItems((featureFlags, output, hasOp) -> ForgeRegistries.ITEMS.getValues().stream()
+                .displayItems((parameters, output) -> ForgeRegistries.ITEMS.getValues().stream()
                         .filter(item -> isOurs(item) && !isBlock(item))
                         .forEach(output::accept))
         );
         event.registerCreativeModeTab(BlockyChef.resource("block"), builder -> builder
                 .icon(() -> new ItemStack(BlockyChefBlocks.STOVE))
                 .title(Component.translatable("itemGroup.blockychef.blocks"))
-                .displayItems((featureFlags, output, hasOp) -> ForgeRegistries.ITEMS.getValues().stream()
+                .displayItems((parameters, output) -> ForgeRegistries.ITEMS.getValues().stream()
                         .filter(item -> isOurs(item) && isBlock(item))
                         .forEach(output::accept))
         );

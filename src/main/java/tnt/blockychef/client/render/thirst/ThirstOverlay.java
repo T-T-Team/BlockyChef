@@ -58,7 +58,6 @@ public class ThirstOverlay implements IGuiOverlay {
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         RenderSystem.disableDepthTest();
-        RenderSystem.enableTexture();
     }
 
     private static void setAlpha(float alpha) {
@@ -78,7 +77,7 @@ public class ThirstOverlay implements IGuiOverlay {
         gui.rightHeight += 10;
         boolean isThirsty = player.hasEffect(BlockyChefMobEffects.THIRST);
         player.getCapability(PlayerThirstStatsProvider.CAPABILITY).ifPresent(stats -> {
-            renderExhaustion(poseStack, stats.getExhaustionLevel(), left, top, gui.getBlitOffset());
+            renderExhaustion(poseStack, stats.getExhaustionLevel(), left, top);
             setupRender();
             float smoothAlpha = lastAlpha + (alpha - lastAlpha) * partialTick;
             renderHeldItemStats(poseStack, gui, player, stats, isThirsty, left, top, smoothAlpha);
@@ -101,7 +100,6 @@ public class ThirstOverlay implements IGuiOverlay {
         boolean isLoss = extraHydration < 0;
         int totalHydration = hydrationLevel + Math.abs(extraHydration);
         int playerHydration = Math.min(hydrationLevel, hydrationLevel + extraHydration);
-        int z = gui.getBlitOffset();
         int j = 0;
         random.setSeed(gui.getGuiTicks() * 312871L);
         for (int i = 0; i < 10; ++i) {
@@ -114,14 +112,14 @@ public class ThirstOverlay implements IGuiOverlay {
             }
 
             // Current hydration
-            GuiComponent.blit(stack, x, y, z, thirsty ? 27 : 0, 0, 9, 9, 256, 256);
+            GuiComponent.blit(stack, x, y, 0, thirsty ? 27 : 0, 0, 9, 9, 256, 256);
             if (idx < hydrationLevel) {
-                GuiComponent.blit(stack, x, y, z, thirsty ? 36 : 9, 0, 9, 9, 256, 256);
+                GuiComponent.blit(stack, x, y, 0, thirsty ? 36 : 9, 0, 9, 9, 256, 256);
                 if (idx <= playerHydration) {
                     j = i;
                 }
             } else if (idx == hydrationLevel) {
-                GuiComponent.blit(stack, x, y, z, thirsty ? 45 : 18, 0, 9, 9, 256, 256);
+                GuiComponent.blit(stack, x, y, 0, thirsty ? 45 : 18, 0, 9, 9, 256, 256);
                 if (idx <= playerHydration) {
                     j = i;
                 }
@@ -130,9 +128,9 @@ public class ThirstOverlay implements IGuiOverlay {
             if (!isLoss) {
                 setAlpha(alpha);
                 if (idx < totalHydration) {
-                    GuiComponent.blit(stack, x, y, z, thirsty ? 36 : 9, 0, 9, 9, 256, 256);
+                    GuiComponent.blit(stack, x, y, 0, thirsty ? 36 : 9, 0, 9, 9, 256, 256);
                 } else if (idx == totalHydration) {
-                    GuiComponent.blit(stack, x, y, z, thirsty ? 45 : 18, 0, 9, 9, 256, 256);
+                    GuiComponent.blit(stack, x, y, 0, thirsty ? 45 : 18, 0, 9, 9, 256, 256);
                 }
                 resetAlpha();
             }
@@ -153,12 +151,12 @@ public class ThirstOverlay implements IGuiOverlay {
             setAlpha(alpha);
             if (idx < hydrationLevel) {
                 if (i == j && idx == playerHydration) {
-                    GuiComponent.blit(stack, x, y, z, 81, 0, 9, 9, 256, 256);
+                    GuiComponent.blit(stack, x, y, 0, 81, 0, 9, 9, 256, 256);
                 } else if (i > j) {
-                    GuiComponent.blit(stack, x, y, z, 63, 0, 9, 9, 256, 256);
+                    GuiComponent.blit(stack, x, y, 0, 63, 0, 9, 9, 256, 256);
                 }
             } else if (idx == hydrationLevel) {
-                GuiComponent.blit(stack, x, y, z, 72, 0, 9, 9, 256, 256);
+                GuiComponent.blit(stack, x, y, 0, 72, 0, 9, 9, 256, 256);
             }
             resetAlpha();
         }
@@ -166,7 +164,6 @@ public class ThirstOverlay implements IGuiOverlay {
 
     private void renderSaturation(PoseStack stack, ForgeGui gui, int hydration, float saturation, boolean thirsty, int left, int top, float alpha) {
         int intSat = Mth.ceil(Math.min(saturation, 20.0F) / 2.0F);
-        int z = gui.getBlitOffset();
         random.setSeed(gui.getGuiTicks() * 312871L);
         for (int i = 0; i < intSat; i++) {
             int x = left - i * 8 - 9;
@@ -186,17 +183,17 @@ public class ThirstOverlay implements IGuiOverlay {
                 icon += 4;
             }
             setAlpha(alpha);
-            GuiComponent.blit(stack, x, y, z, icon * 9, 9, 9, 9, 256, 256);
+            GuiComponent.blit(stack, x, y, 0, icon * 9, 9, 9, 9, 256, 256);
             resetAlpha();
         }
     }
 
-    private void renderExhaustion(PoseStack stack, float exhaustion, int left, int top, int z) {
+    private void renderExhaustion(PoseStack stack, float exhaustion, int left, int top) {
         float value = exhaustion / 4.0F;
         setAlpha(0.75F);
         Matrix4f pose = stack.last().pose();
         int xSize = (int) (value * 81);
-        RenderHelper.texturedBlit(pose, left - xSize, top, left, top + 9, z, (81.0F - xSize) / 256.0F, 18.0F / 256.0F, 81.0F / 256F, 27.0F / 256.0F);
+        RenderHelper.texturedBlit(pose, left - xSize, top, left, top + 9, 0, (81.0F - xSize) / 256.0F, 18.0F / 256.0F, 81.0F / 256F, 27.0F / 256.0F);
         resetAlpha();
     }
 

@@ -22,14 +22,14 @@ public final class SerializationHelper {
     public static <V> Codec<V> registryEntry(IForgeRegistry<V> registry) {
         return ResourceLocation.CODEC.flatXmap(location -> {
             if (!registry.containsKey(location)) {
-                return DataResult.error("Unknown ID: " + location + ", does not exist in " + registry.getRegistryName() + " registry");
+                return DataResult.error(() -> "Unknown ID: " + location + ", does not exist in " + registry.getRegistryName() + " registry");
             }
             V value = registry.getValue(location);
             return DataResult.success(value);
         }, value -> {
             ResourceLocation key = registry.getKey(value);
             if (key == null) {
-                return DataResult.error("Value is not registered");
+                return DataResult.error(() -> "Value is not registered");
             }
             return DataResult.success(key);
         });

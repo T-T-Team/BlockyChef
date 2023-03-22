@@ -53,9 +53,6 @@ import java.util.List;
 @Mod.EventBusSubscriber(modid = BlockyChef.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class Registry {
 
-    // Damage Sources ---
-    public static final DamageSource DEHYDRATATION = new DamageSource("blockychef.dehydratation").bypassArmor().bypassMagic();
-
     private static List<Block> blockEntries = new ArrayList<>();
 
     @SubscribeEvent

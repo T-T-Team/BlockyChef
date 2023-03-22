@@ -1,11 +1,16 @@
 package tnt.blockychef.common.thirst;
 
+import net.minecraft.core.Registry;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.player.Player;
-import tnt.blockychef.common.Registry;
+import tnt.blockychef.common.init.BlockyChefDamageTypes;
 import tnt.blockychef.network.NetworkManager;
 import tnt.blockychef.network.packet.S2C_SendThirstData;
 
@@ -37,7 +42,10 @@ public class PlayerThirstStats implements ThirstStats {
             ++tickTimer;
             if (tickTimer >= 80) {
                 if (player.getHealth() > 10.0F || difficulty == Difficulty.HARD || player.getHealth() > 1.0F && difficulty == Difficulty.NORMAL) {
-                    player.hurt(Registry.DEHYDRATATION, 1.0F);
+                    // TODO possibly could be done in a better way
+                    RegistryAccess access = player.level.registryAccess();
+                    Registry<DamageType> registry = access.registryOrThrow(Registries.DAMAGE_TYPE);
+                    player.hurt(new DamageSource(registry.getHolderOrThrow(BlockyChefDamageTypes.DEHYDRATION)), 1.0F);
                 }
 
                 tickTimer = 0;
