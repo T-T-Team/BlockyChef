@@ -25,6 +25,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import tnt.blockychef.BlockyChef;
+import tnt.blockychef.config.PlantDecay;
 
 public class TreeHangingFruitBlock extends BushBlock implements BonemealableBlock {
 
@@ -107,9 +108,16 @@ public class TreeHangingFruitBlock extends BushBlock implements BonemealableBloc
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (!DecayingGrowingBlock.canTick(level, pos)) return;
         if (this.isRipe(state)) {
-            if (!level.isClientSide && random.nextFloat() < 0.1F) {
-                level.destroyBlock(pos, false);
-                level.setBlock(pos, state.setValue(AGE, 0), 2);
+            PlantDecay decay = BlockyChef.config.decay;
+            if (!level.isClientSide && random.nextFloat() < decay.treeFruitDecayChance) {
+                if (decay.treeFruitDecayKillsPlant) {
+                    level.destroyBlock(pos, decay.treeFruitDecayDropsFruit);
+                } else {
+                    if (decay.treeFruitDecayDropsFruit) {
+                        dropResources(state, level, pos);
+                    }
+                    level.setBlock(pos, state.setValue(AGE, 0), 2);
+                }
             }
         } else {
             float growthChance = 0.05F;
