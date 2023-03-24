@@ -1,6 +1,5 @@
 package tnt.blockychef.common.food.recipe;
 
-import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -19,45 +18,56 @@ import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.util.SerializationHelper;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 
 public class CuttingBoardRecipe extends AbstractFoodRecipe<CuttingBoardBlockEntity> {
 
     public static final CodecRecipeSerializer.CodecProvider<CuttingBoardRecipe> CODEC_PROVIDER = recipeId -> RecordCodecBuilder.create(instance -> instance.group(
             SerializationHelper.INGREDIENT_CODEC.fieldOf("input").forGetter(t -> t.input),
-            Codec.unboundedMap(
-                    ResourceLocation.CODEC.comapFlatMap(
-                            id -> RecipeProcessingTypes.getById(id).map(DataResult::success).orElse(DataResult.error(() -> "Unknown recipe processing type")),
-                            RecipeProcessingType::getLocation
-                    ),
-                    CuttingBoardSubRecipe.CODEC
-            ).fieldOf("values").forGetter(t -> t.subRecipeMap),
+            ResourceLocation.CODEC.comapFlatMap(
+                    location -> RecipeProcessingTypes.getById(location).map(DataResult::success).orElse(DataResult.error(() -> "Unknown recipe processing type '" + location + "'")),
+                    RecipeProcessingType::getLocation
+            ).fieldOf("processingType").forGetter(CuttingBoardRecipe::getProcessingType),
+            Codec.INT.optionalFieldOf("processingTime", 100).forGetter(CuttingBoardRecipe::getProcessingTime),
+            SerializationHelper.SIMPLE_ITEMSTACK_CODEC.listOf().xmap(
+                    list -> list.toArray(new ItemStack[0]),
+                    Arrays::asList
+            ).fieldOf("outputs").forGetter(CuttingBoardRecipe::getOutputs),
             Codec.FLOAT.optionalFieldOf("experience", 0.0F).forGetter(AbstractFoodRecipe::getExperience)
-    ).apply(instance, (ingredient, subRecipeMap, exp) -> new CuttingBoardRecipe(recipeId, ingredient, subRecipeMap, exp)));
+    ).apply(instance, (input, type, time, outputs, exp) -> new CuttingBoardRecipe(recipeId, input, type, time, outputs, exp)));
+
     private final Ingredient input;
-    private final Map<RecipeProcessingType, CuttingBoardSubRecipe> subRecipeMap;
+    private final RecipeProcessingType processingType;
+    private final int processingTime;
+    private final ItemStack[] outputs;
 
-    public CuttingBoardRecipe(ResourceLocation id, Ingredient input, Map<RecipeProcessingType, CuttingBoardSubRecipe> subRecipeMap, float experience) {
+    private CuttingBoardRecipe(ResourceLocation id, Ingredient input, RecipeProcessingType processingType, int processingTime, ItemStack[] outputs, float experience) {
         super(id, experience);
+        this.processingType = processingType;
+        this.processingTime = processingTime;
+        this.outputs = outputs;
         this.input = input;
-        this.subRecipeMap = subRecipeMap;
-    }
-
-    public CuttingBoardSubRecipe getSubRecipe(RecipeProcessingType recipeProcessingType) {
-        return subRecipeMap.get(recipeProcessingType);
-    }
-
-    public RecipeProcessingType getFirstProcessingType() {
-        return getRecipeProcessingTypes().get(0);
-    }
-
-    public List<RecipeProcessingType> getRecipeProcessingTypes() {
-        return ImmutableList.copyOf(subRecipeMap.keySet());
+        if (processingTime < 1) {
+            throwValidationError("Processing time cannot be lower than 1");
+        }
+        if (outputs.length > CuttingBoardBlockEntity.SLOT_OUTPUTS.length) {
+            throwValidationError(String.format("Output amount of %d exceeds maximum output amount of %d", outputs.length, CuttingBoardBlockEntity.SLOT_OUTPUTS.length));
+        }
     }
 
     public boolean isValidInput(ItemStack stack) {
         return this.input.test(stack);
+    }
+
+    public RecipeProcessingType getProcessingType() {
+        return processingType;
+    }
+
+    public int getProcessingTime() {
+        return processingTime;
+    }
+
+    public ItemStack[] getOutputs() {
+        return outputs;
     }
 
     @Override
@@ -68,7 +78,7 @@ public class CuttingBoardRecipe extends AbstractFoodRecipe<CuttingBoardBlockEnti
 
     @Override
     public ItemStack assemble(CuttingBoardBlockEntity board, RegistryAccess access) {
-        throw new UnsupportedOperationException(); // TODO implement
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -86,26 +96,16 @@ public class CuttingBoardRecipe extends AbstractFoodRecipe<CuttingBoardBlockEnti
         return BlockyChefRecipeSerializers.CUTTING_BOARD_RECIPE_SERIALIZER;
     }
 
-    public static final class CuttingBoardSubRecipe {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CuttingBoardRecipe that = (CuttingBoardRecipe) o;
+        return processingType.equals(that.processingType);
+    }
 
-        static final Codec<CuttingBoardSubRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                SerializationHelper.SIMPLE_ITEMSTACK_CODEC.listOf().fieldOf("outputs").forGetter(t -> Arrays.asList(t.outputs)),
-                Codec.INT.fieldOf("time").forGetter(CuttingBoardSubRecipe::getTime)
-        ).apply(instance, (itemStacks, integer) -> new CuttingBoardSubRecipe(itemStacks.toArray(new ItemStack[0]), integer)));
-        private final ItemStack[] outputs;
-        private final int time;
-
-        public CuttingBoardSubRecipe(ItemStack[] outputs, int time) {
-            this.outputs = outputs;
-            this.time = time;
-        }
-
-        public int getTime() {
-            return time;
-        }
-
-        public ItemStack[] getOutputs() {
-            return outputs;
-        }
+    @Override
+    public int hashCode() {
+        return processingType.hashCode();
     }
 }

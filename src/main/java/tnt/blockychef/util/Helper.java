@@ -11,6 +11,9 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -28,6 +31,8 @@ import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.IntSupplier;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public final class Helper {
 
@@ -94,6 +99,22 @@ public final class Helper {
                 compoundTagINBTSerializable.deserializeNBT(tag.getCompound("inventory"));
             }
         }
+    }
+
+    public static <T> Optional<T> find(Collection<T> collection, Predicate<T> filter) {
+        for (T t : collection) {
+            if (filter.test(t)) {
+                return Optional.of(t);
+            }
+        }
+        return Optional.empty();
+    }
+
+    public static <C extends Container, R extends Recipe<C>> List<R> getAllValidRecipes(Level level, RecipeType<R> recipeType, C container) {
+        RecipeManager manager = level.getRecipeManager();
+        return manager.getAllRecipesFor(recipeType).stream()
+                .filter(recipe -> recipe.matches(container, level))
+                .collect(Collectors.toList());
     }
 
     public static boolean canFitItems(ItemStack[] items, Container container, int[] validSlots) {

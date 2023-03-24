@@ -3,16 +3,12 @@
   "input": {
     "item": "minecraft:potato"
   },
-  "values": [
+  "processingType": "blockychef:cutting",
+  "processingTime": 40,
+  "outputs": [
     {
-      "processingType": "blockychef:cutting",
-      "outputs": [
-        {
-          "item": "blockychef:cut_potato",
-          "count": 2
-        }
-      ],
-      "time": 60
+      "item": "minecraft:carrot",
+      "count": 2
     }
   ],
   "experience": 0.1
