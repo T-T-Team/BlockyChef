@@ -1,7 +1,6 @@
 package tnt.blockychef.common;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.EntityType;
@@ -32,13 +31,13 @@ import tnt.blockychef.common.effect.HydrationMobEffect;
 import tnt.blockychef.common.effect.ThirstMobEffect;
 import tnt.blockychef.common.food.DrinkList;
 import tnt.blockychef.common.food.FoodList;
+import tnt.blockychef.common.food.recipe.CodecRecipeSerializer;
 import tnt.blockychef.common.food.recipe.CuttingBoardRecipe;
 import tnt.blockychef.common.food.recipe.DryingRecipe;
 import tnt.blockychef.common.food.recipe.GratingRecipe;
-import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefBlocks;
-import tnt.blockychef.common.init.BlockyChefTrees;
 import tnt.blockychef.common.init.BlockyChefItems;
+import tnt.blockychef.common.init.BlockyChefTrees;
 import tnt.blockychef.common.item.CropSeedsItem;
 import tnt.blockychef.common.item.DrinkableItem;
 import tnt.blockychef.common.item.EdibleCropSeedItem;
@@ -326,9 +325,9 @@ public final class Registry {
     }
 
     private static void registerRecipeSerializers(RegisterEvent.RegisterHelper<RecipeSerializer<?>> helper) {
-        helper.register("drying", new DryingRecipe.Serializer());
-        helper.register("grating", new GratingRecipe.Serializer());
-        helper.register("cutting_board", new CuttingBoardRecipe.Serializer());
+        helper.register("drying", CodecRecipeSerializer.forCodec(DryingRecipe.CODEC_PROVIDER));
+        helper.register("grating", CodecRecipeSerializer.forCodec(GratingRecipe.CODEC_PROVIDER));
+        helper.register("cutting_board", CodecRecipeSerializer.forCodec(CuttingBoardRecipe.CODEC_PROVIDER));
     }
 
     private static void registerFeatures(RegisterEvent.RegisterHelper<Feature<?>> helper) {

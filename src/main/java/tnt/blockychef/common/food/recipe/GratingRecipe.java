@@ -1,6 +1,10 @@
 package tnt.blockychef.common.food.recipe;
 
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonSyntaxException;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -18,15 +22,24 @@ import tnt.blockychef.util.SerializationHelper;
 
 public class GratingRecipe extends AbstractFoodRecipe<GraterBlockEntity> {
 
+    public static final CodecRecipeSerializer.CodecProvider<GratingRecipe> CODEC_PROVIDER = recipeId -> RecordCodecBuilder.create(instance -> instance.group(
+            SerializationHelper.INGREDIENT_CODEC.fieldOf("input").forGetter(t -> t.input),
+            SerializationHelper.SIMPLE_ITEMSTACK_CODEC.fieldOf("output").forGetter(t -> t.output),
+            Codec.INT.optionalFieldOf("gratingAmount", 3).forGetter(GratingRecipe::getGratingAmount),
+            Codec.FLOAT.optionalFieldOf("experience", 0.0F).forGetter(AbstractFoodRecipe::getExperience)
+    ).apply(instance, (ingredient, stack, amount, exp) -> new GratingRecipe(recipeId, ingredient, stack, amount, exp)));
     private final Ingredient input;
     private final ItemStack output;
     private final int gratingAmount;
 
-    public GratingRecipe(ResourceLocation id, Ingredient input, ItemStack output, int gratingAmount, float experience) {
+    private GratingRecipe(ResourceLocation id, Ingredient input, ItemStack output, int gratingAmount, float experience) throws JsonParseException {
         super(id, experience);
         this.input = input;
         this.output = output;
         this.gratingAmount = gratingAmount;
+        if (gratingAmount < 1) {
+            throwValidationError("Grating amount cannot be lower than 1");
+        }
     }
 
     public boolean isValidInput(ItemStack stack) {
@@ -61,35 +74,5 @@ public class GratingRecipe extends AbstractFoodRecipe<GraterBlockEntity> {
     @Override
     public RecipeType<?> getType() {
         return BlockyChefRecipeTypes.GRATING_RECIPE;
-    }
-
-    public static final class Serializer implements RecipeSerializer<GratingRecipe> {
-
-        @Override
-        public GratingRecipe fromJson(ResourceLocation id, JsonObject json) {
-            Ingredient ingredient = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "input"));
-            JsonObject output = GsonHelper.getAsJsonObject(json, "output");
-            ItemStack result = SerializationHelper.resolveItemStackFromJson(output);
-            int gratingAmount = GsonHelper.getAsInt(json, "gratingAmount", 3);
-            float experience = GsonHelper.getAsFloat(json, "experience", 0.0F);
-            return new GratingRecipe(id, ingredient, result, gratingAmount, experience);
-        }
-
-        @Override
-        public @Nullable GratingRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buffer) {
-            Ingredient ingredient = Ingredient.fromNetwork(buffer);
-            ItemStack stack = buffer.readItem();
-            int gratingAmount = buffer.readInt();
-            float experience = buffer.readFloat();
-            return new GratingRecipe(id, ingredient, stack, gratingAmount, experience);
-        }
-
-        @Override
-        public void toNetwork(FriendlyByteBuf buffer, GratingRecipe recipe) {
-            recipe.input.toNetwork(buffer);
-            buffer.writeItem(recipe.output);
-            buffer.writeInt(recipe.gratingAmount);
-            buffer.writeFloat(recipe.getExperience());
-        }
     }
 }
