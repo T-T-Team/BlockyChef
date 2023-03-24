@@ -1,0 +1,49 @@
+package tnt.blockychef.common.menu;
+
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.items.SlotItemHandler;
+import tnt.blockychef.common.block.CuttingBoardBlock;
+import tnt.blockychef.common.block.entity.CuttingBoardBlockEntity;
+import tnt.blockychef.common.init.BlockychefMenuTypes;
+import tnt.blockychef.util.MenuQuickMoveHelper;
+
+public class CuttingBoardMenu extends AbstractBlockEntityMenu<CuttingBoardBlockEntity> {
+
+    private final MenuQuickMoveHelper quickMoveHelper;
+
+    public CuttingBoardMenu(int menuId, Inventory inventory, CuttingBoardBlockEntity blockEntity) {
+        super(BlockychefMenuTypes.CUTTING_BOARD, menuId, blockEntity);
+        this.quickMoveHelper = MenuQuickMoveHelper.inputOutputInventory(() -> slots, this::moveItemStackTo, new int[] {CuttingBoardBlockEntity.SLOT_INPUT}, CuttingBoardBlockEntity.SLOT_OUTPUTS);
+
+        addSlot(new SlotItemHandler(blockEntity.getItemHandler(), CuttingBoardBlockEntity.SLOT_INPUT, 26, 36));
+        for (int y = 0; y < CuttingBoardBlockEntity.SLOT_OUTPUTS.length; y++) {
+            addSlot(new ItemHandlerOutputSlot(blockEntity.getItemHandler(), CuttingBoardBlockEntity.SLOT_OUTPUTS[y], 134, 18 + y * 18));
+        }
+
+        addPlayerSlots(inventory, 8, 92);
+    }
+
+    public CuttingBoardMenu(int menuId, Inventory inventory, FriendlyByteBuf buffer) {
+        this(menuId, inventory, resolveBlockEntityUnsafe(inventory, buffer));
+    }
+
+    @Override
+    public boolean stillValid(Player player) {
+        return access.evaluate((level, pos) -> {
+            BlockState state = level.getBlockState(pos);
+            if (state.getBlock() instanceof CuttingBoardBlock) {
+                return player.distanceToSqr(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) <= 64.0;
+            }
+            return false;
+        }, true);
+    }
+
+    @Override
+    public ItemStack quickMoveStack(Player player, int slotIndex) {
+        return quickMoveHelper.quickMove(player, slotIndex);
+    }
+}

@@ -12,6 +12,7 @@ import tnt.blockychef.common.food.recipe.CuttingBoardRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.util.Helper;
+import tnt.blockychef.util.MenuInventoryHelper;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
@@ -35,7 +36,7 @@ public class CuttingBoardBlockEntity extends RecipeRemberingBlockEntity<CuttingB
     public static void tick(Level level, BlockPos pos, BlockState state, CuttingBoardBlockEntity cuttingBoard) {
         if (cuttingBoard.processing && cuttingBoard.recipe != null) {
             ItemStack[] outputs = cuttingBoard.recipe.getOutputs();
-            if (Helper.canFitItems(outputs, cuttingBoard, SLOT_OUTPUTS)) {
+            if (MenuInventoryHelper.canFitItems(outputs, cuttingBoard, SLOT_OUTPUTS)) {
                 if (++cuttingBoard.timeProcessing >= cuttingBoard.recipe.getProcessingTime()) {
                     cuttingBoard.completeRecipe();
                 }
@@ -126,7 +127,7 @@ public class CuttingBoardBlockEntity extends RecipeRemberingBlockEntity<CuttingB
     private void completeRecipe() {
         storeRecipe(recipe);
         ItemStack[] outputs = recipe.getOutputs();
-        Helper.insertItems(outputs, this, SLOT_OUTPUTS);
+        MenuInventoryHelper.insertItems(outputs, this, SLOT_OUTPUTS);
         ItemStack stack = getInputItem();
         stack.shrink(1);
         setRecipe(null);

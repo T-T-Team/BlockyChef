@@ -17,6 +17,7 @@ import tnt.blockychef.common.food.recipe.DryingRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.util.Helper;
+import tnt.blockychef.util.MenuInventoryHelper;
 
 import java.util.List;
 import java.util.Optional;
@@ -64,7 +65,7 @@ public class DryingRackBlockEntity extends RecipeRemberingBlockEntity<DryingReci
             return;
         if (player == null) {
             getRecipesToAwardAndPopExperience((ServerLevel) level, Vec3.atCenterOf(worldPosition));
-            Helper.dropInventoryContents(level, worldPosition, inventoryHandler);
+            MenuInventoryHelper.dropInventoryContents(level, worldPosition, inventoryHandler);
         } else {
             ItemStack stack = inventoryHandler.getStackInSlot(0);
             if (!stack.isEmpty()) {

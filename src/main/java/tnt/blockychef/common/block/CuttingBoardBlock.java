@@ -1,6 +1,12 @@
 package tnt.blockychef.common.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -11,16 +17,20 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.block.entity.CuttingBoardBlockEntity;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
+import tnt.blockychef.common.menu.CuttingBoardMenu;
 import tnt.blockychef.util.Helper;
 
 public class CuttingBoardBlock extends FullHorizontalAxisBlock implements EntityBlock {
 
     private static final VoxelShape HITBOX = Block.box(2.0, 0.0, 2.0, 14.0, 2.0, 14.0);
+    private static final Component SCREEN_TITLE = Component.translatable("screen.blockychef.cutting_board");
 
     public CuttingBoardBlock() {
         super(Properties.of(Material.WOOD).sound(SoundType.WOOD).strength(2.0F));
@@ -37,7 +47,20 @@ public class CuttingBoardBlock extends FullHorizontalAxisBlock implements Entity
         return BlockyChefBlockEntities.CUTTING_BOARD.create(pos, state);
     }
 
-    // TODO interation
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof CuttingBoardBlockEntity cuttingBoard) {
+            if (!level.isClientSide) {
+                NetworkHooks.openScreen((ServerPlayer) player, new SimpleMenuProvider(
+                        (menuId, inventory, interactionPlayer) -> new CuttingBoardMenu(menuId, inventory, cuttingBoard),
+                        SCREEN_TITLE
+                ), pos);
+                return InteractionResult.SUCCESS;
+            }
+        }
+        return InteractionResult.PASS;
+    }
 
     @Nullable
     @Override

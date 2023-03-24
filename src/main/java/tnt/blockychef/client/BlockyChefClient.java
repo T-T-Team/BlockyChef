@@ -2,6 +2,7 @@ package tnt.blockychef.client;
 
 import dev.toma.configuration.Configuration;
 import dev.toma.configuration.config.format.ConfigFormats;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.FoliageColor;
@@ -18,10 +19,12 @@ import tnt.blockychef.client.render.block.DryingRackBlockEntityRenderer;
 import tnt.blockychef.client.render.block.GraterBlockEntityRenderer;
 import tnt.blockychef.client.render.thirst.ThirstOverlay;
 import tnt.blockychef.client.render.thirst.ThirstTooltipHandler;
+import tnt.blockychef.client.screen.CuttingBoardScreen;
 import tnt.blockychef.common.block.DyeableBlock;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 import tnt.blockychef.common.init.BlockyChefItems;
+import tnt.blockychef.common.init.BlockychefMenuTypes;
 import tnt.blockychef.integrations.Integrations;
 
 public final class BlockyChefClient {
@@ -49,6 +52,7 @@ public final class BlockyChefClient {
 
     private void setup(FMLClientSetupEvent event) {
         Integrations.accept(layer -> layer.setup(event));
+        event.enqueueWork(this::registerScreenFactories);
     }
 
     private void registerGuiOverlays(RegisterGuiOverlaysEvent event) {
@@ -58,6 +62,10 @@ public final class BlockyChefClient {
     private void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(BlockyChefBlockEntities.DRYING_RACK, DryingRackBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(BlockyChefBlockEntities.GRATER, GraterBlockEntityRenderer::new);
+    }
+
+    private void registerScreenFactories() {
+        MenuScreens.register(BlockychefMenuTypes.CUTTING_BOARD, CuttingBoardScreen::new);
     }
 
     private void registerBlockColors(RegisterColorHandlersEvent.Block event) {

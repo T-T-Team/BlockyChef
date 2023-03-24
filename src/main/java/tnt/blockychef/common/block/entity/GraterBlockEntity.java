@@ -15,6 +15,7 @@ import tnt.blockychef.common.food.recipe.GratingRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.util.Helper;
+import tnt.blockychef.util.MenuInventoryHelper;
 
 import java.util.List;
 import java.util.Optional;
@@ -48,7 +49,7 @@ public class GraterBlockEntity extends RecipeRemberingBlockEntity<GratingRecipe>
     public void drop() {
         if (level.isClientSide)
             return;
-        Helper.dropInventoryContents(level, worldPosition, this);
+        MenuInventoryHelper.dropInventoryContents(level, worldPosition, this);
         getRecipesToAwardAndPopExperience((ServerLevel) level, Vec3.atCenterOf(worldPosition));
     }
 
@@ -63,7 +64,7 @@ public class GraterBlockEntity extends RecipeRemberingBlockEntity<GratingRecipe>
                 awardUsedRecipesAndPopExperience(player);
             }
         } else if (!level.isClientSide) {
-            Helper.dropInventoryContents(level, worldPosition, this);
+            MenuInventoryHelper.dropInventoryContents(level, worldPosition, this);
         }
         setChanged();
         Helper.sendBlockEntityClientData(this);

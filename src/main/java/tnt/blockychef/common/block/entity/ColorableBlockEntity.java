@@ -5,6 +5,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import tnt.blockychef.util.Helper;
+import tnt.blockychef.util.MenuInventoryHelper;
 
 import java.util.Arrays;
 
@@ -36,13 +37,13 @@ public abstract class ColorableBlockEntity extends InventoryBlockEntity implemen
 
     @Override
     public void encodeBlockEntityData(CompoundTag tag) {
-        Helper.encodeInventory(this.inventoryHandler, tag);
+        MenuInventoryHelper.encodeInventory(this.inventoryHandler, tag);
         tag.putIntArray("colors", this.colors);
     }
 
     @Override
     public void decodeBlockEntityData(CompoundTag tag) {
-        Helper.decodeInventory(this.inventoryHandler, tag);
+        MenuInventoryHelper.decodeInventory(this.inventoryHandler, tag);
         this.colors = tag.getIntArray("colors");
     }
 
