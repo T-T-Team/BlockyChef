@@ -9,10 +9,11 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import tnt.blockychef.util.MenuQuickMoveHelper;
 
 public abstract class AbstractBlockEntityMenu<B extends BlockEntity> extends AbstractContainerMenu {
 
-    protected final BlockEntity blockEntity;
+    protected final B blockEntity;
     protected final ContainerLevelAccess access;
 
     public AbstractBlockEntityMenu(MenuType<? extends AbstractBlockEntityMenu<B>> menuType, int menuId, B blockEntity) {
@@ -21,7 +22,7 @@ public abstract class AbstractBlockEntityMenu<B extends BlockEntity> extends Abs
         this.access = ContainerLevelAccess.create(blockEntity.getLevel(), blockEntity.getBlockPos());
     }
 
-    public BlockEntity getBlockEntity() {
+    public B getBlockEntity() {
         return blockEntity;
     }
 
@@ -42,5 +43,9 @@ public abstract class AbstractBlockEntityMenu<B extends BlockEntity> extends Abs
         for (int x = 0; x < 9; x++) {
             addSlot(new Slot(inventory, x, startX + x * 18, startY + 58));
         }
+    }
+
+    protected MenuQuickMoveHelper.QuickMoveContext getQuickMoveContext() {
+        return MenuQuickMoveHelper.QuickMoveContext.of(() -> slots, this::moveItemStackTo);
     }
 }

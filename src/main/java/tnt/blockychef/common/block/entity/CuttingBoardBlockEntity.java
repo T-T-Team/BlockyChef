@@ -15,16 +15,16 @@ import tnt.blockychef.util.Helper;
 import tnt.blockychef.util.MenuInventoryHelper;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 public class CuttingBoardBlockEntity extends RecipeRemberingBlockEntity<CuttingBoardRecipe> implements SynchronizableBlockEntity {
 
     public static final int SLOT_INPUT = 0;
     public static final int[] SLOT_OUTPUTS = {1, 2, 3};
 
-    private Set<CuttingBoardRecipe> availableRecipes = Collections.emptySet();
+    private List<CuttingBoardRecipe> availableRecipes = Collections.emptyList();
     private CuttingBoardRecipe recipe;
     private boolean processing;
     private int timeProcessing;
@@ -46,6 +46,11 @@ public class CuttingBoardBlockEntity extends RecipeRemberingBlockEntity<CuttingB
                 Helper.sendBlockEntityClientData(cuttingBoard);
             }
         }
+    }
+
+    public void onInputChanged() {
+        refreshAvailableRecipes();
+        setChanged();
     }
 
     public void setProcessing(boolean processing) {
@@ -110,10 +115,23 @@ public class CuttingBoardBlockEntity extends RecipeRemberingBlockEntity<CuttingB
         decodeBlockEntityData(tag);
     }
 
+    @Nullable
+    public CuttingBoardRecipe getRecipe() {
+        return recipe;
+    }
+
+    public boolean hasMultipleRecipes() {
+        return availableRecipes.size() > 1;
+    }
+
     private void refreshAvailableRecipes() {
         if (level == null)
             return;
-        availableRecipes = new HashSet<>(Helper.getAllValidRecipes(level, BlockyChefRecipeTypes.CUTTING_BOARD_RECIPE, this));
+        availableRecipes = new ArrayList<>(Helper.getAllValidRecipes(level, BlockyChefRecipeTypes.CUTTING_BOARD_RECIPE, this));
+        if (availableRecipes.size() > 0 && (recipe == null || !availableRecipes.contains(recipe))) {
+            recipe = availableRecipes.get(0);
+        }
+        //Helper.sendBlockEntityClientData(this);
     }
 
     private void setRecipe(@Nullable CuttingBoardRecipe recipe) {

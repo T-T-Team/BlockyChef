@@ -30,7 +30,7 @@ import tnt.blockychef.util.Helper;
 public class CuttingBoardBlock extends FullHorizontalAxisBlock implements EntityBlock {
 
     private static final VoxelShape HITBOX = Block.box(2.0, 0.0, 2.0, 14.0, 2.0, 14.0);
-    private static final Component SCREEN_TITLE = Component.translatable("screen.blockychef.cutting_board");
+    public static final Component SCREEN_TITLE = Component.translatable("screen.blockychef.cutting_board");
 
     public CuttingBoardBlock() {
         super(Properties.of(Material.WOOD).sound(SoundType.WOOD).strength(2.0F));

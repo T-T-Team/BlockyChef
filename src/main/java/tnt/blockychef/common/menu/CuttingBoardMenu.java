@@ -3,6 +3,7 @@ package tnt.blockychef.common.menu;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.SlotItemHandler;
@@ -17,14 +18,16 @@ public class CuttingBoardMenu extends AbstractBlockEntityMenu<CuttingBoardBlockE
 
     public CuttingBoardMenu(int menuId, Inventory inventory, CuttingBoardBlockEntity blockEntity) {
         super(BlockychefMenuTypes.CUTTING_BOARD, menuId, blockEntity);
-        this.quickMoveHelper = MenuQuickMoveHelper.inputOutputInventory(() -> slots, this::moveItemStackTo, new int[] {CuttingBoardBlockEntity.SLOT_INPUT}, CuttingBoardBlockEntity.SLOT_OUTPUTS);
+        this.quickMoveHelper = MenuQuickMoveHelper.inputOutputInventory(getQuickMoveContext(), new int[] {CuttingBoardBlockEntity.SLOT_INPUT}, CuttingBoardBlockEntity.SLOT_OUTPUTS);
 
         addSlot(new SlotItemHandler(blockEntity.getItemHandler(), CuttingBoardBlockEntity.SLOT_INPUT, 26, 36));
         for (int y = 0; y < CuttingBoardBlockEntity.SLOT_OUTPUTS.length; y++) {
             addSlot(new ItemHandlerOutputSlot(blockEntity.getItemHandler(), CuttingBoardBlockEntity.SLOT_OUTPUTS[y], 134, 18 + y * 18));
         }
 
-        addPlayerSlots(inventory, 8, 92);
+        addPlayerSlots(inventory, 8, 113);
+
+        addSlotListener(new SimpleSlotListener(this::slotChanged));
     }
 
     public CuttingBoardMenu(int menuId, Inventory inventory, FriendlyByteBuf buffer) {
@@ -45,5 +48,11 @@ public class CuttingBoardMenu extends AbstractBlockEntityMenu<CuttingBoardBlockE
     @Override
     public ItemStack quickMoveStack(Player player, int slotIndex) {
         return quickMoveHelper.quickMove(player, slotIndex);
+    }
+
+    private void slotChanged(AbstractContainerMenu menu, int index, ItemStack stack) {
+        if (index == 0) {
+            blockEntity.onInputChanged();
+        }
     }
 }
