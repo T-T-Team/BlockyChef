@@ -2,17 +2,22 @@ package tnt.blockychef.common.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
+import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.food.recipe.CuttingBoardRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.util.Helper;
 import tnt.blockychef.util.MenuInventoryHelper;
+import tnt.blockychef.util.SerializationHelper;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -62,6 +67,10 @@ public class CuttingBoardBlockEntity extends RecipeRemberingBlockEntity<CuttingB
         return processing;
     }
 
+    public int getRecipeIndex() {
+        return recipe == null ? -1 : availableRecipes.indexOf(recipe);
+    }
+
     public float getProcessingProgress(float partialTicks) {
         if (recipe == null)
             return 0.0F;
@@ -82,37 +91,33 @@ public class CuttingBoardBlockEntity extends RecipeRemberingBlockEntity<CuttingB
     }
 
     @Override
-    public void encodeBlockEntityData(CompoundTag tag) {
+    public void setChanged() {
+        super.setChanged();
         refreshAvailableRecipes();
-        if (recipe != null) {
-            tag.putString("recipe", recipe.getId().toString());
-        }
-        tag.putBoolean("processing", processing);
-        tag.putInt("processingTime", timeProcessing);
+    }
+
+    @Override
+    public void encodeBlockEntityData(CompoundTag tag) {
+        MenuInventoryHelper.encodeInventory(getItemHandler(), tag);
+        saveCommonData(tag);
     }
 
     @Override
     public void decodeBlockEntityData(CompoundTag tag) {
-        refreshAvailableRecipes();
-        if (tag.contains("recipe")) {
-            ResourceLocation location = new ResourceLocation(tag.getString("recipe"));
-            recipe = Helper.find(availableRecipes, recipe -> recipe.getId().equals(location))
-                        .orElse(null);
-        }
-        processing = tag.getBoolean("processing");
-        timeProcessing = tag.getInt("processingTime");
+        MenuInventoryHelper.decodeInventory(getItemHandler(), tag);
+        loadCommonData(tag);
     }
 
     @Override
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
-        encodeBlockEntityData(tag);
+        saveCommonData(tag);
     }
 
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
-        decodeBlockEntityData(tag);
+        loadCommonData(tag);
     }
 
     @Nullable
@@ -124,6 +129,40 @@ public class CuttingBoardBlockEntity extends RecipeRemberingBlockEntity<CuttingB
         return availableRecipes.size() > 1;
     }
 
+    public int getAvailableRecipeCount() {
+        return availableRecipes.size();
+    }
+
+    public void changeRecipe(int direction) {
+        int index = getRecipeIndex();
+        int next = index + direction;
+        if (next >= 0 && next < getAvailableRecipeCount()) {
+            CuttingBoardRecipe recipe = availableRecipes.get(next);
+            setRecipe(recipe);
+        }
+    }
+
+    private void saveCommonData(CompoundTag tag) {
+        if (recipe != null) {
+            tag.putString("recipe", recipe.getId().toString());
+        }
+        tag.putBoolean("processing", processing);
+        tag.putInt("processingTime", timeProcessing);
+    }
+
+    private void loadCommonData(CompoundTag tag) {
+        refreshAvailableRecipes();
+        if (tag.contains("recipe")) {
+            ResourceLocation location = new ResourceLocation(tag.getString("recipe"));
+            recipe = Helper.find(availableRecipes, recipe -> recipe.getId().equals(location))
+                    .orElse(null);
+        } else {
+            recipe = null;
+        }
+        processing = tag.getBoolean("processing");
+        timeProcessing = tag.getInt("processingTime");
+    }
+
     private void refreshAvailableRecipes() {
         if (level == null)
             return;
@@ -131,7 +170,7 @@ public class CuttingBoardBlockEntity extends RecipeRemberingBlockEntity<CuttingB
         if (availableRecipes.size() > 0 && (recipe == null || !availableRecipes.contains(recipe))) {
             recipe = availableRecipes.get(0);
         }
-        //Helper.sendBlockEntityClientData(this);
+        Helper.sendBlockEntityClientData(this);
     }
 
     private void setRecipe(@Nullable CuttingBoardRecipe recipe) {

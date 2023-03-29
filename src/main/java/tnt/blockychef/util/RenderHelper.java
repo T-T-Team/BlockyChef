@@ -3,7 +3,10 @@ package tnt.blockychef.util;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.util.Mth;
 import org.joml.Matrix4f;
+
+import java.util.function.UnaryOperator;
 
 public final class RenderHelper {
 
@@ -16,5 +19,29 @@ public final class RenderHelper {
         buffer.vertex(pose, x2, y2, z).uv(u2, v2).endVertex();
         buffer.vertex(pose, x2, y1, z).uv(u2, v1).endVertex();
         BufferUploader.drawWithShader(buffer.end());
+    }
+
+    public static float applyEasing(float in, Easing easing) {
+        return easing.process(in);
+    }
+
+    public enum Easing {
+
+        SINE_IO(Easing::inOutSine);
+
+        private static final float PI = (float) Math.PI;
+        private final UnaryOperator<Float> processor;
+
+        Easing(UnaryOperator<Float> processor) {
+            this.processor = processor;
+        }
+
+        public float process(float in) {
+            return processor.apply(in);
+        }
+
+        private static float inOutSine(float f) {
+            return -(Mth.cos(PI * f) - 1.0F) / 2.0F;
+        }
     }
 }

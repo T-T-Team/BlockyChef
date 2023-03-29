@@ -1,0 +1,15 @@
+{
+  "type": "blockychef:cutting_board",
+  "input": {
+    "item": "minecraft:potato"
+  },
+  "processingType": "blockychef:slicing",
+  "processingTime": 60,
+  "outputs": [
+    {
+      "item": "blockychef:potato_slice",
+      "count": 6
+    }
+  ],
+  "experience": 0.1
+}

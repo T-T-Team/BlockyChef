@@ -12,6 +12,8 @@ public class RecipeProcessingTypes {
     private static final Map<ResourceLocation, RecipeProcessingType> TYPE_MAP = new HashMap<>();
 
     public static final RecipeProcessingType CUTTING = register("cutting");
+    public static final RecipeProcessingType SLICING = register("slicing");
+    public static final RecipeProcessingType HOLLOWING = register("hollowing");
 
     public static RecipeProcessingType registerRecipeProcessingType(ResourceLocation location) {
         RecipeProcessingType type = new RecipeProcessingType(location);

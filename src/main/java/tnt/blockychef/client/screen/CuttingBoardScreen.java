@@ -12,12 +12,15 @@ import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.entity.CuttingBoardBlockEntity;
 import tnt.blockychef.common.food.recipe.CuttingBoardRecipe;
 import tnt.blockychef.common.menu.CuttingBoardMenu;
+import tnt.blockychef.network.NetworkManager;
+import tnt.blockychef.network.packet.C2S_CuttingBoardEvent;
+import tnt.blockychef.util.Helper;
+import tnt.blockychef.util.Localizations;
+import tnt.blockychef.util.RenderHelper;
 
 public class CuttingBoardScreen extends AbstractContainerScreen<CuttingBoardMenu> {
 
     private static final ResourceLocation TEXTURE = BlockyChef.resource("textures/screen/cutting_board.png");
-    private static final Component START_CUTTING = Component.translatable("screen.blockychef.cutting_board.widget.start_cutting");
-    private static final Component STOP_CUTTING = Component.translatable("screen.blockychef.cutting_board.widget.stop_cutting");
 
     private Button cutButton;
 
@@ -32,7 +35,7 @@ public class CuttingBoardScreen extends AbstractContainerScreen<CuttingBoardMenu
         super.init();
 
         cutButton = addRenderableWidget(
-                new Button.Builder(START_CUTTING, btn -> {})
+                new Button.Builder(Localizations.CANCEL, this::processButtonClicked)
                         .pos(leftPos + 61, topPos + 78)
                         .size(54, 20)
                         .build()
@@ -41,7 +44,20 @@ public class CuttingBoardScreen extends AbstractContainerScreen<CuttingBoardMenu
 
         CuttingBoardBlockEntity blockEntity = menu.getBlockEntity();
         if (blockEntity.hasMultipleRecipes()) {
-            // TODO add recipe switch buttons
+            int index = blockEntity.getRecipeIndex();
+            int maxIndex = blockEntity.getAvailableRecipeCount() - 1;
+            Button prev = addRenderableWidget(new Button.Builder(Component.literal("<"), this::prevRecipeClicked)
+                    .size(20, 20)
+                    .pos(leftPos + 40, topPos + 78)
+                    .build()
+            );
+            prev.active = index > 0;
+            Button next = addRenderableWidget(new Button.Builder(Component.literal(">"), this::nextRecipeClicked)
+                    .size(20, 20)
+                    .pos(leftPos + 116, topPos + 78)
+                    .build()
+            );
+            next.active = index < maxIndex;
         }
     }
 
@@ -54,6 +70,10 @@ public class CuttingBoardScreen extends AbstractContainerScreen<CuttingBoardMenu
         int arrowWidth = (int) (progress * 26);
         blit(poseStack, leftPos + 75, topPos + 38, 176, 0, arrowWidth, 12);
 
+        float f = RenderHelper.applyEasing(Helper.pulse(minecraft.level.getGameTime(), 50L), RenderHelper.Easing.SINE_IO);
+        float minColor = 0.4F;
+        float maxColor = 0.9F;
+        float color = minColor + f * (maxColor - minColor);
         CuttingBoardRecipe recipe = entity.getRecipe();
         if (recipe != null) {
             ItemStack[] outputs = recipe.getOutputs();
@@ -61,7 +81,7 @@ public class CuttingBoardScreen extends AbstractContainerScreen<CuttingBoardMenu
                 int slotIndex = CuttingBoardBlockEntity.SLOT_OUTPUTS[i];
                 ItemStack slotItem = entity.getItem(slotIndex);
                 if (slotItem.isEmpty()) {
-                    RenderSystem.setShaderColor(0.5F, 0.5F, 0.5F, 1.0F);
+                    RenderSystem.setShaderColor(color, color, color, 1.0F);
                     itemRenderer.renderGuiItem(poseStack, outputs[i], leftPos + 134, topPos + 18 + i * 18);
                     RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
                 }
@@ -81,9 +101,34 @@ public class CuttingBoardScreen extends AbstractContainerScreen<CuttingBoardMenu
         updateButtonLabelAndState();
     }
 
+    private void processButtonClicked(Button button) {
+        CuttingBoardBlockEntity entity = menu.getBlockEntity();
+        boolean active = !entity.isProcessing();
+        NetworkManager.dispatchServerPacket(new C2S_CuttingBoardEvent(entity.getBlockPos(), C2S_CuttingBoardEvent.EventType.PROCESSING, active));
+    }
+
+    // TODO does not work correctly
+    private void prevRecipeClicked(Button button) {
+        CuttingBoardBlockEntity entity = menu.getBlockEntity();
+        entity.changeRecipe(-1);
+        init(minecraft, width, height);
+        NetworkManager.dispatchServerPacket(new C2S_CuttingBoardEvent(entity.getBlockPos(), C2S_CuttingBoardEvent.EventType.RECIPE, false));
+    }
+
+    private void nextRecipeClicked(Button button) {
+        CuttingBoardBlockEntity entity = menu.getBlockEntity();
+        entity.changeRecipe(1);
+        init(minecraft, width, height);
+        NetworkManager.dispatchServerPacket(new C2S_CuttingBoardEvent(entity.getBlockPos(), C2S_CuttingBoardEvent.EventType.RECIPE, true));
+    }
+
     private void updateButtonLabelAndState() {
         CuttingBoardBlockEntity entity = menu.getBlockEntity();
+        Component label = Localizations.CANCEL;
         cutButton.active = entity.getRecipe() != null;
-        cutButton.setMessage(entity.isProcessing() ? STOP_CUTTING : START_CUTTING);
+        if (cutButton.active) {
+            label = entity.getRecipe().getProcessingType().getTranslatedComponent();
+        }
+        cutButton.setMessage(entity.isProcessing() ? Localizations.CANCEL : label);
     }
 }

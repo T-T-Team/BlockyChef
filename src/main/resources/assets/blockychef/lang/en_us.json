@@ -557,6 +557,15 @@
   "effect.blockychef.thirst": "Thirst",
   "effect.blockychef.hydration": "Hydration",
 
+  "recipe.process.blockychef.cutting": "Cut",
+  "recipe.process.blockychef.slicing": "Slice",
+  "recipe.process.blockychef.hollowing": "Hollow",
+
+  "label.blockychef.cancel": "Cancel",
+
+  "screen.blockychef.cutting_board": "Cutting Board",
+  "screen.blockychef.cutting_board.widget.start_cutting": "Cut",
+
   "death.attack.blockychef.dehydration": "%s has died due to dehydration",
   "death.attack.blockychef.dehydration.player": "%1$s has died due to dehydration whilst fighting %2$s"
 }

@@ -1,0 +1,14 @@
+{
+  "type": "blockychef:cutting_board",
+  "input": {
+    "item": "minecraft:potato"
+  },
+  "processingType": "blockychef:hollowing",
+  "processingTime": 90,
+  "outputs": [
+    {
+      "item": "blockychef:hollowed_potato"
+    }
+  ],
+  "experience": 0.2
+}

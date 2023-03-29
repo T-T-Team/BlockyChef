@@ -61,4 +61,13 @@ public final class Helper {
                 .filter(recipe -> recipe.matches(container, level))
                 .collect(Collectors.toList());
     }
+
+    public static float pulse(long total, long period) {
+        long l = total % period;
+        return pulse(l / (float) period);
+    }
+
+    public static float pulse(float f) {
+        return f > 0.5F ? 1.0F - ((f - 0.5F) / 0.5F) : f / 0.5F;
+    }
 }
