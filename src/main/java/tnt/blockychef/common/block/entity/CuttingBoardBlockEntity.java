@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-// TODO implement exp awards
 public class CuttingBoardBlockEntity extends RecipeRemberingBlockEntity<CuttingBoardRecipe> implements SynchronizableBlockEntity {
 
     public static final int SLOT_INPUT = 0;

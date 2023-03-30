@@ -2,13 +2,11 @@ package tnt.blockychef.common.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import tnt.blockychef.common.food.recipe.GratingRecipe;
@@ -44,13 +42,6 @@ public class GraterBlockEntity extends RecipeRemberingBlockEntity<GratingRecipe>
         setItem(0, stack);
         refreshRecipes();
         setChanged();
-    }
-
-    public void drop() {
-        if (level.isClientSide)
-            return;
-        MenuInventoryHelper.dropInventoryContents(level, worldPosition, this);
-        getRecipesToAwardAndPopExperience((ServerLevel) level, Vec3.atCenterOf(worldPosition));
     }
 
     public void processRecipe(ServerPlayer player) {

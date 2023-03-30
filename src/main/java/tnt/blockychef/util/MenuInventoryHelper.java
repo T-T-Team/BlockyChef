@@ -8,10 +8,13 @@ import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandler;
 import tnt.blockychef.common.block.entity.InventoryBlockEntity;
+import tnt.blockychef.common.block.entity.RecipeRemberingBlockEntity;
 import tnt.blockychef.util.function.TriConsumer;
 
 import java.util.function.BiFunction;
@@ -19,6 +22,17 @@ import java.util.function.IntSupplier;
 import java.util.stream.IntStream;
 
 public final class MenuInventoryHelper {
+
+    public static void dropRecipeBlockInventoryContentsAndAwardExp(BlockState state, Level level, BlockPos pos, BlockState replacementState) {
+        if (!state.is(replacementState.getBlock())) {
+            if (!level.isClientSide) {
+                BlockEntity blockEntity = level.getBlockEntity(pos);
+                if (blockEntity instanceof RecipeRemberingBlockEntity<?> entity) {
+                    entity.dropInventoryAndExp();
+                }
+            }
+        }
+    }
 
     public static void dropInventoryContents(Level level, BlockPos pos, InventoryBlockEntity blockEntity) {
         blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(itemhandler -> dropInventoryContents(level, pos, itemhandler));

@@ -20,6 +20,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.block.entity.GraterBlockEntity;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
+import tnt.blockychef.util.MenuInventoryHelper;
 
 public class GraterBlock extends FullHorizontalAxisBlock implements EntityBlock {
 
@@ -60,14 +61,7 @@ public class GraterBlock extends FullHorizontalAxisBlock implements EntityBlock 
 
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState replacementState, boolean someValue) {
-        if (!state.is(replacementState.getBlock())) {
-            if (!level.isClientSide) {
-                BlockEntity blockEntity = level.getBlockEntity(pos);
-                if (blockEntity instanceof GraterBlockEntity graterBlock) {
-                    graterBlock.drop();
-                }
-            }
-        }
+        MenuInventoryHelper.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, replacementState);
         super.onRemove(state, level, pos, replacementState, someValue);
     }
 

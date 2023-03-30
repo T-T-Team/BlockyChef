@@ -26,8 +26,8 @@ import tnt.blockychef.common.block.entity.CuttingBoardBlockEntity;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.menu.CuttingBoardMenu;
 import tnt.blockychef.util.Helper;
+import tnt.blockychef.util.MenuInventoryHelper;
 
-// TODO drop items and exp on block destruction
 public class CuttingBoardBlock extends FullHorizontalAxisBlock implements EntityBlock {
 
     private static final VoxelShape HITBOX = Block.box(2.0, 0.0, 2.0, 14.0, 2.0, 14.0);
@@ -69,5 +69,11 @@ public class CuttingBoardBlock extends FullHorizontalAxisBlock implements Entity
         return level.isClientSide ?
                 Helper.createBlockEntityTicker(type, BlockyChefBlockEntities.CUTTING_BOARD, CuttingBoardBlockEntity::tickClient) :
                 Helper.createBlockEntityTicker(type, BlockyChefBlockEntities.CUTTING_BOARD, CuttingBoardBlockEntity::tickServer);
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState replacementState, boolean flag) {
+        MenuInventoryHelper.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, replacementState);
+        super.onRemove(state, level, pos, replacementState, flag);
     }
 }

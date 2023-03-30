@@ -9,14 +9,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
-import net.minecraft.world.Container;
 import net.minecraft.world.entity.ExperienceOrb;
-import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import tnt.blockychef.common.food.recipe.AbstractFoodRecipe;
+import tnt.blockychef.util.MenuInventoryHelper;
 
 import java.util.List;
 
@@ -64,6 +63,13 @@ public abstract class RecipeRemberingBlockEntity<R extends AbstractFoodRecipe<?>
         }
 
         return list;
+    }
+
+    public void dropInventoryAndExp() {
+        if (level.isClientSide)
+            return;
+        MenuInventoryHelper.dropInventoryContents(level, worldPosition, this);
+        getRecipesToAwardAndPopExperience((ServerLevel) level, Vec3.atCenterOf(worldPosition));
     }
 
     public void storeRecipe(R recipe) {

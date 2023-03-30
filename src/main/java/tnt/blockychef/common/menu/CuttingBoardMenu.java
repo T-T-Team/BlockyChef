@@ -1,6 +1,7 @@
 package tnt.blockychef.common.menu;
 
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -22,7 +23,7 @@ public class CuttingBoardMenu extends AbstractBlockEntityMenu<CuttingBoardBlockE
 
         addSlot(new SlotItemHandler(blockEntity.getItemHandler(), CuttingBoardBlockEntity.SLOT_INPUT, 26, 36));
         for (int y = 0; y < CuttingBoardBlockEntity.SLOT_OUTPUTS.length; y++) {
-            addSlot(new ItemHandlerOutputSlot(blockEntity.getItemHandler(), CuttingBoardBlockEntity.SLOT_OUTPUTS[y], 134, 18 + y * 18));
+            addSlot(new ItemHandlerOutputSlotWithCallback(blockEntity.getItemHandler(), CuttingBoardBlockEntity.SLOT_OUTPUTS[y], 134, 18 + y * 18, this::onResultItemTaken));
         }
 
         addPlayerSlots(inventory, 8, 113);
@@ -48,6 +49,12 @@ public class CuttingBoardMenu extends AbstractBlockEntityMenu<CuttingBoardBlockE
     @Override
     public ItemStack quickMoveStack(Player player, int slotIndex) {
         return quickMoveHelper.quickMove(player, slotIndex);
+    }
+
+    private void onResultItemTaken(Player player, ItemStack stack) {
+        if (player instanceof ServerPlayer serverPlayer) {
+            blockEntity.awardUsedRecipesAndPopExperience(serverPlayer);
+        }
     }
 
     private void slotChanged(AbstractContainerMenu menu, int index, ItemStack stack) {
