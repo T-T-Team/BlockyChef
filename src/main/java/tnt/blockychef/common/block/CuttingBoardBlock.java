@@ -65,6 +65,8 @@ public class CuttingBoardBlock extends FullHorizontalAxisBlock implements Entity
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return level.isClientSide ? null : Helper.createBlockEntityTicker(type, BlockyChefBlockEntities.CUTTING_BOARD, CuttingBoardBlockEntity::tick);
+        return level.isClientSide ?
+                Helper.createBlockEntityTicker(type, BlockyChefBlockEntities.CUTTING_BOARD, CuttingBoardBlockEntity::tickClient) :
+                Helper.createBlockEntityTicker(type, BlockyChefBlockEntities.CUTTING_BOARD, CuttingBoardBlockEntity::tickServer);
     }
 }

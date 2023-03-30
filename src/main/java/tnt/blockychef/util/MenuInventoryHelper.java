@@ -16,6 +16,7 @@ import tnt.blockychef.util.function.TriConsumer;
 
 import java.util.function.BiFunction;
 import java.util.function.IntSupplier;
+import java.util.stream.IntStream;
 
 public final class MenuInventoryHelper {
 
@@ -55,45 +56,76 @@ public final class MenuInventoryHelper {
     }
 
     public static boolean canFitItems(ItemStack[] items, Container container, int[] validSlots) {
-        NonNullList<ItemStack> inventory = NonNullList.withSize(validSlots.length, ItemStack.EMPTY);
-        for (int i = 0; i < inventory.size(); i++) {
-            int slotIndex = validSlots[i];
+        int maxIndex = IntStream.of(validSlots).max().orElse(1);
+        NonNullList<ItemStack> inventory = NonNullList.withSize(maxIndex + 1, ItemStack.EMPTY);
+        for (int slotIndex : validSlots) {
             ItemStack stack = container.getItem(slotIndex);
-            inventory.set(i, stack);
+            inventory.set(slotIndex, stack);
         }
-        return insertItems(items, inventory, inventory::size, NonNullList::get, NonNullList::set, validSlots);
+        return insertItems(items, inventory, container::getMaxStackSize, NonNullList::get, NonNullList::set, validSlots);
     }
 
     public static void insertItems(ItemStack[] items, Container container, int[] outputSlots) {
-        insertItems(items, container, container::getContainerSize, Container::getItem, Container::setItem, outputSlots);
+        insertItems(items, container, container::getMaxStackSize, Container::getItem, Container::setItem, outputSlots);
     }
 
-    // TODO prioritize merge of same items first
     private static <T> boolean insertItems(ItemStack[] items, T t, IntSupplier maxSize, BiFunction<T, Integer, ItemStack> itemGetter, TriConsumer<T, Integer, ItemStack> itemSetter, int[] outputSlots) {
         for (ItemStack itemStack : items) {
-            int limit = Math.min(maxSize.getAsInt(), itemStack.getMaxStackSize());
-            int toPlace = itemStack.getCount();
-            for (int i : outputSlots) {
-                ItemStack stack = itemGetter.apply(t, i);
-                if (stack.isEmpty()) {
-                    int placed = Math.min(limit, toPlace);
-                    ItemStack item = itemStack.copy();
-                    item.setCount(placed);
-                    itemSetter.accept(t, i, item);
-                    toPlace -= placed;
-                } else if (ItemStack.isSame(stack, itemStack)) {
-                    int placed = Math.min(toPlace, limit - stack.getCount());
-                    stack.setCount(stack.getCount() + placed);
-                    toPlace -= placed;
-                }
-                if (toPlace == 0) {
-                    break;
-                }
-            }
-            if (toPlace != 0) {
+            boolean result = insertItem(itemStack, t, maxSize, itemGetter, itemSetter, outputSlots);
+            if (!result) {
                 return false;
             }
         }
         return true;
+    }
+
+    private static <T> boolean insertItem(ItemStack item, T target, IntSupplier maxSize, BiFunction<T, Integer, ItemStack> getter, TriConsumer<T, Integer, ItemStack> setter, int[] slots) {
+        // Find best slot for item
+        int max = maxSize.getAsInt();
+        int toInsert = item.getCount();
+        int slot = getSlotForItem(item, target, max, getter, setter, slots);
+        if (slot == -1) {
+            return false;
+        }
+        // Insert item
+        ItemStack itemStack = getter.apply(target, slot);
+        if (itemStack.isEmpty()) {
+            ItemStack inserted = item.copy();
+            inserted.setCount(Math.min(inserted.getCount(), Math.min(toInsert, max)));
+            setter.accept(target, slot, inserted);
+            toInsert -= inserted.getCount();
+        } else if (ItemStack.isSame(itemStack, item)) {
+            ItemStack inserted = item.copy();
+            int emptySpace = Math.max(0, max - itemStack.getCount());
+            int insertAmount = Math.min(emptySpace, toInsert);
+            inserted.setCount(insertAmount);
+            setter.accept(target, slot, inserted);
+            toInsert -= insertAmount;
+        }
+        // If not everything was inserted, repeat
+        if (toInsert > 0) {
+            item.setCount(toInsert);
+            return insertItem(item, target, maxSize, getter, setter, slots);
+        }
+        return true;
+    }
+
+    private static <T> int getSlotForItem(ItemStack stack, T target, int max, BiFunction<T, Integer, ItemStack> getter, TriConsumer<T, Integer, ItemStack> setter, int[] slots) {
+        int slot = -1;
+        for (int i : slots) {
+            ItemStack itemStack = getter.apply(target, i);
+            if (ItemStack.isSame(stack, itemStack)) {
+                if (itemStack.getCount() < max) {
+                    return i;
+                }
+            }
+        }
+        for (int i : slots) {
+            ItemStack itemStack = getter.apply(target, i);
+            if (itemStack.isEmpty()) {
+                return i;
+            }
+        }
+        return slot;
     }
 }

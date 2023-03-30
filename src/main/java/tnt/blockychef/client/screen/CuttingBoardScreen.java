@@ -7,11 +7,14 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.entity.CuttingBoardBlockEntity;
 import tnt.blockychef.common.food.recipe.CuttingBoardRecipe;
 import tnt.blockychef.common.menu.CuttingBoardMenu;
+import tnt.blockychef.common.menu.SimpleSlotListener;
 import tnt.blockychef.network.NetworkManager;
 import tnt.blockychef.network.packet.C2S_CuttingBoardEvent;
 import tnt.blockychef.util.Helper;
@@ -23,6 +26,7 @@ public class CuttingBoardScreen extends AbstractContainerScreen<CuttingBoardMenu
     private static final ResourceLocation TEXTURE = BlockyChef.resource("textures/screen/cutting_board.png");
 
     private Button cutButton;
+    private Button prevRecipe, nextRecipe;
 
     public CuttingBoardScreen(CuttingBoardMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
@@ -40,25 +44,24 @@ public class CuttingBoardScreen extends AbstractContainerScreen<CuttingBoardMenu
                         .size(54, 20)
                         .build()
         );
-        updateButtonLabelAndState();
 
         CuttingBoardBlockEntity blockEntity = menu.getBlockEntity();
-        if (blockEntity.hasMultipleRecipes()) {
-            int index = blockEntity.getRecipeIndex();
-            int maxIndex = blockEntity.getAvailableRecipeCount() - 1;
-            Button prev = addRenderableWidget(new Button.Builder(Component.literal("<"), this::prevRecipeClicked)
-                    .size(20, 20)
-                    .pos(leftPos + 40, topPos + 78)
-                    .build()
-            );
-            prev.active = index > 0;
-            Button next = addRenderableWidget(new Button.Builder(Component.literal(">"), this::nextRecipeClicked)
-                    .size(20, 20)
-                    .pos(leftPos + 116, topPos + 78)
-                    .build()
-            );
-            next.active = index < maxIndex;
-        }
+        int index = blockEntity.getRecipeIndex();
+        int maxIndex = blockEntity.getAvailableRecipeCount() - 1;
+        prevRecipe = addRenderableWidget(new Button.Builder(Component.literal("<"), this::prevRecipeClicked)
+                .size(20, 20)
+                .pos(leftPos + 40, topPos + 78)
+                .build()
+        );
+        prevRecipe.active = index > 0;
+        nextRecipe = addRenderableWidget(new Button.Builder(Component.literal(">"), this::nextRecipeClicked)
+                .size(20, 20)
+                .pos(leftPos + 116, topPos + 78)
+                .build()
+        );
+        nextRecipe.active = index >= 0 && index < maxIndex;
+
+        updateButtonLabelAndState();
     }
 
     @Override
@@ -126,9 +129,13 @@ public class CuttingBoardScreen extends AbstractContainerScreen<CuttingBoardMenu
         CuttingBoardBlockEntity entity = menu.getBlockEntity();
         Component label = Localizations.CANCEL;
         cutButton.active = entity.getRecipe() != null;
+        int index = entity.getRecipeIndex();
+        int max = entity.getAvailableRecipeCount() - 1;
         if (cutButton.active) {
             label = entity.getRecipe().getProcessingType().getTranslatedComponent();
         }
         cutButton.setMessage(entity.isProcessing() ? Localizations.CANCEL : label);
+        prevRecipe.active = index > 0;
+        nextRecipe.active = index >= 0 && index < max;
     }
 }

@@ -2,22 +2,17 @@ package tnt.blockychef.common.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.StringTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
-import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.food.recipe.CuttingBoardRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.util.Helper;
 import tnt.blockychef.util.MenuInventoryHelper;
-import tnt.blockychef.util.SerializationHelper;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -38,18 +33,35 @@ public class CuttingBoardBlockEntity extends RecipeRemberingBlockEntity<CuttingB
         super(BlockyChefBlockEntities.CUTTING_BOARD, pos, state);
     }
 
-    public static void tick(Level level, BlockPos pos, BlockState state, CuttingBoardBlockEntity cuttingBoard) {
-        if (cuttingBoard.processing && cuttingBoard.recipe != null) {
-            ItemStack[] outputs = cuttingBoard.recipe.getOutputs();
-            if (MenuInventoryHelper.canFitItems(outputs, cuttingBoard, SLOT_OUTPUTS)) {
-                if (++cuttingBoard.timeProcessing >= cuttingBoard.recipe.getProcessingTime()) {
-                    cuttingBoard.completeRecipe();
+    public static void tickServer(Level level, BlockPos pos, BlockState state, CuttingBoardBlockEntity cuttingBoard) {
+        if (cuttingBoard.processing) {
+            if (cuttingBoard.recipe != null) {
+                ItemStack[] outputs = cuttingBoard.recipe.getOutputs();
+                if (MenuInventoryHelper.canFitItems(outputs, cuttingBoard, SLOT_OUTPUTS)) {
+                    if (++cuttingBoard.timeProcessing >= cuttingBoard.recipe.getProcessingTime()) {
+                        cuttingBoard.completeRecipe();
+                    }
+                } else {
+                    cuttingBoard.setProcessing(false);
+                    cuttingBoard.timeProcessing = 0;
+                    Helper.sendBlockEntityClientData(cuttingBoard);
                 }
             } else {
                 cuttingBoard.setProcessing(false);
                 cuttingBoard.timeProcessing = 0;
                 Helper.sendBlockEntityClientData(cuttingBoard);
             }
+        }
+    }
+
+    public static void tickClient(Level level, BlockPos pos, BlockState state, CuttingBoardBlockEntity cuttingBoard) {
+        if (cuttingBoard.processing && cuttingBoard.recipe != null) {
+            int max = cuttingBoard.recipe.getProcessingTime();
+            if (cuttingBoard.timeProcessing < max) {
+                cuttingBoard.timeProcessing++;
+            }
+        } else {
+            cuttingBoard.timeProcessing = 0;
         }
     }
 
@@ -177,16 +189,19 @@ public class CuttingBoardBlockEntity extends RecipeRemberingBlockEntity<CuttingB
         boolean changed = this.recipe != recipe;
         this.recipe = recipe;
         if (changed) {
+            timeProcessing = 0;
+            processing = false;
             Helper.sendBlockEntityClientData(this);
         }
     }
 
     private void completeRecipe() {
+        timeProcessing = 0;
         storeRecipe(recipe);
         ItemStack[] outputs = recipe.getOutputs();
         MenuInventoryHelper.insertItems(outputs, this, SLOT_OUTPUTS);
         ItemStack stack = getInputItem();
         stack.shrink(1);
-        setRecipe(null);
+        refreshAvailableRecipes();
     }
 }
