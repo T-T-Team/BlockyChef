@@ -16,10 +16,7 @@ import tnt.blockychef.common.block.entity.SynchronizableBlockEntity;
 import tnt.blockychef.network.NetworkManager;
 import tnt.blockychef.network.packet.S2C_SendBlockEntityData;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -59,6 +56,7 @@ public final class Helper {
         RecipeManager manager = level.getRecipeManager();
         return manager.getAllRecipesFor(recipeType).stream()
                 .filter(recipe -> recipe.matches(container, level))
+                .sorted(Comparator.comparing(Recipe::getId))
                 .collect(Collectors.toList());
     }
 

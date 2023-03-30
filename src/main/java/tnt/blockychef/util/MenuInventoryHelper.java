@@ -71,7 +71,7 @@ public final class MenuInventoryHelper {
 
     private static <T> boolean insertItems(ItemStack[] items, T t, IntSupplier maxSize, BiFunction<T, Integer, ItemStack> itemGetter, TriConsumer<T, Integer, ItemStack> itemSetter, int[] outputSlots) {
         for (ItemStack itemStack : items) {
-            boolean result = insertItem(itemStack, t, maxSize, itemGetter, itemSetter, outputSlots);
+            boolean result = insertItem(itemStack.copy(), t, maxSize, itemGetter, itemSetter, outputSlots);
             if (!result) {
                 return false;
             }
@@ -98,7 +98,7 @@ public final class MenuInventoryHelper {
             ItemStack inserted = item.copy();
             int emptySpace = Math.max(0, max - itemStack.getCount());
             int insertAmount = Math.min(emptySpace, toInsert);
-            inserted.setCount(insertAmount);
+            inserted.setCount(itemStack.getCount() + insertAmount);
             setter.accept(target, slot, inserted);
             toInsert -= insertAmount;
         }

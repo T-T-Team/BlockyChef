@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+// TODO implement exp awards
 public class CuttingBoardBlockEntity extends RecipeRemberingBlockEntity<CuttingBoardRecipe> implements SynchronizableBlockEntity {
 
     public static final int SLOT_INPUT = 0;
@@ -181,6 +182,9 @@ public class CuttingBoardBlockEntity extends RecipeRemberingBlockEntity<CuttingB
         availableRecipes = new ArrayList<>(Helper.getAllValidRecipes(level, BlockyChefRecipeTypes.CUTTING_BOARD_RECIPE, this));
         if (availableRecipes.size() > 0 && (recipe == null || !availableRecipes.contains(recipe))) {
             recipe = availableRecipes.get(0);
+        }
+        if (recipe != null && !availableRecipes.contains(recipe)) {
+            setRecipe(null);
         }
         Helper.sendBlockEntityClientData(this);
     }

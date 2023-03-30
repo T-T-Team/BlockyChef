@@ -27,6 +27,7 @@ import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.menu.CuttingBoardMenu;
 import tnt.blockychef.util.Helper;
 
+// TODO drop items and exp on block destruction
 public class CuttingBoardBlock extends FullHorizontalAxisBlock implements EntityBlock {
 
     private static final VoxelShape HITBOX = Block.box(2.0, 0.0, 2.0, 14.0, 2.0, 14.0);
