@@ -632,7 +632,31 @@ public final class Registry {
         helper.register("vanilla_milkshake", new Item(new Item.Properties()));
         helper.register("vanilla_yogurt", new Item(new Item.Properties()));
         helper.register("yeast", new Item(new Item.Properties()));
-
+        helper.register("beef_jerky", new Item(new Item.Properties()));
+        helper.register("boiled_tomato", new Item(new Item.Properties()));
+        helper.register("bread_crumbs", new Item(new Item.Properties()));
+        helper.register("burnt_camembert", new Item(new Item.Properties()));
+        helper.register("burnt_tomato", new Item(new Item.Properties()));
+        helper.register("butter", new Item(new Item.Properties()));
+        helper.register("camembert", new Item(new Item.Properties()));
+        helper.register("camembert_slice", new Item(new Item.Properties()));
+        helper.register("cheese", new Item(new Item.Properties()));
+        helper.register("cheese_cuts", new Item(new Item.Properties()));
+        helper.register("cheese_slice", new Item(new Item.Properties()));
+        helper.register("chicken_jerky", new Item(new Item.Properties()));
+        helper.register("cream", new Item(new Item.Properties()));
+        helper.register("cured_beef_steak", new Item(new Item.Properties()));
+        helper.register("cured_chicken_breast", new Item(new Item.Properties()));
+        helper.register("cured_pork_steak", new Item(new Item.Properties()));
+        helper.register("grilled_camembert", new Item(new Item.Properties()));
+        helper.register("milk", new Item(new Item.Properties()));
+        helper.register("pork_jerky", new Item(new Item.Properties()));
+        helper.register("rice_dough", new Item(new Item.Properties()));
+        helper.register("shredded_cheese", new Item(new Item.Properties()));
+        helper.register("shredded_garlic", new Item(new Item.Properties()));
+        helper.register("sweet_rice_dough", new Item(new Item.Properties()));
+        helper.register("tomato_sauce", new Item(new Item.Properties()));
+        helper.register("whipped_cream", new Item(new Item.Properties()));
     }
 
     private static void registerBlockEntities(RegisterEvent.RegisterHelper<BlockEntityType<?>> helper) {
