@@ -1,10 +1,8 @@
 package tnt.blockychef.common.food.recipe;
 
 import com.google.gson.JsonParseException;
-import com.google.gson.JsonSyntaxException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -68,13 +66,6 @@ public class DryingRecipe extends AbstractFoodRecipe<DryingRackBlockEntity> {
     @Override
     public RecipeType<?> getType() {
         return BlockyChefRecipeTypes.DRYING_RECIPE;
-    }
-
-    @Override
-    public NonNullList<Ingredient> getIngredients() {
-        NonNullList<Ingredient> list = NonNullList.create();
-        list.add(input);
-        return list;
     }
 
     public int getDryingTime() {

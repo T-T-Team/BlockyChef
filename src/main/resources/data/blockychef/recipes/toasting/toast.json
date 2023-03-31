@@ -1,0 +1,17 @@
+{
+  "type": "blockychef:toasting",
+  "input": {
+    "item": "blockychef:bread_slice"
+  },
+  "output": {
+    "item": "blockychef:toast"
+  },
+  "burntOutput": {
+    "item": "blockychef:burnt_toast"
+  },
+  "toasting": {
+    "minTime": 200,
+    "maxTime": 300
+  },
+  "experience": 0.2
+}

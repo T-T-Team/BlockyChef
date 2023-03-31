@@ -33,10 +33,7 @@ import tnt.blockychef.common.effect.HydrationMobEffect;
 import tnt.blockychef.common.effect.ThirstMobEffect;
 import tnt.blockychef.common.food.DrinkList;
 import tnt.blockychef.common.food.FoodList;
-import tnt.blockychef.common.food.recipe.CodecRecipeSerializer;
-import tnt.blockychef.common.food.recipe.CuttingBoardRecipe;
-import tnt.blockychef.common.food.recipe.DryingRecipe;
-import tnt.blockychef.common.food.recipe.GratingRecipe;
+import tnt.blockychef.common.food.recipe.*;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 import tnt.blockychef.common.init.BlockyChefItems;
 import tnt.blockychef.common.init.BlockyChefTrees;
@@ -669,12 +666,14 @@ public final class Registry {
         helper.register("drying_recipe");
         helper.register("grating_recipe");
         helper.register("cutting_board_recipe");
+        helper.register("toasting_recipe");
     }
 
     private static void registerRecipeSerializers(RegisterEvent.RegisterHelper<RecipeSerializer<?>> helper) {
         helper.register("drying", CodecRecipeSerializer.forCodec(DryingRecipe.CODEC_PROVIDER));
         helper.register("grating", CodecRecipeSerializer.forCodec(GratingRecipe.CODEC_PROVIDER));
         helper.register("cutting_board", CodecRecipeSerializer.forCodec(CuttingBoardRecipe.CODEC_PROVIDER));
+        helper.register("toasting", CodecRecipeSerializer.forCodec(ToasterRecipe.CODEC_PROVIDER));
     }
 
     private static void registerFeatures(RegisterEvent.RegisterHelper<Feature<?>> helper) {

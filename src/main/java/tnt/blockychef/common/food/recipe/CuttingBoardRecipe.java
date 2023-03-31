@@ -83,7 +83,7 @@ public class CuttingBoardRecipe extends AbstractFoodRecipe<CuttingBoardBlockEnti
 
     @Override
     public ItemStack getResultItem(RegistryAccess access) {
-        throw new UnsupportedOperationException();
+        return outputs[0];
     }
 
     @Override
