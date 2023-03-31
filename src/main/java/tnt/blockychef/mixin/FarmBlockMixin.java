@@ -11,7 +11,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import tnt.blockychef.BlockyChef;
-import tnt.blockychef.common.Registry;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 
 @Mixin(FarmBlock.class)

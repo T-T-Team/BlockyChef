@@ -33,7 +33,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.BlockyChef;
-import tnt.blockychef.common.Registry;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 
 import java.util.function.UnaryOperator;

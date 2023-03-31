@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import tnt.blockychef.BlockyChef;
-import tnt.blockychef.common.Registry;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 
 import java.util.IdentityHashMap;

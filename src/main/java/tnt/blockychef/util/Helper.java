@@ -60,6 +60,12 @@ public final class Helper {
                 .collect(Collectors.toList());
     }
 
+    public static <C extends Container, R extends Recipe<C>> Optional<R> findRecipeFor(RecipeManager manager, RecipeType<R> type, Predicate<R> recipeTest) {
+        return manager.getAllRecipesFor(type).stream()
+                .filter(recipeTest)
+                .findFirst();
+    }
+
     public static float pulse(long total, long period) {
         long l = total % period;
         return pulse(l / (float) period);
