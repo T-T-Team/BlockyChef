@@ -23,7 +23,7 @@ import java.util.Optional;
 public class ToasterBlockEntity extends RecipeRemberingBlockEntity<ToasterRecipe> implements SynchronizableBlockEntity, IndexedColorHolder {
 
     private static final int[] SLOTS = { 0, 1 };
-    private final NonNullList<ToastingUnit> units = NonNullList.createWithCapacity(SLOTS.length);
+    private final NonNullList<ToastingUnit> units;
     private int[] colors;
     private boolean toasting;
     private int timeToasting;
@@ -33,8 +33,9 @@ public class ToasterBlockEntity extends RecipeRemberingBlockEntity<ToasterRecipe
         super(BlockyChefBlockEntities.TOASTER, pos, state);
         this.colors = new int[1];
         Arrays.fill(this.colors, Integer.MIN_VALUE);
+        units = NonNullList.createWithCapacity(SLOTS.length);
         for (int slot : SLOTS) {
-            units.set(slot, new ToastingUnit(this, slot));
+            units.add(new ToastingUnit(this, slot));
         }
     }
 
@@ -49,6 +50,7 @@ public class ToasterBlockEntity extends RecipeRemberingBlockEntity<ToasterRecipe
                     }
                     hasActiveUnit = true;
                 } else {
+                    isChanged = true;
                     unit.cancel();
                 }
             }
@@ -128,7 +130,7 @@ public class ToasterBlockEntity extends RecipeRemberingBlockEntity<ToasterRecipe
         decodeBlockEntityData(tag);
     }
 
-    private Optional<ToasterRecipe> getRecipe(ItemStack stack) {
+    public Optional<ToasterRecipe> getRecipe(ItemStack stack) {
         if (level == null)
             return Optional.empty();
         RecipeManager manager = level.getRecipeManager();
@@ -152,7 +154,6 @@ public class ToasterBlockEntity extends RecipeRemberingBlockEntity<ToasterRecipe
 
         void cancel() {
             time = 0;
-            Helper.sendBlockEntityClientData(toaster);
         }
 
         boolean toast() {

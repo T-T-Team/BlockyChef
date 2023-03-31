@@ -23,6 +23,7 @@ import tnt.blockychef.common.effect.ThirstMobEffect;
 import tnt.blockychef.common.food.recipe.*;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 import tnt.blockychef.common.menu.CuttingBoardMenu;
+import tnt.blockychef.common.menu.ToasterMenu;
 import tnt.blockychef.levelgen.feature.WeightedFeatureConfiguration;
 import tnt.blockychef.levelgen.feature.WeightedSelectorFeature;
 import tnt.blockychef.levelgen.tree.TreeFruitDecorator;
@@ -87,6 +88,7 @@ public final class Registry {
 
     private static void registerMenuTypes(RegisterEvent.RegisterHelper<MenuType<?>> helper) {
         helper.register("cutting_board", IForgeMenuType.create(CuttingBoardMenu::new));
+        helper.register("toaster", IForgeMenuType.create(ToasterMenu::new));
     }
 
     private static void registerMobEffects(RegisterEvent.RegisterHelper<MobEffect> helper) {
