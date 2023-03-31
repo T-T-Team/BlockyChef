@@ -36,4 +36,9 @@ public abstract class AbstractFoodRecipe<C extends Container> implements Recipe<
     void throwValidationError(String message) {
         throw new JsonSyntaxException(String.format("Error in recipe [%s, %s]: %s", this.getType(), this.getId(), message));
     }
+
+    @Override
+    public String toString() {
+        return getId().toString();
+    }
 }

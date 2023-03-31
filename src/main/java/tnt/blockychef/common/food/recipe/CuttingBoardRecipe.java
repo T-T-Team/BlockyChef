@@ -100,12 +100,16 @@ public class CuttingBoardRecipe extends AbstractFoodRecipe<CuttingBoardBlockEnti
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CuttingBoardRecipe that = (CuttingBoardRecipe) o;
-        return processingType.equals(that.processingType);
+
+        CuttingBoardRecipe recipe = (CuttingBoardRecipe) o;
+
+        return getId().equals(recipe.getId()) && processingType.equals(recipe.processingType);
     }
 
     @Override
     public int hashCode() {
-        return processingType.hashCode();
+        int result = getId().hashCode();
+        result = 31 * result + processingType.hashCode();
+        return result;
     }
 }

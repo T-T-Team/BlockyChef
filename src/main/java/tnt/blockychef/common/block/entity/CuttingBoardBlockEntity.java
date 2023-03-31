@@ -178,7 +178,7 @@ public class CuttingBoardBlockEntity extends RecipeRemberingBlockEntity<CuttingB
     private void refreshAvailableRecipes() {
         if (level == null)
             return;
-        availableRecipes = new ArrayList<>(Helper.getAllValidRecipes(level, BlockyChefRecipeTypes.CUTTING_BOARD_RECIPE, this));
+        availableRecipes = Helper.getAllValidRecipes(level, BlockyChefRecipeTypes.CUTTING_BOARD_RECIPE, this);
         if (availableRecipes.size() > 0 && (recipe == null || !availableRecipes.contains(recipe))) {
             recipe = availableRecipes.get(0);
         }
