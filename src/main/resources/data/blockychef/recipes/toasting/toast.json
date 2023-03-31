@@ -6,12 +6,6 @@
   "output": {
     "item": "blockychef:toast"
   },
-  "burntOutput": {
-    "item": "blockychef:burnt_toast"
-  },
-  "toasting": {
-    "minTime": 200,
-    "maxTime": 300
-  },
+  "toastingTime": 200,
   "experience": 0.2
 }

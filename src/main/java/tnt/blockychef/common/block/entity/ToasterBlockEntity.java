@@ -3,6 +3,8 @@ package tnt.blockychef.common.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
@@ -13,10 +15,9 @@ import tnt.blockychef.common.food.recipe.ToasterRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.util.Helper;
+import tnt.blockychef.util.MenuInventoryHelper;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 public class ToasterBlockEntity extends RecipeRemberingBlockEntity<ToasterRecipe> implements SynchronizableBlockEntity, IndexedColorHolder {
@@ -56,9 +57,11 @@ public class ToasterBlockEntity extends RecipeRemberingBlockEntity<ToasterRecipe
                 toaster.toasting = false;
                 toaster.timeToasting = 0;
             } else if (++toaster.timeToasting >= toaster.targetToastingTime) {
-                // TODO eject items
+                MenuInventoryHelper.dropInventoryContents(level, pos, toaster.getItemHandler());
                 isChanged = true;
                 toaster.units.forEach(ToastingUnit::cancel);
+                toaster.toasting = false;
+                toaster.timeToasting = 0;
             }
             if (isChanged) {
                 Helper.sendBlockEntityClientData(toaster);
@@ -88,11 +91,29 @@ public class ToasterBlockEntity extends RecipeRemberingBlockEntity<ToasterRecipe
     @Override
     public void encodeBlockEntityData(CompoundTag tag) {
         tag.putIntArray("colors", colors);
+        ListTag unitData = new ListTag();
+        for (ToastingUnit unit : units) {
+            unitData.add(unit.serializeData());
+        }
+        tag.put("unitData", unitData);
+        tag.putBoolean("toasting", toasting);
+        tag.putInt("timeToasting", timeToasting);
+        tag.putInt("targetToastingTime", targetToastingTime);
     }
 
     @Override
     public void decodeBlockEntityData(CompoundTag tag) {
         colors = tag.getIntArray("colors");
+        toasting = tag.getBoolean("toasting");
+        timeToasting = tag.getInt("timeToasting");
+        targetToastingTime = tag.getInt("targetToastingTime");
+        ListTag unitDataTag = tag.getList("unitData", Tag.TAG_COMPOUND);
+        for (int i = 0; i < unitDataTag.size(); i++) {
+            CompoundTag unitTag = unitDataTag.getCompound(i);
+            if (i >= units.size())
+                break;
+            units.get(i).deserializeData(unitTag);
+        }
     }
 
     @Override
@@ -111,7 +132,7 @@ public class ToasterBlockEntity extends RecipeRemberingBlockEntity<ToasterRecipe
         if (level == null)
             return Optional.empty();
         RecipeManager manager = level.getRecipeManager();
-        return manager.getRecipeFor(BlockyChefRecipeTypes.TOASTER_RECIPE, this, level);
+        return Helper.findRecipeFor(manager, BlockyChefRecipeTypes.TOASTER_RECIPE, recipe -> recipe.matches(stack));
     }
 
     static final class ToastingUnit {
@@ -119,7 +140,6 @@ public class ToasterBlockEntity extends RecipeRemberingBlockEntity<ToasterRecipe
         private final ToasterBlockEntity toaster;
         private final int slot;
         private int time;
-        private ToastingStatus status = ToastingStatus.RAW;
 
         ToastingUnit(ToasterBlockEntity toaster, int slot) {
             this.toaster = toaster;
@@ -127,21 +147,41 @@ public class ToasterBlockEntity extends RecipeRemberingBlockEntity<ToasterRecipe
         }
 
         boolean hasValidItem() {
-            ItemStack stack = ItemStack.EMPTY;
-            return true;
+            return getRecipe().isPresent();
         }
 
         void cancel() {
-
+            time = 0;
+            Helper.sendBlockEntityClientData(toaster);
         }
 
         boolean toast() {
-            ++time;
+            Optional<ToasterRecipe> optional = getRecipe();
+            if (optional.isPresent()) {
+                ToasterRecipe recipe = optional.get();
+                int limit = recipe.getToastingTime();
+                if (++time >= limit) {
+                    ItemStack result = recipe.assemble(toaster, toaster.getLevel().registryAccess());
+                    toaster.setItem(slot, result);
+                    return true;
+                }
+            }
             return false;
         }
-    }
 
-    private enum ToastingStatus {
-        RAW, TOASTED, BURNT
+        Optional<ToasterRecipe> getRecipe() {
+            ItemStack stack = toaster.getItem(slot);
+            return toaster.getRecipe(stack);
+        }
+
+        CompoundTag serializeData() {
+            CompoundTag tag = new CompoundTag();
+            tag.putInt("time", time);
+            return tag;
+        }
+
+        void deserializeData(CompoundTag tag) {
+            time = tag.getInt("time");
+        }
     }
 }

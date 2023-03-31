@@ -1,0 +1,10 @@
+{
+  "type": "blockychef:toasting",
+  "input": {
+    "item": "blockychef:toast"
+  },
+  "output": {
+    "item": "blockychef:burnt_toast"
+  },
+  "toastingTime": 100
+}

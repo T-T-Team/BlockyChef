@@ -19,39 +19,36 @@ public class ToasterRecipe extends AbstractFoodRecipe<ToasterBlockEntity> {
     public static final CodecRecipeSerializer.CodecProvider<ToasterRecipe> CODEC_PROVIDER = recipeId -> RecordCodecBuilder.create(instance -> instance.group(
             SerializationHelper.INGREDIENT_CODEC.fieldOf("input").forGetter(t -> t.input),
             SerializationHelper.SIMPLE_ITEMSTACK_CODEC.fieldOf("output").forGetter(ToasterRecipe::getOutput),
-            SerializationHelper.SIMPLE_ITEMSTACK_CODEC.fieldOf("burntOutput").forGetter(ToasterRecipe::getBurntOutput),
-            ToastingLimits.CODEC.fieldOf("toasting").forGetter(ToasterRecipe::getToastingLimits),
+            Codec.intRange(1, Integer.MAX_VALUE).fieldOf("toastingTime").forGetter(ToasterRecipe::getToastingTime),
             Codec.FLOAT.optionalFieldOf("experience", 0.0F).forGetter(AbstractFoodRecipe::getExperience)
-    ).apply(instance, (in, out, burntOut, limits, exp) -> new ToasterRecipe(recipeId, in, out, burntOut, limits, exp)));
+    ).apply(instance, (in, out, time, exp) -> new ToasterRecipe(recipeId, in, out, time, exp)));
 
     private final Ingredient input;
     private final ItemStack output;
-    private final ItemStack burntOutput;
-    private final ToastingLimits toastingLimits;
+    private final int toastingTime;
 
-    public ToasterRecipe(ResourceLocation recipeId, Ingredient input, ItemStack output, ItemStack burntOutput, ToastingLimits limits, float experience) {
+    public ToasterRecipe(ResourceLocation recipeId, Ingredient input, ItemStack output, int toastingTime, float experience) {
         super(recipeId, experience);
         this.input = input;
         this.output = output;
-        this.burntOutput = burntOutput;
-        this.toastingLimits = limits;
+        this.toastingTime = toastingTime;
     }
 
     public ItemStack getOutput() {
         return output;
     }
 
-    public ItemStack getBurntOutput() {
-        return burntOutput;
+    public int getToastingTime() {
+        return toastingTime;
     }
 
-    public ToastingLimits getToastingLimits() {
-        return toastingLimits;
+    public boolean matches(ItemStack stack) {
+        return input.test(stack);
     }
 
     @Override
     public boolean matches(ToasterBlockEntity toaster, Level level) {
-        return false; // TODO link to toaster internal method
+        return false;
     }
 
     @Override
@@ -72,13 +69,5 @@ public class ToasterRecipe extends AbstractFoodRecipe<ToasterBlockEntity> {
     @Override
     public RecipeType<?> getType() {
         return BlockyChefRecipeTypes.TOASTER_RECIPE;
-    }
-
-    public record ToastingLimits(int minTimeToasting, int maxTimeToasting) {
-
-        public static final Codec<ToastingLimits> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                Codec.intRange(1, Integer.MAX_VALUE).fieldOf("minTime").forGetter(ToastingLimits::minTimeToasting),
-                Codec.intRange(1, Integer.MAX_VALUE).fieldOf("maxTime").forGetter(ToastingLimits::maxTimeToasting)
-        ).apply(instance, ToastingLimits::new));
     }
 }
