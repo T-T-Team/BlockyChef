@@ -59,6 +59,7 @@ public abstract class InventoryBlockEntityWithContainerWrapper extends Inventory
     @Override
     public void setItem(int index, ItemStack stack) {
         this.inventoryHandler.setStackInSlot(index, stack);
+        setChanged();
     }
 
     @Override

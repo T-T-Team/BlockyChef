@@ -5,6 +5,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
@@ -22,6 +23,9 @@ import java.util.Optional;
 
 public class ToasterBlockEntity extends RecipeRemberingBlockEntity<ToasterRecipe> implements SynchronizableBlockEntity, IndexedColorHolder {
 
+    public static final int DEFAULT_TIMER_INCREMENT = 100;
+    public static final int MIN_TIMER_VALUE = 100; // 5 seconds
+    public static final int MAX_TIMER_VALUE = 6000; // 5 minutes
     private static final int[] SLOTS = { 0, 1 };
     private final NonNullList<ToastingUnit> units;
     private int[] colors;
@@ -41,24 +45,18 @@ public class ToasterBlockEntity extends RecipeRemberingBlockEntity<ToasterRecipe
 
     public static void tickServer(Level level, BlockPos pos, BlockState state, ToasterBlockEntity toaster) {
         if (toaster.toasting) {
-            boolean hasActiveUnit = false;
             boolean isChanged = false;
             for (ToastingUnit unit : toaster.units) {
                 if (unit.hasValidItem()) {
                     if (unit.toast()) {
                         isChanged = true;
                     }
-                    hasActiveUnit = true;
                 } else {
                     isChanged = true;
                     unit.cancel();
                 }
             }
-            if (!hasActiveUnit) {
-                isChanged = true;
-                toaster.toasting = false;
-                toaster.timeToasting = 0;
-            } else if (++toaster.timeToasting >= toaster.targetToastingTime) {
+            if (++toaster.timeToasting >= toaster.targetToastingTime) {
                 MenuInventoryHelper.dropInventoryContents(level, pos, toaster.getItemHandler());
                 isChanged = true;
                 toaster.units.forEach(ToastingUnit::cancel);
@@ -71,9 +69,35 @@ public class ToasterBlockEntity extends RecipeRemberingBlockEntity<ToasterRecipe
         }
     }
 
+    public void setToasting(boolean toasting) {
+        this.toasting = toasting;
+        setChanged();
+    }
+
+    public boolean isToasting() {
+        return toasting;
+    }
+
+    public void setToastingTimer(int time) {
+        if (toasting) {
+            return;
+        }
+        this.targetToastingTime = Mth.clamp(time, MIN_TIMER_VALUE, MAX_TIMER_VALUE);
+        setChanged();
+    }
+
+    public int getToastingTimer() {
+        return targetToastingTime;
+    }
+
     @Override
     public IItemHandlerModifiable setUpInventory() {
-        return new ItemStackHandler(SLOTS.length);
+        return new ItemStackHandler(SLOTS.length) {
+            @Override
+            protected void onContentsChanged(int slot) {
+                ToasterBlockEntity.this.setChanged();
+            }
+        };
     }
 
     @Override
@@ -92,19 +116,46 @@ public class ToasterBlockEntity extends RecipeRemberingBlockEntity<ToasterRecipe
 
     @Override
     public void encodeBlockEntityData(CompoundTag tag) {
-        tag.putIntArray("colors", colors);
-        ListTag unitData = new ListTag();
-        for (ToastingUnit unit : units) {
-            unitData.add(unit.serializeData());
-        }
-        tag.put("unitData", unitData);
-        tag.putBoolean("toasting", toasting);
-        tag.putInt("timeToasting", timeToasting);
-        tag.putInt("targetToastingTime", targetToastingTime);
+        MenuInventoryHelper.encodeInventory(getItemHandler(), tag);
+        saveSharedData(tag);
     }
 
     @Override
     public void decodeBlockEntityData(CompoundTag tag) {
+        MenuInventoryHelper.decodeInventory(getItemHandler(), tag);
+        loadSharedData(tag);
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
+        saveSharedData(tag);
+    }
+
+    @Override
+    public void load(CompoundTag tag) {
+        super.load(tag);
+        loadSharedData(tag);
+    }
+
+    public Optional<ToasterRecipe> getRecipe(ItemStack stack) {
+        if (level == null)
+            return Optional.empty();
+        RecipeManager manager = level.getRecipeManager();
+        return Helper.findRecipeFor(manager, BlockyChefRecipeTypes.TOASTER_RECIPE, recipe -> recipe.matches(stack));
+    }
+
+    private void saveSharedData(CompoundTag tag) {
+        tag.putIntArray("colors", colors);
+        tag.putBoolean("toasting", toasting);
+        tag.putInt("timeToasting", timeToasting);
+        tag.putInt("targetToastingTime", targetToastingTime);
+        ListTag unitData = new ListTag();
+        units.forEach(unit -> unitData.add(unit.serializeData()));
+        tag.put("unitData", unitData);
+    }
+
+    private void loadSharedData(CompoundTag tag) {
         colors = tag.getIntArray("colors");
         toasting = tag.getBoolean("toasting");
         timeToasting = tag.getInt("timeToasting");
@@ -116,25 +167,6 @@ public class ToasterBlockEntity extends RecipeRemberingBlockEntity<ToasterRecipe
                 break;
             units.get(i).deserializeData(unitTag);
         }
-    }
-
-    @Override
-    protected void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
-        encodeBlockEntityData(tag);
-    }
-
-    @Override
-    public void load(CompoundTag tag) {
-        super.load(tag);
-        decodeBlockEntityData(tag);
-    }
-
-    public Optional<ToasterRecipe> getRecipe(ItemStack stack) {
-        if (level == null)
-            return Optional.empty();
-        RecipeManager manager = level.getRecipeManager();
-        return Helper.findRecipeFor(manager, BlockyChefRecipeTypes.TOASTER_RECIPE, recipe -> recipe.matches(stack));
     }
 
     static final class ToastingUnit {
@@ -164,6 +196,8 @@ public class ToasterBlockEntity extends RecipeRemberingBlockEntity<ToasterRecipe
                 if (++time >= limit) {
                     ItemStack result = recipe.assemble(toaster, toaster.getLevel().registryAccess());
                     toaster.setItem(slot, result);
+                    toaster.storeRecipe(recipe);
+                    time = 0;
                     return true;
                 }
             }

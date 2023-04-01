@@ -110,7 +110,6 @@ public class CuttingBoardScreen extends AbstractContainerScreen<CuttingBoardMenu
         NetworkManager.dispatchServerPacket(new C2S_CuttingBoardEvent(entity.getBlockPos(), C2S_CuttingBoardEvent.EventType.PROCESSING, active));
     }
 
-    // TODO does not work correctly
     private void prevRecipeClicked(Button button) {
         CuttingBoardBlockEntity entity = menu.getBlockEntity();
         entity.changeRecipe(-1);

@@ -8,6 +8,7 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.network.packet.C2S_CuttingBoardEvent;
+import tnt.blockychef.network.packet.C2S_ToasterEvent;
 import tnt.blockychef.network.packet.S2C_SendBlockEntityData;
 import tnt.blockychef.network.packet.S2C_SendThirstData;
 
@@ -41,6 +42,7 @@ public final class NetworkManager {
             register(S2C_SendThirstData.class, S2C_SendThirstData::new);
             register(S2C_SendBlockEntityData.class, S2C_SendBlockEntityData::new);
             register(C2S_CuttingBoardEvent.class, C2S_CuttingBoardEvent::new);
+            register(C2S_ToasterEvent.class, C2S_ToasterEvent::new);
         }
 
         private static <T extends Packet> void register(Class<T> aClass, Function<FriendlyByteBuf, T> decoder) {

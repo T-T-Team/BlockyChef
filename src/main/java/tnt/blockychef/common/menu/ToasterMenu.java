@@ -54,5 +54,15 @@ public class ToasterMenu extends AbstractBlockEntityMenu<ToasterBlockEntity> {
         public boolean mayPlace(@NotNull ItemStack stack) {
             return toaster.getRecipe(stack).isPresent();
         }
+
+        @Override
+        public int getMaxStackSize() {
+            return 1;
+        }
+
+        @Override
+        public int getMaxStackSize(@NotNull ItemStack stack) {
+            return 1;
+        }
     }
 }

@@ -32,6 +32,9 @@ public class ToasterRecipe extends AbstractFoodRecipe<ToasterBlockEntity> {
         this.input = input;
         this.output = output;
         this.toastingTime = toastingTime;
+        if (toastingTime > ToasterBlockEntity.MAX_TIMER_VALUE) {
+            throwValidationError("Toasting time exceeded max time setting of " + ToasterBlockEntity.MAX_TIMER_VALUE);
+        }
     }
 
     public ItemStack getOutput() {
