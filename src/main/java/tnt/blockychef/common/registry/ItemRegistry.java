@@ -431,5 +431,37 @@ public final class ItemRegistry {
         helper.register("sweet_rice_dough", new Item(new Item.Properties()));
         helper.register("tomato_sauce", new Item(new Item.Properties()));
         helper.register("whipped_cream", new Item(new Item.Properties()));
+        helper.register("baguette", new Item(new Item.Properties()));
+        helper.register("blueberry_ice_cream", new Item(new Item.Properties()));
+        helper.register("burger_bun", new Item(new Item.Properties()));
+        helper.register("burnt_baguette", new Item(new Item.Properties()));
+        helper.register("burnt_bread", new Item(new Item.Properties()));
+        helper.register("burnt_burger_bun", new Item(new Item.Properties()));
+        helper.register("burnt_caramel", new Item(new Item.Properties()));
+        helper.register("burnt_chocolate_bar", new Item(new Item.Properties()));
+        helper.register("burnt_roll", new Item(new Item.Properties()));
+        helper.register("burnt_waffle", new Item(new Item.Properties()));
+        helper.register("caramel", new Item(new Item.Properties()));
+        helper.register("caramel_ice_cream", new Item(new Item.Properties()));
+        helper.register("cherry_ice_cream", new Item(new Item.Properties()));
+        helper.register("chocolate_bar", new Item(new Item.Properties()));
+        helper.register("chocolate_chips", new Item(new Item.Properties()));
+        helper.register("chocolate_ice_cream", new Item(new Item.Properties()));
+        helper.register("dried_baguette", new Item(new Item.Properties()));
+        helper.register("dried_roll", new Item(new Item.Properties()));
+        helper.register("grated_chocolate", new Item(new Item.Properties()));
+        helper.register("ice_cream", new Item(new Item.Properties()));
+        helper.register("lemon_ice_cream", new Item(new Item.Properties()));
+        helper.register("raspberry_ice_cream", new Item(new Item.Properties()));
+        helper.register("raw_baguette", new Item(new Item.Properties()));
+        helper.register("raw_bread", new Item(new Item.Properties()));
+        helper.register("raw_burger_bun", new Item(new Item.Properties()));
+        helper.register("raw_roll", new Item(new Item.Properties()));
+        helper.register("raw_waffle", new Item(new Item.Properties()));
+        helper.register("roll", new Item(new Item.Properties()));
+        helper.register("stracciatella_ice_cream", new Item(new Item.Properties()));
+        helper.register("strawberry_ice_cream", new Item(new Item.Properties()));
+        helper.register("vanilla_ice_cream", new Item(new Item.Properties()));
+        helper.register("waffle", new Item(new Item.Properties()));
     }
 }
