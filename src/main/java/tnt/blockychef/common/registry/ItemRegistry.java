@@ -463,5 +463,41 @@ public final class ItemRegistry {
         helper.register("strawberry_ice_cream", new Item(new Item.Properties()));
         helper.register("vanilla_ice_cream", new Item(new Item.Properties()));
         helper.register("waffle", new Item(new Item.Properties()));
+        helper.register("berry_tea", new Item(new Item.Properties()));
+        helper.register("black_coffee", new Item(new Item.Properties()));
+        helper.register("boiled_egg", new Item(new Item.Properties()));
+        helper.register("boiled_egg_cuts", new Item(new Item.Properties()));
+        helper.register("burnt_corn_bread", new Item(new Item.Properties()));
+        helper.register("burnt_egg", new Item(new Item.Properties()));
+        helper.register("burnt_nachos", new Item(new Item.Properties()));
+        helper.register("burnt_pita", new Item(new Item.Properties()));
+        helper.register("burnt_tortilla", new Item(new Item.Properties()));
+        helper.register("cappuccino", new Item(new Item.Properties()));
+        helper.register("citrus_tea", new Item(new Item.Properties()));
+        helper.register("corn_bread", new Item(new Item.Properties()));
+        helper.register("dandelion_tea", new Item(new Item.Properties()));
+        helper.register("egg", new Item(new Item.Properties()));
+        helper.register("espresso", new Item(new Item.Properties()));
+        helper.register("fruit_tea", new Item(new Item.Properties()));
+        helper.register("ginger_tea", new Item(new Item.Properties()));
+        helper.register("honey_tea", new Item(new Item.Properties()));
+        helper.register("hot_caramel_chocolate", new Item(new Item.Properties()));
+        helper.register("hot_chilli_chocolate", new Item(new Item.Properties()));
+        helper.register("hot_chocolate", new Item(new Item.Properties()));
+        helper.register("ice_coffee", new Item(new Item.Properties()));
+        helper.register("latte", new Item(new Item.Properties()));
+        helper.register("milk_tea", new Item(new Item.Properties()));
+        helper.register("mug", new Item(new Item.Properties()));
+        helper.register("mulled_wine", new Item(new Item.Properties()));
+        helper.register("nachos", new Item(new Item.Properties()));
+        helper.register("pita", new Item(new Item.Properties()));
+        helper.register("raw_corn_bread", new Item(new Item.Properties()));
+        helper.register("raw_nachos", new Item(new Item.Properties()));
+        helper.register("raw_pita", new Item(new Item.Properties()));
+        helper.register("raw_tortilla", new Item(new Item.Properties()));
+        helper.register("tea", new Item(new Item.Properties()));
+        helper.register("tortilla", new Item(new Item.Properties()));
+        helper.register("unfinished_mug", new Item(new Item.Properties()));
+
     }
 }
