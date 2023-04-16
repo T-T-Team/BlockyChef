@@ -1,0 +1,12 @@
+{
+  "type": "blockychef:meat_grinding",
+  "input": {
+    "item": "minecraft:beef"
+  },
+  "processingAmount": 5,
+  "output": {
+    "item": "blockychef:grounded_beef_meat",
+    "count": 2
+  },
+  "experience": 0.3
+}

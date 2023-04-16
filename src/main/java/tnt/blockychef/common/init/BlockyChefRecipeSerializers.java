@@ -13,4 +13,6 @@ public final class BlockyChefRecipeSerializers {
     public static final RecipeSerializer<?> CUTTING_BOARD_RECIPE_SERIALIZER = null;
     @ObjectHolder(value = "blockychef:toasting", registryName = "recipe_serializer")
     public static final RecipeSerializer<?> TOASTING_RECIPE_SERIALIZER = null;
+    @ObjectHolder(value = "blockychef:meat_grinding", registryName = "recipe_serializer")
+    public static final RecipeSerializer<?> MEAT_GRINDER_RECIPE_SERIALIZER = null;
 }

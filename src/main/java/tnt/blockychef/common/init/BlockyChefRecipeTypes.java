@@ -2,10 +2,7 @@ package tnt.blockychef.common.init;
 
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.registries.ObjectHolder;
-import tnt.blockychef.common.food.recipe.CuttingBoardRecipe;
-import tnt.blockychef.common.food.recipe.DryingRecipe;
-import tnt.blockychef.common.food.recipe.GratingRecipe;
-import tnt.blockychef.common.food.recipe.ToasterRecipe;
+import tnt.blockychef.common.food.recipe.*;
 
 public final class BlockyChefRecipeTypes {
 
@@ -17,4 +14,6 @@ public final class BlockyChefRecipeTypes {
     public static final RecipeType<CuttingBoardRecipe> CUTTING_BOARD_RECIPE = null;
     @ObjectHolder(value = "blockychef:toasting_recipe", registryName = "recipe_type")
     public static final RecipeType<ToasterRecipe> TOASTER_RECIPE = null;
+    @ObjectHolder(value = "blockychef:meat_grinder_recipe", registryName = "recipe_type")
+    public static final RecipeType<MeatGrinderRecipe> MEAT_GRINDER_RECIPE = null;
 }

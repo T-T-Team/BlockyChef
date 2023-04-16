@@ -84,6 +84,7 @@ public final class Registry {
         helper.register("pasta_machine", BlockEntityType.Builder.of(PastaMachineBlockEntity::new, BlockyChefBlocks.PASTA_MACHINE).build(null));
         helper.register("grater", BlockEntityType.Builder.of(GraterBlockEntity::new, BlockyChefBlocks.GRATER).build(null));
         helper.register("cutting_board", BlockEntityType.Builder.of(CuttingBoardBlockEntity::new, BlockyChefBlocks.OAK_CUTTING_BOARD, BlockyChefBlocks.SPRUCE_CUTTING_BOARD, BlockyChefBlocks.BIRCH_CUTTING_BOARD, BlockyChefBlocks.JUNGLE_CUTTING_BOARD, BlockyChefBlocks.ACACIA_CUTTING_BOARD, BlockyChefBlocks.DARK_CUTTING_BOARD, BlockyChefBlocks.MANGROVE_CUTTING_BOARD, BlockyChefBlocks.CRIMSON_CUTTING_BOARD, BlockyChefBlocks.WARPED_CUTTING_BOARD).build(null));
+        helper.register("meat_grinder", BlockEntityType.Builder.of(MeatGrinderBlockEntity::new, BlockyChefBlocks.MEAT_GRINDER).build(null));
     }
 
     private static void registerMenuTypes(RegisterEvent.RegisterHelper<MenuType<?>> helper) {
@@ -108,6 +109,7 @@ public final class Registry {
         helper.register("grating_recipe");
         helper.register("cutting_board_recipe");
         helper.register("toasting_recipe");
+        helper.register("meat_grinder_recipe");
     }
 
     private static void registerRecipeSerializers(RegisterEvent.RegisterHelper<RecipeSerializer<?>> helper) {
@@ -115,6 +117,7 @@ public final class Registry {
         helper.register("grating", CodecRecipeSerializer.forCodec(GratingRecipe.CODEC_PROVIDER));
         helper.register("cutting_board", CodecRecipeSerializer.forCodec(CuttingBoardRecipe.CODEC_PROVIDER));
         helper.register("toasting", CodecRecipeSerializer.forCodec(ToasterRecipe.CODEC_PROVIDER));
+        helper.register("meat_grinding", CodecRecipeSerializer.forCodec(MeatGrinderRecipe.CODEC_PROVIDER));
     }
 
     private static void registerFeatures(RegisterEvent.RegisterHelper<Feature<?>> helper) {

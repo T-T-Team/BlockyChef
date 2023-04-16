@@ -1,0 +1,116 @@
+package tnt.blockychef.common.block.entity;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.items.IItemHandlerModifiable;
+import net.minecraftforge.items.ItemStackHandler;
+import tnt.blockychef.common.food.recipe.MeatGrinderRecipe;
+import tnt.blockychef.common.init.BlockyChefBlockEntities;
+import tnt.blockychef.common.init.BlockyChefRecipeTypes;
+import tnt.blockychef.util.Helper;
+import tnt.blockychef.util.MenuInventoryHelper;
+import tnt.blockychef.util.SerializationHelper;
+
+import javax.annotation.Nullable;
+import java.util.Optional;
+
+public class MeatGrinderBlockEntity extends RecipeRemberingBlockEntity<MeatGrinderRecipe> implements SynchronizableBlockEntity {
+
+    private MeatGrinderRecipe recipe;
+    private int grindAmount;
+
+    public MeatGrinderBlockEntity(BlockPos pos, BlockState state) {
+        super(BlockyChefBlockEntities.MEAT_GRINDER, pos, state);
+    }
+
+    @Override
+    public IItemHandlerModifiable setUpInventory() {
+        return new ItemStackHandler(1);
+    }
+
+    public ItemStack getInputItem() {
+        return inventoryHandler.getStackInSlot(0);
+    }
+
+    public boolean hasInput() {
+        return !getInputItem().isEmpty();
+    }
+
+    public void setInput(ItemStack stack) {
+        inventoryHandler.setStackInSlot(0, stack);
+        setChanged();
+        refreshRecipe();
+    }
+
+    public void processRecipe(Player player) {
+        if (recipe == null) {
+            return;
+        }
+        if (++grindAmount >= recipe.getProcessingAmount()) {
+            ItemStack result = recipe.assemble(this, level.registryAccess());
+            inventoryHandler.setStackInSlot(0, result);
+            storeRecipe(recipe);
+            grindAmount = 0;
+            if (!level.isClientSide) {
+                awardUsedRecipesAndPopExperience((ServerPlayer) player);
+                MenuInventoryHelper.dropInventoryContents(level, worldPosition, inventoryHandler);
+                Helper.sendBlockEntityClientData(this);
+            }
+        }
+    }
+
+    @Override
+    public void encodeBlockEntityData(CompoundTag tag) {
+        MenuInventoryHelper.encodeInventory(inventoryHandler, tag);
+        tag.putInt("grindAmount", grindAmount);
+    }
+
+    @Override
+    public void decodeBlockEntityData(CompoundTag tag) {
+        MenuInventoryHelper.decodeInventory(inventoryHandler, tag);
+        grindAmount = tag.getInt("grindAmount");
+        refreshRecipe();
+    }
+
+    @Override
+    public void load(CompoundTag tag) {
+        super.load(tag);
+        grindAmount = tag.getInt("grindAmount");
+        refreshRecipe();
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
+        tag.putInt("grindAmount", grindAmount);
+    }
+
+    private void refreshRecipe() {
+        if (level == null)
+            return;
+        RecipeManager recipeManager = level.getRecipeManager();
+        Optional<MeatGrinderRecipe> optional = recipeManager.getRecipeFor(BlockyChefRecipeTypes.MEAT_GRINDER_RECIPE, this, level);
+        if (optional.isPresent()) {
+            setRecipe(optional.get());
+        } else {
+            setRecipe(null);
+        }
+        if (!level.isClientSide) {
+            Helper.sendBlockEntityClientData(this);
+        }
+    }
+
+    private void setRecipe(@Nullable MeatGrinderRecipe recipe) {
+        boolean changed = this.recipe != recipe;
+        this.recipe = recipe;
+        if (changed) {
+            grindAmount = 0;
+            Helper.sendBlockEntityClientData(this);
+        }
+    }
+}

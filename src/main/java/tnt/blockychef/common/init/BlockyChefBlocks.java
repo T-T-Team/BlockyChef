@@ -99,6 +99,8 @@ public final class BlockyChefBlocks {
     public static final JuicerBlock JUICER = null;
     @ObjectHolder(value = "blockychef:grill", registryName = "block")
     public static final GrillBlock GRILL = null;
+    @ObjectHolder(value = "blockychef:meat_grinder", registryName = "block")
+    public static final MeatGrinderBlock MEAT_GRINDER = null;
     @ObjectHolder(value = "blockychef:pasta_machine", registryName = "block")
     public static final PastaMachineBlock PASTA_MACHINE = null;
     @ObjectHolder(value = "blockychef:grater", registryName = "block")
