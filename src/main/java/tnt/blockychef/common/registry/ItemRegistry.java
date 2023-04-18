@@ -498,6 +498,24 @@ public final class ItemRegistry {
         helper.register("tea", new Item(new Item.Properties()));
         helper.register("tortilla", new Item(new Item.Properties()));
         helper.register("unfinished_mug", new Item(new Item.Properties()));
-
+        helper.register("avocado_pesto", new Item(new Item.Properties()));
+        helper.register("boiled_beans", new Item(new Item.Properties()));
+        helper.register("bottle_of_water", new Item(new Item.Properties()));
+        helper.register("burnt_beans", new Item(new Item.Properties()));
+        helper.register("burnt_onion", new Item(new Item.Properties()));
+        helper.register("burnt_soy_meat", new Item(new Item.Properties()));
+        helper.register("burnt_spinach", new Item(new Item.Properties()));
+        helper.register("cooked_onion", new Item(new Item.Properties()));
+        helper.register("cooked_soy_meat", new Item(new Item.Properties()));
+        helper.register("ice_tea", new Item(new Item.Properties()));
+        helper.register("pesto", new Item(new Item.Properties()));
+        helper.register("raw_soy_meat", new Item(new Item.Properties()));
+        helper.register("rice_dumpling_wrapper", new Item(new Item.Properties()));
+        helper.register("rice_papper", new Item(new Item.Properties()));
+        helper.register("rock_salt", new Item(new Item.Properties()));
+        helper.register("soy_flour", new Item(new Item.Properties()));
+        helper.register("spinach", new Item(new Item.Properties()));
+        helper.register("tofu", new Item(new Item.Properties()));
+        helper.register("wheat_flour", new Item(new Item.Properties()));
     }
 }
