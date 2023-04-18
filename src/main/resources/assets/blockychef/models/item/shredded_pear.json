@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "blockychef:item/shreded_lettuce"
+    "layer0": "blockychef:item/shredded_pear"
   }
 }
