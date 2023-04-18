@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#blockychef:is_salt_biome",
+  "features": "blockychef:ore_salt",
+  "step": "underground_ores"
+}

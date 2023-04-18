@@ -1,9 +1,11 @@
 package tnt.blockychef.common.registry;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -160,6 +162,7 @@ public final class BlockRegistry {
         helper.register("hazelnut_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefTrees.HAZELNUT_TREE)));
         helper.register("plum_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefTrees.PLUM_TREE)));
         helper.register("walnut_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefTrees.WALNUT_TREE)));
+        helper.register("salt_ore", new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F, 3.0F), UniformInt.of(0, 2)));
     }
 
     private static boolean allowParrotOrOcelotSpawn(BlockState state, BlockGetter getter, BlockPos pos, EntityType<?> entityType) {
