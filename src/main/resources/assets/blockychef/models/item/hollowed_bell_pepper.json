@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "blockychef:item/hollowed_bellpepper"
+    "layer0": "blockychef:item/hollowed_bell_pepper"
   }
 }
