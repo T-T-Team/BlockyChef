@@ -2,7 +2,6 @@ package tnt.blockychef.common.food;
 
 import com.google.common.base.Supplier;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import tnt.blockychef.common.init.BlockyChefMobEffects;
 import tnt.blockychef.common.thirst.DrinkProperties;
 
