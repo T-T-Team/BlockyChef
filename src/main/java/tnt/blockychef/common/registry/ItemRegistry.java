@@ -1,10 +1,12 @@
 package tnt.blockychef.common.registry;
 
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.UseAnim;
 import net.minecraftforge.registries.RegisterEvent;
 import tnt.blockychef.common.food.DrinkList;
 import tnt.blockychef.common.food.FoodList;
 import tnt.blockychef.common.init.BlockyChefBlocks;
+import tnt.blockychef.common.item.ConsumableItem;
 import tnt.blockychef.common.item.CropSeedsItem;
 import tnt.blockychef.common.item.DrinkableItem;
 import tnt.blockychef.common.item.EdibleCropSeedItem;
@@ -250,7 +252,7 @@ public final class ItemRegistry {
         helper.register("wine", new Item(new Item.Properties()));
         helper.register("apple_juice", new Item(new Item.Properties()));
         helper.register("apple_yogurt", new Item(new Item.Properties()));
-        helper.register("banana_milkshake", new Item(new Item.Properties()));
+        helper.register("banana_milkshake", new ConsumableItem(new Item.Properties().food(FoodList.CORN_MEAL), DrinkList.CORN_MEAL, UseAnim.DRINK));
         helper.register("blueberry_juice", new Item(new Item.Properties()));
         helper.register("blueberry_milkshake", new Item(new Item.Properties()));
         helper.register("blueberry_yogurt", new Item(new Item.Properties()));
