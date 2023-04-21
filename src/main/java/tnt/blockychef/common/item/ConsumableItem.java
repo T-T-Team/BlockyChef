@@ -4,7 +4,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import tnt.blockychef.common.thirst.DrinkProperties;
 
-public class ConsumableItem extends DrinkableItem {
+public class ConsumableItem extends HydrationAdjustingItem {
 
     private final UseAnim useAnim;
 

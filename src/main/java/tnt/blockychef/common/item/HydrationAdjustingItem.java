@@ -11,11 +11,11 @@ import net.minecraft.world.level.Level;
 import tnt.blockychef.common.thirst.DrinkProperties;
 import tnt.blockychef.common.thirst.PlayerThirstStatsProvider;
 
-public class DrinkableItem extends Item implements Drinkable {
+public class HydrationAdjustingItem extends Item implements Drinkable {
 
     private final DrinkProperties drinkProperties;
 
-    public DrinkableItem(Properties properties, DrinkProperties drinkStats) {
+    public HydrationAdjustingItem(Properties properties, DrinkProperties drinkStats) {
         super(properties);
         this.drinkProperties = drinkStats;
     }
