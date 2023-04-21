@@ -13,12 +13,13 @@ import tnt.blockychef.common.thirst.PlayerThirstStatsProvider;
 import tnt.blockychef.util.Helper;
 
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class ConsumableItem extends Item implements Drinkable {
 
     private final DrinkProperties drinkProperties;
     private final Function<ItemStack, UseAnim> useAnimProvider;
-    private ItemStack returnItem = ItemStack.EMPTY;
+    private Supplier<Item> returnItem;
 
     public ConsumableItem(Properties properties, DrinkProperties drinkStats) {
         this(properties, drinkStats, stack -> stack.isEdible() ? UseAnim.EAT : UseAnim.DRINK);
@@ -34,16 +35,8 @@ public class ConsumableItem extends Item implements Drinkable {
         this.useAnimProvider = useAnimProvider;
     }
 
-    public ConsumableItem returns(Item item) {
-        return returns(item, 1);
-    }
-
-    public ConsumableItem returns(Item item, int count) {
-        return returns(new ItemStack(item, count));
-    }
-
-    public ConsumableItem returns(ItemStack itemStack) {
-        this.returnItem = itemStack;
+    public ConsumableItem returns(Supplier<Item> itemProvider) {
+        this.returnItem = itemProvider;
         return this;
     }
 
@@ -86,8 +79,8 @@ public class ConsumableItem extends Item implements Drinkable {
                 stack.shrink(1);
             }
         }
-        if (!returnItem.isEmpty() && entity instanceof Player player) {
-            Helper.giveItem(player, returnItem.copy());
+        if (returnItem != null && entity instanceof Player player) {
+            Helper.giveItem(player, new ItemStack(returnItem.get()));
         }
         return stack;
     }
