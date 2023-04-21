@@ -76,6 +76,8 @@ public final class BlockyChefItems {
     public static final Item SPINACH_LEAF = null;
     @ObjectHolder(value = "blockychef:cinnamon_bark", registryName = "item")
     public static final Item CINNAMON_BARK = null;
+    @ObjectHolder(value = "blockychef:empty_bottle", registryName = "item")
+    public static final Item EMPTY_BOTTLE = null;
 
     // Block items
     @ObjectHolder(value = "blockychef:cinnamon_leaves", registryName = "item")

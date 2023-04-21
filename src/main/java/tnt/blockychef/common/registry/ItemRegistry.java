@@ -6,6 +6,7 @@ import net.minecraftforge.registries.RegisterEvent;
 import tnt.blockychef.common.food.DrinkList;
 import tnt.blockychef.common.food.FoodList;
 import tnt.blockychef.common.init.BlockyChefBlocks;
+import tnt.blockychef.common.init.BlockyChefItems;
 import tnt.blockychef.common.item.ConsumableItem;
 import tnt.blockychef.common.item.CropSeedsItem;
 import tnt.blockychef.common.item.EdibleCropSeedItem;
@@ -70,7 +71,7 @@ public final class ItemRegistry {
         helper.register("fried_shrimp", new ConsumableItem(new Item.Properties().food(FoodList.FRIED_SHRIMP), DrinkList.FRIED_SHRIMP));
         helper.register("burnt_shrimp", new Item(new Item.Properties()));
 
-        helper.register("apple_extract", new ConsumableItem(new Item.Properties(), DrinkList.APPLE_EXTRACT));
+        helper.register("apple_extract", new ConsumableItem(new Item.Properties(), DrinkList.APPLE_EXTRACT, UseAnim.DRINK).returns(BlockyChefItems.EMPTY_BOTTLE));
         helper.register("apple_half", new Item(new Item.Properties().food(FoodList.APPLE_HALF)));
         helper.register("apple_marmalade", new ConsumableItem(new Item.Properties().food(FoodList.APPLE_MARMALADE), DrinkList.APPLE_MARMALADE));
         helper.register("apple_slice", new Item(new Item.Properties().food(FoodList.APPLE_SLICE)));
@@ -124,7 +125,7 @@ public final class ItemRegistry {
         helper.register("dried_black_pepper_cluster", new Item(new Item.Properties()));
         helper.register("dried_bread", new Item(new Item.Properties()));
         helper.register("dried_chilli_pepper", new Item(new Item.Properties()));
-        helper.register("dried_cinamon_bark", new Item(new Item.Properties()));
+        helper.register("dried_cinnamon_bark", new Item(new Item.Properties()));
         helper.register("dried_corn", new Item(new Item.Properties()));
         helper.register("dried_corn_cob", new Item(new Item.Properties()));
         helper.register("dried_mustard_pods", new Item(new Item.Properties()));
@@ -512,7 +513,7 @@ public final class ItemRegistry {
         helper.register("pesto", new Item(new Item.Properties()));
         helper.register("raw_soy_meat", new Item(new Item.Properties()));
         helper.register("rice_dumpling_wrapper", new Item(new Item.Properties()));
-        helper.register("rice_papper", new Item(new Item.Properties()));
+        helper.register("rice_paper", new Item(new Item.Properties()));
         helper.register("rock_salt", new Item(new Item.Properties()));
         helper.register("soy_flour", new Item(new Item.Properties()));
         helper.register("spinach", new Item(new Item.Properties()));
