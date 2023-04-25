@@ -15,7 +15,6 @@ import tnt.blockychef.util.Helper;
 import tnt.blockychef.util.MenuInventoryHelper;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 

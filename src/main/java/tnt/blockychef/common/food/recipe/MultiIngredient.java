@@ -34,4 +34,19 @@ public final class MultiIngredient {
         }
         return remaining <= 0;
     }
+
+    public void consume(Container container, int[] slots) {
+        int remaining = count;
+        for (int slot : slots) {
+            ItemStack stack = container.getItem(slot);
+            if (ingredient.test(stack)) {
+                int toConsume = Math.min(remaining, stack.getCount());
+                stack.shrink(toConsume);
+                remaining -= toConsume;
+                if (remaining <= 0) {
+                    break;
+                }
+            }
+        }
+    }
 }

@@ -16,4 +16,6 @@ public final class BlockyChefRecipeTypes {
     public static final RecipeType<ToasterRecipe> TOASTER_RECIPE = null;
     @ObjectHolder(value = "blockychef:meat_grinder_recipe", registryName = "recipe_type")
     public static final RecipeType<MeatGrinderRecipe> MEAT_GRINDER_RECIPE = null;
+    @ObjectHolder(value = "blockychef:mortar_and_pestle_recipe", registryName = "recipe_type")
+    public static final RecipeType<MortarRecipe> MORTAR_AND_PESTLE_RECIPE = null;
 }

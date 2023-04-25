@@ -101,6 +101,16 @@ public final class BlockyChefBlocks {
     public static final GrillBlock GRILL = null;
     @ObjectHolder(value = "blockychef:meat_grinder", registryName = "block")
     public static final MeatGrinderBlock MEAT_GRINDER = null;
+    @ObjectHolder(value = "blockychef:granite_mortar_and_pestle", registryName = "block")
+    public static final MortarAndPestleBlock GRANITE_MORTAR_AND_PESTLE = null;
+    @ObjectHolder(value = "blockychef:andesite_mortar_and_pestle", registryName = "block")
+    public static final MortarAndPestleBlock ANDESITE_MORTAR_AND_PESTLE = null;
+    @ObjectHolder(value = "blockychef:diorite_mortar_and_pestle", registryName = "block")
+    public static final MortarAndPestleBlock DIORITE_MORTAR_AND_PESTLE = null;
+    @ObjectHolder(value = "blockychef:quartz_mortar_and_pestle", registryName = "block")
+    public static final MortarAndPestleBlock QUARTZ_MORTAR_AND_PESTLE = null;
+    @ObjectHolder(value = "blockychef:deepslate_mortar_and_pestle", registryName = "block")
+    public static final MortarAndPestleBlock DEEPSLATE_MORTAR_AND_PESTLE = null;
     @ObjectHolder(value = "blockychef:pasta_machine", registryName = "block")
     public static final PastaMachineBlock PASTA_MACHINE = null;
     @ObjectHolder(value = "blockychef:grater", registryName = "block")

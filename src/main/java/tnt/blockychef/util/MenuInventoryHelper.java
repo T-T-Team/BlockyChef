@@ -69,7 +69,7 @@ public final class MenuInventoryHelper {
         }
     }
 
-    public static boolean canFitItems(ItemStack[] items, Container container, int[] validSlots) {
+    public static boolean canFitItems(ItemStack[] items, Container container, int... validSlots) {
         int maxIndex = IntStream.of(validSlots).max().orElse(1);
         NonNullList<ItemStack> inventory = NonNullList.withSize(maxIndex + 1, ItemStack.EMPTY);
         for (int slotIndex : validSlots) {
@@ -79,7 +79,7 @@ public final class MenuInventoryHelper {
         return insertItems(items, inventory, container::getMaxStackSize, NonNullList::get, NonNullList::set, validSlots);
     }
 
-    public static void insertItems(ItemStack[] items, Container container, int[] outputSlots) {
+    public static void insertItems(ItemStack[] items, Container container, int... outputSlots) {
         insertItems(items, container, container::getMaxStackSize, Container::getItem, Container::setItem, outputSlots);
     }
 

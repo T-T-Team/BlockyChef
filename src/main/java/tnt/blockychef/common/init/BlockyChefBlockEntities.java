@@ -39,4 +39,6 @@ public final class BlockyChefBlockEntities {
     public static final BlockEntityType<CuttingBoardBlockEntity> CUTTING_BOARD = null;
     @ObjectHolder(value = "blockychef:meat_grinder", registryName = "block_entity_type")
     public static final BlockEntityType<MeatGrinderBlockEntity> MEAT_GRINDER = null;
+    @ObjectHolder(value = "blockychef:mortar_and_pestle", registryName = "block_entity_type")
+    public static final BlockEntityType<MortarAndPestleBlockEntity> MORTAR_AND_PESTLE = null;
 }
