@@ -518,5 +518,21 @@ public final class ItemRegistry {
         helper.register("spinach", new ConsumableItem(new Item.Properties().food(FoodList.SPINACH), DrinkList.SPINACH));
         helper.register("tofu", new ConsumableItem(new Item.Properties().food(FoodList.TOFU), DrinkList.TOFU));
         helper.register("wheat_flour", new ConsumableItem(new Item.Properties().food(FoodList.WHEAT_FLOUR), DrinkList.WHEAT_FLOUR));
+        helper.register("boiled_cheese_tortellini", new Item(new Item.Properties()));
+        helper.register("boiled_mushroom_tortellini", new Item(new Item.Properties()));
+        helper.register("boiled_pork_tortellini", new Item(new Item.Properties()));
+        helper.register("boiled_spinach_tortellini", new Item(new Item.Properties()));
+        helper.register("cooked_grounded_beef_meat", new Item(new Item.Properties()));
+        helper.register("cooked_grounded_pork_meat", new Item(new Item.Properties()));
+        helper.register("cupcake_base", new Item(new Item.Properties()));
+        helper.register("mashed_potatoes", new Item(new Item.Properties()));
+        helper.register("pie_crust", new Item(new Item.Properties()));
+        helper.register("pizza_dough", new Item(new Item.Properties()));
+        helper.register("raw_cheese_tortellini", new Item(new Item.Properties()));
+        helper.register("raw_mushroom_tortellini", new Item(new Item.Properties()));
+        helper.register("raw_pork_tortellini", new Item(new Item.Properties()));
+        helper.register("raw_rice_cake", new Item(new Item.Properties()));
+        helper.register("raw_spinach_tortellini", new Item(new Item.Properties()));
+        helper.register("rice_cake", new Item(new Item.Properties()));
     }
 }
