@@ -84,6 +84,8 @@ public final class BlockyChefItems {
     public static final Item EMPTY_GLASS = null;
     @ObjectHolder(value = "blockychef:empty_large_glass", registryName = "item")
     public static final Item EMPTY_LARGE_GLASS = null;
+    @ObjectHolder(value = "blockychef:mug", registryName = "item")
+    public static final Item MUG = null;
 
     // Block items
     @ObjectHolder(value = "blockychef:cinnamon_leaves", registryName = "item")

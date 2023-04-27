@@ -34,7 +34,7 @@ public final class DrinkList {
     public static final DrinkProperties SOYBEANS_POD = DrinkProperties.Builder.create().stats(-1, 0).build();
     public static final DrinkProperties BASIL = DrinkProperties.Builder.create().stats(-1, 0).build();
     public static final DrinkProperties GINGER = DrinkProperties.Builder.create().stats(-3, 0).build();
-    public static final DrinkProperties TEA = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties TEA_LEAF = DrinkProperties.Builder.create().stats(-1, 0).build();
     public static final DrinkProperties GRAPES = DrinkProperties.Builder.create().stats(1, 2).build();
     public static final DrinkProperties RICE_CROP = DrinkProperties.Builder.create().stats(-2, 0).build();
     public static final DrinkProperties OAT = DrinkProperties.Builder.create().stats(-2, 0).build();
@@ -315,7 +315,7 @@ public final class DrinkList {
     public static final DrinkProperties DRIED_BAGUETTE = DrinkProperties.Builder.create().stats(-5, 0).build();
     public static final DrinkProperties DRIED_ROLL = DrinkProperties.Builder.create().stats(-4, 0).build();
     public static final DrinkProperties GRATED_CHOCOLATE = DrinkProperties.Builder.create().stats(-1, 0).build();
-    public static final DrinkProperties ICE_CREAM = DrinkProperties.Builder.create().stats(1, 1).build();
+    public static final DrinkProperties ICE_CREAM = DrinkProperties.Builder.create().stats(2, 1).build();
     public static final DrinkProperties LEMON_ICE_CREAM = DrinkProperties.Builder.create().stats(2, 1).build();
     public static final DrinkProperties RASPBERRY_ICE_CREAM = DrinkProperties.Builder.create().stats(2, 1).build();
     public static final DrinkProperties RAW_BAGUETTE = DrinkProperties.Builder.create().stats(-1, 0).build();
@@ -328,6 +328,46 @@ public final class DrinkList {
     public static final DrinkProperties STRAWBERRY_ICE_CREAM = DrinkProperties.Builder.create().stats(2, 1).build();
     public static final DrinkProperties VANILLA_ICE_CREAM = DrinkProperties.Builder.create().stats(2, 1).build();
     public static final DrinkProperties WAFFLE = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties BERRY_TEA = DrinkProperties.Builder.create().stats(6, 5).build();
+    public static final DrinkProperties BLACK_COFFEE = DrinkProperties.Builder.create().stats(5, 4).build();
+    public static final DrinkProperties BOILED_EGG_CUTS = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties CAPPUCCINO = DrinkProperties.Builder.create().stats(5, 5).build();
+    public static final DrinkProperties CITRUS_TEA = DrinkProperties.Builder.create().stats(6, 5).build();
+    public static final DrinkProperties CORN_BREAD = DrinkProperties.Builder.create().stats(-3, 0).build();
+    public static final DrinkProperties DANDELION_TEA = DrinkProperties.Builder.create().stats(6, 5).build();
+    public static final DrinkProperties ESPRESSO = DrinkProperties.Builder.create().stats(4, 6).build();
+    public static final DrinkProperties FRUIT_TEA = DrinkProperties.Builder.create().stats(6, 5).build();
+    public static final DrinkProperties GINGER_TEA = DrinkProperties.Builder.create().stats(6, 5).build();
+    public static final DrinkProperties HONEY_TEA = DrinkProperties.Builder.create().stats(6, 5).build();
+    public static final DrinkProperties HOT_CARAMEL_CHOCOLATE = DrinkProperties.Builder.create().stats(7, 6).build();
+    public static final DrinkProperties HOT_CHILLI_CHOCOLATE = DrinkProperties.Builder.create().stats(7, 6).build();
+    public static final DrinkProperties HOT_CHOCOLATE = DrinkProperties.Builder.create().stats(6, 5).build();
+    public static final DrinkProperties ICE_COFFEE = DrinkProperties.Builder.create().stats(6, 6).build();
+    public static final DrinkProperties LATTE = DrinkProperties.Builder.create().stats(5, 5).build();
+    public static final DrinkProperties MILK_TEA = DrinkProperties.Builder.create().stats(5, 5).build();
+    public static final DrinkProperties MULLED_WINE = DrinkProperties.Builder.create().stats(7, 7).build();
+    public static final DrinkProperties NACHOS = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties PITA = DrinkProperties.Builder.create().stats(-3, 0).build();
+    public static final DrinkProperties RAW_CORN_BREAD = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties RAW_NACHOS = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties RAW_PITA = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties RAW_TORTILLA = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties TEA = DrinkProperties.Builder.create().stats(5, 4).build();
+    public static final DrinkProperties TORTILLA = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties AVOCADO_PESTO = DrinkProperties.Builder.create().stats(-3, 0).build();
+    public static final DrinkProperties PESTO = DrinkProperties.Builder.create().stats(-3, 0).build();
+    public static final DrinkProperties BOILED_BEANS = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties BOTTLE_OF_WATER = DrinkProperties.Builder.create().stats(2, 2).giveSingleEffect(PROBABILITY, THIRST).build();
+    public static final DrinkProperties COOKED_ONION = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties COOKED_SOY_MEAT = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties ICE_TEA = DrinkProperties.Builder.create().stats(6, 5).build();
+    public static final DrinkProperties RAW_SOY_MEAT = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties RICE_DUMPLING_WRAPPER = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties RICE_PAPER = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties SOY_FLOUR = DrinkProperties.Builder.create().stats(-4, 0).build();
+    public static final DrinkProperties SPINACH = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties TOFU = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties WHEAT_FLOUR = DrinkProperties.Builder.create().stats(-4, 0).build();
 
     private DrinkList() {}
 }

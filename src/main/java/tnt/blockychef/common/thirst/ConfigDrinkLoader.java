@@ -173,9 +173,6 @@ public final class ConfigDrinkLoader {
         new DefaultDrinkBuilder(Items.MILK_BUCKET)
                 .stats(3)
                 .buildAndExport(list);
-        new DefaultDrinkBuilder(Items.BREAD)
-                .hydrationLoss(1)
-                .buildAndExport(list);
         new DefaultDrinkBuilder(Items.HONEY_BOTTLE)
                 .hydrationLoss(1)
                 .buildAndExport(list);

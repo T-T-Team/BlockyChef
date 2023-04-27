@@ -87,7 +87,7 @@ public final class FoodList {
     public static final FoodProperties SOYBEANS_POD = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties BASIL = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties GINGER = food(1, 1).effect(HUNGER, PROBABILITY).build();
-    public static final FoodProperties TEA = food(1, 1).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties TEA_LEAF = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties GRAPES = food(1, 1).alwaysEat().build();
     public static final FoodProperties RICE_CROP = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties OAT = food(1, 1).effect(HUNGER, PROBABILITY).build();
@@ -397,6 +397,27 @@ public final class FoodList {
     public static final FoodProperties STRAWBERRY_ICE_CREAM = food(4, 3).build();
     public static final FoodProperties VANILLA_ICE_CREAM = food(4, 3).build();
     public static final FoodProperties WAFFLE = food(2, 3).build();
+    public static final FoodProperties BOILED_EGG_CUTS = food(2, 1).build();
+    public static final FoodProperties CORN_BREAD = food(4, 3).build();
+    public static final FoodProperties NACHOS = food(2, 2).build();
+    public static final FoodProperties PITA = food(3, 2).build();
+    public static final FoodProperties RAW_CORN_BREAD = food(2, 2).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties RAW_NACHOS = food(1, 1).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties RAW_PITA = food(2, 1).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties RAW_TORTILLA = food(1, 1).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties TORTILLA = food(2, 2).build();
+    public static final FoodProperties AVOCADO_PESTO = food(4, 2).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties PESTO = food(3, 2).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties BOILED_BEANS = food(2, 2).build();
+    public static final FoodProperties COOKED_ONION = food(2, 1).build();
+    public static final FoodProperties COOKED_SOY_MEAT = food(2, 2).build();
+    public static final FoodProperties RAW_SOY_MEAT = food(1, 1).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties RICE_DUMPLING_WRAPPER = food(1, 2).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties RICE_PAPER = food(1, 1).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties SOY_FLOUR = food(1, 1).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties SPINACH = food(2, 2).build();
+    public static final FoodProperties TOFU = food(2, 2).build();
+    public static final FoodProperties WHEAT_FLOUR = food(1, 1).build();
 
 
     private static FoodProperties.Builder food(int nutrition, int saturation) {
