@@ -24,6 +24,7 @@ public class MortarAndPestleBlockEntity extends RecipeRemberingBlockEntity<Morta
     public static final int OUTPUT = 6;
 
     private MortarRecipe activeRecipe;
+    private boolean processing;
     private int currentProcessingTime;
 
     public MortarAndPestleBlockEntity(BlockPos pos, BlockState state) {
@@ -31,8 +32,13 @@ public class MortarAndPestleBlockEntity extends RecipeRemberingBlockEntity<Morta
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, MortarAndPestleBlockEntity mortarAndPestle) {
-        if (mortarAndPestle.activeRecipe == null)
+        if (mortarAndPestle.activeRecipe == null || !mortarAndPestle.processing)
             return;
+        RecipeManager manager = level.getRecipeManager();
+        if (manager.getRecipeFor(BlockyChefRecipeTypes.MORTAR_AND_PESTLE_RECIPE, mortarAndPestle, level, mortarAndPestle.activeRecipe.getId()).isEmpty()) {
+            mortarAndPestle.setRecipe(null);
+            return;
+        }
         ItemStack result = mortarAndPestle.activeRecipe.getResultItem(level.registryAccess());
         if (!MenuInventoryHelper.canFitItems(new ItemStack[] {result}, mortarAndPestle, OUTPUT)) {
             mortarAndPestle.setRecipe(null);
@@ -48,6 +54,20 @@ public class MortarAndPestleBlockEntity extends RecipeRemberingBlockEntity<Morta
             mortarAndPestle.refreshRecipe();
             Helper.sendBlockEntityClientData(mortarAndPestle);
         }
+    }
+
+    public boolean isActive() {
+        return processing;
+    }
+
+    public void startGrinding() {
+        if (processing)
+            return;
+        refreshRecipe();
+        if (activeRecipe == null)
+            return;
+        currentProcessingTime = 0;
+        Helper.sendBlockEntityClientData(this);
     }
 
     @Override
@@ -81,10 +101,12 @@ public class MortarAndPestleBlockEntity extends RecipeRemberingBlockEntity<Morta
 
     private void saveSharedData(CompoundTag tag) {
         tag.putInt("processingTime", currentProcessingTime);
+        tag.putBoolean("processing", processing);
     }
 
     private void loadSharedData(CompoundTag tag) {
         currentProcessingTime = tag.getInt("processingTime");
+        processing = tag.getBoolean("processing");
         refreshRecipe();
     }
 
@@ -101,6 +123,7 @@ public class MortarAndPestleBlockEntity extends RecipeRemberingBlockEntity<Morta
         if (recipe != this.activeRecipe) {
             this.activeRecipe = recipe;
             this.currentProcessingTime = 0;
+            this.processing = false;
             Helper.sendBlockEntityClientData(this);
         }
     }

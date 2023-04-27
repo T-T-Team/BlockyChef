@@ -677,6 +677,8 @@
   "screen.blockychef.cutting_board.widget.start_cutting": "Cut",
   "screen.blockychef.toaster": "Toaster",
   "screen.blockychef.toaster.widget.toast": "Toast",
+  "screen.blockychef.mortar_and_pestle": "Mortar & Pestle",
+  "screen.blockychef.mortar_and_pestle.widget.grind": "Grind",
 
   "death.attack.blockychef.dehydration": "%s has died due to dehydration",
   "death.attack.blockychef.dehydration.player": "%1$s has died due to dehydration whilst fighting %2$s"
