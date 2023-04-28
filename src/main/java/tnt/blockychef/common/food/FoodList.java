@@ -418,6 +418,22 @@ public final class FoodList {
     public static final FoodProperties SPINACH = food(2, 2).build();
     public static final FoodProperties TOFU = food(2, 2).build();
     public static final FoodProperties WHEAT_FLOUR = food(1, 1).build();
+    public static final FoodProperties RAW_CHEESE_TORTELLINI = food(3, 2).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties RAW_MUSHROOM_TORTELLINI = food(3, 2).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties RAW_PORK_TORTELLINI = food(3, 2).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties RAW_SPINACH_TORTELLINI = food(3, 2).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties BOILED_CHEESE_TORTELLINI = food(4, 3).build();
+    public static final FoodProperties BOILED_MUSHROOM_TORTELLINI = food(4, 3).build();
+    public static final FoodProperties BOILED_PORK_TORTELLINI = food(4, 3).build();
+    public static final FoodProperties BOILED_SPINACH_TORTELLINI = food(4, 3).build();
+    public static final FoodProperties COOKED_GROUNDED_BEEF_MEAT = food(2, 2).build();
+    public static final FoodProperties COOKED_GROUNDED_PORK_MEAT = food(2, 2).build();
+    public static final FoodProperties MASHED_POTATOES = food(3, 2).build();
+    public static final FoodProperties CUPCAKE_BASE = food(1, 1).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties PIE_CRUST = food(2, 2).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties PIZZA_DOUGH = food(2, 2).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties RAW_RICE_CAKE = food(1, 1).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties RICE_CAKE = food(1, 2).build();
 
 
     private static FoodProperties.Builder food(int nutrition, int saturation) {

@@ -368,6 +368,22 @@ public final class DrinkList {
     public static final DrinkProperties SPINACH = DrinkProperties.Builder.create().stats(-1, 0).build();
     public static final DrinkProperties TOFU = DrinkProperties.Builder.create().stats(-1, 0).build();
     public static final DrinkProperties WHEAT_FLOUR = DrinkProperties.Builder.create().stats(-4, 0).build();
+    public static final DrinkProperties RAW_CHEESE_TORTELLINI = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties RAW_MUSHROOM_TORTELLINI = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties RAW_PORK_TORTELLINI = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties RAW_SPINACH_TORTELLINI = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties BOILED_CHEESE_TORTELLINI = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties BOILED_MUSHROOM_TORTELLINI = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties BOILED_PORK_TORTELLINI = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties BOILED_SPINACH_TORTELLINI = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties COOKED_GROUNDED_BEEF_MEAT = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties COOKED_GROUNDED_PORK_MEAT = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties MASHED_POTATOES = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties CUPCAKE_BASE = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties PIE_CRUST = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties PIZZA_DOUGH = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties RAW_RICE_CAKE = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties RICE_CAKE = DrinkProperties.Builder.create().stats(-2, 0).build();
 
     private DrinkList() {}
 }

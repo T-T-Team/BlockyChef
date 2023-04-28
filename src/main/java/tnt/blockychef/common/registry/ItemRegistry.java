@@ -10,6 +10,7 @@ import tnt.blockychef.common.init.BlockyChefBlocks;
 import tnt.blockychef.common.init.BlockyChefItems;
 import tnt.blockychef.common.item.ConsumableItem;
 import tnt.blockychef.common.item.CropSeedsItem;
+import tnt.blockychef.common.item.DumpItem;
 import tnt.blockychef.common.item.EdibleCropSeedItem;
 
 public final class ItemRegistry {
@@ -518,21 +519,26 @@ public final class ItemRegistry {
         helper.register("spinach", new ConsumableItem(new Item.Properties().food(FoodList.SPINACH), DrinkList.SPINACH));
         helper.register("tofu", new ConsumableItem(new Item.Properties().food(FoodList.TOFU), DrinkList.TOFU));
         helper.register("wheat_flour", new ConsumableItem(new Item.Properties().food(FoodList.WHEAT_FLOUR), DrinkList.WHEAT_FLOUR));
-        helper.register("boiled_cheese_tortellini", new Item(new Item.Properties()));
-        helper.register("boiled_mushroom_tortellini", new Item(new Item.Properties()));
-        helper.register("boiled_pork_tortellini", new Item(new Item.Properties()));
-        helper.register("boiled_spinach_tortellini", new Item(new Item.Properties()));
-        helper.register("cooked_grounded_beef_meat", new Item(new Item.Properties()));
-        helper.register("cooked_grounded_pork_meat", new Item(new Item.Properties()));
-        helper.register("cupcake_base", new Item(new Item.Properties()));
-        helper.register("mashed_potatoes", new Item(new Item.Properties()));
-        helper.register("pie_crust", new Item(new Item.Properties()));
-        helper.register("pizza_dough", new Item(new Item.Properties()));
-        helper.register("raw_cheese_tortellini", new Item(new Item.Properties()));
-        helper.register("raw_mushroom_tortellini", new Item(new Item.Properties()));
-        helper.register("raw_pork_tortellini", new Item(new Item.Properties()));
-        helper.register("raw_rice_cake", new Item(new Item.Properties()));
-        helper.register("raw_spinach_tortellini", new Item(new Item.Properties()));
-        helper.register("rice_cake", new Item(new Item.Properties()));
+        helper.register("boiled_cheese_tortellini", new ConsumableItem(new Item.Properties().food(FoodList.BOILED_CHEESE_TORTELLINI), DrinkList.BOILED_CHEESE_TORTELLINI));
+        helper.register("boiled_mushroom_tortellini", new ConsumableItem(new Item.Properties().food(FoodList.BOILED_MUSHROOM_TORTELLINI), DrinkList.BOILED_MUSHROOM_TORTELLINI));
+        helper.register("boiled_pork_tortellini", new ConsumableItem(new Item.Properties().food(FoodList.BOILED_PORK_TORTELLINI), DrinkList.BOILED_PORK_TORTELLINI));
+        helper.register("boiled_spinach_tortellini", new ConsumableItem(new Item.Properties().food(FoodList.BOILED_SPINACH_TORTELLINI), DrinkList.BOILED_SPINACH_TORTELLINI));
+        helper.register("cooked_grounded_beef_meat", new ConsumableItem(new Item.Properties().food(FoodList.COOKED_GROUNDED_BEEF_MEAT), DrinkList.COOKED_GROUNDED_BEEF_MEAT));
+        helper.register("cooked_grounded_pork_meat", new ConsumableItem(new Item.Properties().food(FoodList.COOKED_GROUNDED_PORK_MEAT), DrinkList.COOKED_GROUNDED_PORK_MEAT));
+        helper.register("cupcake_base", new ConsumableItem(new Item.Properties().food(FoodList.CUPCAKE_BASE), DrinkList.CUPCAKE_BASE));
+        helper.register("mashed_potatoes", new ConsumableItem(new Item.Properties().food(FoodList.MASHED_POTATOES), DrinkList.MASHED_POTATOES));
+        helper.register("pie_crust", new ConsumableItem(new Item.Properties().food(FoodList.PIE_CRUST), DrinkList.PIE_CRUST));
+        helper.register("pizza_dough", new ConsumableItem(new Item.Properties().food(FoodList.PIZZA_DOUGH), DrinkList.PIZZA_DOUGH));
+        helper.register("raw_cheese_tortellini", new ConsumableItem(new Item.Properties().food(FoodList.RAW_CHEESE_TORTELLINI), DrinkList.RAW_CHEESE_TORTELLINI));
+        helper.register("raw_mushroom_tortellini", new ConsumableItem(new Item.Properties().food(FoodList.RAW_MUSHROOM_TORTELLINI), DrinkList.RAW_MUSHROOM_TORTELLINI));
+        helper.register("raw_pork_tortellini", new ConsumableItem(new Item.Properties().food(FoodList.RAW_PORK_TORTELLINI), DrinkList.RAW_PORK_TORTELLINI));
+        helper.register("raw_rice_cake", new ConsumableItem(new Item.Properties().food(FoodList.RAW_RICE_CAKE), DrinkList.RAW_RICE_CAKE));
+        helper.register("raw_spinach_tortellini", new ConsumableItem(new Item.Properties().food(FoodList.RAW_SPINACH_TORTELLINI), DrinkList.RAW_SPINACH_TORTELLINI));
+        helper.register("rice_cake", new ConsumableItem(new Item.Properties().food(FoodList.RICE_CAKE), DrinkList.RICE_CAKE));
+        helper.register("burnt_marmalade", new DumpItem(new Item.Properties()).returns(() -> BlockyChefItems.EMPTY_JAR));
+        helper.register("burnt_cheese_tortellini", new Item(new Item.Properties()));
+        helper.register("burnt_pork_tortellini", new Item(new Item.Properties()));
+        helper.register("burnt_mushroom_tortellini", new Item(new Item.Properties()));
+        helper.register("burnt_spinach_tortellini", new Item(new Item.Properties()));
     }
 }

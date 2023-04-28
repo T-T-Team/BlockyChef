@@ -659,6 +659,11 @@
   "item.blockychef.raw_rice_cake": "Raw Rice Cake",
   "item.blockychef.raw_spinach_tortellini": "Raw Spinach Tortellini",
   "item.blockychef.rice_cake": "Rice Cake",
+  "item.blockychef.burnt_marmalade": "Burnt Marmalade",
+  "item.blockychef.burnt_cheese_tortellini": "Burnt Cheese Tortellini",
+  "item.blockychef.burnt_pork_tortellini": "Burnt Pork Tortellini",
+  "item.blockychef.burnt_mushroom_tortellini": "Burnt Mushroom Tortellini",
+  "item.blockychef.burnt_spinach_tortellini": "Burnt Spinach Tortellini",
 
   "config.screen.blockychef": "BlockyChef Configuration",
   "config.blockychef.option.decay": "Plant Decay Config",
