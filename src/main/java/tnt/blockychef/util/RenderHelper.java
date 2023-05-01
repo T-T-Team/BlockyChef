@@ -21,7 +21,11 @@ public final class RenderHelper {
         BufferUploader.drawWithShader(buffer.end());
     }
 
-    public static float applyEasing(float in, Easing easing) {
+    public static float interpolate(float previous, float current, float partialTicks) {
+        return previous + (current - previous) * partialTicks;
+    }
+
+    public static float ease(float in, Easing easing) {
         return easing.process(in);
     }
 

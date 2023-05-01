@@ -48,6 +48,11 @@ public class MortarAndPestleScreen extends AbstractContainerScreen<MortarAndPest
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, TEXTURE);
         blit(stack, leftPos, topPos, 0, 0, imageWidth, imageHeight);
+
+        MortarAndPestleBlockEntity blockEntity = menu.getBlockEntity();
+        float grindProgress = blockEntity.getGrindingProgress(partialTicks);
+        int arrowWidth = (int) (grindProgress * 26);
+        blit(stack, leftPos + 94, topPos + 43, 176, 0, arrowWidth, 12);
     }
 
     @Override

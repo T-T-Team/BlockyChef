@@ -74,4 +74,22 @@ public final class Helper {
     public static float pulse(float f) {
         return f > 0.5F ? 1.0F - ((f - 0.5F) / 0.5F) : f / 0.5F;
     }
+
+    public static <T> boolean contains(T[] array, T element) {
+        for (T t : array) {
+            if (t.equals(element)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static <T> boolean containsRef(T[] array, T element) {
+        for (T t : array) {
+            if (t == element) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

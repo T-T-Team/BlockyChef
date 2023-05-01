@@ -54,6 +54,7 @@ public class CuttingBoardMenu extends AbstractBlockEntityMenu<CuttingBoardBlockE
     private void onResultItemTaken(Player player, ItemStack stack) {
         if (player instanceof ServerPlayer serverPlayer) {
             blockEntity.awardUsedRecipesAndPopExperience(serverPlayer);
+            blockEntity.setChanged();
         }
     }
 

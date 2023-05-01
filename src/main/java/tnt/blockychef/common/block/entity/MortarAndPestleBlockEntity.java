@@ -14,6 +14,7 @@ import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.util.Helper;
 import tnt.blockychef.util.MenuInventoryHelper;
+import tnt.blockychef.util.RenderHelper;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -56,6 +57,16 @@ public class MortarAndPestleBlockEntity extends RecipeRemberingBlockEntity<Morta
         }
     }
 
+    public float getGrindingProgress(float partialTicks) {
+        if (activeRecipe == null || !processing)
+            return 0.0F;
+        int oldTick = Math.max(0, currentProcessingTime - 1);
+        int total = activeRecipe.getProcessingTime();
+        float f0 = oldTick / (float) total;
+        float f1 = currentProcessingTime / (float) total;
+        return RenderHelper.interpolate(f0, f1, partialTicks);
+    }
+
     public boolean isGrinding() {
         return processing;
     }
@@ -71,6 +82,7 @@ public class MortarAndPestleBlockEntity extends RecipeRemberingBlockEntity<Morta
         if (activeRecipe == null)
             return;
         currentProcessingTime = 0;
+        processing = true;
         Helper.sendBlockEntityClientData(this);
     }
 
@@ -114,7 +126,7 @@ public class MortarAndPestleBlockEntity extends RecipeRemberingBlockEntity<Morta
         refreshRecipe();
     }
 
-    private void refreshRecipe() {
+    public void refreshRecipe() {
         if (level == null)
             return;
         RecipeManager manager = level.getRecipeManager();
@@ -130,5 +142,6 @@ public class MortarAndPestleBlockEntity extends RecipeRemberingBlockEntity<Morta
             this.processing = false;
             Helper.sendBlockEntityClientData(this);
         }
+        setChanged();
     }
 }

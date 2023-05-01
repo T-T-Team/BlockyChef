@@ -13,6 +13,7 @@ import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.util.Helper;
 import tnt.blockychef.util.MenuInventoryHelper;
+import tnt.blockychef.util.RenderHelper;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
@@ -89,7 +90,7 @@ public class CuttingBoardBlockEntity extends RecipeRemberingBlockEntity<CuttingB
         int total = recipe.getProcessingTime();
         float previousTickProgress = prevTime / (float) total;
         float currentTickProgress = timeProcessing / (float) total;
-        return previousTickProgress + (currentTickProgress - previousTickProgress) * partialTicks;
+        return RenderHelper.interpolate(previousTickProgress, currentTickProgress, partialTicks);
     }
 
     public ItemStack getInputItem() {

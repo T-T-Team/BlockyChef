@@ -7,14 +7,11 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.ClickType;
-import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.entity.CuttingBoardBlockEntity;
 import tnt.blockychef.common.food.recipe.CuttingBoardRecipe;
 import tnt.blockychef.common.menu.CuttingBoardMenu;
-import tnt.blockychef.common.menu.SimpleSlotListener;
 import tnt.blockychef.network.NetworkManager;
 import tnt.blockychef.network.packet.C2S_CuttingBoardEvent;
 import tnt.blockychef.util.Helper;
@@ -73,7 +70,7 @@ public class CuttingBoardScreen extends AbstractContainerScreen<CuttingBoardMenu
         int arrowWidth = (int) (progress * 26);
         blit(poseStack, leftPos + 75, topPos + 38, 176, 0, arrowWidth, 12);
 
-        float f = RenderHelper.applyEasing(Helper.pulse(minecraft.level.getGameTime(), 50L), RenderHelper.Easing.SINE_IO);
+        float f = RenderHelper.ease(Helper.pulse(minecraft.level.getGameTime(), 50L), RenderHelper.Easing.SINE_IO);
         float minColor = 0.4F;
         float maxColor = 0.9F;
         float color = minColor + f * (maxColor - minColor);
