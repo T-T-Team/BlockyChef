@@ -28,7 +28,7 @@ public class MortarAndPestleBlockEntity extends RecipeRemberingBlockEntity<Morta
     private int currentProcessingTime;
 
     public MortarAndPestleBlockEntity(BlockPos pos, BlockState state) {
-        super(BlockyChefBlockEntities.MEAT_GRINDER, pos, state);
+        super(BlockyChefBlockEntities.MORTAR_AND_PESTLE, pos, state);
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, MortarAndPestleBlockEntity mortarAndPestle) {
@@ -56,8 +56,12 @@ public class MortarAndPestleBlockEntity extends RecipeRemberingBlockEntity<Morta
         }
     }
 
-    public boolean isActive() {
+    public boolean isGrinding() {
         return processing;
+    }
+
+    public boolean hasRecipe() {
+        return activeRecipe != null;
     }
 
     public void startGrinding() {

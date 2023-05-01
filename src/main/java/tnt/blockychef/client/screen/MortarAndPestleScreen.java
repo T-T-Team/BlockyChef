@@ -31,7 +31,7 @@ public class MortarAndPestleScreen extends AbstractContainerScreen<MortarAndPest
         super.init();
 
         grindButton = addRenderableWidget(Button.builder(TEXT_GRIND, this::grindButtonClicked)
-                .pos(89, 64)
+                .pos(leftPos + 89, topPos + 64)
                 .size(80, 20)
                 .build()
         );
@@ -39,7 +39,8 @@ public class MortarAndPestleScreen extends AbstractContainerScreen<MortarAndPest
 
     @Override
     protected void containerTick() {
-        grindButton.active = !menu.getBlockEntity().isActive();
+        MortarAndPestleBlockEntity mortarAndPestle = menu.getBlockEntity();
+        grindButton.active = mortarAndPestle.hasRecipe() && !mortarAndPestle.isGrinding();
     }
 
     @Override
