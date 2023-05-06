@@ -6,7 +6,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.SlotItemHandler;
 import tnt.blockychef.common.block.MortarAndPestleBlock;
 import tnt.blockychef.common.block.entity.MortarAndPestleBlockEntity;
@@ -38,13 +37,7 @@ public class MortarAndPestleMenu extends AbstractBlockEntityMenu<MortarAndPestle
 
     @Override
     public boolean stillValid(Player player) {
-        return access.evaluate((level, pos) -> {
-            BlockState state = level.getBlockState(pos);
-            if (state.getBlock() instanceof MortarAndPestleBlock) {
-                return player.distanceToSqr(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) <= 64.0;
-            }
-            return false;
-        }, true);
+        return stillValid(access, player, state -> state.getBlock() instanceof MortarAndPestleBlock);
     }
 
     @Override

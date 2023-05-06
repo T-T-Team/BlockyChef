@@ -32,7 +32,7 @@ public class CuttingBoardRecipe extends AbstractFoodRecipe<CuttingBoardBlockEnti
                     list -> list.toArray(new ItemStack[0]),
                     Arrays::asList
             ).fieldOf("outputs").forGetter(CuttingBoardRecipe::getOutputs),
-            Codec.FLOAT.optionalFieldOf("experience", 0.0F).forGetter(AbstractFoodRecipe::getExperience)
+            resolveExperience()
     ).apply(instance, (input, type, time, outputs, exp) -> new CuttingBoardRecipe(recipeId, input, type, time, outputs, exp)));
 
     private final Ingredient input;

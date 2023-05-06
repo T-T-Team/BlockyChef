@@ -26,7 +26,7 @@ public class GratingRecipe extends AbstractFoodRecipe<GraterBlockEntity> {
             SerializationHelper.INGREDIENT_CODEC.fieldOf("input").forGetter(t -> t.input),
             SerializationHelper.SIMPLE_ITEMSTACK_CODEC.fieldOf("output").forGetter(t -> t.output),
             Codec.INT.optionalFieldOf("gratingAmount", 3).forGetter(GratingRecipe::getGratingAmount),
-            Codec.FLOAT.optionalFieldOf("experience", 0.0F).forGetter(AbstractFoodRecipe::getExperience)
+            resolveExperience()
     ).apply(instance, (ingredient, stack, amount, exp) -> new GratingRecipe(recipeId, ingredient, stack, amount, exp)));
     private final Ingredient input;
     private final ItemStack output;

@@ -8,19 +8,19 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import tnt.blockychef.BlockyChef;
-import tnt.blockychef.common.block.entity.MortarAndPestleBlockEntity;
-import tnt.blockychef.common.menu.MortarAndPestleMenu;
+import tnt.blockychef.common.block.entity.DoughMakerBlockEntity;
+import tnt.blockychef.common.menu.DoughMakerMenu;
 import tnt.blockychef.network.NetworkManager;
 import tnt.blockychef.network.packet.C2S_InitiateRecipeProcessing;
 
-public class MortarAndPestleScreen extends AbstractContainerScreen<MortarAndPestleMenu> {
+public class DoughMakerScreen extends AbstractContainerScreen<DoughMakerMenu> {
 
-    private static final ResourceLocation TEXTURE = BlockyChef.resource("textures/screen/mortar_and_pestle.png");
-    private static final Component TEXT_GRIND = Component.translatable("screen.blockychef.mortar_and_pestle.widget.grind");
+    private static final ResourceLocation TEXTURE = BlockyChef.resource("textures/screen/dough_maker.png");
+    private static final Component TEXT_PROCESS = Component.translatable("screen.blockychef.dough_maker.widget.process");
 
-    private Button grindButton;
+    private Button processButton;
 
-    public MortarAndPestleScreen(MortarAndPestleMenu menu, Inventory inventory, Component title) {
+    public DoughMakerScreen(DoughMakerMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
         imageHeight = 175;
         inventoryLabelY = imageHeight - 94;
@@ -30,7 +30,7 @@ public class MortarAndPestleScreen extends AbstractContainerScreen<MortarAndPest
     protected void init() {
         super.init();
 
-        grindButton = addRenderableWidget(Button.builder(TEXT_GRIND, this::grindButtonClicked)
+        processButton = addRenderableWidget(Button.builder(TEXT_PROCESS, this::processButtonClicked)
                 .pos(leftPos + 89, topPos + 64)
                 .size(80, 20)
                 .build()
@@ -39,8 +39,8 @@ public class MortarAndPestleScreen extends AbstractContainerScreen<MortarAndPest
 
     @Override
     protected void containerTick() {
-        MortarAndPestleBlockEntity mortarAndPestle = menu.getBlockEntity();
-        grindButton.active = mortarAndPestle.hasRecipe() && !mortarAndPestle.isGrinding();
+        DoughMakerBlockEntity doughMaker = menu.getBlockEntity();
+        processButton.active = doughMaker.hasRecipe() && !doughMaker.isProcessing();
     }
 
     @Override
@@ -49,10 +49,10 @@ public class MortarAndPestleScreen extends AbstractContainerScreen<MortarAndPest
         RenderSystem.setShaderTexture(0, TEXTURE);
         blit(stack, leftPos, topPos, 0, 0, imageWidth, imageHeight);
 
-        MortarAndPestleBlockEntity blockEntity = menu.getBlockEntity();
-        float grindProgress = blockEntity.getGrindingProgress(partialTicks);
-        int arrowWidth = (int) (grindProgress * 26);
-        blit(stack, leftPos + 94, topPos + 43, 176, 0, arrowWidth, 12);
+        DoughMakerBlockEntity blockEntity = menu.getBlockEntity();
+        float mixProgress = blockEntity.getProcessingProgress(partialTicks);
+        int arrowWidth = (int) (mixProgress * 26);
+        blit(stack, leftPos + 75, topPos + 43, 176, 0, arrowWidth, 12);
     }
 
     @Override
@@ -62,8 +62,8 @@ public class MortarAndPestleScreen extends AbstractContainerScreen<MortarAndPest
         renderTooltip(stack, mouseX, mouseY);
     }
 
-    private void grindButtonClicked(Button button) {
-        MortarAndPestleBlockEntity blockEntity = menu.getBlockEntity();
+    private void processButtonClicked(Button button) {
+        DoughMakerBlockEntity blockEntity = menu.getBlockEntity();
         blockEntity.startProcessing();
         NetworkManager.dispatchServerPacket(new C2S_InitiateRecipeProcessing(blockEntity.getBlockPos()));
     }

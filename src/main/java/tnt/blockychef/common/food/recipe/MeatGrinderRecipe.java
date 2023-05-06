@@ -21,7 +21,7 @@ public class MeatGrinderRecipe extends AbstractFoodRecipe<MeatGrinderBlockEntity
             SerializationHelper.INGREDIENT_CODEC.fieldOf("input").forGetter(t -> t.input),
             Codec.intRange(1, 99).optionalFieldOf("processingAmount", 1).forGetter(MeatGrinderRecipe::getProcessingAmount),
             SerializationHelper.SIMPLE_ITEMSTACK_CODEC.fieldOf("output").forGetter(t -> t.result),
-            Codec.FLOAT.optionalFieldOf("experience", 0.0F).forGetter(AbstractFoodRecipe::getExperience)
+            resolveExperience()
     ).apply(instance, (ingredient, amount, item, exp) -> new MeatGrinderRecipe(recipe, ingredient, amount, item, exp)));
 
     private final Ingredient input;

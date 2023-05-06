@@ -20,7 +20,7 @@ public class ToasterRecipe extends AbstractFoodRecipe<ToasterBlockEntity> {
             SerializationHelper.INGREDIENT_CODEC.fieldOf("input").forGetter(t -> t.input),
             SerializationHelper.SIMPLE_ITEMSTACK_CODEC.fieldOf("output").forGetter(ToasterRecipe::getOutput),
             Codec.intRange(1, Integer.MAX_VALUE).fieldOf("toastingTime").forGetter(ToasterRecipe::getToastingTime),
-            Codec.FLOAT.optionalFieldOf("experience", 0.0F).forGetter(AbstractFoodRecipe::getExperience)
+            resolveExperience()
     ).apply(instance, (in, out, time, exp) -> new ToasterRecipe(recipeId, in, out, time, exp)));
 
     private final Ingredient input;

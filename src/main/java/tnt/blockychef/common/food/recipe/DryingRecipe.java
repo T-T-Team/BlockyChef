@@ -21,7 +21,7 @@ public class DryingRecipe extends AbstractFoodRecipe<DryingRackBlockEntity> {
             SerializationHelper.INGREDIENT_CODEC.fieldOf("input").forGetter(t -> t.input),
             SerializationHelper.SIMPLE_ITEMSTACK_CODEC.fieldOf("output").forGetter(t -> t.output),
             Codec.INT.fieldOf("dryingTime").forGetter(DryingRecipe::getDryingTime),
-            Codec.FLOAT.optionalFieldOf("experience", 0.0F).forGetter(AbstractFoodRecipe::getExperience)
+            resolveExperience()
     ).apply(instance, (ingredient, stack, time, exp) -> new DryingRecipe(recipeId, ingredient, stack, time, exp)));
 
     private final Ingredient input;

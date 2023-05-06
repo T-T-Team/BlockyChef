@@ -7,49 +7,49 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.SlotItemHandler;
-import tnt.blockychef.common.block.MixingBowlBlock;
-import tnt.blockychef.common.block.entity.MixingBowlBlockEntity;
+import tnt.blockychef.common.block.entity.DoughMakerBlockEntity;
+import tnt.blockychef.common.init.BlockyChefBlocks;
 import tnt.blockychef.common.init.BlockychefMenuTypes;
 import tnt.blockychef.util.MenuQuickMoveHelper;
 
-public class MixingBowlMenu extends AbstractBlockEntityMenu<MixingBowlBlockEntity> {
+public class DoughMakerMenu extends AbstractBlockEntityMenu<DoughMakerBlockEntity> {
 
     private final MenuQuickMoveHelper quickMoveHelper;
 
-    public MixingBowlMenu(int menuId, Inventory inventory, MixingBowlBlockEntity mixingBowl) {
-        super(BlockychefMenuTypes.MIXING_BOWL, menuId, mixingBowl);
-        this.quickMoveHelper = MenuQuickMoveHelper.inputOutputInventory(getQuickMoveContext(), MixingBowlBlockEntity.INPUTS, MixingBowlBlockEntity.OUTPUTS);
+    public DoughMakerMenu(int menuId, Inventory inventory, DoughMakerBlockEntity doughMaker) {
+        super(BlockychefMenuTypes.DOUGH_MAKER, menuId, doughMaker);
+        this.quickMoveHelper = MenuQuickMoveHelper.inputOutputInventory(getQuickMoveContext(), DoughMakerBlockEntity.INPUTS, DoughMakerBlockEntity.OUTPUTS);
 
         for (int y = 0; y < 2; y++) {
             for (int x = 0; x < 3; x++) {
-                addSlot(new SlotItemHandler(mixingBowl.getItemHandler(), x + y * 3, 8 + x * 18, 32 + y * 18));
+                addSlot(new SlotItemHandler(doughMaker.getItemHandler(), x + y * 3, 8 + x * 18, 32 + y * 18));
             }
         }
 
         for (int x = 0; x < 3; x++) {
-            addSlot(new ItemHandlerOutputSlotWithCallback(mixingBowl.getItemHandler(), 6 + x, 116 + x * 18, 41, this::onResultTaken));
+            addSlot(new ItemHandlerOutputSlotWithCallback(doughMaker.getItemHandler(), 6 + x, 116 + x * 18, 41, this::onResultTaken));
         }
 
         addPlayerSlots(inventory, 8, 93);
         addSlotListener(new SimpleSlotListener(this::slotChanged));
     }
 
-    public MixingBowlMenu(int menuId, Inventory inventory, FriendlyByteBuf buffer) {
+    public DoughMakerMenu(int menuId, Inventory inventory, FriendlyByteBuf buffer) {
         this(menuId, inventory, resolveBlockEntityUnsafe(inventory, buffer));
     }
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(access, player, state -> state.getBlock() instanceof MixingBowlBlock);
+        return stillValid(access, player, BlockyChefBlocks.DOUGH_MAKER);
     }
 
     @Override
-    public ItemStack quickMoveStack(Player player, int index) {
-        return quickMoveHelper.quickMove(player, index);
+    public ItemStack quickMoveStack(Player player, int slot) {
+        return quickMoveHelper.quickMove(player, slot);
     }
 
     private void slotChanged(AbstractContainerMenu menu, int index, ItemStack stack) {
-        if (index < MixingBowlBlockEntity.INPUTS.length) {
+        if (index < DoughMakerBlockEntity.INPUTS.length) {
             blockEntity.refreshRecipe();
         }
     }

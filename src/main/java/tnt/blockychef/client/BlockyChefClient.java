@@ -19,10 +19,7 @@ import tnt.blockychef.client.render.block.DryingRackBlockEntityRenderer;
 import tnt.blockychef.client.render.block.GraterBlockEntityRenderer;
 import tnt.blockychef.client.render.thirst.ThirstOverlay;
 import tnt.blockychef.client.render.thirst.ThirstTooltipHandler;
-import tnt.blockychef.client.screen.CuttingBoardScreen;
-import tnt.blockychef.client.screen.MixingBowlScreen;
-import tnt.blockychef.client.screen.MortarAndPestleScreen;
-import tnt.blockychef.client.screen.ToasterScreen;
+import tnt.blockychef.client.screen.*;
 import tnt.blockychef.common.block.DyeableBlock;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefBlocks;
@@ -72,6 +69,7 @@ public final class BlockyChefClient {
         MenuScreens.register(BlockychefMenuTypes.TOASTER, ToasterScreen::new);
         MenuScreens.register(BlockychefMenuTypes.MORTAR_AND_PESTLE, MortarAndPestleScreen::new);
         MenuScreens.register(BlockychefMenuTypes.MIXING_BOWL, MixingBowlScreen::new);
+        MenuScreens.register(BlockychefMenuTypes.DOUGH_MAKER, DoughMakerScreen::new);
     }
 
     private void registerBlockColors(RegisterColorHandlersEvent.Block event) {

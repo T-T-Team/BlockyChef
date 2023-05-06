@@ -6,18 +6,18 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.network.NetworkEvent;
-import tnt.blockychef.common.block.entity.MixingBowlBlockEntity;
+import tnt.blockychef.common.block.entity.ProcessableRecipeHolder;
 import tnt.blockychef.network.Packet;
 
-public class C2S_MixingBowlInitiateMixing extends Packet {
+public class C2S_InitiateRecipeProcessing extends Packet {
 
     private final BlockPos pos;
 
-    public C2S_MixingBowlInitiateMixing(BlockPos pos) {
+    public C2S_InitiateRecipeProcessing(BlockPos pos) {
         this.pos = pos;
     }
 
-    public C2S_MixingBowlInitiateMixing(FriendlyByteBuf byteBuf) {
+    public C2S_InitiateRecipeProcessing(FriendlyByteBuf byteBuf) {
         this(byteBuf.readBlockPos());
     }
 
@@ -34,8 +34,8 @@ public class C2S_MixingBowlInitiateMixing extends Packet {
             return;
         }
         BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (blockEntity instanceof MixingBowlBlockEntity mixingBowl) {
-            mixingBowl.startMixing();
+        if (blockEntity instanceof ProcessableRecipeHolder holder) {
+            holder.startProcessing();
         }
     }
 }

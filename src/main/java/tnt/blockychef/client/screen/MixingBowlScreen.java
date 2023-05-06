@@ -11,7 +11,7 @@ import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.entity.MixingBowlBlockEntity;
 import tnt.blockychef.common.menu.MixingBowlMenu;
 import tnt.blockychef.network.NetworkManager;
-import tnt.blockychef.network.packet.C2S_MixingBowlInitiateMixing;
+import tnt.blockychef.network.packet.C2S_InitiateRecipeProcessing;
 
 public class MixingBowlScreen extends AbstractContainerScreen<MixingBowlMenu> {
 
@@ -64,7 +64,7 @@ public class MixingBowlScreen extends AbstractContainerScreen<MixingBowlMenu> {
 
     private void mixButtonClicked(Button button) {
         MixingBowlBlockEntity blockEntity = menu.getBlockEntity();
-        blockEntity.startMixing();
-        NetworkManager.dispatchServerPacket(new C2S_MixingBowlInitiateMixing(blockEntity.getBlockPos()));
+        blockEntity.startProcessing();
+        NetworkManager.dispatchServerPacket(new C2S_InitiateRecipeProcessing(blockEntity.getBlockPos()));
     }
 }

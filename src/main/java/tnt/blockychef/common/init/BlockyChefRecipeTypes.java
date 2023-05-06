@@ -20,4 +20,6 @@ public final class BlockyChefRecipeTypes {
     public static final RecipeType<MortarRecipe> MORTAR_AND_PESTLE_RECIPE = null;
     @ObjectHolder(value = "blockychef:mixing_bowl_recipe", registryName = "recipe_type")
     public static final RecipeType<MixingBowlRecipe> MIXING_BOWL_RECIPE = null;
+    @ObjectHolder(value = "blockychef:dough_maker_recipe", registryName = "recipe_type")
+    public static final RecipeType<DoughMakerRecipe> DOUGH_MAKER_RECIPE = null;
 }

@@ -2,6 +2,8 @@ package tnt.blockychef.common.food.recipe;
 
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Recipe;
@@ -17,6 +19,10 @@ public abstract class AbstractFoodRecipe<C extends Container> implements Recipe<
         if (experience < 0.0F) {
             throwValidationError("Experience cannot be lower than 0");
         }
+    }
+
+    public static <R extends AbstractFoodRecipe<?>> RecordCodecBuilder<R, Float> resolveExperience() {
+        return Codec.FLOAT.optionalFieldOf("experience", 0.0F).forGetter(AbstractFoodRecipe::getExperience);
     }
 
     public float getExperience() {

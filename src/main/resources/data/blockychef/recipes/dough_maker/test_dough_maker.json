@@ -1,0 +1,29 @@
+{
+  "type": "blockychef:dough_maker",
+  "inputs": [
+    {
+      "count": 5,
+      "ingredient": {
+        "item": "blockychef:wheat_flour"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:potion"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:dough"
+    }
+  ],
+  "containerItems": [
+    {
+      "item": "minecraft:glass_bottle"
+    }
+  ],
+  "processingTime": 100,
+  "experience": 0.7
+}

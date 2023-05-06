@@ -19,4 +19,6 @@ public final class BlockyChefRecipeSerializers {
     public static final RecipeSerializer<?> MORTAR_AND_PESTLE_RECIPE_SERIALIZER = null;
     @ObjectHolder(value = "blockychef:mixing_bowl", registryName = "recipe_serializer")
     public static final RecipeSerializer<?> MIXING_BOWL_RECIPE_SERIALIZER = null;
+    @ObjectHolder(value = "blockychef:dough_maker", registryName = "recipe_serializer")
+    public static final RecipeSerializer<?> DOUGH_MAKER_RECIPE_SERIALIZER = null;
 }

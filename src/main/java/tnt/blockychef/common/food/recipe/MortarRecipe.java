@@ -21,7 +21,7 @@ public class MortarRecipe extends AbstractFoodRecipe<MortarAndPestleBlockEntity>
             MultiIngredient.CODEC.listOf().fieldOf("inputs").forGetter(t -> t.inputs),
             SerializationHelper.SIMPLE_ITEMSTACK_CODEC.fieldOf("output").forGetter(t -> t.output),
             Codec.INT.fieldOf("processingTime").forGetter(MortarRecipe::getProcessingTime),
-            Codec.FLOAT.optionalFieldOf("experience", 0.0F).forGetter(AbstractFoodRecipe::getExperience)
+            resolveExperience()
     ).apply(instance, (inputs, output, time, exp) -> new MortarRecipe(recipeId, inputs, output, time, exp)));
 
     private final List<MultiIngredient> inputs;

@@ -25,7 +25,7 @@ public class MixingBowlRecipe extends AbstractFoodRecipe<MixingBowlBlockEntity> 
                     Arrays::asList
             ).fieldOf("outputs").forGetter(MixingBowlRecipe::getOutputs),
             Codec.INT.fieldOf("mixingTime").forGetter(MixingBowlRecipe::getMixingTime),
-            Codec.FLOAT.optionalFieldOf("experience", 0.0F).forGetter(AbstractFoodRecipe::getExperience)
+            resolveExperience()
     ).apply(instance, (inputs, outputs, time, exp) -> new MixingBowlRecipe(recipeId, inputs, outputs, time, exp)));
 
     private final List<MultiIngredient> ingredients;

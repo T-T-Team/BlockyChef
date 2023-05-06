@@ -19,7 +19,7 @@ import tnt.blockychef.util.RenderHelper;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class MortarAndPestleBlockEntity extends RecipeRemberingBlockEntity<MortarRecipe> implements SynchronizableBlockEntity {
+public class MortarAndPestleBlockEntity extends RecipeRemberingBlockEntity<MortarRecipe> implements SynchronizableBlockEntity, ProcessableRecipeHolder {
 
     public static final int[] INPUTS = {0, 1, 2, 3, 4, 5};
     public static final int OUTPUT = 6;
@@ -76,7 +76,8 @@ public class MortarAndPestleBlockEntity extends RecipeRemberingBlockEntity<Morta
         return activeRecipe != null;
     }
 
-    public void startGrinding() {
+    @Override
+    public void startProcessing() {
         if (processing)
             return;
         refreshRecipe();

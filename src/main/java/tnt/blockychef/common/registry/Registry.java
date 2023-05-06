@@ -22,10 +22,7 @@ import tnt.blockychef.common.effect.HydrationMobEffect;
 import tnt.blockychef.common.effect.ThirstMobEffect;
 import tnt.blockychef.common.food.recipe.*;
 import tnt.blockychef.common.init.BlockyChefBlocks;
-import tnt.blockychef.common.menu.CuttingBoardMenu;
-import tnt.blockychef.common.menu.MixingBowlMenu;
-import tnt.blockychef.common.menu.MortarAndPestleMenu;
-import tnt.blockychef.common.menu.ToasterMenu;
+import tnt.blockychef.common.menu.*;
 import tnt.blockychef.levelgen.feature.WeightedFeatureConfiguration;
 import tnt.blockychef.levelgen.feature.WeightedSelectorFeature;
 import tnt.blockychef.levelgen.tree.TreeFruitDecorator;
@@ -96,6 +93,7 @@ public final class Registry {
         helper.register("toaster", IForgeMenuType.create(ToasterMenu::new));
         helper.register("mortar_and_pestle", IForgeMenuType.create(MortarAndPestleMenu::new));
         helper.register("mixing_bowl", IForgeMenuType.create(MixingBowlMenu::new));
+        helper.register("dough_maker", IForgeMenuType.create(DoughMakerMenu::new));
     }
 
     private static void registerMobEffects(RegisterEvent.RegisterHelper<MobEffect> helper) {
@@ -118,6 +116,7 @@ public final class Registry {
         helper.register("meat_grinder_recipe");
         helper.register("mortar_and_pestle_recipe");
         helper.register("mixing_bowl_recipe");
+        helper.register("dough_maker_recipe");
     }
 
     private static void registerRecipeSerializers(RegisterEvent.RegisterHelper<RecipeSerializer<?>> helper) {
@@ -128,6 +127,7 @@ public final class Registry {
         helper.register("meat_grinding", CodecRecipeSerializer.forCodec(MeatGrinderRecipe.CODEC_PROVIDER));
         helper.register("grinding", CodecRecipeSerializer.forCodec(MortarRecipe.CODEC_PROVIDER));
         helper.register("mixing_bowl", CodecRecipeSerializer.forCodec(MixingBowlRecipe.CODEC_PROVIDER));
+        helper.register("dough_maker", CodecRecipeSerializer.forCodec(DoughMakerRecipe.CODEC_PROVIDER));
     }
 
     private static void registerFeatures(RegisterEvent.RegisterHelper<Feature<?>> helper) {
