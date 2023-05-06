@@ -18,4 +18,6 @@ public final class BlockychefMenuTypes {
     public static final MenuType<MixingBowlMenu> MIXING_BOWL = null;
     @ObjectHolder(value = "blockychef:dough_maker", registryName = KEY)
     public static final MenuType<DoughMakerMenu> DOUGH_MAKER = null;
+    @ObjectHolder(value = "blockychef:pasta_machine", registryName = KEY)
+    public static final MenuType<PastaMachineMenu> PASTA_MACHINE = null;
 }

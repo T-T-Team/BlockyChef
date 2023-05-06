@@ -27,6 +27,7 @@ import tnt.blockychef.common.block.entity.DoughMakerBlockEntity;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.menu.DoughMakerMenu;
 import tnt.blockychef.util.Helper;
+import tnt.blockychef.util.MenuInventoryHelper;
 
 public class DoughMakerBlock extends DyeableBlock implements EntityBlock {
 
@@ -59,6 +60,12 @@ public class DoughMakerBlock extends DyeableBlock implements EntityBlock {
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState replacementState, boolean flag) {
+        super.onRemove(state, level, pos, replacementState, flag);
+        MenuInventoryHelper.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, replacementState);
     }
 
     @Nullable

@@ -9,23 +9,23 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 import tnt.blockychef.BlockyChef;
-import tnt.blockychef.common.block.entity.CuttingBoardBlockEntity;
-import tnt.blockychef.common.food.recipe.CuttingBoardRecipe;
-import tnt.blockychef.common.menu.CuttingBoardMenu;
+import tnt.blockychef.common.block.entity.PastaMachineBlockEntity;
+import tnt.blockychef.common.food.recipe.PastaMachineRecipe;
+import tnt.blockychef.common.menu.PastaMachineMenu;
 import tnt.blockychef.network.NetworkManager;
 import tnt.blockychef.network.packet.C2S_RecipeSelectorEvent;
 import tnt.blockychef.util.Helper;
 import tnt.blockychef.util.Localizations;
 import tnt.blockychef.util.RenderHelper;
 
-public class CuttingBoardScreen extends AbstractContainerScreen<CuttingBoardMenu> {
+public class PastaMachineScreen extends AbstractContainerScreen<PastaMachineMenu> {
 
-    private static final ResourceLocation TEXTURE = BlockyChef.resource("textures/screen/cutting_board.png");
+    private static final ResourceLocation TEXTURE = BlockyChef.resource("textures/screen/pasta_machine.png");
 
-    private Button cutButton;
+    private Button button;
     private Button prevRecipe, nextRecipe;
 
-    public CuttingBoardScreen(CuttingBoardMenu menu, Inventory inventory, Component title) {
+    public PastaMachineScreen(PastaMachineMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
         this.imageHeight = 195;
         this.inventoryLabelY = imageHeight - 94;
@@ -35,14 +35,14 @@ public class CuttingBoardScreen extends AbstractContainerScreen<CuttingBoardMenu
     protected void init() {
         super.init();
 
-        cutButton = addRenderableWidget(
+        button = addRenderableWidget(
                 new Button.Builder(Localizations.CANCEL, this::processButtonClicked)
                         .pos(leftPos + 61, topPos + 78)
                         .size(54, 20)
                         .build()
         );
 
-        CuttingBoardBlockEntity blockEntity = menu.getBlockEntity();
+        PastaMachineBlockEntity blockEntity = menu.getBlockEntity();
         int index = blockEntity.getRecipeIndex();
         int maxIndex = blockEntity.getAvailableRecipeCount() - 1;
         prevRecipe = addRenderableWidget(new Button.Builder(Component.literal("<"), this::prevRecipeClicked)
@@ -63,7 +63,7 @@ public class CuttingBoardScreen extends AbstractContainerScreen<CuttingBoardMenu
 
     @Override
     protected void renderBg(PoseStack poseStack, float partialTicks, int mouseX, int mouseY) {
-        CuttingBoardBlockEntity entity = menu.getBlockEntity();
+        PastaMachineBlockEntity entity = menu.getBlockEntity();
         RenderSystem.setShaderTexture(0, TEXTURE);
         blit(poseStack, leftPos, topPos, 0, 0, imageWidth, imageHeight);
         float progress = entity.getProcessingProgress(partialTicks);
@@ -74,11 +74,11 @@ public class CuttingBoardScreen extends AbstractContainerScreen<CuttingBoardMenu
         float minColor = 0.4F;
         float maxColor = 0.9F;
         float color = minColor + f * (maxColor - minColor);
-        CuttingBoardRecipe recipe = entity.getRecipe();
+        PastaMachineRecipe recipe = entity.getRecipe();
         if (recipe != null) {
             ItemStack[] outputs = recipe.getOutputs();
             for (int i = 0; i < outputs.length; i++) {
-                int slotIndex = CuttingBoardBlockEntity.SLOT_OUTPUTS[i];
+                int slotIndex = PastaMachineBlockEntity.OUTPUTS[i];
                 ItemStack slotItem = entity.getItem(slotIndex);
                 if (slotItem.isEmpty()) {
                     RenderSystem.setShaderColor(color, color, color, 1.0F);
@@ -102,35 +102,35 @@ public class CuttingBoardScreen extends AbstractContainerScreen<CuttingBoardMenu
     }
 
     private void processButtonClicked(Button button) {
-        CuttingBoardBlockEntity entity = menu.getBlockEntity();
+        PastaMachineBlockEntity entity = menu.getBlockEntity();
         boolean active = !entity.isProcessing();
         NetworkManager.dispatchServerPacket(new C2S_RecipeSelectorEvent(entity.getBlockPos(), C2S_RecipeSelectorEvent.EventType.PROCESSING, active));
     }
 
     private void prevRecipeClicked(Button button) {
-        CuttingBoardBlockEntity entity = menu.getBlockEntity();
+        PastaMachineBlockEntity entity = menu.getBlockEntity();
         entity.changeRecipe(-1);
         init(minecraft, width, height);
         NetworkManager.dispatchServerPacket(new C2S_RecipeSelectorEvent(entity.getBlockPos(), C2S_RecipeSelectorEvent.EventType.RECIPE, false));
     }
 
     private void nextRecipeClicked(Button button) {
-        CuttingBoardBlockEntity entity = menu.getBlockEntity();
+        PastaMachineBlockEntity entity = menu.getBlockEntity();
         entity.changeRecipe(1);
         init(minecraft, width, height);
         NetworkManager.dispatchServerPacket(new C2S_RecipeSelectorEvent(entity.getBlockPos(), C2S_RecipeSelectorEvent.EventType.RECIPE, true));
     }
 
     private void updateButtonLabelAndState() {
-        CuttingBoardBlockEntity entity = menu.getBlockEntity();
+        PastaMachineBlockEntity entity = menu.getBlockEntity();
         Component label = Localizations.CANCEL;
-        cutButton.active = entity.getRecipe() != null;
+        button.active = entity.getRecipe() != null;
         int index = entity.getRecipeIndex();
         int max = entity.getAvailableRecipeCount() - 1;
-        if (cutButton.active) {
+        if (button.active) {
             label = entity.getRecipe().getProcessingType().getTranslatedComponent();
         }
-        cutButton.setMessage(entity.isProcessing() ? Localizations.CANCEL : label);
+        button.setMessage(entity.isProcessing() ? Localizations.CANCEL : label);
         prevRecipe.active = index > 0;
         nextRecipe.active = index >= 0 && index < max;
     }

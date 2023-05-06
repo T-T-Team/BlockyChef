@@ -24,4 +24,6 @@ public final class BlockyChefRecipeTypes {
     public static final RecipeType<MixingBowlRecipe> MIXING_BOWL_RECIPE = null;
     @ObjectHolder(value = "blockychef:dough_maker_recipe", registryName = KEY)
     public static final RecipeType<DoughMakerRecipe> DOUGH_MAKER_RECIPE = null;
+    @ObjectHolder(value = "blockychef:pasta_machine_recipe", registryName = KEY)
+    public static final RecipeType<PastaMachineRecipe> PASTA_MACHINE_RECIPE = null;
 }

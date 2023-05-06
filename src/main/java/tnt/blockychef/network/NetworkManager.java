@@ -38,7 +38,7 @@ public final class NetworkManager {
         public static void register() {
             register(S2C_SendThirstData.class, S2C_SendThirstData::new);
             register(S2C_SendBlockEntityData.class, S2C_SendBlockEntityData::new);
-            register(C2S_CuttingBoardEvent.class, C2S_CuttingBoardEvent::new);
+            register(C2S_RecipeSelectorEvent.class, C2S_RecipeSelectorEvent::new);
             register(C2S_ToasterEvent.class, C2S_ToasterEvent::new);
             register(C2S_InitiateRecipeProcessing.class, C2S_InitiateRecipeProcessing::new);
         }

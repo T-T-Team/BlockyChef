@@ -6,23 +6,24 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.network.NetworkEvent;
-import tnt.blockychef.common.block.entity.CuttingBoardBlockEntity;
+import tnt.blockychef.common.block.entity.SelectableRecipeHolder;
+import tnt.blockychef.common.block.entity.SynchronizableBlockEntity;
 import tnt.blockychef.network.Packet;
 import tnt.blockychef.util.Helper;
 
-public class C2S_CuttingBoardEvent extends Packet {
+public class C2S_RecipeSelectorEvent extends Packet {
 
-    private BlockPos pos;
-    private EventType eventType;
-    private boolean data;
+    private final BlockPos pos;
+    private final EventType eventType;
+    private final boolean data;
 
-    public C2S_CuttingBoardEvent(BlockPos pos, EventType eventType, boolean data) {
+    public C2S_RecipeSelectorEvent(BlockPos pos, EventType eventType, boolean data) {
         this.pos = pos;
         this.eventType = eventType;
         this.data = data;
     }
 
-    public C2S_CuttingBoardEvent(FriendlyByteBuf buffer) {
+    public C2S_RecipeSelectorEvent(FriendlyByteBuf buffer) {
         this(buffer.readBlockPos(), buffer.readEnum(EventType.class), buffer.readBoolean());
     }
 
@@ -40,12 +41,12 @@ public class C2S_CuttingBoardEvent extends Packet {
         if (!level.isLoaded(pos))
             return;
         BlockEntity entity = level.getBlockEntity(pos);
-        if (entity instanceof CuttingBoardBlockEntity cuttingBoard) {
+        if (entity instanceof SelectableRecipeHolder holder) {
             switch (eventType) {
-                case PROCESSING -> cuttingBoard.setProcessing(data);
-                case RECIPE -> cuttingBoard.changeRecipe(data ? 1 : -1);
+                case PROCESSING -> holder.setProcessing(data);
+                case RECIPE -> holder.changeRecipe(data ? 1 : -1);
             }
-            Helper.sendBlockEntityClientData(cuttingBoard);
+            Helper.sendBlockEntityClientData((BlockEntity & SynchronizableBlockEntity) holder);
         }
     }
 

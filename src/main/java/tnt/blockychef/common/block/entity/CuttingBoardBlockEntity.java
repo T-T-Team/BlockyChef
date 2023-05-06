@@ -19,7 +19,7 @@ import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 
-public class CuttingBoardBlockEntity extends RecipeRemberingBlockEntity<CuttingBoardRecipe> implements SynchronizableBlockEntity {
+public class CuttingBoardBlockEntity extends RecipeRemberingBlockEntity<CuttingBoardRecipe> implements SelectableRecipeHolder {
 
     public static final int SLOT_INPUT = 0;
     public static final int[] SLOT_OUTPUTS = {1, 2, 3};
@@ -70,6 +70,7 @@ public class CuttingBoardBlockEntity extends RecipeRemberingBlockEntity<CuttingB
         setChanged();
     }
 
+    @Override
     public void setProcessing(boolean processing) {
         this.processing = processing;
         refreshAvailableRecipes();
@@ -145,6 +146,7 @@ public class CuttingBoardBlockEntity extends RecipeRemberingBlockEntity<CuttingB
         return availableRecipes.size();
     }
 
+    @Override
     public void changeRecipe(int direction) {
         int index = getRecipeIndex();
         int next = index + direction;
@@ -171,8 +173,8 @@ public class CuttingBoardBlockEntity extends RecipeRemberingBlockEntity<CuttingB
         } else {
             recipe = null;
         }
-        processing = tag.getBoolean("processing");
-        timeProcessing = tag.getInt("processingTime");
+        processing = recipe != null && tag.getBoolean("processing");
+        timeProcessing = recipe != null ? tag.getInt("processingTime") : 0;
     }
 
     private void refreshAvailableRecipes() {

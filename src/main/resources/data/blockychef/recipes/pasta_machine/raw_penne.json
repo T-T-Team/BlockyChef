@@ -1,0 +1,15 @@
+{
+  "type": "blockychef:pasta_machine",
+  "input": {
+    "item": "blockychef:pasta_dough"
+  },
+  "processingType": "blockychef:cutting",
+  "processingTime": 100,
+  "outputs": [
+    {
+      "item": "blockychef:raw_penne_pasta",
+      "count": 6
+    }
+  ],
+  "experience": 0.7
+}

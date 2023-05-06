@@ -23,4 +23,6 @@ public final class BlockyChefRecipeSerializers {
     public static final RecipeSerializer<?> MIXING_BOWL_RECIPE_SERIALIZER = null;
     @ObjectHolder(value = "blockychef:dough_maker", registryName = KEY)
     public static final RecipeSerializer<?> DOUGH_MAKER_RECIPE_SERIALIZER = null;
+    @ObjectHolder(value = "blockychef:pasta_machine", registryName = KEY)
+    public static final RecipeSerializer<?> PASTA_MACHINE_RECIPE_SERIALIZER = null;
 }
