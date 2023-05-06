@@ -5,20 +5,22 @@ import net.minecraftforge.registries.ObjectHolder;
 
 public final class BlockyChefRecipeSerializers {
 
-    @ObjectHolder(value = "blockychef:drying", registryName = "recipe_serializer")
+    private static final String KEY = "recipe_serializer";
+
+    @ObjectHolder(value = "blockychef:drying", registryName = KEY)
     public static final RecipeSerializer<?> DRYING_RECIPE_SERIALIZER = null;
-    @ObjectHolder(value = "blockychef:grating", registryName = "recipe_serializer")
+    @ObjectHolder(value = "blockychef:grating", registryName = KEY)
     public static final RecipeSerializer<?> GRATING_RECIPE_SERIALIZER = null;
-    @ObjectHolder(value = "blockychef:cutting_board", registryName = "recipe_serializer")
+    @ObjectHolder(value = "blockychef:cutting_board", registryName = KEY)
     public static final RecipeSerializer<?> CUTTING_BOARD_RECIPE_SERIALIZER = null;
-    @ObjectHolder(value = "blockychef:toasting", registryName = "recipe_serializer")
+    @ObjectHolder(value = "blockychef:toasting", registryName = KEY)
     public static final RecipeSerializer<?> TOASTING_RECIPE_SERIALIZER = null;
-    @ObjectHolder(value = "blockychef:meat_grinding", registryName = "recipe_serializer")
+    @ObjectHolder(value = "blockychef:meat_grinding", registryName = KEY)
     public static final RecipeSerializer<?> MEAT_GRINDER_RECIPE_SERIALIZER = null;
-    @ObjectHolder(value = "blockychef:grinding", registryName = "recipe_serializer")
+    @ObjectHolder(value = "blockychef:grinding", registryName = KEY)
     public static final RecipeSerializer<?> MORTAR_AND_PESTLE_RECIPE_SERIALIZER = null;
-    @ObjectHolder(value = "blockychef:mixing_bowl", registryName = "recipe_serializer")
+    @ObjectHolder(value = "blockychef:mixing_bowl", registryName = KEY)
     public static final RecipeSerializer<?> MIXING_BOWL_RECIPE_SERIALIZER = null;
-    @ObjectHolder(value = "blockychef:dough_maker", registryName = "recipe_serializer")
+    @ObjectHolder(value = "blockychef:dough_maker", registryName = KEY)
     public static final RecipeSerializer<?> DOUGH_MAKER_RECIPE_SERIALIZER = null;
 }

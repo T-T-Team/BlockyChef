@@ -5,8 +5,10 @@ import net.minecraftforge.registries.ObjectHolder;
 
 public final class BlockyChefMobEffects {
 
-    @ObjectHolder(value = "blockychef:thirst", registryName = "mob_effect")
+    private static final String KEY = "mob_effect";
+
+    @ObjectHolder(value = "blockychef:thirst", registryName = KEY)
     public static final MobEffect THIRST = null;
-    @ObjectHolder(value = "blockychef:hydration", registryName = "mob_effect")
+    @ObjectHolder(value = "blockychef:hydration", registryName = KEY)
     public static final MobEffect HYDRATION = null;
 }

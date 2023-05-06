@@ -6,6 +6,8 @@ import tnt.blockychef.levelgen.tree.TreeFruitDecorator;
 
 public final class BlockyChefTreeDecorators {
 
-    @ObjectHolder(value = "blockychef:fruit_decorator", registryName = "worldgen/tree_decorator_type")
+    private static final String KEY = "worldgen/tree_decorator_type";
+
+    @ObjectHolder(value = "blockychef:fruit_decorator", registryName = KEY)
     public static final TreeDecoratorType<TreeFruitDecorator> FRUIT_DECORATOR = null;
 }
