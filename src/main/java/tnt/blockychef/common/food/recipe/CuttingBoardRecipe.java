@@ -78,7 +78,7 @@ public class CuttingBoardRecipe extends AbstractFoodRecipe<CuttingBoardBlockEnti
 
     @Override
     public ItemStack assemble(CuttingBoardBlockEntity board, RegistryAccess access) {
-        throw new UnsupportedOperationException();
+        return getResultItem(access).copy();
     }
 
     @Override

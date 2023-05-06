@@ -111,6 +111,24 @@ public final class BlockyChefBlocks {
     public static final MortarAndPestleBlock QUARTZ_MORTAR_AND_PESTLE = null;
     @ObjectHolder(value = "blockychef:deepslate_mortar_and_pestle", registryName = "block")
     public static final MortarAndPestleBlock DEEPSLATE_MORTAR_AND_PESTLE = null;
+    @ObjectHolder(value = "blockychef:oak_mixing_bowl", registryName = "block")
+    public static final MixingBowlBlock OAK_MIXING_BOWL = null;
+    @ObjectHolder(value = "blockychef:spruce_mixing_bowl", registryName = "block")
+    public static final MixingBowlBlock SPRUCE_MIXING_BOWL = null;
+    @ObjectHolder(value = "blockychef:birch_mixing_bowl", registryName = "block")
+    public static final MixingBowlBlock BIRCH_MIXING_BOWL = null;
+    @ObjectHolder(value = "blockychef:jungle_mixing_bowl", registryName = "block")
+    public static final MixingBowlBlock JUNGLE_MIXING_BOWL = null;
+    @ObjectHolder(value = "blockychef:acacia_mixing_bowl", registryName = "block")
+    public static final MixingBowlBlock ACACIA_MIXING_BOWL = null;
+    @ObjectHolder(value = "blockychef:dark_oak_mixing_bowl", registryName = "block")
+    public static final MixingBowlBlock DARK_OAK_MIXING_BOWL = null;
+    @ObjectHolder(value = "blockychef:mangrove_mixing_bowl", registryName = "block")
+    public static final MixingBowlBlock MANGROVE_MIXING_BOWL = null;
+    @ObjectHolder(value = "blockychef:crimson_mixing_bowl", registryName = "block")
+    public static final MixingBowlBlock CRIMSON_MIXING_BOWL = null;
+    @ObjectHolder(value = "blockychef:warped_mixing_bowl", registryName = "block")
+    public static final MixingBowlBlock WARPED_MIXING_BOWL = null;
     @ObjectHolder(value = "blockychef:pasta_machine", registryName = "block")
     public static final PastaMachineBlock PASTA_MACHINE = null;
     @ObjectHolder(value = "blockychef:grater", registryName = "block")

@@ -18,4 +18,6 @@ public final class BlockyChefRecipeTypes {
     public static final RecipeType<MeatGrinderRecipe> MEAT_GRINDER_RECIPE = null;
     @ObjectHolder(value = "blockychef:mortar_and_pestle_recipe", registryName = "recipe_type")
     public static final RecipeType<MortarRecipe> MORTAR_AND_PESTLE_RECIPE = null;
+    @ObjectHolder(value = "blockychef:mixing_bowl_recipe", registryName = "recipe_type")
+    public static final RecipeType<MixingBowlRecipe> MIXING_BOWL_RECIPE = null;
 }

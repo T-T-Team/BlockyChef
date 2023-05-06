@@ -33,6 +33,12 @@ public class MortarRecipe extends AbstractFoodRecipe<MortarAndPestleBlockEntity>
         this.inputs = inputs;
         this.output = output;
         this.processingTime = processingTime;
+        if (inputs.isEmpty() || inputs.size() > MortarAndPestleBlockEntity.INPUTS.length) {
+            throwValidationError("Input count must be bigger than 0 and smaller than " + MortarAndPestleBlockEntity.INPUTS.length);
+        }
+        if (processingTime <= 0) {
+            throwValidationError("Processing time must be bigger than 0");
+        }
     }
 
     public List<MultiIngredient> getInputs() {

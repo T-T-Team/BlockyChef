@@ -20,6 +20,7 @@ import tnt.blockychef.client.render.block.GraterBlockEntityRenderer;
 import tnt.blockychef.client.render.thirst.ThirstOverlay;
 import tnt.blockychef.client.render.thirst.ThirstTooltipHandler;
 import tnt.blockychef.client.screen.CuttingBoardScreen;
+import tnt.blockychef.client.screen.MixingBowlScreen;
 import tnt.blockychef.client.screen.MortarAndPestleScreen;
 import tnt.blockychef.client.screen.ToasterScreen;
 import tnt.blockychef.common.block.DyeableBlock;
@@ -70,6 +71,7 @@ public final class BlockyChefClient {
         MenuScreens.register(BlockychefMenuTypes.CUTTING_BOARD, CuttingBoardScreen::new);
         MenuScreens.register(BlockychefMenuTypes.TOASTER, ToasterScreen::new);
         MenuScreens.register(BlockychefMenuTypes.MORTAR_AND_PESTLE, MortarAndPestleScreen::new);
+        MenuScreens.register(BlockychefMenuTypes.MIXING_BOWL, MixingBowlScreen::new);
     }
 
     private void registerBlockColors(RegisterColorHandlersEvent.Block event) {

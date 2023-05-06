@@ -1,0 +1,34 @@
+{
+  "type": "blockychef:mixing_bowl",
+  "inputs": [
+    {
+      "count": 6,
+      "ingredient": {
+        "item": "blockychef:pepper_powder"
+      }
+    },
+    {
+      "count": 3,
+      "ingredient": {
+        "item": "blockychef:salt"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "minecraft:gunpowder"
+    },
+    {
+      "item": "blockychef:wheat_flour",
+      "count": 5
+    }
+  ],
+  "mixingTime": 100,
+  "experience": 0.7
+}

@@ -6,19 +6,19 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.network.NetworkEvent;
-import tnt.blockychef.common.block.entity.MortarAndPestleBlockEntity;
+import tnt.blockychef.common.block.entity.MixingBowlBlockEntity;
 import tnt.blockychef.network.Packet;
 
-public class C2S_MortarAndPestleInitiateGrinding extends Packet {
+public class C2S_MixingBowlInitiateMixing extends Packet {
 
     private final BlockPos pos;
 
-    public C2S_MortarAndPestleInitiateGrinding(BlockPos pos) {
+    public C2S_MixingBowlInitiateMixing(BlockPos pos) {
         this.pos = pos;
     }
 
-    public C2S_MortarAndPestleInitiateGrinding(FriendlyByteBuf buffer) {
-        this(buffer.readBlockPos());
+    public C2S_MixingBowlInitiateMixing(FriendlyByteBuf byteBuf) {
+        this(byteBuf.readBlockPos());
     }
 
     @Override
@@ -30,11 +30,12 @@ public class C2S_MortarAndPestleInitiateGrinding extends Packet {
     public void handle(NetworkEvent.Context context) {
         ServerPlayer player = context.getSender();
         ServerLevel level = player.getLevel();
-        if (!level.isLoaded(pos))
+        if (!level.isLoaded(pos)) {
             return;
+        }
         BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (blockEntity instanceof MortarAndPestleBlockEntity mortarAndPestle) {
-            mortarAndPestle.startGrinding();
+        if (blockEntity instanceof MixingBowlBlockEntity mixingBowl) {
+            mixingBowl.startMixing();
         }
     }
 }

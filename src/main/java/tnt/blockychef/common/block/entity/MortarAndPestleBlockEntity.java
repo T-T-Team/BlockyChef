@@ -43,6 +43,7 @@ public class MortarAndPestleBlockEntity extends RecipeRemberingBlockEntity<Morta
         ItemStack result = mortarAndPestle.activeRecipe.getResultItem(level.registryAccess());
         if (!MenuInventoryHelper.canFitItems(new ItemStack[] {result}, mortarAndPestle, OUTPUT)) {
             mortarAndPestle.setRecipe(null);
+            return;
         }
         if (++mortarAndPestle.currentProcessingTime >= mortarAndPestle.activeRecipe.getProcessingTime() && !level.isClientSide) {
             mortarAndPestle.currentProcessingTime = 0;
