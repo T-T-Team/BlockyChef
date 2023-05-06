@@ -3,7 +3,7 @@
   "input": {
     "item": "blockychef:pasta_dough"
   },
-  "processingType": "blockychef:cutting",
+  "processingType": "blockychef:rolling",
   "processingTime": 100,
   "outputs": [
     {

@@ -18,15 +18,16 @@ public class MortarAndPestleMenu extends AbstractBlockEntityMenu<MortarAndPestle
 
     public MortarAndPestleMenu(int menuId, Inventory inventory, MortarAndPestleBlockEntity blockEntity) {
         super(BlockychefMenuTypes.MORTAR_AND_PESTLE, menuId, blockEntity);
-        this.moveHelper = MenuQuickMoveHelper.inputOutputInventory(getQuickMoveContext(), MortarAndPestleBlockEntity.INPUTS, new int[] {MortarAndPestleBlockEntity.OUTPUT});
+        this.moveHelper = MenuQuickMoveHelper.inputOutputInventory(getQuickMoveContext(), MortarAndPestleBlockEntity.INPUTS, MortarAndPestleBlockEntity.OUTPUT);
 
         for (int y = 0; y < 2; y++) {
             for (int x = 0; x < 3; x++) {
-                addSlot(new SlotItemHandler(blockEntity.getItemHandler(), x + y * 3, 27 + x * 18, 32 + y * 18));
+                addSlot(new SlotItemHandler(blockEntity.getItemHandler(), x + y * 3, 8 + x * 18, 32 + y * 18));
             }
         }
-        addSlot(new ItemHandlerOutputSlotWithCallback(blockEntity.getItemHandler(), 6, 134, 41, this::onResultTakenOut));
-
+        for (int x = 0; x < 3; x++) {
+            addSlot(new ItemHandlerOutputSlotWithCallback(blockEntity.getItemHandler(), 6 + x, 116 + x * 18, 41, this::onResultTakenOut));
+        }
         addPlayerSlots(inventory, 8, 93);
         addSlotListener(new SimpleSlotListener(this::slotChanged));
     }

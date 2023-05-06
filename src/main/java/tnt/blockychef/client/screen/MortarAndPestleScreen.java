@@ -52,7 +52,7 @@ public class MortarAndPestleScreen extends AbstractContainerScreen<MortarAndPest
         MortarAndPestleBlockEntity blockEntity = menu.getBlockEntity();
         float grindProgress = blockEntity.getGrindingProgress(partialTicks);
         int arrowWidth = (int) (grindProgress * 26);
-        blit(stack, leftPos + 94, topPos + 43, 176, 0, arrowWidth, 12);
+        blit(stack, leftPos + 75, topPos + 43, 176, 0, arrowWidth, 12);
     }
 
     @Override

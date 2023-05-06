@@ -691,6 +691,7 @@
   "recipe.process.blockychef.cutting": "Cut",
   "recipe.process.blockychef.slicing": "Slice",
   "recipe.process.blockychef.hollowing": "Hollow",
+  "recipe.process.blockychef.rolling": "Roll",
 
   "label.blockychef.cancel": "Cancel",
 
@@ -700,6 +701,11 @@
   "screen.blockychef.toaster.widget.toast": "Toast",
   "screen.blockychef.mortar_and_pestle": "Mortar & Pestle",
   "screen.blockychef.mortar_and_pestle.widget.grind": "Grind",
+  "screen.blockychef.dough_maker": "Dough Maker",
+  "screen.blockychef.dough_maker.widget.process": "Mix",
+  "screen.blockychef.mixing_bowl": "Mixing Bowl",
+  "screen.blockychef.mixing_bowl.widget.mix": "Mix",
+  "screen.blockychef.pasta_machine": "Pasta Machine",
 
   "death.attack.blockychef.dehydration": "%s has died due to dehydration",
   "death.attack.blockychef.dehydration.player": "%1$s has died due to dehydration whilst fighting %2$s"

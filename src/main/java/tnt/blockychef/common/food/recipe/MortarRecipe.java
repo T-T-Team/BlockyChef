@@ -13,22 +13,26 @@ import tnt.blockychef.common.init.BlockyChefRecipeSerializers;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.util.SerializationHelper;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class MortarRecipe extends AbstractFoodRecipe<MortarAndPestleBlockEntity> {
 
     public static final CodecRecipeSerializer.CodecProvider<MortarRecipe> CODEC_PROVIDER = recipeId -> RecordCodecBuilder.create(instance -> instance.group(
             MultiIngredient.CODEC.listOf().fieldOf("inputs").forGetter(t -> t.inputs),
-            SerializationHelper.SIMPLE_ITEMSTACK_CODEC.fieldOf("output").forGetter(t -> t.output),
+            SerializationHelper.SIMPLE_ITEMSTACK_CODEC.listOf().xmap(
+                    list -> list.toArray(ItemStack[]::new),
+                    Arrays::asList
+            ).fieldOf("outputs").forGetter(MortarRecipe::getOutput),
             Codec.INT.fieldOf("processingTime").forGetter(MortarRecipe::getProcessingTime),
             resolveExperience()
     ).apply(instance, (inputs, output, time, exp) -> new MortarRecipe(recipeId, inputs, output, time, exp)));
 
     private final List<MultiIngredient> inputs;
-    private final ItemStack output;
+    private final ItemStack[] output;
     private final int processingTime;
 
-    public MortarRecipe(ResourceLocation recipeId, List<MultiIngredient> inputs, ItemStack output, int processingTime, float exp) {
+    public MortarRecipe(ResourceLocation recipeId, List<MultiIngredient> inputs, ItemStack[] output, int processingTime, float exp) {
         super(recipeId, exp);
         this.inputs = inputs;
         this.output = output;
@@ -49,6 +53,10 @@ public class MortarRecipe extends AbstractFoodRecipe<MortarAndPestleBlockEntity>
         return processingTime;
     }
 
+    public ItemStack[] getOutput() {
+        return output;
+    }
+
     @Override
     public boolean matches(MortarAndPestleBlockEntity mortarAndPestle, Level level) {
         for (MultiIngredient ingredient : inputs) {
@@ -66,7 +74,7 @@ public class MortarRecipe extends AbstractFoodRecipe<MortarAndPestleBlockEntity>
 
     @Override
     public ItemStack getResultItem(RegistryAccess access) {
-        return output;
+        return output[0];
     }
 
     @Override

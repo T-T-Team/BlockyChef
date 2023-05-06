@@ -14,6 +14,7 @@ public class RecipeProcessingTypes {
     public static final RecipeProcessingType CUTTING = register("cutting");
     public static final RecipeProcessingType SLICING = register("slicing");
     public static final RecipeProcessingType HOLLOWING = register("hollowing");
+    public static final RecipeProcessingType ROLLING = register("rolling");
 
     public static RecipeProcessingType registerRecipeProcessingType(ResourceLocation location) {
         RecipeProcessingType type = new RecipeProcessingType(location);

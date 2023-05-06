@@ -42,7 +42,7 @@ public class DoughMakerRecipe extends AbstractItemReturningRecipe<DoughMakerBloc
 
     @Override
     public int[] getInputSlots(DoughMakerBlockEntity container) {
-        return DoughMakerBlockEntity.INPUTS;
+        return DoughMakerBlockEntity.OUTPUTS;
     }
 
     public List<MultiIngredient> getInputs() {

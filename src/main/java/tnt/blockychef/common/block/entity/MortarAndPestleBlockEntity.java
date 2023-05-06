@@ -22,7 +22,7 @@ import java.util.Optional;
 public class MortarAndPestleBlockEntity extends RecipeRemberingBlockEntity<MortarRecipe> implements SynchronizableBlockEntity, ProcessableRecipeHolder {
 
     public static final int[] INPUTS = {0, 1, 2, 3, 4, 5};
-    public static final int OUTPUT = 6;
+    public static final int[] OUTPUT = {6, 7, 8};
 
     private MortarRecipe activeRecipe;
     private boolean processing;
@@ -40,8 +40,8 @@ public class MortarAndPestleBlockEntity extends RecipeRemberingBlockEntity<Morta
             mortarAndPestle.setRecipe(null);
             return;
         }
-        ItemStack result = mortarAndPestle.activeRecipe.getResultItem(level.registryAccess());
-        if (!MenuInventoryHelper.canFitItems(new ItemStack[] {result}, mortarAndPestle, OUTPUT)) {
+        ItemStack[] result = mortarAndPestle.activeRecipe.getOutput();
+        if (!MenuInventoryHelper.canFitItems(result, mortarAndPestle, OUTPUT)) {
             mortarAndPestle.setRecipe(null);
             return;
         }
@@ -50,8 +50,7 @@ public class MortarAndPestleBlockEntity extends RecipeRemberingBlockEntity<Morta
             for (MultiIngredient ingredient : mortarAndPestle.activeRecipe.getInputs()) {
                 ingredient.consume(mortarAndPestle, INPUTS);
             }
-            ItemStack[] output = new ItemStack[] { mortarAndPestle.activeRecipe.assemble(mortarAndPestle, level.registryAccess()) };
-            MenuInventoryHelper.insertItems(output, mortarAndPestle, OUTPUT);
+            MenuInventoryHelper.insertItems(result, mortarAndPestle, OUTPUT);
             mortarAndPestle.storeRecipe(mortarAndPestle.activeRecipe);
             mortarAndPestle.refreshRecipe();
             Helper.sendBlockEntityClientData(mortarAndPestle);
@@ -90,7 +89,7 @@ public class MortarAndPestleBlockEntity extends RecipeRemberingBlockEntity<Morta
 
     @Override
     public IItemHandlerModifiable setUpInventory() {
-        return new ItemStackHandler(7);
+        return new ItemStackHandler(9);
     }
 
     @Override
