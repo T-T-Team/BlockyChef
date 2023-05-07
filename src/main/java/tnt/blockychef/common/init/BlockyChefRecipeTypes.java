@@ -28,4 +28,6 @@ public final class BlockyChefRecipeTypes {
     public static final RecipeType<PastaMachineRecipe> PASTA_MACHINE_RECIPE = null;
     @ObjectHolder(value = "blockychef:barrel_recipe", registryName = KEY)
     public static final RecipeType<BarrelRecipe> BARREL_RECIPE = null;
+    @ObjectHolder(value = "blockychef:juicer_recipe", registryName = KEY)
+    public static final RecipeType<JuicerRecipe> JUICER_RECIPE = null;
 }

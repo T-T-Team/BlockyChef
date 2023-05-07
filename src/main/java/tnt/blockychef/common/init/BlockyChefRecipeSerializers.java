@@ -27,4 +27,6 @@ public final class BlockyChefRecipeSerializers {
     public static final RecipeSerializer<?> PASTA_MACHINE_RECIPE_SERIALIZER = null;
     @ObjectHolder(value = "blockychef:barrel", registryName = KEY)
     public static final RecipeSerializer<?> BARREL_RECIPE_SERIALIZER = null;
+    @ObjectHolder(value = "blockychef:juicing", registryName = KEY)
+    public static final RecipeSerializer<?> JUICER_RECIPE_SERIALIZER = null;
 }

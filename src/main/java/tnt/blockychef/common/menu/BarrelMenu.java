@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.SlotItemHandler;
 import tnt.blockychef.common.block.BarrelBlock;
 import tnt.blockychef.common.block.entity.BarrelBlockEntity;
-import tnt.blockychef.common.init.BlockychefMenuTypes;
+import tnt.blockychef.common.init.BlockyChefMenuTypes;
 import tnt.blockychef.util.MenuQuickMoveHelper;
 
 public class BarrelMenu extends AbstractBlockEntityMenu<BarrelBlockEntity> {
@@ -17,7 +17,7 @@ public class BarrelMenu extends AbstractBlockEntityMenu<BarrelBlockEntity> {
     private final MenuQuickMoveHelper moveHelper;
 
     public BarrelMenu(int menuId, Inventory inventory, BarrelBlockEntity barrel) {
-        super(BlockychefMenuTypes.BARREL, menuId, barrel);
+        super(BlockyChefMenuTypes.BARREL, menuId, barrel);
         this.moveHelper = MenuQuickMoveHelper.inputOutputInventory(getQuickMoveContext(), BarrelBlockEntity.INPUTS, BarrelBlockEntity.OUTPUTS);
 
         for (int y = 0; y < 2; y++) {

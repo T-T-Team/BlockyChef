@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.SlotItemHandler;
 import tnt.blockychef.common.block.CuttingBoardBlock;
 import tnt.blockychef.common.block.entity.CuttingBoardBlockEntity;
-import tnt.blockychef.common.init.BlockychefMenuTypes;
+import tnt.blockychef.common.init.BlockyChefMenuTypes;
 import tnt.blockychef.util.MenuQuickMoveHelper;
 
 public class CuttingBoardMenu extends AbstractBlockEntityMenu<CuttingBoardBlockEntity> {
@@ -17,7 +17,7 @@ public class CuttingBoardMenu extends AbstractBlockEntityMenu<CuttingBoardBlockE
     private final MenuQuickMoveHelper quickMoveHelper;
 
     public CuttingBoardMenu(int menuId, Inventory inventory, CuttingBoardBlockEntity blockEntity) {
-        super(BlockychefMenuTypes.CUTTING_BOARD, menuId, blockEntity);
+        super(BlockyChefMenuTypes.CUTTING_BOARD, menuId, blockEntity);
         this.quickMoveHelper = MenuQuickMoveHelper.inputOutputInventory(getQuickMoveContext(), new int[] {CuttingBoardBlockEntity.SLOT_INPUT}, CuttingBoardBlockEntity.SLOT_OUTPUTS);
 
         addSlot(new SlotItemHandler(blockEntity.getItemHandler(), CuttingBoardBlockEntity.SLOT_INPUT, 26, 36));

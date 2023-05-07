@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.SlotItemHandler;
 import tnt.blockychef.common.block.MortarAndPestleBlock;
 import tnt.blockychef.common.block.entity.MortarAndPestleBlockEntity;
-import tnt.blockychef.common.init.BlockychefMenuTypes;
+import tnt.blockychef.common.init.BlockyChefMenuTypes;
 import tnt.blockychef.util.MenuQuickMoveHelper;
 
 public class MortarAndPestleMenu extends AbstractBlockEntityMenu<MortarAndPestleBlockEntity> {
@@ -17,7 +17,7 @@ public class MortarAndPestleMenu extends AbstractBlockEntityMenu<MortarAndPestle
     private final MenuQuickMoveHelper moveHelper;
 
     public MortarAndPestleMenu(int menuId, Inventory inventory, MortarAndPestleBlockEntity blockEntity) {
-        super(BlockychefMenuTypes.MORTAR_AND_PESTLE, menuId, blockEntity);
+        super(BlockyChefMenuTypes.MORTAR_AND_PESTLE, menuId, blockEntity);
         this.moveHelper = MenuQuickMoveHelper.inputOutputInventory(getQuickMoveContext(), MortarAndPestleBlockEntity.INPUTS, MortarAndPestleBlockEntity.OUTPUT);
 
         for (int y = 0; y < 2; y++) {

@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.SlotItemHandler;
 import tnt.blockychef.common.block.entity.DoughMakerBlockEntity;
 import tnt.blockychef.common.init.BlockyChefBlocks;
-import tnt.blockychef.common.init.BlockychefMenuTypes;
+import tnt.blockychef.common.init.BlockyChefMenuTypes;
 import tnt.blockychef.util.MenuQuickMoveHelper;
 
 public class DoughMakerMenu extends AbstractBlockEntityMenu<DoughMakerBlockEntity> {
@@ -17,7 +17,7 @@ public class DoughMakerMenu extends AbstractBlockEntityMenu<DoughMakerBlockEntit
     private final MenuQuickMoveHelper quickMoveHelper;
 
     public DoughMakerMenu(int menuId, Inventory inventory, DoughMakerBlockEntity doughMaker) {
-        super(BlockychefMenuTypes.DOUGH_MAKER, menuId, doughMaker);
+        super(BlockyChefMenuTypes.DOUGH_MAKER, menuId, doughMaker);
         this.quickMoveHelper = MenuQuickMoveHelper.inputOutputInventory(getQuickMoveContext(), DoughMakerBlockEntity.INPUTS, DoughMakerBlockEntity.OUTPUTS);
 
         for (int y = 0; y < 2; y++) {

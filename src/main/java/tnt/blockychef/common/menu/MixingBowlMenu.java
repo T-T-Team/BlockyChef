@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.SlotItemHandler;
 import tnt.blockychef.common.block.MixingBowlBlock;
 import tnt.blockychef.common.block.entity.MixingBowlBlockEntity;
-import tnt.blockychef.common.init.BlockychefMenuTypes;
+import tnt.blockychef.common.init.BlockyChefMenuTypes;
 import tnt.blockychef.util.MenuQuickMoveHelper;
 
 public class MixingBowlMenu extends AbstractBlockEntityMenu<MixingBowlBlockEntity> {
@@ -17,7 +17,7 @@ public class MixingBowlMenu extends AbstractBlockEntityMenu<MixingBowlBlockEntit
     private final MenuQuickMoveHelper quickMoveHelper;
 
     public MixingBowlMenu(int menuId, Inventory inventory, MixingBowlBlockEntity mixingBowl) {
-        super(BlockychefMenuTypes.MIXING_BOWL, menuId, mixingBowl);
+        super(BlockyChefMenuTypes.MIXING_BOWL, menuId, mixingBowl);
         this.quickMoveHelper = MenuQuickMoveHelper.inputOutputInventory(getQuickMoveContext(), MixingBowlBlockEntity.INPUTS, MixingBowlBlockEntity.OUTPUTS);
 
         for (int y = 0; y < 2; y++) {

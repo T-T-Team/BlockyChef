@@ -4,7 +4,7 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.registries.ObjectHolder;
 import tnt.blockychef.common.menu.*;
 
-public final class BlockychefMenuTypes {
+public final class BlockyChefMenuTypes {
 
     private static final String KEY = "menu";
 

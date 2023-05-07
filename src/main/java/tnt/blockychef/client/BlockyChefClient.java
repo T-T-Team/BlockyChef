@@ -24,7 +24,7 @@ import tnt.blockychef.common.block.DyeableBlock;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 import tnt.blockychef.common.init.BlockyChefItems;
-import tnt.blockychef.common.init.BlockychefMenuTypes;
+import tnt.blockychef.common.init.BlockyChefMenuTypes;
 import tnt.blockychef.integrations.Integrations;
 
 public final class BlockyChefClient {
@@ -65,13 +65,13 @@ public final class BlockyChefClient {
     }
 
     private void registerScreenFactories() {
-        MenuScreens.register(BlockychefMenuTypes.CUTTING_BOARD, CuttingBoardScreen::new);
-        MenuScreens.register(BlockychefMenuTypes.TOASTER, ToasterScreen::new);
-        MenuScreens.register(BlockychefMenuTypes.MORTAR_AND_PESTLE, MortarAndPestleScreen::new);
-        MenuScreens.register(BlockychefMenuTypes.MIXING_BOWL, MixingBowlScreen::new);
-        MenuScreens.register(BlockychefMenuTypes.DOUGH_MAKER, DoughMakerScreen::new);
-        MenuScreens.register(BlockychefMenuTypes.PASTA_MACHINE, PastaMachineScreen::new);
-        MenuScreens.register(BlockychefMenuTypes.BARREL, BarrelScreen::new);
+        MenuScreens.register(BlockyChefMenuTypes.CUTTING_BOARD, CuttingBoardScreen::new);
+        MenuScreens.register(BlockyChefMenuTypes.TOASTER, ToasterScreen::new);
+        MenuScreens.register(BlockyChefMenuTypes.MORTAR_AND_PESTLE, MortarAndPestleScreen::new);
+        MenuScreens.register(BlockyChefMenuTypes.MIXING_BOWL, MixingBowlScreen::new);
+        MenuScreens.register(BlockyChefMenuTypes.DOUGH_MAKER, DoughMakerScreen::new);
+        MenuScreens.register(BlockyChefMenuTypes.PASTA_MACHINE, PastaMachineScreen::new);
+        MenuScreens.register(BlockyChefMenuTypes.BARREL, BarrelScreen::new);
     }
 
     private void registerBlockColors(RegisterColorHandlersEvent.Block event) {

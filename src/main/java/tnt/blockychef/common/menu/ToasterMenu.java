@@ -9,7 +9,7 @@ import net.minecraftforge.items.SlotItemHandler;
 import org.jetbrains.annotations.NotNull;
 import tnt.blockychef.common.block.entity.ToasterBlockEntity;
 import tnt.blockychef.common.init.BlockyChefBlocks;
-import tnt.blockychef.common.init.BlockychefMenuTypes;
+import tnt.blockychef.common.init.BlockyChefMenuTypes;
 import tnt.blockychef.util.MenuQuickMoveHelper;
 
 public class ToasterMenu extends AbstractBlockEntityMenu<ToasterBlockEntity> {
@@ -17,7 +17,7 @@ public class ToasterMenu extends AbstractBlockEntityMenu<ToasterBlockEntity> {
     private final MenuQuickMoveHelper moveHelper;
 
     public ToasterMenu(int menuId, Inventory inventory, ToasterBlockEntity toaster) {
-        super(BlockychefMenuTypes.TOASTER, menuId, toaster);
+        super(BlockyChefMenuTypes.TOASTER, menuId, toaster);
         this.moveHelper = MenuQuickMoveHelper.simpleInventory(getQuickMoveContext(), 2);
 
         IItemHandler handler = toaster.getItemHandler();

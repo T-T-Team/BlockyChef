@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.SlotItemHandler;
 import tnt.blockychef.common.block.entity.PastaMachineBlockEntity;
 import tnt.blockychef.common.init.BlockyChefBlocks;
-import tnt.blockychef.common.init.BlockychefMenuTypes;
+import tnt.blockychef.common.init.BlockyChefMenuTypes;
 import tnt.blockychef.util.MenuQuickMoveHelper;
 
 public class PastaMachineMenu extends AbstractBlockEntityMenu<PastaMachineBlockEntity> {
@@ -17,7 +17,7 @@ public class PastaMachineMenu extends AbstractBlockEntityMenu<PastaMachineBlockE
     private final MenuQuickMoveHelper quickMoveHelper;
 
     public PastaMachineMenu(int menuId, Inventory inventory, PastaMachineBlockEntity blockEntity) {
-        super(BlockychefMenuTypes.PASTA_MACHINE, menuId, blockEntity);
+        super(BlockyChefMenuTypes.PASTA_MACHINE, menuId, blockEntity);
         this.quickMoveHelper = MenuQuickMoveHelper.inputOutputInventory(getQuickMoveContext(), PastaMachineBlockEntity.INPUTS, PastaMachineBlockEntity.OUTPUTS);
 
         addSlot(new SlotItemHandler(blockEntity.getItemHandler(), PastaMachineBlockEntity.INPUTS[0], 26, 36));
