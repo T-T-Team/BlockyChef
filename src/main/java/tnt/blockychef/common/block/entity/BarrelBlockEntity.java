@@ -1,0 +1,147 @@
+package tnt.blockychef.common.block.entity;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.items.IItemHandlerModifiable;
+import net.minecraftforge.items.ItemStackHandler;
+import tnt.blockychef.common.food.recipe.BarrelRecipe;
+import tnt.blockychef.common.init.BlockyChefBlockEntities;
+import tnt.blockychef.common.init.BlockyChefRecipeTypes;
+import tnt.blockychef.util.Helper;
+import tnt.blockychef.util.MenuInventoryHelper;
+import tnt.blockychef.util.RenderHelper;
+
+import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.Optional;
+
+public class BarrelBlockEntity extends RecipeRemberingBlockEntity<BarrelRecipe> implements ProcessableRecipeHolder, SynchronizableBlockEntity {
+
+    public static final int[] INPUTS = {0, 1, 2, 3, 4, 5};
+    public static final int[] OUTPUTS = {6, 7, 8};
+
+    private BarrelRecipe activeRecipe;
+    private boolean fermenting;
+    private int fermentingTime;
+
+    public BarrelBlockEntity(BlockPos pos, BlockState state) {
+        super(BlockyChefBlockEntities.BARREL, pos, state);
+    }
+
+    public static void tick(Level level, BlockPos pos, BlockState state, BarrelBlockEntity barrel) {
+        if (barrel.activeRecipe == null || !barrel.fermenting) {
+            return;
+        }
+        RecipeManager manager = level.getRecipeManager();
+        if (manager.getRecipeFor(BlockyChefRecipeTypes.BARREL_RECIPE, barrel, level, barrel.activeRecipe.getId()).isEmpty()) {
+            barrel.setRecipe(null);
+            return;
+        }
+        ItemStack[] outputs = barrel.activeRecipe.getOutputs();
+        if (!MenuInventoryHelper.canFitItems(outputs, barrel, OUTPUTS)) {
+            barrel.setRecipe(null);
+            return;
+        }
+        if (++barrel.fermentingTime >= barrel.activeRecipe.getFermentTime() && !level.isClientSide) {
+            barrel.fermentingTime = 0;
+            barrel.activeRecipe.getInputs().forEach(ingredient -> ingredient.consume(barrel, INPUTS));
+            ItemStack[] assembledOutputs = Arrays.stream(outputs).map(ItemStack::copy).toArray(ItemStack[]::new);
+            MenuInventoryHelper.insertItems(assembledOutputs, barrel, OUTPUTS);
+            barrel.storeRecipe(barrel.activeRecipe);
+            barrel.refreshRecipe();
+            Helper.sendBlockEntityClientData(barrel);
+        }
+    }
+
+    @Override
+    public IItemHandlerModifiable setUpInventory() {
+        return new ItemStackHandler(INPUTS.length + OUTPUTS.length);
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
+        saveSharedData(tag);
+    }
+
+    @Override
+    public void load(CompoundTag tag) {
+        super.load(tag);
+        loadSharedData(tag);
+    }
+
+    @Override
+    public void encodeBlockEntityData(CompoundTag tag) {
+        MenuInventoryHelper.encodeInventory(inventoryHandler, tag);
+        saveSharedData(tag);
+    }
+
+    @Override
+    public void decodeBlockEntityData(CompoundTag tag) {
+        MenuInventoryHelper.decodeInventory(inventoryHandler, tag);
+        loadSharedData(tag);
+    }
+
+    public float getFermentingProgress(float partialTicks) {
+        if (activeRecipe == null || !fermenting)
+            return 0.0F;
+        int oldTick = Math.max(0, fermentingTime - 1);
+        int total = activeRecipe.getFermentTime();
+        float f0 = oldTick / (float) total;
+        float f1 = fermentingTime / (float) total;
+        return RenderHelper.interpolate(f0, f1, partialTicks);
+    }
+
+    public boolean isFermenting() {
+        return fermenting;
+    }
+
+    public boolean hasRecipe() {
+        return activeRecipe != null;
+    }
+
+    @Override
+    public void startProcessing() {
+        if (fermenting)
+            return;
+        refreshRecipe();
+        if (activeRecipe == null)
+            return;
+        fermentingTime = 0;
+        fermenting = true;
+        Helper.sendBlockEntityClientData(this);
+    }
+
+    public void refreshRecipe() {
+        if (level == null)
+            return;
+        RecipeManager manager = level.getRecipeManager();
+        Optional<BarrelRecipe> optional = manager.getRecipeFor(BlockyChefRecipeTypes.BARREL_RECIPE, this, level);
+        setRecipe(optional.orElse(null));
+    }
+
+    private void setRecipe(@Nullable BarrelRecipe recipe) {
+        if (activeRecipe != recipe) {
+            activeRecipe = recipe;
+            fermentingTime = 0;
+            fermenting = false;
+            Helper.sendBlockEntityClientData(this);
+        }
+        setChanged();
+    }
+
+    private void saveSharedData(CompoundTag tag) {
+        tag.putInt("fermentingTime", fermentingTime);
+        tag.putBoolean("fermenting", fermenting);
+    }
+
+    private void loadSharedData(CompoundTag tag) {
+        fermentingTime = tag.getInt("fermentingTime");
+        fermenting = tag.getBoolean("fermenting");
+        refreshRecipe();
+    }
+}

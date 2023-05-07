@@ -86,6 +86,7 @@ public final class Registry {
         helper.register("meat_grinder", BlockEntityType.Builder.of(MeatGrinderBlockEntity::new, BlockyChefBlocks.MEAT_GRINDER).build(null));
         helper.register("mortar_and_pestle", BlockEntityType.Builder.of(MortarAndPestleBlockEntity::new, BlockyChefBlocks.GRANITE_MORTAR_AND_PESTLE, BlockyChefBlocks.ANDESITE_MORTAR_AND_PESTLE, BlockyChefBlocks.DIORITE_MORTAR_AND_PESTLE, BlockyChefBlocks.QUARTZ_MORTAR_AND_PESTLE, BlockyChefBlocks.DEEPSLATE_MORTAR_AND_PESTLE).build(null));
         helper.register("mixing_bowl", BlockEntityType.Builder.of(MixingBowlBlockEntity::new, BlockyChefBlocks.OAK_MIXING_BOWL, BlockyChefBlocks.SPRUCE_MIXING_BOWL, BlockyChefBlocks.BIRCH_MIXING_BOWL, BlockyChefBlocks.JUNGLE_MIXING_BOWL, BlockyChefBlocks.ACACIA_MIXING_BOWL, BlockyChefBlocks.DARK_OAK_MIXING_BOWL, BlockyChefBlocks.MANGROVE_MIXING_BOWL, BlockyChefBlocks.CRIMSON_MIXING_BOWL, BlockyChefBlocks.WARPED_MIXING_BOWL).build(null));
+        helper.register("barrel", BlockEntityType.Builder.of(BarrelBlockEntity::new, BlockyChefBlocks.OAK_BARREL, BlockyChefBlocks.SPRUCE_BARREL, BlockyChefBlocks.BIRCH_BARREL, BlockyChefBlocks.JUNGLE_BARREL, BlockyChefBlocks.ACACIA_BARREL, BlockyChefBlocks.DARK_OAK_BARREL, BlockyChefBlocks.MANGROVE_BARREL, BlockyChefBlocks.CRIMSON_BARREL, BlockyChefBlocks.WARPED_BARREL).build(null));
     }
 
     private static void registerMenuTypes(RegisterEvent.RegisterHelper<MenuType<?>> helper) {
@@ -95,6 +96,7 @@ public final class Registry {
         helper.register("mixing_bowl", IForgeMenuType.create(MixingBowlMenu::new));
         helper.register("dough_maker", IForgeMenuType.create(DoughMakerMenu::new));
         helper.register("pasta_machine", IForgeMenuType.create(PastaMachineMenu::new));
+        helper.register("barrel", IForgeMenuType.create(BarrelMenu::new));
     }
 
     private static void registerMobEffects(RegisterEvent.RegisterHelper<MobEffect> helper) {
@@ -119,6 +121,7 @@ public final class Registry {
         helper.register("mixing_bowl_recipe");
         helper.register("dough_maker_recipe");
         helper.register("pasta_machine_recipe");
+        helper.register("barrel_recipe");
     }
 
     private static void registerRecipeSerializers(RegisterEvent.RegisterHelper<RecipeSerializer<?>> helper) {
@@ -131,6 +134,7 @@ public final class Registry {
         helper.register("mixing_bowl", CodecRecipeSerializer.forCodec(MixingBowlRecipe.CODEC_PROVIDER));
         helper.register("dough_maker", CodecRecipeSerializer.forCodec(DoughMakerRecipe.CODEC_PROVIDER));
         helper.register("pasta_machine", CodecRecipeSerializer.forCodec(PastaMachineRecipe.CODEC_PROVIDER));
+        helper.register("barrel", CodecRecipeSerializer.forCodec(BarrelRecipe.CODEC_PROVIDER));
     }
 
     private static void registerFeatures(RegisterEvent.RegisterHelper<Feature<?>> helper) {

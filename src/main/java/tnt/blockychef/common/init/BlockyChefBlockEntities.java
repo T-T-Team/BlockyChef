@@ -44,4 +44,6 @@ public final class BlockyChefBlockEntities {
     public static final BlockEntityType<MortarAndPestleBlockEntity> MORTAR_AND_PESTLE = null;
     @ObjectHolder(value = "blockychef:mixing_bowl", registryName = KEY)
     public static final BlockEntityType<MixingBowlBlockEntity> MIXING_BOWL = null;
+    @ObjectHolder(value = "blockychef:barrel", registryName = KEY)
+    public static final BlockEntityType<BarrelBlockEntity> BARREL = null;
 }

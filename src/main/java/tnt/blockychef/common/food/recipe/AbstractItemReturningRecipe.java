@@ -27,14 +27,14 @@ public abstract class AbstractItemReturningRecipe<C extends Container> extends A
                 .forGetter(AbstractItemReturningRecipe::getContainerItems);
     }
 
-    public abstract int[] getInputSlots(C container);
+    public abstract int[] getContainerSlots(C container);
 
     public List<ItemStack> getContainerItems() {
         return containerItems;
     }
 
     public void returnItemsToContainer(C container, Level level, BlockPos pos) {
-        int[] slots = getInputSlots(container);
+        int[] slots = getContainerSlots(container);
         for (ItemStack stack : containerItems) {
             if (MenuInventoryHelper.canFitItems(new ItemStack[] {stack}, container, slots)) {
                 MenuInventoryHelper.insertItems(new ItemStack[] {stack.copy()}, container, slots);

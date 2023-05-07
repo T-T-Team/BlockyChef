@@ -71,6 +71,7 @@ public final class BlockyChefClient {
         MenuScreens.register(BlockychefMenuTypes.MIXING_BOWL, MixingBowlScreen::new);
         MenuScreens.register(BlockychefMenuTypes.DOUGH_MAKER, DoughMakerScreen::new);
         MenuScreens.register(BlockychefMenuTypes.PASTA_MACHINE, PastaMachineScreen::new);
+        MenuScreens.register(BlockychefMenuTypes.BARREL, BarrelScreen::new);
     }
 
     private void registerBlockColors(RegisterColorHandlersEvent.Block event) {

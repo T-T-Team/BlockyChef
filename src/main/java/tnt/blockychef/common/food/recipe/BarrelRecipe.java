@@ -8,7 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import tnt.blockychef.common.block.entity.DoughMakerBlockEntity;
+import tnt.blockychef.common.block.entity.BarrelBlockEntity;
 import tnt.blockychef.common.init.BlockyChefRecipeSerializers;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.util.SerializationHelper;
@@ -16,33 +16,28 @@ import tnt.blockychef.util.SerializationHelper;
 import java.util.Arrays;
 import java.util.List;
 
-public class DoughMakerRecipe extends AbstractItemReturningRecipe<DoughMakerBlockEntity> {
+public class BarrelRecipe extends AbstractItemReturningRecipe<BarrelBlockEntity> {
 
-    public static final CodecRecipeSerializer.CodecProvider<DoughMakerRecipe> CODEC_PROVIDER = recipeId -> RecordCodecBuilder.create(instance -> instance.group(
-            MultiIngredient.CODEC.listOf().fieldOf("inputs").forGetter(DoughMakerRecipe::getInputs),
+    public static final CodecRecipeSerializer.CodecProvider<BarrelRecipe> CODEC_PROVIDER = recipeId -> RecordCodecBuilder.create(instance -> instance.group(
+            MultiIngredient.CODEC.listOf().fieldOf("inputs").forGetter(BarrelRecipe::getInputs),
             SerializationHelper.SIMPLE_ITEMSTACK_CODEC.listOf().xmap(
                     list -> list.toArray(ItemStack[]::new),
                     Arrays::asList
-            ).fieldOf("outputs").forGetter(DoughMakerRecipe::getOutputs),
-            Codec.INT.fieldOf("processingTime").forGetter(DoughMakerRecipe::getProcessingTime),
+            ).fieldOf("outputs").forGetter(BarrelRecipe::getOutputs),
             resolveContainerItems(),
+            Codec.INT.fieldOf("fermentTime").forGetter(BarrelRecipe::getFermentTime),
             resolveExperience()
-    ).apply(instance, (in, out, time, ret, exp) -> new DoughMakerRecipe(recipeId, in, out, time, ret, exp)));
+    ).apply(instance, (in, out, ret, time, exp) -> new BarrelRecipe(recipeId, in, out, ret, time, exp)));
 
     private final List<MultiIngredient> inputs;
     private final ItemStack[] outputs;
-    private final int processingTime;
+    private final int fermentTime;
 
-    public DoughMakerRecipe(ResourceLocation recipeId, List<MultiIngredient> inputs, ItemStack[] outputs, int processingTime, List<ItemStack> containerItems, float experience) {
+    public BarrelRecipe(ResourceLocation recipeId, List<MultiIngredient> inputs, ItemStack[] outputs, List<ItemStack> containerItems, int fermentTime, float experience) {
         super(recipeId, experience, containerItems);
         this.inputs = inputs;
         this.outputs = outputs;
-        this.processingTime = processingTime;
-    }
-
-    @Override
-    public int[] getContainerSlots(DoughMakerBlockEntity container) {
-        return DoughMakerBlockEntity.OUTPUTS;
+        this.fermentTime = fermentTime;
     }
 
     public List<MultiIngredient> getInputs() {
@@ -53,14 +48,14 @@ public class DoughMakerRecipe extends AbstractItemReturningRecipe<DoughMakerBloc
         return outputs;
     }
 
-    public int getProcessingTime() {
-        return processingTime;
+    public int getFermentTime() {
+        return fermentTime;
     }
 
     @Override
-    public boolean matches(DoughMakerBlockEntity doughMaker, Level level) {
-        for (MultiIngredient multiIngredient : inputs) {
-            if (!multiIngredient.test(doughMaker, DoughMakerBlockEntity.INPUTS)) {
+    public boolean matches(BarrelBlockEntity blockEntity, Level level) {
+        for (MultiIngredient ingredient : inputs) {
+            if (!ingredient.test(blockEntity, BarrelBlockEntity.INPUTS)) {
                 return false;
             }
         }
@@ -73,17 +68,22 @@ public class DoughMakerRecipe extends AbstractItemReturningRecipe<DoughMakerBloc
     }
 
     @Override
-    public ItemStack assemble(DoughMakerBlockEntity doughMaker, RegistryAccess access) {
+    public ItemStack assemble(BarrelBlockEntity block, RegistryAccess access) {
         return getResultItem(access).copy();
     }
 
     @Override
+    public int[] getContainerSlots(BarrelBlockEntity container) {
+        return BarrelBlockEntity.OUTPUTS;
+    }
+
+    @Override
     public RecipeType<?> getType() {
-        return BlockyChefRecipeTypes.DOUGH_MAKER_RECIPE;
+        return BlockyChefRecipeTypes.BARREL_RECIPE;
     }
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return BlockyChefRecipeSerializers.DOUGH_MAKER_RECIPE_SERIALIZER;
+        return BlockyChefRecipeSerializers.BARREL_RECIPE_SERIALIZER;
     }
 }

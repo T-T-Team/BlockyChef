@@ -193,4 +193,22 @@ public final class BlockyChefBlocks {
     public static final CuttingBoardBlock CRIMSON_CUTTING_BOARD = null;
     @ObjectHolder(value = "blockychef:warped_cutting_board", registryName = KEY)
     public static final CuttingBoardBlock WARPED_CUTTING_BOARD = null;
+    @ObjectHolder(value = "blockychef:oak_barrel", registryName = KEY)
+    public static final BarrelBlock OAK_BARREL = null;
+    @ObjectHolder(value = "blockychef:spruce_barrel", registryName = KEY)
+    public static final BarrelBlock SPRUCE_BARREL = null;
+    @ObjectHolder(value = "blockychef:birch_barrel", registryName = KEY)
+    public static final BarrelBlock BIRCH_BARREL = null;
+    @ObjectHolder(value = "blockychef:jungle_barrel", registryName = KEY)
+    public static final BarrelBlock JUNGLE_BARREL = null;
+    @ObjectHolder(value = "blockychef:acacia_barrel", registryName = KEY)
+    public static final BarrelBlock ACACIA_BARREL = null;
+    @ObjectHolder(value = "blockychef:dark_oak_barrel", registryName = KEY)
+    public static final BarrelBlock DARK_OAK_BARREL = null;
+    @ObjectHolder(value = "blockychef:mangrove_barrel", registryName = KEY)
+    public static final BarrelBlock MANGROVE_BARREL = null;
+    @ObjectHolder(value = "blockychef:crimson_barrel", registryName = KEY)
+    public static final BarrelBlock CRIMSON_BARREL = null;
+    @ObjectHolder(value = "blockychef:warped_barrel", registryName = KEY)
+    public static final BarrelBlock WARPED_BARREL = null;
 }
