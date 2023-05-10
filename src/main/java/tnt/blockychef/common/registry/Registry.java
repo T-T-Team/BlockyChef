@@ -19,7 +19,7 @@ import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.entity.*;
 import tnt.blockychef.common.effect.HydrationMobEffect;
 import tnt.blockychef.common.effect.ThirstMobEffect;
-import tnt.blockychef.common.food.fluid.Fluid;
+import tnt.blockychef.common.food.fluid.FluidType;
 import tnt.blockychef.common.food.recipe.*;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 import tnt.blockychef.common.menu.*;
@@ -34,13 +34,13 @@ import java.util.function.Supplier;
 @Mod.EventBusSubscriber(modid = BlockyChef.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class Registry {
 
-    public static Supplier<IForgeRegistry<Fluid>> FLUID;
+    public static Supplier<IForgeRegistry<FluidType>> FLUID;
 
     private static List<Block> blockEntries = new ArrayList<>();
 
     @SubscribeEvent
     public static void createRegistries(NewRegistryEvent event) {
-        FLUID = event.create(new RegistryBuilder<Fluid>().setName(BlockyChef.resource("fluid")));
+        FLUID = event.create(new RegistryBuilder<FluidType>().setName(BlockyChef.resource("fluid")));
     }
 
     @SubscribeEvent
@@ -154,8 +154,8 @@ public final class Registry {
         helper.register("fruit_decorator", new TreeDecoratorType<>(TreeFruitDecorator.CODEC));
     }
 
-    private static void registerFluids(RegisterEvent.RegisterHelper<Fluid> helper) {
-        helper.register("orange_fluid", new Fluid(0xFF7328));
+    private static void registerFluids(RegisterEvent.RegisterHelper<FluidType> helper) {
+        helper.register("orange_fluid", new FluidType(0xFF7328));
     }
 
     @FunctionalInterface

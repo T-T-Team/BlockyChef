@@ -7,6 +7,7 @@ import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
+import tnt.blockychef.common.food.fluid.FluidContainer;
 import tnt.blockychef.common.food.recipe.JuicerRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
@@ -19,12 +20,14 @@ import java.util.Optional;
 
 public class JuicerBlockEntity extends RecipeRemberingBlockEntity<JuicerRecipe> implements SynchronizableBlockEntity, IndexedColorHolder {
 
+    private final FluidContainer container;
     private JuicerRecipe activeRecipe;
     private int pressCounter;
     private int[] colors;
 
     public JuicerBlockEntity(BlockPos pos, BlockState state) {
         super(BlockyChefBlockEntities.JUICER, pos, state);
+        this.container = new FluidContainer(1000, false);
         this.colors = new int[1];
         Arrays.fill(this.colors, Integer.MIN_VALUE);
     }
