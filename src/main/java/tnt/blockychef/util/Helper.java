@@ -92,4 +92,12 @@ public final class Helper {
         }
         return false;
     }
+
+    public static <E extends Enum<E>> int getEnumFlags(E... values) {
+        int result = 0;
+        for (E e : values) {
+            result |= 1 << e.ordinal();
+        }
+        return result;
+    }
 }

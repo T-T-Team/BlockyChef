@@ -50,6 +50,14 @@ public final class ColorHelper {
         return (((r << 8) + g) << 8) + b;
     }
 
+    public static int darken(int color, float factor) {
+        int alpha = getAlphaColorComponent(color);
+        int red = (int) (getRedColorComponent(color) * factor);
+        int green = (int) (getGreenColorComponent(color) * factor);
+        int blue = (int) (getBlueColorComponent(color) * factor);
+        return (alpha << 24) | (red << 16) | (green << 8) | blue;
+    }
+
     public static int getAlphaColorComponent(int color) {
         return color >> 24 & 255;
     }

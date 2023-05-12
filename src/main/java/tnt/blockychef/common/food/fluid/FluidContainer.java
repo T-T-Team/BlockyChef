@@ -20,6 +20,10 @@ public final class FluidContainer {
         this.fluids = new TreeMap<>(Comparator.comparingInt(FluidType::fluidDensity));
     }
 
+    public Map<FluidType, Integer> getFluids() {
+        return fluids;
+    }
+
     public boolean insert(Fluid fluid) {
         if (!fluids.isEmpty()) {
             if (allowMultipleTypes) {
@@ -59,8 +63,8 @@ public final class FluidContainer {
         return fluids.values().stream().reduce(0, Integer::sum);
     }
 
-    public float getFilledCapacityPercent() {
-        return getAmount() / (float) capacity;
+    public float getFilledCapacityPercent(int amount) {
+        return amount / (float) capacity;
     }
 
     public boolean isFull() {

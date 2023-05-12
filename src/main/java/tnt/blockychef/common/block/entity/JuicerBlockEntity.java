@@ -95,6 +95,14 @@ public class JuicerBlockEntity extends RecipeRemberingBlockEntity<JuicerRecipe> 
         }
     }
 
+    public FluidContainer getFluids() {
+        return container;
+    }
+
+    public int getPressAmount() {
+        return pressCounter;
+    }
+
     @Override
     public int getColor(int index) {
         return index >= 0 && index < colors.length ? colors[index] : Integer.MIN_VALUE;
