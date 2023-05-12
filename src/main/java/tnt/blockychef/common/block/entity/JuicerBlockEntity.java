@@ -9,6 +9,7 @@ import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
+import tnt.blockychef.common.data.fluids.FluidHolder;
 import tnt.blockychef.common.food.fluid.Fluid;
 import tnt.blockychef.common.food.fluid.FluidContainer;
 import tnt.blockychef.common.food.recipe.JuicerRecipe;
@@ -21,7 +22,7 @@ import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class JuicerBlockEntity extends RecipeRemberingBlockEntity<JuicerRecipe> implements SynchronizableBlockEntity, IndexedColorHolder {
+public class JuicerBlockEntity extends RecipeRemberingBlockEntity<JuicerRecipe> implements SynchronizableBlockEntity, IndexedColorHolder, FluidHolder {
 
     private final FluidContainer container;
     private JuicerRecipe activeRecipe;
@@ -36,12 +37,27 @@ public class JuicerBlockEntity extends RecipeRemberingBlockEntity<JuicerRecipe> 
     }
 
     @Override
+    public boolean hasFluid(Fluid fluid) {
+        return container.hasFluid(fluid);
+    }
+
+    @Override
+    public boolean extract(Fluid fluid) {
+        boolean result = container.extract(fluid);
+        setChanged();
+        Helper.sendBlockEntityClientData(this);
+        return result;
+    }
+
+    @Override
     public IItemHandlerModifiable setUpInventory() {
         return new ItemStackHandler(1);
     }
 
     public void setInputItem(ItemStack stack) {
+        stack.setCount(1);
         inventoryHandler.setStackInSlot(0, stack);
+        refreshRecipe();
         setChanged();
     }
 
@@ -58,8 +74,12 @@ public class JuicerBlockEntity extends RecipeRemberingBlockEntity<JuicerRecipe> 
     }
 
     public void processRecipe(Player player) {
-        if (activeRecipe == null)
+        if (activeRecipe == null) {
+            if (hasInputItem()) {
+                MenuInventoryHelper.dropInventoryContents(level, worldPosition, inventoryHandler);
+            }
             return;
+        }
         if (++pressCounter >= activeRecipe.getPressAmount()) {
             Fluid result = activeRecipe.getOutput().copy();
             container.insert(result);

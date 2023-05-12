@@ -17,8 +17,11 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.entity.JuicerBlockEntity;
+import tnt.blockychef.common.data.fluids.FluidExtractor;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
+import tnt.blockychef.util.Helper;
 import tnt.blockychef.util.MenuInventoryHelper;
 
 public class JuicerBlock extends DyeableBlock implements EntityBlock {
@@ -43,8 +46,17 @@ public class JuicerBlock extends DyeableBlock implements EntityBlock {
     protected InteractionResult handleDefaultInteraction(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult, ItemStack stack) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof JuicerBlockEntity juicer) {
-            // TODO try fluid extraction first
-            if (juicer.hasInputItem()) {
+            FluidExtractor extractor = BlockyChef.EXTRACTION_MANAGER.getExtractor(stack, juicer);
+            if (extractor != null) {
+                ItemStack result = extractor.extractFluid(juicer);
+                if (!result.isEmpty()) {
+                    Helper.giveItem(player, result);
+                    if (!player.isCreative()) {
+                        stack.shrink(1);
+                    }
+                    return InteractionResult.SUCCESS;
+                }
+            } else if (juicer.hasInputItem()) {
                 juicer.processRecipe(player);
                 return InteractionResult.SUCCESS;
             } else if (!stack.isEmpty() && juicer.isNotFull()) {

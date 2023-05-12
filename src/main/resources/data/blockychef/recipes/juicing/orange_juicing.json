@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:juicing",
+  "input": {
+    "item": "blockychef:orange"
+  },
+  "pressAmount": 4,
+  "output": {
+    "fluid": "blockychef:orange_fluid",
+    "amount": 250
+  }
+}

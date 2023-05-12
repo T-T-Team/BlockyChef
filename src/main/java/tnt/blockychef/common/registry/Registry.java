@@ -131,6 +131,7 @@ public final class Registry {
         helper.register("dough_maker_recipe");
         helper.register("pasta_machine_recipe");
         helper.register("barrel_recipe");
+        helper.register("juicer_recipe");
     }
 
     private static void registerRecipeSerializers(RegisterEvent.RegisterHelper<RecipeSerializer<?>> helper) {
@@ -144,6 +145,7 @@ public final class Registry {
         helper.register("dough_maker", CodecRecipeSerializer.forCodec(DoughMakerRecipe.CODEC_PROVIDER));
         helper.register("pasta_machine", CodecRecipeSerializer.forCodec(PastaMachineRecipe.CODEC_PROVIDER));
         helper.register("barrel", CodecRecipeSerializer.forCodec(BarrelRecipe.CODEC_PROVIDER));
+        helper.register("juicing", CodecRecipeSerializer.forCodec(JuicerRecipe.CODEC_PROVIDER));
     }
 
     private static void registerFeatures(RegisterEvent.RegisterHelper<Feature<?>> helper) {

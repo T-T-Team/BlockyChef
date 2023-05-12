@@ -34,7 +34,9 @@ public final class FluidContainer {
         }
     }
 
-    public boolean extract(FluidType type, int amount) {
+    public boolean extract(Fluid fluid) {
+        FluidType type = fluid.getFluidType();
+        int amount = fluid.getAmount();
         int stored = fluids.getOrDefault(type, 0);
         if (stored >= amount) {
             int result = stored - amount;
@@ -46,6 +48,11 @@ public final class FluidContainer {
             return true;
         }
         return false;
+    }
+
+    public boolean hasFluid(Fluid fluid) {
+        int amount = fluids.getOrDefault(fluid.getFluidType(), 0);
+        return amount >= fluid.getAmount();
     }
 
     public int getAmount() {

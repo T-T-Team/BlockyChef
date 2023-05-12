@@ -7,6 +7,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
@@ -16,6 +17,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import tnt.blockychef.client.BlockyChefClient;
+import tnt.blockychef.common.data.fluids.FluidExtractionManager;
 import tnt.blockychef.common.thirst.DrinkConsumeHandler;
 import tnt.blockychef.common.thirst.ConfigDrinkLoader;
 import tnt.blockychef.common.thirst.PlayerThirstStatsProvider;
@@ -28,6 +30,7 @@ public final class BlockyChef {
 
     public static final String MODID = "blockychef";
     public static final Logger LOGGER = LogManager.getLogger("Blockychef");
+    public static final FluidExtractionManager EXTRACTION_MANAGER = new FluidExtractionManager();
     public static BlockyChefConfig config;
 
     public BlockyChef() {
@@ -40,6 +43,7 @@ public final class BlockyChef {
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
         forgeBus.addListener(DrinkConsumeHandler::onItemConsumed);
         forgeBus.addGenericListener(Entity.class, this::attachPlayerCapabilities);
+        forgeBus.addListener(this::addDatapackLoaders);
     }
 
     private void setup(FMLCommonSetupEvent event) {
@@ -52,6 +56,10 @@ public final class BlockyChef {
         if (event.getObject() instanceof Player player) {
             event.addCapability(resource("thirst"), new PlayerThirstStatsProvider(player));
         }
+    }
+
+    private void addDatapackLoaders(AddReloadListenerEvent event) {
+        event.addListener(EXTRACTION_MANAGER);
     }
 
     public static ResourceLocation resource(String path) {
