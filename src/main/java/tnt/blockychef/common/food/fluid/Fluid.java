@@ -18,6 +18,10 @@ public final class Fluid {
         this.amount = amount;
     }
 
+    public Fluid copy() {
+        return new Fluid(fluidType, amount);
+    }
+
     public FluidType getFluidType() {
         return fluidType;
     }

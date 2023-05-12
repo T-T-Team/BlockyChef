@@ -2,7 +2,9 @@ package tnt.blockychef.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -15,7 +17,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+import tnt.blockychef.common.block.entity.JuicerBlockEntity;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
+import tnt.blockychef.util.MenuInventoryHelper;
 
 public class JuicerBlock extends DyeableBlock implements EntityBlock {
 
@@ -33,6 +37,31 @@ public class JuicerBlock extends DyeableBlock implements EntityBlock {
     @Override
     public int getLayerIndexFromInteraction(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         return 0;
+    }
+
+    @Override
+    protected InteractionResult handleDefaultInteraction(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult, ItemStack stack) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof JuicerBlockEntity juicer) {
+            // TODO try fluid extraction first
+            if (juicer.hasInputItem()) {
+                juicer.processRecipe(player);
+                return InteractionResult.SUCCESS;
+            } else if (!stack.isEmpty() && juicer.isNotFull()) {
+                juicer.setInputItem(stack.copy());
+                if (!player.isCreative()) {
+                    stack.shrink(1);
+                }
+                return InteractionResult.SUCCESS;
+            }
+        }
+        return InteractionResult.PASS;
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState replacementState, boolean p_60519_) {
+        super.onRemove(state, level, pos, replacementState, p_60519_);
+        MenuInventoryHelper.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, replacementState);
     }
 
     @Nullable

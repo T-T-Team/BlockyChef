@@ -2,11 +2,14 @@ package tnt.blockychef.common.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
+import tnt.blockychef.common.food.fluid.Fluid;
 import tnt.blockychef.common.food.fluid.FluidContainer;
 import tnt.blockychef.common.food.recipe.JuicerRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
@@ -37,8 +40,39 @@ public class JuicerBlockEntity extends RecipeRemberingBlockEntity<JuicerRecipe> 
         return new ItemStackHandler(1);
     }
 
+    public void setInputItem(ItemStack stack) {
+        inventoryHandler.setStackInSlot(0, stack);
+        setChanged();
+    }
+
     public ItemStack getInputItem() {
         return inventoryHandler.getStackInSlot(0);
+    }
+
+    public boolean hasInputItem() {
+        return !getInputItem().isEmpty();
+    }
+
+    public boolean isNotFull() {
+        return !container.isFull();
+    }
+
+    public void processRecipe(Player player) {
+        if (activeRecipe == null)
+            return;
+        if (++pressCounter >= activeRecipe.getPressAmount()) {
+            Fluid result = activeRecipe.getOutput().copy();
+            container.insert(result);
+            storeRecipe(activeRecipe);
+            getInputItem().shrink(1);
+            pressCounter = 0;
+            refreshRecipe();
+            setChanged();
+            if (!level.isClientSide) {
+                awardUsedRecipesAndPopExperience((ServerPlayer) player);
+                Helper.sendBlockEntityClientData(this);
+            }
+        }
     }
 
     @Override
@@ -82,11 +116,13 @@ public class JuicerBlockEntity extends RecipeRemberingBlockEntity<JuicerRecipe> 
     private void saveSharedData(CompoundTag tag) {
         tag.putInt("pressAmount", pressCounter);
         tag.putIntArray("colors", colors);
+        tag.put("fluids", container.serialize());
     }
 
     private void loadSharedData(CompoundTag tag) {
         pressCounter = tag.getInt("pressAmount");
         colors = tag.getIntArray("colors");
+        container.deserialize(tag.getCompound("fluids"));
         refreshRecipe();
     }
 

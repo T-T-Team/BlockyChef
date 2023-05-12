@@ -20,7 +20,7 @@ public final class FluidContainer {
         this.fluids = new TreeMap<>(Comparator.comparingInt(FluidType::fluidDensity));
     }
 
-    public Fluid insert(Fluid fluid) {
+    public boolean insert(Fluid fluid) {
         if (!fluids.isEmpty()) {
             if (allowMultipleTypes) {
                 return insertFluid(fluid);
@@ -28,7 +28,7 @@ public final class FluidContainer {
             if (fluids.containsKey(fluid.getFluidType())) {
                 return insertFluid(fluid);
             }
-            return fluid;
+            return false;
         } else {
             return insertFluid(fluid);
         }
@@ -56,6 +56,10 @@ public final class FluidContainer {
         return getAmount() / (float) capacity;
     }
 
+    public boolean isFull() {
+        return getAmount() >= capacity;
+    }
+
     public CompoundTag serialize() {
         CompoundTag tag = new CompoundTag();
         for (Map.Entry<FluidType, Integer> entry : fluids.entrySet()) {
@@ -76,15 +80,15 @@ public final class FluidContainer {
         }
     }
 
-    private Fluid insertFluid(Fluid fluid) {
+    private boolean insertFluid(Fluid fluid) {
         int limit = capacity - getAmount();
         if (limit <= 0) {
-            return fluid;
+            return false;
         }
         int stored = fluids.computeIfAbsent(fluid.getFluidType(), k -> 0);
         int toStore = Math.min(limit, fluid.getAmount());
         fluid.extract(toStore);
         fluids.put(fluid.getFluidType(), stored + toStore);
-        return fluid.isEmpty() ? null : fluid;
+        return fluid.isEmpty();
     }
 }
