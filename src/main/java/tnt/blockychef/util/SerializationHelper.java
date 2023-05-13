@@ -64,6 +64,21 @@ public final class SerializationHelper {
         });
     }
 
+    public static <E extends Enum<E>> Codec<E> enumCodec(Class<E> type) {
+        return enumCodec(type, Enum::name, name -> Enum.valueOf(type, name));
+    }
+
+    public static <E extends Enum<E>> Codec<E> enumCodec(Class<E> type, Function<E, String> encoder, Function<String, E> decoder) {
+        return Codec.STRING.comapFlatMap(name -> {
+            try {
+                E result = decoder.apply(name);
+                return DataResult.success(result);
+            } catch (IllegalArgumentException e) {
+                return DataResult.error(() -> "Unknown enum constant " + name + " for type " + type.getSimpleName());
+            }
+        }, encoder);
+    }
+
     public static JsonObject asObject(JsonElement element) {
         if (element.isJsonObject()) {
             return element.getAsJsonObject();

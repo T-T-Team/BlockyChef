@@ -22,4 +22,6 @@ public final class BlockyChefMenuTypes {
     public static final MenuType<PastaMachineMenu> PASTA_MACHINE = null;
     @ObjectHolder(value = "blockychef:barrel", registryName = KEY)
     public static final MenuType<BarrelMenu> BARREL = null;
+    @ObjectHolder(value = "blockychef:mixer", registryName = KEY)
+    public static final MenuType<MixerMenu> MIXER = null;
 }

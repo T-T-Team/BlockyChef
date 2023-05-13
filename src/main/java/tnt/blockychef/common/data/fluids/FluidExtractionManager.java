@@ -16,14 +16,14 @@ import java.util.*;
 public final class FluidExtractionManager extends SimpleJsonResourceReloadListener {
 
     private static final Gson GSON = new Gson();
-    private final Collection<FluidExtractor> extractorList = new ArrayList<>();
+    private final Collection<FluidExtraction> extractorList = new ArrayList<>();
 
     public FluidExtractionManager() {
         super(GSON, "fluid_extractors");
     }
 
-    public FluidExtractor getExtractor(ItemStack stack, FluidHolder holder) {
-        for (FluidExtractor extractor : extractorList) {
+    public FluidExtraction getExtractor(ItemStack stack, FluidHolder holder) {
+        for (FluidExtraction extractor : extractorList) {
             if (extractor.matches(stack, holder)) {
                 return extractor;
             }
@@ -37,8 +37,8 @@ public final class FluidExtractionManager extends SimpleJsonResourceReloadListen
             ResourceLocation location = entry.getKey();
             try {
                 JsonElement element = entry.getValue();
-                DataResult<FluidExtractor> dataResult = FluidExtractor.CODEC.parse(JsonOps.INSTANCE, element);
-                Optional<FluidExtractor> opt = dataResult.resultOrPartial(BlockyChef.LOGGER::error);
+                DataResult<FluidExtraction> dataResult = FluidExtraction.CODEC.parse(JsonOps.INSTANCE, element);
+                Optional<FluidExtraction> opt = dataResult.resultOrPartial(BlockyChef.LOGGER::error);
                 opt.ifPresent(extractorList::add);
             } catch (RuntimeException e) {
                 BlockyChef.LOGGER.error("Error loading fluid extractor file {}: {}", location, e);

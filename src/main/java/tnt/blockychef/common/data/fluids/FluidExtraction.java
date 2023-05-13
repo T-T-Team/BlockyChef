@@ -10,9 +10,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 import tnt.blockychef.common.food.fluid.Fluid;
 import tnt.blockychef.util.SerializationHelper;
 
-public final class FluidExtractor {
+public final class FluidExtraction {
 
-    public static final Codec<FluidExtractor> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final Codec<FluidExtraction> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             ResourceLocation.CODEC.comapFlatMap(location -> {
                 if (!ForgeRegistries.ITEMS.containsKey(location)) {
                     return DataResult.error(() -> "Unknown item: " + location);
@@ -21,13 +21,13 @@ public final class FluidExtractor {
             }, ForgeRegistries.ITEMS::getKey).fieldOf("item").forGetter(t -> t.inputItem),
             SerializationHelper.SIMPLE_ITEMSTACK_CODEC.fieldOf("output").forGetter(t -> t.outputItem),
             Fluid.CODEC.fieldOf("fluidFilter").forGetter(t -> t.fluid)
-    ).apply(instance, FluidExtractor::new));
+    ).apply(instance, FluidExtraction::new));
 
     private final Item inputItem;
     private final ItemStack outputItem;
     private final Fluid fluid;
 
-    public FluidExtractor(Item inputItem, ItemStack outputItem, Fluid fluid) {
+    public FluidExtraction(Item inputItem, ItemStack outputItem, Fluid fluid) {
         this.inputItem = inputItem;
         this.outputItem = outputItem;
         this.fluid = fluid;

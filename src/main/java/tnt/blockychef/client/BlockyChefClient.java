@@ -18,6 +18,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import tnt.blockychef.client.render.block.DryingRackBlockEntityRenderer;
 import tnt.blockychef.client.render.block.GraterBlockEntityRenderer;
 import tnt.blockychef.client.render.block.JuicerBlockEntityRenderer;
+import tnt.blockychef.client.render.block.MixerBlockEntityRenderer;
 import tnt.blockychef.client.render.thirst.ThirstOverlay;
 import tnt.blockychef.client.render.thirst.ThirstTooltipHandler;
 import tnt.blockychef.client.screen.*;
@@ -64,6 +65,7 @@ public final class BlockyChefClient {
         event.registerBlockEntityRenderer(BlockyChefBlockEntities.DRYING_RACK, DryingRackBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(BlockyChefBlockEntities.GRATER, GraterBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(BlockyChefBlockEntities.JUICER, JuicerBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(BlockyChefBlockEntities.MIXER, MixerBlockEntityRenderer::new);
     }
 
     private void registerScreenFactories() {
@@ -74,6 +76,7 @@ public final class BlockyChefClient {
         MenuScreens.register(BlockyChefMenuTypes.DOUGH_MAKER, DoughMakerScreen::new);
         MenuScreens.register(BlockyChefMenuTypes.PASTA_MACHINE, PastaMachineScreen::new);
         MenuScreens.register(BlockyChefMenuTypes.BARREL, BarrelScreen::new);
+        MenuScreens.register(BlockyChefMenuTypes.MIXER, MixerScreen::new);
     }
 
     private void registerBlockColors(RegisterColorHandlersEvent.Block event) {

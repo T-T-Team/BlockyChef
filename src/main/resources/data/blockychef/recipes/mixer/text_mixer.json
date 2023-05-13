@@ -1,0 +1,16 @@
+{
+  "type": "blockychef:mixer",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "blockychef:orange"
+      },
+      "count": 4
+    }
+  ],
+  "rpm": "MEDIUM",
+  "output": {
+    "fluid": "blockychef:orange_fluid",
+    "amount": 250
+  }
+}

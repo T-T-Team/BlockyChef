@@ -41,6 +41,7 @@ public final class NetworkManager {
             register(C2S_RecipeSelectorEvent.class, C2S_RecipeSelectorEvent::new);
             register(C2S_ToasterEvent.class, C2S_ToasterEvent::new);
             register(C2S_InitiateRecipeProcessing.class, C2S_InitiateRecipeProcessing::new);
+            register(C2S_MixerEvent.class, C2S_MixerEvent::new);
         }
 
         private static <T extends Packet> void register(Class<T> aClass, Function<FriendlyByteBuf, T> decoder) {

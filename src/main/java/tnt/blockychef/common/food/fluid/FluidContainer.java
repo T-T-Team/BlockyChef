@@ -24,6 +24,10 @@ public final class FluidContainer {
         return fluids;
     }
 
+    public int getCapacity() {
+        return capacity;
+    }
+
     public boolean insert(Fluid fluid) {
         if (!fluids.isEmpty()) {
             if (allowMultipleTypes) {

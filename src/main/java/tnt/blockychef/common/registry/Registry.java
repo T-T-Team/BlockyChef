@@ -106,6 +106,7 @@ public final class Registry {
         helper.register("dough_maker", IForgeMenuType.create(DoughMakerMenu::new));
         helper.register("pasta_machine", IForgeMenuType.create(PastaMachineMenu::new));
         helper.register("barrel", IForgeMenuType.create(BarrelMenu::new));
+        helper.register("mixer", IForgeMenuType.create(MixerMenu::new));
     }
 
     private static void registerMobEffects(RegisterEvent.RegisterHelper<MobEffect> helper) {
@@ -132,6 +133,7 @@ public final class Registry {
         helper.register("pasta_machine_recipe");
         helper.register("barrel_recipe");
         helper.register("juicer_recipe");
+        helper.register("mixer_recipe");
     }
 
     private static void registerRecipeSerializers(RegisterEvent.RegisterHelper<RecipeSerializer<?>> helper) {
@@ -146,6 +148,7 @@ public final class Registry {
         helper.register("pasta_machine", CodecRecipeSerializer.forCodec(PastaMachineRecipe.CODEC_PROVIDER));
         helper.register("barrel", CodecRecipeSerializer.forCodec(BarrelRecipe.CODEC_PROVIDER));
         helper.register("juicing", CodecRecipeSerializer.forCodec(JuicerRecipe.CODEC_PROVIDER));
+        helper.register("mixer", CodecRecipeSerializer.forCodec(MixerRecipe.CODEC_PROVIDER));
     }
 
     private static void registerFeatures(RegisterEvent.RegisterHelper<Feature<?>> helper) {

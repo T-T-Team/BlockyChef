@@ -1,8 +1,13 @@
 package tnt.blockychef.common.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -14,12 +19,20 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
+import tnt.blockychef.BlockyChef;
+import tnt.blockychef.common.block.entity.MixerBlockEntity;
+import tnt.blockychef.common.data.fluids.FluidExtraction;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
+import tnt.blockychef.common.menu.MixerMenu;
+import tnt.blockychef.util.Helper;
+import tnt.blockychef.util.MenuInventoryHelper;
 
 public class MixerBlock extends DyeableBlock implements EntityBlock {
 
     private static final VoxelShape HITBOX = Block.box(4.0, 0.0, 4.0, 12.0, 14.0, 12.0);
+    private static final Component TITLE = Component.translatable("screen.blockychef.mixer");
 
     public MixerBlock() {
         super(Properties.of(Material.STONE).sound(SoundType.STONE).strength(3.0F).noOcclusion());
@@ -33,6 +46,33 @@ public class MixerBlock extends DyeableBlock implements EntityBlock {
     @Override
     public int getLayerIndexFromInteraction(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         return 0;
+    }
+
+    @Override
+    protected InteractionResult handleDefaultInteraction(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult, ItemStack stack) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof MixerBlockEntity mixer) {
+            FluidExtraction extraction = BlockyChef.EXTRACTION_MANAGER.getExtractor(stack, mixer);
+            if (extraction != null) {
+                ItemStack result = extraction.extractFluid(mixer);
+                if (!result.isEmpty()) {
+                    Helper.giveItem(player, result);
+                }
+            } else if (!level.isClientSide) {
+                NetworkHooks.openScreen((ServerPlayer) player, new SimpleMenuProvider(
+                        (menuId, inv, owner) -> new MixerMenu(menuId, inv, mixer),
+                        TITLE
+                ), pos);
+            }
+            return InteractionResult.SUCCESS;
+        }
+        return InteractionResult.PASS;
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState replacementState, boolean p_60519_) {
+        super.onRemove(state, level, pos, replacementState, p_60519_);
+        MenuInventoryHelper.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, replacementState);
     }
 
     @Nullable

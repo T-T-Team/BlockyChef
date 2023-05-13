@@ -19,7 +19,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.entity.JuicerBlockEntity;
-import tnt.blockychef.common.data.fluids.FluidExtractor;
+import tnt.blockychef.common.data.fluids.FluidExtraction;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.util.Helper;
 import tnt.blockychef.util.MenuInventoryHelper;
@@ -46,7 +46,7 @@ public class JuicerBlock extends DyeableBlock implements EntityBlock {
     protected InteractionResult handleDefaultInteraction(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult, ItemStack stack) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof JuicerBlockEntity juicer) {
-            FluidExtractor extractor = BlockyChef.EXTRACTION_MANAGER.getExtractor(stack, juicer);
+            FluidExtraction extractor = BlockyChef.EXTRACTION_MANAGER.getExtractor(stack, juicer);
             if (extractor != null) {
                 ItemStack result = extractor.extractFluid(juicer);
                 if (!result.isEmpty()) {
