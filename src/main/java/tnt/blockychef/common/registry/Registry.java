@@ -1,5 +1,6 @@
 package tnt.blockychef.common.registry;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.inventory.MenuType;
@@ -159,13 +160,26 @@ public final class Registry {
         helper.register("fruit_decorator", new TreeDecoratorType<>(TreeFruitDecorator.CODEC));
     }
 
-    private static void registerFluids(RegisterEvent.RegisterHelper<FluidType> helper) {
-        helper.register("orange_fluid", new FluidType(0xAAFF7328));
-        helper.register("cherry_fluid", new FluidType(0x96BA000C));
+    private static void registerFluids(RegisterEvent.RegisterHelper<FluidType> forgeHelper) {
+        FluidRegistryHelper helper = (id, fluidColor, fluidDensity) -> {
+            ResourceLocation identifier = BlockyChef.resource(id);
+            FluidType type = new FluidType(identifier, fluidColor, fluidDensity);
+            forgeHelper.register(id, type);
+        };
+        helper.register("orange_fluid", 0xAAFF7328);
+        helper.register("cherry_fluid", 0x96BA000C);
     }
 
     @FunctionalInterface
     private interface RecipeTypeRegistryHelper {
         void register(String id);
+    }
+
+    @FunctionalInterface
+    private interface FluidRegistryHelper {
+        void register(String id, int fluidColor, int fluidDensity);
+        default void register(String id, int fluidColor) {
+            register(id, fluidColor, 0);
+        }
     }
 }

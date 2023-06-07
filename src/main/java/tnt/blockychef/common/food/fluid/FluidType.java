@@ -5,14 +5,54 @@ import com.mojang.serialization.DataResult;
 import net.minecraft.resources.ResourceLocation;
 import tnt.blockychef.common.registry.Registry;
 
-public record FluidType(int fluidColor, int fluidDensity) {
+public final class FluidType {
 
     public static final Codec<FluidType> CODEC = ResourceLocation.CODEC.comapFlatMap(location -> {
         FluidType fluidType = Registry.FLUID.get().getValue(location);
         return fluidType != null ? DataResult.success(fluidType) : DataResult.error(() -> "Unknown fluid type: " + location);
     }, fluidType -> Registry.FLUID.get().getKey(fluidType));
 
-    public FluidType(int fluidColor) {
-        this(fluidColor, 1);
+    private final ResourceLocation identifier;
+    private final int fluidColor;
+    private final int fluidDensity;
+
+    public FluidType(ResourceLocation identifier, int fluidColor) {
+        this(identifier, fluidColor, 0);
+    }
+
+    public FluidType(ResourceLocation identifier, int fluidColor, int fluidDensity) {
+        this.identifier = identifier;
+        this.fluidColor = fluidColor;
+        this.fluidDensity = fluidDensity;
+    }
+
+    public ResourceLocation getFluidIdentifier() {
+        return identifier;
+    }
+
+    public int fluidColor() {
+        return fluidColor;
+    }
+
+    public int fluidDensity() {
+        return fluidDensity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FluidType type = (FluidType) o;
+        return getFluidIdentifier().equals(type.getFluidIdentifier());
+    }
+
+    @Override
+    public int hashCode() {
+        return getFluidIdentifier().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("FluidType[%s]", getFluidIdentifier());
     }
 }
