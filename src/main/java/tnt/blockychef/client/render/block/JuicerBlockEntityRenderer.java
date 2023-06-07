@@ -32,17 +32,20 @@ public class JuicerBlockEntityRenderer implements BlockEntityRenderer<JuicerBloc
         fluidRenderer.setVertices(builder -> {
             switch (direction) {
                 case NORTH -> {
-                    builder.addShape(0.21F, 0.33F, 0.555F, 0.33F, 0.555F, 0.67F, 0.21F, 0.67F, Helper.getEnumFlags(Direction.EAST));
-                    builder.addShape(0.555F, 0.33F, 0.555F, 0.67F, 0.83F, 0.55F, 0.83F, 0.45F, Helper.getEnumFlags(Direction.NORTH));
+                    builder.addShape(0.20F, 0.32F, 0.555F, 0.32F, 0.555F, 0.68F, 0.20F, 0.68F, Helper.getEnumFlags(Direction.EAST));
+                    builder.addShape(0.555F, 0.32F, 0.555F, 0.68F, 0.84F, 0.56F, 0.84F, 0.44F, Helper.getEnumFlags(Direction.NORTH));
                 }
                 case SOUTH -> {
-                    // TODO south direction
+                    builder.addShape(0.80F, 0.32F, 0.445F, 0.32F, 0.445F, 0.68F, 0.80F, 0.68F, Helper.getEnumFlags(Direction.EAST));
+                    builder.addShape(0.445F, 0.32F, 0.16F, 0.44F, 0.16F, 0.56F, 0.445F, 0.68F, Helper.getEnumFlags(Direction.WEST));
                 }
                 case WEST -> {
-                    // TODO west direction
+                    builder.addShape(0.68F, 0.8F, 0.68F, 0.445F, 0.32F, 0.445F, 0.32F, 0.8F, Helper.getEnumFlags(Direction.EAST));
+                    builder.addShape(0.68F, 0.445F, 0.565F, 0.165F, 0.435F, 0.165F, 0.32F, 0.445F, Helper.getEnumFlags(Direction.WEST));
                 }
                 case EAST -> {
-                    // TODO east direction
+                    builder.addShape(0.68F, 0.2F, 0.32F, 0.2F, 0.32F, 0.56F, 0.68F, 0.56F, Helper.getEnumFlags(Direction.SOUTH));
+                    builder.addShape(0.68F, 0.56F, 0.32F, 0.56F, 0.435F, 0.84F, 0.565F, 0.84F, Helper.getEnumFlags(Direction.NORTH));
                 }
             }
         });
