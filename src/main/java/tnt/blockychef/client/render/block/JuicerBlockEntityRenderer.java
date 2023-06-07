@@ -66,7 +66,7 @@ public class JuicerBlockEntityRenderer implements BlockEntityRenderer<JuicerBloc
             case WEST -> poseStack.translate(0.0, 0.0, 0.12);
             case EAST -> poseStack.translate(0.0, 0.0, -0.12);
         }
-        poseStack.mulPose(Axis.YP.rotationDegrees(30.0F * juicer.getPressAmount()));
+        poseStack.mulPose(Axis.YP.rotationDegrees(60.0F * juicer.getPressAmount()));
         poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
         poseStack.scale(scaleF, scaleF, scaleF);
         itemRenderer.renderStatic(stack, ItemDisplayContext.FIXED, light, OverlayTexture.NO_OVERLAY, poseStack, bufferSource, juicer.getLevel(), 0);

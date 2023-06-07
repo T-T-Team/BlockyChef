@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:juicing",
+  "input": {
+    "item": "blockychef:picked_cherry"
+  },
+  "pressAmount": 6,
+  "output": {
+    "fluid": "blockychef:cherry_fluid",
+    "amount": 25
+  }
+}

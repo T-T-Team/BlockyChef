@@ -1,11 +1,11 @@
 {
   "type": "blockychef:juicing",
   "input": {
-    "item": "blockychef:orange"
+    "item": "blockychef:orange_half"
   },
-  "pressAmount": 4,
+  "pressAmount": 12,
   "output": {
     "fluid": "blockychef:orange_fluid",
-    "amount": 250
+    "amount": 125
   }
 }

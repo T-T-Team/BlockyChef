@@ -161,6 +161,7 @@ public final class Registry {
 
     private static void registerFluids(RegisterEvent.RegisterHelper<FluidType> helper) {
         helper.register("orange_fluid", new FluidType(0xAAFF7328));
+        helper.register("cherry_fluid", new FluidType(0x96BA000C));
     }
 
     @FunctionalInterface

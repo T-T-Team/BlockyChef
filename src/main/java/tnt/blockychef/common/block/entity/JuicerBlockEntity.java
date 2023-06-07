@@ -31,7 +31,7 @@ public class JuicerBlockEntity extends RecipeRemberingBlockEntity<JuicerRecipe> 
 
     public JuicerBlockEntity(BlockPos pos, BlockState state) {
         super(BlockyChefBlockEntities.JUICER, pos, state);
-        this.container = new FluidContainer(750, false);
+        this.container = new FluidContainer(500, false);
         this.colors = new int[1];
         Arrays.fill(this.colors, Integer.MIN_VALUE);
     }
