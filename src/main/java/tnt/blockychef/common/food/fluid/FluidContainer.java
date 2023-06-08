@@ -4,9 +4,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import tnt.blockychef.common.registry.Registry;
 
-import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 public final class FluidContainer {
 
@@ -17,7 +16,7 @@ public final class FluidContainer {
     public FluidContainer(int capacity, boolean allowMultipleTypes) {
         this.capacity = capacity;
         this.allowMultipleTypes = allowMultipleTypes;
-        this.fluids = new TreeMap<>(Comparator.comparingInt(FluidType::fluidDensity));
+        this.fluids = new HashMap<>();
     }
 
     public Map<FluidType, Integer> getFluids() {
