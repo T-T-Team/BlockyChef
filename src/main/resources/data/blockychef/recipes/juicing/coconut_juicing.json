@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:juicing",
+  "input": {
+    "item": "blockychef:coconut_half"
+  },
+  "pressAmount": 8,
+  "output": {
+    "fluid": "blockychef:coconut_milk_fluid",
+    "amount": 250
+  }
+}

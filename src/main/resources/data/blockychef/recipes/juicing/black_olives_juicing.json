@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:juicing",
+  "input": {
+    "item": "blockychef:black_olives"
+  },
+  "pressAmount": 6,
+  "output": {
+    "fluid": "blockychef:olive_oil_fluid",
+    "amount": 100
+  }
+}

@@ -166,8 +166,12 @@ public final class Registry {
             FluidType type = new FluidType(identifier, fluidColor, fluidDensity);
             forgeHelper.register(id, type);
         };
-        helper.register("orange_fluid", 0xAAFF7328);
+        helper.register("orange_fluid", 0x96FF7328);
         helper.register("cherry_fluid", 0x96BA000C);
+        helper.register("olive_oil_fluid", 0x96C1B330);
+        helper.register("oil_fluid", 0x96C6A933);
+        helper.register("coconut_milk_fluid", 0xAADBD8CE);
+        helper.register("soy_milk_fluid", 0xAAE5E0CC);
     }
 
     @FunctionalInterface

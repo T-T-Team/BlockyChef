@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:juicing",
+  "input": {
+    "item": "blockychef:peanuts"
+  },
+  "pressAmount": 6,
+  "output": {
+    "fluid": "blockychef:oil_fluid",
+    "amount": 100
+  }
+}

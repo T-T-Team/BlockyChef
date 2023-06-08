@@ -1,10 +1,10 @@
 {
   "item": "blockychef:empty_bottle",
   "output": {
-    "item": "blockychef:orange_extract"
+    "item": "blockychef:cherry_extract"
   },
   "fluidFilter": {
-    "fluid": "blockychef:orange_fluid",
+    "fluid": "blockychef:cherry_fluid",
     "amount": 500
   }
 }

@@ -1,10 +1,10 @@
 {
   "item": "blockychef:empty_bottle",
   "output": {
-    "item": "blockychef:orange_extract"
+    "item": "blockychef:coconut_milk"
   },
   "fluidFilter": {
-    "fluid": "blockychef:orange_fluid",
+    "fluid": "blockychef:coconut_milk_fluid",
     "amount": 500
   }
 }

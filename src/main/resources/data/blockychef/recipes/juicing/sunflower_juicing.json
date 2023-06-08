@@ -1,11 +1,11 @@
 {
   "type": "blockychef:juicing",
   "input": {
-    "item": "blockychef:orange_half"
+    "item": "minecraft:sunflower"
   },
   "pressAmount": 8,
   "output": {
-    "fluid": "blockychef:orange_fluid",
+    "fluid": "blockychef:oil_fluid",
     "amount": 125
   }
 }

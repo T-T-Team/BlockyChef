@@ -1,11 +1,11 @@
 {
   "type": "blockychef:juicing",
   "input": {
-    "item": "blockychef:picked_cherry"
+    "item": "blockychef:soybeans"
   },
   "pressAmount": 3,
   "output": {
-    "fluid": "blockychef:cherry_fluid",
+    "fluid": "blockychef:soy_milk_fluid",
     "amount": 50
   }
 }
