@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:grating",
+  "input": {
+    "item": "blockychef:garlic_clove"
+  },
+  "output": {
+    "item": "blockychef:shredded_garlic",
+    "count": 1
+  },
+  "gratingAmount": 16
+}

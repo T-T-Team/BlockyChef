@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:grating",
+  "input": {
+    "item": "minecraft:carrot"
+  },
+  "output": {
+    "item": "blockychef:shredded_carrot",
+    "count": 2
+  },
+  "gratingAmount": 16
+}

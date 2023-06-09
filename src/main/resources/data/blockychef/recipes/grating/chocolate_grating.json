@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:grating",
+  "input": {
+    "item": "blockychef:chocolate_bar"
+  },
+  "output": {
+    "item": "blockychef:grated_chocolate",
+    "count": 2
+  },
+  "gratingAmount": 16
+}

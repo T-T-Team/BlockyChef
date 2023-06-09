@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:grating",
+  "input": {
+    "item": "blockychef:cucumber"
+  },
+  "output": {
+    "item": "blockychef:shredded_cucumber",
+    "count": 2
+  },
+  "gratingAmount": 16
+}

@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:grating",
+  "input": {
+    "item": "minecraft:apple"
+  },
+  "output": {
+    "item": "blockychef:shredded_apple",
+    "count": 2
+  },
+  "gratingAmount": 16
+}

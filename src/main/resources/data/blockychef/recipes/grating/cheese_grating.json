@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:grating",
+  "input": {
+    "item": "blockychef:cheese"
+  },
+  "output": {
+    "item": "blockychef:shredded_cheese",
+    "count": 2
+  },
+  "gratingAmount": 16
+}

@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:grating",
+  "input": {
+    "item": "blockychef:ginger_root"
+  },
+  "output": {
+    "item": "blockychef:shredded_ginger",
+    "count": 2
+  },
+  "gratingAmount": 16
+}

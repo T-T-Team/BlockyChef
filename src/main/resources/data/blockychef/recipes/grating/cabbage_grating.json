@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:grating",
+  "input": {
+    "item": "blockychef:cabbage"
+  },
+  "output": {
+    "item": "blockychef:shredded_cabbage",
+    "count": 2
+  },
+  "gratingAmount": 16
+}
