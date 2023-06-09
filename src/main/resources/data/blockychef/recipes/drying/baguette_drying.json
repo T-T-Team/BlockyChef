@@ -1,0 +1,10 @@
+{
+  "type": "blockychef:drying",
+  "input": {
+    "item": "blockychef:baguette"
+  },
+  "output": {
+    "item": "blockychef:dried_baguette"
+  },
+  "dryingTime": 2400
+}

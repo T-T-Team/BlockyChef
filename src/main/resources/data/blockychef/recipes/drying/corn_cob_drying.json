@@ -1,0 +1,10 @@
+{
+  "type": "blockychef:drying",
+  "input": {
+    "item": "blockychef:raw_corn_cob"
+  },
+  "output": {
+    "item": "blockychef:dried_corn_cob"
+  },
+  "dryingTime": 2400
+}

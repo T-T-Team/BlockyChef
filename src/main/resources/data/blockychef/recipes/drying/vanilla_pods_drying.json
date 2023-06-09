@@ -1,0 +1,10 @@
+{
+  "type": "blockychef:drying",
+  "input": {
+    "item": "blockychef:vanilla_pods"
+  },
+  "output": {
+    "item": "blockychef:dried_vanilla_pods"
+  },
+  "dryingTime": 2400
+}

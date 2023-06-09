@@ -1,0 +1,10 @@
+{
+  "type": "blockychef:drying",
+  "input": {
+    "item": "blockychef:roll"
+  },
+  "output": {
+    "item": "blockychef:dried_roll"
+  },
+  "dryingTime": 2400
+}

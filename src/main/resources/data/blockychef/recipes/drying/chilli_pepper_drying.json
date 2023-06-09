@@ -1,0 +1,10 @@
+{
+  "type": "blockychef:drying",
+  "input": {
+    "item": "blockychef:chilli_pepper"
+  },
+  "output": {
+    "item": "blockychef:dried_chilli_pepper"
+  },
+  "dryingTime": 2400
+}

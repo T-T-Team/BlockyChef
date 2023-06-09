@@ -1,0 +1,10 @@
+{
+  "type": "blockychef:drying",
+  "input": {
+    "item": "minecraft:bread"
+  },
+  "output": {
+    "item": "blockychef:dried_bread"
+  },
+  "dryingTime": 2400
+}

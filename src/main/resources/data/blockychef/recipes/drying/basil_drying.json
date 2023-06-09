@@ -1,0 +1,10 @@
+{
+  "type": "blockychef:drying",
+  "input": {
+    "item": "blockychef:basil"
+  },
+  "output": {
+    "item": "blockychef:dried_basil"
+  },
+  "dryingTime": 2400
+}

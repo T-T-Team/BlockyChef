@@ -1,0 +1,10 @@
+{
+  "type": "blockychef:drying",
+  "input": {
+    "item": "blockychef:black_pepper_cluster"
+  },
+  "output": {
+    "item": "blockychef:dried_black_pepper_cluster"
+  },
+  "dryingTime": 2400
+}

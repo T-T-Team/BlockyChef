@@ -1,0 +1,10 @@
+{
+  "type": "blockychef:drying",
+  "input": {
+    "item": "blockychef:mustard_pods"
+  },
+  "output": {
+    "item": "blockychef:dried_mustard_pods"
+  },
+  "dryingTime": 2400
+}

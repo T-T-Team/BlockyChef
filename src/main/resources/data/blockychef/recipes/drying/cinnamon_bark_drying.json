@@ -1,0 +1,10 @@
+{
+  "type": "blockychef:drying",
+  "input": {
+    "item": "blockychef:cinnamon_bark"
+  },
+  "output": {
+    "item": "blockychef:dried_cinnamon_bark"
+  },
+  "dryingTime": 2400
+}

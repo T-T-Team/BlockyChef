@@ -381,8 +381,8 @@ public final class FoodList {
     public static final FoodProperties CHOCOLATE_BAR = food(2, 2).build();
     public static final FoodProperties CHOCOLATE_CHIPS = food(1, 1).build();
     public static final FoodProperties CHOCOLATE_ICE_CREAM = food(4, 3).build();
-    public static final FoodProperties DRIED_BAGUETTE = food(3, 2).build();
-    public static final FoodProperties DRIED_ROLL = food(2, 2).build();
+    public static final FoodProperties DRIED_BAGUETTE = food(3, 2).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties DRIED_ROLL = food(2, 2).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties GRATED_CHOCOLATE = food(1, 1).build();
     public static final FoodProperties ICE_CREAM = food(3, 1).build();
     public static final FoodProperties LEMON_ICE_CREAM = food(4, 3).build();

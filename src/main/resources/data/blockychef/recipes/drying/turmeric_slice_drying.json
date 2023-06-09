@@ -1,0 +1,10 @@
+{
+  "type": "blockychef:drying",
+  "input": {
+    "item": "blockychef:turmeric_slice"
+  },
+  "output": {
+    "item": "blockychef:dried_turmeric_slice"
+  },
+  "dryingTime": 2400
+}
