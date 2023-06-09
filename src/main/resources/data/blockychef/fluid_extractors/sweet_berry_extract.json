@@ -1,0 +1,10 @@
+{
+  "item": "blockychef:empty_bottle",
+  "output": {
+    "item": "blockychef:sweet_berry_extract"
+  },
+  "fluidFilter": {
+    "fluid": "blockychef:sweet_berry_fluid",
+    "amount": 500
+  }
+}

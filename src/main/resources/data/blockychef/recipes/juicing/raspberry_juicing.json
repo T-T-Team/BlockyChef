@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:juicing",
+  "input": {
+    "item": "blockychef:raspberry"
+  },
+  "pressAmount": 3,
+  "output": {
+    "fluid": "blockychef:raspberry_fluid",
+    "amount": 50
+  }
+}

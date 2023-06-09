@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:juicing",
+  "input": {
+    "item": "blockychef:shredded_carrot"
+  },
+  "pressAmount": 8,
+  "output": {
+    "fluid": "blockychef:carrot_fluid",
+    "amount": 100
+  }
+}

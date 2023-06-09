@@ -1,0 +1,10 @@
+{
+  "item": "blockychef:empty_bottle",
+  "output": {
+    "item": "blockychef:grape_extract"
+  },
+  "fluidFilter": {
+    "fluid": "blockychef:grape_fluid",
+    "amount": 500
+  }
+}

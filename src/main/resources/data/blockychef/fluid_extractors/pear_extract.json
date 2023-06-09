@@ -1,0 +1,10 @@
+{
+  "item": "blockychef:empty_bottle",
+  "output": {
+    "item": "blockychef:pear_extract"
+  },
+  "fluidFilter": {
+    "fluid": "blockychef:pear_fluid",
+    "amount": 500
+  }
+}

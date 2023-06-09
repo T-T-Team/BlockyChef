@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:juicing",
+  "input": {
+    "item": "blockychef:plum_half"
+  },
+  "pressAmount": 6,
+  "output": {
+    "fluid": "blockychef:plum_fluid",
+    "amount": 100
+  }
+}

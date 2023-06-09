@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:juicing",
+  "input": {
+    "item": "minecraft:sweet_berries"
+  },
+  "pressAmount": 3,
+  "output": {
+    "fluid": "blockychef:sweet_berry_fluid",
+    "amount": 50
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:juicing",
+  "input": {
+    "item": "blockychef:tomato"
+  },
+  "pressAmount": 6,
+  "output": {
+    "fluid": "blockychef:tomato_fluid",
+    "amount": 100
+  }
+}

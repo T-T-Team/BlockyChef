@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:juicing",
+  "input": {
+    "item": "blockychef:grapes"
+  },
+  "pressAmount": 6,
+  "output": {
+    "fluid": "blockychef:grape_fluid",
+    "amount": 125
+  }
+}

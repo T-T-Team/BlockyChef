@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:juicing",
+  "input": {
+    "item": "minecraft:melon_slice"
+  },
+  "pressAmount": 4,
+  "output": {
+    "fluid": "blockychef:melon_fluid",
+    "amount": 100
+  }
+}

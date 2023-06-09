@@ -1,0 +1,10 @@
+{
+  "item": "blockychef:empty_bottle",
+  "output": {
+    "item": "blockychef:plum_extract"
+  },
+  "fluidFilter": {
+    "fluid": "blockychef:plum_fluid",
+    "amount": 500
+  }
+}

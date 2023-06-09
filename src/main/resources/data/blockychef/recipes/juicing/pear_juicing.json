@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:juicing",
+  "input": {
+    "item": "blockychef:pear_half"
+  },
+  "pressAmount": 6,
+  "output": {
+    "fluid": "blockychef:pear_fluid",
+    "amount": 100
+  }
+}

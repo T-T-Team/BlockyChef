@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:juicing",
+  "input": {
+    "item": "blockychef:pineapple_half"
+  },
+  "pressAmount": 8,
+  "output": {
+    "fluid": "blockychef:pineapple_fluid",
+    "amount": 250
+  }
+}
