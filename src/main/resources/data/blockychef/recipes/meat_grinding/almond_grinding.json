@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:meat_grinding",
+  "input": {
+    "item": "blockychef:almond"
+  },
+  "processingAmount": 16,
+  "output": {
+    "item": "blockychef:grounded_almond",
+    "count": 1
+  }
+}

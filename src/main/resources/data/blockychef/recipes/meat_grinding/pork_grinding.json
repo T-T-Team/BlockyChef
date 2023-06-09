@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:meat_grinding",
+  "input": {
+    "item": "minecraft:porkchop"
+  },
+  "processingAmount": 16,
+  "output": {
+    "item": "blockychef:grounded_pork_meat",
+    "count": 2
+  }
+}

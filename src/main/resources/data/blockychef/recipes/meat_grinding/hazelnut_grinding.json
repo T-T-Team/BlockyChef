@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:meat_grinding",
+  "input": {
+    "item": "blockychef:hazelnuts"
+  },
+  "processingAmount": 16,
+  "output": {
+    "item": "blockychef:grounded_hazelnuts",
+    "count": 1
+  }
+}
