@@ -4,12 +4,11 @@
     "item": "minecraft:potato"
   },
   "processingType": "blockychef:slicing",
-  "processingTime": 60,
+  "processingTime": 80,
   "outputs": [
     {
       "item": "blockychef:potato_slice",
-      "count": 6
+      "count": 2
     }
-  ],
-  "experience": 0.1
+  ]
 }

@@ -1,13 +1,13 @@
 {
   "type": "blockychef:cutting_board",
   "input": {
-    "item": "minecraft:potato"
+    "item": "blockychef:raw_chicken_breast"
   },
   "processingType": "blockychef:cutting",
   "processingTime": 80,
   "outputs": [
     {
-      "item": "blockychef:potato_cuts",
+      "item": "blockychef:diced_chicken_meat",
       "count": 2
     }
   ]

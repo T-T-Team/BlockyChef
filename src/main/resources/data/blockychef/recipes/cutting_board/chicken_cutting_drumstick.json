@@ -1,13 +1,13 @@
 {
   "type": "blockychef:cutting_board",
   "input": {
-    "item": "minecraft:potato"
+    "item": "minecraft:chicken"
   },
-  "processingType": "blockychef:slicing",
+  "processingType": "blockychef:cutting",
   "processingTime": 80,
   "outputs": [
     {
-      "item": "blockychef:raw_potato_fries",
+      "item": "blockychef:raw_chicken_drumstick",
       "count": 2
     }
   ]
