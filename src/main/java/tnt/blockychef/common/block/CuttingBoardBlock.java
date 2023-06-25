@@ -16,7 +16,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -34,7 +33,7 @@ public class CuttingBoardBlock extends FullHorizontalAxisBlock implements Entity
     public static final Component SCREEN_TITLE = Component.translatable("screen.blockychef.cutting_board");
 
     public CuttingBoardBlock() {
-        super(Properties.of(Material.WOOD).sound(SoundType.WOOD).strength(2.0F));
+        super(Properties.of().sound(SoundType.WOOD).strength(2.0F));
     }
 
     @Override

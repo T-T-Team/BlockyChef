@@ -11,7 +11,6 @@ import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import tnt.blockychef.common.block.*;
 import tnt.blockychef.common.init.BlockyChefItems;
 import tnt.blockychef.common.init.BlockyChefTrees;
@@ -20,7 +19,7 @@ import tnt.blockychef.levelgen.tree.SimpleTreeGrower;
 public final class BlockRegistry {
 
     public static void register(BlockRegistryHelper helper) {
-        helper.register("weeds", new DecayingGrowingBlock(BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP)), false);
+        helper.register("weeds", new DecayingGrowingBlock(BlockBehaviour.Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.CROP)), false);
         helper.register("wheat_crops", new CropsBlock(() -> Items.WHEAT_SEEDS), false);
         helper.register("potato_crops", new CropsBlock(() -> Items.POTATO), false);
         helper.register("carrot_crops", new CropsBlock(() -> Items.CARROT), false);
@@ -140,9 +139,9 @@ public final class BlockRegistry {
         helper.register("concrete_plank_kitchen_sink", new KitchenSinkBlock());
         helper.register("plank_concrete_kitchen_sink", new KitchenSinkBlock());
         helper.register("plank_plank_kitchen_sink", new KitchenSinkBlock());
-        helper.register("cinnamon_log", new CinnamonLogBlock(BlockBehaviour.Properties.of(Material.WOOD).strength(2.0F).sound(SoundType.WOOD)));
-        helper.register("cinnamon_stripped_log", new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.WOOD).strength(2.0F).sound(SoundType.WOOD)));
-        helper.register("cinnamon_leaves", new LeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).randomTicks().sound(SoundType.GRASS)
+        helper.register("cinnamon_log", new CinnamonLogBlock(BlockBehaviour.Properties.of().strength(2.0F).sound(SoundType.WOOD)));
+        helper.register("cinnamon_stripped_log", new RotatedPillarBlock(BlockBehaviour.Properties.of().strength(2.0F).sound(SoundType.WOOD)));
+        helper.register("cinnamon_leaves", new LeavesBlock(BlockBehaviour.Properties.of().strength(0.2F).randomTicks().sound(SoundType.GRASS)
                 .noOcclusion().isValidSpawn(BlockRegistry::allowParrotOrOcelotSpawn).isSuffocating(BlockRegistry::alwaysFalse).isViewBlocking(BlockRegistry::alwaysFalse)));
         helper.register("cinnamon_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefTrees.CINNAMON_TREE)));
         helper.register("apple_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefTrees.APPLE_TREE)));
@@ -162,7 +161,7 @@ public final class BlockRegistry {
         helper.register("hazelnut_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefTrees.HAZELNUT_TREE)));
         helper.register("plum_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefTrees.PLUM_TREE)));
         helper.register("walnut_sapling", new TreeSaplingBlock(new SimpleTreeGrower(BlockyChefTrees.WALNUT_TREE)));
-        helper.register("salt_ore", new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F, 3.0F), UniformInt.of(0, 2)));
+        helper.register("salt_ore", new DropExperienceBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(3.0F, 3.0F), UniformInt.of(0, 2)));
     }
 
     private static boolean allowParrotOrOcelotSpawn(BlockState state, BlockGetter getter, BlockPos pos, EntityType<?> entityType) {

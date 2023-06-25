@@ -16,7 +16,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -34,7 +33,7 @@ public class MortarAndPestleBlock extends FullHorizontalAxisBlock implements Ent
     private static final Component TITLE = Component.translatable("screen.blockychef.mortar_and_pestle");
 
     public MortarAndPestleBlock() {
-        super(Properties.of(Material.STONE).sound(SoundType.STONE).strength(1.5F));
+        super(Properties.of().sound(SoundType.STONE).strength(1.5F));
     }
 
     @Override

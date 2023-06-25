@@ -1,7 +1,7 @@
 package tnt.blockychef.client.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
@@ -62,13 +62,12 @@ public class PastaMachineScreen extends AbstractContainerScreen<PastaMachineMenu
     }
 
     @Override
-    protected void renderBg(PoseStack poseStack, float partialTicks, int mouseX, int mouseY) {
+    protected void renderBg(GuiGraphics graphics, float partialTicks, int mouseX, int mouseY) {
         PastaMachineBlockEntity entity = menu.getBlockEntity();
-        RenderSystem.setShaderTexture(0, TEXTURE);
-        blit(poseStack, leftPos, topPos, 0, 0, imageWidth, imageHeight);
+        graphics.blit(TEXTURE, leftPos, topPos, 0, 0, imageWidth, imageHeight);
         float progress = entity.getProcessingProgress(partialTicks);
         int arrowWidth = (int) (progress * 26);
-        blit(poseStack, leftPos + 75, topPos + 38, 176, 0, arrowWidth, 12);
+        graphics.blit(TEXTURE, leftPos + 75, topPos + 38, 176, 0, arrowWidth, 12);
 
         float f = RenderHelper.ease(Helper.pulse(minecraft.level.getGameTime(), 50L), RenderHelper.Easing.SINE_IO);
         float minColor = 0.4F;
@@ -82,7 +81,7 @@ public class PastaMachineScreen extends AbstractContainerScreen<PastaMachineMenu
                 ItemStack slotItem = entity.getItem(slotIndex);
                 if (slotItem.isEmpty()) {
                     RenderSystem.setShaderColor(color, color, color, 1.0F);
-                    itemRenderer.renderGuiItem(poseStack, outputs[i], leftPos + 134, topPos + 18 + i * 18);
+                    graphics.renderItem(outputs[i], leftPos + 134, topPos + 18 + i * 18);
                     RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
                 }
             }
@@ -90,10 +89,10 @@ public class PastaMachineScreen extends AbstractContainerScreen<PastaMachineMenu
     }
 
     @Override
-    public void render(PoseStack poseStack, int mouseX, int mouseY, float partialTicks) {
-        renderBackground(poseStack);
-        super.render(poseStack, mouseX, mouseY, partialTicks);
-        renderTooltip(poseStack, mouseX, mouseY);
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
+        renderBackground(graphics);
+        super.render(graphics, mouseX, mouseY, partialTicks);
+        renderTooltip(graphics, mouseX, mouseY);
     }
 
     @Override

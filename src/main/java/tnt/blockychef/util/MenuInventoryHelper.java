@@ -108,7 +108,7 @@ public final class MenuInventoryHelper {
             inserted.setCount(Math.min(inserted.getCount(), Math.min(toInsert, max)));
             setter.accept(target, slot, inserted);
             toInsert -= inserted.getCount();
-        } else if (ItemStack.isSame(itemStack, item)) {
+        } else if (ItemStack.isSameItem(itemStack, item)) {
             ItemStack inserted = item.copy();
             int emptySpace = Math.max(0, max - itemStack.getCount());
             int insertAmount = Math.min(emptySpace, toInsert);
@@ -128,7 +128,7 @@ public final class MenuInventoryHelper {
         int slot = -1;
         for (int i : slots) {
             ItemStack itemStack = getter.apply(target, i);
-            if (ItemStack.isSame(stack, itemStack)) {
+            if (ItemStack.isSameItem(stack, itemStack)) {
                 if (itemStack.getCount() < max) {
                     return i;
                 }

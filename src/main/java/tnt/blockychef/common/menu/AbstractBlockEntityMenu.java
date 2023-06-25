@@ -43,7 +43,7 @@ public abstract class AbstractBlockEntityMenu<B extends BlockEntity> extends Abs
     @SuppressWarnings("unchecked")
     protected static <B extends BlockEntity> B resolveBlockEntityUnsafe(Inventory inventory, FriendlyByteBuf buffer) {
         BlockPos pos = buffer.readBlockPos();
-        Level level = inventory.player.getLevel();
+        Level level = inventory.player.level();
         BlockEntity entity = level.getBlockEntity(pos);
         return (B) entity;
     }

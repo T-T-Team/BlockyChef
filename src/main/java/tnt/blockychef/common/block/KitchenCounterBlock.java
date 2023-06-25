@@ -8,7 +8,6 @@ import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
@@ -17,7 +16,7 @@ import tnt.blockychef.common.init.BlockyChefBlockEntities;
 public class KitchenCounterBlock extends DyeableBlock implements EntityBlock {
 
     public KitchenCounterBlock() {
-        super(Properties.of(Material.STONE).sound(SoundType.STONE).strength(1.5F).noOcclusion());
+        super(Properties.of().sound(SoundType.STONE).strength(1.5F).noOcclusion());
     }
 
     @Override

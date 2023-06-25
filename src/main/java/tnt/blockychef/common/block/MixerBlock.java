@@ -15,7 +15,6 @@ import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -35,7 +34,7 @@ public class MixerBlock extends DyeableBlock implements EntityBlock {
     private static final Component TITLE = Component.translatable("screen.blockychef.mixer");
 
     public MixerBlock() {
-        super(Properties.of(Material.STONE).sound(SoundType.STONE).strength(3.0F).noOcclusion());
+        super(Properties.of().sound(SoundType.STONE).strength(3.0F).noOcclusion());
     }
 
     @Override

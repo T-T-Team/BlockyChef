@@ -53,7 +53,7 @@ public class C2S_ToasterEvent extends Packet {
     @Override
     public void handle(NetworkEvent.Context context) {
         ServerPlayer player = context.getSender();
-        ServerLevel level = player.getLevel();
+        ServerLevel level = player.serverLevel();
         if (!level.isLoaded(pos))
             return;
         BlockEntity blockEntity = level.getBlockEntity(pos);

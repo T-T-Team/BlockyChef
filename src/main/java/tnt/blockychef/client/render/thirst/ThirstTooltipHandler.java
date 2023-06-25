@@ -5,10 +5,9 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Either;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
-import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
@@ -61,7 +60,7 @@ public final class ThirstTooltipHandler {
         }
 
         @Override
-        public void renderImage(Font font, int x, int y, PoseStack poseStack, ItemRenderer itemRenderer) {
+        public void renderImage(Font font, int x, int y, GuiGraphics graphics) {
             ItemStack stack = tooltip.stack;
             if (shouldIgnoreRender(stack)) {
                 return;
@@ -81,23 +80,23 @@ public final class ThirstTooltipHandler {
             offsetX += (Math.abs(tooltip.hydrationLevel) - 1) / 2 * 9;
 
             // Hydration icons
-            RenderSystem.setShaderTexture(0, ThirstOverlay.TEXTURE);
             for (int i = 0; i < hydrationValue; i += 2) {
-                GuiComponent.blit(poseStack, offsetX, offsetY, 0, negative ? 54 : 0, 0, 9, 9, 256, 256);
+                graphics.blit(ThirstOverlay.TEXTURE, offsetX, offsetY, 0, negative ? 54 : 0, 0, 9, 9, 256, 256);
                 if (i == hydrationValue - 1) {
-                    GuiComponent.blit(poseStack, offsetX, offsetY, 0, negative ? 72 : 18, 0, 9, 9, 256, 256);
+                    graphics.blit(ThirstOverlay.TEXTURE, offsetX, offsetY, 0, negative ? 72 : 18, 0, 9, 9, 256, 256);
                 } else {
-                    GuiComponent.blit(poseStack, offsetX, offsetY, 0, negative ? 63 : 9, 0, 9, 9, 256, 256);
+                    graphics.blit(ThirstOverlay.TEXTURE, offsetX, offsetY, 0, negative ? 63 : 9, 0, 9, 9, 256, 256);
                 }
                 offsetX -= 9;
             }
             // Hydration text
             if (tooltip.hydrationDescriptor != null) {
                 offsetX += 18;
+                PoseStack poseStack = graphics.pose();
                 poseStack.pushPose();
                 poseStack.translate(offsetX, offsetY, 0);
                 poseStack.scale(0.75F, 0.75F, 0.75F);
-                font.drawShadow(poseStack, tooltip.hydrationDescriptor, 2, 2, 0xFFAAAAAA, false);
+                graphics.drawString(font, tooltip.hydrationDescriptor, 2, 2, 0xFFAAAAAA, false);
                 poseStack.popPose();
             }
 
@@ -105,32 +104,32 @@ public final class ThirstTooltipHandler {
                 return;
             }
             // Saturation icons
-            RenderSystem.setShaderTexture(0, ThirstOverlay.TEXTURE);
             int saturationValue = tooltip.saturationLevel;
             offsetX = x;
             offsetY += 10;
             offsetX += (tooltip.saturationLevel - 1) / 2 * 7;
             for (int i = 0; i < saturationValue; i += 2) {
-                GuiComponent.blit(poseStack, offsetX, offsetY, 0, 0, 27, 7, 7, 256, 256);
+                graphics.blit(ThirstOverlay.TEXTURE, offsetX, offsetY, 0, 0, 27, 7, 7, 256, 256);
                 float value = (saturationValue - i) / 2.0F;
                 if (value >= 1.0F) {
-                    GuiComponent.blit(poseStack, offsetX, offsetY, 0, 28, 27, 7, 7, 256, 256);
+                    graphics.blit(ThirstOverlay.TEXTURE, offsetX, offsetY, 0, 28, 27, 7, 7, 256, 256);
                 } else if (value > 0.5F) {
-                    GuiComponent.blit(poseStack, offsetX, offsetY, 0, 21, 27, 7, 7, 256, 256);
+                    graphics.blit(ThirstOverlay.TEXTURE, offsetX, offsetY, 0, 21, 27, 7, 7, 256, 256);
                 } else if (value > 0.25F) {
-                    GuiComponent.blit(poseStack, offsetX, offsetY, 0, 14, 27, 7, 7, 256, 256);
+                    graphics.blit(ThirstOverlay.TEXTURE, offsetX, offsetY, 0, 14, 27, 7, 7, 256, 256);
                 } else {
-                    GuiComponent.blit(poseStack, offsetX, offsetY, 0, 7, 27, 7, 7, 256, 256);
+                    graphics.blit(ThirstOverlay.TEXTURE, offsetX, offsetY, 0, 7, 27, 7, 7, 256, 256);
                 }
                 offsetX -= 7;
             }
             // Saturation text
             if (tooltip.saturationDescriptor != null) {
                 offsetX += 14;
+                PoseStack poseStack = graphics.pose();
                 poseStack.pushPose();
                 poseStack.translate(offsetX, offsetY, 0);
                 poseStack.scale(0.75f, 0.75f, 0.75f);
-                font.drawShadow(poseStack, tooltip.saturationDescriptor, 2, 1, 0xFFAAAAAA, false);
+                graphics.drawString(font, tooltip.saturationDescriptor, 2, 1, 0xFFAAAAAA, false);
                 poseStack.popPose();
             }
         }

@@ -18,7 +18,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -39,11 +38,7 @@ public class DryingRackBlock extends FullHorizontalAxisBlock implements EntityBl
     };
 
     public DryingRackBlock() {
-        this(Material.WOOD);
-    }
-
-    public DryingRackBlock(Material material) {
-        super(Properties.of(material).strength(1.4F).noOcclusion());
+        super(Properties.of().strength(1.4F).noOcclusion());
     }
 
     @Override

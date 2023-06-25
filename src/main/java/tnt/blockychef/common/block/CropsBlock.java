@@ -26,7 +26,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -57,7 +56,7 @@ public class CropsBlock extends DecayingGrowingBlock implements BonemealableBloc
     }
 
     public CropsBlock(SeedProvider provider, UnaryOperator<Properties> propertyExtender) {
-        this(provider, propertyExtender.apply(Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.CROP)));
+        this(provider, propertyExtender.apply(Properties.of().noCollission().randomTicks().instabreak().sound(SoundType.CROP)));
     }
 
     protected CropsBlock(SeedProvider provider, Properties properties) {

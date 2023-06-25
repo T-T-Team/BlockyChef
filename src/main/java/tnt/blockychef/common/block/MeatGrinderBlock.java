@@ -12,7 +12,6 @@ import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -25,7 +24,7 @@ public class MeatGrinderBlock extends FullHorizontalAxisBlock implements EntityB
     private static final VoxelShape HITBOX = Block.box(3.0, 0.0, 3.0, 13.0, 8.0, 13.0);
 
     public MeatGrinderBlock() {
-        super(Properties.of(Material.STONE).sound(SoundType.STONE).strength(3.0F).noOcclusion());
+        super(Properties.of().sound(SoundType.STONE).strength(3.0F).noOcclusion());
     }
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter blockGetter, BlockPos pos, CollisionContext context) {

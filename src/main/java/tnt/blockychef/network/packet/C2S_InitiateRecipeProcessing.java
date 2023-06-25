@@ -29,7 +29,7 @@ public class C2S_InitiateRecipeProcessing extends Packet {
     @Override
     public void handle(NetworkEvent.Context context) {
         ServerPlayer player = context.getSender();
-        ServerLevel level = player.getLevel();
+        ServerLevel level = player.serverLevel();
         if (!level.isLoaded(pos)) {
             return;
         }

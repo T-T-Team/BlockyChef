@@ -47,7 +47,7 @@ public abstract class RecipeRemberingBlockEntity<R extends AbstractFoodRecipe<?>
     }
 
     public void awardUsedRecipesAndPopExperience(ServerPlayer player) {
-        List<Recipe<?>> list = this.getRecipesToAwardAndPopExperience(player.getLevel(), player.position());
+        List<Recipe<?>> list = this.getRecipesToAwardAndPopExperience(player.serverLevel(), player.position());
         player.awardRecipes(list);
         this.recipesUsed.clear();
     }

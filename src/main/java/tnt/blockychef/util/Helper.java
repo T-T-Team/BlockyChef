@@ -28,11 +28,11 @@ public final class Helper {
     }
 
     public static void giveItem(Player player, ItemStack stack) {
-        if (player.level.isClientSide)
+        if (player.level().isClientSide)
             return;
         Inventory inventory = player.getInventory();
         if (!inventory.add(stack)) {
-            Containers.dropItemStack(player.level, player.getX(), player.getY(), player.getZ(), stack);
+            Containers.dropItemStack(player.level(), player.getX(), player.getY(), player.getZ(), stack);
         }
     }
 
@@ -93,6 +93,7 @@ public final class Helper {
         return false;
     }
 
+    @SafeVarargs
     public static <E extends Enum<E>> int getEnumFlags(E... values) {
         int result = 0;
         for (E e : values) {

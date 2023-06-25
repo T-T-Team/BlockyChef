@@ -118,7 +118,7 @@ public final class DrinkProperties {
         public Builder giveSingleEffect(float chance, Supplier<MobEffectInstance> effectProvider) {
             return this.onDrink(player -> {
                 RandomSource source = player.getRandom();
-                if (!player.level.isClientSide && source.nextFloat() < chance) {
+                if (!player.level().isClientSide && source.nextFloat() < chance) {
                     player.addEffect(effectProvider.get());
                 }
             });

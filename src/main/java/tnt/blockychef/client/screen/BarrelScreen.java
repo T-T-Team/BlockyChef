@@ -2,6 +2,7 @@ package tnt.blockychef.client.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
@@ -44,22 +45,19 @@ public class BarrelScreen extends AbstractContainerScreen<BarrelMenu> {
     }
 
     @Override
-    protected void renderBg(PoseStack stack, float partialTicks, int mouseX, int mouseY) {
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, TEXTURE);
-        blit(stack, leftPos, topPos, 0, 0, imageWidth, imageHeight);
-
+    protected void renderBg(GuiGraphics graphics, float partialTicks, int mouseX, int mouseY) {
+        graphics.blit(TEXTURE, leftPos, topPos, 0, 0, imageWidth, imageHeight);
         BarrelBlockEntity blockEntity = menu.getBlockEntity();
         float mixProgress = blockEntity.getFermentingProgress(partialTicks);
         int arrowWidth = (int) (mixProgress * 26);
-        blit(stack, leftPos + 75, topPos + 43, 176, 0, arrowWidth, 12);
+        graphics.blit(TEXTURE, leftPos + 75, topPos + 43, 176, 0, arrowWidth, 12);
     }
 
     @Override
-    public void render(PoseStack stack, int mouseX, int mouseY, float partialTicks) {
-        renderBackground(stack);
-        super.render(stack, mouseX, mouseY, partialTicks);
-        renderTooltip(stack, mouseX, mouseY);
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
+        renderBackground(graphics);
+        super.render(graphics, mouseX, mouseY, partialTicks);
+        renderTooltip(graphics, mouseX, mouseY);
     }
 
     private void mixButtonClicked(Button button) {

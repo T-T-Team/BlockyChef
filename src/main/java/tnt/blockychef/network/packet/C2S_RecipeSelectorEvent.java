@@ -37,7 +37,7 @@ public class C2S_RecipeSelectorEvent extends Packet {
     @Override
     public void handle(NetworkEvent.Context context) {
         ServerPlayer player = context.getSender();
-        ServerLevel level = player.getLevel();
+        ServerLevel level = player.serverLevel();
         if (!level.isLoaded(pos))
             return;
         BlockEntity entity = level.getBlockEntity(pos);

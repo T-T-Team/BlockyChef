@@ -16,7 +16,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -35,7 +34,7 @@ public class MixingBowlBlock extends FullHorizontalAxisBlock implements EntityBl
     private static final Component TITLE = Component.translatable("screen.blockychef.mixing_bowl");
 
     public MixingBowlBlock() {
-        super(Properties.of(Material.WOOD).sound(SoundType.WOOD).strength(1.5F));
+        super(Properties.of().sound(SoundType.WOOD).strength(1.5F));
     }
 
     @Override

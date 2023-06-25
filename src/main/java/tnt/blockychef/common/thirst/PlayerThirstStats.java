@@ -10,6 +10,7 @@ import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import tnt.blockychef.common.init.BlockyChefDamageTypes;
 import tnt.blockychef.network.NetworkManager;
 import tnt.blockychef.network.packet.S2C_SendThirstData;
@@ -28,7 +29,8 @@ public class PlayerThirstStats implements ThirstStats {
 
     @Override
     public void tick() {
-        Difficulty difficulty = player.level.getDifficulty();
+        Level level = player.level();
+        Difficulty difficulty = level.getDifficulty();
         if (exhaustion > 4.0F) {
             exhaustion -= 4.0F;
             if (saturation > 0.0F) {
@@ -43,7 +45,7 @@ public class PlayerThirstStats implements ThirstStats {
             if (tickTimer >= 80) {
                 if (player.getHealth() > 10.0F || difficulty == Difficulty.HARD || player.getHealth() > 1.0F && difficulty == Difficulty.NORMAL) {
                     // TODO possibly could be done in a better way
-                    RegistryAccess access = player.level.registryAccess();
+                    RegistryAccess access = level.registryAccess();
                     Registry<DamageType> registry = access.registryOrThrow(Registries.DAMAGE_TYPE);
                     player.hurt(new DamageSource(registry.getHolderOrThrow(BlockyChefDamageTypes.DEHYDRATION)), 1.0F);
                 }
@@ -59,7 +61,7 @@ public class PlayerThirstStats implements ThirstStats {
     public void drink(DrinkProperties stats) {
         this.hydration = Mth.clamp(this.hydration + stats.getHydration(), 0, 20);
         this.saturation = Mth.clamp(this.saturation + Math.abs(stats.getHydration()) * stats.getSaturation() * 2.0F, 0.0F, this.hydration);
-        if (!player.level.isClientSide) {
+        if (!player.level().isClientSide) {
             stats.onConsumed(player);
         }
     }
@@ -101,7 +103,7 @@ public class PlayerThirstStats implements ThirstStats {
 
     @Override
     public void addExhaustion(float exhaustion) {
-        if (!player.getAbilities().invulnerable && !player.level.isClientSide) {
+        if (!player.getAbilities().invulnerable && !player.level().isClientSide) {
             this.exhaustion = Math.min(40.0F, this.exhaustion + exhaustion);
             sendClientData();
         }
@@ -127,7 +129,7 @@ public class PlayerThirstStats implements ThirstStats {
 
     @Override
     public void sendClientData() {
-        if (!player.level.isClientSide) {
+        if (!player.level().isClientSide) {
             NetworkManager.dispatchClientPacket((ServerPlayer) player, new S2C_SendThirstData(this.serializeNBT()));
         }
     }
