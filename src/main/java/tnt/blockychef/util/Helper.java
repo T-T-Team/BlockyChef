@@ -17,6 +17,7 @@ import tnt.blockychef.network.NetworkManager;
 import tnt.blockychef.network.packet.S2C_SendBlockEntityData;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -100,5 +101,22 @@ public final class Helper {
             result |= 1 << e.ordinal();
         }
         return result;
+    }
+
+    public static int sum(int value, boolean... values) {
+        int sum = 0;
+        for (boolean b : values) {
+            if (b) {
+                sum += value;
+            }
+        }
+        return sum;
+    }
+
+    public static <T> T[] populateByIndex(T[] in, Function<Integer, T> constructor) {
+        for (int i = 0; i < in.length; i++) {
+            in[i] = constructor.apply(i);
+        }
+        return in;
     }
 }

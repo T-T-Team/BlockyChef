@@ -29,17 +29,17 @@ public final class HeatHelper {
     }
 
     public static float getHeatValue(Level level, BlockPos pos, @Nullable Direction direction) {
-        HeatSource heatSource = getHeatSource(level, pos);
+        HeatSource heatSource = getHeatSource(level, pos, direction);
         if (isEmpty(heatSource)) {
             return 0.0F;
         }
         return heatSource.getHeat(direction);
     }
 
-    public static HeatSource getHeatSource(Level level, BlockPos pos) {
+    public static HeatSource getHeatSource(Level level, BlockPos pos, @Nullable Direction direction) {
         BlockState state = level.getBlockState(pos);
         if (state.getBlock() instanceof HeatSourceProvider provider) {
-            return provider.getHeatSourceAt(level, pos);
+            return provider.getHeatSourceAt(level, pos, direction);
         }
         for (VanillaHeatSourceProvider vanillaHeatSourceProvider : DEFAULT_HEAT_SOURCES) {
             if (vanillaHeatSourceProvider.isValidSource(level, pos, state)) {
