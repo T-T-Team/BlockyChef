@@ -1,0 +1,17 @@
+{
+  "type": "blockychef:grinding",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "blockychef:dried_chilli_pepper"
+      },
+      "count": 2
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:chilli_powder"
+    }
+  ],
+  "processingTime": 120
+}

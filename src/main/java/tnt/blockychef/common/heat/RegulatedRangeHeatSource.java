@@ -47,6 +47,6 @@ public class RegulatedRangeHeatSource implements RegulatedHeatSource {
     }
 
     public void decodeData(CompoundTag data) {
-        adjust(data.getFloat("amount"));
+        //adjust(data.getFloat("amount"));
     }
 }

@@ -1,0 +1,17 @@
+{
+  "type": "blockychef:grinding",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "minecraft:wheat"
+      },
+      "count": 2
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:wheat_flour"
+    }
+  ],
+  "processingTime": 120
+}

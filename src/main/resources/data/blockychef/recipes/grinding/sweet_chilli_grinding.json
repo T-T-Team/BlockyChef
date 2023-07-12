@@ -1,0 +1,52 @@
+{
+  "type": "blockychef:grinding",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "blockychef:diced_chilli_pepper"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:shredded_garlic"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:oil"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:salt"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:sugar"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:empty_jar"
+      },
+      "count": 1
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:sweet_chilli_sauce",
+      "count": 1
+    },
+    {
+      "item": "blockychef:empty_bottle",
+      "count": 1
+    }
+  ],
+  "processingTime": 160
+}

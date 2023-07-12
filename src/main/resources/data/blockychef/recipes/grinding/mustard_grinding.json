@@ -1,0 +1,40 @@
+{
+  "type": "blockychef:grinding",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "blockychef:dried_mustard_pods"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:oil"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:salt"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:empty_jar"
+      },
+      "count": 1
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:mustard",
+      "count": 1
+    },
+    {
+      "item": "blockychef:empty_bottle",
+      "count": 1
+    }
+  ],
+  "processingTime": 160
+}

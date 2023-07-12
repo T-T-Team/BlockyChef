@@ -1,0 +1,17 @@
+{
+  "type": "blockychef:grinding",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "blockychef:oat_crop"
+      },
+      "count": 2
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:oat_meal"
+    }
+  ],
+  "processingTime": 120
+}

@@ -252,7 +252,7 @@ public final class FoodList {
     public static final FoodProperties SOYBEANS = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties STRAWBERRY_MARMALADE = food(3, 2).build();
     public static final FoodProperties STRAWBERRY_SLICE = food(1, 1).build();
-    public static final FoodProperties SWEET_CHILLI_SAUCE = food(2, 2).build();
+    public static final FoodProperties SWEET_CHILLI_SAUCE = food(2, 2).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties TOMATO_SLICE = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties TURMERIC_POWDER = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties TURMERIC_SLICE = food(1, 1).effect(HUNGER, PROBABILITY).build();

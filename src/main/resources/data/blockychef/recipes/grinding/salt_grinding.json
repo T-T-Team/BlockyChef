@@ -1,0 +1,17 @@
+{
+  "type": "blockychef:grinding",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "blockychef:rock_salt"
+      },
+      "count": 1
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:salt"
+    }
+  ],
+  "processingTime": 120
+}

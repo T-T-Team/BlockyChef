@@ -1,0 +1,17 @@
+{
+  "type": "blockychef:grinding",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "blockychef:dried_black_pepper_cluster"
+      },
+      "count": 2
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:pepper_powder"
+    }
+  ],
+  "processingTime": 120
+}

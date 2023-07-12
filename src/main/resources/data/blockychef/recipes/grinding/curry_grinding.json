@@ -1,0 +1,36 @@
+{
+  "type": "blockychef:grinding",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "blockychef:turmeric_powder"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:chilli_powder"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:salt"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:pepper_powder"
+      },
+      "count": 1
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:curry_powder",
+      "count": 2
+    }
+  ],
+  "processingTime": 120
+}

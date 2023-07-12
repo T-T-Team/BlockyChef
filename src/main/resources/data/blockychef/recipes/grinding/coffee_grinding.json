@@ -1,0 +1,17 @@
+{
+  "type": "blockychef:grinding",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "blockychef:roasted_coffee_beans"
+      },
+      "count": 2
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:coffee_powder"
+    }
+  ],
+  "processingTime": 120
+}

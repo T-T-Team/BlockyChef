@@ -694,6 +694,9 @@
   "recipe.process.blockychef.rolling": "Roll",
 
   "label.blockychef.cancel": "Cancel",
+  "label.blockychef.low": "Power Low",
+  "label.blockychef.medium": "Power Medium",
+  "label.blockychef.high": "Power High",
 
   "screen.blockychef.cutting_board": "Cutting Board",
   "screen.blockychef.cutting_board.widget.start_cutting": "Cut",
@@ -706,6 +709,10 @@
   "screen.blockychef.mixing_bowl": "Mixing Bowl",
   "screen.blockychef.mixing_bowl.widget.mix": "Mix",
   "screen.blockychef.pasta_machine": "Pasta Machine",
+  "screen.blockychef.mixer": "Mixer",
+  "screen.blockychef.mixer.widget.mix": "Mix",
+  "screen.blockychef.barrel": "Barrel",
+  "screen.blockychef.barrel.widget.ferment": "Ferment",
 
   "death.attack.blockychef.dehydration": "%s has died due to dehydration",
   "death.attack.blockychef.dehydration.player": "%1$s has died due to dehydration whilst fighting %2$s"

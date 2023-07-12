@@ -3,16 +3,15 @@
   "inputs": [
     {
       "ingredient": {
-        "item": "minecraft:wheat"
+        "item": "blockychef:hazelnuts"
       },
       "count": 2
     }
   ],
   "outputs": [
     {
-      "item": "blockychef:wheat_flour"
+      "item": "blockychef:grounded_hazelnuts"
     }
   ],
-  "processingTime": 120,
-  "experience": 0.2
+  "processingTime": 120
 }

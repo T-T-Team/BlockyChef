@@ -1,0 +1,52 @@
+{
+  "type": "blockychef:grinding",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "blockychef:basil"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:garlic_clove"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:olive_oil"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:salt"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:avocado_slice"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:empty_jar"
+      },
+      "count": 1
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:avocado_pesto",
+      "count": 1
+    },
+    {
+      "item": "blockychef:empty_bottle",
+      "count": 1
+    }
+  ],
+  "processingTime": 160
+}
