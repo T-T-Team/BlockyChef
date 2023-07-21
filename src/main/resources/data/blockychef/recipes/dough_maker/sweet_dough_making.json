@@ -1,0 +1,40 @@
+{
+  "type": "blockychef:dough_maker",
+  "inputs": [
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "blockychef:wheat_flour"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:bottle_of_water"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:yeast"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:sweet_dough"
+    }
+  ],
+  "containerItems": [
+    {
+      "item": "blockychef:empty_bottle"
+    }
+  ],
+  "processingTime": 140
+}

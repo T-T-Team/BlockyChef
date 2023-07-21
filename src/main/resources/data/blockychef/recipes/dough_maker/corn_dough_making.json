@@ -1,0 +1,40 @@
+{
+  "type": "blockychef:dough_maker",
+  "inputs": [
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "blockychef:corn_meal"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:bottle_of_water"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:salt"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:yeast"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:corn_dough"
+    }
+  ],
+  "containerItems": [
+    {
+      "item": "blockychef:empty_bottle"
+    }
+  ],
+  "processingTime": 140
+}

@@ -1,0 +1,35 @@
+{
+  "type": "blockychef:dough_maker",
+  "inputs": [
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "blockychef:boiled_potato_cuts"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:wheat_flour"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:salt"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:egg_yolk"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:potato_dough"
+    }
+  ],
+  "processingTime": 140
+}

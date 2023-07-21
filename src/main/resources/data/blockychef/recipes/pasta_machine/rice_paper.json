@@ -1,14 +1,14 @@
 {
   "type": "blockychef:pasta_machine",
   "input": {
-    "item": "blockychef:pasta_dough"
+    "item": "blockychef:rice_dough"
   },
   "processingType": "blockychef:rolling",
   "processingTime": 120,
   "outputs": [
     {
-      "item": "blockychef:raw_penne_pasta",
-      "count": 2
+      "item": "blockychef:rice_paper",
+      "count": 3
     }
   ]
 }

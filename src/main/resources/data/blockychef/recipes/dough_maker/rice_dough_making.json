@@ -1,0 +1,34 @@
+{
+  "type": "blockychef:dough_maker",
+  "inputs": [
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "blockychef:rice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:bottle_of_water"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:salt"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:rice_dough"
+    }
+  ],
+  "containerItems": [
+    {
+      "item": "blockychef:empty_bottle"
+    }
+  ],
+  "processingTime": 140
+}

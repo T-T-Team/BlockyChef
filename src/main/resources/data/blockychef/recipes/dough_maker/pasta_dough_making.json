@@ -1,0 +1,40 @@
+{
+  "type": "blockychef:dough_maker",
+  "inputs": [
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "blockychef:wheat_flour"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:bottle_of_water"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:salt"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:egg_yolk"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:pasta_dough"
+    }
+  ],
+  "containerItems": [
+    {
+      "item": "blockychef:empty_bottle"
+    }
+  ],
+  "processingTime": 140
+}

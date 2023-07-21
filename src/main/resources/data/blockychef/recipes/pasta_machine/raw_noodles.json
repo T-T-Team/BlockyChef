@@ -4,12 +4,11 @@
     "item": "blockychef:pasta_dough"
   },
   "processingType": "blockychef:rolling",
-  "processingTime": 100,
+  "processingTime": 120,
   "outputs": [
     {
       "item": "blockychef:raw_noodles_pasta",
-      "count": 3
+      "count": 2
     }
-  ],
-  "experience": 0.7
+  ]
 }
