@@ -68,6 +68,14 @@ public class DryingRecipe extends AbstractFoodRecipe<DryingRackBlockEntity> {
         return BlockyChefRecipeTypes.DRYING_RECIPE;
     }
 
+    public Ingredient getInput() {
+        return input;
+    }
+
+    public ItemStack getOutput() {
+        return output;
+    }
+
     public int getDryingTime() {
         return dryingTime;
     }
