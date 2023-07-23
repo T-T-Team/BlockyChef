@@ -66,6 +66,10 @@ public class CuttingBoardRecipe extends AbstractFoodRecipe<CuttingBoardBlockEnti
         return processingTime;
     }
 
+    public Ingredient getInput() {
+        return input;
+    }
+
     public ItemStack[] getOutputs() {
         return outputs;
     }
