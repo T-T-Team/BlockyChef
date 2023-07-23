@@ -7,6 +7,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import tnt.blockychef.util.SerializationHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public final class MultiIngredient {
 
     public static final Codec<MultiIngredient> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -20,6 +23,16 @@ public final class MultiIngredient {
     private MultiIngredient(Ingredient ingredient, int count) {
         this.ingredient = ingredient;
         this.count = count;
+    }
+
+    public List<ItemStack> toItemStackList() {
+        List<ItemStack> list = new ArrayList<>();
+        for (ItemStack stack : ingredient.getItems()) {
+            ItemStack itemStack = stack.copy();
+            itemStack.setCount(count);
+            list.add(itemStack);
+        }
+        return list;
     }
 
     public boolean test(Container container, int[] slots) {

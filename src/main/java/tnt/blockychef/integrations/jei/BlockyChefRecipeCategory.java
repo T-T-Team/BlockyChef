@@ -47,7 +47,7 @@ public abstract class BlockyChefRecipeCategory<T extends AbstractFoodRecipe<?>> 
 
     protected final void drawExperience(float experience, GuiGraphics guiGraphics, int x, int y) {
         if (experience > 0) {
-            Component experienceString = Component.translatable("gui.jei.category.smelting.experience", experience);
+            Component experienceString = getExperienceLabel(experience);
             Font font = Minecraft.getInstance().font;
             guiGraphics.drawString(font, experienceString, x + getBackground().getWidth(), y, 0xFF808080, false);
         }
@@ -55,11 +55,26 @@ public abstract class BlockyChefRecipeCategory<T extends AbstractFoodRecipe<?>> 
 
     protected final void drawTime(int time, GuiGraphics guiGraphics, int x, int y) {
         if (time > 0) {
-            int timeSeconds = time / 20;
-            Component timeString = Component.translatable("gui.jei.category.smelting.time.seconds", timeSeconds);
+            Component timeString = getTimeLabel(time);
             Minecraft minecraft = Minecraft.getInstance();
             Font fontRenderer = minecraft.font;
             guiGraphics.drawString(fontRenderer, timeString, x + getBackground().getWidth(), y, 0xFF808080, false);
         }
+    }
+
+    protected final void drawCentered(String text, GuiGraphics guiGraphics, int x, int y, int color, boolean shadow) {
+        Minecraft minecraft = Minecraft.getInstance();
+        Font font = minecraft.font;
+        int width = font.width(text);
+        guiGraphics.drawString(font, text, x + (background.getWidth() - width) / 2.0F, y, color, shadow);
+    }
+
+    protected static Component getExperienceLabel(float experience) {
+        return Component.translatable("gui.jei.category.smelting.experience", experience);
+    }
+
+    protected static Component getTimeLabel(int ticks) {
+        int timeSeconds = ticks / 20;
+        return Component.translatable("gui.jei.category.smelting.time.seconds", timeSeconds);
     }
 }

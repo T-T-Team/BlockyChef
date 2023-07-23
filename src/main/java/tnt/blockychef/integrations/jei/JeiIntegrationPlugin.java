@@ -18,11 +18,11 @@ import net.minecraft.world.level.Level;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.food.recipe.CuttingBoardRecipe;
 import tnt.blockychef.common.food.recipe.DryingRecipe;
+import tnt.blockychef.common.food.recipe.MixingBowlRecipe;
 import tnt.blockychef.common.food.recipe.ToasterRecipe;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 import tnt.blockychef.common.init.BlockyChefMenuTypes;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
-import tnt.blockychef.common.menu.CuttingBoardMenu;
 import tnt.blockychef.common.menu.ToasterMenu;
 
 import java.util.List;
@@ -35,12 +35,14 @@ public class JeiIntegrationPlugin implements IModPlugin {
     static final RecipeType<DryingRecipe> DRYING_RECIPE = new RecipeType<>(BlockyChef.resource("drying"), DryingRecipe.class);
     static final RecipeType<CuttingBoardRecipe> CUTTING_BOARD_RECIPE = new RecipeType<>(BlockyChef.resource("cutting_board"), CuttingBoardRecipe.class);
     static final RecipeType<ToasterRecipe> TOASTER_RECIPE = new RecipeType<>(BlockyChef.resource("toaster"), ToasterRecipe.class);
+    static final RecipeType<MixingBowlRecipe> MIXING_BOWL = new RecipeType<>(BlockyChef.resource("mixing_bowl"), MixingBowlRecipe.class);
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         registration.addRecipes(DRYING_RECIPE, getRecipes(BlockyChefRecipeTypes.DRYING_RECIPE));
         registration.addRecipes(CUTTING_BOARD_RECIPE, getRecipes(BlockyChefRecipeTypes.CUTTING_BOARD_RECIPE));
         registration.addRecipes(TOASTER_RECIPE, getRecipes(BlockyChefRecipeTypes.TOASTER_RECIPE));
+        registration.addRecipes(MIXING_BOWL, getRecipes(BlockyChefRecipeTypes.MIXING_BOWL_RECIPE));
     }
 
     @Override
@@ -49,7 +51,8 @@ public class JeiIntegrationPlugin implements IModPlugin {
         registration.addRecipeCategories(
                 new DryingRecipeCategory(helper),
                 new CuttingBoardRecipeCategory(helper),
-                new ToastingRecipeCategory(helper)
+                new ToastingRecipeCategory(helper),
+                new MixingBowlRecipeCategory(helper)
         );
     }
 
@@ -59,6 +62,8 @@ public class JeiIntegrationPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.OAK_CUTTING_BOARD), CUTTING_BOARD_RECIPE);
         // TODO add all cutting board variants / or find a way to use block tags for this
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.TOASTER), TOASTER_RECIPE);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.OAK_MIXING_BOWL), MIXING_BOWL);
+        // TODO add all mixing bowl variants
     }
 
     @Override
