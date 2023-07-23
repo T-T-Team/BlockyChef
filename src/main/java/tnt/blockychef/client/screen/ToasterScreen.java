@@ -60,7 +60,7 @@ public class ToasterScreen extends AbstractContainerScreen<ToasterMenu> {
         int timer = menu.getBlockEntity().getToastingTimer() / 20;
         String text = String.valueOf(timer);
         int width = font.width(text);
-        graphics.drawString(font, text, 77 + (49 - width) / 2, 49, 0x404040);
+        graphics.drawString(font, text, 77 + (49 - width) / 2, 49, 0x404040, false);
     }
 
     @Override

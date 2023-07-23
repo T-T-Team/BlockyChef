@@ -12,26 +12,29 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.entity.CuttingBoardBlockEntity;
 import tnt.blockychef.common.food.recipe.CuttingBoardRecipe;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 
 public class CuttingBoardRecipeCategory extends BlockyChefRecipeCategory<CuttingBoardRecipe> {
 
-    private static final Component TITLE = Component.translatable("jei.recipe.blockychef.cutting_board");
-    private static final ResourceLocation BACKGROUND_PATH = BlockyChef.resource("textures/screen/jei/cutting_board.png");
-    private final IDrawable background;
-    private final IDrawable icon;
     private final IDrawable progressArrow;
 
     public CuttingBoardRecipeCategory(IGuiHelper helper) {
-        background = helper.drawableBuilder(BACKGROUND_PATH, 0, 0, 126, 54).setTextureSize(152, 54).build();
-        progressArrow = helper.drawableBuilder(BACKGROUND_PATH, 126, 0, 26, 12).setTextureSize(152, 54)
+        super(helper, "cutting_board");
+        progressArrow = helper.drawableBuilder(backgroundPath, 126, 0, 26, 12).setTextureSize(152, 54)
                 .buildAnimated(300, IDrawableAnimated.StartDirection.LEFT, false);
-        icon = helper.createDrawableItemStack(new ItemStack(BlockyChefBlocks.OAK_CUTTING_BOARD));
+    }
+
+    @Override
+    protected IDrawable createBackground(IGuiHelper helper) {
+        return helper.drawableBuilder(backgroundPath, 0, 0, 126, 54).setTextureSize(152, 54).build();
+    }
+
+    @Override
+    protected ItemStack getIconStack() {
+        return new ItemStack(BlockyChefBlocks.OAK_CUTTING_BOARD);
     }
 
     @Override
@@ -56,22 +59,7 @@ public class CuttingBoardRecipeCategory extends BlockyChefRecipeCategory<Cutting
     }
 
     @Override
-    public IDrawable getBackground() {
-        return background;
-    }
-
-    @Override
-    public IDrawable getIcon() {
-        return icon;
-    }
-
-    @Override
-    public Component getTitle() {
-        return TITLE;
-    }
-
-    @Override
     public RecipeType<CuttingBoardRecipe> getRecipeType() {
-        return JeiPlugin.CUTTING_BOARD_RECIPE;
+        return JeiIntegrationPlugin.CUTTING_BOARD_RECIPE;
     }
 }

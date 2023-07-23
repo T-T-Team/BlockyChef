@@ -9,26 +9,28 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.food.recipe.DryingRecipe;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 
 public class DryingRecipeCategory extends BlockyChefRecipeCategory<DryingRecipe> {
 
-    private static final Component TITLE = Component.translatable("jei.recipe.blockychef.drying");
-    private static final ResourceLocation BACKGROUND_PATH = BlockyChef.resource("textures/screen/jei/drying_rack.png");
-    private final IDrawable background;
-    private final IDrawable icon;
     private final IDrawable progressArrow;
 
     public DryingRecipeCategory(IGuiHelper helper) {
-        background = helper.drawableBuilder(BACKGROUND_PATH, 0, 0, 72, 18).setTextureSize(94, 18).build();
-        progressArrow = helper.drawableBuilder(BACKGROUND_PATH, 72, 0, 22, 16).setTextureSize(94, 18)
+        super(helper, "drying_rack");
+        progressArrow = helper.drawableBuilder(backgroundPath, 72, 0, 22, 16).setTextureSize(94, 18)
                 .buildAnimated(300, IDrawableAnimated.StartDirection.LEFT, false);
-        icon = helper.createDrawableItemStack(new ItemStack(BlockyChefBlocks.DRYING_RACK));
+    }
+
+    @Override
+    protected IDrawable createBackground(IGuiHelper helper) {
+        return helper.drawableBuilder(backgroundPath, 0, 0, 72, 18).setTextureSize(94, 18).build();
+    }
+
+    @Override
+    protected ItemStack getIconStack() {
+        return new ItemStack(BlockyChefBlocks.DRYING_RACK);
     }
 
     @Override
@@ -45,22 +47,7 @@ public class DryingRecipeCategory extends BlockyChefRecipeCategory<DryingRecipe>
     }
 
     @Override
-    public Component getTitle() {
-        return TITLE;
-    }
-
-    @Override
-    public IDrawable getBackground() {
-        return background;
-    }
-
-    @Override
-    public IDrawable getIcon() {
-        return icon;
-    }
-
-    @Override
     public RecipeType<DryingRecipe> getRecipeType() {
-        return JeiPlugin.DRYING_RECIPE;
+        return JeiIntegrationPlugin.DRYING_RECIPE;
     }
 }

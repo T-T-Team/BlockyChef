@@ -37,6 +37,10 @@ public class ToasterRecipe extends AbstractFoodRecipe<ToasterBlockEntity> {
         }
     }
 
+    public Ingredient getInput() {
+        return input;
+    }
+
     public ItemStack getOutput() {
         return output;
     }
