@@ -38,6 +38,7 @@ public class JeiIntegrationPlugin implements IModPlugin {
     static final RecipeType<DoughMakerRecipe> DOUGH_MAKER = new RecipeType<>(BlockyChef.resource("dough_maker"), DoughMakerRecipe.class);
     static final RecipeType<PastaMachineRecipe> PASTA_MACHINE = new RecipeType<>(BlockyChef.resource("pasta_machine"), PastaMachineRecipe.class);
     static final RecipeType<MeatGrinderRecipe> MEAT_GRINDER = new RecipeType<>(BlockyChef.resource("meat_grinder"), MeatGrinderRecipe.class);
+    static final RecipeType<GratingRecipe> GRATER = new RecipeType<>(BlockyChef.resource("grater"), GratingRecipe.class);
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
@@ -50,6 +51,7 @@ public class JeiIntegrationPlugin implements IModPlugin {
         registration.addRecipes(DOUGH_MAKER, getRecipes(BlockyChefRecipeTypes.DOUGH_MAKER_RECIPE));
         registration.addRecipes(PASTA_MACHINE, getRecipes(BlockyChefRecipeTypes.PASTA_MACHINE_RECIPE));
         registration.addRecipes(MEAT_GRINDER, getRecipes(BlockyChefRecipeTypes.MEAT_GRINDER_RECIPE));
+        registration.addRecipes(GRATER, getRecipes(BlockyChefRecipeTypes.GRATING_RECIPE));
     }
 
     @Override
@@ -64,7 +66,8 @@ public class JeiIntegrationPlugin implements IModPlugin {
                 new BarrelRecipeCategory(helper),
                 new DoughMakerRecipeCategory(helper),
                 new PastaMachineRecipeCategory(helper),
-                new MeatGrinderRecipeCategory(helper)
+                new MeatGrinderRecipeCategory(helper),
+                new GraterRecipeCategory(helper)
         );
     }
 
@@ -107,6 +110,7 @@ public class JeiIntegrationPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.DOUGH_MAKER), DOUGH_MAKER);
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.PASTA_MACHINE), PASTA_MACHINE);
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.MEAT_GRINDER), MEAT_GRINDER);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.GRATER), GRATER);
     }
 
     @Override

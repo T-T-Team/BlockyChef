@@ -46,6 +46,14 @@ public class GratingRecipe extends AbstractFoodRecipe<GraterBlockEntity> {
         return input.test(stack);
     }
 
+    public Ingredient getInput() {
+        return input;
+    }
+
+    public ItemStack getOutput() {
+        return output;
+    }
+
     public int getGratingAmount() {
         return gratingAmount;
     }
