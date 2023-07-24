@@ -2,6 +2,7 @@ package tnt.blockychef.common.food.fluid;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import tnt.blockychef.common.registry.Registry;
 
@@ -15,6 +16,7 @@ public final class FluidType {
     private final ResourceLocation identifier;
     private final int fluidColor;
     private final int fluidDensity;
+    private final Component text;
 
     public FluidType(ResourceLocation identifier, int fluidColor) {
         this(identifier, fluidColor, 0);
@@ -24,6 +26,11 @@ public final class FluidType {
         this.identifier = identifier;
         this.fluidColor = fluidColor;
         this.fluidDensity = fluidDensity;
+        this.text = Component.translatable("crafting.fluid." + identifier.toString().replaceAll(":", "."));
+    }
+
+    public Component getComponent() {
+        return text;
     }
 
     public ResourceLocation getFluidIdentifier() {

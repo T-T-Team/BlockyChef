@@ -39,6 +39,7 @@ public class JeiIntegrationPlugin implements IModPlugin {
     static final RecipeType<PastaMachineRecipe> PASTA_MACHINE = new RecipeType<>(BlockyChef.resource("pasta_machine"), PastaMachineRecipe.class);
     static final RecipeType<MeatGrinderRecipe> MEAT_GRINDER = new RecipeType<>(BlockyChef.resource("meat_grinder"), MeatGrinderRecipe.class);
     static final RecipeType<GratingRecipe> GRATER = new RecipeType<>(BlockyChef.resource("grater"), GratingRecipe.class);
+    static final RecipeType<JuicerRecipe> JUICER = new RecipeType<>(BlockyChef.resource("juicer"), JuicerRecipe.class);
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
@@ -52,6 +53,7 @@ public class JeiIntegrationPlugin implements IModPlugin {
         registration.addRecipes(PASTA_MACHINE, getRecipes(BlockyChefRecipeTypes.PASTA_MACHINE_RECIPE));
         registration.addRecipes(MEAT_GRINDER, getRecipes(BlockyChefRecipeTypes.MEAT_GRINDER_RECIPE));
         registration.addRecipes(GRATER, getRecipes(BlockyChefRecipeTypes.GRATING_RECIPE));
+        registration.addRecipes(JUICER, getRecipes(BlockyChefRecipeTypes.JUICER_RECIPE));
     }
 
     @Override
@@ -67,7 +69,8 @@ public class JeiIntegrationPlugin implements IModPlugin {
                 new DoughMakerRecipeCategory(helper),
                 new PastaMachineRecipeCategory(helper),
                 new MeatGrinderRecipeCategory(helper),
-                new GraterRecipeCategory(helper)
+                new GraterRecipeCategory(helper),
+                new JuicerRecipeCategory(helper)
         );
     }
 
@@ -111,6 +114,7 @@ public class JeiIntegrationPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.PASTA_MACHINE), PASTA_MACHINE);
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.MEAT_GRINDER), MEAT_GRINDER);
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.GRATER), GRATER);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.JUICER), JUICER);
     }
 
     @Override

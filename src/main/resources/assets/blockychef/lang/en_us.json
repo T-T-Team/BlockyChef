@@ -698,6 +698,7 @@
   "label.blockychef.low": "Power Low",
   "label.blockychef.medium": "Power Medium",
   "label.blockychef.high": "Power High",
+  "label.blockychef.fluid_amount": "%s mB",
 
   "screen.blockychef.cutting_board": "Cutting Board",
   "screen.blockychef.cutting_board.widget.start_cutting": "Cut",
@@ -724,5 +725,7 @@
   "jei.recipe_category.blockychef.toasting": "Toaster",
   "jei.recipe_category.blockychef.barrel": "Barrel",
   "jei.recipe_category.blockychef.dough_maker": "Dough Maker",
-  "jei.recipe_category.blockychef.mortar_and_pestle": "Mortar & Pestle"
+  "jei.recipe_category.blockychef.mortar_and_pestle": "Mortar & Pestle",
+
+  "crafting.fluid.blockychef.orange_fluid": "Orange Fluid"
 }

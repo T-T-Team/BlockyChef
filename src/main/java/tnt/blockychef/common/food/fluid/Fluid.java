@@ -2,6 +2,10 @@ package tnt.blockychef.common.food.fluid;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.network.chat.Component;
+
+import java.util.Arrays;
+import java.util.List;
 
 public final class Fluid {
 
@@ -44,5 +48,12 @@ public final class Fluid {
 
     public boolean isEmpty() {
         return amount <= 0;
+    }
+
+    public List<Component> getTooltip() {
+        return Arrays.asList(
+                fluidType.getComponent(),
+                Component.translatable("label.blockychef.fluid_amount", amount)
+        );
     }
 }

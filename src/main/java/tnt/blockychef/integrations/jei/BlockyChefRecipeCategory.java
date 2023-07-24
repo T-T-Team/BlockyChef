@@ -10,9 +10,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import tnt.blockychef.BlockyChef;
-import tnt.blockychef.common.food.recipe.AbstractFoodRecipe;
 
-public abstract class BlockyChefRecipeCategory<T extends AbstractFoodRecipe<?>> implements IRecipeCategory<T> {
+public abstract class BlockyChefRecipeCategory<T> implements IRecipeCategory<T> {
 
     protected final ResourceLocation backgroundPath;
     protected IDrawable background;

@@ -35,6 +35,10 @@ public class JuicerRecipe extends AbstractFoodRecipe<JuicerBlockEntity> {
         this.output = value;
     }
 
+    public Ingredient getInput() {
+        return input;
+    }
+
     public int getPressAmount() {
         return pressAmount;
     }
