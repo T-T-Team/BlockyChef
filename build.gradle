@@ -74,6 +74,8 @@ dependencies {
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     // Appleskin
     implementation fg.deobf("squeek.appleskin:appleskin-forge:${appleskin_version}")
+    // Waila
+    implementation fg.deobf("curse.maven:jade-324717:${waila_version}")
     // JEI
     compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"))
     compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"))
