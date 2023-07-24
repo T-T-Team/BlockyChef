@@ -53,12 +53,7 @@ public class DoughMakerRecipe extends AbstractFoodRecipe<DoughMakerBlockEntity> 
 
     @Override
     public boolean matches(DoughMakerBlockEntity doughMaker, Level level) {
-        for (MultiIngredient multiIngredient : inputs) {
-            if (!multiIngredient.test(doughMaker, DoughMakerBlockEntity.INPUTS)) {
-                return false;
-            }
-        }
-        return true;
+        return MultiIngredient.test(doughMaker, DoughMakerBlockEntity.INPUTS, inputs);
     }
 
     @Override

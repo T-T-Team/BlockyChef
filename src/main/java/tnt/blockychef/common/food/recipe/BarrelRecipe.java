@@ -53,12 +53,7 @@ public class BarrelRecipe extends AbstractFoodRecipe<BarrelBlockEntity> {
 
     @Override
     public boolean matches(BarrelBlockEntity blockEntity, Level level) {
-        for (MultiIngredient ingredient : inputs) {
-            if (!ingredient.test(blockEntity, BarrelBlockEntity.INPUTS)) {
-                return false;
-            }
-        }
-        return true;
+        return MultiIngredient.test(blockEntity, BarrelBlockEntity.INPUTS, inputs);
     }
 
     @Override

@@ -50,12 +50,7 @@ public class MixerRecipe extends AbstractFoodRecipe<MixerBlockEntity> {
 
     @Override
     public boolean matches(MixerBlockEntity mixer, Level level) {
-        for (MultiIngredient ingredient : inputs) {
-            if (!ingredient.test(mixer, MixerBlockEntity.INPUTS)) {
-                return false;
-            }
-        }
-        return true;
+        return MultiIngredient.test(mixer, MixerBlockEntity.INPUTS, inputs);
     }
 
     @Override

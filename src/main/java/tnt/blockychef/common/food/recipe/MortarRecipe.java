@@ -59,12 +59,7 @@ public class MortarRecipe extends AbstractFoodRecipe<MortarAndPestleBlockEntity>
 
     @Override
     public boolean matches(MortarAndPestleBlockEntity mortarAndPestle, Level level) {
-        for (MultiIngredient ingredient : inputs) {
-            if (!ingredient.test(mortarAndPestle, MortarAndPestleBlockEntity.INPUTS)) {
-                return false;
-            }
-        }
-        return true;
+        return MultiIngredient.test(mortarAndPestle, MortarAndPestleBlockEntity.INPUTS, inputs);
     }
 
     @Override

@@ -62,12 +62,7 @@ public class MixingBowlRecipe extends AbstractFoodRecipe<MixingBowlBlockEntity> 
 
     @Override
     public boolean matches(MixingBowlBlockEntity blockEntity, Level level) {
-        for (MultiIngredient ingredient : ingredients) {
-            if (!ingredient.test(blockEntity, MixingBowlBlockEntity.INPUTS)) {
-                return false;
-            }
-        }
-        return true;
+        return MultiIngredient.test(blockEntity, MixingBowlBlockEntity.INPUTS, ingredients);
     }
 
     @Override
