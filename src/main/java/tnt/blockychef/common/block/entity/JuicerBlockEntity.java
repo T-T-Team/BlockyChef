@@ -7,10 +7,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import tnt.blockychef.common.data.fluids.FluidHolder;
-import tnt.blockychef.common.food.fluid.Fluid;
 import tnt.blockychef.common.food.fluid.FluidContainer;
 import tnt.blockychef.common.food.recipe.JuicerRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
@@ -37,12 +37,12 @@ public class JuicerBlockEntity extends RecipeRemberingBlockEntity<JuicerRecipe> 
     }
 
     @Override
-    public boolean hasFluid(Fluid fluid) {
+    public boolean hasFluid(FluidStack fluid) {
         return container.hasFluid(fluid);
     }
 
     @Override
-    public boolean extract(Fluid fluid) {
+    public boolean extract(FluidStack fluid) {
         boolean result = container.extract(fluid);
         setChanged();
         Helper.sendBlockEntityClientData(this);
@@ -81,7 +81,7 @@ public class JuicerBlockEntity extends RecipeRemberingBlockEntity<JuicerRecipe> 
             return;
         }
         if (++pressCounter >= activeRecipe.getPressAmount()) {
-            Fluid result = activeRecipe.getOutput().copy();
+            FluidStack result = activeRecipe.getOutput().copy();
             container.insert(result);
             storeRecipe(activeRecipe);
             getInputItem().shrink(1);

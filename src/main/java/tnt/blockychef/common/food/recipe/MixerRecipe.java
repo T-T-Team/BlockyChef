@@ -8,8 +8,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.fluids.FluidStack;
 import tnt.blockychef.common.block.entity.MixerBlockEntity;
-import tnt.blockychef.common.food.fluid.Fluid;
 import tnt.blockychef.common.init.BlockyChefRecipeSerializers;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.util.SerializationHelper;
@@ -21,16 +21,16 @@ public class MixerRecipe extends AbstractItemReturningRecipe<MixerBlockEntity> {
     public static final CodecRecipeSerializer.CodecProvider<MixerRecipe> CODEC_PROVIDER = recipe -> RecordCodecBuilder.create(instance -> instance.group(
             MultiIngredient.CODEC.listOf().fieldOf("inputs").forGetter(MixerRecipe::getInputs),
             SerializationHelper.enumCodec(RpmValue.class).fieldOf("rpm").forGetter(MixerRecipe::getRpm),
-            Fluid.CODEC.fieldOf("output").forGetter(MixerRecipe::getOutput),
+            FluidStack.CODEC.fieldOf("output").forGetter(MixerRecipe::getOutput),
             resolveContainerItems(),
             resolveExperience()
     ).apply(instance, (in, rpm, out, cti, exp) -> new MixerRecipe(recipe, in, rpm, out, cti, exp)));
 
     private final List<MultiIngredient> inputs;
     private final RpmValue rpm;
-    private final Fluid output;
+    private final FluidStack output;
 
-    public MixerRecipe(ResourceLocation recipeId, List<MultiIngredient> inputs, RpmValue rpm, Fluid output, List<ItemStack> containerItems, float experience) {
+    public MixerRecipe(ResourceLocation recipeId, List<MultiIngredient> inputs, RpmValue rpm, FluidStack output, List<ItemStack> containerItems, float experience) {
         super(recipeId, experience, containerItems);
         this.inputs = inputs;
         this.rpm = rpm;
@@ -45,7 +45,7 @@ public class MixerRecipe extends AbstractItemReturningRecipe<MixerBlockEntity> {
         return rpm;
     }
 
-    public Fluid getOutput() {
+    public FluidStack getOutput() {
         return output;
     }
 

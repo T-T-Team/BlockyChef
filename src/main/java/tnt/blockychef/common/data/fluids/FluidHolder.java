@@ -1,10 +1,10 @@
 package tnt.blockychef.common.data.fluids;
 
-import tnt.blockychef.common.food.fluid.Fluid;
+import net.minecraftforge.fluids.FluidStack;
 
 public interface FluidHolder {
 
-    boolean hasFluid(Fluid fluid);
+    boolean hasFluid(FluidStack fluid);
 
-    boolean extract(Fluid fluid);
+    boolean extract(FluidStack fluid);
 }

@@ -6,12 +6,11 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import tnt.blockychef.common.data.fluids.FluidHolder;
-import tnt.blockychef.common.food.fluid.Fluid;
 import tnt.blockychef.common.food.fluid.FluidContainer;
-import tnt.blockychef.common.food.fluid.FluidType;
 import tnt.blockychef.common.food.recipe.MixerRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
@@ -20,7 +19,6 @@ import tnt.blockychef.util.MenuInventoryHelper;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
-import java.util.Map;
 import java.util.Optional;
 
 public class MixerBlockEntity extends RecipeRemberingBlockEntity<MixerRecipe> implements SynchronizableBlockEntity, IndexedColorHolder, FluidHolder {
@@ -40,21 +38,22 @@ public class MixerBlockEntity extends RecipeRemberingBlockEntity<MixerRecipe> im
     }
 
     @Override
-    public boolean hasFluid(Fluid fluid) {
+    public boolean hasFluid(FluidStack fluid) {
         return container.hasFluid(fluid);
     }
 
     @Override
-    public boolean extract(Fluid fluid) {
+    public boolean extract(FluidStack fluid) {
         return container.extract(fluid);
     }
 
     public boolean canBlend() {
         if (activeRecipe == null)
             return false;
-        Map<FluidType, Integer> fluidMap = container.getFluids();
-        Fluid result = activeRecipe.getOutput();
-        if (fluidMap.size() > 0 && !fluidMap.containsKey(result.getFluidType()))
+        FluidStack result = activeRecipe.getOutput();
+        FluidStack check = result.copy();
+        check.setAmount(1);
+        if (container.getFluids().size() > 0 && !container.hasFluid(check))
             return false;
         return container.getAmount() + result.getAmount() <= container.getCapacity();
     }
@@ -72,8 +71,8 @@ public class MixerBlockEntity extends RecipeRemberingBlockEntity<MixerRecipe> im
             activeRecipe.getInputs().forEach(ingredient -> ingredient.consume(this, INPUTS));
             activeRecipe.returnItemsToContainer(this, level, worldPosition);
             if (rpmDiff == 0) {
-                Fluid fluid = activeRecipe.getOutput().copy();
-                container.insert(fluid);
+                FluidStack stack = activeRecipe.getOutput().copy();
+                container.insert(stack);
                 storeRecipe(activeRecipe);
                 if (!level.isClientSide) {
                     awardUsedRecipesAndPopExperience((ServerPlayer) player);

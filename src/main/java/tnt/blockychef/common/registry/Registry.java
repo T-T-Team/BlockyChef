@@ -1,6 +1,5 @@
 package tnt.blockychef.common.registry;
 
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.inventory.MenuType;
@@ -15,12 +14,12 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorTy
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.*;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegisterEvent;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.entity.*;
 import tnt.blockychef.common.effect.HydrationMobEffect;
 import tnt.blockychef.common.effect.ThirstMobEffect;
-import tnt.blockychef.common.food.fluid.FluidType;
 import tnt.blockychef.common.food.recipe.*;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 import tnt.blockychef.common.menu.*;
@@ -30,19 +29,11 @@ import tnt.blockychef.levelgen.tree.TreeFruitDecorator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = BlockyChef.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class Registry {
 
-    public static Supplier<IForgeRegistry<FluidType>> FLUID;
-
     private static List<Block> blockEntries = new ArrayList<>();
-
-    @SubscribeEvent
-    public static void createRegistries(NewRegistryEvent event) {
-        FLUID = event.create(new RegistryBuilder<FluidType>().setName(BlockyChef.resource("fluid")));
-    }
 
     @SubscribeEvent
     public static void registerObjects(RegisterEvent event) {
@@ -55,7 +46,6 @@ public final class Registry {
         event.register(ForgeRegistries.RECIPE_SERIALIZERS.getRegistryKey(), Registry::registerRecipeSerializers);
         event.register(ForgeRegistries.FEATURES.getRegistryKey(), Registry::registerFeatures);
         event.register(ForgeRegistries.TREE_DECORATOR_TYPES.getRegistryKey(), Registry::registerTreeDecorators);
-        event.register(FLUID.get().getRegistryKey(), Registry::registerFluids);
     }
 
     private static void registerBlocks(RegisterEvent.RegisterHelper<Block> helper) {
@@ -160,11 +150,12 @@ public final class Registry {
         helper.register("fruit_decorator", new TreeDecoratorType<>(TreeFruitDecorator.CODEC));
     }
 
-    private static void registerFluids(RegisterEvent.RegisterHelper<FluidType> forgeHelper) {
+    // TODO remove
+    private static void registerFluids(RegisterEvent.RegisterHelper<?> forgeHelper) {
         FluidRegistryHelper helper = (id, fluidColor, fluidDensity) -> {
-            ResourceLocation identifier = BlockyChef.resource(id);
-            FluidType type = new FluidType(identifier, fluidColor, fluidDensity);
-            forgeHelper.register(id, type);
+            //ResourceLocation identifier = BlockyChef.resource(id);
+            //FluidType type = new FluidType(identifier, fluidColor, fluidDensity);
+            //forgeHelper.register(id, type);
         };
         helper.register("orange_fluid", 0xAAFF7328);
         helper.register("cherry_fluid", 0xAABA000C);

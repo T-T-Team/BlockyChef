@@ -7,11 +7,14 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.minecraftforge.fluids.FluidStack;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import tnt.blockychef.BlockyChef;
+import tnt.blockychef.common.fluid.EdibleFluidType;
 import tnt.blockychef.common.food.fluid.FluidContainer;
-import tnt.blockychef.common.food.fluid.FluidType;
 import tnt.blockychef.util.ColorHelper;
 
 import java.util.ArrayList;
@@ -43,8 +46,8 @@ public final class FluidContainerRenderer {
     }
 
     public void renderFluids(FluidContainer container, PoseStack poseStack, MultiBufferSource bufferSource, int light) {
-        Map<FluidType, Integer> map = container.getFluids();
-        if (map.isEmpty())
+        List<FluidStack> fluids = container.getFluids();
+        if (fluids.isEmpty())
             return;
         float offset = 0.0F;
         float delta = maxY - minY;
@@ -55,11 +58,12 @@ public final class FluidContainerRenderer {
         float nx = 0;
         float ny = 1;
         float nz = 0;
-        float darkenModifier = map.size() > 1 ? 1.0F : 1.0F - container.getFilledCapacityPercent(container.getAmount()) * 0.5F;
-        for (Map.Entry<FluidType, Integer> entry : map.entrySet()) {
-            int color = entry.getKey().fluidColor();
+        float darkenModifier = fluids.size() > 1 ? 1.0F : 1.0F - container.getFilledCapacityPercent(container.getAmount()) * 0.5F;
+        for (FluidStack stack : fluids) {
+            IClientFluidTypeExtensions extensions = IClientFluidTypeExtensions.of(stack.getFluid());
+            int color = extensions.getTintColor();
             int darkColor = ColorHelper.darken(color, darkenModifier);
-            float f = container.getFilledCapacityPercent(entry.getValue());
+            float f = container.getFilledCapacityPercent(stack.getAmount());
             float y1 = minY + offset;
             float y2 = y1 + delta * f;
             for (Vertex vertex : vertexList) {

@@ -6,8 +6,8 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
-import tnt.blockychef.common.food.fluid.Fluid;
 import tnt.blockychef.util.SerializationHelper;
 
 public final class FluidExtraction {
@@ -20,14 +20,14 @@ public final class FluidExtraction {
                 return DataResult.success(ForgeRegistries.ITEMS.getValue(location));
             }, ForgeRegistries.ITEMS::getKey).fieldOf("item").forGetter(t -> t.inputItem),
             SerializationHelper.SIMPLE_ITEMSTACK_CODEC.fieldOf("output").forGetter(t -> t.outputItem),
-            Fluid.CODEC.fieldOf("fluidFilter").forGetter(t -> t.fluid)
+            FluidStack.CODEC.fieldOf("fluidFilter").forGetter(t -> t.fluid)
     ).apply(instance, FluidExtraction::new));
 
     private final Item inputItem;
     private final ItemStack outputItem;
-    private final Fluid fluid;
+    private final FluidStack fluid;
 
-    public FluidExtraction(Item inputItem, ItemStack outputItem, Fluid fluid) {
+    public FluidExtraction(Item inputItem, ItemStack outputItem, FluidStack fluid) {
         this.inputItem = inputItem;
         this.outputItem = outputItem;
         this.fluid = fluid;

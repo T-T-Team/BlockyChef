@@ -1,25 +1,27 @@
 package tnt.blockychef.common.food.fluid;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
-import tnt.blockychef.common.registry.Registry;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidType;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class FluidContainer {
 
-    private final Map<FluidType, Integer> fluids;
+    private final List<FluidStack> fluids;
     private final int capacity;
     private final boolean allowMultipleTypes;
 
     public FluidContainer(int capacity, boolean allowMultipleTypes) {
         this.capacity = capacity;
         this.allowMultipleTypes = allowMultipleTypes;
-        this.fluids = new HashMap<>();
+        this.fluids = new ArrayList<>();
     }
 
-    public Map<FluidType, Integer> getFluids() {
+    public List<FluidStack> getFluids() {
         return fluids;
     }
 
@@ -27,12 +29,12 @@ public final class FluidContainer {
         return capacity;
     }
 
-    public boolean insert(Fluid fluid) {
+    public boolean insert(FluidStack fluid) {
         if (!fluids.isEmpty()) {
             if (allowMultipleTypes) {
                 return insertFluid(fluid);
             }
-            if (fluids.containsKey(fluid.getFluidType())) {
+            if (isInsertable(fluid)) {
                 return insertFluid(fluid);
             }
             return false;
@@ -41,29 +43,39 @@ public final class FluidContainer {
         }
     }
 
-    public boolean extract(Fluid fluid) {
-        FluidType type = fluid.getFluidType();
-        int amount = fluid.getAmount();
-        int stored = fluids.getOrDefault(type, 0);
+    public boolean isInsertable(FluidStack stack) {
+        if (fluids.isEmpty())
+            return true;
+        FluidStack first = fluids.get(0);
+        return first.getFluid().getFluidType() == stack.getFluid().getFluidType();
+    }
+
+    public boolean extract(FluidStack fluidStack) {
+        FluidType type = fluidStack.getFluid().getFluidType();
+        int amount = fluidStack.getAmount();
+        int stored = this.getStoredAmount(type);
         if (stored >= amount) {
             int result = stored - amount;
-            if (result == 0) {
-                fluids.remove(type);
-            } else {
-                fluids.put(type, result);
+            fluids.removeIf(stack -> stack.getFluid().getFluidType() == type);
+            if (result > 0) {
+                fluids.add(new FluidStack(fluidStack.getFluid(), result));
             }
             return true;
         }
         return false;
     }
 
-    public boolean hasFluid(Fluid fluid) {
-        int amount = fluids.getOrDefault(fluid.getFluidType(), 0);
+    public boolean hasFluid(FluidStack fluid) {
+        int amount = getStoredAmount(fluid.getFluid().getFluidType());
         return amount >= fluid.getAmount();
     }
 
+    public int getStoredAmount(FluidType type) {
+        return fluids.stream().filter(stack -> stack.getFluid().getFluidType() == type).mapToInt(FluidStack::getAmount).sum();
+    }
+
     public int getAmount() {
-        return fluids.values().stream().reduce(0, Integer::sum);
+        return fluids.stream().mapToInt(FluidStack::getAmount).sum();
     }
 
     public float getFilledCapacityPercent(int amount) {
@@ -76,33 +88,26 @@ public final class FluidContainer {
 
     public CompoundTag serialize() {
         CompoundTag tag = new CompoundTag();
-        for (Map.Entry<FluidType, Integer> entry : fluids.entrySet()) {
-            ResourceLocation id = Registry.FLUID.get().getKey(entry.getKey());
-            tag.putInt(id.toString(), entry.getValue());
-        }
+        ListTag list = new ListTag();
+        fluids.forEach(fluid -> list.add(fluid.writeToNBT(new CompoundTag())));
+        tag.put("fluids", list);
         return tag;
     }
 
     public void deserialize(CompoundTag tag) {
         fluids.clear();
-        for (String key : tag.getAllKeys()) {
-            FluidType type = Registry.FLUID.get().getValue(new ResourceLocation(key));
-            if (type == null)
-                continue;
-            int amount = tag.getInt(key);
-            fluids.put(type, amount);
-        }
+        tag.getList("fluids", Tag.TAG_COMPOUND).forEach(fluidTag -> fluids.add(FluidStack.loadFluidStackFromNBT((CompoundTag) fluidTag)));
     }
 
-    private boolean insertFluid(Fluid fluid) {
+    private boolean insertFluid(FluidStack fluid) {
         int limit = capacity - getAmount();
         if (limit <= 0) {
             return false;
         }
-        int stored = fluids.computeIfAbsent(fluid.getFluidType(), k -> 0);
         int toStore = Math.min(limit, fluid.getAmount());
-        fluid.extract(toStore);
-        fluids.put(fluid.getFluidType(), stored + toStore);
+        FluidStack inserting = fluid.copy();
+        inserting.setAmount(toStore);
+        fluids.add(inserting);
         return fluid.isEmpty();
     }
 }

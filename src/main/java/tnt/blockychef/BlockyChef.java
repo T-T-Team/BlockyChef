@@ -19,6 +19,8 @@ import org.apache.logging.log4j.Logger;
 import tnt.blockychef.client.BlockyChefClient;
 import tnt.blockychef.common.CreativeTabs;
 import tnt.blockychef.common.data.fluids.FluidExtractionManager;
+import tnt.blockychef.common.init.BlockyChefFluidTypes;
+import tnt.blockychef.common.init.BlockyChefFluids;
 import tnt.blockychef.common.thirst.DrinkConsumeHandler;
 import tnt.blockychef.common.thirst.ConfigDrinkLoader;
 import tnt.blockychef.common.thirst.PlayerThirstStatsProvider;
@@ -40,6 +42,8 @@ public final class BlockyChef {
 
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         CreativeTabs.TABS.register(modBus);
+        BlockyChefFluidTypes.register(modBus);
+        BlockyChefFluids.register(modBus);
         modBus.addListener(this::setup);
 
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
