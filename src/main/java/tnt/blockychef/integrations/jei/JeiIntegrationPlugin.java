@@ -40,6 +40,7 @@ public class JeiIntegrationPlugin implements IModPlugin {
     static final RecipeType<MeatGrinderRecipe> MEAT_GRINDER = new RecipeType<>(BlockyChef.resource("meat_grinder"), MeatGrinderRecipe.class);
     static final RecipeType<GratingRecipe> GRATER = new RecipeType<>(BlockyChef.resource("grater"), GratingRecipe.class);
     static final RecipeType<JuicerRecipe> JUICER = new RecipeType<>(BlockyChef.resource("juicer"), JuicerRecipe.class);
+    static final RecipeType<MixerRecipe> MIXER = new RecipeType<>(BlockyChef.resource("mixer"), MixerRecipe.class);
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
@@ -54,6 +55,7 @@ public class JeiIntegrationPlugin implements IModPlugin {
         registration.addRecipes(MEAT_GRINDER, getRecipes(BlockyChefRecipeTypes.MEAT_GRINDER_RECIPE));
         registration.addRecipes(GRATER, getRecipes(BlockyChefRecipeTypes.GRATING_RECIPE));
         registration.addRecipes(JUICER, getRecipes(BlockyChefRecipeTypes.JUICER_RECIPE));
+        registration.addRecipes(MIXER, getRecipes(BlockyChefRecipeTypes.MIXER_RECIPE));
     }
 
     @Override
@@ -70,7 +72,8 @@ public class JeiIntegrationPlugin implements IModPlugin {
                 new PastaMachineRecipeCategory(helper),
                 new MeatGrinderRecipeCategory(helper),
                 new GraterRecipeCategory(helper),
-                new JuicerRecipeCategory(helper)
+                new JuicerRecipeCategory(helper),
+                new MixerRecipeCategory(helper)
         );
     }
 
@@ -115,6 +118,7 @@ public class JeiIntegrationPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.MEAT_GRINDER), MEAT_GRINDER);
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.GRATER), GRATER);
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.JUICER), JUICER);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.MIXER), MIXER);
     }
 
     @Override

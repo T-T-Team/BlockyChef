@@ -8,6 +8,8 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
 import tnt.blockychef.common.food.recipe.JuicerRecipe;
@@ -46,5 +48,8 @@ public class JuicerRecipeCategory extends BlockychefFluidRecipeCategory<JuicerRe
     @Override
     public void draw(JuicerRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         drawFluid(guiGraphics, recipe.getOutput(), 55, 1, mouseX, mouseY);
+        String text = recipe.getPressAmount() + "x";
+        Font font = Minecraft.getInstance().font;
+        guiGraphics.drawString(font, text, background.getWidth() + 5, (background.getHeight() - font.lineHeight) / 2.0F, 0x808080, false);
     }
 }
