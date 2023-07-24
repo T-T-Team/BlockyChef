@@ -1,0 +1,24 @@
+{
+  "type": "blockychef:barrel",
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:cheese"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:brown_mushroom"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:camembert",
+      "count": 1
+    }
+  ],
+  "fermentTime": 2400
+}

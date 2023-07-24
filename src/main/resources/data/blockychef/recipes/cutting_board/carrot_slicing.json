@@ -1,0 +1,14 @@
+{
+  "type": "blockychef:cutting_board",
+  "input": {
+    "item": "minecraft:carrot"
+  },
+  "processingType": "blockychef:slicing",
+  "processingTime": 80,
+  "outputs": [
+    {
+      "item": "blockychef:carrot_slice",
+      "count": 2
+    }
+  ]
+}

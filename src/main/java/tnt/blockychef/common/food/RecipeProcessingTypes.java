@@ -13,6 +13,7 @@ public class RecipeProcessingTypes {
 
     public static final RecipeProcessingType CUTTING = register("cutting");
     public static final RecipeProcessingType SLICING = register("slicing");
+    public static final RecipeProcessingType PEELING = register("peeling");
     public static final RecipeProcessingType HOLLOWING = register("hollowing");
     public static final RecipeProcessingType ROLLING = register("rolling");
 

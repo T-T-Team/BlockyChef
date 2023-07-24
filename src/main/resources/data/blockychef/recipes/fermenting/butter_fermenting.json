@@ -1,0 +1,28 @@
+{
+  "type": "blockychef:barrel",
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:milk"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:salt"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:butter",
+      "count": 1
+    },
+    {
+      "item": "blockychef:empty_bottle",
+      "count": 1
+    }
+  ],
+  "fermentTime": 2400
+}

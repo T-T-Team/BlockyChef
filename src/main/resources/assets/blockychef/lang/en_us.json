@@ -692,6 +692,7 @@
   "recipe.process.blockychef.slicing": "Slice",
   "recipe.process.blockychef.hollowing": "Hollow",
   "recipe.process.blockychef.rolling": "Roll",
+  "recipe.process.blockychef.peeling": "Peel",
 
   "label.blockychef.cancel": "Cancel",
   "label.blockychef.low": "Power Low",
@@ -715,5 +716,13 @@
   "screen.blockychef.barrel.widget.ferment": "Ferment",
 
   "death.attack.blockychef.dehydration": "%s has died due to dehydration",
-  "death.attack.blockychef.dehydration.player": "%1$s has died due to dehydration whilst fighting %2$s"
+  "death.attack.blockychef.dehydration.player": "%1$s has died due to dehydration whilst fighting %2$s",
+
+  "jei.recipe_category.blockychef.cutting_board": "Cutting Board",
+  "jei.recipe_category.blockychef.drying_rack": "Drying Rack",
+  "jei.recipe_category.blockychef.mixing_bowl": "Mixing Bowl",
+  "jei.recipe_category.blockychef.toasting": "Toaster",
+  "jei.recipe_category.blockychef.barrel": "Barrel",
+  "jei.recipe_category.blockychef.dough_maker": "Dough Maker",
+  "jei.recipe_category.blockychef.mortar_and_pestle": "Mortar & Pestle"
 }

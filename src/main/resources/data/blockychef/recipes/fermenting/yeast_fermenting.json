@@ -1,0 +1,30 @@
+{
+  "type": "blockychef:barrel",
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:wheat_flour"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "minecraft:brown_mushroom"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:yeast",
+      "count": 4
+    }
+  ],
+  "fermentTime": 2400
+}

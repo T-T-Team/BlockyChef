@@ -16,10 +16,7 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import tnt.blockychef.BlockyChef;
-import tnt.blockychef.common.food.recipe.CuttingBoardRecipe;
-import tnt.blockychef.common.food.recipe.DryingRecipe;
-import tnt.blockychef.common.food.recipe.MixingBowlRecipe;
-import tnt.blockychef.common.food.recipe.ToasterRecipe;
+import tnt.blockychef.common.food.recipe.*;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 import tnt.blockychef.common.init.BlockyChefMenuTypes;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
@@ -36,6 +33,10 @@ public class JeiIntegrationPlugin implements IModPlugin {
     static final RecipeType<CuttingBoardRecipe> CUTTING_BOARD_RECIPE = new RecipeType<>(BlockyChef.resource("cutting_board"), CuttingBoardRecipe.class);
     static final RecipeType<ToasterRecipe> TOASTER_RECIPE = new RecipeType<>(BlockyChef.resource("toaster"), ToasterRecipe.class);
     static final RecipeType<MixingBowlRecipe> MIXING_BOWL = new RecipeType<>(BlockyChef.resource("mixing_bowl"), MixingBowlRecipe.class);
+    static final RecipeType<MortarRecipe> MORTAR_AND_PESTLE = new RecipeType<>(BlockyChef.resource("mortar_and_pestle"), MortarRecipe.class);
+    static final RecipeType<BarrelRecipe> BARREL = new RecipeType<>(BlockyChef.resource("barrel"), BarrelRecipe.class);
+    static final RecipeType<DoughMakerRecipe> DOUGH_MAKER = new RecipeType<>(BlockyChef.resource("dough_maker"), DoughMakerRecipe.class);
+    static final RecipeType<PastaMachineRecipe> PASTA_MACHINE = new RecipeType<>(BlockyChef.resource("pasta_machine"), PastaMachineRecipe.class);
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
@@ -43,6 +44,10 @@ public class JeiIntegrationPlugin implements IModPlugin {
         registration.addRecipes(CUTTING_BOARD_RECIPE, getRecipes(BlockyChefRecipeTypes.CUTTING_BOARD_RECIPE));
         registration.addRecipes(TOASTER_RECIPE, getRecipes(BlockyChefRecipeTypes.TOASTER_RECIPE));
         registration.addRecipes(MIXING_BOWL, getRecipes(BlockyChefRecipeTypes.MIXING_BOWL_RECIPE));
+        registration.addRecipes(MORTAR_AND_PESTLE, getRecipes(BlockyChefRecipeTypes.MORTAR_AND_PESTLE_RECIPE));
+        registration.addRecipes(BARREL, getRecipes(BlockyChefRecipeTypes.BARREL_RECIPE));
+        registration.addRecipes(DOUGH_MAKER, getRecipes(BlockyChefRecipeTypes.DOUGH_MAKER_RECIPE));
+        registration.addRecipes(PASTA_MACHINE, getRecipes(BlockyChefRecipeTypes.PASTA_MACHINE_RECIPE));
     }
 
     @Override
@@ -52,7 +57,11 @@ public class JeiIntegrationPlugin implements IModPlugin {
                 new DryingRecipeCategory(helper),
                 new CuttingBoardRecipeCategory(helper),
                 new ToastingRecipeCategory(helper),
-                new MixingBowlRecipeCategory(helper)
+                new MixingBowlRecipeCategory(helper),
+                new MortarRecipeCategory(helper),
+                new BarrelRecipeCategory(helper),
+                new DoughMakerRecipeCategory(helper),
+                new PastaMachineRecipeCategory(helper)
         );
     }
 
@@ -60,10 +69,40 @@ public class JeiIntegrationPlugin implements IModPlugin {
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.DRYING_RACK), DRYING_RECIPE);
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.OAK_CUTTING_BOARD), CUTTING_BOARD_RECIPE);
-        // TODO add all cutting board variants / or find a way to use block tags for this
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.SPRUCE_CUTTING_BOARD), CUTTING_BOARD_RECIPE);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.BIRCH_CUTTING_BOARD), CUTTING_BOARD_RECIPE);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.JUNGLE_CUTTING_BOARD), CUTTING_BOARD_RECIPE);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.DARK_CUTTING_BOARD), CUTTING_BOARD_RECIPE);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.CRIMSON_CUTTING_BOARD), CUTTING_BOARD_RECIPE);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.WARPED_CUTTING_BOARD), CUTTING_BOARD_RECIPE);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.ACACIA_CUTTING_BOARD), CUTTING_BOARD_RECIPE);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.MANGROVE_CUTTING_BOARD), CUTTING_BOARD_RECIPE);
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.TOASTER), TOASTER_RECIPE);
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.OAK_MIXING_BOWL), MIXING_BOWL);
-        // TODO add all mixing bowl variants
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.BIRCH_MIXING_BOWL), MIXING_BOWL);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.DARK_OAK_MIXING_BOWL), MIXING_BOWL);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.JUNGLE_MIXING_BOWL), MIXING_BOWL);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.SPRUCE_MIXING_BOWL), MIXING_BOWL);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.MANGROVE_MIXING_BOWL), MIXING_BOWL);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.ACACIA_MIXING_BOWL), MIXING_BOWL);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.WARPED_MIXING_BOWL), MIXING_BOWL);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.CRIMSON_MIXING_BOWL), MIXING_BOWL);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.DEEPSLATE_MORTAR_AND_PESTLE), MORTAR_AND_PESTLE);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.ANDESITE_MORTAR_AND_PESTLE), MORTAR_AND_PESTLE);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.DIORITE_MORTAR_AND_PESTLE), MORTAR_AND_PESTLE);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.GRANITE_MORTAR_AND_PESTLE), MORTAR_AND_PESTLE);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.QUARTZ_MORTAR_AND_PESTLE), MORTAR_AND_PESTLE);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.OAK_BARREL), BARREL);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.BIRCH_BARREL), BARREL);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.SPRUCE_BARREL), BARREL);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.JUNGLE_BARREL), BARREL);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.DARK_OAK_BARREL), BARREL);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.ACACIA_BARREL), BARREL);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.MANGROVE_BARREL), BARREL);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.WARPED_BARREL), BARREL);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.CRIMSON_BARREL), BARREL);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.DOUGH_MAKER), DOUGH_MAKER);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.PASTA_MACHINE), PASTA_MACHINE);
     }
 
     @Override

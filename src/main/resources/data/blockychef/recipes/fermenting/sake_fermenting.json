@@ -1,0 +1,40 @@
+{
+  "type": "blockychef:barrel",
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:bottle_of_water"
+      }
+    },
+    {
+      "count": 3,
+      "ingredient": {
+        "item": "blockychef:boiled_rice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:yeast"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:sake",
+      "count": 1
+    },
+    {
+      "item": "blockychef:empty_bottle",
+      "count": 1
+    }
+  ],
+  "fermentTime": 2400
+}

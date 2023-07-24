@@ -1,0 +1,42 @@
+{
+  "type": "blockychef:barrel",
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:soy_milk"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:vinegar"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "blockychef:salt"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "blockychef:shredded_garlic"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:soy_sauce",
+      "count": 2
+    }
+  ],
+  "fermentTime": 2400
+}

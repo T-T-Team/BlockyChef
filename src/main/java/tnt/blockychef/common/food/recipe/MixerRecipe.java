@@ -90,7 +90,7 @@ public class MixerRecipe extends AbstractItemReturningRecipe<MixerBlockEntity> {
         private final Component translatedText;
 
         RpmValue() {
-            this.translatedText = Component.literal("label.blockychef." + name().toLowerCase());
+            this.translatedText = Component.translatable("label.blockychef." + name().toLowerCase());
         }
 
         public Component getTranslatedText() {

@@ -1,0 +1,30 @@
+{
+  "type": "blockychef:barrel",
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:grape_extract"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:brown_mushroom"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:wine",
+      "count": 1
+    }
+  ],
+  "fermentTime": 2400
+}

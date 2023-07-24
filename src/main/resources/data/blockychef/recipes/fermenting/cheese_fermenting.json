@@ -1,0 +1,34 @@
+{
+  "type": "blockychef:barrel",
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:milk"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "blockychef:salt"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:yeast"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:cheese",
+      "count": 1
+    },
+    {
+      "item": "blockychef:empty_bottle",
+      "count": 1
+    }
+  ],
+  "fermentTime": 2400
+}
