@@ -10,6 +10,8 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+import tnt.blockychef.common.block.entity.MixerBlockEntity;
 import tnt.blockychef.common.food.recipe.MixerRecipe;
 import tnt.blockychef.common.food.recipe.MultiIngredient;
 import tnt.blockychef.common.init.BlockyChefBlocks;
@@ -51,12 +53,17 @@ public class MixerRecipeCategory extends BlockychefFluidRecipeCategory<MixerReci
                         .addItemStacks(input);
             }
         }
+        FluidStack stack = recipe.getOutput();
+
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 109, 10).addFluidStack(stack.getFluid(), adjustToCapacity(stack.getAmount(), MixerBlockEntity.FLUID_CAPACITY));
     }
 
     @Override
     public void draw(MixerRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        drawFluid(guiGraphics, recipe.getOutput(), 109, 10, mouseX, mouseY);
-        drawCentered(recipe.getRpm().name(), guiGraphics, 18, 28, 0x808080, false);
+        fluidIconsOverlay.draw(guiGraphics, 109, 10);
+        progressArrow.draw(guiGraphics, 68, 12);
+        drawCentered(recipe.getRpm().name(), guiGraphics, 18, 1, 0x808080, false);
+        drawCentered(getValueLabel(recipe.getOutput().getAmount()).getString(), guiGraphics, 18, 28, 0x808080, false);
     }
 
     @Override

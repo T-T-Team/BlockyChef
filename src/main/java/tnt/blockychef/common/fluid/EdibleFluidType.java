@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 
 public final class EdibleFluidType extends FluidType {
 
-    private static final ResourceLocation WATER_STILL = new ResourceLocation("block/water");
+    private static final ResourceLocation WATER_STILL = new ResourceLocation("block/water_still");
     private static final ResourceLocation WATER_FLOWING = new ResourceLocation("block/water_flow");
 
     private final ResourceLocation stillTexture;

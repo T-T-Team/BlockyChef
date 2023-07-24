@@ -13,6 +13,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+import tnt.blockychef.common.block.entity.JuicerBlockEntity;
 import tnt.blockychef.common.food.recipe.JuicerRecipe;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 
@@ -45,14 +46,15 @@ public class JuicerRecipeCategory extends BlockychefFluidRecipeCategory<JuicerRe
     public void setRecipe(IRecipeLayoutBuilder builder, JuicerRecipe recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 1, 1).addIngredients(recipe.getInput());
         FluidStack stack = recipe.getOutput();
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 55, 1).addFluidStack(stack.getFluid(), stack.getAmount());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 55, 1).addFluidStack(stack.getFluid(), adjustToCapacity(stack.getAmount(), JuicerBlockEntity.FLUID_CAPACITY));
     }
 
     @Override
     public void draw(JuicerRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        drawFluid(guiGraphics, recipe.getOutput(), 55, 1, mouseX, mouseY);
-        String text = recipe.getPressAmount() + "x";
+        fluidIconsOverlay.draw(guiGraphics, 55, 1);
+        progressArrow.draw(guiGraphics, 25, 1);
         Font font = Minecraft.getInstance().font;
-        guiGraphics.drawString(font, text, background.getWidth() + 5, (background.getHeight() - font.lineHeight) / 2.0F, 0x808080, false);
+        float top = (background.getHeight() - font.lineHeight) / 2.0F;
+        guiGraphics.drawString(font, getValueLabel(recipe.getOutput().getAmount()).getString(), background.getWidth() + 5, top, 0x808080, false);
     }
 }

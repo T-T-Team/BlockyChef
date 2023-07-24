@@ -10,7 +10,7 @@
   ],
   "rpm": "MEDIUM",
   "output": {
-    "fluid": "blockychef:orange_fluid",
-    "amount": 250
+    "FluidName": "blockychef:orange",
+    "Amount": 250
   }
 }

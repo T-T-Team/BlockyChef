@@ -2,9 +2,8 @@ package tnt.blockychef.integrations.jei;
 
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraftforge.fluids.FluidStack;
+import net.minecraft.network.chat.Component;
+import net.minecraftforge.fluids.FluidType;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.integrations.jei.render.TintedDrawable;
 
@@ -21,16 +20,8 @@ public abstract class BlockychefFluidRecipeCategory<T> extends BlockyChefRecipeC
                 .setTextureSize(getFluidWidth(), getFluidHeight()).build();
     }
 
-    public void drawFluid(GuiGraphics guiGraphics, FluidStack fluid, int x, int y, double mouseX, double mouseY) {
-        // TODO complete
-        /*int color = fluid.getFluidType().fluidColor();
-        fluidIcon.setTint(color);
-        fluidIcon.draw(guiGraphics, x, y);
-        fluidIconsOverlay.draw(guiGraphics, x, y);
-        boolean isHovered = mouseX >= x && mouseX <= x + getFluidWidth() && mouseY >= y && mouseY <= y + getFluidHeight();
-        if (isHovered) {
-            guiGraphics.renderComponentTooltip(Minecraft.getInstance().font, fluid.getTooltip(), (int) mouseX, (int) mouseY);
-        }*/
+    public Component getValueLabel(int amount) {
+        return Component.translatable("label.blockychef.fluid_amount", amount);
     }
 
     protected int getFluidWidth() {
@@ -39,5 +30,10 @@ public abstract class BlockychefFluidRecipeCategory<T> extends BlockyChefRecipeC
 
     protected int getFluidHeight() {
         return 16;
+    }
+
+    protected static int adjustToCapacity(int value, int capacity) {
+        float f = value / (float) capacity;
+        return (int) (f * FluidType.BUCKET_VOLUME);
     }
 }

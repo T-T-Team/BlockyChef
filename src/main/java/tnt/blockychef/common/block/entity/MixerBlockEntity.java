@@ -24,6 +24,7 @@ import java.util.Optional;
 public class MixerBlockEntity extends RecipeRemberingBlockEntity<MixerRecipe> implements SynchronizableBlockEntity, IndexedColorHolder, FluidHolder {
 
     public static final int[] INPUTS = {0, 1, 2, 3, 4, 5};
+    public static final int FLUID_CAPACITY = 750;
 
     private final FluidContainer container;
     private MixerRecipe.RpmValue selectedRpm = MixerRecipe.RpmValue.MEDIUM;
@@ -32,7 +33,7 @@ public class MixerBlockEntity extends RecipeRemberingBlockEntity<MixerRecipe> im
 
     public MixerBlockEntity(BlockPos pos, BlockState state) {
         super(BlockyChefBlockEntities.MIXER, pos, state);
-        this.container = new FluidContainer(750, false);
+        this.container = new FluidContainer(FLUID_CAPACITY, false);
         this.colors = new int[1];
         Arrays.fill(this.colors, Integer.MIN_VALUE);
     }

@@ -24,6 +24,8 @@ import java.util.Optional;
 
 public class JuicerBlockEntity extends RecipeRemberingBlockEntity<JuicerRecipe> implements SynchronizableBlockEntity, IndexedColorHolder, FluidHolder {
 
+    public static final int FLUID_CAPACITY = 500;
+
     private final FluidContainer container;
     private JuicerRecipe activeRecipe;
     private int pressCounter;
@@ -31,7 +33,7 @@ public class JuicerBlockEntity extends RecipeRemberingBlockEntity<JuicerRecipe> 
 
     public JuicerBlockEntity(BlockPos pos, BlockState state) {
         super(BlockyChefBlockEntities.JUICER, pos, state);
-        this.container = new FluidContainer(500, false);
+        this.container = new FluidContainer(FLUID_CAPACITY, false);
         this.colors = new int[1];
         Arrays.fill(this.colors, Integer.MIN_VALUE);
     }
