@@ -75,6 +75,10 @@ public class JuicerBlockEntity extends RecipeRemberingBlockEntity<JuicerRecipe> 
         return !container.isFull();
     }
 
+    public float getProgress() {
+        return activeRecipe != null ? pressCounter / (float) activeRecipe.getPressAmount() : 0.0F;
+    }
+
     public void processRecipe(Player player) {
         if (activeRecipe == null) {
             if (hasInputItem()) {

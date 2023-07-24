@@ -699,6 +699,8 @@
   "label.blockychef.medium": "Power Medium",
   "label.blockychef.high": "Power High",
   "label.blockychef.fluid_amount": "%s mB",
+  "label.blockychef.drying": "Drying: %ss",
+  "label.blockychef.fluid_capacity": "Capacity: %s / %s",
 
   "screen.blockychef.cutting_board": "Cutting Board",
   "screen.blockychef.cutting_board.widget.start_cutting": "Cut",
@@ -727,5 +729,8 @@
   "jei.recipe_category.blockychef.dough_maker": "Dough Maker",
   "jei.recipe_category.blockychef.mortar_and_pestle": "Mortar & Pestle",
 
-  "crafting.fluid.blockychef.orange_fluid": "Orange Fluid"
+  "crafting.fluid.blockychef.orange_fluid": "Orange Fluid",
+
+  "config.jade.plugin_blockychef.drying_rack": "Drying Rack",
+  "config.jade.plugin_blockychef.juicer": "Juicer"
 }

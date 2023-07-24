@@ -86,6 +86,10 @@ public final class FluidContainer {
         return getAmount() >= capacity;
     }
 
+    public boolean isEmpty() {
+        return fluids.isEmpty();
+    }
+
     private void flatten() {
         Map<FluidType, List<FluidStack>> map = new LinkedHashMap<>();
         for (FluidStack stack : fluids) {
@@ -110,9 +114,7 @@ public final class FluidContainer {
 
     public CompoundTag serialize() {
         CompoundTag tag = new CompoundTag();
-        ListTag list = new ListTag();
-        fluids.forEach(fluid -> list.add(fluid.writeToNBT(new CompoundTag())));
-        tag.put("fluids", list);
+        tag.put("fluids", serializeAsList());
         return tag;
     }
 
@@ -120,6 +122,18 @@ public final class FluidContainer {
         fluids.clear();
         tag.getList("fluids", Tag.TAG_COMPOUND).forEach(fluidTag -> fluids.add(FluidStack.loadFluidStackFromNBT((CompoundTag) fluidTag)));
         flatten();
+    }
+
+    public ListTag serializeAsList() {
+        ListTag list = new ListTag();
+        fluids.forEach(fluid -> list.add(fluid.writeToNBT(new CompoundTag())));
+        return list;
+    }
+
+    public static List<FluidStack> deserializeAsList(ListTag tag) {
+        List<FluidStack> fluids = new ArrayList<>();
+        tag.forEach(fluidTag -> fluids.add(FluidStack.loadFluidStackFromNBT((CompoundTag) fluidTag)));
+        return fluids;
     }
 
     private boolean insertFluid(FluidStack fluid) {

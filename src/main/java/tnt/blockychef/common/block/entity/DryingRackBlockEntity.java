@@ -60,6 +60,14 @@ public class DryingRackBlockEntity extends RecipeRemberingBlockEntity<DryingReci
         return !inventoryHandler.getStackInSlot(0).isEmpty();
     }
 
+    public int getTicksDrying() {
+        return ticksDrying;
+    }
+
+    public int getTotalTime() {
+        return recipe != null ? recipe.getDryingTime() : 1;
+    }
+
     public void clearInventoryAndProcessRecipe(@Nullable Player player) {
         if (level.isClientSide)
             return;
