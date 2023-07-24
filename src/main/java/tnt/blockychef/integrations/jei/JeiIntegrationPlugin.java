@@ -37,6 +37,7 @@ public class JeiIntegrationPlugin implements IModPlugin {
     static final RecipeType<BarrelRecipe> BARREL = new RecipeType<>(BlockyChef.resource("barrel"), BarrelRecipe.class);
     static final RecipeType<DoughMakerRecipe> DOUGH_MAKER = new RecipeType<>(BlockyChef.resource("dough_maker"), DoughMakerRecipe.class);
     static final RecipeType<PastaMachineRecipe> PASTA_MACHINE = new RecipeType<>(BlockyChef.resource("pasta_machine"), PastaMachineRecipe.class);
+    static final RecipeType<MeatGrinderRecipe> MEAT_GRINDER = new RecipeType<>(BlockyChef.resource("meat_grinder"), MeatGrinderRecipe.class);
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
@@ -48,6 +49,7 @@ public class JeiIntegrationPlugin implements IModPlugin {
         registration.addRecipes(BARREL, getRecipes(BlockyChefRecipeTypes.BARREL_RECIPE));
         registration.addRecipes(DOUGH_MAKER, getRecipes(BlockyChefRecipeTypes.DOUGH_MAKER_RECIPE));
         registration.addRecipes(PASTA_MACHINE, getRecipes(BlockyChefRecipeTypes.PASTA_MACHINE_RECIPE));
+        registration.addRecipes(MEAT_GRINDER, getRecipes(BlockyChefRecipeTypes.MEAT_GRINDER_RECIPE));
     }
 
     @Override
@@ -61,7 +63,8 @@ public class JeiIntegrationPlugin implements IModPlugin {
                 new MortarRecipeCategory(helper),
                 new BarrelRecipeCategory(helper),
                 new DoughMakerRecipeCategory(helper),
-                new PastaMachineRecipeCategory(helper)
+                new PastaMachineRecipeCategory(helper),
+                new MeatGrinderRecipeCategory(helper)
         );
     }
 
@@ -103,6 +106,7 @@ public class JeiIntegrationPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.CRIMSON_BARREL), BARREL);
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.DOUGH_MAKER), DOUGH_MAKER);
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.PASTA_MACHINE), PASTA_MACHINE);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.MEAT_GRINDER), MEAT_GRINDER);
     }
 
     @Override

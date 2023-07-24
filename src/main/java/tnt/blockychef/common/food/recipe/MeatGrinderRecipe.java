@@ -35,6 +35,14 @@ public class MeatGrinderRecipe extends AbstractFoodRecipe<MeatGrinderBlockEntity
         this.result = result;
     }
 
+    public Ingredient getInput() {
+        return input;
+    }
+
+    public ItemStack getOutput() {
+        return result;
+    }
+
     public int getProcessingAmount() {
         return processingAmount;
     }
