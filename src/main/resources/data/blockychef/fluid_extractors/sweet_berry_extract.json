@@ -4,7 +4,7 @@
     "item": "blockychef:sweet_berry_extract"
   },
   "fluidFilter": {
-    "fluid": "blockychef:sweet_berry_fluid",
-    "amount": 500
+    "FluidName": "blockychef:sweet_berry",
+    "Amount": 500
   }
 }

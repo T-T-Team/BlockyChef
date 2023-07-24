@@ -31,10 +31,5 @@
       "item": "blockychef:sweet_dough"
     }
   ],
-  "containerItems": [
-    {
-      "item": "blockychef:empty_bottle"
-    }
-  ],
   "processingTime": 140
 }

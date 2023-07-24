@@ -25,10 +25,5 @@
       "item": "blockychef:sweet_rice_dough"
     }
   ],
-  "containerItems": [
-    {
-      "item": "blockychef:empty_bottle"
-    }
-  ],
   "processingTime": 140
 }

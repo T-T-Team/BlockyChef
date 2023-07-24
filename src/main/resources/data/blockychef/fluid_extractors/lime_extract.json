@@ -4,7 +4,7 @@
     "item": "blockychef:lime_extract"
   },
   "fluidFilter": {
-    "fluid": "blockychef:lime_fluid",
-    "amount": 500
+    "FluidName": "blockychef:lime",
+    "Amount": 500
   }
 }

@@ -4,7 +4,7 @@
     "item": "blockychef:cherry_extract"
   },
   "fluidFilter": {
-    "fluid": "blockychef:cherry_fluid",
-    "amount": 500
+    "FluidName": "blockychef:cherry",
+    "Amount": 500
   }
 }

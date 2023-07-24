@@ -4,7 +4,7 @@
     "item": "blockychef:peach_extract"
   },
   "fluidFilter": {
-    "fluid": "blockychef:peach_fluid",
-    "amount": 500
+    "FluidName": "blockychef:peach",
+    "Amount": 500
   }
 }

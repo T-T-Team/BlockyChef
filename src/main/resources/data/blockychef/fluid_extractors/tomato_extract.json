@@ -4,7 +4,7 @@
     "item": "blockychef:tomato_extract"
   },
   "fluidFilter": {
-    "fluid": "blockychef:tomato_fluid",
-    "amount": 500
+    "FluidName": "blockychef:tomato",
+    "Amount": 500
   }
 }

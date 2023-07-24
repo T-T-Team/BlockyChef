@@ -4,7 +4,7 @@
     "item": "blockychef:soy_milk"
   },
   "fluidFilter": {
-    "fluid": "blockychef:soy_milk_fluid",
-    "amount": 500
+    "FluidName": "blockychef:soy_milk",
+    "Amount": 500
   }
 }

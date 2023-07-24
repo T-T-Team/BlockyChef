@@ -4,7 +4,7 @@
     "item": "blockychef:coconut_milk"
   },
   "fluidFilter": {
-    "fluid": "blockychef:coconut_milk_fluid",
-    "amount": 500
+    "FluidName": "blockychef:coconut_milk",
+    "Amount": 500
   }
 }

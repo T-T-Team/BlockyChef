@@ -4,7 +4,7 @@
     "item": "blockychef:olive_oil"
   },
   "fluidFilter": {
-    "fluid": "blockychef:olive_oil_fluid",
-    "amount": 500
+    "FluidName": "blockychef:olive_oil",
+    "Amount": 500
   }
 }

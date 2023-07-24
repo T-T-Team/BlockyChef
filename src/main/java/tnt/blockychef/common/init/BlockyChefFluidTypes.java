@@ -26,7 +26,7 @@ public final class BlockyChefFluidTypes {
     public static final RegistryObject<EdibleFluidType> LIME_FLUID = registerEdible("lime_fluid", 0xAAACE24D);
     public static final RegistryObject<EdibleFluidType> MELON_FLUID = registerEdible("melon_fluid", 0xAADD616B);
     public static final RegistryObject<EdibleFluidType> PEACH_FLUID = registerEdible("peach_fluid", 0xAADD703E);
-    public static final RegistryObject<EdibleFluidType> PEAR_FLUID = registerEdible("peach_fluid", 0xAADDDD6E);
+    public static final RegistryObject<EdibleFluidType> PEAR_FLUID = registerEdible("pear_fluid", 0xAADDDD6E);
     public static final RegistryObject<EdibleFluidType> PINEAPPLE_FLUID = registerEdible("pineapple_fluid", 0xAADDAF2A);
     public static final RegistryObject<EdibleFluidType> PLUM_FLUID = registerEdible("plum_fluid", 0xAA8E1C9F);
     public static final RegistryObject<EdibleFluidType> RASPBERRY_FLUID = registerEdible("raspberry_fluid", 0xAAC60F40);
