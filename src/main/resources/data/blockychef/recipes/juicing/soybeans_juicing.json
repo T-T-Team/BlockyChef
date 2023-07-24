@@ -5,7 +5,7 @@
   },
   "pressAmount": 3,
   "output": {
-    "fluid": "blockychef:soy_milk_fluid",
-    "amount": 50
+    "FluidName": "blockychef:soy_milk",
+    "Amount": 50
   }
 }

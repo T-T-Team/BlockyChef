@@ -3,9 +3,9 @@
   "input": {
     "item": "blockychef:peanuts"
   },
-  "pressAmount": 6,
+  "pressAmount": 4,
   "output": {
-    "fluid": "blockychef:oil_fluid",
-    "amount": 100
+    "FluidName": "blockychef:oil",
+    "Amount": 50
   }
 }

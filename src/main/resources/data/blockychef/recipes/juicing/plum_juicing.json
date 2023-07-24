@@ -5,7 +5,7 @@
   },
   "pressAmount": 6,
   "output": {
-    "fluid": "blockychef:plum_fluid",
-    "amount": 100
+    "FluidName": "blockychef:plum",
+    "Amount": 100
   }
 }

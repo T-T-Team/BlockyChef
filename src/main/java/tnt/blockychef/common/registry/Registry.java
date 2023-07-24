@@ -150,35 +150,7 @@ public final class Registry {
         helper.register("fruit_decorator", new TreeDecoratorType<>(TreeFruitDecorator.CODEC));
     }
 
-    // TODO remove
-    private static void registerFluids(RegisterEvent.RegisterHelper<?> forgeHelper) {
-        FluidRegistryHelper helper = (id, fluidColor, fluidDensity) -> {
-            //ResourceLocation identifier = BlockyChef.resource(id);
-            //FluidType type = new FluidType(identifier, fluidColor, fluidDensity);
-            //forgeHelper.register(id, type);
-        };
-        helper.register("orange_fluid", 0xAAFF7328);
-        helper.register("cherry_fluid", 0xAABA000C);
-        helper.register("olive_oil_fluid", 0xAAC1B330);
-        helper.register("oil_fluid", 0xAAC6A933);
-        helper.register("coconut_milk_fluid", 0xAADBD8CE);
-        helper.register("soy_milk_fluid", 0xAAE5E0CC);
-        helper.register("apple_fluid", 0xAAE2DC9E);
-        helper.register("blueberry_fluid", 0xAA3C05BC);
-        helper.register("carrot_fluid", 0xAACC6E1C);
-        helper.register("grape_fluid", 0xAA9500BF);
-        helper.register("lemon_fluid", 0xAAEFE143);
-        helper.register("lime_fluid", 0xAAACE24D);
-        helper.register("melon_fluid", 0xAADD616B);
-        helper.register("peach_fluid", 0xAADD703E);
-        helper.register("pear_fluid", 0xAADDDD6E);
-        helper.register("pineapple_fluid", 0xAADDAF2A);
-        helper.register("plum_fluid", 0xAA8E1C9F);
-        helper.register("raspberry_fluid", 0xAAC60F40);
-        helper.register("strawberry_fluid", 0xAAD83C3C);
-        helper.register("sweet_berry_fluid", 0xAA8C1D00);
-        helper.register("tomato_fluid", 0xAAAC2F0C);
-    }
+
 
     @FunctionalInterface
     private interface RecipeTypeRegistryHelper {

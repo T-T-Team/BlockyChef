@@ -5,7 +5,7 @@
   },
   "pressAmount": 8,
   "output": {
-    "fluid": "blockychef:carrot_fluid",
-    "amount": 100
+    "FluidName": "blockychef:carrot",
+    "Amount": 100
   }
 }

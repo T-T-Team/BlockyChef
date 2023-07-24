@@ -5,7 +5,7 @@
   },
   "pressAmount": 6,
   "output": {
-    "fluid": "blockychef:olive_oil_fluid",
-    "amount": 100
+    "FluidName": "blockychef:olive_oil",
+    "Amount": 100
   }
 }
