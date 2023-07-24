@@ -55,6 +55,10 @@ public class PastaMachineRecipe extends AbstractFoodRecipe<PastaMachineBlockEnti
         }
     }
 
+    public Ingredient getInput() {
+        return input;
+    }
+
     public ItemStack[] getOutputs() {
         return outputs;
     }

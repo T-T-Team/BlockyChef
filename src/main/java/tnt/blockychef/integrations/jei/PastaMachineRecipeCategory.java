@@ -14,7 +14,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import tnt.blockychef.common.block.entity.CuttingBoardBlockEntity;
-import tnt.blockychef.common.food.recipe.CuttingBoardRecipe;
 import tnt.blockychef.common.food.recipe.PastaMachineRecipe;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 
