@@ -1,5 +1,6 @@
 package tnt.blockychef.common.data.fluids;
 
+import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.mojang.serialization.DataResult;
@@ -16,10 +17,14 @@ import java.util.*;
 public final class FluidExtractionManager extends SimpleJsonResourceReloadListener {
 
     private static final Gson GSON = new Gson();
-    private final Collection<FluidExtraction> extractorList = new ArrayList<>();
+    private final List<FluidExtraction> extractorList = new ArrayList<>();
 
     public FluidExtractionManager() {
         super(GSON, "fluid_extractors");
+    }
+
+    public List<FluidExtraction> getLoadedExtractionRecipes() {
+        return ImmutableList.copyOf(extractorList);
     }
 
     public FluidExtraction getExtractor(ItemStack stack, FluidHolder holder) {
@@ -33,6 +38,7 @@ public final class FluidExtractionManager extends SimpleJsonResourceReloadListen
 
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> resourceMap, ResourceManager resourceManager, ProfilerFiller profiler) {
+        extractorList.clear();
         for (Map.Entry<ResourceLocation, JsonElement> entry : resourceMap.entrySet()) {
             ResourceLocation location = entry.getKey();
             try {

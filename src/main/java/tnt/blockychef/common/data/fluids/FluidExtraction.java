@@ -18,23 +18,35 @@ public final class FluidExtraction {
                     return DataResult.error(() -> "Unknown item: " + location);
                 }
                 return DataResult.success(ForgeRegistries.ITEMS.getValue(location));
-            }, ForgeRegistries.ITEMS::getKey).fieldOf("item").forGetter(t -> t.inputItem),
+            }, ForgeRegistries.ITEMS::getKey).fieldOf("item").forGetter(t -> t.inputItem.getItem()),
             SerializationHelper.SIMPLE_ITEMSTACK_CODEC.fieldOf("output").forGetter(t -> t.outputItem),
             FluidStack.CODEC.fieldOf("fluidFilter").forGetter(t -> t.fluid)
     ).apply(instance, FluidExtraction::new));
 
-    private final Item inputItem;
+    private final ItemStack inputItem;
     private final ItemStack outputItem;
     private final FluidStack fluid;
 
     public FluidExtraction(Item inputItem, ItemStack outputItem, FluidStack fluid) {
-        this.inputItem = inputItem;
+        this.inputItem = new ItemStack(inputItem);
         this.outputItem = outputItem;
         this.fluid = fluid;
     }
 
+    public ItemStack getInputItem() {
+        return inputItem;
+    }
+
+    public FluidStack getFluid() {
+        return fluid;
+    }
+
+    public ItemStack getOutputItem() {
+        return outputItem;
+    }
+
     public boolean matches(ItemStack stack, FluidHolder holder) {
-        return stack.getItem() == inputItem && holder.hasFluid(fluid);
+        return stack.getItem() == inputItem.getItem() && holder.hasFluid(fluid);
     }
 
     public ItemStack extractFluid(FluidHolder holder) {

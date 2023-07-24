@@ -6,8 +6,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public final class FluidContainer {
 
@@ -60,6 +59,7 @@ public final class FluidContainer {
             if (result > 0) {
                 fluids.add(new FluidStack(fluidStack.getFluid(), result));
             }
+            flatten();
             return true;
         }
         return false;
@@ -86,6 +86,28 @@ public final class FluidContainer {
         return getAmount() >= capacity;
     }
 
+    private void flatten() {
+        Map<FluidType, List<FluidStack>> map = new LinkedHashMap<>();
+        for (FluidStack stack : fluids) {
+            FluidType type = stack.getFluid().getFluidType();
+            map.computeIfAbsent(type, k -> new ArrayList<>()).add(stack);
+        }
+        fluids.clear();
+        for (List<FluidStack> list : map.values()) {
+            FluidStack stack = FluidStack.EMPTY;
+            for (FluidStack fluidStack : list) {
+                if (stack.isEmpty()) {
+                    stack = fluidStack.copy();
+                } else {
+                    stack.setAmount(stack.getAmount() + fluidStack.getAmount());
+                }
+            }
+            if (!stack.isEmpty()) {
+                fluids.add(stack);
+            }
+        }
+    }
+
     public CompoundTag serialize() {
         CompoundTag tag = new CompoundTag();
         ListTag list = new ListTag();
@@ -97,6 +119,7 @@ public final class FluidContainer {
     public void deserialize(CompoundTag tag) {
         fluids.clear();
         tag.getList("fluids", Tag.TAG_COMPOUND).forEach(fluidTag -> fluids.add(FluidStack.loadFluidStackFromNBT((CompoundTag) fluidTag)));
+        flatten();
     }
 
     private boolean insertFluid(FluidStack fluid) {
@@ -108,6 +131,7 @@ public final class FluidContainer {
         FluidStack inserting = fluid.copy();
         inserting.setAmount(toStore);
         fluids.add(inserting);
+        flatten();
         return fluid.isEmpty();
     }
 }

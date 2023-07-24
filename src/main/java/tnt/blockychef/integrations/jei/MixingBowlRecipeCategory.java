@@ -42,7 +42,10 @@ public class MixingBowlRecipeCategory extends BlockyChefRecipeCategory<MixingBow
     public void draw(MixingBowlRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         arrow.draw(guiGraphics, 68, 12);
         drawCentered(getTimeLabel(recipe.getMixingTime()).getString(), guiGraphics, 0, 3, 0x808080, false);
-        drawCentered(getExperienceLabel(recipe.getExperience()).getString(), guiGraphics, 0, 25, 0x808080, false);
+        float exp = recipe.getExperience();
+        if (exp > 0) {
+            drawCentered(getExperienceLabel(exp).getString(), guiGraphics, 0, 25, 0x808080, false);
+        }
     }
 
     @Override

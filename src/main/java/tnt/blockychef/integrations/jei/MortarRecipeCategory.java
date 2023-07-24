@@ -42,7 +42,10 @@ public class MortarRecipeCategory extends BlockyChefRecipeCategory<MortarRecipe>
     public void draw(MortarRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         arrow.draw(guiGraphics, 68, 12);
         drawCentered(getTimeLabel(recipe.getProcessingTime()).getString(), guiGraphics, 0, 3, 0x808080, false);
-        drawCentered(getExperienceLabel(recipe.getExperience()).getString(), guiGraphics, 0, 25, 0x808080, false);
+        float exp = recipe.getExperience();
+        if (exp > 0) {
+            drawCentered(getExperienceLabel(exp).getString(), guiGraphics, 0, 25, 0x808080, false);
+        }
     }
 
     @Override

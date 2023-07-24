@@ -16,6 +16,7 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import tnt.blockychef.BlockyChef;
+import tnt.blockychef.common.data.fluids.FluidExtraction;
 import tnt.blockychef.common.food.recipe.*;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 import tnt.blockychef.common.init.BlockyChefMenuTypes;
@@ -41,6 +42,7 @@ public class JeiIntegrationPlugin implements IModPlugin {
     static final RecipeType<GratingRecipe> GRATER = new RecipeType<>(BlockyChef.resource("grater"), GratingRecipe.class);
     static final RecipeType<JuicerRecipe> JUICER = new RecipeType<>(BlockyChef.resource("juicer"), JuicerRecipe.class);
     static final RecipeType<MixerRecipe> MIXER = new RecipeType<>(BlockyChef.resource("mixer"), MixerRecipe.class);
+    static final RecipeType<FluidExtraction> FLUID_EXTRACTION = new RecipeType<>(BlockyChef.resource("fluid_extraction"), FluidExtraction.class);
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
@@ -56,6 +58,7 @@ public class JeiIntegrationPlugin implements IModPlugin {
         registration.addRecipes(GRATER, getRecipes(BlockyChefRecipeTypes.GRATING_RECIPE));
         registration.addRecipes(JUICER, getRecipes(BlockyChefRecipeTypes.JUICER_RECIPE));
         registration.addRecipes(MIXER, getRecipes(BlockyChefRecipeTypes.MIXER_RECIPE));
+        registration.addRecipes(FLUID_EXTRACTION, BlockyChef.EXTRACTION_MANAGER.getLoadedExtractionRecipes());
     }
 
     @Override
@@ -73,7 +76,8 @@ public class JeiIntegrationPlugin implements IModPlugin {
                 new MeatGrinderRecipeCategory(helper),
                 new GraterRecipeCategory(helper),
                 new JuicerRecipeCategory(helper),
-                new MixerRecipeCategory(helper)
+                new MixerRecipeCategory(helper),
+                new FluidExtractionRecipeCategory(helper)
         );
     }
 
@@ -119,6 +123,8 @@ public class JeiIntegrationPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.GRATER), GRATER);
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.JUICER), JUICER);
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.MIXER), MIXER);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.JUICER), FLUID_EXTRACTION);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.MIXER), FLUID_EXTRACTION);
     }
 
     @Override
