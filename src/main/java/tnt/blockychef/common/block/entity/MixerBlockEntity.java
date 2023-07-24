@@ -69,8 +69,7 @@ public class MixerBlockEntity extends RecipeRemberingBlockEntity<MixerRecipe> im
         MixerRecipe.RpmValue recipeRpm = activeRecipe.getRpm();
         int rpmDiff = recipeRpm.ordinal() - selectedRpm.ordinal();
         if (rpmDiff <= 0) {
-            activeRecipe.getInputs().forEach(ingredient -> ingredient.consume(this, INPUTS));
-            activeRecipe.returnItemsToContainer(this, level, worldPosition);
+            consumeIngredientsAndApplyCraftRemainder(INPUTS, new int[0], in -> activeRecipe.getInputs().forEach(multiIngredient -> multiIngredient.consume(this, in)));
             if (rpmDiff == 0) {
                 FluidStack stack = activeRecipe.getOutput().copy();
                 container.insert(stack);

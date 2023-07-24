@@ -16,22 +16,21 @@ import tnt.blockychef.util.SerializationHelper;
 
 import java.util.List;
 
-public class MixerRecipe extends AbstractItemReturningRecipe<MixerBlockEntity> {
+public class MixerRecipe extends AbstractFoodRecipe<MixerBlockEntity> {
 
     public static final CodecRecipeSerializer.CodecProvider<MixerRecipe> CODEC_PROVIDER = recipe -> RecordCodecBuilder.create(instance -> instance.group(
             MultiIngredient.CODEC.listOf().fieldOf("inputs").forGetter(MixerRecipe::getInputs),
             SerializationHelper.enumCodec(RpmValue.class).fieldOf("rpm").forGetter(MixerRecipe::getRpm),
             FluidStack.CODEC.fieldOf("output").forGetter(MixerRecipe::getOutput),
-            resolveContainerItems(),
             resolveExperience()
-    ).apply(instance, (in, rpm, out, cti, exp) -> new MixerRecipe(recipe, in, rpm, out, cti, exp)));
+    ).apply(instance, (in, rpm, out, exp) -> new MixerRecipe(recipe, in, rpm, out, exp)));
 
     private final List<MultiIngredient> inputs;
     private final RpmValue rpm;
     private final FluidStack output;
 
-    public MixerRecipe(ResourceLocation recipeId, List<MultiIngredient> inputs, RpmValue rpm, FluidStack output, List<ItemStack> containerItems, float experience) {
-        super(recipeId, experience, containerItems);
+    public MixerRecipe(ResourceLocation recipeId, List<MultiIngredient> inputs, RpmValue rpm, FluidStack output, float experience) {
+        super(recipeId, experience);
         this.inputs = inputs;
         this.rpm = rpm;
         this.output = output;
@@ -47,11 +46,6 @@ public class MixerRecipe extends AbstractItemReturningRecipe<MixerBlockEntity> {
 
     public FluidStack getOutput() {
         return output;
-    }
-
-    @Override
-    public int[] getContainerSlots(MixerBlockEntity container) {
-        return MixerBlockEntity.INPUTS;
     }
 
     @Override

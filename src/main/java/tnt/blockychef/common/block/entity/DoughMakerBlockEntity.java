@@ -51,8 +51,7 @@ public class DoughMakerBlockEntity extends RecipeRemberingBlockEntity<DoughMaker
         }
         if (++doughMaker.processingTime >= doughMaker.activeRecipe.getProcessingTime() && !level.isClientSide) {
             doughMaker.processingTime = 0;
-            doughMaker.activeRecipe.getInputs().forEach(ingredient -> ingredient.consume(doughMaker, INPUTS));
-            doughMaker.activeRecipe.returnItemsToContainer(doughMaker, level, pos);
+            doughMaker.consumeIngredientsAndApplyCraftRemainder(INPUTS, OUTPUTS, in -> doughMaker.activeRecipe.getInputs().forEach(multiIngredient -> multiIngredient.consume(doughMaker, in)));
             ItemStack[] assembled = Arrays.stream(outputs).map(ItemStack::copy).toArray(ItemStack[]::new);
             MenuInventoryHelper.insertItems(assembled, doughMaker, OUTPUTS);
             doughMaker.storeRecipe(doughMaker.activeRecipe);

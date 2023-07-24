@@ -16,7 +16,7 @@ import tnt.blockychef.util.SerializationHelper;
 import java.util.Arrays;
 import java.util.List;
 
-public class DoughMakerRecipe extends AbstractItemReturningRecipe<DoughMakerBlockEntity> {
+public class DoughMakerRecipe extends AbstractFoodRecipe<DoughMakerBlockEntity> {
 
     public static final CodecRecipeSerializer.CodecProvider<DoughMakerRecipe> CODEC_PROVIDER = recipeId -> RecordCodecBuilder.create(instance -> instance.group(
             MultiIngredient.CODEC.listOf().fieldOf("inputs").forGetter(DoughMakerRecipe::getInputs),
@@ -25,24 +25,18 @@ public class DoughMakerRecipe extends AbstractItemReturningRecipe<DoughMakerBloc
                     Arrays::asList
             ).fieldOf("outputs").forGetter(DoughMakerRecipe::getOutputs),
             Codec.INT.fieldOf("processingTime").forGetter(DoughMakerRecipe::getProcessingTime),
-            resolveContainerItems(),
             resolveExperience()
-    ).apply(instance, (in, out, time, ret, exp) -> new DoughMakerRecipe(recipeId, in, out, time, ret, exp)));
+    ).apply(instance, (in, out, time, exp) -> new DoughMakerRecipe(recipeId, in, out, time, exp)));
 
     private final List<MultiIngredient> inputs;
     private final ItemStack[] outputs;
     private final int processingTime;
 
-    public DoughMakerRecipe(ResourceLocation recipeId, List<MultiIngredient> inputs, ItemStack[] outputs, int processingTime, List<ItemStack> containerItems, float experience) {
-        super(recipeId, experience, containerItems);
+    public DoughMakerRecipe(ResourceLocation recipeId, List<MultiIngredient> inputs, ItemStack[] outputs, int processingTime, float experience) {
+        super(recipeId, experience);
         this.inputs = inputs;
         this.outputs = outputs;
         this.processingTime = processingTime;
-    }
-
-    @Override
-    public int[] getContainerSlots(DoughMakerBlockEntity container) {
-        return DoughMakerBlockEntity.OUTPUTS;
     }
 
     public List<MultiIngredient> getInputs() {

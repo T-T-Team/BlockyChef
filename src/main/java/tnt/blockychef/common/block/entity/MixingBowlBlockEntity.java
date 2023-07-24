@@ -48,7 +48,7 @@ public class MixingBowlBlockEntity extends RecipeRemberingBlockEntity<MixingBowl
         }
         if (++mixingBowl.mixingTime >= mixingBowl.activeRecipe.getMixingTime() && !level.isClientSide) {
             mixingBowl.mixingTime = 0;
-            mixingBowl.activeRecipe.getInputs().forEach(ingredient -> ingredient.consume(mixingBowl, INPUTS));
+            mixingBowl.consumeIngredientsAndApplyCraftRemainder(INPUTS, OUTPUTS, in -> mixingBowl.activeRecipe.getInputs().forEach(multiIngredient -> multiIngredient.consume(mixingBowl, in)));
             ItemStack[] assembledOutputs = Arrays.stream(outputs).map(ItemStack::copy).toArray(ItemStack[]::new);
             MenuInventoryHelper.insertItems(assembledOutputs, mixingBowl, OUTPUTS);
             mixingBowl.storeRecipe(mixingBowl.activeRecipe);

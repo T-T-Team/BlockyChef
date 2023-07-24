@@ -16,7 +16,7 @@ import tnt.blockychef.util.SerializationHelper;
 import java.util.Arrays;
 import java.util.List;
 
-public class BarrelRecipe extends AbstractItemReturningRecipe<BarrelBlockEntity> {
+public class BarrelRecipe extends AbstractFoodRecipe<BarrelBlockEntity> {
 
     public static final CodecRecipeSerializer.CodecProvider<BarrelRecipe> CODEC_PROVIDER = recipeId -> RecordCodecBuilder.create(instance -> instance.group(
             MultiIngredient.CODEC.listOf().fieldOf("inputs").forGetter(BarrelRecipe::getInputs),
@@ -24,17 +24,16 @@ public class BarrelRecipe extends AbstractItemReturningRecipe<BarrelBlockEntity>
                     list -> list.toArray(ItemStack[]::new),
                     Arrays::asList
             ).fieldOf("outputs").forGetter(BarrelRecipe::getOutputs),
-            resolveContainerItems(),
             Codec.INT.fieldOf("fermentTime").forGetter(BarrelRecipe::getFermentTime),
             resolveExperience()
-    ).apply(instance, (in, out, ret, time, exp) -> new BarrelRecipe(recipeId, in, out, ret, time, exp)));
+    ).apply(instance, (in, out, time, exp) -> new BarrelRecipe(recipeId, in, out, time, exp)));
 
     private final List<MultiIngredient> inputs;
     private final ItemStack[] outputs;
     private final int fermentTime;
 
-    public BarrelRecipe(ResourceLocation recipeId, List<MultiIngredient> inputs, ItemStack[] outputs, List<ItemStack> containerItems, int fermentTime, float experience) {
-        super(recipeId, experience, containerItems);
+    public BarrelRecipe(ResourceLocation recipeId, List<MultiIngredient> inputs, ItemStack[] outputs, int fermentTime, float experience) {
+        super(recipeId, experience);
         this.inputs = inputs;
         this.outputs = outputs;
         this.fermentTime = fermentTime;
@@ -70,11 +69,6 @@ public class BarrelRecipe extends AbstractItemReturningRecipe<BarrelBlockEntity>
     @Override
     public ItemStack assemble(BarrelBlockEntity block, RegistryAccess access) {
         return getResultItem(access).copy();
-    }
-
-    @Override
-    public int[] getContainerSlots(BarrelBlockEntity container) {
-        return BarrelBlockEntity.OUTPUTS;
     }
 
     @Override

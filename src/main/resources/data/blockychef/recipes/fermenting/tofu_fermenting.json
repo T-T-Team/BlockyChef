@@ -24,7 +24,9 @@
     {
       "item": "blockychef:tofu",
       "count": 1
-    },
+    }
+  ],
+  "containerItems": [
     {
       "item": "blockychef:empty_bottle",
       "count": 1

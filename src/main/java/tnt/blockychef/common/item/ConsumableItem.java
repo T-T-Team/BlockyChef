@@ -89,4 +89,14 @@ public class ConsumableItem extends Item implements Drinkable {
     public DrinkProperties getStats() {
         return drinkProperties;
     }
+
+    @Override
+    public boolean hasCraftingRemainingItem(ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public ItemStack getCraftingRemainingItem(ItemStack itemStack) {
+        return new ItemStack(returnItem.get());
+    }
 }

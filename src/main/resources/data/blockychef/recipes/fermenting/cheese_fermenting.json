@@ -24,7 +24,9 @@
     {
       "item": "blockychef:cheese",
       "count": 1
-    },
+    }
+  ],
+  "containerItems": [
     {
       "item": "blockychef:empty_bottle",
       "count": 1

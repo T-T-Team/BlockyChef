@@ -204,9 +204,8 @@ public class CuttingBoardBlockEntity extends RecipeRemberingBlockEntity<CuttingB
         timeProcessing = 0;
         storeRecipe(recipe);
         ItemStack[] outputs = recipe.getOutputs();
+        consumeIngredientsAndApplyCraftRemainder(new int[] {SLOT_INPUT}, SLOT_OUTPUTS, in -> getInputItem().shrink(1));
         MenuInventoryHelper.insertItems(outputs, this, SLOT_OUTPUTS);
-        ItemStack stack = getInputItem();
-        stack.shrink(1);
         refreshAvailableRecipes();
     }
 }

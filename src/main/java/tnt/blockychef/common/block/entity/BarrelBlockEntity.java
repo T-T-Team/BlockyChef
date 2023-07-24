@@ -17,6 +17,7 @@ import tnt.blockychef.util.RenderHelper;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 public class BarrelBlockEntity extends RecipeRemberingBlockEntity<BarrelRecipe> implements ProcessableRecipeHolder, SynchronizableBlockEntity {
@@ -48,7 +49,7 @@ public class BarrelBlockEntity extends RecipeRemberingBlockEntity<BarrelRecipe> 
         }
         if (++barrel.fermentingTime >= barrel.activeRecipe.getFermentTime() && !level.isClientSide) {
             barrel.fermentingTime = 0;
-            barrel.activeRecipe.getInputs().forEach(ingredient -> ingredient.consume(barrel, INPUTS));
+            barrel.consumeIngredientsAndApplyCraftRemainder(INPUTS, OUTPUTS, in -> barrel.activeRecipe.getInputs().forEach(multiIngredient -> multiIngredient.consume(barrel, in)));
             ItemStack[] assembledOutputs = Arrays.stream(outputs).map(ItemStack::copy).toArray(ItemStack[]::new);
             MenuInventoryHelper.insertItems(assembledOutputs, barrel, OUTPUTS);
             barrel.storeRecipe(barrel.activeRecipe);
