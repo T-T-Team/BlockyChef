@@ -728,9 +728,37 @@
   "jei.recipe_category.blockychef.barrel": "Barrel",
   "jei.recipe_category.blockychef.dough_maker": "Dough Maker",
   "jei.recipe_category.blockychef.mortar_and_pestle": "Mortar & Pestle",
+  "jei.recipe_category.blockychef.fluid_extraction": "Fluid Extraction",
+  "jei.recipe_category.blockychef.juicer": "Juicer",
+  "jei.recipe_category.blockychef.grater": "Grater",
+  "jei.recipe_category.blockychef.meat_grinder": "Meat Grinder",
+  "jei.recipe_category.blockychef.mixer": "Mixer",
+  "jei.recipe_category.blockychef.pasta_machine": "Pasta Machine",
 
-  "crafting.fluid.blockychef.orange_fluid": "Orange Fluid",
 
   "config.jade.plugin_blockychef.drying_rack": "Drying Rack",
-  "config.jade.plugin_blockychef.juicer": "Juicer"
+  "config.jade.plugin_blockychef.juicer": "Juicer",
+
+
+  "fluid_type.blockychef.orange_fluid": "Orange Extract",
+  "fluid_type.blockychef.cherry_fluid": "Cherry Extract",
+  "fluid_type.blockychef.olive_oil_fluid": "Olive Oil",
+  "fluid_type.blockychef.oil_fluid": "Oil",
+  "fluid_type.blockychef.coconut_milk_fluid": "Coconut Milk",
+  "fluid_type.blockychef.soy_milk_fluid": "Soy Milk",
+  "fluid_type.blockychef.apple_fluid": "Apple Extract",
+  "fluid_type.blockychef.blueberry_fluid": "Blueberry Extract",
+  "fluid_type.blockychef.carrot_fluid": "Carrot Extract",
+  "fluid_type.blockychef.grape_fluid": "Grape Extract",
+  "fluid_type.blockychef.lemon_fluid": "Lemon Extract",
+  "fluid_type.blockychef.lime_fluid": "Lime Extract",
+  "fluid_type.blockychef.melon_fluid": "Melon Extract",
+  "fluid_type.blockychef.peach_fluid": "Peach Extract",
+  "fluid_type.blockychef.pear_fluid": "Pear Extract",
+  "fluid_type.blockychef.pineapple_fluid": "Pineapple Extract",
+  "fluid_type.blockychef.plum_fluid": "Plum Extract",
+  "fluid_type.blockychef.raspberry_fluid": "Raspberry Extract",
+  "fluid_type.blockychef.strawberry_fluid": "Strawberry Extract",
+  "fluid_type.blockychef.sweet_berry_fluid": "Sweet Berry Extract",
+  "fluid_type.blockychef.tomato_fluid": "Tomato Extract"
 }

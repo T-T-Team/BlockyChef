@@ -1,0 +1,10 @@
+{
+  "type": "blockychef:drying",
+  "input": {
+    "item": "blockychef:cured_chicken_breast"
+  },
+  "output": {
+    "item": "blockychef:chicken_jerky"
+  },
+  "dryingTime": 2400
+}

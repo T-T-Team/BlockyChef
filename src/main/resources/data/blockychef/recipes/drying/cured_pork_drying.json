@@ -1,0 +1,10 @@
+{
+  "type": "blockychef:drying",
+  "input": {
+    "item": "blockychef:cured_pork_steak"
+  },
+  "output": {
+    "item": "blockychef:pork_jerky"
+  },
+  "dryingTime": 2400
+}
