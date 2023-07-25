@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import tnt.blockychef.common.food.recipe.AbstractFoodRecipe;
 import tnt.blockychef.util.Helper;
 
-public abstract class SingleItemRecipeBlockEntity<R extends AbstractFoodRecipe<?>> extends RecipeRemberingBlockEntity<R> implements SynchronizableBlockEntity {
+public abstract class SingleItemRecipeBlockEntity<R extends AbstractFoodRecipe<?>> extends RecipeRememberingBlockEntity<R> implements SynchronizableBlockEntity {
 
     private R recipe;
 

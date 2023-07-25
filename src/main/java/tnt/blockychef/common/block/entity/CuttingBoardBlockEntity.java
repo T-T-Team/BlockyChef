@@ -19,7 +19,7 @@ import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 
-public class CuttingBoardBlockEntity extends RecipeRemberingBlockEntity<CuttingBoardRecipe> implements SelectableRecipeHolder {
+public class CuttingBoardBlockEntity extends RecipeRememberingBlockEntity<CuttingBoardRecipe> implements SelectableRecipeHolder {
 
     public static final int SLOT_INPUT = 0;
     public static final int[] SLOT_OUTPUTS = {1, 2, 3};

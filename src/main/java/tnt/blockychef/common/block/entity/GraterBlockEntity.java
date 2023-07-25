@@ -18,7 +18,7 @@ import tnt.blockychef.util.MenuInventoryHelper;
 import java.util.List;
 import java.util.Optional;
 
-public class GraterBlockEntity extends RecipeRemberingBlockEntity<GratingRecipe> implements SynchronizableBlockEntity {
+public class GraterBlockEntity extends RecipeRememberingBlockEntity<GratingRecipe> implements SynchronizableBlockEntity {
 
     private GratingRecipe recipe;
     private int gratingAmount;

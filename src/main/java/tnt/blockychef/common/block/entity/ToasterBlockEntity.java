@@ -21,7 +21,7 @@ import tnt.blockychef.util.MenuInventoryHelper;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class ToasterBlockEntity extends RecipeRemberingBlockEntity<ToasterRecipe> implements SynchronizableBlockEntity, IndexedColorHolder {
+public class ToasterBlockEntity extends RecipeRememberingBlockEntity<ToasterRecipe> implements SynchronizableBlockEntity, IndexedColorHolder {
 
     public static final int DEFAULT_TIMER_INCREMENT = 100;
     public static final int MIN_TIMER_VALUE = 100; // 5 seconds

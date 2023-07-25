@@ -22,7 +22,7 @@ import tnt.blockychef.util.MenuInventoryHelper;
 import java.util.List;
 import java.util.Optional;
 
-public class DryingRackBlockEntity extends RecipeRemberingBlockEntity<DryingRecipe> implements SynchronizableBlockEntity {
+public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRecipe> implements SynchronizableBlockEntity {
 
     private DryingRecipe recipe;
     private int ticksDrying;

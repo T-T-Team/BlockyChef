@@ -19,7 +19,7 @@ import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class MixingBowlBlockEntity extends RecipeRemberingBlockEntity<MixingBowlRecipe> implements SynchronizableBlockEntity, ProcessableRecipeHolder {
+public class MixingBowlBlockEntity extends RecipeRememberingBlockEntity<MixingBowlRecipe> implements SynchronizableBlockEntity, ProcessableRecipeHolder {
 
     public static final int[] INPUTS = {0, 1, 2, 3, 4, 5};
     public static final int[] OUTPUTS = {6, 7, 8};

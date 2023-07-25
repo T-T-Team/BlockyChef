@@ -21,7 +21,7 @@ import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class MixerBlockEntity extends RecipeRemberingBlockEntity<MixerRecipe> implements SynchronizableBlockEntity, IndexedColorHolder, FluidHolder {
+public class MixerBlockEntity extends RecipeRememberingBlockEntity<MixerRecipe> implements SynchronizableBlockEntity, IndexedColorHolder, FluidHolder {
 
     public static final int[] INPUTS = {0, 1, 2, 3, 4, 5};
     public static final int FLUID_CAPACITY = 750;

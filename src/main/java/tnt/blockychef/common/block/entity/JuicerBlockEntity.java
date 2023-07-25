@@ -22,7 +22,7 @@ import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class JuicerBlockEntity extends RecipeRemberingBlockEntity<JuicerRecipe> implements SynchronizableBlockEntity, IndexedColorHolder, FluidHolder {
+public class JuicerBlockEntity extends RecipeRememberingBlockEntity<JuicerRecipe> implements SynchronizableBlockEntity, IndexedColorHolder, FluidHolder {
 
     public static final int FLUID_CAPACITY = 500;
 

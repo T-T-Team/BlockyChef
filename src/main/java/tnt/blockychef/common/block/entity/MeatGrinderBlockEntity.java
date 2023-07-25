@@ -14,12 +14,11 @@ import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.util.Helper;
 import tnt.blockychef.util.MenuInventoryHelper;
-import tnt.blockychef.util.SerializationHelper;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class MeatGrinderBlockEntity extends RecipeRemberingBlockEntity<MeatGrinderRecipe> implements SynchronizableBlockEntity {
+public class MeatGrinderBlockEntity extends RecipeRememberingBlockEntity<MeatGrinderRecipe> implements SynchronizableBlockEntity {
 
     private MeatGrinderRecipe recipe;
     private int grindAmount;

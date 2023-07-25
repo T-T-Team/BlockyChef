@@ -9,7 +9,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import tnt.blockychef.common.food.recipe.MortarRecipe;
-import tnt.blockychef.common.food.recipe.MultiIngredient;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.util.Helper;
@@ -19,7 +18,7 @@ import tnt.blockychef.util.RenderHelper;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class MortarAndPestleBlockEntity extends RecipeRemberingBlockEntity<MortarRecipe> implements SynchronizableBlockEntity, ProcessableRecipeHolder {
+public class MortarAndPestleBlockEntity extends RecipeRememberingBlockEntity<MortarRecipe> implements SynchronizableBlockEntity, ProcessableRecipeHolder {
 
     public static final int[] INPUTS = {0, 1, 2, 3, 4, 5};
     public static final int[] OUTPUT = {6, 7, 8};

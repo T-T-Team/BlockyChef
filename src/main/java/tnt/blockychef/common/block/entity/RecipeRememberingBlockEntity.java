@@ -23,11 +23,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-public abstract class RecipeRemberingBlockEntity<R extends AbstractFoodRecipe<?>> extends InventoryBlockEntityWithContainerWrapper {
+public abstract class RecipeRememberingBlockEntity<R extends AbstractFoodRecipe<?>> extends InventoryBlockEntityWithContainerWrapper {
 
     private final Object2IntOpenHashMap<ResourceLocation> recipesUsed = new Object2IntOpenHashMap<>();
 
-    public RecipeRemberingBlockEntity(BlockEntityType<? extends RecipeRemberingBlockEntity> type, BlockPos pos, BlockState state) {
+    public RecipeRememberingBlockEntity(BlockEntityType<? extends RecipeRememberingBlockEntity> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 

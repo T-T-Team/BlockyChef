@@ -17,10 +17,9 @@ import tnt.blockychef.util.RenderHelper;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
-public class BarrelBlockEntity extends RecipeRemberingBlockEntity<BarrelRecipe> implements ProcessableRecipeHolder, SynchronizableBlockEntity {
+public class BarrelBlockEntity extends RecipeRememberingBlockEntity<BarrelRecipe> implements ProcessableRecipeHolder, SynchronizableBlockEntity {
 
     public static final int[] INPUTS = {0, 1, 2, 3, 4, 5};
     public static final int[] OUTPUTS = {6, 7, 8};

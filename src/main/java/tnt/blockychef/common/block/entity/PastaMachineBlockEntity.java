@@ -20,7 +20,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class PastaMachineBlockEntity extends RecipeRemberingBlockEntity<PastaMachineRecipe> implements SelectableRecipeHolder, IndexedColorHolder {
+public class PastaMachineBlockEntity extends RecipeRememberingBlockEntity<PastaMachineRecipe> implements SelectableRecipeHolder, IndexedColorHolder {
 
     public static final int[] INPUTS = {0};
     public static final int[] OUTPUTS = {1, 2, 3};

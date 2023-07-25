@@ -14,7 +14,7 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.items.IItemHandler;
 import tnt.blockychef.common.block.entity.InventoryBlockEntity;
-import tnt.blockychef.common.block.entity.RecipeRemberingBlockEntity;
+import tnt.blockychef.common.block.entity.RecipeRememberingBlockEntity;
 import tnt.blockychef.util.function.TriConsumer;
 
 import java.util.function.BiFunction;
@@ -27,7 +27,7 @@ public final class MenuInventoryHelper {
         if (!state.is(replacementState.getBlock())) {
             if (!level.isClientSide) {
                 BlockEntity blockEntity = level.getBlockEntity(pos);
-                if (blockEntity instanceof RecipeRemberingBlockEntity<?> entity) {
+                if (blockEntity instanceof RecipeRememberingBlockEntity<?> entity) {
                     entity.dropInventoryAndExp();
                 }
             }
