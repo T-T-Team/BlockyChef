@@ -3,15 +3,12 @@ package tnt.blockychef.common.food.recipe;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.world.Container;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import tnt.blockychef.util.SerializationHelper;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public final class MultiIngredient {
 
@@ -39,22 +36,26 @@ public final class MultiIngredient {
     }
 
     public static boolean test(Container container, int[] slots, List<MultiIngredient> ingredients) {
-        boolean validItem = false;
-        for (MultiIngredient ingredient : ingredients) {
-            if (ingredient.test(container, slots, true)) {
-                validItem = true;
-                break;
-            }
-        }
-        if (validItem) {
+        for (int slot : slots) {
+            ItemStack stack = container.getItem(slot);
+            if (stack.isEmpty())
+                continue;
+            boolean validItemStack = false;
             for (MultiIngredient ingredient : ingredients) {
-                if (!ingredient.test(container, slots)) {
-                    return false;
+                if (ingredient.ingredient.test(stack)) {
+                    validItemStack = true;
                 }
             }
-            return true;
+            if (!validItemStack) {
+                return false;
+            }
         }
-        return false;
+        for (MultiIngredient ingredient : ingredients) {
+            if (!ingredient.test(container, slots)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean test(Container container, int[] slots) {
