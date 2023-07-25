@@ -1,0 +1,14 @@
+{
+  "type": "blockychef:cutting_board",
+  "input": {
+    "item": "blockychef:broccoli"
+  },
+  "processingType": "blockychef:cutting",
+  "processingTime": 80,
+  "outputs": [
+    {
+      "item": "blockychef:broccoli_cuts",
+      "count": 2
+    }
+  ]
+}

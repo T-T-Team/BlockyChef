@@ -1,0 +1,14 @@
+{
+  "type": "blockychef:cutting_board",
+  "input": {
+    "item": "blockychef:bean_pod"
+  },
+  "processingType": "blockychef:peeling",
+  "processingTime": 80,
+  "outputs": [
+    {
+      "item": "blockychef:beans",
+      "count": 2
+    }
+  ]
+}
