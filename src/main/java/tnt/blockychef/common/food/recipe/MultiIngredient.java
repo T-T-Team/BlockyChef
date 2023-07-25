@@ -52,8 +52,9 @@ public final class MultiIngredient {
                     return false;
                 }
             }
+            return true;
         }
-        return true;
+        return false;
     }
 
     public boolean test(Container container, int[] slots) {

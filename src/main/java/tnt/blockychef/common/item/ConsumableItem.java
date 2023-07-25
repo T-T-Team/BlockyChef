@@ -92,7 +92,7 @@ public class ConsumableItem extends Item implements Drinkable {
 
     @Override
     public boolean hasCraftingRemainingItem(ItemStack stack) {
-        return true;
+        return returnItem != null;
     }
 
     @Override

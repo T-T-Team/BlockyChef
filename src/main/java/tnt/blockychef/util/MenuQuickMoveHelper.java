@@ -48,7 +48,7 @@ public final class MenuQuickMoveHelper {
             ItemStack slotItem = slot.getItem();
             stack = slotItem.copy();
             Rule rule = getRuleForSlot(slotIndex, slotItem);
-            if (rule != null && rule.move(slotItem, context.getItemStackMoveHelper())) {
+            if (rule != null && !rule.move(slotItem, context.getItemStackMoveHelper())) {
                 return ItemStack.EMPTY;
             }
 

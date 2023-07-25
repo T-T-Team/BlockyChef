@@ -131,10 +131,8 @@ public class DryingRackBlockEntity extends RecipeRemberingBlockEntity<DryingReci
                 return;
             RecipeManager manager = level.getRecipeManager();
             Optional<DryingRecipe> optional = manager.getRecipeFor(BlockyChefRecipeTypes.DRYING_RECIPE, this, level);
-            optional.ifPresent(recipe -> {
-                clearRecipe();
-                this.recipe = recipe;
-            });
+            clearRecipe();
+            optional.ifPresent(recipe -> this.recipe = recipe);
         }
     }
 
