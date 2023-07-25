@@ -97,6 +97,6 @@ public class ConsumableItem extends Item implements Drinkable {
 
     @Override
     public ItemStack getCraftingRemainingItem(ItemStack itemStack) {
-        return new ItemStack(returnItem.get());
+        return returnItem != null ? new ItemStack(returnItem.get()) : ItemStack.EMPTY;
     }
 }
