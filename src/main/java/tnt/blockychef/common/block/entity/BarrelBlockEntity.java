@@ -48,7 +48,7 @@ public class BarrelBlockEntity extends RecipeRememberingBlockEntity<BarrelRecipe
         }
         if (++barrel.fermentingTime >= barrel.activeRecipe.getFermentTime() && !level.isClientSide) {
             barrel.fermentingTime = 0;
-            barrel.consumeIngredientsAndApplyCraftRemainder(INPUTS, OUTPUTS, in -> barrel.activeRecipe.getInputs().forEach(multiIngredient -> multiIngredient.consume(barrel, in)));
+            barrel.consumeIngredientsAndApplyCraftRemainder(barrel.activeRecipe, INPUTS, OUTPUTS, in -> barrel.activeRecipe.getInputs().forEach(multiIngredient -> multiIngredient.consume(barrel, in)));
             ItemStack[] assembledOutputs = Arrays.stream(outputs).map(ItemStack::copy).toArray(ItemStack[]::new);
             MenuInventoryHelper.insertItems(assembledOutputs, barrel, OUTPUTS);
             barrel.storeRecipe(barrel.activeRecipe);

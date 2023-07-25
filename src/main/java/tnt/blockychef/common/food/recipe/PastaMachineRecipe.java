@@ -18,6 +18,7 @@ import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.util.SerializationHelper;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class PastaMachineRecipe extends AbstractFoodRecipe<PastaMachineBlockEntity> {
 
@@ -32,16 +33,17 @@ public class PastaMachineRecipe extends AbstractFoodRecipe<PastaMachineBlockEnti
                     list -> list.toArray(ItemStack[]::new),
                     Arrays::asList
             ).fieldOf("outputs").forGetter(PastaMachineRecipe::getOutputs),
-            resolveExperience()
-    ).apply(instance, (input, type, time, outputs, exp) -> new PastaMachineRecipe(recipeId, input, type, outputs, time, exp)));
+            resolveExperience(),
+            resolveRemainderConsumer()
+    ).apply(instance, (input, type, time, outputs, exp, rem) -> new PastaMachineRecipe(recipeId, input, type, outputs, time, exp, rem)));
 
     private final Ingredient input;
     private final RecipeProcessingType processingType;
     private final ItemStack[] outputs;
     private final int processingTime;
 
-    public PastaMachineRecipe(ResourceLocation recipeId, Ingredient input, RecipeProcessingType processingType, ItemStack[] outputs, int processingTime, float experience) {
-        super(recipeId, experience);
+    public PastaMachineRecipe(ResourceLocation recipeId, Ingredient input, RecipeProcessingType processingType, ItemStack[] outputs, int processingTime, float experience, List<MultiIngredient> remainderConsumer) {
+        super(recipeId, remainderConsumer, experience);
         this.input = input;
         this.processingType = processingType;
         this.outputs = outputs;

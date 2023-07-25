@@ -15,21 +15,24 @@ import tnt.blockychef.common.init.BlockyChefRecipeSerializers;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.util.SerializationHelper;
 
+import java.util.List;
+
 public class JuicerRecipe extends AbstractFoodRecipe<JuicerBlockEntity> {
 
     public static final CodecRecipeSerializer.CodecProvider<JuicerRecipe> CODEC_PROVIDER = recipeId -> RecordCodecBuilder.create(instance -> instance.group(
             SerializationHelper.INGREDIENT_CODEC.fieldOf("input").forGetter(t -> t.input),
             Codec.INT.fieldOf("pressAmount").forGetter(JuicerRecipe::getPressAmount),
             FluidStack.CODEC.fieldOf("output").forGetter(JuicerRecipe::getOutput),
-            resolveExperience()
-    ).apply(instance, (in, amount, out, exp) -> new JuicerRecipe(recipeId, in, amount, out, exp)));
+            resolveExperience(),
+            resolveRemainderConsumer()
+    ).apply(instance, (in, amount, out, exp, rem) -> new JuicerRecipe(recipeId, in, amount, out, exp, rem)));
 
     private final Ingredient input;
     private final int pressAmount;
     private final FluidStack output;
 
-    public JuicerRecipe(ResourceLocation recipeId, Ingredient ingredient, int pressAmount, FluidStack value, float experience) {
-        super(recipeId, experience);
+    public JuicerRecipe(ResourceLocation recipeId, Ingredient ingredient, int pressAmount, FluidStack value, float experience, List<MultiIngredient> remainderConsumer) {
+        super(recipeId, remainderConsumer, experience);
         this.input = ingredient;
         this.pressAmount = pressAmount;
         this.output = value;

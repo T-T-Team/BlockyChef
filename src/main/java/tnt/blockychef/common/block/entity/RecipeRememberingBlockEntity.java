@@ -12,11 +12,13 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import tnt.blockychef.common.food.recipe.AbstractFoodRecipe;
+import tnt.blockychef.common.food.recipe.MultiIngredient;
 import tnt.blockychef.util.MenuInventoryHelper;
 
 import java.util.ArrayList;
@@ -80,7 +82,7 @@ public abstract class RecipeRememberingBlockEntity<R extends AbstractFoodRecipe<
         this.recipesUsed.addTo(recipe.getId(), 1);
     }
 
-    protected void consumeIngredientsAndApplyCraftRemainder(int[] inputs, int[] outputs, Consumer<int[]> ingredientConsumer) {
+    protected void consumeIngredientsAndApplyCraftRemainder(R recipe, int[] inputs, int[] outputs, Consumer<int[]> ingredientConsumer) {
         List<ItemStack> craftingRemainder = new ArrayList<>();
         for (int slot : inputs) {
             ItemStack stack = getItem(slot);
@@ -88,11 +90,17 @@ public abstract class RecipeRememberingBlockEntity<R extends AbstractFoodRecipe<
                 craftingRemainder.add(stack.getCraftingRemainingItem());
             }
         }
+        List<MultiIngredient> craftRemainderConsumer = recipe.getOutputConsumers();
+        for (MultiIngredient ingredient : craftRemainderConsumer) {
+            ingredient.consume(craftingRemainder);
+        }
         ingredientConsumer.accept(inputs);
         int[] slots = new int[inputs.length + outputs.length];
         System.arraycopy(outputs, 0, slots, 0, outputs.length);
         System.arraycopy(inputs, 0, slots, outputs.length, inputs.length);
         for (ItemStack remainder : craftingRemainder) {
+            if (remainder.isEmpty())
+                continue;
             if (MenuInventoryHelper.canFitItems(new ItemStack[] {remainder}, this, slots)) {
                 MenuInventoryHelper.insertItems(new ItemStack[] {remainder.copy()}, this, slots);
             } else {

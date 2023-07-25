@@ -22,15 +22,16 @@ public class MixerRecipe extends AbstractFoodRecipe<MixerBlockEntity> {
             MultiIngredient.CODEC.listOf().fieldOf("inputs").forGetter(MixerRecipe::getInputs),
             SerializationHelper.enumCodec(RpmValue.class).fieldOf("rpm").forGetter(MixerRecipe::getRpm),
             FluidStack.CODEC.fieldOf("output").forGetter(MixerRecipe::getOutput),
-            resolveExperience()
-    ).apply(instance, (in, rpm, out, exp) -> new MixerRecipe(recipe, in, rpm, out, exp)));
+            resolveExperience(),
+            resolveRemainderConsumer()
+    ).apply(instance, (in, rpm, out, exp, rem) -> new MixerRecipe(recipe, in, rpm, out, exp, rem)));
 
     private final List<MultiIngredient> inputs;
     private final RpmValue rpm;
     private final FluidStack output;
 
-    public MixerRecipe(ResourceLocation recipeId, List<MultiIngredient> inputs, RpmValue rpm, FluidStack output, float experience) {
-        super(recipeId, experience);
+    public MixerRecipe(ResourceLocation recipeId, List<MultiIngredient> inputs, RpmValue rpm, FluidStack output, float experience, List<MultiIngredient> remainderConsumer) {
+        super(recipeId, remainderConsumer, experience);
         this.inputs = inputs;
         this.rpm = rpm;
         this.output = output;

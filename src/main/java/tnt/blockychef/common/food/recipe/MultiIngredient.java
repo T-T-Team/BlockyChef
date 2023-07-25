@@ -90,4 +90,18 @@ public final class MultiIngredient {
             }
         }
     }
+
+    public void consume(List<ItemStack> list) {
+        int remaining = count;
+        for (ItemStack stack : list) {
+            if (ingredient.test(stack)) {
+                int toConsume = Math.min(remaining, stack.getCount());
+                stack.shrink(toConsume);
+                remaining -= toConsume;
+                if (remaining <= 0) {
+                    break;
+                }
+            }
+        }
+    }
 }

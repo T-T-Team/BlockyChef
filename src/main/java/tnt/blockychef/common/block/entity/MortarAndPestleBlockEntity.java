@@ -46,7 +46,7 @@ public class MortarAndPestleBlockEntity extends RecipeRememberingBlockEntity<Mor
         }
         if (++mortarAndPestle.currentProcessingTime >= mortarAndPestle.activeRecipe.getProcessingTime() && !level.isClientSide) {
             mortarAndPestle.currentProcessingTime = 0;
-            mortarAndPestle.consumeIngredientsAndApplyCraftRemainder(INPUTS, OUTPUT, in -> mortarAndPestle.activeRecipe.getInputs().forEach(multiIngredient -> multiIngredient.consume(mortarAndPestle, in)));
+            mortarAndPestle.consumeIngredientsAndApplyCraftRemainder(mortarAndPestle.activeRecipe, INPUTS, OUTPUT, in -> mortarAndPestle.activeRecipe.getInputs().forEach(multiIngredient -> multiIngredient.consume(mortarAndPestle, in)));
             MenuInventoryHelper.insertItems(result, mortarAndPestle, OUTPUT);
             mortarAndPestle.storeRecipe(mortarAndPestle.activeRecipe);
             mortarAndPestle.refreshRecipe();

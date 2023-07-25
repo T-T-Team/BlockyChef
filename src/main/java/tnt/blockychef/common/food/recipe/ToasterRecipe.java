@@ -14,21 +14,24 @@ import tnt.blockychef.common.init.BlockyChefRecipeSerializers;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.util.SerializationHelper;
 
+import java.util.List;
+
 public class ToasterRecipe extends AbstractFoodRecipe<ToasterBlockEntity> {
 
     public static final CodecRecipeSerializer.CodecProvider<ToasterRecipe> CODEC_PROVIDER = recipeId -> RecordCodecBuilder.create(instance -> instance.group(
             SerializationHelper.INGREDIENT_CODEC.fieldOf("input").forGetter(t -> t.input),
             SerializationHelper.SIMPLE_ITEMSTACK_CODEC.fieldOf("output").forGetter(ToasterRecipe::getOutput),
             Codec.intRange(1, Integer.MAX_VALUE).fieldOf("toastingTime").forGetter(ToasterRecipe::getToastingTime),
-            resolveExperience()
-    ).apply(instance, (in, out, time, exp) -> new ToasterRecipe(recipeId, in, out, time, exp)));
+            resolveExperience(),
+            resolveRemainderConsumer()
+    ).apply(instance, (in, out, time, exp, rem) -> new ToasterRecipe(recipeId, in, out, time, exp, rem)));
 
     private final Ingredient input;
     private final ItemStack output;
     private final int toastingTime;
 
-    public ToasterRecipe(ResourceLocation recipeId, Ingredient input, ItemStack output, int toastingTime, float experience) {
-        super(recipeId, experience);
+    public ToasterRecipe(ResourceLocation recipeId, Ingredient input, ItemStack output, int toastingTime, float experience, List<MultiIngredient> remainderConsumer) {
+        super(recipeId, remainderConsumer, experience);
         this.input = input;
         this.output = output;
         this.toastingTime = toastingTime;

@@ -25,15 +25,16 @@ public class DoughMakerRecipe extends AbstractFoodRecipe<DoughMakerBlockEntity> 
                     Arrays::asList
             ).fieldOf("outputs").forGetter(DoughMakerRecipe::getOutputs),
             Codec.INT.fieldOf("processingTime").forGetter(DoughMakerRecipe::getProcessingTime),
-            resolveExperience()
-    ).apply(instance, (in, out, time, exp) -> new DoughMakerRecipe(recipeId, in, out, time, exp)));
+            resolveExperience(),
+            resolveRemainderConsumer()
+    ).apply(instance, (in, out, time, exp, rem) -> new DoughMakerRecipe(recipeId, in, out, time, exp, rem)));
 
     private final List<MultiIngredient> inputs;
     private final ItemStack[] outputs;
     private final int processingTime;
 
-    public DoughMakerRecipe(ResourceLocation recipeId, List<MultiIngredient> inputs, ItemStack[] outputs, int processingTime, float experience) {
-        super(recipeId, experience);
+    public DoughMakerRecipe(ResourceLocation recipeId, List<MultiIngredient> inputs, ItemStack[] outputs, int processingTime, float experience, List<MultiIngredient> remainderConsumer) {
+        super(recipeId, remainderConsumer, experience);
         this.inputs = inputs;
         this.outputs = outputs;
         this.processingTime = processingTime;

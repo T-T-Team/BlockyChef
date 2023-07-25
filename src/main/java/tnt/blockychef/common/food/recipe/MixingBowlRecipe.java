@@ -25,15 +25,16 @@ public class MixingBowlRecipe extends AbstractFoodRecipe<MixingBowlBlockEntity> 
                     Arrays::asList
             ).fieldOf("outputs").forGetter(MixingBowlRecipe::getOutputs),
             Codec.INT.fieldOf("mixingTime").forGetter(MixingBowlRecipe::getMixingTime),
-            resolveExperience()
-    ).apply(instance, (inputs, outputs, time, exp) -> new MixingBowlRecipe(recipeId, inputs, outputs, time, exp)));
+            resolveExperience(),
+            resolveRemainderConsumer()
+    ).apply(instance, (inputs, outputs, time, exp, rem) -> new MixingBowlRecipe(recipeId, inputs, outputs, time, exp, rem)));
 
     private final List<MultiIngredient> ingredients;
     private final ItemStack[] outputs;
     private final int mixingTime;
 
-    public MixingBowlRecipe(ResourceLocation recipeId, List<MultiIngredient> inputs, ItemStack[] outputs, int mixingTime, float experience) {
-        super(recipeId, experience);
+    public MixingBowlRecipe(ResourceLocation recipeId, List<MultiIngredient> inputs, ItemStack[] outputs, int mixingTime, float experience, List<MultiIngredient> remainderConsumer) {
+        super(recipeId, remainderConsumer, experience);
         this.ingredients = inputs;
         this.outputs = outputs;
         this.mixingTime = mixingTime;

@@ -25,15 +25,16 @@ public class MortarRecipe extends AbstractFoodRecipe<MortarAndPestleBlockEntity>
                     Arrays::asList
             ).fieldOf("outputs").forGetter(MortarRecipe::getOutput),
             Codec.INT.fieldOf("processingTime").forGetter(MortarRecipe::getProcessingTime),
-            resolveExperience()
-    ).apply(instance, (inputs, output, time, exp) -> new MortarRecipe(recipeId, inputs, output, time, exp)));
+            resolveExperience(),
+            resolveRemainderConsumer()
+    ).apply(instance, (inputs, output, time, exp, rem) -> new MortarRecipe(recipeId, inputs, output, time, exp, rem)));
 
     private final List<MultiIngredient> inputs;
     private final ItemStack[] output;
     private final int processingTime;
 
-    public MortarRecipe(ResourceLocation recipeId, List<MultiIngredient> inputs, ItemStack[] output, int processingTime, float exp) {
-        super(recipeId, exp);
+    public MortarRecipe(ResourceLocation recipeId, List<MultiIngredient> inputs, ItemStack[] output, int processingTime, float exp, List<MultiIngredient> remainderConsumer) {
+        super(recipeId, remainderConsumer, exp);
         this.inputs = inputs;
         this.output = output;
         this.processingTime = processingTime;

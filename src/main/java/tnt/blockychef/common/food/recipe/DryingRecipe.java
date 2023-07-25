@@ -15,21 +15,24 @@ import tnt.blockychef.common.init.BlockyChefRecipeSerializers;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.util.SerializationHelper;
 
+import java.util.List;
+
 public class DryingRecipe extends AbstractFoodRecipe<DryingRackBlockEntity> {
 
     public static final CodecRecipeSerializer.CodecProvider<DryingRecipe> CODEC_PROVIDER = recipeId -> RecordCodecBuilder.create(instance -> instance.group(
             SerializationHelper.INGREDIENT_CODEC.fieldOf("input").forGetter(t -> t.input),
             SerializationHelper.SIMPLE_ITEMSTACK_CODEC.fieldOf("output").forGetter(t -> t.output),
             Codec.INT.fieldOf("dryingTime").forGetter(DryingRecipe::getDryingTime),
-            resolveExperience()
-    ).apply(instance, (ingredient, stack, time, exp) -> new DryingRecipe(recipeId, ingredient, stack, time, exp)));
+            resolveExperience(),
+            resolveRemainderConsumer()
+    ).apply(instance, (ingredient, stack, time, exp, rem) -> new DryingRecipe(recipeId, ingredient, stack, time, exp, rem)));
 
     private final Ingredient input;
     private final ItemStack output;
     private final int dryingTime;
 
-    private DryingRecipe(ResourceLocation id, Ingredient input, ItemStack output, int dryingTime, float experience) throws JsonParseException {
-        super(id, experience);
+    private DryingRecipe(ResourceLocation id, Ingredient input, ItemStack output, int dryingTime, float experience, List<MultiIngredient> remainderConsumer) throws JsonParseException {
+        super(id, remainderConsumer, experience);
         this.input = input;
         this.output = output;
         this.dryingTime = dryingTime;

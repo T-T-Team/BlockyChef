@@ -6,15 +6,21 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
+
+import java.util.Collections;
+import java.util.List;
 
 public abstract class AbstractFoodRecipe<C extends Container> implements Recipe<C> {
 
     private final ResourceLocation id;
     private final float experience;
+    private final List<MultiIngredient> outputConsumers;
 
-    protected AbstractFoodRecipe(ResourceLocation id, float experience) throws JsonParseException {
+    protected AbstractFoodRecipe(ResourceLocation id, List<MultiIngredient> outputConsumers, float experience) throws JsonParseException {
         this.id = id;
+        this.outputConsumers = outputConsumers;
         this.experience = experience;
         if (experience < 0.0F) {
             throwValidationError("Experience cannot be lower than 0");
@@ -25,8 +31,16 @@ public abstract class AbstractFoodRecipe<C extends Container> implements Recipe<
         return Codec.FLOAT.optionalFieldOf("experience", 0.0F).forGetter(AbstractFoodRecipe::getExperience);
     }
 
+    public static <R extends AbstractFoodRecipe<?>> RecordCodecBuilder<R, List<MultiIngredient>> resolveRemainderConsumer() {
+        return MultiIngredient.CODEC.listOf().optionalFieldOf("craftRemainderConsumers", Collections.emptyList()).forGetter(AbstractFoodRecipe::getOutputConsumers);
+    }
+
     public float getExperience() {
         return experience;
+    }
+
+    public List<MultiIngredient> getOutputConsumers() {
+        return outputConsumers;
     }
 
     @Override

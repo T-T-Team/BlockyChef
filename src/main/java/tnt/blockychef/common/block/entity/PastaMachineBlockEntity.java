@@ -44,7 +44,7 @@ public class PastaMachineBlockEntity extends RecipeRememberingBlockEntity<PastaM
                 if (++pastaMachine.processingTime >= pastaMachine.recipe.getProcessingTime()) {
                     pastaMachine.processingTime = 0;
                     pastaMachine.storeRecipe(pastaMachine.recipe);
-                    pastaMachine.consumeIngredientsAndApplyCraftRemainder(INPUTS, OUTPUTS, in -> pastaMachine.getInputItem().shrink(1));
+                    pastaMachine.consumeIngredientsAndApplyCraftRemainder(pastaMachine.recipe, INPUTS, OUTPUTS, in -> pastaMachine.getInputItem().shrink(1));
                     MenuInventoryHelper.insertItems(pastaMachine.recipe.getOutputs(), pastaMachine, OUTPUTS);
                     pastaMachine.refreshRecipes();
                 }

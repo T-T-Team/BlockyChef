@@ -38,5 +38,13 @@
       "count": 2
     }
   ],
+  "craftRemainderConsumers": [
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "blockychef:empty_bottle"
+      }
+    }
+  ],
   "fermentTime": 2400
 }

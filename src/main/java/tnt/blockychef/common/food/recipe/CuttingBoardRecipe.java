@@ -18,6 +18,7 @@ import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.util.SerializationHelper;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class CuttingBoardRecipe extends AbstractFoodRecipe<CuttingBoardBlockEntity> {
 
@@ -32,16 +33,17 @@ public class CuttingBoardRecipe extends AbstractFoodRecipe<CuttingBoardBlockEnti
                     list -> list.toArray(ItemStack[]::new),
                     Arrays::asList
             ).fieldOf("outputs").forGetter(CuttingBoardRecipe::getOutputs),
-            resolveExperience()
-    ).apply(instance, (input, type, time, outputs, exp) -> new CuttingBoardRecipe(recipeId, input, type, time, outputs, exp)));
+            resolveExperience(),
+            resolveRemainderConsumer()
+    ).apply(instance, (input, type, time, outputs, exp, rem) -> new CuttingBoardRecipe(recipeId, input, type, time, outputs, exp, rem)));
 
     private final Ingredient input;
     private final RecipeProcessingType processingType;
     private final int processingTime;
     private final ItemStack[] outputs;
 
-    private CuttingBoardRecipe(ResourceLocation id, Ingredient input, RecipeProcessingType processingType, int processingTime, ItemStack[] outputs, float experience) {
-        super(id, experience);
+    private CuttingBoardRecipe(ResourceLocation id, Ingredient input, RecipeProcessingType processingType, int processingTime, ItemStack[] outputs, float experience, List<MultiIngredient> remainderConsumer) {
+        super(id, remainderConsumer, experience);
         this.processingType = processingType;
         this.processingTime = processingTime;
         this.outputs = outputs;

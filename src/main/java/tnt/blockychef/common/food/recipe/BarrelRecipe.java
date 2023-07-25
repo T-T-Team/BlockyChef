@@ -25,15 +25,16 @@ public class BarrelRecipe extends AbstractFoodRecipe<BarrelBlockEntity> {
                     Arrays::asList
             ).fieldOf("outputs").forGetter(BarrelRecipe::getOutputs),
             Codec.INT.fieldOf("fermentTime").forGetter(BarrelRecipe::getFermentTime),
-            resolveExperience()
-    ).apply(instance, (in, out, time, exp) -> new BarrelRecipe(recipeId, in, out, time, exp)));
+            resolveExperience(),
+            resolveRemainderConsumer()
+    ).apply(instance, (in, out, time, exp, rem) -> new BarrelRecipe(recipeId, in, out, time, exp, rem)));
 
     private final List<MultiIngredient> inputs;
     private final ItemStack[] outputs;
     private final int fermentTime;
 
-    public BarrelRecipe(ResourceLocation recipeId, List<MultiIngredient> inputs, ItemStack[] outputs, int fermentTime, float experience) {
-        super(recipeId, experience);
+    public BarrelRecipe(ResourceLocation recipeId, List<MultiIngredient> inputs, ItemStack[] outputs, int fermentTime, float experience, List<MultiIngredient> remainderConsumer) {
+        super(recipeId, remainderConsumer, experience);
         this.inputs = inputs;
         this.outputs = outputs;
         this.fermentTime = fermentTime;

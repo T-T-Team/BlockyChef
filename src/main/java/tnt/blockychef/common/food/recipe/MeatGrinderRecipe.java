@@ -1,6 +1,5 @@
 package tnt.blockychef.common.food.recipe;
 
-import com.google.gson.JsonParseException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.RegistryAccess;
@@ -15,21 +14,24 @@ import tnt.blockychef.common.init.BlockyChefRecipeSerializers;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.util.SerializationHelper;
 
+import java.util.List;
+
 public class MeatGrinderRecipe extends AbstractFoodRecipe<MeatGrinderBlockEntity> {
 
     public static final CodecRecipeSerializer.CodecProvider<MeatGrinderRecipe> CODEC_PROVIDER = recipe -> RecordCodecBuilder.create(instance -> instance.group(
             SerializationHelper.INGREDIENT_CODEC.fieldOf("input").forGetter(t -> t.input),
             Codec.intRange(1, 99).optionalFieldOf("processingAmount", 1).forGetter(MeatGrinderRecipe::getProcessingAmount),
             SerializationHelper.SIMPLE_ITEMSTACK_CODEC.fieldOf("output").forGetter(t -> t.result),
-            resolveExperience()
-    ).apply(instance, (ingredient, amount, item, exp) -> new MeatGrinderRecipe(recipe, ingredient, amount, item, exp)));
+            resolveExperience(),
+            resolveRemainderConsumer()
+    ).apply(instance, (ingredient, amount, item, exp, rem) -> new MeatGrinderRecipe(recipe, ingredient, amount, item, exp, rem)));
 
     private final Ingredient input;
     private final int processingAmount;
     private final ItemStack result;
 
-    public MeatGrinderRecipe(ResourceLocation id, Ingredient input, int processingAmount, ItemStack result, float experience) {
-        super(id, experience);
+    public MeatGrinderRecipe(ResourceLocation id, Ingredient input, int processingAmount, ItemStack result, float experience, List<MultiIngredient> remainderConsumer) {
+        super(id, remainderConsumer, experience);
         this.input = input;
         this.processingAmount = processingAmount;
         this.result = result;
