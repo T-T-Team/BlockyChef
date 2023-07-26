@@ -1,0 +1,14 @@
+{
+  "type": "blockychef:cutting_board",
+  "input": {
+    "item": "blockychef:cucumber"
+  },
+  "processingType": "blockychef:cutting",
+  "processingTime": 80,
+  "outputs": [
+    {
+      "item": "blockychef:cucumber_slice",
+      "count": 2
+    }
+  ]
+}

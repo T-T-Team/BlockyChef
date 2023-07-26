@@ -1,0 +1,14 @@
+{
+  "type": "blockychef:cutting_board",
+  "input": {
+    "item": "minecraft:egg"
+  },
+  "processingType": "blockychef:cutting",
+  "processingTime": 80,
+  "outputs": [
+    {
+      "item": "blockychef:cracked_egg",
+      "count": 1
+    }
+  ]
+}

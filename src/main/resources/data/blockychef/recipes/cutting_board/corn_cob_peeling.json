@@ -1,0 +1,14 @@
+{
+  "type": "blockychef:cutting_board",
+  "input": {
+    "item": "blockychef:corn_cob"
+  },
+  "processingType": "blockychef:peeling",
+  "processingTime": 80,
+  "outputs": [
+    {
+      "item": "blockychef:raw_corn_cob",
+      "count": 1
+    }
+  ]
+}

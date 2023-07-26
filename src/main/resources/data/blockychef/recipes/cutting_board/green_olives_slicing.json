@@ -1,0 +1,14 @@
+{
+  "type": "blockychef:cutting_board",
+  "input": {
+    "item": "blockychef:green_olives"
+  },
+  "processingType": "blockychef:slicing",
+  "processingTime": 80,
+  "outputs": [
+    {
+      "item": "blockychef:green_olive_slice",
+      "count": 2
+    }
+  ]
+}

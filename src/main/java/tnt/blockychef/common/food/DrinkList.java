@@ -384,6 +384,7 @@ public final class DrinkList {
     public static final DrinkProperties PIZZA_DOUGH = DrinkProperties.Builder.create().stats(-1, 0).build();
     public static final DrinkProperties RAW_RICE_CAKE = DrinkProperties.Builder.create().stats(-1, 0).build();
     public static final DrinkProperties RICE_CAKE = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties PEELED_ONION = DrinkProperties.Builder.create().stats(-3, 0).build();
 
     private DrinkList() {}
 }

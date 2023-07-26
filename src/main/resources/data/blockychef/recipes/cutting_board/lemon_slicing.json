@@ -1,0 +1,14 @@
+{
+  "type": "blockychef:cutting_board",
+  "input": {
+    "item": "blockychef:lemon"
+  },
+  "processingType": "blockychef:slicing",
+  "processingTime": 80,
+  "outputs": [
+    {
+      "item": "blockychef:lemon_slice",
+      "count": 2
+    }
+  ]
+}

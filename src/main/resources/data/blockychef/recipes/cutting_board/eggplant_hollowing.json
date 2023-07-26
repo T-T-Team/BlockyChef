@@ -1,0 +1,14 @@
+{
+  "type": "blockychef:cutting_board",
+  "input": {
+    "item": "blockychef:eggplant"
+  },
+  "processingType": "blockychef:hollowing",
+  "processingTime": 80,
+  "outputs": [
+    {
+      "item": "blockychef:hollowed_eggplant",
+      "count": 1
+    }
+  ]
+}
