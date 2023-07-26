@@ -24,7 +24,7 @@ import java.util.Optional;
 public class MixerBlockEntity extends RecipeRememberingBlockEntity<MixerRecipe> implements SynchronizableBlockEntity, IndexedColorHolder, FluidHolder {
 
     public static final int[] INPUTS = {0, 1, 2, 3, 4, 5};
-    public static final int FLUID_CAPACITY = 750;
+    public static final int FLUID_CAPACITY = 500;
 
     private final FluidContainer container;
     private MixerRecipe.RpmValue selectedRpm = MixerRecipe.RpmValue.MEDIUM;

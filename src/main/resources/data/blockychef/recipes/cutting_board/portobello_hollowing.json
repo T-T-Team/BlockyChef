@@ -1,0 +1,14 @@
+{
+  "type": "blockychef:cutting_board",
+  "input": {
+    "item": "blockychef:portobello_mushroom"
+  },
+  "processingType": "blockychef:hollowing",
+  "processingTime": 80,
+  "outputs": [
+    {
+      "item": "blockychef:hollowed_portobello",
+      "count": 1
+    }
+  ]
+}

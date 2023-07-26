@@ -540,5 +540,6 @@ public final class ItemRegistry {
         helper.register("burnt_pork_tortellini", new Item(new Item.Properties()));
         helper.register("burnt_mushroom_tortellini", new Item(new Item.Properties()));
         helper.register("burnt_spinach_tortellini", new Item(new Item.Properties()));
+        helper.register("peeled_onion", new ConsumableItem(new Item.Properties().food(FoodList.PEELED_ONION), DrinkList.PEELED_ONION));
     }
 }

@@ -1,0 +1,14 @@
+{
+  "type": "blockychef:cutting_board",
+  "input": {
+    "item": "blockychef:garlic"
+  },
+  "processingType": "blockychef:peeling",
+  "processingTime": 80,
+  "outputs": [
+    {
+      "item": "blockychef:garlic_clove",
+      "count": 2
+    }
+  ]
+}

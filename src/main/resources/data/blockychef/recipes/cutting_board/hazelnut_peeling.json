@@ -1,0 +1,14 @@
+{
+  "type": "blockychef:cutting_board",
+  "input": {
+    "item": "blockychef:hazelnut"
+  },
+  "processingType": "blockychef:peeling",
+  "processingTime": 80,
+  "outputs": [
+    {
+      "item": "blockychef:hazelnuts",
+      "count": 2
+    }
+  ]
+}
