@@ -12,8 +12,9 @@ import tnt.blockychef.common.food.recipe.CuttingBoardRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.util.Helper;
-import tnt.blockychef.util.MenuInventoryHelper;
-import tnt.blockychef.util.RenderHelper;
+import tnt.tntlib.api.blockentity.BlockEntityHelper;
+import tnt.tntlib.api.math.Interpolation;
+import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
@@ -44,12 +45,12 @@ public class CuttingBoardBlockEntity extends RecipeRememberingBlockEntity<Cuttin
                 } else {
                     cuttingBoard.setProcessing(false);
                     cuttingBoard.timeProcessing = 0;
-                    Helper.sendBlockEntityClientData(cuttingBoard);
+                    BlockEntityHelper.sendBlockEntityClientData(cuttingBoard);
                 }
             } else {
                 cuttingBoard.setProcessing(false);
                 cuttingBoard.timeProcessing = 0;
-                Helper.sendBlockEntityClientData(cuttingBoard);
+                BlockEntityHelper.sendBlockEntityClientData(cuttingBoard);
             }
         }
     }
@@ -91,7 +92,7 @@ public class CuttingBoardBlockEntity extends RecipeRememberingBlockEntity<Cuttin
         int total = recipe.getProcessingTime();
         float previousTickProgress = prevTime / (float) total;
         float currentTickProgress = timeProcessing / (float) total;
-        return RenderHelper.interpolate(previousTickProgress, currentTickProgress, partialTicks);
+        return Interpolation.linear(previousTickProgress, currentTickProgress, partialTicks);
     }
 
     public ItemStack getInputItem() {
@@ -110,13 +111,13 @@ public class CuttingBoardBlockEntity extends RecipeRememberingBlockEntity<Cuttin
     }
 
     @Override
-    public void encodeBlockEntityData(CompoundTag tag) {
+    public void encodeData(CompoundTag tag) {
         MenuInventoryHelper.encodeInventory(getItemHandler(), tag);
         saveCommonData(tag);
     }
 
     @Override
-    public void decodeBlockEntityData(CompoundTag tag) {
+    public void decodeData(CompoundTag tag) {
         MenuInventoryHelper.decodeInventory(getItemHandler(), tag);
         loadCommonData(tag);
     }
@@ -187,7 +188,7 @@ public class CuttingBoardBlockEntity extends RecipeRememberingBlockEntity<Cuttin
         if (recipe != null && !availableRecipes.contains(recipe)) {
             setRecipe(null);
         }
-        Helper.sendBlockEntityClientData(this);
+        BlockEntityHelper.sendBlockEntityClientData(this);
     }
 
     private void setRecipe(@Nullable CuttingBoardRecipe recipe) {
@@ -196,7 +197,7 @@ public class CuttingBoardBlockEntity extends RecipeRememberingBlockEntity<Cuttin
         if (changed) {
             timeProcessing = 0;
             processing = false;
-            Helper.sendBlockEntityClientData(this);
+            BlockEntityHelper.sendBlockEntityClientData(this);
         }
     }
 

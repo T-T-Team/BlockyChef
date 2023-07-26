@@ -12,13 +12,14 @@ import net.minecraftforge.items.ItemStackHandler;
 import tnt.blockychef.common.food.recipe.MeatGrinderRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
-import tnt.blockychef.util.Helper;
-import tnt.blockychef.util.MenuInventoryHelper;
+import tnt.tntlib.api.blockentity.BlockEntityHelper;
+import tnt.tntlib.api.blockentity.Synchronizable;
+import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class MeatGrinderBlockEntity extends RecipeRememberingBlockEntity<MeatGrinderRecipe> implements SynchronizableBlockEntity {
+public class MeatGrinderBlockEntity extends RecipeRememberingBlockEntity<MeatGrinderRecipe> implements Synchronizable {
 
     private MeatGrinderRecipe recipe;
     private int grindAmount;
@@ -58,19 +59,19 @@ public class MeatGrinderBlockEntity extends RecipeRememberingBlockEntity<MeatGri
             if (!level.isClientSide) {
                 awardUsedRecipesAndPopExperience((ServerPlayer) player);
                 MenuInventoryHelper.dropInventoryContents(level, worldPosition, inventoryHandler);
-                Helper.sendBlockEntityClientData(this);
+                BlockEntityHelper.sendBlockEntityClientData(this);
             }
         }
     }
 
     @Override
-    public void encodeBlockEntityData(CompoundTag tag) {
+    public void encodeData(CompoundTag tag) {
         MenuInventoryHelper.encodeInventory(inventoryHandler, tag);
         tag.putInt("grindAmount", grindAmount);
     }
 
     @Override
-    public void decodeBlockEntityData(CompoundTag tag) {
+    public void decodeData(CompoundTag tag) {
         MenuInventoryHelper.decodeInventory(inventoryHandler, tag);
         grindAmount = tag.getInt("grindAmount");
         refreshRecipe();
@@ -100,7 +101,7 @@ public class MeatGrinderBlockEntity extends RecipeRememberingBlockEntity<MeatGri
             setRecipe(null);
         }
         if (!level.isClientSide) {
-            Helper.sendBlockEntityClientData(this);
+            BlockEntityHelper.sendBlockEntityClientData(this);
         }
     }
 
@@ -109,7 +110,7 @@ public class MeatGrinderBlockEntity extends RecipeRememberingBlockEntity<MeatGri
         this.recipe = recipe;
         if (changed) {
             grindAmount = 0;
-            Helper.sendBlockEntityClientData(this);
+            BlockEntityHelper.sendBlockEntityClientData(this);
         }
     }
 }

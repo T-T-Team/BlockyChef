@@ -13,15 +13,15 @@ import net.minecraft.world.level.Level;
 import tnt.blockychef.common.block.entity.DryingRackBlockEntity;
 import tnt.blockychef.common.init.BlockyChefRecipeSerializers;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
-import tnt.blockychef.util.SerializationHelper;
+import tnt.tntlib.api.serialization.Codecs;
 
 import java.util.List;
 
 public class DryingRecipe extends AbstractFoodRecipe<DryingRackBlockEntity> {
 
     public static final CodecRecipeSerializer.CodecProvider<DryingRecipe> CODEC_PROVIDER = recipeId -> RecordCodecBuilder.create(instance -> instance.group(
-            SerializationHelper.INGREDIENT_CODEC.fieldOf("input").forGetter(t -> t.input),
-            SerializationHelper.SIMPLE_ITEMSTACK_CODEC.fieldOf("output").forGetter(t -> t.output),
+            Codecs.INGREDIENT_CODEC.fieldOf("input").forGetter(t -> t.input),
+            Codecs.SIMPLE_ITEMSTACK_CODEC.fieldOf("output").forGetter(t -> t.output),
             Codec.INT.fieldOf("dryingTime").forGetter(DryingRecipe::getDryingTime),
             resolveExperience(),
             resolveRemainderConsumer()

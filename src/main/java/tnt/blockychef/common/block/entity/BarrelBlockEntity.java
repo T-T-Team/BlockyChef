@@ -11,15 +11,16 @@ import net.minecraftforge.items.ItemStackHandler;
 import tnt.blockychef.common.food.recipe.BarrelRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
-import tnt.blockychef.util.Helper;
-import tnt.blockychef.util.MenuInventoryHelper;
-import tnt.blockychef.util.RenderHelper;
+import tnt.tntlib.api.blockentity.BlockEntityHelper;
+import tnt.tntlib.api.blockentity.Synchronizable;
+import tnt.tntlib.api.math.Interpolation;
+import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class BarrelBlockEntity extends RecipeRememberingBlockEntity<BarrelRecipe> implements ProcessableRecipeHolder, SynchronizableBlockEntity {
+public class BarrelBlockEntity extends RecipeRememberingBlockEntity<BarrelRecipe> implements ProcessableRecipeHolder, Synchronizable {
 
     public static final int[] INPUTS = {0, 1, 2, 3, 4, 5};
     public static final int[] OUTPUTS = {6, 7, 8};
@@ -53,7 +54,7 @@ public class BarrelBlockEntity extends RecipeRememberingBlockEntity<BarrelRecipe
             MenuInventoryHelper.insertItems(assembledOutputs, barrel, OUTPUTS);
             barrel.storeRecipe(barrel.activeRecipe);
             barrel.refreshRecipe();
-            Helper.sendBlockEntityClientData(barrel);
+            BlockEntityHelper.sendBlockEntityClientData(barrel);
         }
     }
 
@@ -75,13 +76,13 @@ public class BarrelBlockEntity extends RecipeRememberingBlockEntity<BarrelRecipe
     }
 
     @Override
-    public void encodeBlockEntityData(CompoundTag tag) {
+    public void encodeData(CompoundTag tag) {
         MenuInventoryHelper.encodeInventory(inventoryHandler, tag);
         saveSharedData(tag);
     }
 
     @Override
-    public void decodeBlockEntityData(CompoundTag tag) {
+    public void decodeData(CompoundTag tag) {
         MenuInventoryHelper.decodeInventory(inventoryHandler, tag);
         loadSharedData(tag);
     }
@@ -93,7 +94,7 @@ public class BarrelBlockEntity extends RecipeRememberingBlockEntity<BarrelRecipe
         int total = activeRecipe.getFermentTime();
         float f0 = oldTick / (float) total;
         float f1 = fermentingTime / (float) total;
-        return RenderHelper.interpolate(f0, f1, partialTicks);
+        return Interpolation.linear(f0, f1, partialTicks);
     }
 
     public boolean isFermenting() {
@@ -113,7 +114,7 @@ public class BarrelBlockEntity extends RecipeRememberingBlockEntity<BarrelRecipe
             return;
         fermentingTime = 0;
         fermenting = true;
-        Helper.sendBlockEntityClientData(this);
+        BlockEntityHelper.sendBlockEntityClientData(this);
     }
 
     public void refreshRecipe() {
@@ -129,7 +130,7 @@ public class BarrelBlockEntity extends RecipeRememberingBlockEntity<BarrelRecipe
             activeRecipe = recipe;
             fermentingTime = 0;
             fermenting = false;
-            Helper.sendBlockEntityClientData(this);
+            BlockEntityHelper.sendBlockEntityClientData(this);
         }
         setChanged();
     }

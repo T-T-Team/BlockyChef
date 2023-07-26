@@ -13,14 +13,14 @@ import net.minecraftforge.fluids.FluidStack;
 import tnt.blockychef.common.block.entity.JuicerBlockEntity;
 import tnt.blockychef.common.init.BlockyChefRecipeSerializers;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
-import tnt.blockychef.util.SerializationHelper;
+import tnt.tntlib.api.serialization.Codecs;
 
 import java.util.List;
 
 public class JuicerRecipe extends AbstractFoodRecipe<JuicerBlockEntity> {
 
     public static final CodecRecipeSerializer.CodecProvider<JuicerRecipe> CODEC_PROVIDER = recipeId -> RecordCodecBuilder.create(instance -> instance.group(
-            SerializationHelper.INGREDIENT_CODEC.fieldOf("input").forGetter(t -> t.input),
+            Codecs.INGREDIENT_CODEC.fieldOf("input").forGetter(t -> t.input),
             Codec.INT.fieldOf("pressAmount").forGetter(JuicerRecipe::getPressAmount),
             FluidStack.CODEC.fieldOf("output").forGetter(JuicerRecipe::getOutput),
             resolveExperience(),

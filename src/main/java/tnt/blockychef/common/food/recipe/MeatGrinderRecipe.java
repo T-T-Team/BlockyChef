@@ -12,16 +12,16 @@ import net.minecraft.world.level.Level;
 import tnt.blockychef.common.block.entity.MeatGrinderBlockEntity;
 import tnt.blockychef.common.init.BlockyChefRecipeSerializers;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
-import tnt.blockychef.util.SerializationHelper;
+import tnt.tntlib.api.serialization.Codecs;
 
 import java.util.List;
 
 public class MeatGrinderRecipe extends AbstractFoodRecipe<MeatGrinderBlockEntity> {
 
     public static final CodecRecipeSerializer.CodecProvider<MeatGrinderRecipe> CODEC_PROVIDER = recipe -> RecordCodecBuilder.create(instance -> instance.group(
-            SerializationHelper.INGREDIENT_CODEC.fieldOf("input").forGetter(t -> t.input),
+            Codecs.INGREDIENT_CODEC.fieldOf("input").forGetter(t -> t.input),
             Codec.intRange(1, 99).optionalFieldOf("processingAmount", 1).forGetter(MeatGrinderRecipe::getProcessingAmount),
-            SerializationHelper.SIMPLE_ITEMSTACK_CODEC.fieldOf("output").forGetter(t -> t.result),
+            Codecs.SIMPLE_ITEMSTACK_CODEC.fieldOf("output").forGetter(t -> t.result),
             resolveExperience(),
             resolveRemainderConsumer()
     ).apply(instance, (ingredient, amount, item, exp, rem) -> new MeatGrinderRecipe(recipe, ingredient, amount, item, exp, rem)));

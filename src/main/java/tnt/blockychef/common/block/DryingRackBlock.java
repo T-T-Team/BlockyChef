@@ -23,8 +23,9 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.block.entity.DryingRackBlockEntity;
+import tnt.blockychef.common.block.entity.RecipeRememberingBlockEntity;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
-import tnt.blockychef.util.Helper;
+import tnt.tntlib.api.blockentity.BlockEntityHelper;
 
 import java.util.Optional;
 
@@ -101,14 +102,7 @@ public class DryingRackBlock extends FullHorizontalAxisBlock implements EntityBl
 
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState replacementState, boolean someValue) {
-        if (!state.is(replacementState.getBlock())) {
-            if (!level.isClientSide) {
-                BlockEntity blockEntity = level.getBlockEntity(pos);
-                if (blockEntity instanceof DryingRackBlockEntity dryingRack) {
-                    dryingRack.clearInventoryAndProcessRecipe(null);
-                }
-            }
-        }
+        RecipeRememberingBlockEntity.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, replacementState);
         super.onRemove(state, level, pos, replacementState, someValue);
     }
 
@@ -121,6 +115,6 @@ public class DryingRackBlock extends FullHorizontalAxisBlock implements EntityBl
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return level.isClientSide ? null : Helper.createBlockEntityTicker(type, BlockyChefBlockEntities.DRYING_RACK, DryingRackBlockEntity::tick);
+        return level.isClientSide ? null : BlockEntityHelper.createBlockEntityTicker(type, BlockyChefBlockEntities.DRYING_RACK, DryingRackBlockEntity::tick);
     }
 }

@@ -11,14 +11,15 @@ import net.minecraftforge.items.ItemStackHandler;
 import tnt.blockychef.common.food.recipe.MortarRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
-import tnt.blockychef.util.Helper;
-import tnt.blockychef.util.MenuInventoryHelper;
-import tnt.blockychef.util.RenderHelper;
+import tnt.tntlib.api.blockentity.BlockEntityHelper;
+import tnt.tntlib.api.blockentity.Synchronizable;
+import tnt.tntlib.api.math.Interpolation;
+import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class MortarAndPestleBlockEntity extends RecipeRememberingBlockEntity<MortarRecipe> implements SynchronizableBlockEntity, ProcessableRecipeHolder {
+public class MortarAndPestleBlockEntity extends RecipeRememberingBlockEntity<MortarRecipe> implements Synchronizable, ProcessableRecipeHolder {
 
     public static final int[] INPUTS = {0, 1, 2, 3, 4, 5};
     public static final int[] OUTPUT = {6, 7, 8};
@@ -50,7 +51,7 @@ public class MortarAndPestleBlockEntity extends RecipeRememberingBlockEntity<Mor
             MenuInventoryHelper.insertItems(result, mortarAndPestle, OUTPUT);
             mortarAndPestle.storeRecipe(mortarAndPestle.activeRecipe);
             mortarAndPestle.refreshRecipe();
-            Helper.sendBlockEntityClientData(mortarAndPestle);
+            BlockEntityHelper.sendBlockEntityClientData(mortarAndPestle);
         }
     }
 
@@ -61,7 +62,7 @@ public class MortarAndPestleBlockEntity extends RecipeRememberingBlockEntity<Mor
         int total = activeRecipe.getProcessingTime();
         float f0 = oldTick / (float) total;
         float f1 = currentProcessingTime / (float) total;
-        return RenderHelper.interpolate(f0, f1, partialTicks);
+        return Interpolation.linear(f0, f1, partialTicks);
     }
 
     public boolean isGrinding() {
@@ -81,7 +82,7 @@ public class MortarAndPestleBlockEntity extends RecipeRememberingBlockEntity<Mor
             return;
         currentProcessingTime = 0;
         processing = true;
-        Helper.sendBlockEntityClientData(this);
+        BlockEntityHelper.sendBlockEntityClientData(this);
     }
 
     @Override
@@ -90,13 +91,13 @@ public class MortarAndPestleBlockEntity extends RecipeRememberingBlockEntity<Mor
     }
 
     @Override
-    public void encodeBlockEntityData(CompoundTag tag) {
+    public void encodeData(CompoundTag tag) {
         MenuInventoryHelper.encodeInventory(inventoryHandler, tag);
         saveSharedData(tag);
     }
 
     @Override
-    public void decodeBlockEntityData(CompoundTag tag) {
+    public void decodeData(CompoundTag tag) {
         MenuInventoryHelper.decodeInventory(inventoryHandler, tag);
         loadSharedData(tag);
     }
@@ -138,7 +139,7 @@ public class MortarAndPestleBlockEntity extends RecipeRememberingBlockEntity<Mor
             this.activeRecipe = recipe;
             this.currentProcessingTime = 0;
             this.processing = false;
-            Helper.sendBlockEntityClientData(this);
+            BlockEntityHelper.sendBlockEntityClientData(this);
         }
         setChanged();
     }

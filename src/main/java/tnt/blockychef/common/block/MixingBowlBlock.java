@@ -22,10 +22,10 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.block.entity.MixingBowlBlockEntity;
+import tnt.blockychef.common.block.entity.RecipeRememberingBlockEntity;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.menu.MixingBowlMenu;
-import tnt.blockychef.util.Helper;
-import tnt.blockychef.util.MenuInventoryHelper;
+import tnt.tntlib.api.blockentity.BlockEntityHelper;
 
 // TODO always require ground below this block
 public class MixingBowlBlock extends FullHorizontalAxisBlock implements EntityBlock {
@@ -59,8 +59,8 @@ public class MixingBowlBlock extends FullHorizontalAxisBlock implements EntityBl
 
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState replacementState, boolean flag) {
+        RecipeRememberingBlockEntity.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, replacementState);
         super.onRemove(state, level, pos, replacementState, flag);
-        MenuInventoryHelper.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, replacementState);
     }
 
     @Nullable
@@ -72,6 +72,6 @@ public class MixingBowlBlock extends FullHorizontalAxisBlock implements EntityBl
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return Helper.createBlockEntityTicker(type, BlockyChefBlockEntities.MIXING_BOWL, MixingBowlBlockEntity::tick);
+        return BlockEntityHelper.createBlockEntityTicker(type, BlockyChefBlockEntities.MIXING_BOWL, MixingBowlBlockEntity::tick);
     }
 }

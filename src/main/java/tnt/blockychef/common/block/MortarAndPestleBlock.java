@@ -22,10 +22,10 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.block.entity.MortarAndPestleBlockEntity;
+import tnt.blockychef.common.block.entity.RecipeRememberingBlockEntity;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.menu.MortarAndPestleMenu;
-import tnt.blockychef.util.Helper;
-import tnt.blockychef.util.MenuInventoryHelper;
+import tnt.tntlib.api.blockentity.BlockEntityHelper;
 
 public class MortarAndPestleBlock extends FullHorizontalAxisBlock implements EntityBlock {
 
@@ -50,13 +50,13 @@ public class MortarAndPestleBlock extends FullHorizontalAxisBlock implements Ent
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return Helper.createBlockEntityTicker(type, BlockyChefBlockEntities.MORTAR_AND_PESTLE, MortarAndPestleBlockEntity::tick);
+        return BlockEntityHelper.createBlockEntityTicker(type, BlockyChefBlockEntities.MORTAR_AND_PESTLE, MortarAndPestleBlockEntity::tick);
     }
 
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean flag) {
+        RecipeRememberingBlockEntity.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, oldState);
         super.onRemove(state, level, pos, oldState, flag);
-        MenuInventoryHelper.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, oldState);
     }
 
     @Override

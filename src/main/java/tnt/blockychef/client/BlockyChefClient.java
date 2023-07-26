@@ -1,7 +1,7 @@
 package tnt.blockychef.client;
 
-import dev.toma.configuration.Configuration;
-import dev.toma.configuration.config.format.ConfigFormats;
+import tnt.tntlib.api.module.configuration.Configuration;
+import tnt.tntlib.api.module.configuration.config.format.ConfigFormats;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.resources.ResourceLocation;

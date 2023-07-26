@@ -10,7 +10,7 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import tnt.blockychef.common.thirst.DrinkProperties;
 import tnt.blockychef.common.thirst.PlayerThirstStatsProvider;
-import tnt.blockychef.util.Helper;
+import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -80,7 +80,7 @@ public class ConsumableItem extends Item implements Drinkable {
             }
         }
         if (returnItem != null && entity instanceof Player player) {
-            Helper.giveItem(player, new ItemStack(returnItem.get()));
+            MenuInventoryHelper.giveItemOrDrop(player, new ItemStack(returnItem.get()));
         }
         return stack;
     }

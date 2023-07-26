@@ -1,4 +1,4 @@
-package tnt.blockychef.network.packet;
+package tnt.blockychef.network.message;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
@@ -7,10 +7,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
+import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.thirst.PlayerThirstStatsProvider;
-import tnt.blockychef.network.Packet;
+import tnt.tntlib.api.network.Network;
+import tnt.tntlib.api.network.message.Server2ClientMessage;
 
-public class S2C_SendThirstData extends Packet {
+@Network.Message(BlockyChef.MODID)
+public class S2C_SendThirstData extends Server2ClientMessage {
 
     private final CompoundTag tag;
 
@@ -29,8 +32,7 @@ public class S2C_SendThirstData extends Packet {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void handle(NetworkEvent.Context context) {
-        Minecraft minecraft = Minecraft.getInstance();
+    public void handle(Minecraft minecraft, NetworkEvent.Context context) {
         Player player = minecraft.player;
         player.getCapability(PlayerThirstStatsProvider.CAPABILITY).ifPresent(data -> data.deserializeNBT(tag));
     }

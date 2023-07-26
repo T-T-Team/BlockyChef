@@ -10,7 +10,8 @@ import net.minecraftforge.items.SlotItemHandler;
 import tnt.blockychef.common.block.MortarAndPestleBlock;
 import tnt.blockychef.common.block.entity.MortarAndPestleBlockEntity;
 import tnt.blockychef.common.init.BlockyChefMenuTypes;
-import tnt.blockychef.util.MenuQuickMoveHelper;
+import tnt.tntlib.api.menu.AbstractBlockEntityMenu;
+import tnt.tntlib.api.menu.MenuQuickMoveHelper;
 
 public class MortarAndPestleMenu extends AbstractBlockEntityMenu<MortarAndPestleBlockEntity> {
 

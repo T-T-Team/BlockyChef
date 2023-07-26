@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import tnt.blockychef.common.init.BlockyChefDamageTypes;
 import tnt.blockychef.network.NetworkManager;
-import tnt.blockychef.network.packet.S2C_SendThirstData;
+import tnt.blockychef.network.message.S2C_SendThirstData;
 
 public class PlayerThirstStats implements ThirstStats {
 
@@ -130,7 +130,7 @@ public class PlayerThirstStats implements ThirstStats {
     @Override
     public void sendClientData() {
         if (!player.level().isClientSide) {
-            NetworkManager.dispatchClientPacket((ServerPlayer) player, new S2C_SendThirstData(this.serializeNBT()));
+            NetworkManager.DISPATCHER.sendToClient((ServerPlayer) player, new S2C_SendThirstData(this.serializeNBT()));
         }
     }
 }

@@ -1,6 +1,8 @@
 package tnt.blockychef.common.block.entity;
 
-public interface SelectableRecipeHolder extends SynchronizableBlockEntity {
+import tnt.tntlib.api.blockentity.Synchronizable;
+
+public interface SelectableRecipeHolder extends Synchronizable {
 
     void setProcessing(boolean data);
 

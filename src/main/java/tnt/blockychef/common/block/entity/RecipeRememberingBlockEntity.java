@@ -12,25 +12,38 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import tnt.blockychef.common.food.recipe.AbstractFoodRecipe;
 import tnt.blockychef.common.food.recipe.MultiIngredient;
-import tnt.blockychef.util.MenuInventoryHelper;
+import tnt.tntlib.api.blockentity.VanillaInventoryBlockEntity;
+import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-public abstract class RecipeRememberingBlockEntity<R extends AbstractFoodRecipe<?>> extends InventoryBlockEntityWithContainerWrapper {
+public abstract class RecipeRememberingBlockEntity<R extends AbstractFoodRecipe<?>> extends VanillaInventoryBlockEntity {
 
     private final Object2IntOpenHashMap<ResourceLocation> recipesUsed = new Object2IntOpenHashMap<>();
 
     public RecipeRememberingBlockEntity(BlockEntityType<? extends RecipeRememberingBlockEntity> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
+    }
+
+    public static void dropRecipeBlockInventoryContentsAndAwardExp(BlockState state, Level level, BlockPos pos, BlockState replacementState) {
+        if (!state.is(replacementState.getBlock())) {
+            if (!level.isClientSide) {
+                BlockEntity blockEntity = level.getBlockEntity(pos);
+                if (blockEntity instanceof RecipeRememberingBlockEntity<?> entity) {
+                    entity.dropInventoryAndExp();
+                }
+            }
+        }
     }
 
     @Override
@@ -74,7 +87,7 @@ public abstract class RecipeRememberingBlockEntity<R extends AbstractFoodRecipe<
     public void dropInventoryAndExp() {
         if (level.isClientSide)
             return;
-        MenuInventoryHelper.dropInventoryContents(level, worldPosition, this);
+        tnt.tntlib.api.menu.MenuInventoryHelper.dropInventoryContents(level, worldPosition, this.getItemHandler());
         getRecipesToAwardAndPopExperience((ServerLevel) level, Vec3.atCenterOf(worldPosition));
     }
 

@@ -4,12 +4,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import tnt.blockychef.util.Helper;
-import tnt.blockychef.util.MenuInventoryHelper;
+import tnt.tntlib.api.blockentity.BlockEntityHelper;
+import tnt.tntlib.api.blockentity.Synchronizable;
+import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import java.util.Arrays;
 
-public abstract class ColorableBlockEntity extends InventoryBlockEntity implements SynchronizableBlockEntity, IndexedColorHolder {
+public abstract class ColorableBlockEntity extends InventoryBlockEntity implements Synchronizable, IndexedColorHolder {
 
     private int[] colors;
 
@@ -31,18 +32,18 @@ public abstract class ColorableBlockEntity extends InventoryBlockEntity implemen
         if (index >= 0 && index < colors.length) {
             colors[index] = color;
             this.setChanged();
-            Helper.sendBlockEntityClientData(this);
+            BlockEntityHelper.sendBlockEntityClientData(this);
         }
     }
 
     @Override
-    public void encodeBlockEntityData(CompoundTag tag) {
+    public void encodeData(CompoundTag tag) {
         MenuInventoryHelper.encodeInventory(this.inventoryHandler, tag);
         tag.putIntArray("colors", this.colors);
     }
 
     @Override
-    public void decodeBlockEntityData(CompoundTag tag) {
+    public void decodeData(CompoundTag tag) {
         MenuInventoryHelper.decodeInventory(this.inventoryHandler, tag);
         this.colors = tag.getIntArray("colors");
     }

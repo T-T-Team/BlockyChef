@@ -23,10 +23,10 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.block.entity.DoughMakerBlockEntity;
+import tnt.blockychef.common.block.entity.RecipeRememberingBlockEntity;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.menu.DoughMakerMenu;
-import tnt.blockychef.util.Helper;
-import tnt.blockychef.util.MenuInventoryHelper;
+import tnt.tntlib.api.blockentity.BlockEntityHelper;
 
 public class DoughMakerBlock extends DyeableBlock implements EntityBlock {
 
@@ -63,8 +63,9 @@ public class DoughMakerBlock extends DyeableBlock implements EntityBlock {
 
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState replacementState, boolean flag) {
+        RecipeRememberingBlockEntity.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, replacementState);
         super.onRemove(state, level, pos, replacementState, flag);
-        MenuInventoryHelper.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, replacementState);
+
     }
 
     @Nullable
@@ -76,6 +77,6 @@ public class DoughMakerBlock extends DyeableBlock implements EntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return Helper.createBlockEntityTicker(type, BlockyChefBlockEntities.DOUGH_MAKER, DoughMakerBlockEntity::tick);
+        return BlockEntityHelper.createBlockEntityTicker(type, BlockyChefBlockEntities.DOUGH_MAKER, DoughMakerBlockEntity::tick);
     }
 }

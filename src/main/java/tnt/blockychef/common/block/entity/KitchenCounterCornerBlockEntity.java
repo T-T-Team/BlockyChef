@@ -5,11 +5,12 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
-import tnt.blockychef.util.Helper;
+import tnt.tntlib.api.blockentity.BlockEntityHelper;
+import tnt.tntlib.api.blockentity.Synchronizable;
 
 import java.util.Arrays;
 
-public class KitchenCounterCornerBlockEntity extends BlockEntity implements SynchronizableBlockEntity, IndexedColorHolder {
+public class KitchenCounterCornerBlockEntity extends BlockEntity implements Synchronizable, IndexedColorHolder {
 
     private int[] colors;
 
@@ -29,29 +30,29 @@ public class KitchenCounterCornerBlockEntity extends BlockEntity implements Sync
         if (index >= 0 && index < colors.length) {
             colors[index] = color;
             this.setChanged();
-            Helper.sendBlockEntityClientData(this);
+            BlockEntityHelper.sendBlockEntityClientData(this);
         }
     }
 
     @Override
-    public void encodeBlockEntityData(CompoundTag tag) {
+    public void encodeData(CompoundTag tag) {
         tag.putIntArray("colors", colors);
     }
 
     @Override
-    public void decodeBlockEntityData(CompoundTag tag) {
+    public void decodeData(CompoundTag tag) {
         colors = tag.getIntArray("colors");
     }
 
     @Override
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
-        encodeBlockEntityData(tag);
+        encodeData(tag);
     }
 
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
-        decodeBlockEntityData(tag);
+        decodeData(tag);
     }
 }

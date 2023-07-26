@@ -10,7 +10,7 @@ import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.entity.MortarAndPestleBlockEntity;
 import tnt.blockychef.common.menu.MortarAndPestleMenu;
 import tnt.blockychef.network.NetworkManager;
-import tnt.blockychef.network.packet.C2S_InitiateRecipeProcessing;
+import tnt.blockychef.network.message.C2S_InitiateRecipeProcessing;
 
 public class MortarAndPestleScreen extends AbstractContainerScreen<MortarAndPestleMenu> {
 
@@ -62,6 +62,6 @@ public class MortarAndPestleScreen extends AbstractContainerScreen<MortarAndPest
     private void grindButtonClicked(Button button) {
         MortarAndPestleBlockEntity blockEntity = menu.getBlockEntity();
         blockEntity.startProcessing();
-        NetworkManager.dispatchServerPacket(new C2S_InitiateRecipeProcessing(blockEntity.getBlockPos()));
+        NetworkManager.DISPATCHER.sendToServer(new C2S_InitiateRecipeProcessing(blockEntity.getBlockPos()));
     }
 }

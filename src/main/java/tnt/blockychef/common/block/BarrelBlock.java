@@ -22,10 +22,10 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.block.entity.BarrelBlockEntity;
+import tnt.blockychef.common.block.entity.RecipeRememberingBlockEntity;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.menu.BarrelMenu;
-import tnt.blockychef.util.Helper;
-import tnt.blockychef.util.MenuInventoryHelper;
+import tnt.tntlib.api.blockentity.BlockEntityHelper;
 
 public class BarrelBlock extends Block implements EntityBlock {
 
@@ -44,7 +44,7 @@ public class BarrelBlock extends Block implements EntityBlock {
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState replacementState, boolean p_60519_) {
         super.onRemove(state, level, pos, replacementState, p_60519_);
-        MenuInventoryHelper.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, replacementState);
+        RecipeRememberingBlockEntity.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, replacementState);
     }
 
     @Override
@@ -71,6 +71,6 @@ public class BarrelBlock extends Block implements EntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return Helper.createBlockEntityTicker(type, BlockyChefBlockEntities.BARREL, BarrelBlockEntity::tick);
+        return BlockEntityHelper.createBlockEntityTicker(type, BlockyChefBlockEntities.BARREL, BarrelBlockEntity::tick);
     }
 }

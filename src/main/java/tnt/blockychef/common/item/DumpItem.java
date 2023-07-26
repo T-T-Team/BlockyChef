@@ -8,7 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-import tnt.blockychef.util.Helper;
+import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import java.util.function.Supplier;
 
@@ -46,7 +46,7 @@ public class DumpItem extends Item {
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
         stack.shrink(1);
         if (returnItem != null && entity instanceof Player player) {
-            Helper.giveItem(player, new ItemStack(returnItem.get()));
+            MenuInventoryHelper.giveItemOrDrop(player, new ItemStack(returnItem.get()));
         }
         return stack;
     }

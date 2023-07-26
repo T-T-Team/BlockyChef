@@ -12,7 +12,7 @@ import net.minecraftforge.fluids.FluidStack;
 import tnt.blockychef.common.block.entity.MixerBlockEntity;
 import tnt.blockychef.common.init.BlockyChefRecipeSerializers;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
-import tnt.blockychef.util.SerializationHelper;
+import tnt.tntlib.api.serialization.Codecs;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class MixerRecipe extends AbstractFoodRecipe<MixerBlockEntity> {
 
     public static final CodecRecipeSerializer.CodecProvider<MixerRecipe> CODEC_PROVIDER = recipe -> RecordCodecBuilder.create(instance -> instance.group(
             MultiIngredient.CODEC.listOf().fieldOf("inputs").forGetter(MixerRecipe::getInputs),
-            SerializationHelper.enumCodec(RpmValue.class).fieldOf("rpm").forGetter(MixerRecipe::getRpm),
+            Codecs.enumCodec(RpmValue.class).fieldOf("rpm").forGetter(MixerRecipe::getRpm),
             FluidStack.CODEC.fieldOf("output").forGetter(MixerRecipe::getOutput),
             resolveExperience(),
             resolveRemainderConsumer()

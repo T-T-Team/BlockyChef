@@ -14,14 +14,15 @@ import tnt.blockychef.common.food.fluid.FluidContainer;
 import tnt.blockychef.common.food.recipe.MixerRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
-import tnt.blockychef.util.Helper;
-import tnt.blockychef.util.MenuInventoryHelper;
+import tnt.tntlib.api.blockentity.BlockEntityHelper;
+import tnt.tntlib.api.blockentity.Synchronizable;
+import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class MixerBlockEntity extends RecipeRememberingBlockEntity<MixerRecipe> implements SynchronizableBlockEntity, IndexedColorHolder, FluidHolder {
+public class MixerBlockEntity extends RecipeRememberingBlockEntity<MixerRecipe> implements Synchronizable, IndexedColorHolder, FluidHolder {
 
     public static final int[] INPUTS = {0, 1, 2, 3, 4, 5};
     public static final int FLUID_CAPACITY = 750;
@@ -80,7 +81,7 @@ public class MixerBlockEntity extends RecipeRememberingBlockEntity<MixerRecipe> 
             }
         }
         refreshRecipe();
-        Helper.sendBlockEntityClientData(this);
+        BlockEntityHelper.sendBlockEntityClientData(this);
     }
 
     public void setSelectedRpm(MixerRecipe.RpmValue value) {
@@ -111,18 +112,18 @@ public class MixerBlockEntity extends RecipeRememberingBlockEntity<MixerRecipe> 
         if (index >= 0 && index < colors.length) {
             colors[index] = color;
             this.setChanged();
-            Helper.sendBlockEntityClientData(this);
+            BlockEntityHelper.sendBlockEntityClientData(this);
         }
     }
 
     @Override
-    public void encodeBlockEntityData(CompoundTag tag) {
+    public void encodeData(CompoundTag tag) {
         MenuInventoryHelper.encodeInventory(inventoryHandler, tag);
         saveSharedData(tag);
     }
 
     @Override
-    public void decodeBlockEntityData(CompoundTag tag) {
+    public void decodeData(CompoundTag tag) {
         MenuInventoryHelper.decodeInventory(inventoryHandler, tag);
         loadSharedData(tag);
     }
@@ -163,7 +164,7 @@ public class MixerBlockEntity extends RecipeRememberingBlockEntity<MixerRecipe> 
     private void setRecipe(@Nullable MixerRecipe recipe) {
         if (recipe != activeRecipe) {
             activeRecipe = recipe;
-            Helper.sendBlockEntityClientData(this);
+            BlockEntityHelper.sendBlockEntityClientData(this);
         }
         setChanged();
     }

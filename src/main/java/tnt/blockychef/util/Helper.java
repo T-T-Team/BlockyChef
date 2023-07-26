@@ -1,48 +1,19 @@
 package tnt.blockychef.util;
 
 import net.minecraft.world.Container;
-import net.minecraft.world.Containers;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import tnt.blockychef.common.block.entity.SynchronizableBlockEntity;
-import tnt.blockychef.network.NetworkManager;
-import tnt.blockychef.network.packet.S2C_SendBlockEntityData;
 
-import java.util.*;
-import java.util.function.Function;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public final class Helper {
-
-    @SuppressWarnings("unchecked")
-    public static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createBlockEntityTicker(BlockEntityType<A> typeToTest, BlockEntityType<E> wantedType, BlockEntityTicker<? super E> ticker) {
-        return typeToTest == wantedType ? (BlockEntityTicker<A>) ticker : null;
-    }
-
-    public static void giveItem(Player player, ItemStack stack) {
-        if (player.level().isClientSide)
-            return;
-        Inventory inventory = player.getInventory();
-        if (!inventory.add(stack)) {
-            Containers.dropItemStack(player.level(), player.getX(), player.getY(), player.getZ(), stack);
-        }
-    }
-
-    public static <B extends BlockEntity & SynchronizableBlockEntity> void sendBlockEntityClientData(B blockEntity) {
-        Level level = Objects.requireNonNull(blockEntity, "blockEntity cannot be null").getLevel();
-        if (level == null || level.isClientSide)
-            return;
-        NetworkManager.dispatchClientLevelPacket(level, S2C_SendBlockEntityData.createUpdatePacket(blockEntity));
-    }
 
     public static <T> Optional<T> find(Collection<T> collection, Predicate<T> filter) {
         for (T t : collection) {
@@ -111,12 +82,5 @@ public final class Helper {
             }
         }
         return sum;
-    }
-
-    public static <T> T[] populateByIndex(T[] in, Function<Integer, T> constructor) {
-        for (int i = 0; i < in.length; i++) {
-            in[i] = constructor.apply(i);
-        }
-        return in;
     }
 }

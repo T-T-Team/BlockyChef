@@ -12,15 +12,15 @@ import net.minecraft.world.level.Level;
 import tnt.blockychef.common.block.entity.ToasterBlockEntity;
 import tnt.blockychef.common.init.BlockyChefRecipeSerializers;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
-import tnt.blockychef.util.SerializationHelper;
+import tnt.tntlib.api.serialization.Codecs;
 
 import java.util.List;
 
 public class ToasterRecipe extends AbstractFoodRecipe<ToasterBlockEntity> {
 
     public static final CodecRecipeSerializer.CodecProvider<ToasterRecipe> CODEC_PROVIDER = recipeId -> RecordCodecBuilder.create(instance -> instance.group(
-            SerializationHelper.INGREDIENT_CODEC.fieldOf("input").forGetter(t -> t.input),
-            SerializationHelper.SIMPLE_ITEMSTACK_CODEC.fieldOf("output").forGetter(ToasterRecipe::getOutput),
+            Codecs.INGREDIENT_CODEC.fieldOf("input").forGetter(t -> t.input),
+            Codecs.SIMPLE_ITEMSTACK_CODEC.fieldOf("output").forGetter(ToasterRecipe::getOutput),
             Codec.intRange(1, Integer.MAX_VALUE).fieldOf("toastingTime").forGetter(ToasterRecipe::getToastingTime),
             resolveExperience(),
             resolveRemainderConsumer()

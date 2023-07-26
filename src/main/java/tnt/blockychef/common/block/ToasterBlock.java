@@ -22,11 +22,11 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
+import tnt.blockychef.common.block.entity.RecipeRememberingBlockEntity;
 import tnt.blockychef.common.block.entity.ToasterBlockEntity;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.menu.ToasterMenu;
-import tnt.blockychef.util.Helper;
-import tnt.blockychef.util.MenuInventoryHelper;
+import tnt.tntlib.api.blockentity.BlockEntityHelper;
 
 public class ToasterBlock extends DyeableBlock implements EntityBlock {
 
@@ -49,7 +49,7 @@ public class ToasterBlock extends DyeableBlock implements EntityBlock {
 
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState replacementState, boolean flag) {
-        MenuInventoryHelper.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, replacementState);
+        RecipeRememberingBlockEntity.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, replacementState);
         super.onRemove(state, level, pos, replacementState, flag);
     }
 
@@ -77,6 +77,6 @@ public class ToasterBlock extends DyeableBlock implements EntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return level.isClientSide ? null : Helper.createBlockEntityTicker(type, BlockyChefBlockEntities.TOASTER, ToasterBlockEntity::tickServer);
+        return level.isClientSide ? null : BlockEntityHelper.createBlockEntityTicker(type, BlockyChefBlockEntities.TOASTER, ToasterBlockEntity::tickServer);
     }
 }

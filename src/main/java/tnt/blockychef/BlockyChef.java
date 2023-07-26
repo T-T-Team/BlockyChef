@@ -1,7 +1,5 @@
 package tnt.blockychef;
 
-import dev.toma.configuration.Configuration;
-import dev.toma.configuration.config.format.ConfigFormats;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -21,12 +19,13 @@ import tnt.blockychef.common.CreativeTabs;
 import tnt.blockychef.common.data.fluids.FluidExtractionManager;
 import tnt.blockychef.common.init.BlockyChefFluidTypes;
 import tnt.blockychef.common.init.BlockyChefFluids;
-import tnt.blockychef.common.thirst.DrinkConsumeHandler;
 import tnt.blockychef.common.thirst.ConfigDrinkLoader;
+import tnt.blockychef.common.thirst.DrinkConsumeHandler;
 import tnt.blockychef.common.thirst.PlayerThirstStatsProvider;
 import tnt.blockychef.config.BlockyChefConfig;
 import tnt.blockychef.integrations.Integrations;
-import tnt.blockychef.network.NetworkManager;
+import tnt.tntlib.api.module.configuration.Configuration;
+import tnt.tntlib.api.module.configuration.config.format.ConfigFormats;
 
 @Mod(BlockyChef.MODID)
 public final class BlockyChef {
@@ -54,7 +53,6 @@ public final class BlockyChef {
 
     private void setup(FMLCommonSetupEvent event) {
         ConfigDrinkLoader.loadData();
-        NetworkManager.Registry.register();
         Integrations.accept(layer -> layer.setup(event));
     }
 

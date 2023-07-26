@@ -15,7 +15,7 @@ import tnt.blockychef.common.food.RecipeProcessingType;
 import tnt.blockychef.common.food.RecipeProcessingTypes;
 import tnt.blockychef.common.init.BlockyChefRecipeSerializers;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
-import tnt.blockychef.util.SerializationHelper;
+import tnt.tntlib.api.serialization.Codecs;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,13 +23,13 @@ import java.util.List;
 public class CuttingBoardRecipe extends AbstractFoodRecipe<CuttingBoardBlockEntity> {
 
     public static final CodecRecipeSerializer.CodecProvider<CuttingBoardRecipe> CODEC_PROVIDER = recipeId -> RecordCodecBuilder.create(instance -> instance.group(
-            SerializationHelper.INGREDIENT_CODEC.fieldOf("input").forGetter(t -> t.input),
+            Codecs.INGREDIENT_CODEC.fieldOf("input").forGetter(t -> t.input),
             ResourceLocation.CODEC.comapFlatMap(
                     location -> RecipeProcessingTypes.getById(location).map(DataResult::success).orElse(DataResult.error(() -> "Unknown recipe processing type '" + location + "'")),
                     RecipeProcessingType::getLocation
             ).fieldOf("processingType").forGetter(CuttingBoardRecipe::getProcessingType),
             Codec.INT.optionalFieldOf("processingTime", 100).forGetter(CuttingBoardRecipe::getProcessingTime),
-            SerializationHelper.SIMPLE_ITEMSTACK_CODEC.listOf().xmap(
+            Codecs.SIMPLE_ITEMSTACK_CODEC.listOf().xmap(
                     list -> list.toArray(ItemStack[]::new),
                     Arrays::asList
             ).fieldOf("outputs").forGetter(CuttingBoardRecipe::getOutputs),

@@ -10,7 +10,8 @@ import net.minecraftforge.items.SlotItemHandler;
 import tnt.blockychef.common.block.CuttingBoardBlock;
 import tnt.blockychef.common.block.entity.CuttingBoardBlockEntity;
 import tnt.blockychef.common.init.BlockyChefMenuTypes;
-import tnt.blockychef.util.MenuQuickMoveHelper;
+import tnt.tntlib.api.menu.AbstractBlockEntityMenu;
+import tnt.tntlib.api.menu.MenuQuickMoveHelper;
 
 public class CuttingBoardMenu extends AbstractBlockEntityMenu<CuttingBoardBlockEntity> {
 

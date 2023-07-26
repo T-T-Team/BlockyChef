@@ -1,6 +1,6 @@
 package tnt.blockychef.config;
 
-import dev.toma.configuration.config.Configurable;
+import tnt.tntlib.api.module.configuration.config.Configurable;
 
 public final class ThirstConfig {
 

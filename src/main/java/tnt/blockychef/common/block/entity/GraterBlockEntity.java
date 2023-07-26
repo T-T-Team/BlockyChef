@@ -12,13 +12,14 @@ import net.minecraftforge.items.ItemStackHandler;
 import tnt.blockychef.common.food.recipe.GratingRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
-import tnt.blockychef.util.Helper;
-import tnt.blockychef.util.MenuInventoryHelper;
+import tnt.tntlib.api.blockentity.BlockEntityHelper;
+import tnt.tntlib.api.blockentity.Synchronizable;
+import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import java.util.List;
 import java.util.Optional;
 
-public class GraterBlockEntity extends RecipeRememberingBlockEntity<GratingRecipe> implements SynchronizableBlockEntity {
+public class GraterBlockEntity extends RecipeRememberingBlockEntity<GratingRecipe> implements Synchronizable {
 
     private GratingRecipe recipe;
     private int gratingAmount;
@@ -51,14 +52,14 @@ public class GraterBlockEntity extends RecipeRememberingBlockEntity<GratingRecip
                 ItemStack output = recipe.assemble(this, level.registryAccess());
                 setRecipe(null);
                 setItem(0, ItemStack.EMPTY);
-                Helper.giveItem(player, output);
+                MenuInventoryHelper.giveItemOrDrop(player, output);
                 awardUsedRecipesAndPopExperience(player);
             }
         } else if (!level.isClientSide) {
-            MenuInventoryHelper.dropInventoryContents(level, worldPosition, this);
+            MenuInventoryHelper.dropInventoryContents(level, worldPosition, getItemHandler());
         }
         setChanged();
-        Helper.sendBlockEntityClientData(this);
+        BlockEntityHelper.sendBlockEntityClientData(this);
     }
 
     public boolean hasActiveRecipe() {
@@ -102,7 +103,7 @@ public class GraterBlockEntity extends RecipeRememberingBlockEntity<GratingRecip
     }
 
     @Override
-    public void encodeBlockEntityData(CompoundTag tag) {
+    public void encodeData(CompoundTag tag) {
         ItemStack stack = inventoryHandler.getStackInSlot(0);
         if (!stack.isEmpty()) {
             tag.put("item", stack.serializeNBT());
@@ -111,7 +112,7 @@ public class GraterBlockEntity extends RecipeRememberingBlockEntity<GratingRecip
     }
 
     @Override
-    public void decodeBlockEntityData(CompoundTag tag) {
+    public void decodeData(CompoundTag tag) {
         ItemStack stack = tag.contains("item") ? ItemStack.of(tag.getCompound("item")) : ItemStack.EMPTY;
         inventoryHandler.setStackInSlot(0, stack);
         gratingAmount = tag.getInt("gratingAmount");
@@ -121,6 +122,6 @@ public class GraterBlockEntity extends RecipeRememberingBlockEntity<GratingRecip
         this.recipe = recipe;
         this.gratingAmount = 0;
         setChanged();
-        Helper.sendBlockEntityClientData(this);
+        BlockEntityHelper.sendBlockEntityClientData(this);
     }
 }

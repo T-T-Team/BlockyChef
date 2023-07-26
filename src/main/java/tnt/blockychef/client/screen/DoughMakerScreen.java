@@ -10,7 +10,7 @@ import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.entity.DoughMakerBlockEntity;
 import tnt.blockychef.common.menu.DoughMakerMenu;
 import tnt.blockychef.network.NetworkManager;
-import tnt.blockychef.network.packet.C2S_InitiateRecipeProcessing;
+import tnt.blockychef.network.message.C2S_InitiateRecipeProcessing;
 
 public class DoughMakerScreen extends AbstractContainerScreen<DoughMakerMenu> {
 
@@ -62,6 +62,6 @@ public class DoughMakerScreen extends AbstractContainerScreen<DoughMakerMenu> {
     private void processButtonClicked(Button button) {
         DoughMakerBlockEntity blockEntity = menu.getBlockEntity();
         blockEntity.startProcessing();
-        NetworkManager.dispatchServerPacket(new C2S_InitiateRecipeProcessing(blockEntity.getBlockPos()));
+        NetworkManager.DISPATCHER.sendToServer(new C2S_InitiateRecipeProcessing(blockEntity.getBlockPos()));
     }
 }

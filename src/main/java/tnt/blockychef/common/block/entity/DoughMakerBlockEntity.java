@@ -11,15 +11,16 @@ import net.minecraftforge.items.ItemStackHandler;
 import tnt.blockychef.common.food.recipe.DoughMakerRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
-import tnt.blockychef.util.Helper;
-import tnt.blockychef.util.MenuInventoryHelper;
-import tnt.blockychef.util.RenderHelper;
+import tnt.tntlib.api.blockentity.BlockEntityHelper;
+import tnt.tntlib.api.blockentity.Synchronizable;
+import tnt.tntlib.api.math.Interpolation;
+import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class DoughMakerBlockEntity extends RecipeRememberingBlockEntity<DoughMakerRecipe> implements SynchronizableBlockEntity, IndexedColorHolder, ProcessableRecipeHolder {
+public class DoughMakerBlockEntity extends RecipeRememberingBlockEntity<DoughMakerRecipe> implements Synchronizable, IndexedColorHolder, ProcessableRecipeHolder {
 
     public static final int[] INPUTS = {0, 1, 2, 3, 4, 5};
     public static final int[] OUTPUTS = {6, 7, 8};
@@ -56,7 +57,7 @@ public class DoughMakerBlockEntity extends RecipeRememberingBlockEntity<DoughMak
             MenuInventoryHelper.insertItems(assembled, doughMaker, OUTPUTS);
             doughMaker.storeRecipe(doughMaker.activeRecipe);
             doughMaker.refreshRecipe();
-            Helper.sendBlockEntityClientData(doughMaker);
+            BlockEntityHelper.sendBlockEntityClientData(doughMaker);
         }
     }
 
@@ -75,18 +76,18 @@ public class DoughMakerBlockEntity extends RecipeRememberingBlockEntity<DoughMak
         if (index >= 0 && index < colors.length) {
             colors[index] = color;
             this.setChanged();
-            Helper.sendBlockEntityClientData(this);
+            BlockEntityHelper.sendBlockEntityClientData(this);
         }
     }
 
     @Override
-    public void encodeBlockEntityData(CompoundTag tag) {
+    public void encodeData(CompoundTag tag) {
         MenuInventoryHelper.encodeInventory(inventoryHandler, tag);
         saveSharedData(tag);
     }
 
     @Override
-    public void decodeBlockEntityData(CompoundTag tag) {
+    public void decodeData(CompoundTag tag) {
         MenuInventoryHelper.decodeInventory(inventoryHandler, tag);
         loadSharedData(tag);
     }
@@ -120,7 +121,7 @@ public class DoughMakerBlockEntity extends RecipeRememberingBlockEntity<DoughMak
             return;
         processingTime = 0;
         processing = true;
-        Helper.sendBlockEntityClientData(this);
+        BlockEntityHelper.sendBlockEntityClientData(this);
     }
 
     public float getProcessingProgress(float partialTicks) {
@@ -130,7 +131,7 @@ public class DoughMakerBlockEntity extends RecipeRememberingBlockEntity<DoughMak
         int total = activeRecipe.getProcessingTime();
         float f0 = oldTick / (float) total;
         float f1 = processingTime / (float) total;
-        return RenderHelper.interpolate(f0, f1, partialTicks);
+        return Interpolation.linear(f0, f1, partialTicks);
     }
 
     public void refreshRecipe() {
@@ -159,7 +160,7 @@ public class DoughMakerBlockEntity extends RecipeRememberingBlockEntity<DoughMak
             activeRecipe = recipe;
             processing = false;
             processingTime = 0;
-            Helper.sendBlockEntityClientData(this);
+            BlockEntityHelper.sendBlockEntityClientData(this);
         }
         setChanged();
     }

@@ -13,10 +13,11 @@ import tnt.blockychef.common.block.entity.CuttingBoardBlockEntity;
 import tnt.blockychef.common.food.recipe.CuttingBoardRecipe;
 import tnt.blockychef.common.menu.CuttingBoardMenu;
 import tnt.blockychef.network.NetworkManager;
-import tnt.blockychef.network.packet.C2S_RecipeSelectorEvent;
+import tnt.blockychef.network.message.C2S_RecipeSelectorEvent;
 import tnt.blockychef.util.Helper;
 import tnt.blockychef.util.Localizations;
-import tnt.blockychef.util.RenderHelper;
+import tnt.tntlib.api.functional.EasingFunction;
+import tnt.tntlib.api.math.Interpolation;
 
 public class CuttingBoardScreen extends AbstractContainerScreen<CuttingBoardMenu> {
 
@@ -69,7 +70,7 @@ public class CuttingBoardScreen extends AbstractContainerScreen<CuttingBoardMenu
         int arrowWidth = (int) (progress * 26);
         graphics.blit(TEXTURE, leftPos + 75, topPos + 38, 176, 0, arrowWidth, 12);
 
-        float f = RenderHelper.ease(Helper.pulse(minecraft.level.getGameTime(), 50L), RenderHelper.Easing.SINE_IO);
+        float f = Interpolation.ease(Helper.pulse(minecraft.level.getGameTime(), 50L), EasingFunction.EASE_IN_OUT_SINE);
         float minColor = 0.4F;
         float maxColor = 0.9F;
         float color = minColor + f * (maxColor - minColor);
@@ -103,21 +104,21 @@ public class CuttingBoardScreen extends AbstractContainerScreen<CuttingBoardMenu
     private void processButtonClicked(Button button) {
         CuttingBoardBlockEntity entity = menu.getBlockEntity();
         boolean active = !entity.isProcessing();
-        NetworkManager.dispatchServerPacket(new C2S_RecipeSelectorEvent(entity.getBlockPos(), C2S_RecipeSelectorEvent.EventType.PROCESSING, active));
+        NetworkManager.DISPATCHER.sendToServer(new C2S_RecipeSelectorEvent(entity.getBlockPos(), C2S_RecipeSelectorEvent.EventType.PROCESSING, active));
     }
 
     private void prevRecipeClicked(Button button) {
         CuttingBoardBlockEntity entity = menu.getBlockEntity();
         entity.changeRecipe(-1);
         init(minecraft, width, height);
-        NetworkManager.dispatchServerPacket(new C2S_RecipeSelectorEvent(entity.getBlockPos(), C2S_RecipeSelectorEvent.EventType.RECIPE, false));
+        NetworkManager.DISPATCHER.sendToServer(new C2S_RecipeSelectorEvent(entity.getBlockPos(), C2S_RecipeSelectorEvent.EventType.RECIPE, false));
     }
 
     private void nextRecipeClicked(Button button) {
         CuttingBoardBlockEntity entity = menu.getBlockEntity();
         entity.changeRecipe(1);
         init(minecraft, width, height);
-        NetworkManager.dispatchServerPacket(new C2S_RecipeSelectorEvent(entity.getBlockPos(), C2S_RecipeSelectorEvent.EventType.RECIPE, true));
+        NetworkManager.DISPATCHER.sendToServer(new C2S_RecipeSelectorEvent(entity.getBlockPos(), C2S_RecipeSelectorEvent.EventType.RECIPE, true));
     }
 
     private void updateButtonLabelAndState() {

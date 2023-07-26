@@ -12,8 +12,9 @@ import tnt.blockychef.common.food.recipe.PastaMachineRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.util.Helper;
-import tnt.blockychef.util.MenuInventoryHelper;
-import tnt.blockychef.util.RenderHelper;
+import tnt.tntlib.api.blockentity.BlockEntityHelper;
+import tnt.tntlib.api.math.Interpolation;
+import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
@@ -51,7 +52,7 @@ public class PastaMachineBlockEntity extends RecipeRememberingBlockEntity<PastaM
             } else {
                 pastaMachine.setProcessing(false);
                 pastaMachine.processingTime = 0;
-                Helper.sendBlockEntityClientData(pastaMachine);
+                BlockEntityHelper.sendBlockEntityClientData(pastaMachine);
             }
         }
     }
@@ -86,18 +87,18 @@ public class PastaMachineBlockEntity extends RecipeRememberingBlockEntity<PastaM
         if (index >= 0 && index < colors.length) {
             colors[index] = color;
             this.setChanged();
-            Helper.sendBlockEntityClientData(this);
+            BlockEntityHelper.sendBlockEntityClientData(this);
         }
     }
 
     @Override
-    public void encodeBlockEntityData(CompoundTag tag) {
+    public void encodeData(CompoundTag tag) {
         MenuInventoryHelper.encodeInventory(inventoryHandler, tag);
         saveSharedData(tag);
     }
 
     @Override
-    public void decodeBlockEntityData(CompoundTag tag) {
+    public void decodeData(CompoundTag tag) {
         MenuInventoryHelper.decodeInventory(inventoryHandler, tag);
         loadSharedData(tag);
     }
@@ -140,7 +141,7 @@ public class PastaMachineBlockEntity extends RecipeRememberingBlockEntity<PastaM
         int total = recipe.getProcessingTime();
         float previousTickProgress = prevTime / (float) total;
         float currentTickProgress = processingTime / (float) total;
-        return RenderHelper.interpolate(previousTickProgress, currentTickProgress, partialTicks);
+        return Interpolation.linear(previousTickProgress, currentTickProgress, partialTicks);
     }
 
     @Nullable
@@ -172,7 +173,7 @@ public class PastaMachineBlockEntity extends RecipeRememberingBlockEntity<PastaM
         if (recipe != null && !availableRecipes.contains(recipe)) {
             setRecipe(null);
         }
-        Helper.sendBlockEntityClientData(this);
+        BlockEntityHelper.sendBlockEntityClientData(this);
     }
 
     private void setRecipe(@Nullable PastaMachineRecipe recipe) {
@@ -180,7 +181,7 @@ public class PastaMachineBlockEntity extends RecipeRememberingBlockEntity<PastaM
             this.recipe = recipe;
             this.processing = false;
             this.processingTime = 0;
-            Helper.sendBlockEntityClientData(this);
+            BlockEntityHelper.sendBlockEntityClientData(this);
         }
         setChanged();
     }

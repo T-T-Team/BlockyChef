@@ -11,7 +11,7 @@ import net.minecraft.world.level.Level;
 import tnt.blockychef.common.block.entity.MixingBowlBlockEntity;
 import tnt.blockychef.common.init.BlockyChefRecipeSerializers;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
-import tnt.blockychef.util.SerializationHelper;
+import tnt.tntlib.api.serialization.Codecs;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +20,7 @@ public class MixingBowlRecipe extends AbstractFoodRecipe<MixingBowlBlockEntity> 
 
     public static final CodecRecipeSerializer.CodecProvider<MixingBowlRecipe> CODEC_PROVIDER = recipeId -> RecordCodecBuilder.create(instance -> instance.group(
             MultiIngredient.CODEC.listOf().fieldOf("inputs").forGetter(MixingBowlRecipe::getInputs),
-            SerializationHelper.SIMPLE_ITEMSTACK_CODEC.listOf().xmap(
+            Codecs.SIMPLE_ITEMSTACK_CODEC.listOf().xmap(
                     list -> list.toArray(ItemStack[]::new),
                     Arrays::asList
             ).fieldOf("outputs").forGetter(MixingBowlRecipe::getOutputs),

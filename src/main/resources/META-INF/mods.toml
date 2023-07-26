@@ -25,3 +25,10 @@ description='''${mod_description}'''
     versionRange="${minecraft_version_range}"
     ordering="NONE"
     side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="tntlib"
+    mandatory=true
+    versionRange="${tntlib_version_range}"
+    ordering="NONE"
+    side="BOTH"

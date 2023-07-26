@@ -16,13 +16,14 @@ import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.food.recipe.DryingRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
-import tnt.blockychef.util.Helper;
-import tnt.blockychef.util.MenuInventoryHelper;
+import tnt.tntlib.api.blockentity.BlockEntityHelper;
+import tnt.tntlib.api.blockentity.Synchronizable;
+import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import java.util.List;
 import java.util.Optional;
 
-public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRecipe> implements SynchronizableBlockEntity {
+public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRecipe> implements Synchronizable {
 
     private DryingRecipe recipe;
     private int ticksDrying;
@@ -52,7 +53,7 @@ public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRe
     public void setItem(ItemStack stack) {
         inventoryHandler.setStackInSlot(0, stack);
         updateRecipes();
-        Helper.sendBlockEntityClientData(this);
+        BlockEntityHelper.sendBlockEntityClientData(this);
         setChanged();
     }
 
@@ -77,7 +78,7 @@ public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRe
         } else {
             ItemStack stack = inventoryHandler.getStackInSlot(0);
             if (!stack.isEmpty()) {
-                Helper.giveItem(player, stack.copy());
+                MenuInventoryHelper.giveItemOrDrop(player, stack.copy());
             }
             setItem(ItemStack.EMPTY);
             awardUsedRecipesAndPopExperience((ServerPlayer) player);
@@ -109,7 +110,7 @@ public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRe
     }
 
     @Override
-    public void encodeBlockEntityData(CompoundTag tag) {
+    public void encodeData(CompoundTag tag) {
         ItemStack stack = inventoryHandler.getStackInSlot(0);
         if (!stack.isEmpty()) {
             tag.put("item", stack.serializeNBT());
@@ -117,7 +118,7 @@ public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRe
     }
 
     @Override
-    public void decodeBlockEntityData(CompoundTag tag) {
+    public void decodeData(CompoundTag tag) {
         ItemStack stack = tag.contains("item") ? ItemStack.of(tag.getCompound("item")) : ItemStack.EMPTY;
         inventoryHandler.setStackInSlot(0, stack);
     }

@@ -12,7 +12,7 @@ import tnt.blockychef.common.block.entity.MixerBlockEntity;
 import tnt.blockychef.common.food.recipe.MixerRecipe;
 import tnt.blockychef.common.menu.MixerMenu;
 import tnt.blockychef.network.NetworkManager;
-import tnt.blockychef.network.packet.C2S_MixerEvent;
+import tnt.blockychef.network.message.C2S_MixerEvent;
 
 public class MixerScreen extends AbstractContainerScreen<MixerMenu> {
 
@@ -60,12 +60,12 @@ public class MixerScreen extends AbstractContainerScreen<MixerMenu> {
     private void rpmValueChanged(MixerRecipe.RpmValue value) {
         MixerBlockEntity blockEntity = menu.getBlockEntity();
         blockEntity.setSelectedRpm(value);
-        NetworkManager.dispatchServerPacket(new C2S_MixerEvent(blockEntity.getBlockPos(), false, value.ordinal()));
+        NetworkManager.DISPATCHER.sendToServer(new C2S_MixerEvent(blockEntity.getBlockPos(), false, value.ordinal()));
     }
 
     private void mixButtonPressed(Button button) {
         MixerBlockEntity blockEntity = menu.getBlockEntity();
         blockEntity.blend(minecraft.player);
-        NetworkManager.dispatchServerPacket(new C2S_MixerEvent(blockEntity.getBlockPos(), true, -1));
+        NetworkManager.DISPATCHER.sendToServer(new C2S_MixerEvent(blockEntity.getBlockPos(), true, -1));
     }
 }

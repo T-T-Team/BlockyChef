@@ -10,10 +10,13 @@ import tnt.blockychef.common.heat.RegulatedRangeHeatSource;
 import tnt.blockychef.common.heat.RegulationHandler;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.util.Helper;
+import tnt.tntlib.api.ArrayUtils;
+import tnt.tntlib.api.blockentity.BlockEntityHelper;
+import tnt.tntlib.api.blockentity.Synchronizable;
 
 import java.util.Arrays;
 
-public class StoveBlockEntity extends BlockEntity implements SynchronizableBlockEntity, IndexedColorHolder {
+public class StoveBlockEntity extends BlockEntity implements Synchronizable, IndexedColorHolder {
 
     public static final int ENERGY_BUFFER_SIZE = 300;
     public static final int[] FUEL = {0};
@@ -34,7 +37,7 @@ public class StoveBlockEntity extends BlockEntity implements SynchronizableBlock
         RegulationHandler externalHandler = new StoveRegulationHandler(this::handleExternalHeatEvent);
         this.stoveHeatSource = new RegulatedRangeHeatSource(stoveHandler, 160.0F, 350.0F);
         this.externalHeatSource = new RegulatedRangeHeatSource(externalHandler, 80.0F, 200.0F);
-        this.slots = Helper.populateByIndex(new CookingSlot[INPUTS.length], CookingSlot::new);
+        this.slots = ArrayUtils.indexedFill(new CookingSlot[INPUTS.length], CookingSlot::new);
         this.colors = new int[1];
         Arrays.fill(this.colors, Integer.MIN_VALUE);
     }
@@ -49,7 +52,7 @@ public class StoveBlockEntity extends BlockEntity implements SynchronizableBlock
         if (index >= 0 && index < colors.length) {
             colors[index] = color;
             this.setChanged();
-            Helper.sendBlockEntityClientData(this);
+            BlockEntityHelper.sendBlockEntityClientData(this);
         }
     }
 
@@ -71,12 +74,12 @@ public class StoveBlockEntity extends BlockEntity implements SynchronizableBlock
     }
 
     @Override
-    public void encodeBlockEntityData(CompoundTag tag) {
+    public void encodeData(CompoundTag tag) {
         saveSharedData(tag);
     }
 
     @Override
-    public void decodeBlockEntityData(CompoundTag tag) {
+    public void decodeData(CompoundTag tag) {
         loadSharedData(tag);
     }
 

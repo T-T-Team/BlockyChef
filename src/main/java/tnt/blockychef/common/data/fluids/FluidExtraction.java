@@ -8,7 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
-import tnt.blockychef.util.SerializationHelper;
+import tnt.tntlib.api.serialization.Codecs;
 
 public final class FluidExtraction {
 
@@ -19,7 +19,7 @@ public final class FluidExtraction {
                 }
                 return DataResult.success(ForgeRegistries.ITEMS.getValue(location));
             }, ForgeRegistries.ITEMS::getKey).fieldOf("item").forGetter(t -> t.inputItem.getItem()),
-            SerializationHelper.SIMPLE_ITEMSTACK_CODEC.fieldOf("output").forGetter(t -> t.outputItem),
+            Codecs.SIMPLE_ITEMSTACK_CODEC.fieldOf("output").forGetter(t -> t.outputItem),
             FluidStack.CODEC.fieldOf("fluidFilter").forGetter(t -> t.fluid)
     ).apply(instance, FluidExtraction::new));
 

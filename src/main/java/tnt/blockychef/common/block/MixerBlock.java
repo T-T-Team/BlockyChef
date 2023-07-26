@@ -22,11 +22,11 @@ import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.entity.MixerBlockEntity;
+import tnt.blockychef.common.block.entity.RecipeRememberingBlockEntity;
 import tnt.blockychef.common.data.fluids.FluidExtraction;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.menu.MixerMenu;
-import tnt.blockychef.util.Helper;
-import tnt.blockychef.util.MenuInventoryHelper;
+import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 public class MixerBlock extends DyeableBlock implements EntityBlock {
 
@@ -55,7 +55,7 @@ public class MixerBlock extends DyeableBlock implements EntityBlock {
             if (extraction != null) {
                 ItemStack result = extraction.extractFluid(mixer);
                 if (!result.isEmpty()) {
-                    Helper.giveItem(player, result);
+                    MenuInventoryHelper.giveItemOrDrop(player, result);
                 }
             } else if (!level.isClientSide) {
                 NetworkHooks.openScreen((ServerPlayer) player, new SimpleMenuProvider(
@@ -71,7 +71,7 @@ public class MixerBlock extends DyeableBlock implements EntityBlock {
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState replacementState, boolean p_60519_) {
         super.onRemove(state, level, pos, replacementState, p_60519_);
-        MenuInventoryHelper.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, replacementState);
+        RecipeRememberingBlockEntity.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, replacementState);
     }
 
     @Nullable

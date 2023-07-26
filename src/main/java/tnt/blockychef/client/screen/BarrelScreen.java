@@ -1,7 +1,5 @@
 package tnt.blockychef.client.screen;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -12,7 +10,7 @@ import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.entity.BarrelBlockEntity;
 import tnt.blockychef.common.menu.BarrelMenu;
 import tnt.blockychef.network.NetworkManager;
-import tnt.blockychef.network.packet.C2S_InitiateRecipeProcessing;
+import tnt.blockychef.network.message.C2S_InitiateRecipeProcessing;
 
 public class BarrelScreen extends AbstractContainerScreen<BarrelMenu> {
 
@@ -63,6 +61,6 @@ public class BarrelScreen extends AbstractContainerScreen<BarrelMenu> {
     private void mixButtonClicked(Button button) {
         BarrelBlockEntity blockEntity = menu.getBlockEntity();
         blockEntity.startProcessing();
-        NetworkManager.dispatchServerPacket(new C2S_InitiateRecipeProcessing(blockEntity.getBlockPos()));
+        NetworkManager.DISPATCHER.sendToServer(new C2S_InitiateRecipeProcessing(blockEntity.getBlockPos()));
     }
 }

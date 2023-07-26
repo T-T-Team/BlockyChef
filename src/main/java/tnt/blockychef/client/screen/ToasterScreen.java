@@ -11,7 +11,7 @@ import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.entity.ToasterBlockEntity;
 import tnt.blockychef.common.menu.ToasterMenu;
 import tnt.blockychef.network.NetworkManager;
-import tnt.blockychef.network.packet.C2S_ToasterEvent;
+import tnt.blockychef.network.message.C2S_ToasterEvent;
 
 public class ToasterScreen extends AbstractContainerScreen<ToasterMenu> {
 
@@ -73,7 +73,7 @@ public class ToasterScreen extends AbstractContainerScreen<ToasterMenu> {
     private void toastButtonClicked(Button button) {
         ToasterBlockEntity toaster = menu.getBlockEntity();
         toaster.setToasting(true);
-        NetworkManager.dispatchServerPacket(C2S_ToasterEvent.toastEvent(toaster.getBlockPos(), true));
+        NetworkManager.DISPATCHER.sendToServer(C2S_ToasterEvent.toastEvent(toaster.getBlockPos(), true));
     }
 
     private void decreaseTimerClicked(Button button) {
@@ -84,7 +84,7 @@ public class ToasterScreen extends AbstractContainerScreen<ToasterMenu> {
         }
         int add = scale(-ToasterBlockEntity.DEFAULT_TIMER_INCREMENT);
         toaster.setToastingTimer(currentTime + add);
-        NetworkManager.dispatchServerPacket(C2S_ToasterEvent.timeEvent(toaster.getBlockPos(), toaster.getToastingTimer()));
+        NetworkManager.DISPATCHER.sendToServer(C2S_ToasterEvent.timeEvent(toaster.getBlockPos(), toaster.getToastingTimer()));
     }
 
     private void increaseTimerClicked(Button button) {
@@ -95,7 +95,7 @@ public class ToasterScreen extends AbstractContainerScreen<ToasterMenu> {
         }
         int add = scale(ToasterBlockEntity.DEFAULT_TIMER_INCREMENT);
         toaster.setToastingTimer(currentTime + add);
-        NetworkManager.dispatchServerPacket(C2S_ToasterEvent.timeEvent(toaster.getBlockPos(), toaster.getToastingTimer()));
+        NetworkManager.DISPATCHER.sendToServer(C2S_ToasterEvent.timeEvent(toaster.getBlockPos(), toaster.getToastingTimer()));
     }
 
     private int scale(int timer) {

@@ -11,15 +11,16 @@ import net.minecraftforge.items.ItemStackHandler;
 import tnt.blockychef.common.food.recipe.MixingBowlRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
-import tnt.blockychef.util.Helper;
-import tnt.blockychef.util.MenuInventoryHelper;
-import tnt.blockychef.util.RenderHelper;
+import tnt.tntlib.api.blockentity.BlockEntityHelper;
+import tnt.tntlib.api.blockentity.Synchronizable;
+import tnt.tntlib.api.math.Interpolation;
+import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class MixingBowlBlockEntity extends RecipeRememberingBlockEntity<MixingBowlRecipe> implements SynchronizableBlockEntity, ProcessableRecipeHolder {
+public class MixingBowlBlockEntity extends RecipeRememberingBlockEntity<MixingBowlRecipe> implements Synchronizable, ProcessableRecipeHolder {
 
     public static final int[] INPUTS = {0, 1, 2, 3, 4, 5};
     public static final int[] OUTPUTS = {6, 7, 8};
@@ -53,7 +54,7 @@ public class MixingBowlBlockEntity extends RecipeRememberingBlockEntity<MixingBo
             MenuInventoryHelper.insertItems(assembledOutputs, mixingBowl, OUTPUTS);
             mixingBowl.storeRecipe(mixingBowl.activeRecipe);
             mixingBowl.refreshRecipe();
-            Helper.sendBlockEntityClientData(mixingBowl);
+            BlockEntityHelper.sendBlockEntityClientData(mixingBowl);
         }
     }
 
@@ -75,13 +76,13 @@ public class MixingBowlBlockEntity extends RecipeRememberingBlockEntity<MixingBo
     }
 
     @Override
-    public void encodeBlockEntityData(CompoundTag tag) {
+    public void encodeData(CompoundTag tag) {
         MenuInventoryHelper.encodeInventory(inventoryHandler, tag);
         saveSharedData(tag);
     }
 
     @Override
-    public void decodeBlockEntityData(CompoundTag tag) {
+    public void decodeData(CompoundTag tag) {
         MenuInventoryHelper.decodeInventory(inventoryHandler, tag);
         loadSharedData(tag);
     }
@@ -93,7 +94,7 @@ public class MixingBowlBlockEntity extends RecipeRememberingBlockEntity<MixingBo
         int total = activeRecipe.getMixingTime();
         float f0 = oldTick / (float) total;
         float f1 = mixingTime / (float) total;
-        return RenderHelper.interpolate(f0, f1, partialTicks);
+        return Interpolation.linear(f0, f1, partialTicks);
     }
 
     public boolean isMixing() {
@@ -113,7 +114,7 @@ public class MixingBowlBlockEntity extends RecipeRememberingBlockEntity<MixingBo
             return;
         mixingTime = 0;
         mixing = true;
-        Helper.sendBlockEntityClientData(this);
+        BlockEntityHelper.sendBlockEntityClientData(this);
     }
 
     public void refreshRecipe() {
@@ -129,7 +130,7 @@ public class MixingBowlBlockEntity extends RecipeRememberingBlockEntity<MixingBo
             activeRecipe = recipe;
             mixingTime = 0;
             mixing = false;
-            Helper.sendBlockEntityClientData(this);
+            BlockEntityHelper.sendBlockEntityClientData(this);
         }
         setChanged();
     }

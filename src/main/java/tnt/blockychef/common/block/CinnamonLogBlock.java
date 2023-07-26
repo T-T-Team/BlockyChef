@@ -14,7 +14,7 @@ import net.minecraftforge.common.ToolAction;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 import tnt.blockychef.common.init.BlockyChefItems;
-import tnt.blockychef.util.Helper;
+import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 public class CinnamonLogBlock extends RotatedPillarBlock {
 
@@ -41,7 +41,7 @@ public class CinnamonLogBlock extends RotatedPillarBlock {
         int dropCount = 1 + level.random.nextInt(3);
         ItemStack bark = new ItemStack(BlockyChefItems.CINNAMON_BARK, dropCount);
         if (player != null) {
-            Helper.giveItem(player, bark);
+            MenuInventoryHelper.giveItemOrDrop(player, bark);
         } else {
             Vec3 center = pos.getCenter();
             ItemEntity entity = new ItemEntity(level, center.x, center.y, center.z, new ItemStack(BlockyChefItems.CINNAMON_BARK, dropCount));

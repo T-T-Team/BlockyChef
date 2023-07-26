@@ -15,14 +15,15 @@ import tnt.blockychef.common.food.fluid.FluidContainer;
 import tnt.blockychef.common.food.recipe.JuicerRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
-import tnt.blockychef.util.Helper;
-import tnt.blockychef.util.MenuInventoryHelper;
+import tnt.tntlib.api.blockentity.BlockEntityHelper;
+import tnt.tntlib.api.blockentity.Synchronizable;
+import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class JuicerBlockEntity extends RecipeRememberingBlockEntity<JuicerRecipe> implements SynchronizableBlockEntity, IndexedColorHolder, FluidHolder {
+public class JuicerBlockEntity extends RecipeRememberingBlockEntity<JuicerRecipe> implements Synchronizable, IndexedColorHolder, FluidHolder {
 
     public static final int FLUID_CAPACITY = 500;
 
@@ -47,7 +48,7 @@ public class JuicerBlockEntity extends RecipeRememberingBlockEntity<JuicerRecipe
     public boolean extract(FluidStack fluid) {
         boolean result = container.extract(fluid);
         setChanged();
-        Helper.sendBlockEntityClientData(this);
+        BlockEntityHelper.sendBlockEntityClientData(this);
         return result;
     }
 
@@ -96,7 +97,7 @@ public class JuicerBlockEntity extends RecipeRememberingBlockEntity<JuicerRecipe
             setChanged();
             if (!level.isClientSide) {
                 awardUsedRecipesAndPopExperience((ServerPlayer) player);
-                Helper.sendBlockEntityClientData(this);
+                BlockEntityHelper.sendBlockEntityClientData(this);
             }
         }
     }
@@ -119,18 +120,18 @@ public class JuicerBlockEntity extends RecipeRememberingBlockEntity<JuicerRecipe
         if (index >= 0 && index < colors.length) {
             colors[index] = color;
             this.setChanged();
-            Helper.sendBlockEntityClientData(this);
+            BlockEntityHelper.sendBlockEntityClientData(this);
         }
     }
 
     @Override
-    public void encodeBlockEntityData(CompoundTag tag) {
+    public void encodeData(CompoundTag tag) {
         MenuInventoryHelper.encodeInventory(inventoryHandler, tag);
         saveSharedData(tag);
     }
 
     @Override
-    public void decodeBlockEntityData(CompoundTag tag) {
+    public void decodeData(CompoundTag tag) {
         MenuInventoryHelper.decodeInventory(inventoryHandler, tag);
         loadSharedData(tag);
     }
@@ -172,7 +173,7 @@ public class JuicerBlockEntity extends RecipeRememberingBlockEntity<JuicerRecipe
         if (recipe != activeRecipe) {
             activeRecipe = recipe;
             pressCounter = 0;
-            Helper.sendBlockEntityClientData(this);
+            BlockEntityHelper.sendBlockEntityClientData(this);
         }
         setChanged();
     }

@@ -11,7 +11,7 @@ import net.minecraft.world.level.Level;
 import tnt.blockychef.common.block.entity.MortarAndPestleBlockEntity;
 import tnt.blockychef.common.init.BlockyChefRecipeSerializers;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
-import tnt.blockychef.util.SerializationHelper;
+import tnt.tntlib.api.serialization.Codecs;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +20,7 @@ public class MortarRecipe extends AbstractFoodRecipe<MortarAndPestleBlockEntity>
 
     public static final CodecRecipeSerializer.CodecProvider<MortarRecipe> CODEC_PROVIDER = recipeId -> RecordCodecBuilder.create(instance -> instance.group(
             MultiIngredient.CODEC.listOf().fieldOf("inputs").forGetter(t -> t.inputs),
-            SerializationHelper.SIMPLE_ITEMSTACK_CODEC.listOf().xmap(
+            Codecs.SIMPLE_ITEMSTACK_CODEC.listOf().xmap(
                     list -> list.toArray(ItemStack[]::new),
                     Arrays::asList
             ).fieldOf("outputs").forGetter(MortarRecipe::getOutput),

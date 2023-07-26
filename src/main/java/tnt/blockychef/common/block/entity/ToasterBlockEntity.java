@@ -16,12 +16,14 @@ import tnt.blockychef.common.food.recipe.ToasterRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.util.Helper;
-import tnt.blockychef.util.MenuInventoryHelper;
+import tnt.tntlib.api.blockentity.BlockEntityHelper;
+import tnt.tntlib.api.blockentity.Synchronizable;
+import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import java.util.Arrays;
 import java.util.Optional;
 
-public class ToasterBlockEntity extends RecipeRememberingBlockEntity<ToasterRecipe> implements SynchronizableBlockEntity, IndexedColorHolder {
+public class ToasterBlockEntity extends RecipeRememberingBlockEntity<ToasterRecipe> implements Synchronizable, IndexedColorHolder {
 
     public static final int DEFAULT_TIMER_INCREMENT = 100;
     public static final int MIN_TIMER_VALUE = 100; // 5 seconds
@@ -64,7 +66,7 @@ public class ToasterBlockEntity extends RecipeRememberingBlockEntity<ToasterReci
                 toaster.timeToasting = 0;
             }
             if (isChanged) {
-                Helper.sendBlockEntityClientData(toaster);
+                BlockEntityHelper.sendBlockEntityClientData(toaster);
             }
         }
     }
@@ -110,18 +112,18 @@ public class ToasterBlockEntity extends RecipeRememberingBlockEntity<ToasterReci
         if (index >= 0 && index < colors.length) {
             colors[index] = color;
             this.setChanged();
-            Helper.sendBlockEntityClientData(this);
+            BlockEntityHelper.sendBlockEntityClientData(this);
         }
     }
 
     @Override
-    public void encodeBlockEntityData(CompoundTag tag) {
+    public void encodeData(CompoundTag tag) {
         MenuInventoryHelper.encodeInventory(getItemHandler(), tag);
         saveSharedData(tag);
     }
 
     @Override
-    public void decodeBlockEntityData(CompoundTag tag) {
+    public void decodeData(CompoundTag tag) {
         MenuInventoryHelper.decodeInventory(getItemHandler(), tag);
         loadSharedData(tag);
     }

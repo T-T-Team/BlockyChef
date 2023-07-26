@@ -18,10 +18,10 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.entity.JuicerBlockEntity;
+import tnt.blockychef.common.block.entity.RecipeRememberingBlockEntity;
 import tnt.blockychef.common.data.fluids.FluidExtraction;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
-import tnt.blockychef.util.Helper;
-import tnt.blockychef.util.MenuInventoryHelper;
+import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 public class JuicerBlock extends DyeableBlock implements EntityBlock {
 
@@ -49,7 +49,7 @@ public class JuicerBlock extends DyeableBlock implements EntityBlock {
             if (extractor != null) {
                 ItemStack result = extractor.extractFluid(juicer);
                 if (!result.isEmpty()) {
-                    Helper.giveItem(player, result);
+                    MenuInventoryHelper.giveItemOrDrop(player, result);
                     if (!player.isCreative()) {
                         stack.shrink(1);
                     }
@@ -72,7 +72,7 @@ public class JuicerBlock extends DyeableBlock implements EntityBlock {
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState replacementState, boolean p_60519_) {
         super.onRemove(state, level, pos, replacementState, p_60519_);
-        MenuInventoryHelper.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, replacementState);
+        RecipeRememberingBlockEntity.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, replacementState);
     }
 
     @Nullable

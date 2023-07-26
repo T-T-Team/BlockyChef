@@ -22,10 +22,10 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.block.entity.CuttingBoardBlockEntity;
+import tnt.blockychef.common.block.entity.RecipeRememberingBlockEntity;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.menu.CuttingBoardMenu;
-import tnt.blockychef.util.Helper;
-import tnt.blockychef.util.MenuInventoryHelper;
+import tnt.tntlib.api.blockentity.BlockEntityHelper;
 
 public class CuttingBoardBlock extends FullHorizontalAxisBlock implements EntityBlock {
 
@@ -66,13 +66,13 @@ public class CuttingBoardBlock extends FullHorizontalAxisBlock implements Entity
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return level.isClientSide ?
-                Helper.createBlockEntityTicker(type, BlockyChefBlockEntities.CUTTING_BOARD, CuttingBoardBlockEntity::tickClient) :
-                Helper.createBlockEntityTicker(type, BlockyChefBlockEntities.CUTTING_BOARD, CuttingBoardBlockEntity::tickServer);
+                BlockEntityHelper.createBlockEntityTicker(type, BlockyChefBlockEntities.CUTTING_BOARD, CuttingBoardBlockEntity::tickClient) :
+                BlockEntityHelper.createBlockEntityTicker(type, BlockyChefBlockEntities.CUTTING_BOARD, CuttingBoardBlockEntity::tickServer);
     }
 
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState replacementState, boolean flag) {
-        MenuInventoryHelper.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, replacementState);
+        RecipeRememberingBlockEntity.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, replacementState);
         super.onRemove(state, level, pos, replacementState, flag);
     }
 }
