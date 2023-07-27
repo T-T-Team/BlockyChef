@@ -526,7 +526,7 @@ public final class ItemRegistry {
         helper.register("cooked_grounded_beef_meat", new ConsumableItem(new Item.Properties().food(FoodList.COOKED_GROUNDED_BEEF_MEAT), DrinkList.COOKED_GROUNDED_BEEF_MEAT));
         helper.register("cooked_grounded_pork_meat", new ConsumableItem(new Item.Properties().food(FoodList.COOKED_GROUNDED_PORK_MEAT), DrinkList.COOKED_GROUNDED_PORK_MEAT));
         helper.register("cupcake_base", new ConsumableItem(new Item.Properties().food(FoodList.CUPCAKE_BASE), DrinkList.CUPCAKE_BASE));
-        helper.register("mashed_potatoes", new ConsumableItem(new Item.Properties().food(FoodList.MASHED_POTATOES), DrinkList.MASHED_POTATOES));
+        helper.register("mashed_potatoes", new ConsumableItem(new Item.Properties().food(FoodList.MASHED_POTATOES), DrinkList.MASHED_POTATOES).returns(() -> Items.BOWL));
         helper.register("pie_crust", new ConsumableItem(new Item.Properties().food(FoodList.PIE_CRUST), DrinkList.PIE_CRUST));
         helper.register("pizza_dough", new ConsumableItem(new Item.Properties().food(FoodList.PIZZA_DOUGH), DrinkList.PIZZA_DOUGH));
         helper.register("raw_cheese_tortellini", new ConsumableItem(new Item.Properties().food(FoodList.RAW_CHEESE_TORTELLINI), DrinkList.RAW_CHEESE_TORTELLINI));
@@ -541,5 +541,6 @@ public final class ItemRegistry {
         helper.register("burnt_mushroom_tortellini", new Item(new Item.Properties()));
         helper.register("burnt_spinach_tortellini", new Item(new Item.Properties()));
         helper.register("peeled_onion", new ConsumableItem(new Item.Properties().food(FoodList.PEELED_ONION), DrinkList.PEELED_ONION));
+        helper.register("coconut_flakes", new Item(new Item.Properties().food(FoodList.COCONUT_FLAKES)));
     }
 }

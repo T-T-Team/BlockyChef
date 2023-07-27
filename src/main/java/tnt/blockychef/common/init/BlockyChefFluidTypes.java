@@ -36,7 +36,24 @@ public final class BlockyChefFluidTypes {
 
 
 
-    public static final RegistryObject<EdibleFluidType> ORANGE_JUICE_FLUID = registerEdible("orange_juice_fluid", 0xAAFF7328);
+    public static final RegistryObject<EdibleFluidType> ORANGE_JUICE_FLUID = registerEdible("orange_juice_fluid", 0xAAFF9966);
+    public static final RegistryObject<EdibleFluidType> APPLE_JUICE_FLUID = registerEdible("apple_juice_fluid", 0xAAE0DBB1);
+    public static final RegistryObject<EdibleFluidType> BLUEBERRY_JUICE_FLUID = registerEdible("blueberry_juice_fluid", 0xAA5C34BA);
+    public static final RegistryObject<EdibleFluidType> CARROT_JUICE_FLUID = registerEdible("carrot_juice_fluid", 0xAACC8851);
+    public static final RegistryObject<EdibleFluidType> CHERRY_JUICE_FLUID = registerEdible("cherry_juice_fluid", 0xAAB73A43);
+    public static final RegistryObject<EdibleFluidType> GRAPE_JUICE_FLUID = registerEdible("grape_juice_fluid", 0xAA9E3CBC);
+    public static final RegistryObject<EdibleFluidType> LEMONADE_FLUID = registerEdible("lemonade_fluid", 0xAAEDE374);
+    public static final RegistryObject<EdibleFluidType> LIME_JUICE_FLUID = registerEdible("lime_juice_fluid", 0xAABDE07B);
+    public static final RegistryObject<EdibleFluidType> MELON_JUICE_FLUID = registerEdible("melon_juice_fluid", 0xAADB858C);
+    public static final RegistryObject<EdibleFluidType> PEACH_JUICE_FLUID = registerEdible("peach_juice_fluid", 0xAADB8864);
+    public static final RegistryObject<EdibleFluidType> PEAR_JUICE_FLUID = registerEdible("pear_juice_fluid", 0xAADBDB9B);
+    public static final RegistryObject<EdibleFluidType> PINEAPPLE_JUICE_FLUID = registerEdible("pineapple_juice_fluid", 0xAADBB95E);
+    public static final RegistryObject<EdibleFluidType> PLUM_JUICE_FLUID = registerEdible("plum_juice_fluid", 0xAA93529E);
+    public static final RegistryObject<EdibleFluidType> RASPBERRY_JUICE_FLUID = registerEdible("raspberry_juice_fluid", 0xAAD66471);
+    public static final RegistryObject<EdibleFluidType> STRAWBERRY_JUICE_FLUID = registerEdible("strawberry_juice_fluid", 0xAAD65E5E);
+    public static final RegistryObject<EdibleFluidType> TOMATO_JUICE_FLUID = registerEdible("tomato_juice_fluid", 0xAAAA472C);
+    public static final RegistryObject<EdibleFluidType> VEGGIE_JUICE_FLUID = registerEdible("veggie_juice_fluid", 0xAA357029);
+    public static final RegistryObject<EdibleFluidType> ICE_TEA_FLUID = registerEdible("ice_tea_fluid", 0xAAA89B39);
     public static void register(IEventBus eventBus) {
         REGISTER.register(eventBus);
     }

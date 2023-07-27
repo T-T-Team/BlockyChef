@@ -1,0 +1,28 @@
+{
+  "type": "blockychef:mixer",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "blockychef:lemon_extract"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:bottle_of_water"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:sugar"
+      },
+      "count": 2
+    }
+  ],
+  "rpm": "MEDIUM",
+  "output": {
+    "FluidName": "blockychef:lemonade",
+    "Amount": 500
+  }
+}

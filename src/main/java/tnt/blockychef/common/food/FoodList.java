@@ -435,6 +435,7 @@ public final class FoodList {
     public static final FoodProperties RAW_RICE_CAKE = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties RICE_CAKE = food(1, 2).build();
     public static final FoodProperties PEELED_ONION = food(1, 1).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties COCONUT_FLAKES = food(1, 1).effect(HUNGER, PROBABILITY).build();
 
 
     private static FoodProperties.Builder food(int nutrition, int saturation) {

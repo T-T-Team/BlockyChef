@@ -1,0 +1,28 @@
+{
+  "type": "blockychef:mixer",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "blockychef:tomato_extract"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:bottle_of_water"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:salt"
+      },
+      "count": 1
+    }
+  ],
+  "rpm": "MEDIUM",
+  "output": {
+    "FluidName": "blockychef:tomato_juice",
+    "Amount": 500
+  }
+}

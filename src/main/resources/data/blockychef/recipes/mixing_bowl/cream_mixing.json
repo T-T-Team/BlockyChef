@@ -1,0 +1,24 @@
+{
+  "type": "blockychef:mixing_bowl",
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:milk"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:bowl"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:cream",
+      "count": 1
+    }
+  ],
+  "mixingTime": 120
+}

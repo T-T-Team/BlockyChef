@@ -1,13 +1,13 @@
 {
   "type": "blockychef:cutting_board",
   "input": {
-    "item": "blockychef:hazelnut"
+    "item": "blockychef:pea_pod"
   },
   "processingType": "blockychef:peeling",
   "processingTime": 80,
   "outputs": [
     {
-      "item": "blockychef:hazelnuts",
+      "item": "blockychef:peas",
       "count": 1
     }
   ]

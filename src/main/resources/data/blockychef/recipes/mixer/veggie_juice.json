@@ -1,0 +1,40 @@
+{
+  "type": "blockychef:mixer",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "blockychef:bottle_of_water"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:avocado_slice"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:apple_slice"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:shredded_carrot"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:shredded_cucumber"
+      },
+      "count": 1
+    }
+  ],
+  "rpm": "HIGH",
+  "output": {
+    "FluidName": "blockychef:veggie_juice",
+    "Amount": 500
+  }
+}

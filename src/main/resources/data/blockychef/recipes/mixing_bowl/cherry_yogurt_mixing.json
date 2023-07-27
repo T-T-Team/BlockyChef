@@ -1,0 +1,30 @@
+{
+  "type": "blockychef:mixing_bowl",
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:plain_yogurt"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:picked_cherry"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:cherry_yogurt",
+      "count": 1
+    }
+  ],
+  "mixingTime": 120
+}

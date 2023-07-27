@@ -1,0 +1,10 @@
+{
+  "item": "blockychef:empty_glass",
+  "output": {
+    "item": "blockychef:lime_juice"
+  },
+  "fluidFilter": {
+    "FluidName": "blockychef:lime_juice",
+    "Amount": 250
+  }
+}

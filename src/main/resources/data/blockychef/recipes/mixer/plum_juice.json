@@ -1,0 +1,28 @@
+{
+  "type": "blockychef:mixer",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "blockychef:plum_extract"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:bottle_of_water"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:sugar"
+      },
+      "count": 2
+    }
+  ],
+  "rpm": "MEDIUM",
+  "output": {
+    "FluidName": "blockychef:plum_juice",
+    "Amount": 500
+  }
+}

@@ -1,13 +1,13 @@
 {
   "type": "blockychef:cutting_board",
   "input": {
-    "item": "blockychef:hazelnut"
+    "item": "minecraft:tropical_fish"
   },
-  "processingType": "blockychef:peeling",
+  "processingType": "blockychef:cutting",
   "processingTime": 80,
   "outputs": [
     {
-      "item": "blockychef:hazelnuts",
+      "item": "blockychef:raw_fish_fillet",
       "count": 1
     }
   ]

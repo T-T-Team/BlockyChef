@@ -1,0 +1,28 @@
+{
+  "type": "blockychef:mixer",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "blockychef:tea"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:lemon_slice"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:snowball"
+      },
+      "count": 1
+    }
+  ],
+  "rpm": "LOW",
+  "output": {
+    "FluidName": "blockychef:ice_tea_juice",
+    "Amount": 250
+  }
+}

@@ -665,6 +665,7 @@
   "item.blockychef.burnt_mushroom_tortellini": "Burnt Mushroom Tortellini",
   "item.blockychef.burnt_spinach_tortellini": "Burnt Spinach Tortellini",
   "item.blockychef.peeled_onion": "Peeled Onion",
+  "item.blockychef.coconut_flakes": "Coconut Flakes",
 
   "config.screen.blockychef": "BlockyChef Configuration",
   "config.blockychef.option.decay": "Plant Decay Config",
@@ -761,5 +762,23 @@
   "fluid_type.blockychef.raspberry_fluid": "Raspberry Extract",
   "fluid_type.blockychef.strawberry_fluid": "Strawberry Extract",
   "fluid_type.blockychef.sweet_berry_fluid": "Sweet Berry Extract",
-  "fluid_type.blockychef.tomato_fluid": "Tomato Extract"
+  "fluid_type.blockychef.tomato_fluid": "Tomato Extract",
+  "fluid_type.blockychef.apple_juice": "Apple Juice",
+  "fluid_type.blockychef.blueberry_juice": "Blueberry Juice",
+  "fluid_type.blockychef.carrot_juice": "Carrot Juice",
+  "fluid_type.blockychef.cherry_juice": "Cherry Juice",
+  "fluid_type.blockychef.grape_juice": "Grape Juice",
+  "fluid_type.blockychef.lemonade": "Lemonade",
+  "fluid_type.blockychef.lime_juice": "Lime Juice",
+  "fluid_type.blockychef.melon_juice": "Melon Juice",
+  "fluid_type.blockychef.orange_juice": "Orange Juice",
+  "fluid_type.blockychef.peach_juice": "Peach Juice",
+  "fluid_type.blockychef.pear_juice": "Pear Juice",
+  "fluid_type.blockychef.pineapple_juice": "Pineapple Juice",
+  "fluid_type.blockychef.plum_juice": "Plum Juice",
+  "fluid_type.blockychef.raspberry_juice": "Raspberry Juice",
+  "fluid_type.blockychef.strawberry_juice": "Strawberry Juice",
+  "fluid_type.blockychef.tomato_juice": "Tomato Juice",
+  "fluid_type.blockychef.veggie_juice": "Veggie Juice",
+  "fluid_type.blockychef.ice_tea": "Ice Tea"
 }

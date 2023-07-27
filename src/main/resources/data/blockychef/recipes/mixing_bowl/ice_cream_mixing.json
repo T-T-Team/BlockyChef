@@ -1,0 +1,36 @@
+{
+  "type": "blockychef:mixing_bowl",
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:cream"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "minecraft:snowball"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:egg_yolk"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:ice_cream",
+      "count": 1
+    }
+  ],
+  "mixingTime": 120
+}

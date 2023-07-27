@@ -1,0 +1,30 @@
+{
+  "type": "blockychef:barrel",
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:milk"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:yeast"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:paper"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:plain_yogurt",
+      "count": 1
+    }
+  ],
+  "fermentTime": 2400
+}
