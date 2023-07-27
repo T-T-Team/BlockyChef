@@ -4,7 +4,7 @@
     "item": "blockychef:ice_tea"
   },
   "fluidFilter": {
-    "FluidName": "blockychef:ice_tea",
+    "FluidName": "blockychef:ice_tea_juice",
     "Amount": 250
   }
 }
