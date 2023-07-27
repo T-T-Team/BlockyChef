@@ -1,6 +1,7 @@
 package tnt.blockychef.common.registry;
 
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.UseAnim;
 import net.minecraftforge.registries.RegisterEvent;
@@ -8,10 +9,7 @@ import tnt.blockychef.common.food.DrinkList;
 import tnt.blockychef.common.food.FoodList;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 import tnt.blockychef.common.init.BlockyChefItems;
-import tnt.blockychef.common.item.ConsumableItem;
-import tnt.blockychef.common.item.CropSeedsItem;
-import tnt.blockychef.common.item.DumpItem;
-import tnt.blockychef.common.item.EdibleCropSeedItem;
+import tnt.blockychef.common.item.*;
 
 public final class ItemRegistry {
 
@@ -433,7 +431,7 @@ public final class ItemRegistry {
         helper.register("shredded_garlic", new ConsumableItem(new Item.Properties().food(FoodList.SHREDDED_GARLIC), DrinkList.SHREDDED_GARLIC));
         helper.register("sweet_rice_dough", new ConsumableItem(new Item.Properties().food(FoodList.SWEET_RICE_DOUGH), DrinkList.SWEET_RICE_DOUGH));
         helper.register("tomato_sauce", new ConsumableItem(new Item.Properties().food(FoodList.TOMATO_SAUCE), DrinkList.TOMATO_SAUCE).returns(() -> BlockyChefItems.EMPTY_JAR));
-        helper.register("whipped_cream", new Item(new Item.Properties().food(FoodList.WHIPPED_CREAM)));
+        helper.register("whipped_cream", new CraftingRemainderItem(new Item.Properties().food(FoodList.WHIPPED_CREAM), () -> new ItemStack(Items.BOW)));
         helper.register("baguette", new ConsumableItem(new Item.Properties().food(FoodList.BAGUETTE), DrinkList.BAGUETTE));
         helper.register("blueberry_ice_cream", new ConsumableItem(new Item.Properties().food(FoodList.BLUEBERRY_ICE_CREAM), DrinkList.BLUEBERRY_ICE_CREAM).returns(() -> Items.BOWL));
         helper.register("burger_bun", new ConsumableItem(new Item.Properties().food(FoodList.BURGER_BUN), DrinkList.BURGER_BUN));
