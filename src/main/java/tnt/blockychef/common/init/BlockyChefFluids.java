@@ -52,7 +52,8 @@ public final class BlockyChefFluids {
     public static final RegistryObject<Fluid> STRAWBERRY_JUICE_FLUID = registerSource("strawberry_juice", () -> BlockyChefFluids.STRAWBERRY_JUICE_FLUID_PROPERTIES);
     public static final RegistryObject<Fluid> TOMATO_JUICE_FLUID = registerSource("tomato_juice", () -> BlockyChefFluids.TOMATO_JUICE_FLUID_PROPERTIES);
     public static final RegistryObject<Fluid> VEGGIE_JUICE_FLUID = registerSource("veggie_juice", () -> BlockyChefFluids.VEGGIE_JUICE_FLUID_PROPERTIES);
-    public static final RegistryObject<Fluid> ICE_TEA_FLUID = registerSource("ice_tea_juice", () -> BlockyChefFluids.ICE_TEA_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> ICE_TEA_FLUID = registerSource("ice_tea", () -> BlockyChefFluids.ICE_TEA_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> SWEET_BERRY_JUICE_FLUID = registerSource("sweet_berry_juice", () -> BlockyChefFluids.SWEET_BERRY_JUICE_FLUID_PROPERTIES);
 
 
 
@@ -95,6 +96,7 @@ public final class BlockyChefFluids {
     public static final RegistryObject<Fluid> TOMATO_JUICE_FLOWING_FLUID = registerSource("tomato_juice_flowing", () -> BlockyChefFluids.TOMATO_JUICE_FLUID_PROPERTIES);
     public static final RegistryObject<Fluid> VEGGIE_JUICE_FLOWING_FLUID = registerSource("veggie_juice_flowing", () -> BlockyChefFluids.VEGGIE_JUICE_FLUID_PROPERTIES);
     public static final RegistryObject<Fluid> ICE_TEA_FLOWING_FLUID = registerSource("ice_tea_flowing", () -> BlockyChefFluids.ICE_TEA_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> SWEET_BERRY_JUICE_FLOWING_FLUID = registerSource("sweet_berry_juice_flowing", () -> BlockyChefFluids.SWEET_BERRY_JUICE_FLUID_PROPERTIES);
 
 
 
@@ -137,6 +139,7 @@ public final class BlockyChefFluids {
     private static final ForgeFlowingFluid.Properties TOMATO_JUICE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.TOMATO_JUICE_FLUID, TOMATO_JUICE_FLUID, TOMATO_JUICE_FLOWING_FLUID);
     private static final ForgeFlowingFluid.Properties VEGGIE_JUICE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.VEGGIE_JUICE_FLUID, VEGGIE_JUICE_FLUID, VEGGIE_JUICE_FLOWING_FLUID);
     private static final ForgeFlowingFluid.Properties ICE_TEA_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.ICE_TEA_FLUID, ICE_TEA_FLUID, ICE_TEA_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties SWEET_BERRY_JUICE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.SWEET_BERRY_JUICE_FLUID, SWEET_BERRY_JUICE_FLUID, SWEET_BERRY_JUICE_FLOWING_FLUID);
 
     public static void register(IEventBus bus) {
         REGISTER.register(bus);

@@ -22,7 +22,7 @@
   ],
   "rpm": "LOW",
   "output": {
-    "FluidName": "blockychef:ice_tea_juice",
+    "FluidName": "blockychef:ice_tea",
     "Amount": 250
   }
 }

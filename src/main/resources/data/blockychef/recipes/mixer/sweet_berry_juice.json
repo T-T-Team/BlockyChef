@@ -3,7 +3,7 @@
   "inputs": [
     {
       "ingredient": {
-        "item": "blockychef:pear_extract"
+        "item": "blockychef:sweet_berry_extract"
       },
       "count": 1
     },
@@ -22,7 +22,7 @@
   ],
   "rpm": "MEDIUM",
   "output": {
-    "FluidName": "blockychef:pear_juice",
+    "FluidName": "blockychef:sweet_berry_juice",
     "Amount": 500
   }
 }

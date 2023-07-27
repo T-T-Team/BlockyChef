@@ -54,6 +54,7 @@ public final class BlockyChefFluidTypes {
     public static final RegistryObject<EdibleFluidType> TOMATO_JUICE_FLUID = registerEdible("tomato_juice_fluid", 0xAAAA472C);
     public static final RegistryObject<EdibleFluidType> VEGGIE_JUICE_FLUID = registerEdible("veggie_juice_fluid", 0xAA357029);
     public static final RegistryObject<EdibleFluidType> ICE_TEA_FLUID = registerEdible("ice_tea_fluid", 0xAAA89B39);
+    public static final RegistryObject<EdibleFluidType> SWEET_BERRY_JUICE_FLUID = registerEdible("sweet_berry_juice", 0xAA893E2C);
     public static void register(IEventBus eventBus) {
         REGISTER.register(eventBus);
     }
