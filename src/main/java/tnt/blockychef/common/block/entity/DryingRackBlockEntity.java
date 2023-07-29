@@ -96,6 +96,10 @@ public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRe
         }
     }
 
+    public DryingRecipe getRecipe() {
+        return recipe;
+    }
+
     @Override
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);

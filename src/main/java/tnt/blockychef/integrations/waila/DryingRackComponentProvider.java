@@ -1,6 +1,7 @@
 package tnt.blockychef.integrations.waila;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import snownee.jade.api.BlockAccessor;
@@ -11,6 +12,7 @@ import snownee.jade.api.config.IPluginConfig;
 import snownee.jade.api.ui.IElementHelper;
 import snownee.jade.impl.ui.ProgressArrowElement;
 import tnt.blockychef.common.block.entity.DryingRackBlockEntity;
+import tnt.blockychef.common.food.recipe.DryingRecipe;
 
 public enum DryingRackComponentProvider implements IBlockComponentProvider, IServerDataProvider<BlockAccessor> {
 
@@ -22,11 +24,18 @@ public enum DryingRackComponentProvider implements IBlockComponentProvider, ISer
         if (tag.contains("time")) {
             int time = tag.getInt("time");
             int total = tag.getInt("total");
-            ItemStack item = ItemStack.of(tag.getCompound("item"));
-
-            IElementHelper helper = IElementHelper.get();
-            tooltip.add(helper.item(item));
-            tooltip.append(new ProgressArrowElement(time / (float)total));
+            if (time <= 0) {
+                return;
+            }
+            tooltip.add(Component.translatable("label.blockychef.drying", (total - time) / 20));
+            if (tag.contains("input")) {
+                IElementHelper helper = IElementHelper.get();
+                ItemStack input = ItemStack.of(tag.getCompound("input"));
+                ItemStack output = ItemStack.of(tag.getCompound("output"));
+                tooltip.add(helper.item(input));
+                tooltip.append(new ProgressArrowElement(time / (float) total));
+                tooltip.append(helper.item(output));
+            }
         }
     }
 
@@ -36,7 +45,11 @@ public enum DryingRackComponentProvider implements IBlockComponentProvider, ISer
         if (blockEntity.hasItem()) {
             compoundTag.putInt("time", blockEntity.getTicksDrying());
             compoundTag.putInt("total", blockEntity.getTotalTime());
-            compoundTag.put("item", blockEntity.getItem(0).save(new CompoundTag()));
+            DryingRecipe recipe = blockEntity.getRecipe();
+            if (recipe != null) {
+                compoundTag.put("input", blockEntity.getItem(0).save(new CompoundTag()));
+                compoundTag.put("output", recipe.getOutput().serializeNBT());
+            }
         }
     }
 

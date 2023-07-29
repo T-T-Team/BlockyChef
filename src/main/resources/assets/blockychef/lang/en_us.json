@@ -703,6 +703,7 @@
   "label.blockychef.high": "Power High",
   "label.blockychef.fluid_amount": "%s mB",
   "label.blockychef.drying": "Drying: %ss",
+  "label.blockychef.juicing": "Juicing: %s%%",
   "label.blockychef.fluid_capacity": "Capacity: %s / %s",
 
   "screen.blockychef.cutting_board": "Cutting Board",
