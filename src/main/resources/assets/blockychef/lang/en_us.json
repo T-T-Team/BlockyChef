@@ -704,6 +704,7 @@
   "label.blockychef.fluid_amount": "%s mB",
   "label.blockychef.drying": "Drying: %ss",
   "label.blockychef.juicing": "Juicing: %s%%",
+  "label.blockychef.fermenting": "Fermenting: %ss",
   "label.blockychef.fluid_capacity": "Capacity: %s / %s",
 
   "screen.blockychef.cutting_board": "Cutting Board",
@@ -739,10 +740,9 @@
   "jei.recipe_category.blockychef.mixer": "Mixer",
   "jei.recipe_category.blockychef.pasta_machine": "Pasta Machine",
 
-
   "config.jade.plugin_blockychef.drying_rack": "Drying Rack",
   "config.jade.plugin_blockychef.juicer": "Juicer",
-
+  "config.jade.plugin_blockychef.barrel": "Barrel",
 
   "fluid_type.blockychef.orange_fluid": "Orange Extract",
   "fluid_type.blockychef.cherry_fluid": "Cherry Extract",

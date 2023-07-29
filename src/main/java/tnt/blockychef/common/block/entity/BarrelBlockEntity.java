@@ -11,14 +11,14 @@ import net.minecraftforge.items.ItemStackHandler;
 import tnt.blockychef.common.food.recipe.BarrelRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
+import tnt.blockychef.network.Packet;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.blockentity.Synchronizable;
 import tnt.tntlib.api.math.Interpolation;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.Optional;
+import java.util.*;
 
 public class BarrelBlockEntity extends RecipeRememberingBlockEntity<BarrelRecipe> implements ProcessableRecipeHolder, Synchronizable {
 
@@ -34,6 +34,11 @@ public class BarrelBlockEntity extends RecipeRememberingBlockEntity<BarrelRecipe
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, BarrelBlockEntity barrel) {
+        if (barrel.fermenting && barrel.activeRecipe == null) {
+            barrel.refreshRecipe();
+            barrel.fermenting = barrel.activeRecipe != null;
+            return;
+        }
         if (barrel.activeRecipe == null || !barrel.fermenting) {
             return;
         }
@@ -56,6 +61,29 @@ public class BarrelBlockEntity extends RecipeRememberingBlockEntity<BarrelRecipe
             barrel.refreshRecipe();
             BlockEntityHelper.sendBlockEntityClientData(barrel);
         }
+    }
+
+    public List<ItemStack> getInputItems() {
+        List<ItemStack> itemStacks = new ArrayList<>();
+        for (int slot : INPUTS) {
+            ItemStack stack = getItem(slot);
+            if (!stack.isEmpty()) {
+                itemStacks.add(stack);
+            }
+        }
+        return itemStacks;
+    }
+
+    public List<ItemStack> getOutputs() {
+        return activeRecipe != null ? Arrays.asList(activeRecipe.getOutputs()) : Collections.emptyList();
+    }
+
+    public int getFermentingTime() {
+        return fermentingTime;
+    }
+
+    public int getTotalFermentTime() {
+        return activeRecipe != null ? activeRecipe.getFermentTime() : 1;
     }
 
     @Override
