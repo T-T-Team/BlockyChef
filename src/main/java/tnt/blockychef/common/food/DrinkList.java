@@ -8,7 +8,7 @@ import tnt.blockychef.common.thirst.DrinkProperties;
 public final class DrinkList {
 
     private static final Supplier<MobEffectInstance> THIRST = () -> new MobEffectInstance(BlockyChefMobEffects.THIRST, 300, 0);
-    private static final float PROBABILITY = 0.15F;
+    private static final float PROBABILITY = 0.3F;
 
 
     public static final DrinkProperties TOMATO = DrinkProperties.Builder.create().stats(1, 1).build();
@@ -386,6 +386,7 @@ public final class DrinkList {
     public static final DrinkProperties RICE_CAKE = DrinkProperties.Builder.create().stats(-2, 0).build();
     public static final DrinkProperties PEELED_ONION = DrinkProperties.Builder.create().stats(-3, 0).build();
     public static final DrinkProperties SWEET_BERRY_JUICE = DrinkProperties.Builder.create().stats(5, 4).build();
+    public static final DrinkProperties FRAPPE_COFFEE = DrinkProperties.Builder.create().stats(7, 7).build();
 
     private DrinkList() {}
 }

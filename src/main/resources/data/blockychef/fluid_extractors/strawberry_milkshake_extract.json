@@ -1,0 +1,10 @@
+{
+  "item": "blockychef:empty_large_glass",
+  "output": {
+    "item": "blockychef:strawberry_milkshake"
+  },
+  "fluidFilter": {
+    "FluidName": "blockychef:strawberry_milkshake",
+    "Amount": 400
+  }
+}

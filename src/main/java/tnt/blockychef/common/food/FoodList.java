@@ -16,7 +16,7 @@ public final class FoodList {
     public static final Map<FoodProperties, FoodProperties> FOOD_OVERRIDES = new IdentityHashMap<>();
 
     private static final Supplier<MobEffectInstance> HUNGER = () -> new MobEffectInstance(MobEffects.HUNGER, 300, 7);
-    private static final float PROBABILITY = 0.15F;
+    private static final float PROBABILITY = 0.20F;
 
 
     // Vanilla overrides
@@ -436,6 +436,7 @@ public final class FoodList {
     public static final FoodProperties RICE_CAKE = food(1, 2).build();
     public static final FoodProperties PEELED_ONION = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties COCONUT_FLAKES = food(1, 1).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties FRAPPE_COFFEE = food(2, 2).build();
 
 
     private static FoodProperties.Builder food(int nutrition, int saturation) {

@@ -1,0 +1,40 @@
+{
+  "type": "blockychef:mixer",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "blockychef:milk"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:snowball"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:sugar"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:grounded_hazelnuts"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:grounded_almond"
+      },
+      "count": 1
+    }
+  ],
+  "rpm": "LOW",
+  "output": {
+    "FluidName": "blockychef:nuts_milkshake",
+    "Amount": 400
+  }
+}

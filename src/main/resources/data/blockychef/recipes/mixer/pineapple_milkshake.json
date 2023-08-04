@@ -1,0 +1,34 @@
+{
+  "type": "blockychef:mixer",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "blockychef:milk"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:snowball"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:sugar"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:pineapple_cuts"
+      },
+      "count": 3
+    }
+  ],
+  "rpm": "LOW",
+  "output": {
+    "FluidName": "blockychef:pineapple_milkshake",
+    "Amount": 400
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "blockychef:mixer",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "blockychef:milk"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:vanilla_ice_cream"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:black_coffee"
+      },
+      "count": 1
+    }
+  ],
+  "rpm": "LOW",
+  "output": {
+    "FluidName": "blockychef:frappe_coffee",
+    "Amount": 400
+  }
+}

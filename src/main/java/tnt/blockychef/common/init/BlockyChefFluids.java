@@ -54,6 +54,17 @@ public final class BlockyChefFluids {
     public static final RegistryObject<Fluid> VEGGIE_JUICE_FLUID = registerSource("veggie_juice", () -> BlockyChefFluids.VEGGIE_JUICE_FLUID_PROPERTIES);
     public static final RegistryObject<Fluid> ICE_TEA_FLUID = registerSource("ice_tea", () -> BlockyChefFluids.ICE_TEA_FLUID_PROPERTIES);
     public static final RegistryObject<Fluid> SWEET_BERRY_JUICE_FLUID = registerSource("sweet_berry_juice", () -> BlockyChefFluids.SWEET_BERRY_JUICE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> BANANA_MILKSHAKE_FLUID = registerSource("banana_milkshake", () -> BlockyChefFluids.BANANA_MILKSHAKE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> BLUEBERRY_MILKSHAKE_FLUID = registerSource("blueberry_milkshake", () -> BlockyChefFluids.BLUEBERRY_MILKSHAKE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> CHOCOLATE_MILKSHAKE_FLUID = registerSource("chocolate_milkshake", () -> BlockyChefFluids.CHOCOLATE_MILKSHAKE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> COCONUT_MILKSHAKE_FLUID = registerSource("coconut_milkshake", () -> BlockyChefFluids.COCONUT_MILKSHAKE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> NUTS_MILKSHAKE_FLUID = registerSource("nuts_milkshake", () -> BlockyChefFluids.NUTS_MILKSHAKE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> PINEAPPLE_MILKSHAKE_FLUID = registerSource("pineapple_milkshake", () -> BlockyChefFluids.PINEAPPLE_MILKSHAKE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> RASPBERRY_MILKSHAKE_FLUID = registerSource("raspberry_milkshake", () -> BlockyChefFluids.RASPBERRY_MILKSHAKE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> STRAWBERRY_MILKSHAKE_FLUID = registerSource("strawberry_milkshake", () -> BlockyChefFluids.STRAWBERRY_MILKSHAKE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> VANILLA_MILKSHAKE_FLUID = registerSource("vanilla_milkshake", () -> BlockyChefFluids.VANILLA_MILKSHAKE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> FRAPPE_COFFEE_FLUID = registerSource("frappe_coffee", () -> BlockyChefFluids.FRAPPE_COFFEE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> ICE_COFFEE_FLUID = registerSource("ice_coffee", () -> BlockyChefFluids.ICE_COFFEE_FLUID_PROPERTIES);
 
 
 
@@ -97,6 +108,17 @@ public final class BlockyChefFluids {
     public static final RegistryObject<Fluid> VEGGIE_JUICE_FLOWING_FLUID = registerSource("veggie_juice_flowing", () -> BlockyChefFluids.VEGGIE_JUICE_FLUID_PROPERTIES);
     public static final RegistryObject<Fluid> ICE_TEA_FLOWING_FLUID = registerSource("ice_tea_flowing", () -> BlockyChefFluids.ICE_TEA_FLUID_PROPERTIES);
     public static final RegistryObject<Fluid> SWEET_BERRY_JUICE_FLOWING_FLUID = registerSource("sweet_berry_juice_flowing", () -> BlockyChefFluids.SWEET_BERRY_JUICE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> BANANA_MILKSHAKE_FLOWING_FLUID = registerSource("banana_milkshake_flowing", () -> BlockyChefFluids.BANANA_MILKSHAKE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> BLUEBERRY_MILKSHAKE_FLOWING_FLUID = registerSource("blueberry_milkshake_flowing", () -> BlockyChefFluids.BLUEBERRY_MILKSHAKE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> CHOCOLATE_MILKSHAKE_FLOWING_FLUID = registerSource("chocolate_milkshake_flowing", () -> BlockyChefFluids.CHOCOLATE_MILKSHAKE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> COCONUT_MILKSHAKE_FLOWING_FLUID = registerSource("coconut_milkshake_flowing", () -> BlockyChefFluids.COCONUT_MILKSHAKE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> NUTS_MILKSHAKE_FLOWING_FLUID = registerSource("nuts_milkshake_flowing", () -> BlockyChefFluids.NUTS_MILKSHAKE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> PINEAPPLE_MILKSHAKE_FLOWING_FLUID = registerSource("pineapple_milkshake_flowing", () -> BlockyChefFluids.PINEAPPLE_MILKSHAKE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> RASPBERRY_MILKSHAKE_FLOWING_FLUID = registerSource("raspberry_milkshake_flowing", () -> BlockyChefFluids.RASPBERRY_MILKSHAKE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> STRAWBERRY_MILKSHAKE_FLOWING_FLUID = registerSource("strawberry_milkshake_flowing", () -> BlockyChefFluids.STRAWBERRY_MILKSHAKE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> VANILLA_MILKSHAKE_FLOWING_FLUID = registerSource("vanilla_milkshake_flowing", () -> BlockyChefFluids.VANILLA_MILKSHAKE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> FRAPPE_COFFEE_FLOWING_FLUID = registerSource("frappe_coffee_flowing", () -> BlockyChefFluids.FRAPPE_COFFEE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> ICE_COFFEE_FLOWING_FLUID = registerSource("ice_coffee_flowing", () -> BlockyChefFluids.ICE_COFFEE_FLUID_PROPERTIES);
 
 
 
@@ -140,6 +162,17 @@ public final class BlockyChefFluids {
     private static final ForgeFlowingFluid.Properties VEGGIE_JUICE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.VEGGIE_JUICE_FLUID, VEGGIE_JUICE_FLUID, VEGGIE_JUICE_FLOWING_FLUID);
     private static final ForgeFlowingFluid.Properties ICE_TEA_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.ICE_TEA_FLUID, ICE_TEA_FLUID, ICE_TEA_FLOWING_FLUID);
     private static final ForgeFlowingFluid.Properties SWEET_BERRY_JUICE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.SWEET_BERRY_JUICE_FLUID, SWEET_BERRY_JUICE_FLUID, SWEET_BERRY_JUICE_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties BANANA_MILKSHAKE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.BANANA_MILKSHAKE_FLUID, BANANA_MILKSHAKE_FLUID, BANANA_MILKSHAKE_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties BLUEBERRY_MILKSHAKE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.BLUEBERRY_MILKSHAKE_FLUID, BLUEBERRY_MILKSHAKE_FLUID, BLUEBERRY_MILKSHAKE_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties CHOCOLATE_MILKSHAKE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.CHOCOLATE_MILKSHAKE_FLUID, CHOCOLATE_MILKSHAKE_FLUID, CHOCOLATE_MILKSHAKE_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties COCONUT_MILKSHAKE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.COCONUT_MILKSHAKE_FLUID, COCONUT_MILKSHAKE_FLUID, COCONUT_MILKSHAKE_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties NUTS_MILKSHAKE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.NUTS_MILKSHAKE_FLUID, NUTS_MILKSHAKE_FLUID, NUTS_MILKSHAKE_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties PINEAPPLE_MILKSHAKE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.PINEAPPLE_MILKSHAKE_FLUID, PINEAPPLE_MILKSHAKE_FLUID, PINEAPPLE_MILKSHAKE_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties RASPBERRY_MILKSHAKE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.RASPBERRY_MILKSHAKE_FLUID, RASPBERRY_MILKSHAKE_FLUID, RASPBERRY_MILKSHAKE_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties STRAWBERRY_MILKSHAKE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.STRAWBERRY_MILKSHAKE_FLUID, STRAWBERRY_MILKSHAKE_FLUID, STRAWBERRY_MILKSHAKE_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties VANILLA_MILKSHAKE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.VANILLA_MILKSHAKE_FLUID, VANILLA_MILKSHAKE_FLUID, VANILLA_MILKSHAKE_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties FRAPPE_COFFEE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.FRAPPE_COFFEE_FLUID, FRAPPE_COFFEE_FLUID, FRAPPE_COFFEE_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties ICE_COFFEE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.ICE_COFFEE_FLUID, ICE_COFFEE_FLUID, ICE_COFFEE_FLOWING_FLUID);
 
     public static void register(IEventBus bus) {
         REGISTER.register(bus);

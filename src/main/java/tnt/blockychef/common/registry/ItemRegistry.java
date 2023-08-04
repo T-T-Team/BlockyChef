@@ -540,5 +540,7 @@ public final class ItemRegistry {
         helper.register("peeled_onion", new DrinkableConsumableItem(new Item.Properties().food(FoodList.PEELED_ONION), DrinkList.PEELED_ONION));
         helper.register("coconut_flakes", new Item(new Item.Properties().food(FoodList.COCONUT_FLAKES)));
         helper.register("sweet_berry_juice", new DrinkableConsumableItem(new Item.Properties(), DrinkList.SWEET_BERRY_JUICE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_GLASS));
+        helper.register("frappe_coffee", new DrinkableConsumableItem(new Item.Properties().food(FoodList.FRAPPE_COFFEE), DrinkList.FRAPPE_COFFEE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_LARGE_GLASS));
+
     }
 }
