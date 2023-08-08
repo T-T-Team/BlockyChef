@@ -1,0 +1,30 @@
+{
+  "type": "blockychef:mixing_bowl",
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:grounded_pork_meat"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:salt"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:pepper_powder"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:pork_burger_patty",
+      "count": 1
+    }
+  ],
+  "mixingTime": 120
+}

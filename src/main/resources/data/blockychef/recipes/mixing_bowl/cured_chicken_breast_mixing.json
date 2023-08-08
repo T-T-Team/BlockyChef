@@ -1,0 +1,24 @@
+{
+  "type": "blockychef:mixing_bowl",
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:raw_chicken_breast"
+      }
+    },
+    {
+      "count": 3,
+      "ingredient": {
+        "item": "blockychef:salt"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:cured_chicken_breast",
+      "count": 1
+    }
+  ],
+  "mixingTime": 120
+}

@@ -1,0 +1,14 @@
+{
+  "type": "blockychef:cutting_board",
+  "input": {
+    "item": "blockychef:rice_dough"
+  },
+  "processingType": "blockychef:rolling",
+  "processingTime": 80,
+  "outputs": [
+    {
+      "item": "blockychef:raw_rice_cake",
+      "count": 2
+    }
+  ]
+}

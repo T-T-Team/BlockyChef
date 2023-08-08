@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "_W_",
+    "_ _",
+    "___"
+  ],
+  "key": {
+    "_": {
+      "item": "minecraft:glass_pane"
+    },
+    "W": {
+      "tag": "wooden_slabs"
+    }
+  },
+  "result": {
+    "item": "blockychef:empty_jar"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "type": "blockychef:mixing_bowl",
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:raw_tortellini_pasta"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:salt"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:pepper_powder"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "blockychef:portobello_slice"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:raw_mushroom_tortellini",
+      "count": 1
+    }
+  ],
+  "mixingTime": 120
+}

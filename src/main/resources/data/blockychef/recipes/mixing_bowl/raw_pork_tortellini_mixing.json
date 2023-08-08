@@ -1,0 +1,36 @@
+{
+  "type": "blockychef:mixing_bowl",
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:raw_tortellini_pasta"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:salt"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:pepper_powder"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:grounded_pork_meat"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:raw_pork_tortellini",
+      "count": 1
+    }
+  ],
+  "mixingTime": 120
+}

@@ -1,0 +1,24 @@
+{
+  "type": "blockychef:mixing_bowl",
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:raw_beef_steak"
+      }
+    },
+    {
+      "count": 3,
+      "ingredient": {
+        "item": "blockychef:salt"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:cured_beef_steak",
+      "count": 1
+    }
+  ],
+  "mixingTime": 120
+}

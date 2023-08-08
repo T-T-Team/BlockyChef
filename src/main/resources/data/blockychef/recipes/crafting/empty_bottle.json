@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "_W_",
+    "_ _",
+    " _ "
+  ],
+  "key": {
+    "_": {
+      "item": "minecraft:glass_pane"
+    },
+    "W": {
+      "tag": "wooden_buttons"
+    }
+  },
+  "result": {
+    "item": "blockychef:empty_bottle"
+  }
+}
