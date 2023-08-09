@@ -1,0 +1,24 @@
+{
+  "type": "blockychef:mixing_bowl",
+  "inputs": [
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "blockychef:soy_flour"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:bottle_of_water"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:raw_soy_meat",
+      "count": 2
+    }
+  ],
+  "mixingTime": 120
+}

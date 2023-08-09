@@ -1,0 +1,40 @@
+{
+  "type": "blockychef:mixer",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "blockychef:boiled_tomato"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:shredded_apple"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:diced_onion"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:pepper_powder"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:salt"
+      },
+      "count": 1
+    }
+  ],
+  "rpm": "HIGH",
+  "output": {
+    "FluidName": "blockychef:ketchup",
+    "Amount": 300
+  }
+}

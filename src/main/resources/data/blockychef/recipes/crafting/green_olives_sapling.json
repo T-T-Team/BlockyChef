@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " _ ",
+    "_W_",
+    "   "
+  ],
+  "key": {
+    "_": {
+      "item": "blockychef:green_olives"
+    },
+    "W": {
+      "item": "minecraft:acacia_sapling"
+    }
+  },
+  "result": {
+    "item": "blockychef:green_olives_sapling"
+  }
+}

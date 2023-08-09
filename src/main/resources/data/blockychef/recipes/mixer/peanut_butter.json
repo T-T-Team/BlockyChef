@@ -1,0 +1,28 @@
+{
+  "type": "blockychef:mixer",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "blockychef:roasted_peanuts"
+      },
+      "count": 3
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:salt"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:sugar"
+      },
+      "count": 1
+    }
+  ],
+  "rpm": "HIGH",
+  "output": {
+    "FluidName": "blockychef:peanut_butter",
+    "Amount": 300
+  }
+}

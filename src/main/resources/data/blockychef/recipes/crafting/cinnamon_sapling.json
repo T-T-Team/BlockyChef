@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " _ ",
+    "_W_",
+    "   "
+  ],
+  "key": {
+    "_": {
+      "item": "blockychef:cinnamon_bark"
+    },
+    "W": {
+      "item": "minecraft:jungle_sapling"
+    }
+  },
+  "result": {
+    "item": "blockychef:cinnamon_sapling"
+  }
+}

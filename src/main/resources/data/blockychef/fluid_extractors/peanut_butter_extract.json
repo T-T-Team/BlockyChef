@@ -1,0 +1,10 @@
+{
+  "item": "blockychef:empty_jar",
+  "output": {
+    "item": "blockychef:peanut_butter"
+  },
+  "fluidFilter": {
+    "FluidName": "blockychef:peanut_butter",
+    "Amount": 300
+  }
+}

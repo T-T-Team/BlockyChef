@@ -1,0 +1,40 @@
+{
+  "type": "blockychef:mixer",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "blockychef:egg_yolk"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:dried_mustard_pods"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:oil"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:pepper_powder"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:salt"
+      },
+      "count": 1
+    }
+  ],
+  "rpm": "HIGH",
+  "output": {
+    "FluidName": "blockychef:mayo",
+    "Amount": 300
+  }
+}

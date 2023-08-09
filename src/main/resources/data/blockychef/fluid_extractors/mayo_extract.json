@@ -1,0 +1,10 @@
+{
+  "item": "blockychef:empty_jar",
+  "output": {
+    "item": "blockychef:mayo"
+  },
+  "fluidFilter": {
+    "FluidName": "blockychef:mayo",
+    "Amount": 300
+  }
+}

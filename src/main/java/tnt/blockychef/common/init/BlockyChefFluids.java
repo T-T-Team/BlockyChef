@@ -65,6 +65,12 @@ public final class BlockyChefFluids {
     public static final RegistryObject<Fluid> VANILLA_MILKSHAKE_FLUID = registerSource("vanilla_milkshake", () -> BlockyChefFluids.VANILLA_MILKSHAKE_FLUID_PROPERTIES);
     public static final RegistryObject<Fluid> FRAPPE_COFFEE_FLUID = registerSource("frappe_coffee", () -> BlockyChefFluids.FRAPPE_COFFEE_FLUID_PROPERTIES);
     public static final RegistryObject<Fluid> ICE_COFFEE_FLUID = registerSource("ice_coffee", () -> BlockyChefFluids.ICE_COFFEE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> PEANUT_BUTTER_FLUID = registerSource("peanut_butter", () -> BlockyChefFluids.PEANUT_BUTTER_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> COCOA_SPREAD_FLUID = registerSource("cocoa_spread", () -> BlockyChefFluids.COCOA_SPREAD_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> BBQ_SAUCE_FLUID = registerSource("bbq_sauce", () -> BlockyChefFluids.BBQ_SAUCE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> KETCHUP_FLUID = registerSource("ketchup", () -> BlockyChefFluids.KETCHUP_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> TOMATO_SAUCE_FLUID = registerSource("tomato_sauce", () -> BlockyChefFluids.TOMATO_SAUCE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> MAYO_FLUID = registerSource("mayo", () -> BlockyChefFluids.MAYO_FLUID_PROPERTIES);
 
 
 
@@ -119,6 +125,12 @@ public final class BlockyChefFluids {
     public static final RegistryObject<Fluid> VANILLA_MILKSHAKE_FLOWING_FLUID = registerSource("vanilla_milkshake_flowing", () -> BlockyChefFluids.VANILLA_MILKSHAKE_FLUID_PROPERTIES);
     public static final RegistryObject<Fluid> FRAPPE_COFFEE_FLOWING_FLUID = registerSource("frappe_coffee_flowing", () -> BlockyChefFluids.FRAPPE_COFFEE_FLUID_PROPERTIES);
     public static final RegistryObject<Fluid> ICE_COFFEE_FLOWING_FLUID = registerSource("ice_coffee_flowing", () -> BlockyChefFluids.ICE_COFFEE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> PEANUT_BUTTER_FLOWING_FLUID = registerSource("peanut_butter_flowing", () -> BlockyChefFluids.PEANUT_BUTTER_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> COCOA_SPREAD_FLOWING_FLUID = registerSource("cocoa_spread_flowing", () -> BlockyChefFluids.COCOA_SPREAD_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> BBQ_SAUCE_FLOWING_FLUID = registerSource("bbq_sauce_flowing", () -> BlockyChefFluids.BBQ_SAUCE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> KETCHUP_FLOWING_FLUID = registerSource("ketchup_flowing", () -> BlockyChefFluids.KETCHUP_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> TOMATO_SAUCE_FLOWING_FLUID = registerSource("tomato_sauce_flowing", () -> BlockyChefFluids.TOMATO_SAUCE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> MAYO_FLOWING_FLUID = registerSource("mayo_flowing", () -> BlockyChefFluids.MAYO_FLUID_PROPERTIES);
 
 
 
@@ -173,6 +185,12 @@ public final class BlockyChefFluids {
     private static final ForgeFlowingFluid.Properties VANILLA_MILKSHAKE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.VANILLA_MILKSHAKE_FLUID, VANILLA_MILKSHAKE_FLUID, VANILLA_MILKSHAKE_FLOWING_FLUID);
     private static final ForgeFlowingFluid.Properties FRAPPE_COFFEE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.FRAPPE_COFFEE_FLUID, FRAPPE_COFFEE_FLUID, FRAPPE_COFFEE_FLOWING_FLUID);
     private static final ForgeFlowingFluid.Properties ICE_COFFEE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.ICE_COFFEE_FLUID, ICE_COFFEE_FLUID, ICE_COFFEE_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties PEANUT_BUTTER_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.PEANUT_BUTTER_FLUID, PEANUT_BUTTER_FLUID, PEANUT_BUTTER_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties COCOA_SPREAD_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.COCOA_SPREAD_FLUID, COCOA_SPREAD_FLUID, COCOA_SPREAD_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties BBQ_SAUCE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.BBQ_SAUCE_FLUID, BBQ_SAUCE_FLUID, BBQ_SAUCE_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties KETCHUP_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.KETCHUP_FLUID, KETCHUP_FLUID, KETCHUP_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties TOMATO_SAUCE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.TOMATO_SAUCE_FLUID, TOMATO_SAUCE_FLUID, TOMATO_SAUCE_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties MAYO_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.MAYO_FLUID, MAYO_FLUID, MAYO_FLOWING_FLUID);
 
     public static void register(IEventBus bus) {
         REGISTER.register(bus);

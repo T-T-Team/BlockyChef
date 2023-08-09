@@ -1,0 +1,10 @@
+{
+  "item": "blockychef:empty_jar",
+  "output": {
+    "item": "blockychef:cocoa_spread"
+  },
+  "fluidFilter": {
+    "FluidName": "blockychef:cocoa_spread",
+    "Amount": 300
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "item": "blockychef:empty_jar",
+  "output": {
+    "item": "blockychef:ketchup"
+  },
+  "fluidFilter": {
+    "FluidName": "blockychef:ketchup",
+    "Amount": 300
+  }
+}

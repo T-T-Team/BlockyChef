@@ -1,0 +1,10 @@
+{
+  "item": "blockychef:empty_jar",
+  "output": {
+    "item": "blockychef:bbq_sauce"
+  },
+  "fluidFilter": {
+    "FluidName": "blockychef:bbq_sauce",
+    "Amount": 300
+  }
+}

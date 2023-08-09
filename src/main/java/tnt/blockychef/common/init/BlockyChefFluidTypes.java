@@ -69,6 +69,15 @@ public final class BlockyChefFluidTypes {
     public static final RegistryObject<EdibleFluidType> VANILLA_MILKSHAKE_FLUID = registerEdible("vanilla_milkshake_fluid", 0xAAFFF2E0);
     public static final RegistryObject<EdibleFluidType> FRAPPE_COFFEE_FLUID = registerEdible("frappe_coffee_fluid", 0xAAEACEAF);
     public static final RegistryObject<EdibleFluidType> ICE_COFFEE_FLUID = registerEdible("ice_coffee_fluid", 0xAAE8C6A2);
+
+
+
+    public static final RegistryObject<EdibleFluidType> PEANUT_BUTTER_FLUID = registerEdible("peanut_butter_fluid", 0xFFD8A564);
+    public static final RegistryObject<EdibleFluidType> COCOA_SPREAD_FLUID = registerEdible("cocoa_spread_fluid", 0xFF3A2C1B);
+    public static final RegistryObject<EdibleFluidType> BBQ_SAUCE_FLUID = registerEdible("bbq_sauce_fluid", 0xFF471C00);
+    public static final RegistryObject<EdibleFluidType> KETCHUP_FLUID = registerEdible("ketchup_fluid", 0xFF8C2412);
+    public static final RegistryObject<EdibleFluidType> TOMATO_SAUCE_FLUID = registerEdible("tomato_sauce_fluid", 0xFFA32F15);
+    public static final RegistryObject<EdibleFluidType> MAYO_FLUID = registerEdible("mayo_fluid", 0xFFEFE0C1);
     public static void register(IEventBus eventBus) {
         REGISTER.register(eventBus);
     }

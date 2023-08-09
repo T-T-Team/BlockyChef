@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " _ ",
+    "_W_",
+    "   "
+  ],
+  "key": {
+    "_": {
+      "item": "blockychef:plum"
+    },
+    "W": {
+      "item": "minecraft:oak_sapling"
+    }
+  },
+  "result": {
+    "item": "blockychef:plum_sapling"
+  }
+}

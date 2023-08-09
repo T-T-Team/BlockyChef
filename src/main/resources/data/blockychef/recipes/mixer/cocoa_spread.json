@@ -1,0 +1,34 @@
+{
+  "type": "blockychef:mixer",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "blockychef:cocoa_powder"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:almond"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:sugar"
+      },
+      "count": 2
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:butter"
+      },
+      "count": 1
+    }
+  ],
+  "rpm": "HIGH",
+  "output": {
+    "FluidName": "blockychef:cocoa_spread",
+    "Amount": 300
+  }
+}

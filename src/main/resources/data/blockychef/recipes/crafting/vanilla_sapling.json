@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " _ ",
+    "_W_",
+    "   "
+  ],
+  "key": {
+    "_": {
+      "item": "blockychef:vanilla_pods"
+    },
+    "W": {
+      "item": "minecraft:jungle_sapling"
+    }
+  },
+  "result": {
+    "item": "blockychef:vanilla_sapling"
+  }
+}

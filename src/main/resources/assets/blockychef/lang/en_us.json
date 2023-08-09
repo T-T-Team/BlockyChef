@@ -795,5 +795,11 @@
   "fluid_type.blockychef.strawberry_milkshake_fluid": "Strawberry Milkshake",
   "fluid_type.blockychef.vanilla_milkshake_fluid": "Vanilla Milkshake",
   "fluid_type.blockychef.frappe_coffee_fluid": "Frappe Coffee",
-  "fluid_type.blockychef.ice_coffee_fluid": "Ice Coffee"
+  "fluid_type.blockychef.ice_coffee_fluid": "Ice Coffee",
+  "fluid_type.blockychef.peanut_butter_fluid": "Peanut Butter",
+  "fluid_type.blockychef.cocoa_spread_fluid": "Cocoa Spread",
+  "fluid_type.blockychef.bbq_sauce_fluid": "BBQ Sauce",
+  "fluid_type.blockychef.ketchup_fluid": "Ketchup",
+  "fluid_type.blockychef.tomato_sauce_fluid": "Tomato Sauce",
+  "fluid_type.blockychef.mayo_fluid": "Mayo"
 }
