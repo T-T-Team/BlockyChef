@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:stove",
+  "input": {
+    "item": "minecraft:cooked_chicken"
+  },
+  "result": {
+    "item": "minecraft:coal"
+  },
+  "burntResult": {
+    "item": "minecraft:coal"
+  },
+  "cookingConfiguration": {
+    "time": 80,
+    "minTemperature": 1,
+    "maxTemperature": 10
+  },
+  "overcooking": true,
+  "experience": 0.7
+}

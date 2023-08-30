@@ -18,4 +18,8 @@ public final class BlockyChefConfig {
     @Configurable
     @Configurable.Comment("Thirst configuration")
     public ThirstConfig thirst = new ThirstConfig();
+
+    @Configurable
+    @Configurable.Comment("Cooking configuration")
+    public CookingConfig cooking = new CookingConfig();
 }

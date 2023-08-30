@@ -1,5 +1,6 @@
 package tnt.blockychef.util;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -35,6 +36,12 @@ public final class Helper {
     public static <C extends Container, R extends Recipe<C>> Optional<R> findRecipeFor(RecipeManager manager, RecipeType<R> type, Predicate<R> recipeTest) {
         return manager.getAllRecipesFor(type).stream()
                 .filter(recipeTest)
+                .findFirst();
+    }
+
+    public static <C extends Container, R extends Recipe<C>> Optional<R> findRecipeByIdFor(RecipeManager manager, RecipeType<R> type, ResourceLocation recipeId) {
+        return manager.getAllRecipesFor(type).stream()
+                .filter(r -> r.getId().equals(recipeId))
                 .findFirst();
     }
 
