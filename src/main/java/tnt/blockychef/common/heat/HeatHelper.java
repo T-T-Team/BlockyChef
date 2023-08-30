@@ -15,6 +15,7 @@ import tnt.blockychef.common.init.BlockyChefTags;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public final class HeatHelper {
 
@@ -37,16 +38,29 @@ public final class HeatHelper {
     }
 
     public static HeatSource getHeatSource(Level level, BlockPos pos, @Nullable Direction direction) {
-        BlockState state = level.getBlockState(pos);
+        BlockPos position = direction != null ? pos.relative(direction) : pos;
+        BlockState state = level.getBlockState(position);
         if (state.getBlock() instanceof HeatSourceProvider provider) {
-            return provider.getHeatSourceAt(level, pos, direction);
+            return provider.getHeatSourceAt(level, position, direction);
         }
         for (VanillaHeatSourceProvider vanillaHeatSourceProvider : DEFAULT_HEAT_SOURCES) {
-            if (vanillaHeatSourceProvider.isValidSource(level, pos, state)) {
+            if (vanillaHeatSourceProvider.isValidSource(level, position, state)) {
                 return vanillaHeatSourceProvider.getHeatSource();
             }
         }
         return NoHeatSource.INSTANCE;
+    }
+
+    public static float regulateHeat(float currentHeat, float setHeat, float speed) {
+        if (currentHeat == setHeat) {
+            return setHeat;
+        }
+        float diff = setHeat - currentHeat;
+        if (Math.abs(diff) < speed) {
+            return setHeat;
+        }
+        float adjust = setHeat < currentHeat ? (-speed * 1.2F) : speed;
+        return currentHeat + adjust;
     }
 
     public static boolean isEmpty(HeatSource source) {

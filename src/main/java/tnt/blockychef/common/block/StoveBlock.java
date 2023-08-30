@@ -1,6 +1,7 @@
 package tnt.blockychef.common.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -19,11 +20,14 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.block.entity.StoveBlockEntity;
+import tnt.blockychef.common.heat.HeatSource;
+import tnt.blockychef.common.heat.HeatSourceProvider;
+import tnt.blockychef.common.heat.NoHeatSource;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.menu.StoveMenu;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 
-public class StoveBlock extends DyeableBlock implements EntityBlock {
+public class StoveBlock extends DyeableBlock implements EntityBlock, HeatSourceProvider {
 
     public static final Component TITLE = Component.translatable("screen.blockychef.stove");
 
@@ -57,5 +61,14 @@ public class StoveBlock extends DyeableBlock implements EntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
         return BlockEntityHelper.createBlockEntityTicker(pBlockEntityType, BlockyChefBlockEntities.STOVE, StoveBlockEntity::tick);
+    }
+
+    @Override
+    public HeatSource getHeatSourceAt(Level level, BlockPos pos, @Nullable Direction direction) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof StoveBlockEntity stove) {
+            return direction != null ? stove.getExternalHeatSource() : stove.getStoveHeatSource();
+        }
+        return NoHeatSource.INSTANCE;
     }
 }

@@ -92,12 +92,12 @@ public class StoveRecipe extends AbstractFoodRecipe<StoveBlockEntity> {
         return BlockyChefRecipeTypes.STOVE_RECIPE;
     }
 
-    public record CookingConfiguration(int time, int minTemperature, int maxTemperature, float burnSpeed) {
+    public record CookingConfiguration(int time, float minTemperature, float maxTemperature, float burnSpeed) {
 
         public static final Codec<CookingConfiguration> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 Codec.intRange(1, Integer.MAX_VALUE).fieldOf("time").forGetter(CookingConfiguration::time),
-                Codec.INT.fieldOf("minTemperature").forGetter(CookingConfiguration::minTemperature),
-                Codec.INT.fieldOf("maxTemperature").forGetter(CookingConfiguration::maxTemperature),
+                Codec.FLOAT.fieldOf("minTemperature").forGetter(CookingConfiguration::minTemperature),
+                Codec.FLOAT.fieldOf("maxTemperature").forGetter(CookingConfiguration::maxTemperature),
                 Codec.FLOAT.optionalFieldOf("burnSpeed", 1.0F).forGetter(CookingConfiguration::burnSpeed)
         ).apply(instance, CookingConfiguration::new));
 

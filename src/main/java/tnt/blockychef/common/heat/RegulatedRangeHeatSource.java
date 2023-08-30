@@ -19,11 +19,16 @@ public class RegulatedRangeHeatSource implements RegulatedHeatSource {
     }
 
     @Override
+    public boolean isProducingHeat() {
+        return amount > 0;
+    }
+
+    @Override
     public float getHeat(@Nullable Direction direction) {
         return amount;
     }
 
-    public float getRaw() {
+    public float getHeat() {
         return amount;
     }
 
@@ -47,6 +52,6 @@ public class RegulatedRangeHeatSource implements RegulatedHeatSource {
     }
 
     public void decodeData(CompoundTag data) {
-        //adjust(data.getFloat("amount"));
+        amount = data.getFloat("amount");
     }
 }

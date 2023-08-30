@@ -5,11 +5,13 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import tnt.blockychef.common.block.entity.StoveBlockEntity;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 import tnt.blockychef.common.init.BlockyChefMenuTypes;
+import tnt.blockychef.common.menu.slot.FuelSlot;
 import tnt.tntlib.api.menu.AbstractBlockEntityMenu;
 import tnt.tntlib.api.menu.MenuQuickMoveHelper;
 
@@ -22,7 +24,12 @@ public class StoveMenu extends AbstractBlockEntityMenu<StoveBlockEntity> {
     public StoveMenu(int menuId, Inventory inventory, StoveBlockEntity stove) {
         super(BlockyChefMenuTypes.STOVE, menuId, stove);
         MenuQuickMoveHelper.QuickMoveContext context = getQuickMoveContext();
-        this.moveHelper = null; // TODO
+        this.moveHelper = MenuQuickMoveHelper.Builder.withContext(context)
+                .addRule(0, 6, 7, 43)
+                .addRule(6, 7, 7, 43)
+                .addRule(7, 43, 6, 7, FuelSlot::isFuel)
+                .addRule(7, 43, 0, 6)
+                .build();
         // Fuel slot
         for (int y = 0; y < 2; y++) {
             for (int x = 0; x < 3; x++) {
@@ -34,7 +41,7 @@ public class StoveMenu extends AbstractBlockEntityMenu<StoveBlockEntity> {
                 }));
             }
         }
-        addSlot(new SlotItemHandler(stove.getItemHandler(), 6, 80, 69));
+        addSlot(new FuelSlot(stove.getItemHandler(), 6, 80, 69));
         // Player inventory
         addPlayerSlots(inventory, 8, 93);
 
@@ -47,7 +54,7 @@ public class StoveMenu extends AbstractBlockEntityMenu<StoveBlockEntity> {
 
     @Override
     public ItemStack quickMoveStack(Player pPlayer, int pIndex) {
-        return ItemStack.EMPTY; // TODO
+        return moveHelper.quickMove(pPlayer, pIndex);
     }
 
     @Override
@@ -74,6 +81,11 @@ public class StoveMenu extends AbstractBlockEntityMenu<StoveBlockEntity> {
         public boolean mayPickup(Player playerIn) {
             StoveBlockEntity.CookingSlot cookingSlot = cookingSlotProvider.get();
             return !cookingSlot.isLocked();
+        }
+
+        @Override
+        public int getMaxStackSize() {
+            return 1;
         }
     }
 }

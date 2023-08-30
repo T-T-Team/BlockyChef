@@ -11,8 +11,8 @@
   },
   "cookingConfiguration": {
     "time": 80,
-    "minTemperature": 1,
-    "maxTemperature": 10
+    "minTemperature": 5,
+    "maxTemperature": 6
   },
   "overcooking": true,
   "experience": 0.7

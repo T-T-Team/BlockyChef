@@ -9,6 +9,13 @@ import net.minecraft.world.entity.player.Inventory;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.entity.StoveBlockEntity;
 import tnt.blockychef.common.menu.StoveMenu;
+import tnt.blockychef.network.NetworkManager;
+import tnt.blockychef.network.message.C2S_RegulateTemperature;
+import tnt.tntlib.api.GraphicsHelper;
+import tnt.tntlib.api.HorizontalAlignment;
+import tnt.tntlib.api.VerticalAlignment;
+
+import java.util.Locale;
 
 public class StoveScreen extends AbstractContainerScreen<StoveMenu> {
 
@@ -36,21 +43,21 @@ public class StoveScreen extends AbstractContainerScreen<StoveMenu> {
     }
 
     private void reduceTemperature(Button button) {
-        menu.getBlockEntity().getStoveHeatSource().getRegulationHandler().decrease();
+        NetworkManager.DISPATCHER.sendToServer(new C2S_RegulateTemperature(menu.getBlockEntity().getBlockPos(), null, true));
     }
 
     private void increaseTemperature(Button button) {
-        menu.getBlockEntity().getStoveHeatSource().getRegulationHandler().increase();
+        NetworkManager.DISPATCHER.sendToServer(new C2S_RegulateTemperature(menu.getBlockEntity().getBlockPos(), null, false));
     }
 
     @Override
     protected void renderLabels(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
         pGuiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 0x404040, false);
-        pGuiGraphics.drawString(font, String.valueOf(StoveBlockEntity.TEMPERATURE_LIMIT), 150, 13, 0x404040, false);
-        pGuiGraphics.drawString(font, "0", 156, 81, 0x404040, false);
+        GraphicsHelper.drawRightAlignedText(pGuiGraphics, Component.literal(String.valueOf(StoveBlockEntity.TEMPERATURE_LIMIT)), font, 163, 17, 0x404040);
+        GraphicsHelper.drawRightAlignedText(pGuiGraphics, Component.literal("0"), font, 163, 78, 0x404040);
 
-        float setTemperature = menu.getBlockEntity().getStoveHeatSource().getRaw();
-        pGuiGraphics.drawString(font, String.format("%.1f", setTemperature), 148, 13 + (81 - 13) / 2.0F, 0x404040, false);
+        float setTemperature = menu.getBlockEntity().getStoveHeatSource().getHeat();
+        GraphicsHelper.drawAlignedText(pGuiGraphics, Component.literal(String.format(Locale.ROOT, "%.1f", setTemperature)), font, HorizontalAlignment.RIGHT, VerticalAlignment.CENTER, 145, 17, 18, 68, 0x404040);
     }
 
     @Override
@@ -92,7 +99,7 @@ public class StoveScreen extends AbstractContainerScreen<StoveMenu> {
             pGuiGraphics.renderTooltip(font, Component.translatable("label.blockychef.energy", stove.getStoredEnergyAmount()), mouseX, mouseY);
         }
         if (mouseX >= leftPos + 164 && mouseX <= leftPos + 168 && mouseY >= topPos + 16 && mouseY <= topPos + 85) {
-            pGuiGraphics.renderTooltip(font, Component.translatable("label.blockychef.temperature", String.format("%.1f", stove.getActualTemperature())), mouseX, mouseY);
+            pGuiGraphics.renderTooltip(font, Component.translatable("label.blockychef.temperature", String.format(Locale.ROOT, "%.1f", stove.getActualTemperature())), mouseX, mouseY);
         }
     }
 }

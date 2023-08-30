@@ -10,9 +10,10 @@
     "item": "minecraft:coal"
   },
   "cookingConfiguration": {
-    "time": 200,
+    "time": 400,
     "minTemperature": 4,
-    "maxTemperature": 5
+    "maxTemperature": 5,
+    "burnSpeed": 0.4
   },
   "experience": 0.7
 }

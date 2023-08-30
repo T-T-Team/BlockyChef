@@ -707,6 +707,8 @@
   "label.blockychef.juicing": "Juicing: %s%%",
   "label.blockychef.fermenting": "Fermenting: %ss",
   "label.blockychef.fluid_capacity": "Capacity: %s / %s",
+  "label.blockychef.energy": "Energy: %s",
+  "label.blockychef.temperature": "Temperature: %s",
 
   "screen.blockychef.cutting_board": "Cutting Board",
   "screen.blockychef.cutting_board.widget.start_cutting": "Cut",
