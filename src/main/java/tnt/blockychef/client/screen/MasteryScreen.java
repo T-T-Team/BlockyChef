@@ -14,16 +14,18 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.food.mastery.CookingMastery;
+import tnt.blockychef.common.food.mastery.MasteryGroup;
 import tnt.blockychef.common.food.mastery.PlayerMasteryDataProvider;
 import tnt.tntlib.api.GraphicsHelper;
 import tnt.tntlib.api.HorizontalAlignment;
 import tnt.tntlib.api.VerticalAlignment;
 
-import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Locale;
+import java.util.function.BiConsumer;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 public class MasteryScreen extends Screen {
 
@@ -34,48 +36,43 @@ public class MasteryScreen extends Screen {
     private static final int MARGIN_TOP = 50;
     private static final int MASTERY_SIZE = 20;
 
-    private final List<Filter<MasteryData>> filters = new ArrayList<>();
-    private final List<Sorter<MasteryData>> sorters = new ArrayList<>();
+    private final EnumSet<MasteryGroup> displayedGroups = EnumSet.allOf(MasteryGroup.class);
     private int scrollIndex;
     private int rowCount;
 
     public MasteryScreen() {
         super(TITLE);
-        this.sorters.add(new Sorter<>(Comparator.comparingInt(MasteryData::cookCount)));
-        this.sorters.add(new Sorter<>(Comparator.comparing(t -> t.mastery().item().getDescription().getString())));
     }
 
     @Override
     protected void init() {
+        int left = 5;
+        int top = 5;
+        for (MasteryGroup group : MasteryGroup.values()) {
+            GroupFilterWidget widget = new GroupFilterWidget(group, displayedGroups::contains, this::filterChanged);
+            int widgetWidth = font.width(widget.getMessage());
+            if (left + widgetWidth >= width) {
+                top += 15;
+                left = 5;
+            }
+            widget.setX(left);
+            widget.setY(top);
+            widget.setWidth(widgetWidth);
+            widget.setHeight(15);
+            left += widgetWidth + 5;
+            addRenderableWidget(widget);
+        }
         PlayerMasteryDataProvider.getMasteryData(minecraft.player).ifPresent(dataProvider -> {
-            Stream<MasteryData> stream = BlockyChef.MASTERY_MANAGER.getFullMasteryList().stream().map(mastery -> {
-                Item item = mastery.item();
-                int cookCount = dataProvider.getCookedCount(item);
-                CookingMastery.Tier tier = mastery.getTier(cookCount);
-                return new MasteryData(mastery, cookCount, tier);
-            });
-            if (!filters.isEmpty()) {
-                stream = stream.filter(masteryData -> {
-                    for (Filter<MasteryData> filter : filters) {
-                        if (!filter.test(masteryData)) {
-                            return false;
-                        }
-                    }
-                    return true;
-                });
-            }
-            if (!sorters.isEmpty()) {
-                Comparator<MasteryData> comparator = null;
-                for (Sorter<MasteryData> sorter : sorters) {
-                    if (comparator == null) {
-                        comparator = sorter.comparator;
-                    } else {
-                        comparator = comparator.thenComparing(sorter.comparator);
-                    }
-                }
-                stream = stream.sorted(comparator);
-            }
-            List<MasteryData> data = stream.toList();
+            List<MasteryData> data = BlockyChef.MASTERY_MANAGER.getFullMasteryList().stream()
+                    .map(mastery -> {
+                        Item item = mastery.item();
+                        int cookCount = dataProvider.getCookedCount(item);
+                        CookingMastery.Tier tier = mastery.getTier(cookCount);
+                        return new MasteryData(mastery, cookCount, tier);
+                    })
+                    .filter(t -> displayedGroups.contains(t.mastery().group()))
+                    .sorted(Comparator.comparingInt(MasteryData::cookCount).reversed().thenComparing(t -> t.mastery().item().getDescription().getString()))
+                    .toList();
             main:
             for (int y = scrollIndex; y < scrollIndex + ROWS; y++) {
                 for (int x = 0; x < COLUMS; x++) {
@@ -92,6 +89,18 @@ public class MasteryScreen extends Screen {
                 }
             }
         });
+    }
+
+    private void filterChanged(MasteryGroup group, boolean wasActive) {
+        if (wasActive) {
+            displayedGroups.remove(group);
+        } else {
+            displayedGroups.add(group);
+        }
+        if (displayedGroups.isEmpty()) {
+            displayedGroups.add(MasteryGroup.NONE);
+        }
+        init(minecraft, width, height);
     }
 
     @Override
@@ -147,26 +156,37 @@ public class MasteryScreen extends Screen {
     private record MasteryData(CookingMastery mastery, int cookCount, CookingMastery.Tier tier) {
     }
 
-    private static final class Filter<T> implements Predicate<T> {
+    private static final class GroupFilterWidget extends AbstractWidget {
 
-        private final Predicate<T> filter;
+        private final MasteryGroup group;
+        private final Predicate<MasteryGroup> active;
+        private final BiConsumer<MasteryGroup, Boolean> callback;
 
-        public Filter(Predicate<T> filter) {
-            this.filter = filter;
+        public GroupFilterWidget(MasteryGroup group, Predicate<MasteryGroup> active, BiConsumer<MasteryGroup, Boolean> callback) {
+            super(0, 0, 0, 0, Component.translatable("blockychef.mastery.group." + group.name().toLowerCase(Locale.ROOT)));
+            this.group = group;
+            this.active = active;
+            this.callback = callback;
         }
 
         @Override
-        public boolean test(T t) {
-            return filter.test(t);
+        protected void renderWidget(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+            boolean selected = active.test(group);
+            if (isHovered) {
+                pGuiGraphics.fill(getX(), getY(), getX() + getWidth(), getY() + getHeight(), 0x22FFFFFF);
+            }
+            GraphicsHelper.drawCenteredText(pGuiGraphics, getMessage(), Minecraft.getInstance().font, getX(), getY(), getWidth(), getHeight(), selected ? 0xFFFFFF : 0x666666, true);
         }
-    }
 
-    private static final class Sorter<T> {
+        @Override
+        public void onClick(double pMouseX, double pMouseY) {
+            boolean isActive = active.test(group);
+            callback.accept(group, isActive);
+        }
 
-        private final Comparator<T> comparator;
+        @Override
+        protected void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
 
-        public Sorter(Comparator<T> comparator) {
-            this.comparator = comparator;
         }
     }
 }

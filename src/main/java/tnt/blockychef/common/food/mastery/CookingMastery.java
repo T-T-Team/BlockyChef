@@ -32,7 +32,7 @@ public record CookingMastery(Item item, List<Tier> tiers, @Nullable MasteryGroup
     public static final Codec<CookingMastery> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             BuiltInRegistries.ITEM.byNameCodec().fieldOf("item").forGetter(CookingMastery::item),
             Tier.TIER_CODEC.listOf().optionalFieldOf("tiers", DEFAULT_TIER_LIST).forGetter(CookingMastery::tiers),
-            Codecs.enumCodec(MasteryGroup.class).optionalFieldOf("group", null).forGetter(CookingMastery::group)
+            Codecs.enumCodec(MasteryGroup.class).optionalFieldOf("group", MasteryGroup.NONE).forGetter(CookingMastery::group)
     ).apply(instance, CookingMastery::new));
 
     public static void applyMastery(Player player, ItemStack stack) {
