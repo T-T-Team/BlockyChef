@@ -438,7 +438,6 @@ public final class FoodList {
     public static final FoodProperties COCONUT_FLAKES = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties FRAPPE_COFFEE = food(2, 2).build();
 
-
     private static FoodProperties.Builder food(int nutrition, int saturation) {
         return new FoodProperties.Builder().nutrition(nutrition).saturationMod(saturation / (nutrition * 2.0F));
     }

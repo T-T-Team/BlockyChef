@@ -1,5 +1,7 @@
 package tnt.blockychef.integrations;
 
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.UseAnim;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
@@ -7,6 +9,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import squeek.appleskin.ModConfig;
 import squeek.appleskin.api.event.FoodValuesEvent;
+import squeek.appleskin.api.food.FoodValues;
+import tnt.blockychef.common.food.mastery.CookingMastery;
+import tnt.blockychef.common.food.mastery.FoodQuality;
 
 public final class AppleskinIntegration implements ModIntegrationLayer {
 
@@ -27,6 +32,14 @@ public final class AppleskinIntegration implements ModIntegrationLayer {
     }
 
     private void gatherModifiedFoodValues(FoodValuesEvent event) {
-        // TODO adjust based on food stats
+        ItemStack stack = event.itemStack;
+        UseAnim anim = stack.getUseAnimation();
+        if (anim == UseAnim.EAT) {
+            FoodQuality quality = CookingMastery.getItemQuality(stack);
+            if (quality != null) {
+                FoodValues original = event.defaultFoodValues;
+                System.out.println(original);
+            }
+        }
     }
 }

@@ -1,14 +1,15 @@
 package tnt.blockychef.common.menu;
 
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import tnt.blockychef.common.block.entity.StoveBlockEntity;
+import tnt.blockychef.common.food.mastery.CookingMastery;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 import tnt.blockychef.common.init.BlockyChefMenuTypes;
 import tnt.blockychef.common.menu.slot.FuelSlot;
@@ -25,7 +26,6 @@ public class StoveMenu extends AbstractBlockEntityMenu<StoveBlockEntity> {
         super(BlockyChefMenuTypes.STOVE, menuId, stove);
         MenuQuickMoveHelper.QuickMoveContext context = getQuickMoveContext();
         this.moveHelper = MenuQuickMoveHelper.Builder.withContext(context)
-                .addRule(0, 6, 7, 43)
                 .addRule(6, 7, 7, 43)
                 .addRule(7, 43, 6, 7, FuelSlot::isFuel)
                 .addRule(7, 43, 0, 6)
@@ -35,7 +35,7 @@ public class StoveMenu extends AbstractBlockEntityMenu<StoveBlockEntity> {
             for (int x = 0; x < 3; x++) {
                 // Cooking slots
                 int slotIndex = (y * 3) + x;
-                addSlot(new CookingSlot(stove.getItemHandler(), slotIndex, 44 + x * 36, 17 + y * 28, () -> {
+                addSlot(new CookingSlot(stove.getItemHandler(), slotIndex, 44 + x * 36, 17 + y * 28, stove, () -> {
                     StoveBlockEntity.CookingSlot[] cookSlots = stove.getSlots();
                     return cookSlots[slotIndex];
                 }));
@@ -70,10 +70,12 @@ public class StoveMenu extends AbstractBlockEntityMenu<StoveBlockEntity> {
 
     private static final class CookingSlot extends SlotItemHandler {
 
+        private final StoveBlockEntity stove;
         private final Supplier<StoveBlockEntity.CookingSlot> cookingSlotProvider;
 
-        public CookingSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition, Supplier<StoveBlockEntity.CookingSlot> cookingSlotProvider) {
+        public CookingSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition, StoveBlockEntity stove, Supplier<StoveBlockEntity.CookingSlot> cookingSlotProvider) {
             super(itemHandler, index, xPosition, yPosition);
+            this.stove = stove;
             this.cookingSlotProvider = cookingSlotProvider;
         }
 
@@ -86,6 +88,16 @@ public class StoveMenu extends AbstractBlockEntityMenu<StoveBlockEntity> {
         @Override
         public int getMaxStackSize() {
             return 1;
+        }
+
+        @Override
+        public void onTake(Player pPlayer, ItemStack pStack) {
+            CookingMastery.applyMastery(pPlayer, pStack);
+            if (pPlayer instanceof ServerPlayer serverPlayer) {
+                stove.awardUsedRecipesAndPopExperience(serverPlayer);
+                stove.setChanged();
+            }
+            super.onTake(pPlayer, pStack);
         }
     }
 }

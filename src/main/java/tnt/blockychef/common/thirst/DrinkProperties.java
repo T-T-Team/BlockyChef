@@ -6,6 +6,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.UseAnim;
+import tnt.blockychef.common.food.mastery.CookingMastery;
+import tnt.blockychef.common.food.mastery.FoodQuality;
 import tnt.blockychef.common.item.Drinkable;
 
 import java.util.Objects;
@@ -31,6 +34,17 @@ public final class DrinkProperties {
         this.onConsumed = builder.onDrink;
     }
 
+    public DrinkProperties adjustForQuality(FoodQuality quality) {
+        int newHydration = hydrationLevel + quality.getLevelAdjustment();
+        int saturation = calculateIntegerSaturation(hydrationLevel, this.saturation);
+        float newSaturation = calculateSaturation(newHydration, saturation + quality.getSaturationAdjustment());
+        Builder builder = new Builder().stats(newHydration, newSaturation);
+        if (alwaysDrinkable) {
+            builder.setAlwaysDrinkable();
+        }
+        return builder.onDrink(this.onConsumed).build();
+    }
+
     public int getHydration() {
         return this.hydrationLevel;
     }
@@ -51,8 +65,12 @@ public final class DrinkProperties {
         return this == NONE;
     }
 
-    public static float calculateSaturationForHydrationLevel(int waterLevel, int wantedSaturationLevel) {
-        return wantedSaturationLevel / (waterLevel * 2.0F);
+    public static float calculateSaturation(int level, int requiredSaturation) {
+        return requiredSaturation / (level * 2.0F);
+    }
+
+    public static int calculateIntegerSaturation(int level, float saturation) {
+        return (int) (saturation * level * 2);
     }
 
     public static DrinkPropertiesHolder getDrinkStatistics(ItemStack stack) {
@@ -74,7 +92,15 @@ public final class DrinkProperties {
     }
 
     public static DrinkProperties adjustStats(DrinkProperties stats, ItemStack stack) {
-        return stats; // TODO implement
+        UseAnim anim = stack.getUseAnimation();
+        if (anim != UseAnim.DRINK) {
+            return stats;
+        }
+        FoodQuality quality = CookingMastery.getItemQuality(stack);
+        if (quality != null) {
+            return quality.applyDrink(stats);
+        }
+        return stats;
     }
 
     public static final class Builder {
@@ -98,7 +124,7 @@ public final class DrinkProperties {
         }
 
         public Builder stats(int hydration, int saturation) {
-            return this.stats(hydration, calculateSaturationForHydrationLevel(hydration, saturation));
+            return this.stats(hydration, calculateSaturation(hydration, saturation));
         }
 
         public Builder stats(int hydration) {

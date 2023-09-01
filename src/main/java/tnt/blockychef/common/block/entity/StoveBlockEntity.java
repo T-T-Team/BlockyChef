@@ -215,6 +215,7 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
         }
         float f = source.getHeat() + stepSize;
         source.set(f, decreased);
+        setChanged();
     }
 
     public final class CookingSlot {

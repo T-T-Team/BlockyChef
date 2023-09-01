@@ -710,6 +710,8 @@
   "label.blockychef.energy": "Energy: %s",
   "label.blockychef.temperature": "Temperature: %s",
 
+  "tooltip.blockychef.quality": "Quality: %s",
+
   "screen.blockychef.cutting_board": "Cutting Board",
   "screen.blockychef.cutting_board.widget.start_cutting": "Cut",
   "screen.blockychef.toaster": "Toaster",

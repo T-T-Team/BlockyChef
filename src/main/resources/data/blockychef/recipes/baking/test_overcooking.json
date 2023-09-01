@@ -1,7 +1,7 @@
 {
   "type": "blockychef:stove",
   "input": {
-    "item": "minecraft:cooked_chicken"
+    "item": "blockychef:cooked_chicken_drumstick"
   },
   "result": {
     "item": "minecraft:coal"
@@ -10,9 +10,9 @@
     "item": "minecraft:coal"
   },
   "cookingConfiguration": {
-    "time": 80,
-    "minTemperature": 5,
-    "maxTemperature": 6
+    "time": 200,
+    "minTemperature": 0.10,
+    "maxTemperature": 10.0
   },
   "overcooking": true,
   "experience": 0.7

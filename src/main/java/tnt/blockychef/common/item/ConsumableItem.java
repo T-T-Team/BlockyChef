@@ -13,7 +13,7 @@ import tnt.tntlib.api.menu.MenuInventoryHelper;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class ConsumableItem extends Item {
+public class ConsumableItem extends MasteryApplicableItem {
 
     private final Function<ItemStack, UseAnim> anim;
     private Supplier<ItemStack> returnItemProvider;

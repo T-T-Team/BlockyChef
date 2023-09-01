@@ -254,7 +254,7 @@ public final class ConfigDrinkLoader {
         }
 
         public DefaultDrinkBuilder stats(int hydration, int saturation) {
-            return stats(hydration, DrinkProperties.calculateSaturationForHydrationLevel(hydration, saturation));
+            return stats(hydration, DrinkProperties.calculateSaturation(hydration, saturation));
         }
 
         public DefaultDrinkBuilder stats(int hydration) {

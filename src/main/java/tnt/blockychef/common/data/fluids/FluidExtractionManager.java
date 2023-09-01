@@ -36,6 +36,15 @@ public final class FluidExtractionManager extends SimpleJsonResourceReloadListen
         return null;
     }
 
+    public void loadFromNetwork(List<FluidExtraction> extractorList) {
+        this.extractorList.clear();
+        this.extractorList.addAll(extractorList);
+    }
+
+    public List<FluidExtraction> getFullExtractorsList() {
+        return ImmutableList.copyOf(extractorList);
+    }
+
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> resourceMap, ResourceManager resourceManager, ProfilerFiller profiler) {
         extractorList.clear();

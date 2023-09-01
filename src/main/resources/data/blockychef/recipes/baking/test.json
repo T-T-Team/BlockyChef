@@ -4,7 +4,7 @@
     "item": "minecraft:chicken"
   },
   "result": {
-    "item": "minecraft:cooked_chicken"
+    "item": "blockychef:cooked_chicken_drumstick"
   },
   "burntResult": {
     "item": "minecraft:coal"
