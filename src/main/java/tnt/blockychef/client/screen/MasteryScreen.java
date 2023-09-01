@@ -30,8 +30,8 @@ import java.util.function.Predicate;
 public class MasteryScreen extends Screen {
 
     private static final Component TITLE = Component.translatable("screen.blockychef.masteries");
-    private static final int COLUMS = 8;
-    private static final int ROWS = 9;
+    private static final int COLUMS = 12;
+    private static final int ROWS = 7;
     private static final int SPACING = 35;
     private static final int MARGIN_TOP = 50;
     private static final int MASTERY_SIZE = 20;
@@ -123,6 +123,7 @@ public class MasteryScreen extends Screen {
 
     public static final class MasteryWidget extends AbstractWidget {
 
+        private static final Component MAX_LEVEL = Component.translatable("label.blockychef.tier.max");
         private final MasteryData data;
         private final ItemStack cachedItemStack;
 
@@ -145,7 +146,13 @@ public class MasteryScreen extends Screen {
                 pGuiGraphics.blit(icon, getX() - border, getY() + border, 0, 0, badgeSize, badgeSize, badgeSize, badgeSize);
                 RenderSystem.disableBlend();
             }
-            GraphicsHelper.drawAlignedText(pGuiGraphics, Component.literal(data.cookCount() + "x"), Minecraft.getInstance().font, HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM, getX(), getY(), getWidth(), getHeight(), 0xFFFFFF, true, 0, 16);
+            Component text;
+            if (badge == CookingMastery.Tier.Badge.GOLD) {
+                text = MAX_LEVEL;
+            } else {
+                text = Component.literal(data.cookCount() + "x");
+            }
+            GraphicsHelper.drawAlignedText(pGuiGraphics, text, Minecraft.getInstance().font, HorizontalAlignment.CENTER, VerticalAlignment.BOTTOM, getX(), getY(), getWidth(), getHeight(), 0xFFFFFF, true, 0, 16);
         }
 
         @Override

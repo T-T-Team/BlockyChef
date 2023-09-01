@@ -1,6 +1,7 @@
 package tnt.blockychef.common;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -12,7 +13,10 @@ import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 import tnt.blockychef.BlockyChef;
+import tnt.blockychef.common.food.mastery.PlayerMasteryData;
+import tnt.blockychef.common.food.mastery.PlayerMasteryDataProvider;
 import tnt.blockychef.common.thirst.PlayerThirstStatsProvider;
 import tnt.blockychef.common.thirst.ThirstStats;
 
