@@ -30,8 +30,8 @@ import java.util.function.Predicate;
 public class MasteryScreen extends Screen {
 
     private static final Component TITLE = Component.translatable("screen.blockychef.masteries");
-    private static final int PADDING = 5;
-    private static final int GRID_SPACING = 35;
+    private static final int PADDING = 15;
+    private static final int GRID_SPACING = 50;
     private static final int MASTERY_SIZE = 20;
     private static final DataManagerWidget.View<MasteryData> DEFAULT_VIEW = new DataManagerWidget.View<>("System", true, Collections.emptyList(), TNTUtils.createInit(new DataSorters<>(), sorters -> {
         sorters.add(new DataSorters.BaseSorter<>("cook_count", () -> Comparator.comparingInt(MasteryData::cookCount), true).force());
@@ -120,7 +120,7 @@ public class MasteryScreen extends Screen {
     @Override
     public boolean mouseScrolled(double pMouseX, double pMouseY, double pDelta) {
         int nextIndex = scrollIndex - (int) pDelta;
-        if (nextIndex >= 0 && nextIndex + grid.getColumns() < grid.getRows()) {
+        if (nextIndex >= 0 && nextIndex/* TODO + grid.getTotalRows() */< grid.getRows()) {
             this.scrollIndex = nextIndex;
             init(minecraft, width, height);
             return true;
@@ -146,13 +146,11 @@ public class MasteryScreen extends Screen {
             int border = 2;
             pGuiGraphics.renderItem(cachedItemStack, getX() + border, getY() + border);
             CookingMastery.Tier.Badge badge = data.tier().badge();
-            if (badge != CookingMastery.Tier.Badge.NONE) {
-                ResourceLocation icon = badge.getIconPath();
-                RenderSystem.enableBlend();
-                int badgeSize = MASTERY_SIZE + border * 2;
-                pGuiGraphics.blit(icon, getX() - border, getY() + border, 0, 0, badgeSize, badgeSize, badgeSize, badgeSize);
-                RenderSystem.disableBlend();
-            }
+            ResourceLocation icon = badge.getIconPath();
+            RenderSystem.enableBlend();
+            int badgeSize = MASTERY_SIZE + border * 2;
+            pGuiGraphics.blit(icon, getX() - border, getY() + border, 0, 0, badgeSize, badgeSize, badgeSize, badgeSize);
+            RenderSystem.disableBlend();
             Component text;
             if (badge == CookingMastery.Tier.Badge.GOLD) {
                 text = MAX_LEVEL;

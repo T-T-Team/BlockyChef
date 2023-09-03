@@ -64,6 +64,11 @@ public class DataManagerWidget<T> extends ContainerWidget {
         int panelTop = 0;
         int left = getX();
         Font font = Minecraft.getInstance().font;
+        if (filteringAllowed) {
+            Component text = Component.translatable("label.filters");
+            addRenderableWidget(new LabelWidget(getX(), getY() + panelTop, font.width(text), 20, text, font));
+            panelTop += 20;
+        }
         if (sortingAllowed) {
             Component text = Component.translatable("label.sorting");
             addRenderableWidget(new LabelWidget(getX(), getY() + panelTop, font.width(text), 20, text, font));
