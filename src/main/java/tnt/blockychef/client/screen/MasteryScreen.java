@@ -1,12 +1,14 @@
 package tnt.blockychef.client.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -14,13 +16,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.aa.DataManagerWidget;
+import tnt.blockychef.aa.DataSorters;
 import tnt.blockychef.common.food.mastery.CookingMastery;
 import tnt.blockychef.common.food.mastery.MasteryGroup;
 import tnt.blockychef.common.food.mastery.PlayerMasteryDataProvider;
-import tnt.tntlib.api.CollectionUtils;
-import tnt.tntlib.api.GraphicsHelper;
-import tnt.tntlib.api.HorizontalAlignment;
-import tnt.tntlib.api.VerticalAlignment;
+import tnt.tntlib.api.*;
 import tnt.tntlib.api.screen.widgets.GridWidget;
 
 import java.util.*;
@@ -30,15 +30,18 @@ import java.util.function.Predicate;
 public class MasteryScreen extends Screen {
 
     private static final Component TITLE = Component.translatable("screen.blockychef.masteries");
-    private static final int SPACING = 35;
-    private static final int MARGIN_TOP = 50;
+    private static final int PADDING = 5;
+    private static final int GRID_SPACING = 35;
     private static final int MASTERY_SIZE = 20;
-    private static final DataManagerWidget.View<MasteryData> DEFAULT_VIEW = new DataManagerWidget.View<>("System", true, Collections.emptyList(), Collections.emptyList());
+    private static final DataManagerWidget.View<MasteryData> DEFAULT_VIEW = new DataManagerWidget.View<>("System", true, Collections.emptyList(), TNTUtils.createInit(new DataSorters<>(), sorters -> {
+        sorters.add(new DataSorters.BaseSorter<>("cook_count", () -> Comparator.comparingInt(MasteryData::cookCount), true).force());
+        sorters.add(new DataSorters.BaseSorter<>("name", () -> Comparator.<MasteryData, String>comparing(t -> t.mastery.item().getDescription().getString())).force());
+    }));
 
     @Deprecated
     private final EnumSet<MasteryGroup> displayedGroups = EnumSet.allOf(MasteryGroup.class);
-    private GridWidget grid;
     private DataManagerWidget.View<MasteryData> lastView;
+    private GridWidget grid;
     private int scrollIndex;
 
     public MasteryScreen() {
@@ -47,22 +50,6 @@ public class MasteryScreen extends Screen {
 
     @Override
     protected void init() {
-        int left = 5;
-        int top = 5;
-        for (MasteryGroup group : MasteryGroup.values()) {
-            GroupFilterWidget widget = new GroupFilterWidget(group, displayedGroups::contains, this::filterChanged);
-            int widgetWidth = font.width(widget.getMessage());
-            if (left + widgetWidth >= width) {
-                top += 15;
-                left = 5;
-            }
-            widget.setX(left);
-            widget.setY(top);
-            widget.setWidth(widgetWidth);
-            widget.setHeight(15);
-            left += widgetWidth + 5;
-            addRenderableWidget(widget);
-        }
         PlayerMasteryDataProvider.getMasteryData(minecraft.player).ifPresent(dataProvider -> {
             List<MasteryData> data = BlockyChef.MASTERY_MANAGER.getFullMasteryList().stream()
                     .map(mastery -> {
@@ -74,15 +61,21 @@ public class MasteryScreen extends Screen {
                     .filter(t -> CollectionUtils.containsAny(t.mastery().groups(), displayedGroups))
                     .sorted(Comparator.comparingInt(MasteryData::cookCount).reversed().thenComparing(t -> t.mastery().item().getDescription().getString()))
                     .toList();
-            grid = new GridWidget(SPACING, MARGIN_TOP, width - 2 * SPACING, height - MARGIN_TOP);
-            grid.setMargin(SPACING);
-            DataManagerWidget<MasteryData> masteries = new DataManagerWidget<>(SPACING, MARGIN_TOP, width - 2 * SPACING, height - MARGIN_TOP);
+            DataManagerWidget<MasteryData> masteries = new DataManagerWidget<>(PADDING, PADDING, width - 2 * PADDING, height - PADDING);
+            masteries.setFilteringMode(true);
+            masteries.setSortingMode(true);
             if (lastView == null) {
                 lastView = DEFAULT_VIEW;
             }
             masteries.setView(lastView);
+            Rect2i canvas = masteries.getCanvas();
+            grid = new GridWidget(canvas.getX(), canvas.getY(), canvas.getWidth(), canvas.getHeight());
+            grid.setMargin(GRID_SPACING);
             masteries.setDataHandler((manager, list) -> {
                 grid.clear();
+                Rect2i size = manager.getCanvas();
+                grid.setY(size.getY());
+                grid.setHeight(size.getHeight());
                 main:
                 for (int y = scrollIndex; y < scrollIndex + grid.getRows(); y++) {
                     for (int x = 0; x < grid.getColumns(); x++) {
@@ -95,6 +88,11 @@ public class MasteryScreen extends Screen {
                     }
                 }
             });
+            masteries.setRefreshHandler(mng -> {
+                lastView = mng.getView(null);
+                init(minecraft, width, height);
+            });
+            masteries.setData(data);
             masteries.addRenderableWidget(grid);
             addRenderableWidget(masteries);
         });
@@ -132,7 +130,7 @@ public class MasteryScreen extends Screen {
 
     public static final class MasteryWidget extends AbstractWidget {
 
-        private static final Component MAX_LEVEL = Component.translatable("label.blockychef.tier.max");
+        private static final Component MAX_LEVEL = Component.translatable("label.blockychef.tier.max").withStyle(ChatFormatting.BOLD, ChatFormatting.GOLD);
         private final MasteryData data;
         private final ItemStack cachedItemStack;
 

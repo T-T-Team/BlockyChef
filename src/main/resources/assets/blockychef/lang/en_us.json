@@ -709,8 +709,13 @@
   "label.blockychef.fluid_capacity": "Capacity: %s / %s",
   "label.blockychef.energy": "Energy: %s",
   "label.blockychef.temperature": "Temperature: %s",
+  "label.blockychef.tier.max": "MAX",
 
   "tooltip.blockychef.quality": "Quality: %s",
+  "sorter.key.cook_count": "Cook Count",
+  "sorter.key.name": "Name",
+  "sorter.value.asc": "ASC",
+  "sorter.value.desc": "DESC",
 
   "screen.blockychef.cutting_board": "Cutting Board",
   "screen.blockychef.cutting_board.widget.start_cutting": "Cut",
