@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "blockychef:item/backed_rabbit_leg"
+    "layer0": "blockychef:item/baked_rabbit_leg"
   }
 }

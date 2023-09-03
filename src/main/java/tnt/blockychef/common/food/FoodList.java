@@ -1,12 +1,10 @@
 package tnt.blockychef.common.food;
 
 import com.google.common.base.Supplier;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.food.Foods;
-import tnt.blockychef.common.init.BlockyChefMobEffects;
 
 import java.util.IdentityHashMap;
 import java.util.Map;
@@ -292,8 +290,8 @@ public final class FoodList {
     public static final FoodProperties STRAWBERRY_YOGURT = food(3, 2).build();
     public static final FoodProperties SWEET_DOUGH = food(2, 2).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties VEGGIE_JUICE = food(2, 1).build();
-    public static final FoodProperties BACKED_RABBIT_LEG = food(2, 2).build();
-    public static final FoodProperties BACKED_POTATO_CUTS = food(2, 2).build();
+    public static final FoodProperties BAKED_RABBIT_LEG = food(2, 2).build();
+    public static final FoodProperties BAKED_POTATO_CUTS = food(2, 2).build();
     public static final FoodProperties BOILED_BROCCOLI_CUTS = food(2, 2).build();
     public static final FoodProperties BOILED_CABBAGE_LEAF = food(2, 2).build();
     public static final FoodProperties BOILED_GNOCCHI = food(3, 2).build();

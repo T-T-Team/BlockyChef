@@ -1,9 +1,9 @@
 {
-  "item": "blockychef:blueberry_yogurt",
+  "item": "blockychef:strawberry_yogurt",
   "groups": [
     "FOOD",
-    "YOGURT",
     "DAIRY",
+    "YOGURT",
     "FRUIT"
   ]
 }

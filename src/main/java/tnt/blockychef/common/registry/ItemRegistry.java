@@ -253,7 +253,7 @@ public final class ItemRegistry {
         helper.register("apple_yogurt", new MasteryApplicableItem(new Item.Properties().food(FoodList.APPLE_YOGURT)));
         helper.register("banana_milkshake", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BANANA_MILKSHAKE), DrinkList.BANANA_MILKSHAKE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_LARGE_GLASS));
         helper.register("blueberry_juice", new DrinkableConsumableItem(new Item.Properties(), DrinkList.BLUEBERRY_JUICE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_GLASS));
-        helper.register("blueberry_milkshake", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BLUEBERRY_MILKSHAKE), DrinkList.BANANA_MILKSHAKE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_LARGE_GLASS));
+        helper.register("blueberry_milkshake", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BLUEBERRY_MILKSHAKE), DrinkList.BLUEBERRY_MILKSHAKE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_LARGE_GLASS));
         helper.register("blueberry_yogurt", new MasteryApplicableItem(new Item.Properties().food(FoodList.BLUEBERRY_YOGURT)));
         helper.register("carrot_juice", new DrinkableConsumableItem(new Item.Properties(), DrinkList.CARROT_JUICE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_GLASS));
         helper.register("cherry_juice", new DrinkableConsumableItem(new Item.Properties(), DrinkList.CHERRY_JUICE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_GLASS));
@@ -301,8 +301,8 @@ public final class ItemRegistry {
         helper.register("sweet_dough", new DrinkableConsumableItem(new Item.Properties().food(FoodList.SWEET_DOUGH), DrinkList.SWEET_DOUGH));
         helper.register("tomato_juice", new DrinkableConsumableItem(new Item.Properties(), DrinkList.TOMATO_JUICE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_GLASS));
         helper.register("veggie_juice", new DrinkableConsumableItem(new Item.Properties().food(FoodList.VEGGIE_JUICE), DrinkList.VEGGIE_JUICE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_GLASS));
-        helper.register("backed_rabbit_leg", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BACKED_RABBIT_LEG), DrinkList.BACKED_RABBIT_LEG));
-        helper.register("baked_potato_cuts", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BACKED_POTATO_CUTS), DrinkList.BACKED_POTATO_CUTS));
+        helper.register("baked_rabbit_leg", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BAKED_RABBIT_LEG), DrinkList.BAKED_RABBIT_LEG));
+        helper.register("baked_potato_cuts", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BAKED_POTATO_CUTS), DrinkList.BAKED_POTATO_CUTS));
         helper.register("boiled_broccoli_cuts", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BOILED_BROCCOLI_CUTS), DrinkList.BOILED_BROCCOLI_CUTS));
         helper.register("boiled_cabbage_leaf", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BOILED_CABBAGE_LEAF), DrinkList.BOILED_CABBAGE_LEAF));
         helper.register("boiled_carrot_slice", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BOILED_CARROT_SLICE), DrinkList.BOILED_CARROT_SLICE));

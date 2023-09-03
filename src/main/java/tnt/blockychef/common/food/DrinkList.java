@@ -230,8 +230,8 @@ public final class DrinkList {
     public static final DrinkProperties SWEET_DOUGH = DrinkProperties.Builder.create().stats(-2, 0).build();
     public static final DrinkProperties TOMATO_JUICE = DrinkProperties.Builder.create().stats(5, 4).build();
     public static final DrinkProperties VEGGIE_JUICE = DrinkProperties.Builder.create().stats(4, 3).build();
-    public static final DrinkProperties BACKED_RABBIT_LEG = DrinkProperties.Builder.create().stats(-2, 0).build();
-    public static final DrinkProperties BACKED_POTATO_CUTS = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties BAKED_RABBIT_LEG = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties BAKED_POTATO_CUTS = DrinkProperties.Builder.create().stats(-2, 0).build();
     public static final DrinkProperties BOILED_BROCCOLI_CUTS = DrinkProperties.Builder.create().stats(-1, 0).build();
     public static final DrinkProperties BOILED_CABBAGE_LEAF = DrinkProperties.Builder.create().stats(-1, 0).build();
     public static final DrinkProperties BOILED_CARROT_SLICE = DrinkProperties.Builder.create().stats(-1, 0).build();
