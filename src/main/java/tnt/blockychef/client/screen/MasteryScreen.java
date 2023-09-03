@@ -13,32 +13,33 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import tnt.blockychef.BlockyChef;
+import tnt.blockychef.aa.DataManagerWidget;
 import tnt.blockychef.common.food.mastery.CookingMastery;
 import tnt.blockychef.common.food.mastery.MasteryGroup;
 import tnt.blockychef.common.food.mastery.PlayerMasteryDataProvider;
+import tnt.tntlib.api.CollectionUtils;
 import tnt.tntlib.api.GraphicsHelper;
 import tnt.tntlib.api.HorizontalAlignment;
 import tnt.tntlib.api.VerticalAlignment;
+import tnt.tntlib.api.screen.widgets.GridWidget;
 
-import java.util.Comparator;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 
 public class MasteryScreen extends Screen {
 
     private static final Component TITLE = Component.translatable("screen.blockychef.masteries");
-    private static final int COLUMS = 12;
-    private static final int ROWS = 7;
     private static final int SPACING = 35;
     private static final int MARGIN_TOP = 50;
     private static final int MASTERY_SIZE = 20;
+    private static final DataManagerWidget.View<MasteryData> DEFAULT_VIEW = new DataManagerWidget.View<>("System", true, Collections.emptyList(), Collections.emptyList());
 
+    @Deprecated
     private final EnumSet<MasteryGroup> displayedGroups = EnumSet.allOf(MasteryGroup.class);
+    private GridWidget grid;
+    private DataManagerWidget.View<MasteryData> lastView;
     private int scrollIndex;
-    private int rowCount;
 
     public MasteryScreen() {
         super(TITLE);
@@ -70,24 +71,32 @@ public class MasteryScreen extends Screen {
                         CookingMastery.Tier tier = mastery.getTier(cookCount);
                         return new MasteryData(mastery, cookCount, tier);
                     })
-                    .filter(t -> displayedGroups.contains(t.mastery().group()))
+                    .filter(t -> CollectionUtils.containsAny(t.mastery().groups(), displayedGroups))
                     .sorted(Comparator.comparingInt(MasteryData::cookCount).reversed().thenComparing(t -> t.mastery().item().getDescription().getString()))
                     .toList();
-            main:
-            for (int y = scrollIndex; y < scrollIndex + ROWS; y++) {
-                for (int x = 0; x < COLUMS; x++) {
-                    int index = x + (y * COLUMS);
-                    if (index >= data.size()) {
-                        rowCount = y + 1;
-                        if (x == 0) {
-                            rowCount -= 1;
-                        }
-                        break main;
-                    }
-                    MasteryWidget widget = new MasteryWidget(SPACING + x * SPACING, MARGIN_TOP + y * SPACING, MASTERY_SIZE, MASTERY_SIZE, CommonComponents.EMPTY, data.get(index));
-                    addRenderableWidget(widget);
-                }
+            grid = new GridWidget(SPACING, MARGIN_TOP, width - 2 * SPACING, height - MARGIN_TOP);
+            grid.setMargin(SPACING);
+            DataManagerWidget<MasteryData> masteries = new DataManagerWidget<>(SPACING, MARGIN_TOP, width - 2 * SPACING, height - MARGIN_TOP);
+            if (lastView == null) {
+                lastView = DEFAULT_VIEW;
             }
+            masteries.setView(lastView);
+            masteries.setDataHandler((manager, list) -> {
+                grid.clear();
+                main:
+                for (int y = scrollIndex; y < scrollIndex + grid.getRows(); y++) {
+                    for (int x = 0; x < grid.getColumns(); x++) {
+                        int index = x + (y * grid.getColumns());
+                        if (index >= list.size()) {
+                            break main;
+                        }
+                        MasteryWidget widget = new MasteryWidget(0, 0, MASTERY_SIZE, MASTERY_SIZE, CommonComponents.EMPTY, list.get(index));
+                        grid.addRenderableWidget(widget);
+                    }
+                }
+            });
+            masteries.addRenderableWidget(grid);
+            addRenderableWidget(masteries);
         });
     }
 
@@ -113,7 +122,7 @@ public class MasteryScreen extends Screen {
     @Override
     public boolean mouseScrolled(double pMouseX, double pMouseY, double pDelta) {
         int nextIndex = scrollIndex - (int) pDelta;
-        if (nextIndex >= 0 && nextIndex + COLUMS < rowCount) {
+        if (nextIndex >= 0 && nextIndex + grid.getColumns() < grid.getRows()) {
             this.scrollIndex = nextIndex;
             init(minecraft, width, height);
             return true;
@@ -170,7 +179,7 @@ public class MasteryScreen extends Screen {
         private final BiConsumer<MasteryGroup, Boolean> callback;
 
         public GroupFilterWidget(MasteryGroup group, Predicate<MasteryGroup> active, BiConsumer<MasteryGroup, Boolean> callback) {
-            super(0, 0, 0, 0, Component.translatable("blockychef.mastery.group." + group.name().toLowerCase(Locale.ROOT)));
+            super(0, 0, 0, 0, Component.translatable("blockychef.mastery.groups." + group.name().toLowerCase(Locale.ROOT)));
             this.group = group;
             this.active = active;
             this.callback = callback;

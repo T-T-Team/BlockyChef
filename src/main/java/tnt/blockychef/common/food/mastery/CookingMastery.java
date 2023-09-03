@@ -15,10 +15,9 @@ import net.minecraft.world.item.UseAnim;
 import tnt.blockychef.BlockyChef;
 import tnt.tntlib.api.serialization.Codecs;
 
-import javax.annotation.Nullable;
 import java.util.*;
 
-public record CookingMastery(Item item, List<Tier> tiers, @Nullable MasteryGroup group) {
+public record CookingMastery(Item item, List<Tier> tiers, List<MasteryGroup> groups) {
 
     public static final String QUALITY_TAG_KEY = "blockychef.quality";
     public static final List<Tier> DEFAULT_TIER_LIST = ImmutableList.<Tier>builder()
@@ -32,7 +31,7 @@ public record CookingMastery(Item item, List<Tier> tiers, @Nullable MasteryGroup
     public static final Codec<CookingMastery> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             BuiltInRegistries.ITEM.byNameCodec().fieldOf("item").forGetter(CookingMastery::item),
             Tier.TIER_CODEC.listOf().optionalFieldOf("tiers", DEFAULT_TIER_LIST).forGetter(CookingMastery::tiers),
-            Codecs.enumCodec(MasteryGroup.class).optionalFieldOf("group", MasteryGroup.NONE).forGetter(CookingMastery::group)
+            Codecs.enumCodec(MasteryGroup.class).listOf().optionalFieldOf("groups", Collections.singletonList(MasteryGroup.NONE)).forGetter(CookingMastery::groups)
     ).apply(instance, CookingMastery::new));
 
     public static void applyMastery(Player player, ItemStack stack) {
