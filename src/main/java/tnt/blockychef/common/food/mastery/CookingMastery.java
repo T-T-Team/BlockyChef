@@ -22,12 +22,12 @@ public record CookingMastery(Item item, List<Tier> tiers, List<MasteryGroup> gro
     public static final String QUALITY_TAG_KEY = "blockychef.quality";
     public static final List<Tier> DEFAULT_TIER_LIST = ImmutableList.<Tier>builder()
             .add(
-                    new Tier(Tier.Badge.NONE, 0, createQualitiesMap(0.4F, 0.25F, 0.1F, 0.0F)),
-                    new Tier(Tier.Badge.BRONZE, 15, createQualitiesMap(0.6F, 0.4F, 0.2F, 0.05F)),
-                    new Tier(Tier.Badge.SILVER, 45, createQualitiesMap(0.9F, 0.6F, 0.4F, 0.2F)),
-                    new Tier(Tier.Badge.GOLD, 60, createQualitiesMap(0.0F, 1.0F, 0.75F, 0.45F)),
-                    new Tier(Tier.Badge.EMERALD, 80, createQualitiesMap(0.0F, 1.0F, 0.75F, 0.45F)),
-                    new Tier(Tier.Badge.DIAMOND, 150, createQualitiesMap(0.0F, 1.0F, 0.75F, 0.45F))
+                    new Tier(Tier.Badge.NONE, 0, createQualitiesMap(0.4F, 0.2F, 0.0F, 0.0F)),
+                    new Tier(Tier.Badge.BRONZE, 15, createQualitiesMap(0.55F, 0.35F, 0.15F, 0.0F)),
+                    new Tier(Tier.Badge.SILVER, 35, createQualitiesMap(0.75F, 0.5F, 0.4F, 0.1F)),
+                    new Tier(Tier.Badge.GOLD, 65, createQualitiesMap(1.0F, 0.65F, 0.5F, 0.2F)),
+                    new Tier(Tier.Badge.EMERALD, 100, createQualitiesMap(1.0F, 0.85F, 0.6F, 0.35F)),
+                    new Tier(Tier.Badge.DIAMOND, 150, createQualitiesMap(0.0F, 1.0F, 0.75F, 0.5F))
             )
             .build();
     public static final Codec<CookingMastery> CODEC = RecordCodecBuilder.create(instance -> instance.group(
