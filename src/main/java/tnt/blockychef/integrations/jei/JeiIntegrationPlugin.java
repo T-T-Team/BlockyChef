@@ -23,7 +23,9 @@ import tnt.blockychef.common.init.BlockyChefMenuTypes;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.common.menu.ToasterMenu;
 
+import javax.annotation.Nullable;
 import java.util.List;
+import java.util.function.Predicate;
 
 @JeiPlugin
 public class JeiIntegrationPlugin implements IModPlugin {
@@ -43,6 +45,7 @@ public class JeiIntegrationPlugin implements IModPlugin {
     static final RecipeType<JuicerRecipe> JUICER = new RecipeType<>(BlockyChef.resource("juicer"), JuicerRecipe.class);
     static final RecipeType<MixerRecipe> MIXER = new RecipeType<>(BlockyChef.resource("mixer"), MixerRecipe.class);
     static final RecipeType<FluidExtraction> FLUID_EXTRACTION = new RecipeType<>(BlockyChef.resource("fluid_extraction"), FluidExtraction.class);
+    static final RecipeType<StoveRecipe> STOVE = new RecipeType<>(BlockyChef.resource("stove"), StoveRecipe.class);
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
@@ -59,6 +62,7 @@ public class JeiIntegrationPlugin implements IModPlugin {
         registration.addRecipes(JUICER, getRecipes(BlockyChefRecipeTypes.JUICER_RECIPE));
         registration.addRecipes(MIXER, getRecipes(BlockyChefRecipeTypes.MIXER_RECIPE));
         registration.addRecipes(FLUID_EXTRACTION, BlockyChef.EXTRACTION_MANAGER.getLoadedExtractionRecipes());
+        registration.addRecipes(STOVE, getRecipes(BlockyChefRecipeTypes.STOVE_RECIPE, recipe -> !recipe.isOvercooking()));
     }
 
     @Override
@@ -77,7 +81,8 @@ public class JeiIntegrationPlugin implements IModPlugin {
                 new GraterRecipeCategory(helper),
                 new JuicerRecipeCategory(helper),
                 new MixerRecipeCategory(helper),
-                new FluidExtractionRecipeCategory(helper)
+                new FluidExtractionRecipeCategory(helper),
+                new StoveRecipeCategory(helper)
         );
     }
 
@@ -125,6 +130,7 @@ public class JeiIntegrationPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.MIXER), MIXER);
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.JUICER), FLUID_EXTRACTION);
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.MIXER), FLUID_EXTRACTION);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.STOVE), STOVE);
     }
 
     @Override
@@ -138,8 +144,16 @@ public class JeiIntegrationPlugin implements IModPlugin {
     }
 
     private static <I extends Container, R extends Recipe<I>> List<R> getRecipes(net.minecraft.world.item.crafting.RecipeType<R> type) {
+        return getRecipes(type, null);
+    }
+
+    private static <I extends Container, R extends Recipe<I>> List<R> getRecipes(net.minecraft.world.item.crafting.RecipeType<R> type, @Nullable Predicate<R> filter) {
         Level level = Minecraft.getInstance().level;
         RecipeManager manager = level.getRecipeManager();
-        return manager.getAllRecipesFor(type);
+        List<R> list = manager.getAllRecipesFor(type);
+        if (filter == null) {
+            return list;
+        }
+        return list.stream().filter(filter).toList();
     }
 }

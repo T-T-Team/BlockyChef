@@ -3,6 +3,7 @@ package tnt.blockychef.common.food.recipe;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -15,6 +16,7 @@ import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.tntlib.api.serialization.Codecs;
 
 import java.util.List;
+import java.util.Locale;
 
 public class StoveRecipe extends AbstractFoodRecipe<StoveBlockEntity> {
 
@@ -107,6 +109,10 @@ public class StoveRecipe extends AbstractFoodRecipe<StoveBlockEntity> {
 
         public boolean isBurning(float temperature) {
             return temperature > maxTemperature;
+        }
+
+        public Component getTemperatureRange() {
+            return Component.literal(String.format(Locale.ROOT, "%.1f-%.1f", minTemperature, maxTemperature));
         }
     }
 }
