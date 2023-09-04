@@ -25,7 +25,9 @@ public record CookingMastery(Item item, List<Tier> tiers, List<MasteryGroup> gro
                     new Tier(Tier.Badge.NONE, 0, createQualitiesMap(0.4F, 0.25F, 0.1F, 0.0F)),
                     new Tier(Tier.Badge.BRONZE, 15, createQualitiesMap(0.6F, 0.4F, 0.2F, 0.05F)),
                     new Tier(Tier.Badge.SILVER, 45, createQualitiesMap(0.9F, 0.6F, 0.4F, 0.2F)),
-                    new Tier(Tier.Badge.GOLD, 100, createQualitiesMap(0.0F, 1.0F, 0.75F, 0.45F))
+                    new Tier(Tier.Badge.GOLD, 60, createQualitiesMap(0.0F, 1.0F, 0.75F, 0.45F)),
+                    new Tier(Tier.Badge.EMERALD, 80, createQualitiesMap(0.0F, 1.0F, 0.75F, 0.45F)),
+                    new Tier(Tier.Badge.DIAMOND, 150, createQualitiesMap(0.0F, 1.0F, 0.75F, 0.45F))
             )
             .build();
     public static final Codec<CookingMastery> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -146,7 +148,9 @@ public record CookingMastery(Item item, List<Tier> tiers, List<MasteryGroup> gro
             NONE,
             BRONZE,
             SILVER,
-            GOLD;
+            GOLD,
+            EMERALD,
+            DIAMOND;
 
             private final ResourceLocation icon;
 

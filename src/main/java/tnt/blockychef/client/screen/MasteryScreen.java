@@ -130,7 +130,7 @@ public class MasteryScreen extends Screen {
 
     public static final class MasteryWidget extends AbstractWidget {
 
-        private static final Component MAX_LEVEL = Component.translatable("label.blockychef.tier.max").withStyle(ChatFormatting.BOLD, ChatFormatting.GOLD);
+        private static final Component MAX_LEVEL = Component.translatable("label.blockychef.tier.max").withStyle(ChatFormatting.BOLD, ChatFormatting.AQUA);
         private final MasteryData data;
         private final ItemStack cachedItemStack;
 
@@ -152,7 +152,7 @@ public class MasteryScreen extends Screen {
             pGuiGraphics.blit(icon, getX() - border, getY() + border, 0, 0, badgeSize, badgeSize, badgeSize, badgeSize);
             RenderSystem.disableBlend();
             Component text;
-            if (badge == CookingMastery.Tier.Badge.GOLD) {
+            if (badge == CookingMastery.Tier.Badge.DIAMOND) {
                 text = MAX_LEVEL;
             } else {
                 text = Component.literal(data.cookCount() + "x");
