@@ -96,6 +96,11 @@ public class StoveMenu extends AbstractBlockEntityMenu<StoveBlockEntity> {
         }
 
         @Override
+        public int getMaxStackSize(@NotNull ItemStack stack) {
+            return getMaxStackSize();
+        }
+
+        @Override
         public void onTake(Player pPlayer, ItemStack pStack) {
             CookingMastery.applyMastery(pPlayer, pStack);
             if (pPlayer instanceof ServerPlayer serverPlayer) {
