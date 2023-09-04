@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:stove",
+  "input": {
+    "item": "blockychef:baked_potato_cuts"
+  },
+  "result": {
+    "item": "blockychef:burnt_potato_cuts"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_potato_cuts"
+  },
+  "cookingConfiguration": {
+    "time": 400,
+    "minTemperature": 0.10,
+    "maxTemperature": 10.0
+  },
+  "overcooking": true
+}

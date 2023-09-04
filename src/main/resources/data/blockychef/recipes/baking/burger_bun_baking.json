@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:stove",
+  "input": {
+    "item": "blockychef:raw_burger_bun"
+  },
+  "result": {
+    "item": "blockychef:burger_bun"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_burger_bun"
+  },
+  "cookingConfiguration": {
+    "time": 400,
+    "minTemperature": 4,
+    "maxTemperature": 5,
+    "burnSpeed": 0.4
+  }
+}

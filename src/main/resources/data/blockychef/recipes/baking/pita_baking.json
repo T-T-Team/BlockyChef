@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:stove",
+  "input": {
+    "item": "blockychef:raw_pita"
+  },
+  "result": {
+    "item": "blockychef:pita"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_pita"
+  },
+  "cookingConfiguration": {
+    "time": 500,
+    "minTemperature": 4,
+    "maxTemperature": 5,
+    "burnSpeed": 0.4
+  }
+}

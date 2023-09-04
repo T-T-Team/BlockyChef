@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:stove",
+  "input": {
+    "item": "blockychef:baked_rabbit_leg"
+  },
+  "result": {
+    "item": "blockychef:burnt_rabbit_leg"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_rabbit_leg"
+  },
+  "cookingConfiguration": {
+    "time": 400,
+    "minTemperature": 0.10,
+    "maxTemperature": 10.0
+  },
+  "overcooking": true
+}

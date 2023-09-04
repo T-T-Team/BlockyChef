@@ -363,6 +363,7 @@ public final class ItemRegistry {
         helper.register("burnt_spaghetti_pasta", new Item(new Item.Properties()));
         helper.register("burnt_toast", new Item(new Item.Properties()));
         helper.register("burnt_tortellini_pasta", new Item(new Item.Properties()));
+        helper.register("burnt_rice_cake", new Item(new Item.Properties()));
         helper.register("chocolate_yogurt", new Item(new Item.Properties().food(FoodList.CHOCOLATE_YOGURT)));
         helper.register("cooked_bacon", new DrinkableConsumableItem(new Item.Properties().food(FoodList.COOKED_BACON), DrinkList.COOKED_BACON));
         helper.register("cooked_beef_slice", new DrinkableConsumableItem(new Item.Properties().food(FoodList.COOKED_BEEF_SLICE), DrinkList.COOKED_BEEF_SLICE));

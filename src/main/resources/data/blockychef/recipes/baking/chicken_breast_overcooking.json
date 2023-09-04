@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:stove",
+  "input": {
+    "item": "blockychef:cooked_chicken_breast"
+  },
+  "result": {
+    "item": "blockychef:burnt_chicken_breast"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_chicken_breast"
+  },
+  "cookingConfiguration": {
+    "time": 400,
+    "minTemperature": 0.10,
+    "maxTemperature": 10.0
+  },
+  "overcooking": true
+}

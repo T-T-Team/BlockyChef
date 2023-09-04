@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:stove",
+  "input": {
+    "item": "blockychef:raw_baguette"
+  },
+  "result": {
+    "item": "blockychef:baguette"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_baguette"
+  },
+  "cookingConfiguration": {
+    "time": 500,
+    "minTemperature": 5,
+    "maxTemperature": 6,
+    "burnSpeed": 0.4
+  }
+}

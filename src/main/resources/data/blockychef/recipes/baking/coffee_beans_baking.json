@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:stove",
+  "input": {
+    "item": "blockychef:coffee_beans"
+  },
+  "result": {
+    "item": "blockychef:roasted_coffee_beans"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_coffee_beans"
+  },
+  "cookingConfiguration": {
+    "time": 700,
+    "minTemperature": 5,
+    "maxTemperature": 6,
+    "burnSpeed": 0.6
+  }
+}

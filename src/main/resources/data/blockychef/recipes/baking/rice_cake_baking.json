@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:stove",
+  "input": {
+    "item": "blockychef:raw_rice_cake"
+  },
+  "result": {
+    "item": "blockychef:rice_cake"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_rice_cake"
+  },
+  "cookingConfiguration": {
+    "time": 400,
+    "minTemperature": 2,
+    "maxTemperature": 3,
+    "burnSpeed": 0.4
+  }
+}

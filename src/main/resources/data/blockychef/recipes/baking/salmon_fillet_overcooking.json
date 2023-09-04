@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:stove",
+  "input": {
+    "item": "blockychef:cooked_salmon_fillet"
+  },
+  "result": {
+    "item": "blockychef:burnt_salmon_fillet"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_salmon_fillet"
+  },
+  "cookingConfiguration": {
+    "time": 400,
+    "minTemperature": 0.10,
+    "maxTemperature": 10.0
+  },
+  "overcooking": true
+}

@@ -31,7 +31,7 @@ public class MasteryScreen extends Screen {
 
     private static final Component TITLE = Component.translatable("screen.blockychef.masteries");
     private static final int PADDING = 15;
-    private static final int GRID_SPACING = 50;
+    private static final int GRID_SPACING = 40;
     private static final int MASTERY_SIZE = 20;
     private static final DataManagerWidget.View<MasteryData> DEFAULT_VIEW = new DataManagerWidget.View<>("System", true, Collections.emptyList(), TNTUtils.createInit(new DataSorters<>(), sorters -> {
         sorters.add(new DataSorters.BaseSorter<>("cook_count", () -> Comparator.comparingInt(MasteryData::cookCount), true).force());

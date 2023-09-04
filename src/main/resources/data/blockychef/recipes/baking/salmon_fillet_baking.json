@@ -1,19 +1,18 @@
 {
   "type": "blockychef:stove",
   "input": {
-    "item": "minecraft:chicken"
+    "item": "blockychef:raw_salmon_fillet"
   },
   "result": {
-    "item": "blockychef:cooked_chicken_drumstick"
+    "item": "blockychef:cooked_salmon_fillet"
   },
   "burntResult": {
-    "item": "minecraft:coal"
+    "item": "blockychef:burnt_salmon_fillet"
   },
   "cookingConfiguration": {
-    "time": 400,
+    "time": 500,
     "minTemperature": 4,
     "maxTemperature": 5,
     "burnSpeed": 0.4
-  },
-  "experience": 0.7
+  }
 }

@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:stove",
+  "input": {
+    "item": "blockychef:corn_bread"
+  },
+  "result": {
+    "item": "blockychef:burnt_corn_bread"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_corn_bread"
+  },
+  "cookingConfiguration": {
+    "time": 400,
+    "minTemperature": 0.10,
+    "maxTemperature": 10.0
+  },
+  "overcooking": true
+}

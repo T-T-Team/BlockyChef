@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:stove",
+  "input": {
+    "item": "blockychef:pita"
+  },
+  "result": {
+    "item": "blockychef:burnt_pita"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_pita"
+  },
+  "cookingConfiguration": {
+    "time": 400,
+    "minTemperature": 0.10,
+    "maxTemperature": 10.0
+  },
+  "overcooking": true
+}

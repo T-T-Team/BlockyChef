@@ -219,6 +219,7 @@
   "item.blockychef.burnt_chicken_burger_patty": "Burnt Chicken Burger Patty",
   "item.blockychef.burnt_pork_burger_patty": "Burnt Pork Burger Patty",
   "item.blockychef.burnt_rice": "Burnt Rice",
+  "item.blockychef.burnt_rice_cake": "Burnt Rice Cake",
   "item.blockychef.cabbage_leaf": "Cabbage Leaf",
   "item.blockychef.carrot_extract": "Carrot Extract",
   "item.blockychef.carrot_slice": "Carrot Slice",
@@ -810,5 +811,12 @@
   "fluid_type.blockychef.bbq_sauce_fluid": "BBQ Sauce",
   "fluid_type.blockychef.ketchup_fluid": "Ketchup",
   "fluid_type.blockychef.tomato_sauce_fluid": "Tomato Sauce",
-  "fluid_type.blockychef.mayo_fluid": "Mayo"
+  "fluid_type.blockychef.mayo_fluid": "Mayo",
+
+
+  "blockychef.food.quality.bad": "Bad",
+  "blockychef.food.quality.average": "Average",
+  "blockychef.food.quality.good": "Good",
+  "blockychef.food.quality.great": "Great",
+  "blockychef.food.quality.perfect": "Perfect"
 }
