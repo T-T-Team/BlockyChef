@@ -8,14 +8,19 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
+import org.jetbrains.annotations.NotNull;
 import tnt.blockychef.common.block.entity.StoveBlockEntity;
 import tnt.blockychef.common.food.mastery.CookingMastery;
+import tnt.blockychef.common.food.recipe.StoveRecipe;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 import tnt.blockychef.common.init.BlockyChefMenuTypes;
+import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.common.menu.slot.FuelSlot;
+import tnt.blockychef.util.Helper;
 import tnt.tntlib.api.menu.AbstractBlockEntityMenu;
 import tnt.tntlib.api.menu.MenuQuickMoveHelper;
 
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public class StoveMenu extends AbstractBlockEntityMenu<StoveBlockEntity> {
@@ -98,6 +103,12 @@ public class StoveMenu extends AbstractBlockEntityMenu<StoveBlockEntity> {
                 stove.setChanged();
             }
             super.onTake(pPlayer, pStack);
+        }
+
+        @Override
+        public boolean mayPlace(@NotNull ItemStack stack) {
+            Optional<StoveRecipe> opt = Helper.findRecipeFor(stove.getLevel().getRecipeManager(), BlockyChefRecipeTypes.STOVE_RECIPE, recipe -> recipe.matches(stack) && !recipe.isOvercooking());
+            return super.mayPlace(stack) && opt.isPresent();
         }
     }
 }
