@@ -8,15 +8,14 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import tnt.blockychef.BlockyChef;
-import tnt.blockychef.aa.DataManagerWidget;
-import tnt.blockychef.aa.DataSorters;
+import tnt.blockychef.aa.data.*;
+import tnt.blockychef.aa.widget.DataManagerWidget;
 import tnt.blockychef.common.food.mastery.CookingMastery;
 import tnt.blockychef.common.food.mastery.MasteryGroup;
 import tnt.blockychef.common.food.mastery.PlayerMasteryDataProvider;
@@ -24,23 +23,27 @@ import tnt.tntlib.api.*;
 import tnt.tntlib.api.screen.widgets.GridWidget;
 
 import java.util.*;
-import java.util.function.BiConsumer;
-import java.util.function.Predicate;
 
 public class MasteryScreen extends Screen {
 
     private static final Component TITLE = Component.translatable("screen.blockychef.masteries");
+    // Filters
+    private static final FilterType<MasteryData> FILTER_GROUP = new FilterType<>(BlockyChef.resource("group"), t -> new EnumListFilter<>(t, data -> data.mastery.groups(), MasteryScreen::filterOrAll, EnumSet.of(MasteryGroup.MILKSHAKE), true));
+    private static final FilterType<MasteryData> FILTER_MASTERY = new FilterType<>(BlockyChef.resource("name"), t -> new TextFilter<>(t, data -> data.mastery.item().getDescription().toString(), String::contains, "", true));
+    // Sorters
+    private static final SorterType<MasteryData> SORT_COOK_COUNT = new SorterType<>(BlockyChef.resource("cook_count"), () -> Comparator.comparingInt(MasteryData::cookCount), type -> new Sorter.SimpleSorter<>(type, true, false));
+    private static final SorterType<MasteryData> SORT_MASTERY_NAME = new SorterType<>(BlockyChef.resource("mastery_name"), () -> Comparator.comparing(t -> t.mastery().item().getDescription().getString()), type -> new Sorter.SimpleSorter<>(type, false, false));
     private static final int PADDING = 15;
     private static final int GRID_SPACING = 40;
     private static final int MASTERY_SIZE = 20;
-    private static final DataManagerWidget.View<MasteryData> DEFAULT_VIEW = new DataManagerWidget.View<>("System", true, Collections.emptyList(), TNTUtils.createInit(new DataSorters<>(), sorters -> {
-        sorters.add(new DataSorters.BaseSorter<>("cook_count", () -> Comparator.comparingInt(MasteryData::cookCount), true).force());
-        sorters.add(new DataSorters.BaseSorter<>("name", () -> Comparator.<MasteryData, String>comparing(t -> t.mastery.item().getDescription().getString())).force());
+    private static final View<MasteryData> DEFAULT_VIEW = new View.SimpleView<>("System", TNTUtils.createInit(new LinkedHashSet<>(), filters -> {
+        filters.add(FILTER_GROUP.createDefault());
+    }), TNTUtils.createInit(new LinkedHashSet<>(), sorters -> {
+        sorters.add(SORT_COOK_COUNT.createDefault());
+        sorters.add(SORT_MASTERY_NAME.createDefault());
     }));
 
-    @Deprecated
-    private final EnumSet<MasteryGroup> displayedGroups = EnumSet.allOf(MasteryGroup.class);
-    private DataManagerWidget.View<MasteryData> lastView;
+    private static View<MasteryData> lastView;
     private GridWidget grid;
     private int scrollIndex;
 
@@ -58,56 +61,29 @@ public class MasteryScreen extends Screen {
                         CookingMastery.Tier tier = mastery.getTier(cookCount);
                         return new MasteryData(mastery, cookCount, tier);
                     })
-                    .filter(t -> CollectionUtils.containsAny(t.mastery().groups(), displayedGroups))
-                    .sorted(Comparator.comparingInt(MasteryData::cookCount).reversed().thenComparing(t -> t.mastery().item().getDescription().getString()))
                     .toList();
-            DataManagerWidget<MasteryData> masteries = new DataManagerWidget<>(PADDING, PADDING, width - 2 * PADDING, height - PADDING);
-            masteries.setFilteringMode(true);
-            masteries.setSortingMode(true);
             if (lastView == null) {
                 lastView = DEFAULT_VIEW;
             }
-            masteries.setView(lastView);
-            Rect2i canvas = masteries.getCanvas();
-            grid = new GridWidget(canvas.getX(), canvas.getY(), canvas.getWidth(), canvas.getHeight());
-            grid.setMargin(GRID_SPACING);
-            masteries.setDataHandler((manager, list) -> {
-                grid.clear();
-                Rect2i size = manager.getCanvas();
-                grid.setY(size.getY());
-                grid.setHeight(size.getHeight());
+            DataManagerWidget.DataManagerProperties<MasteryData> properties = new DataManagerWidget.DataManagerProperties<>(lastView, (renderData, dataview, canv, widgets) -> {
+                grid = new GridWidget(canv.getX(), canv.getY(), canv.getWidth(), canv.getHeight());
+                grid.setMargin(GRID_SPACING);
                 main:
                 for (int y = scrollIndex; y < scrollIndex + grid.getRows(); y++) {
                     for (int x = 0; x < grid.getColumns(); x++) {
                         int index = x + (y * grid.getColumns());
-                        if (index >= list.size()) {
+                        if (index >= renderData.size()) {
                             break main;
                         }
-                        MasteryWidget widget = new MasteryWidget(0, 0, MASTERY_SIZE, MASTERY_SIZE, CommonComponents.EMPTY, list.get(index));
+                        MasteryWidget widget = new MasteryWidget(0, 0, MASTERY_SIZE, MASTERY_SIZE, CommonComponents.EMPTY, renderData.get(index));
                         grid.addRenderableWidget(widget);
                     }
                 }
-            });
-            masteries.setRefreshHandler(mng -> {
-                lastView = mng.getView(null);
-                init(minecraft, width, height);
-            });
-            masteries.setData(data);
-            masteries.addRenderableWidget(grid);
-            addRenderableWidget(masteries);
+                widgets.addWidget(grid);
+                lastView = dataview;
+            }, Arrays.asList(FILTER_GROUP, FILTER_MASTERY), Arrays.asList(SORT_COOK_COUNT, SORT_MASTERY_NAME));
+            addRenderableWidget(new DataManagerWidget<>(PADDING, PADDING, width - 2 * PADDING, height - PADDING, properties, data));
         });
-    }
-
-    private void filterChanged(MasteryGroup group, boolean wasActive) {
-        if (wasActive) {
-            displayedGroups.remove(group);
-        } else {
-            displayedGroups.add(group);
-        }
-        if (displayedGroups.isEmpty()) {
-            displayedGroups.add(MasteryGroup.NONE);
-        }
-        init(minecraft, width, height);
     }
 
     @Override
@@ -163,42 +139,19 @@ public class MasteryScreen extends Screen {
         @Override
         protected void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
         }
+
+        @Override
+        protected boolean isValidClickButton(int pButton) {
+            return false;
+        }
     }
 
     private record MasteryData(CookingMastery mastery, int cookCount, CookingMastery.Tier tier) {
     }
 
-    private static final class GroupFilterWidget extends AbstractWidget {
-
-        private final MasteryGroup group;
-        private final Predicate<MasteryGroup> active;
-        private final BiConsumer<MasteryGroup, Boolean> callback;
-
-        public GroupFilterWidget(MasteryGroup group, Predicate<MasteryGroup> active, BiConsumer<MasteryGroup, Boolean> callback) {
-            super(0, 0, 0, 0, Component.translatable("blockychef.mastery.groups." + group.name().toLowerCase(Locale.ROOT)));
-            this.group = group;
-            this.active = active;
-            this.callback = callback;
-        }
-
-        @Override
-        protected void renderWidget(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
-            boolean selected = active.test(group);
-            if (isHovered) {
-                pGuiGraphics.fill(getX(), getY(), getX() + getWidth(), getY() + getHeight(), 0x22FFFFFF);
-            }
-            GraphicsHelper.drawCenteredText(pGuiGraphics, getMessage(), Minecraft.getInstance().font, getX(), getY(), getWidth(), getHeight(), selected ? 0xFFFFFF : 0x666666, true);
-        }
-
-        @Override
-        public void onClick(double pMouseX, double pMouseY) {
-            boolean isActive = active.test(group);
-            callback.accept(group, isActive);
-        }
-
-        @Override
-        protected void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
-
-        }
+    private static boolean filterOrAll(EnumSet<MasteryGroup> filter, Collection<MasteryGroup> groups) {
+        if (filter.isEmpty())
+            return true;
+        return CollectionUtils.containsAny(groups, filter);
     }
 }

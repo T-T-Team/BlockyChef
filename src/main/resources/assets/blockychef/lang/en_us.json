@@ -713,10 +713,11 @@
   "label.blockychef.tier.max": "MAX",
 
   "tooltip.blockychef.quality": "Quality: %s",
-  "sorter.key.cook_count": "Cook Count",
-  "sorter.key.name": "Name",
-  "sorter.value.asc": "ASC",
-  "sorter.value.desc": "DESC",
+  "filter.key.blockychef.group": "Group",
+  "sorter.key.blockychef.cook_count": "Cook Count",
+  "sorter.key.blockychef.mastery_name": "Name",
+  "sorter.value.asc": "Ascending",
+  "sorter.value.desc": "Descending",
 
   "screen.blockychef.cutting_board": "Cutting Board",
   "screen.blockychef.cutting_board.widget.start_cutting": "Cut",
