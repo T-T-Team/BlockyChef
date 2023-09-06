@@ -11,8 +11,8 @@
   },
   "cookingConfiguration": {
     "time": 400,
-    "minTemperature": 4,
-    "maxTemperature": 5,
+    "minTemperature": 3,
+    "maxTemperature": 4,
     "burnSpeed": 0.4
   }
 }
