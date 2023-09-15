@@ -735,6 +735,7 @@
   "screen.blockychef.barrel": "Barrel",
   "screen.blockychef.barrel.widget.ferment": "Ferment",
   "screen.blockychef.stove": "Stove",
+  "screen.blockychef.masteries": "Masteries",
 
   "death.attack.blockychef.dehydration": "%s has died due to dehydration",
   "death.attack.blockychef.dehydration.player": "%1$s has died due to dehydration whilst fighting %2$s",
