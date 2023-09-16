@@ -26,4 +26,6 @@ public final class BlockyChefMenuTypes {
     public static final MenuType<MixerMenu> MIXER = null;
     @ObjectHolder(value = "blockychef:stove", registryName = KEY)
     public static final MenuType<StoveMenu> STOVE = null;
+    @ObjectHolder(value = "blockychef:pan", registryName = KEY)
+    public static final MenuType<PanMenu> PAN = null;
 }

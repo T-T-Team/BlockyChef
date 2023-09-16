@@ -6,5 +6,6 @@
   "output": {
     "item": "blockychef:burnt_toast"
   },
-  "toastingTime": 100
+  "toastingTime": 100,
+  "overcooking": true
 }

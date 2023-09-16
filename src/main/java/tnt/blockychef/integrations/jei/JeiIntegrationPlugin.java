@@ -62,7 +62,7 @@ public class JeiIntegrationPlugin implements IModPlugin {
         registration.addRecipes(JUICER, getRecipes(BlockyChefRecipeTypes.JUICER_RECIPE));
         registration.addRecipes(MIXER, getRecipes(BlockyChefRecipeTypes.MIXER_RECIPE));
         registration.addRecipes(FLUID_EXTRACTION, BlockyChef.EXTRACTION_MANAGER.getLoadedExtractionRecipes());
-        registration.addRecipes(STOVE, getRecipes(BlockyChefRecipeTypes.STOVE_RECIPE, recipe -> !recipe.isOvercooking()));
+        registration.addRecipes(STOVE, getRecipes(BlockyChefRecipeTypes.STOVE_RECIPE));
     }
 
     @Override
@@ -144,7 +144,7 @@ public class JeiIntegrationPlugin implements IModPlugin {
     }
 
     private static <I extends Container, R extends Recipe<I>> List<R> getRecipes(net.minecraft.world.item.crafting.RecipeType<R> type) {
-        return getRecipes(type, null);
+        return getRecipes(type, recipe -> !(recipe instanceof BurnableRecipe burnable) || !burnable.isBurning());
     }
 
     private static <I extends Container, R extends Recipe<I>> List<R> getRecipes(net.minecraft.world.item.crafting.RecipeType<R> type, @Nullable Predicate<R> filter) {

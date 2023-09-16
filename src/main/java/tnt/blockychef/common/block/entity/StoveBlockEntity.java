@@ -4,17 +4,19 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import tnt.blockychef.BlockyChef;
+import tnt.blockychef.common.food.recipe.CookingConfiguration;
 import tnt.blockychef.common.food.recipe.StoveRecipe;
 import tnt.blockychef.common.heat.HeatHelper;
+import tnt.blockychef.common.heat.HeatValues;
 import tnt.blockychef.common.heat.RegulatedRangeHeatSource;
 import tnt.blockychef.common.heat.RegulationHandler;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
@@ -26,17 +28,17 @@ import tnt.tntlib.api.blockentity.Synchronizable;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> implements Synchronizable, IndexedColorHolder {
 
     public static final int ENERGY_BUFFER_SIZE = 1600;
-    public static final int TEMPERATURE_LIMIT = 10;
     public static final int[] FUEL = {6};
     public static final int[] INPUTS = {0, 1, 2, 3, 4, 5};
 
     private final RegulatedRangeHeatSource stoveHeatSource;
     private final RegulatedRangeHeatSource externalHeatSource;
-    private final CookingSlot[] slots;
+    private final StoveCookingSlot[] slots;
 
     private int energyBuffer;
     private float temperature;
@@ -46,9 +48,9 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
         super(BlockyChefBlockEntities.STOVE, pos, state);
         RegulationHandler stoveHandler = new StoveRegulationHandler(this::handleStoveHeatEvent);
         RegulationHandler externalHandler = new StoveRegulationHandler(this::handleExternalHeatEvent);
-        this.stoveHeatSource = new RegulatedRangeHeatSource(stoveHandler, 0, TEMPERATURE_LIMIT);
-        this.externalHeatSource = new RegulatedRangeHeatSource(externalHandler, 0, TEMPERATURE_LIMIT);
-        this.slots = ArrayUtils.indexedFill(new CookingSlot[INPUTS.length], CookingSlot::new);
+        this.stoveHeatSource = new RegulatedRangeHeatSource(stoveHandler, 0, HeatValues.MAX_TEMPERATURE);
+        this.externalHeatSource = new RegulatedRangeHeatSource(externalHandler, 0, HeatValues.MAX_TEMPERATURE);
+        this.slots = ArrayUtils.indexedFill(new StoveCookingSlot[INPUTS.length], index -> new StoveCookingSlot(index, this));
         this.colors = new int[1];
         Arrays.fill(this.colors, Integer.MIN_VALUE);
     }
@@ -67,7 +69,7 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
 
         // Cooking tick
         if (stove.canCook()) {
-            for (CookingSlot slot : stove.slots) {
+            for (StoveCookingSlot slot : stove.slots) {
                 slot.updateSlot();
             }
             if (level.getGameTime() % 2L == 0L) {
@@ -132,7 +134,7 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
     }
 
     public float getHeatAmount() {
-        return 1.0F - (temperature / TEMPERATURE_LIMIT);
+        return 1.0F - (temperature / HeatValues.MAX_TEMPERATURE);
     }
 
     public boolean canCook() {
@@ -171,7 +173,7 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
         loadSharedData(tag);
     }
 
-    public CookingSlot[] getSlots() {
+    public StoveCookingSlot[] getSlots() {
         return slots;
     }
 
@@ -183,7 +185,7 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
         tag.putFloat("temperature", temperature);
         ListTag slots = new ListTag();
         Arrays.stream(this.slots)
-                .map(CookingSlot::serialize)
+                .map(StoveCookingSlot::serialize)
                 .forEach(slots::add);
         tag.put("cookingSlots", slots);
     }
@@ -218,33 +220,25 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
         setChanged();
     }
 
-    public final class CookingSlot {
+    public final class StoveCookingSlot extends CookingSlot<StoveRecipe, StoveBlockEntity> {
 
-        private final int slotIndex;
-        private int progressionTimer;
-        private int totalTimer;
-        private float burnAmount;
-        private StoveRecipe recipe;
-
-        public CookingSlot(int slotIndex) {
-            this.slotIndex = slotIndex;
+        public StoveCookingSlot(int slotIndex, StoveBlockEntity blockEntity) {
+            super(slotIndex, blockEntity);
         }
 
-        public void loadRecipe(RecipeManager manager) {
-            ItemStack input = getItem();
-            StoveRecipe stoveRecipe = Helper.findRecipeFor(manager, BlockyChefRecipeTypes.STOVE_RECIPE, rec -> rec.matches(input))
-                    .orElse(null);
-            if (stoveRecipe == null || recipe != stoveRecipe) {
-                progressionTimer = 0;
-                totalTimer = 0;
-                burnAmount = 0;
-                recipe = stoveRecipe;
-            }
-            if (recipe != null) {
-                totalTimer = recipe.getConfiguration().time();
-            }
-            BlockEntityHelper.sendBlockEntityClientData(StoveBlockEntity.this);
-            StoveBlockEntity.this.setChanged();
+        @Override
+        public RecipeType<StoveRecipe> getRecipeType() {
+            return BlockyChefRecipeTypes.STOVE_RECIPE;
+        }
+
+        @Override
+        public Optional<StoveRecipe> getRecipe(RecipeManager manager, ItemStack input) {
+            return Helper.findRecipeFor(manager, getRecipeType(), r -> r.matches(input));
+        }
+
+        @Override
+        protected void recipeLoaded(StoveRecipe recipe) {
+            totalTimer = recipe.getConfiguration().time();
         }
 
         public boolean isLocked() {
@@ -255,7 +249,7 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
             ItemStack stack = this.getItem();
             if (stack.isEmpty() || recipe == null)
                 return;
-            StoveRecipe.CookingConfiguration configuration = recipe.getConfiguration();
+            CookingConfiguration configuration = recipe.getConfiguration();
             float temp = StoveBlockEntity.this.temperature;
             if (configuration.isCooking(temp)) {
                 if (configuration.isBurning(temp)) {
@@ -275,51 +269,6 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
                     stove.storeRecipe(recipe);
                     loadRecipe(StoveBlockEntity.this.level.getRecipeManager());
                 }
-            }
-        }
-
-        public float getProgress() {
-            if (recipe != null && recipe.isOvercooking()) {
-                return 0.0F;
-            }
-            return progressionTimer / (float) totalTimer;
-        }
-
-        public float getBurnProgress() {
-            if (recipe != null && recipe.isOvercooking()) {
-                return progressionTimer / (float) totalTimer;
-            }
-            return burnAmount;
-        }
-
-        public ItemStack getItem() {
-            return StoveBlockEntity.this.getItem(getSlotIndex());
-        }
-
-        public int getSlotIndex() {
-            return this.slotIndex;
-        }
-
-        public CompoundTag serialize() {
-            CompoundTag tag = new CompoundTag();
-            tag.putInt("progression", progressionTimer);
-            tag.putInt("total", totalTimer);
-            tag.putFloat("burn", burnAmount);
-            if (recipe != null) {
-                tag.putString("recipeId", recipe.getId().toString());
-            }
-            return tag;
-        }
-
-        public void deserialize(CompoundTag tag) {
-            progressionTimer = tag.getInt("progression");
-            totalTimer = tag.getInt("total");
-            burnAmount = tag.getFloat("burn");
-
-            StoveBlockEntity be = StoveBlockEntity.this;
-            if (be.level != null && tag.contains("recipeId")) {
-                recipe = Helper.findRecipeByIdFor(be.level.getRecipeManager(), BlockyChefRecipeTypes.STOVE_RECIPE, new ResourceLocation(tag.getString("recipeId")))
-                        .orElse(null);
             }
         }
     }

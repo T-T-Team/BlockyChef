@@ -40,8 +40,8 @@ public class StoveMenu extends AbstractBlockEntityMenu<StoveBlockEntity> {
             for (int x = 0; x < 3; x++) {
                 // Cooking slots
                 int slotIndex = (y * 3) + x;
-                addSlot(new CookingSlot(stove.getItemHandler(), slotIndex, 44 + x * 36, 17 + y * 28, stove, () -> {
-                    StoveBlockEntity.CookingSlot[] cookSlots = stove.getSlots();
+                addSlot(new StoveSlot(stove.getItemHandler(), slotIndex, 44 + x * 36, 17 + y * 28, stove, () -> {
+                    StoveBlockEntity.StoveCookingSlot[] cookSlots = stove.getSlots();
                     return cookSlots[slotIndex];
                 }));
             }
@@ -73,12 +73,12 @@ public class StoveMenu extends AbstractBlockEntityMenu<StoveBlockEntity> {
         }
     }
 
-    private static final class CookingSlot extends SlotItemHandler {
+    private static final class StoveSlot extends SlotItemHandler {
 
         private final StoveBlockEntity stove;
-        private final Supplier<StoveBlockEntity.CookingSlot> cookingSlotProvider;
+        private final Supplier<StoveBlockEntity.StoveCookingSlot> cookingSlotProvider;
 
-        public CookingSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition, StoveBlockEntity stove, Supplier<StoveBlockEntity.CookingSlot> cookingSlotProvider) {
+        public StoveSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition, StoveBlockEntity stove, Supplier<StoveBlockEntity.StoveCookingSlot> cookingSlotProvider) {
             super(itemHandler, index, xPosition, yPosition);
             this.stove = stove;
             this.cookingSlotProvider = cookingSlotProvider;
@@ -86,7 +86,7 @@ public class StoveMenu extends AbstractBlockEntityMenu<StoveBlockEntity> {
 
         @Override
         public boolean mayPickup(Player playerIn) {
-            StoveBlockEntity.CookingSlot cookingSlot = cookingSlotProvider.get();
+            StoveBlockEntity.StoveCookingSlot cookingSlot = cookingSlotProvider.get();
             return !cookingSlot.isLocked();
         }
 

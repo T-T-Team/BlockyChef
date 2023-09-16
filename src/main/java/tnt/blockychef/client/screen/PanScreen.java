@@ -3,13 +3,18 @@ package tnt.blockychef.client.screen;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import org.joml.Vector2i;
 import tnt.blockychef.BlockyChef;
-import tnt.blockychef.common.block.entity.StoveBlockEntity;
+import tnt.blockychef.common.block.entity.PanBlockEntity;
+import tnt.blockychef.common.heat.HeatHelper;
+import tnt.blockychef.common.heat.HeatSource;
 import tnt.blockychef.common.heat.HeatValues;
-import tnt.blockychef.common.menu.StoveMenu;
+import tnt.blockychef.common.heat.RegulatedHeatSource;
+import tnt.blockychef.common.menu.PanMenu;
 import tnt.blockychef.network.NetworkManager;
 import tnt.blockychef.network.message.C2S_RegulateTemperature;
 import tnt.tntlib.api.GraphicsHelper;
@@ -18,59 +23,47 @@ import tnt.tntlib.api.VerticalAlignment;
 
 import java.util.Locale;
 
-public class StoveScreen extends AbstractContainerScreen<StoveMenu> {
+public class PanScreen extends AbstractContainerScreen<PanMenu> {
 
-    public static final ResourceLocation TEXTURE = BlockyChef.resource("textures/screen/stove.png");
+    public static final ResourceLocation TEXTURE = BlockyChef.resource("textures/screen/pan.png");
+    private static final Vector2i[] SLOT_POSITIONS = {
+            new Vector2i(80, 8), new Vector2i(103, 37), new Vector2i(95, 67),
+            new Vector2i(65, 67), new Vector2i(57, 37)
+    };
 
-    public StoveScreen(StoveMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
+    public PanScreen(PanMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
-        imageHeight = 175;
+        imageHeight = 188;
     }
 
     @Override
     protected void init() {
         super.init();
-
-        addRenderableWidget(new Button.Builder(Component.literal("-"), this::reduceTemperature)
-                .pos(leftPos + 42, topPos + 67)
-                .size(20, 20)
-                .build()
-        );
-        addRenderableWidget(new Button.Builder(Component.literal("+"), this::increaseTemperature)
-                .pos(leftPos + 114, topPos + 67)
-                .size(20, 20)
-                .build()
-        );
+        HeatSource heatSource = HeatHelper.getHeatSource(minecraft.level, menu.getBlockEntity().getBlockPos(), Direction.DOWN);
+        if (heatSource instanceof RegulatedHeatSource regulatedHeatSource) {
+            // TODO heat controls
+        }
     }
-
-    private void reduceTemperature(Button button) {
-        NetworkManager.DISPATCHER.sendToServer(new C2S_RegulateTemperature(menu.getBlockEntity().getBlockPos(), null, true));
-    }
-
-    private void increaseTemperature(Button button) {
-        NetworkManager.DISPATCHER.sendToServer(new C2S_RegulateTemperature(menu.getBlockEntity().getBlockPos(), null, false));
-    }
-
     @Override
     protected void renderLabels(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
         pGuiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 0x404040, false);
         GraphicsHelper.drawRightAlignedText(pGuiGraphics, Component.literal(String.valueOf(HeatValues.MAX_TEMPERATURE)), font, 163, 17, 0x404040);
         GraphicsHelper.drawRightAlignedText(pGuiGraphics, Component.literal("0"), font, 163, 78, 0x404040);
 
-        float setTemperature = menu.getBlockEntity().getStoveHeatSource().getHeat();
+        HeatSource heatSource = HeatHelper.getHeatSource(minecraft.level, menu.getBlockEntity().getBlockPos(), Direction.DOWN);
+        float setTemperature = heatSource.getHeat(Direction.UP);
         GraphicsHelper.drawAlignedText(pGuiGraphics, Component.literal(String.format(Locale.ROOT, "%.1f", setTemperature)), font, HorizontalAlignment.RIGHT, VerticalAlignment.CENTER, 145, 17, 18, 68, 0x404040);
     }
 
     @Override
     protected void renderBg(GuiGraphics graphics, float pPartialTick, int pMouseX, int pMouseY) {
         graphics.blit(TEXTURE, leftPos, topPos, 0, 0, imageWidth, imageHeight);
-        StoveBlockEntity stove = menu.getBlockEntity();
-        StoveBlockEntity.StoveCookingSlot[] slots = stove.getSlots();
-        for (StoveBlockEntity.StoveCookingSlot slot : slots) {
-            int slotIndex = slot.getSlotIndex();
-            int slotX = leftPos + 44 + (slotIndex % 3) * 36;
-            int slotY = topPos + 17 + (slotIndex / 3) * 28;
-
+        PanBlockEntity pan = menu.getBlockEntity();
+        PanBlockEntity.PanCookingSlot[] slots = pan.getSlots();
+        for (PanBlockEntity.PanCookingSlot slot : slots) {
+            Vector2i slotPos = SLOT_POSITIONS[slot.getSlotIndex()];
+            int slotX = leftPos + slotPos.x;
+            int slotY = topPos + slotPos.y;
             float cookingProgress = slot.getProgress();
             float burnProgress = slot.getBurnProgress();
             graphics.fill(slotX - 4, slotY - 1, slotX - 2, slotY + 17, 0xFF666666);
@@ -84,10 +77,10 @@ public class StoveScreen extends AbstractContainerScreen<StoveMenu> {
         }
         int height = 85;
         int top = 16;
-        graphics.fill(leftPos + 8, topPos + top, leftPos + 12, topPos + height, 0xFF666666);
+        //graphics.fill(leftPos + 8, topPos + top, leftPos + 12, topPos + height, 0xFF666666);
         graphics.fill(leftPos + 164, topPos + top, leftPos + 168, topPos + height, 0xFF666666);
-        graphics.fill(leftPos + 8, topPos + top + (int) ((height - top) * stove.getEnergyBufferValue()), leftPos + 12, topPos + height, 0xFFE2B100);
-        graphics.fill(leftPos + 164, topPos + top + (int) ((height - top) * stove.getHeatAmount()), leftPos + 168, topPos + height, 0xFFFF0000);
+        //graphics.fill(leftPos + 8, topPos + top + (int) ((height - top) * pan.getEnergyBufferValue()), leftPos + 12, topPos + height, 0xFFE2B100);
+        graphics.fill(leftPos + 164, topPos + top + (int) ((height - top) * (1.0F - pan.getTemperature() / HeatValues.MAX_TEMPERATURE)), leftPos + 168, topPos + height, 0xFFFF0000);
     }
 
     @Override
@@ -95,12 +88,20 @@ public class StoveScreen extends AbstractContainerScreen<StoveMenu> {
         renderBackground(pGuiGraphics);
         super.render(pGuiGraphics, mouseX, mouseY, pPartialTick);
         renderTooltip(pGuiGraphics, mouseX, mouseY);
-        StoveBlockEntity stove = menu.getBlockEntity();
-        if (mouseX >= leftPos + 8 && mouseX <= leftPos + 12 && mouseY >= topPos + 16 && mouseY <= topPos + 85) {
-            pGuiGraphics.renderTooltip(font, Component.translatable("label.blockychef.energy", stove.getStoredEnergyAmount()), mouseX, mouseY);
-        }
+        PanBlockEntity pan = menu.getBlockEntity();
+        /*if (mouseX >= leftPos + 8 && mouseX <= leftPos + 12 && mouseY >= topPos + 16 && mouseY <= topPos + 85) {
+            pGuiGraphics.renderTooltip(font, Component.translatable("label.blockychef.energy", pan.getStoredEnergyAmount()), mouseX, mouseY);
+        }*/
         if (mouseX >= leftPos + 164 && mouseX <= leftPos + 168 && mouseY >= topPos + 16 && mouseY <= topPos + 85) {
-            pGuiGraphics.renderTooltip(font, Component.translatable("label.blockychef.temperature", String.format(Locale.ROOT, "%.1f", stove.getActualTemperature())), mouseX, mouseY);
+            pGuiGraphics.renderTooltip(font, Component.translatable("label.blockychef.temperature", String.format(Locale.ROOT, "%.1f", pan.getTemperature())), mouseX, mouseY);
         }
+    }
+
+    private void reduceTemperature(Button button) {
+        NetworkManager.DISPATCHER.sendToServer(new C2S_RegulateTemperature(menu.getBlockEntity().getBlockPos(), Direction.DOWN, true));
+    }
+
+    private void increaseTemperature(Button button) {
+        NetworkManager.DISPATCHER.sendToServer(new C2S_RegulateTemperature(menu.getBlockEntity().getBlockPos(), Direction.DOWN, false));
     }
 }

@@ -3,7 +3,6 @@ package tnt.blockychef.common.food.recipe;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -16,9 +15,8 @@ import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.tntlib.api.serialization.Codecs;
 
 import java.util.List;
-import java.util.Locale;
 
-public class StoveRecipe extends AbstractFoodRecipe<StoveBlockEntity> {
+public class StoveRecipe extends AbstractFoodRecipe<StoveBlockEntity> implements BurnableRecipe {
 
     public static final CodecRecipeSerializer.CodecProvider<StoveRecipe> CODEC_PROVIDER = recipeId -> RecordCodecBuilder.create(instance -> instance.group(
             Codecs.INGREDIENT_CODEC.fieldOf("input").forGetter(StoveRecipe::getInput),
@@ -43,6 +41,11 @@ public class StoveRecipe extends AbstractFoodRecipe<StoveBlockEntity> {
         this.result = result;
         this.burntResult = burntResult;
         this.isOvercooking = isOvercooking;
+    }
+
+    @Override
+    public boolean isBurning() {
+        return isOvercooking;
     }
 
     public Ingredient getInput() {
@@ -94,25 +97,4 @@ public class StoveRecipe extends AbstractFoodRecipe<StoveBlockEntity> {
         return BlockyChefRecipeTypes.STOVE_RECIPE;
     }
 
-    public record CookingConfiguration(int time, float minTemperature, float maxTemperature, float burnSpeed) {
-
-        public static final Codec<CookingConfiguration> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                Codec.intRange(1, Integer.MAX_VALUE).fieldOf("time").forGetter(CookingConfiguration::time),
-                Codec.FLOAT.fieldOf("minTemperature").forGetter(CookingConfiguration::minTemperature),
-                Codec.FLOAT.fieldOf("maxTemperature").forGetter(CookingConfiguration::maxTemperature),
-                Codec.FLOAT.optionalFieldOf("burnSpeed", 1.0F).forGetter(CookingConfiguration::burnSpeed)
-        ).apply(instance, CookingConfiguration::new));
-
-        public boolean isCooking(float temperature) {
-            return temperature >= minTemperature;
-        }
-
-        public boolean isBurning(float temperature) {
-            return temperature > maxTemperature;
-        }
-
-        public Component getTemperatureRange() {
-            return Component.literal(String.format(Locale.ROOT, "%.1f-%.1f", minTemperature, maxTemperature));
-        }
-    }
 }

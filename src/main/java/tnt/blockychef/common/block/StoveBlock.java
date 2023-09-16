@@ -45,8 +45,8 @@ public class StoveBlock extends DyeableBlock implements EntityBlock, HeatSourceP
         if (!level.isClientSide) {
             if (level.getBlockEntity(pos) instanceof StoveBlockEntity stove) {
                 NetworkHooks.openScreen((ServerPlayer) player, new SimpleMenuProvider((id, inv, owner) -> new StoveMenu(id, inv, stove), TITLE), pos);
-                return InteractionResult.SUCCESS;
             }
+            return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
     }

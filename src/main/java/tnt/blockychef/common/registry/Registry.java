@@ -87,6 +87,7 @@ public final class Registry {
         helper.register("mortar_and_pestle", BlockEntityType.Builder.of(MortarAndPestleBlockEntity::new, BlockyChefBlocks.GRANITE_MORTAR_AND_PESTLE, BlockyChefBlocks.ANDESITE_MORTAR_AND_PESTLE, BlockyChefBlocks.DIORITE_MORTAR_AND_PESTLE, BlockyChefBlocks.QUARTZ_MORTAR_AND_PESTLE, BlockyChefBlocks.DEEPSLATE_MORTAR_AND_PESTLE).build(null));
         helper.register("mixing_bowl", BlockEntityType.Builder.of(MixingBowlBlockEntity::new, BlockyChefBlocks.OAK_MIXING_BOWL, BlockyChefBlocks.SPRUCE_MIXING_BOWL, BlockyChefBlocks.BIRCH_MIXING_BOWL, BlockyChefBlocks.JUNGLE_MIXING_BOWL, BlockyChefBlocks.ACACIA_MIXING_BOWL, BlockyChefBlocks.DARK_OAK_MIXING_BOWL, BlockyChefBlocks.MANGROVE_MIXING_BOWL, BlockyChefBlocks.CRIMSON_MIXING_BOWL, BlockyChefBlocks.WARPED_MIXING_BOWL).build(null));
         helper.register("barrel", BlockEntityType.Builder.of(BarrelBlockEntity::new, BlockyChefBlocks.OAK_BARREL, BlockyChefBlocks.SPRUCE_BARREL, BlockyChefBlocks.BIRCH_BARREL, BlockyChefBlocks.JUNGLE_BARREL, BlockyChefBlocks.ACACIA_BARREL, BlockyChefBlocks.DARK_OAK_BARREL, BlockyChefBlocks.MANGROVE_BARREL, BlockyChefBlocks.CRIMSON_BARREL, BlockyChefBlocks.WARPED_BARREL).build(null));
+        helper.register("pan", BlockEntityType.Builder.of(PanBlockEntity::new, BlockyChefBlocks.PAN).build(null));
     }
 
     private static void registerMenuTypes(RegisterEvent.RegisterHelper<MenuType<?>> helper) {
@@ -99,6 +100,7 @@ public final class Registry {
         helper.register("barrel", IForgeMenuType.create(BarrelMenu::new));
         helper.register("mixer", IForgeMenuType.create(MixerMenu::new));
         helper.register("stove", IForgeMenuType.create(StoveMenu::new));
+        helper.register("pan", IForgeMenuType.create(PanMenu::new));
     }
 
     private static void registerMobEffects(RegisterEvent.RegisterHelper<MobEffect> helper) {
@@ -127,6 +129,7 @@ public final class Registry {
         helper.register("juicer_recipe");
         helper.register("mixer_recipe");
         helper.register("stove_recipe");
+        helper.register("pan_recipe");
     }
 
     private static void registerRecipeSerializers(RegisterEvent.RegisterHelper<RecipeSerializer<?>> helper) {
@@ -143,6 +146,7 @@ public final class Registry {
         helper.register("juicing", CodecRecipeSerializer.forCodec(JuicerRecipe.CODEC_PROVIDER));
         helper.register("mixer", CodecRecipeSerializer.forCodec(MixerRecipe.CODEC_PROVIDER));
         helper.register("stove", CodecRecipeSerializer.forCodec(StoveRecipe.CODEC_PROVIDER));
+        helper.register("pan", CodecRecipeSerializer.forCodec(null)); // TODO
     }
 
     private static void registerFeatures(RegisterEvent.RegisterHelper<Feature<?>> helper) {
@@ -153,18 +157,8 @@ public final class Registry {
         helper.register("fruit_decorator", new TreeDecoratorType<>(TreeFruitDecorator.CODEC));
     }
 
-
-
     @FunctionalInterface
     private interface RecipeTypeRegistryHelper {
         void register(String id);
-    }
-
-    @FunctionalInterface
-    private interface FluidRegistryHelper {
-        void register(String id, int fluidColor, int fluidDensity);
-        default void register(String id, int fluidColor) {
-            register(id, fluidColor, 0);
-        }
     }
 }
