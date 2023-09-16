@@ -41,7 +41,21 @@ public class PanScreen extends AbstractContainerScreen<PanMenu> {
         super.init();
         HeatSource heatSource = HeatHelper.getHeatSource(minecraft.level, menu.getBlockEntity().getBlockPos(), Direction.DOWN);
         if (heatSource instanceof RegulatedHeatSource regulatedHeatSource) {
-            // TODO heat controls
+            addRenderableWidget(new Button.Builder(Component.literal("-"), this::reduceTemperature)
+                    .pos(leftPos + 143, topPos + 89)
+                    .size(12, 12)
+                    .build()
+            );
+            addRenderableWidget(new Button.Builder(Component.literal("+"), this::increaseTemperature)
+                    .pos(leftPos + 156, topPos + 89)
+                    .size(12, 12)
+                    .build()
+            );
+            addRenderableWidget(new Button.Builder(Component.literal("Stir"), t -> {})
+                    .pos(leftPos + 60, topPos + 86)
+                    .size(60, 16)
+                    .build()
+            );
         }
     }
     @Override
