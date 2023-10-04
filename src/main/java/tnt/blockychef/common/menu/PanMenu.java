@@ -17,10 +17,10 @@ public class PanMenu extends AbstractBlockEntityMenu<PanBlockEntity> {
     public PanMenu(int menuId, Inventory playerInventory, PanBlockEntity pan) {
         super(BlockyChefMenuTypes.PAN, menuId, pan);
         addSlot(new SlotItemHandler(pan.getItemHandler(), 0, 80, 8));
-        addSlot(new SlotItemHandler(pan.getItemHandler(), 1, 103, 37));
-        addSlot(new SlotItemHandler(pan.getItemHandler(), 2, 95, 67));
-        addSlot(new SlotItemHandler(pan.getItemHandler(), 3, 65, 67));
-        addSlot(new SlotItemHandler(pan.getItemHandler(), 4, 57, 37));
+        addSlot(new SlotItemHandler(pan.getItemHandler(), 1, 107, 34));
+        addSlot(new SlotItemHandler(pan.getItemHandler(), 2, 97, 65));
+        addSlot(new SlotItemHandler(pan.getItemHandler(), 3, 63, 65));
+        addSlot(new SlotItemHandler(pan.getItemHandler(), 4, 53, 34));
         addSlot(new SlotItemHandler(pan.getItemHandler(), 5, 8, 70));
         addPlayerSlots(playerInventory, 8, 106);
         addSlotListener(new SimpleSlotListener(this::slotChanged));

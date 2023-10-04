@@ -711,6 +711,7 @@
   "label.blockychef.energy": "Energy: %s",
   "label.blockychef.temperature": "Temperature: %s",
   "label.blockychef.tier.max": "MAX",
+  "label.blockychef.stir": "Stir",
 
   "tooltip.blockychef.quality": "Quality: %s",
   "filter.key.blockychef.group": "Group",
@@ -736,6 +737,7 @@
   "screen.blockychef.barrel.widget.ferment": "Ferment",
   "screen.blockychef.stove": "Stove",
   "screen.blockychef.masteries": "Masteries",
+  "screen.blockychef.pan": "Pan",
 
   "death.attack.blockychef.dehydration": "%s has died due to dehydration",
   "death.attack.blockychef.dehydration.player": "%1$s has died due to dehydration whilst fighting %2$s",

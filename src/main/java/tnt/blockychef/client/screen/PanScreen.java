@@ -27,8 +27,8 @@ public class PanScreen extends AbstractContainerScreen<PanMenu> {
 
     public static final ResourceLocation TEXTURE = BlockyChef.resource("textures/screen/pan.png");
     private static final Vector2i[] SLOT_POSITIONS = {
-            new Vector2i(80, 8), new Vector2i(103, 37), new Vector2i(95, 67),
-            new Vector2i(65, 67), new Vector2i(57, 37)
+            new Vector2i(80, 8), new Vector2i(107, 34), new Vector2i(97, 65),
+            new Vector2i(63, 65), new Vector2i(53, 34)
     };
 
     public PanScreen(PanMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
@@ -51,9 +51,9 @@ public class PanScreen extends AbstractContainerScreen<PanMenu> {
                     .size(12, 12)
                     .build()
             );
-            addRenderableWidget(new Button.Builder(Component.literal("Stir"), t -> {})
+            addRenderableWidget(new Button.Builder(Component.translatable("label.blockychef.stir"), t -> {})
                     .pos(leftPos + 60, topPos + 86)
-                    .size(60, 16)
+                    .size(56, 16)
                     .build()
             );
         }
