@@ -5,7 +5,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.event.network.CustomPayloadEvent;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.entity.SelectableRecipeHolder;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
@@ -38,7 +38,7 @@ public class C2S_RecipeSelectorEvent extends Client2ServerMessage {
     }
 
     @Override
-    public void handle(ServerPlayer player, NetworkEvent.Context context) {
+    public void handle(ServerPlayer player, CustomPayloadEvent.Context context) {
         ServerLevel level = player.serverLevel();
         if (!level.isLoaded(pos))
             return;

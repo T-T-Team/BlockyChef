@@ -4,7 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.event.network.CustomPayloadEvent;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.food.mastery.CookingMastery;
 import tnt.tntlib.api.network.Network;
@@ -38,7 +38,7 @@ public final class S2C_SendMasteriesToClient extends Server2ClientMessage {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void handle(Minecraft minecraft, NetworkEvent.Context context) {
+    public void handle(Minecraft minecraft, CustomPayloadEvent.Context context) {
         BlockyChef.MASTERY_MANAGER.loadFromNetwork(list);
     }
 }

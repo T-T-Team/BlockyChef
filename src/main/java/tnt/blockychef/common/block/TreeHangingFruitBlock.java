@@ -67,7 +67,7 @@ public class TreeHangingFruitBlock extends BushBlock implements BonemealableBloc
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader reader, BlockPos pos, BlockState state, boolean clientside) {
+    public boolean isValidBonemealTarget(LevelReader reader, BlockPos pos, BlockState state) {
         return !this.isRipe(state);
     }
 

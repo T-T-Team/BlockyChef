@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -26,8 +27,8 @@ public class PastaMachineBlockEntity extends RecipeRememberingBlockEntity<PastaM
     public static final int[] INPUTS = {0};
     public static final int[] OUTPUTS = {1, 2, 3};
 
-    private List<PastaMachineRecipe> availableRecipes = Collections.emptyList();
-    private PastaMachineRecipe recipe;
+    private List<RecipeHolder<PastaMachineRecipe>> availableRecipes = Collections.emptyList();
+    private RecipeHolder<PastaMachineRecipe> recipe;
     private boolean processing;
     private int processingTime;
     private int[] colors;
@@ -40,13 +41,14 @@ public class PastaMachineBlockEntity extends RecipeRememberingBlockEntity<PastaM
 
     public static void tickServer(Level level, BlockPos pos, BlockState state, PastaMachineBlockEntity pastaMachine) {
         if (pastaMachine.recipe != null && pastaMachine.processing) {
-            ItemStack[] outputs = pastaMachine.recipe.getOutputs();
+            PastaMachineRecipe pastaMachineRecipe = pastaMachine.recipe.value();
+            ItemStack[] outputs = pastaMachineRecipe.getOutputs();
             if (MenuInventoryHelper.canFitItems(outputs, pastaMachine, OUTPUTS)) {
-                if (++pastaMachine.processingTime >= pastaMachine.recipe.getProcessingTime()) {
+                if (++pastaMachine.processingTime >= pastaMachineRecipe.getProcessingTime()) {
                     pastaMachine.processingTime = 0;
                     pastaMachine.storeRecipe(pastaMachine.recipe);
-                    pastaMachine.consumeIngredientsAndApplyCraftRemainder(pastaMachine.recipe, INPUTS, OUTPUTS, in -> pastaMachine.getInputItem().shrink(1));
-                    MenuInventoryHelper.insertItems(pastaMachine.recipe.getOutputs(), pastaMachine, OUTPUTS);
+                    pastaMachine.consumeIngredientsAndApplyCraftRemainder(pastaMachineRecipe, INPUTS, OUTPUTS, in -> pastaMachine.getInputItem().shrink(1));
+                    MenuInventoryHelper.insertItems(pastaMachineRecipe.getOutputs(), pastaMachine, OUTPUTS);
                     pastaMachine.refreshRecipes();
                 }
             } else {
@@ -59,7 +61,7 @@ public class PastaMachineBlockEntity extends RecipeRememberingBlockEntity<PastaM
 
     public static void tickClient(Level level, BlockPos pos, BlockState state, PastaMachineBlockEntity pastaMachine) {
         if (pastaMachine.processing && pastaMachine.recipe != null) {
-            int max = pastaMachine.recipe.getProcessingTime();
+            int max = pastaMachine.recipe.value().getProcessingTime();
             if (pastaMachine.processingTime < max) {
                 pastaMachine.processingTime++;
             }
@@ -138,14 +140,14 @@ public class PastaMachineBlockEntity extends RecipeRememberingBlockEntity<PastaM
         if (recipe == null)
             return 0.0F;
         int prevTime = Math.max(0, processingTime - 1);
-        int total = recipe.getProcessingTime();
+        int total = recipe.value().getProcessingTime();
         float previousTickProgress = prevTime / (float) total;
         float currentTickProgress = processingTime / (float) total;
         return Interpolation.linear(previousTickProgress, currentTickProgress, partialTicks);
     }
 
     @Nullable
-    public PastaMachineRecipe getRecipe() {
+    public RecipeHolder<PastaMachineRecipe> getRecipe() {
         return recipe;
     }
 
@@ -158,7 +160,7 @@ public class PastaMachineBlockEntity extends RecipeRememberingBlockEntity<PastaM
         int index = getRecipeIndex();
         int next = index + direction;
         if (next >= 0 && next < getAvailableRecipeCount()) {
-            PastaMachineRecipe recipe = availableRecipes.get(next);
+            RecipeHolder<PastaMachineRecipe> recipe = availableRecipes.get(next);
             setRecipe(recipe);
         }
     }
@@ -176,7 +178,7 @@ public class PastaMachineBlockEntity extends RecipeRememberingBlockEntity<PastaM
         BlockEntityHelper.sendBlockEntityClientData(this);
     }
 
-    private void setRecipe(@Nullable PastaMachineRecipe recipe) {
+    private void setRecipe(@Nullable RecipeHolder<PastaMachineRecipe> recipe) {
         if (recipe != this.recipe) {
             this.recipe = recipe;
             this.processing = false;
@@ -188,7 +190,7 @@ public class PastaMachineBlockEntity extends RecipeRememberingBlockEntity<PastaM
 
     private void saveSharedData(CompoundTag tag) {
         if (recipe != null) {
-            tag.putString("recipe", recipe.getId().toString());
+            tag.putString("recipe", recipe.id().toString());
         }
         tag.putBoolean("processing", processing);
         tag.putInt("processingTime", processingTime);
@@ -199,7 +201,7 @@ public class PastaMachineBlockEntity extends RecipeRememberingBlockEntity<PastaM
         refreshRecipes();
         if (tag.contains("recipe")) {
             ResourceLocation location = new ResourceLocation(tag.getString("recipe"));
-            recipe = Helper.find(availableRecipes, recipe -> recipe.getId().equals(location))
+            recipe = Helper.find(availableRecipes, recipe -> recipe.id().equals(location))
                     .orElse(null);
         } else {
             recipe = null;

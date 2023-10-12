@@ -3,6 +3,7 @@ package tnt.blockychef.common.block.entity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import tnt.blockychef.common.food.recipe.AbstractFoodRecipe;
@@ -20,7 +21,7 @@ public abstract class CookingSlot<R extends AbstractFoodRecipe<B> & BurnableReci
     protected int progressionTimer;
     protected int totalTimer;
     protected float burnAmount;
-    protected R recipe;
+    protected RecipeHolder<R> recipe;
 
     public CookingSlot(int slotIndex, B blockEntity) {
         this.slotIndex = slotIndex;
@@ -29,11 +30,11 @@ public abstract class CookingSlot<R extends AbstractFoodRecipe<B> & BurnableReci
 
     public abstract RecipeType<R> getRecipeType();
 
-    public abstract Optional<R> getRecipe(RecipeManager manager, ItemStack input);
+    public abstract Optional<RecipeHolder<R>> getRecipe(RecipeManager manager, ItemStack input);
 
     public void loadRecipe(RecipeManager manager) {
         ItemStack input = getItem();
-        R rRecipe = getRecipe(manager, input).orElse(null);
+        RecipeHolder<R> rRecipe = getRecipe(manager, input).orElse(null);
         if (rRecipe == null || recipe != rRecipe) {
             progressionTimer = 0;
             totalTimer = 0;
@@ -48,14 +49,14 @@ public abstract class CookingSlot<R extends AbstractFoodRecipe<B> & BurnableReci
     }
 
     public float getProgress() {
-        if (recipe != null && recipe.isBurning()) {
+        if (recipe != null && recipe.value().isBurning()) {
             return 0.0F;
         }
         return progressionTimer / (float) totalTimer;
     }
 
     public float getBurnProgress() {
-        if (recipe != null && recipe.isBurning()) {
+        if (recipe != null && recipe.value().isBurning()) {
             return progressionTimer / (float) totalTimer;
         }
         return burnAmount;
@@ -69,7 +70,7 @@ public abstract class CookingSlot<R extends AbstractFoodRecipe<B> & BurnableReci
         return this.slotIndex;
     }
 
-    protected void recipeLoaded(R recipe) {}
+    protected void recipeLoaded(RecipeHolder<R> recipe) {}
 
     public CompoundTag serialize() {
         CompoundTag tag = new CompoundTag();
@@ -77,7 +78,7 @@ public abstract class CookingSlot<R extends AbstractFoodRecipe<B> & BurnableReci
         tag.putInt("total", totalTimer);
         tag.putFloat("burn", burnAmount);
         if (recipe != null) {
-            tag.putString("recipeId", recipe.getId().toString());
+            tag.putString("recipeId", recipe.id().toString());
         }
         return tag;
     }
@@ -88,7 +89,7 @@ public abstract class CookingSlot<R extends AbstractFoodRecipe<B> & BurnableReci
         burnAmount = tag.getFloat("burn");
 
         if (blockEntity.getLevel() != null && tag.contains("recipeId")) {
-            Optional<R> optional = Helper.findRecipeByIdFor(blockEntity.getLevel().getRecipeManager(), getRecipeType(), new ResourceLocation(tag.getString("recipeId")));
+            Optional<RecipeHolder<R>> optional = Helper.findRecipeByIdFor(blockEntity.getLevel().getRecipeManager(), getRecipeType(), new ResourceLocation(tag.getString("recipeId")));
             recipe = optional.orElse(null);
         }
     }

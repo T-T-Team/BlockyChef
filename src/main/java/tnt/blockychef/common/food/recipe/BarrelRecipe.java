@@ -3,7 +3,6 @@ package tnt.blockychef.common.food.recipe;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -18,7 +17,7 @@ import java.util.List;
 
 public class BarrelRecipe extends AbstractFoodRecipe<BarrelBlockEntity> {
 
-    public static final CodecRecipeSerializer.CodecProvider<BarrelRecipe> CODEC_PROVIDER = recipeId -> RecordCodecBuilder.create(instance -> instance.group(
+    public static final Codec<BarrelRecipe> CODEC_PROVIDER = RecordCodecBuilder.create(instance -> instance.group(
             MultiIngredient.CODEC.listOf().fieldOf("inputs").forGetter(BarrelRecipe::getInputs),
             Codecs.SIMPLE_ITEMSTACK_CODEC.listOf().xmap(
                     list -> list.toArray(ItemStack[]::new),
@@ -27,14 +26,14 @@ public class BarrelRecipe extends AbstractFoodRecipe<BarrelBlockEntity> {
             Codec.INT.fieldOf("fermentTime").forGetter(BarrelRecipe::getFermentTime),
             resolveExperience(),
             resolveRemainderConsumer()
-    ).apply(instance, (in, out, time, exp, rem) -> new BarrelRecipe(recipeId, in, out, time, exp, rem)));
+    ).apply(instance, BarrelRecipe::new));
 
     private final List<MultiIngredient> inputs;
     private final ItemStack[] outputs;
     private final int fermentTime;
 
-    public BarrelRecipe(ResourceLocation recipeId, List<MultiIngredient> inputs, ItemStack[] outputs, int fermentTime, float experience, List<MultiIngredient> remainderConsumer) {
-        super(recipeId, remainderConsumer, experience);
+    public BarrelRecipe(List<MultiIngredient> inputs, ItemStack[] outputs, int fermentTime, float experience, List<MultiIngredient> remainderConsumer) {
+        super(remainderConsumer, experience);
         this.inputs = inputs;
         this.outputs = outputs;
         this.fermentTime = fermentTime;

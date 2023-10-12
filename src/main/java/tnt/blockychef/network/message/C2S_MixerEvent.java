@@ -5,7 +5,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.event.network.CustomPayloadEvent;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.entity.MixerBlockEntity;
 import tnt.blockychef.common.food.recipe.MixerRecipe;
@@ -38,7 +38,7 @@ public class C2S_MixerEvent extends Client2ServerMessage {
     }
 
     @Override
-    public void handle(ServerPlayer player, NetworkEvent.Context context) {
+    public void handle(ServerPlayer player, CustomPayloadEvent.Context context) {
         ServerLevel level = player.serverLevel();
         if (!level.isLoaded(pos))
             return;

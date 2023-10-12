@@ -1,9 +1,10 @@
-package tnt.blockychef.integrations.waila;
+/*package tnt.blockychef.integrations.waila;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import snownee.jade.api.BlockAccessor;
 import snownee.jade.api.IBlockComponentProvider;
 import snownee.jade.api.IServerDataProvider;
@@ -45,10 +46,10 @@ public enum DryingRackComponentProvider implements IBlockComponentProvider, ISer
         if (blockEntity.hasItem()) {
             compoundTag.putInt("time", blockEntity.getTicksDrying());
             compoundTag.putInt("total", blockEntity.getTotalTime());
-            DryingRecipe recipe = blockEntity.getRecipe();
-            if (recipe != null) {
+            RecipeHolder<DryingRecipe> recipeHolder = blockEntity.getRecipe();
+            if (recipeHolder != null) {
                 compoundTag.put("input", blockEntity.getItem(0).save(new CompoundTag()));
-                compoundTag.put("output", recipe.getOutput().serializeNBT());
+                compoundTag.put("output", recipeHolder.value().getOutput().serializeNBT());
             }
         }
     }
@@ -58,3 +59,4 @@ public enum DryingRackComponentProvider implements IBlockComponentProvider, ISer
         return WailaIntegrationPlugin.DRYING_RACK;
     }
 }
+*/

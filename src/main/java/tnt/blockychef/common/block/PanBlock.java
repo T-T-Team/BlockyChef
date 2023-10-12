@@ -19,7 +19,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.block.entity.PanBlockEntity;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
@@ -45,7 +44,7 @@ public class PanBlock extends FullHorizontalAxisBlock implements EntityBlock {
         BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
         if (blockEntity instanceof PanBlockEntity panBlockEntity) {
             if (!pLevel.isClientSide) {
-                NetworkHooks.openScreen((ServerPlayer) pPlayer, new SimpleMenuProvider((menuId, inv, owner) -> new PanMenu(menuId, inv, panBlockEntity), TITLE), pPos);
+                ((ServerPlayer) pPlayer).openMenu(new SimpleMenuProvider((menuId, inv, owner) -> new PanMenu(menuId, inv, panBlockEntity), TITLE), pPos);
             }
             return InteractionResult.SUCCESS;
         }

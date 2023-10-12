@@ -136,16 +136,16 @@ public final class Registry {
         helper.register("drying", CodecRecipeSerializer.forCodec(DryingRecipe.CODEC_PROVIDER));
         helper.register("grating", CodecRecipeSerializer.forCodec(GratingRecipe.CODEC_PROVIDER));
         helper.register("cutting_board", CodecRecipeSerializer.forCodec(CuttingBoardRecipe.CODEC_PROVIDER));
-        helper.register("toasting", CodecRecipeSerializer.forCodec(ToasterRecipe.CODEC_PROVIDER));
+        helper.register("toasting", CodecRecipeSerializer.forCodec(ToasterRecipe.CODEC));
         helper.register("meat_grinding", CodecRecipeSerializer.forCodec(MeatGrinderRecipe.CODEC_PROVIDER));
-        helper.register("grinding", CodecRecipeSerializer.forCodec(MortarRecipe.CODEC_PROVIDER));
-        helper.register("mixing_bowl", CodecRecipeSerializer.forCodec(MixingBowlRecipe.CODEC_PROVIDER));
+        helper.register("grinding", CodecRecipeSerializer.forCodec(MortarRecipe.CODEC));
+        helper.register("mixing_bowl", CodecRecipeSerializer.forCodec(MixingBowlRecipe.CODEC));
         helper.register("dough_maker", CodecRecipeSerializer.forCodec(DoughMakerRecipe.CODEC_PROVIDER));
-        helper.register("pasta_machine", CodecRecipeSerializer.forCodec(PastaMachineRecipe.CODEC_PROVIDER));
+        helper.register("pasta_machine", CodecRecipeSerializer.forCodec(PastaMachineRecipe.CODEC));
         helper.register("barrel", CodecRecipeSerializer.forCodec(BarrelRecipe.CODEC_PROVIDER));
         helper.register("juicing", CodecRecipeSerializer.forCodec(JuicerRecipe.CODEC_PROVIDER));
-        helper.register("mixer", CodecRecipeSerializer.forCodec(MixerRecipe.CODEC_PROVIDER));
-        helper.register("stove", CodecRecipeSerializer.forCodec(StoveRecipe.CODEC_PROVIDER));
+        helper.register("mixer", CodecRecipeSerializer.forCodec(MixerRecipe.CODEC));
+        helper.register("stove", CodecRecipeSerializer.forCodec(StoveRecipe.CODEC));
         helper.register("pan", CodecRecipeSerializer.forCodec(null)); // TODO
     }
 

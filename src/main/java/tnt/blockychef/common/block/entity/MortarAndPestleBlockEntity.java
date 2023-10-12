@@ -3,6 +3,7 @@ package tnt.blockychef.common.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -24,7 +25,7 @@ public class MortarAndPestleBlockEntity extends RecipeRememberingBlockEntity<Mor
     public static final int[] INPUTS = {0, 1, 2, 3, 4, 5};
     public static final int[] OUTPUT = {6, 7, 8};
 
-    private MortarRecipe activeRecipe;
+    private RecipeHolder<MortarRecipe> activeRecipe;
     private boolean processing;
     private int currentProcessingTime;
 
@@ -36,18 +37,19 @@ public class MortarAndPestleBlockEntity extends RecipeRememberingBlockEntity<Mor
         if (mortarAndPestle.activeRecipe == null || !mortarAndPestle.processing)
             return;
         RecipeManager manager = level.getRecipeManager();
-        if (manager.getRecipeFor(BlockyChefRecipeTypes.MORTAR_AND_PESTLE_RECIPE, mortarAndPestle, level, mortarAndPestle.activeRecipe.getId()).isEmpty()) {
+        MortarRecipe recipe = mortarAndPestle.activeRecipe.value();
+        if (manager.getRecipeFor(BlockyChefRecipeTypes.MORTAR_AND_PESTLE_RECIPE, mortarAndPestle, level, mortarAndPestle.activeRecipe.id()).isEmpty()) {
             mortarAndPestle.setRecipe(null);
             return;
         }
-        ItemStack[] result = mortarAndPestle.activeRecipe.getOutput();
+        ItemStack[] result = recipe.getOutput();
         if (!MenuInventoryHelper.canFitItems(result, mortarAndPestle, OUTPUT)) {
             mortarAndPestle.setRecipe(null);
             return;
         }
-        if (++mortarAndPestle.currentProcessingTime >= mortarAndPestle.activeRecipe.getProcessingTime() && !level.isClientSide) {
+        if (++mortarAndPestle.currentProcessingTime >= recipe.getProcessingTime() && !level.isClientSide) {
             mortarAndPestle.currentProcessingTime = 0;
-            mortarAndPestle.consumeIngredientsAndApplyCraftRemainder(mortarAndPestle.activeRecipe, INPUTS, OUTPUT, in -> mortarAndPestle.activeRecipe.getInputs().forEach(multiIngredient -> multiIngredient.consume(mortarAndPestle, in)));
+            mortarAndPestle.consumeIngredientsAndApplyCraftRemainder(recipe, INPUTS, OUTPUT, in -> recipe.getInputs().forEach(multiIngredient -> multiIngredient.consume(mortarAndPestle, in)));
             MenuInventoryHelper.insertItems(result, mortarAndPestle, OUTPUT);
             mortarAndPestle.storeRecipe(mortarAndPestle.activeRecipe);
             mortarAndPestle.refreshRecipe();
@@ -59,7 +61,7 @@ public class MortarAndPestleBlockEntity extends RecipeRememberingBlockEntity<Mor
         if (activeRecipe == null || !processing)
             return 0.0F;
         int oldTick = Math.max(0, currentProcessingTime - 1);
-        int total = activeRecipe.getProcessingTime();
+        int total = activeRecipe.value().getProcessingTime();
         float f0 = oldTick / (float) total;
         float f1 = currentProcessingTime / (float) total;
         return Interpolation.linear(f0, f1, partialTicks);
@@ -129,12 +131,11 @@ public class MortarAndPestleBlockEntity extends RecipeRememberingBlockEntity<Mor
         if (level == null)
             return;
         RecipeManager manager = level.getRecipeManager();
-        Optional<MortarRecipe> optional = manager.getRecipeFor(BlockyChefRecipeTypes.MORTAR_AND_PESTLE_RECIPE, this, level);
-        MortarRecipe recipe = optional.orElse(null);
-        setRecipe(recipe);
+        Optional<RecipeHolder<MortarRecipe>> optional = manager.getRecipeFor(BlockyChefRecipeTypes.MORTAR_AND_PESTLE_RECIPE, this, level);
+        setRecipe(optional.orElse(null));
     }
 
-    private void setRecipe(@Nullable MortarRecipe recipe) {
+    private void setRecipe(@Nullable RecipeHolder<MortarRecipe> recipe) {
         if (recipe != this.activeRecipe) {
             this.activeRecipe = recipe;
             this.currentProcessingTime = 0;

@@ -5,7 +5,6 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import tnt.tntlib.api.serialization.Codecs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,7 @@ import java.util.List;
 public final class MultiIngredient {
 
     public static final Codec<MultiIngredient> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Codecs.INGREDIENT_CODEC.fieldOf("ingredient").forGetter(t -> t.ingredient),
+            Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(t -> t.ingredient),
             Codec.intRange(1, Integer.MAX_VALUE).optionalFieldOf("count", 1).forGetter(t -> t.count)
     ).apply(instance, MultiIngredient::new));
 

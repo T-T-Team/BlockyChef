@@ -23,7 +23,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.block.entity.MixingBowlBlockEntity;
 import tnt.blockychef.common.block.entity.RecipeRememberingBlockEntity;
@@ -31,7 +30,6 @@ import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.menu.MixingBowlMenu;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 
-// TODO always require ground below this block
 public class MixingBowlBlock extends FullHorizontalAxisBlock implements EntityBlock {
 
     private static final VoxelShape HITBOX = Block.box(4.0, 0.0, 4.0, 12.0, 4.0, 12.0);
@@ -63,7 +61,7 @@ public class MixingBowlBlock extends FullHorizontalAxisBlock implements EntityBl
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof MixingBowlBlockEntity mixingBowl) {
             if (!level.isClientSide) {
-                NetworkHooks.openScreen((ServerPlayer) player, new SimpleMenuProvider(
+                ((ServerPlayer) player).openMenu(new SimpleMenuProvider(
                         (menuId, inv, owner) -> new MixingBowlMenu(menuId, inv, mixingBowl),
                         TITLE
                 ), pos);

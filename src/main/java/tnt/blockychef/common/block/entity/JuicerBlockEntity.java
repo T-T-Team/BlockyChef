@@ -5,6 +5,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
@@ -28,7 +29,7 @@ public class JuicerBlockEntity extends RecipeRememberingBlockEntity<JuicerRecipe
     public static final int FLUID_CAPACITY = 500;
 
     private final FluidContainer container;
-    private JuicerRecipe activeRecipe;
+    private RecipeHolder<JuicerRecipe> activeRecipe;
     private int pressCounter;
     private int[] colors;
 
@@ -77,7 +78,7 @@ public class JuicerBlockEntity extends RecipeRememberingBlockEntity<JuicerRecipe
     }
 
     public float getProgress() {
-        return activeRecipe != null ? pressCounter / (float) activeRecipe.getPressAmount() : 0.0F;
+        return activeRecipe != null ? pressCounter / (float) activeRecipe.value().getPressAmount() : 0.0F;
     }
 
     public void processRecipe(Player player) {
@@ -87,8 +88,9 @@ public class JuicerBlockEntity extends RecipeRememberingBlockEntity<JuicerRecipe
             }
             return;
         }
-        if (++pressCounter >= activeRecipe.getPressAmount()) {
-            FluidStack result = activeRecipe.getOutput().copy();
+        JuicerRecipe recipe = activeRecipe.value();
+        if (++pressCounter >= recipe.getPressAmount()) {
+            FluidStack result = recipe.getOutput().copy();
             container.insert(result);
             storeRecipe(activeRecipe);
             getInputItem().shrink(1);
@@ -165,11 +167,11 @@ public class JuicerBlockEntity extends RecipeRememberingBlockEntity<JuicerRecipe
         if (level == null)
             return;
         RecipeManager manager = level.getRecipeManager();
-        Optional<JuicerRecipe> optional = manager.getRecipeFor(BlockyChefRecipeTypes.JUICER_RECIPE, this, level);
+        Optional<RecipeHolder<JuicerRecipe>> optional = manager.getRecipeFor(BlockyChefRecipeTypes.JUICER_RECIPE, this, level);
         setRecipe(optional.orElse(null));
     }
 
-    private void setRecipe(@Nullable JuicerRecipe recipe) {
+    private void setRecipe(@Nullable RecipeHolder<JuicerRecipe> recipe) {
         if (recipe != activeRecipe) {
             activeRecipe = recipe;
             pressCounter = 0;

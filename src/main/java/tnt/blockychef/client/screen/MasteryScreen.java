@@ -87,13 +87,13 @@ public class MasteryScreen extends Screen {
 
     @Override
     public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
-        renderBackground(pGuiGraphics);
+        renderBackground(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
         pGuiGraphics.fill(0, 0, width, height, 0x66 << 24);
         super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
     }
 
     @Override
-    public boolean mouseScrolled(double pMouseX, double pMouseY, double pDelta) {
+    public boolean mouseScrolled(double pMouseX, double pMouseY, double pDelta, double deltaY) {
         return UiHelper.handleMouseScrolled(pDelta, scrollIndex, grid.getRows(), grid.getTotalRowCountFor(masteryCount), value -> {
             scrollIndex = value;
             init(minecraft, width, height);

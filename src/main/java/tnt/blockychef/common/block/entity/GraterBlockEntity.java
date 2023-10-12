@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -16,12 +17,13 @@ import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.blockentity.Synchronizable;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
 public class GraterBlockEntity extends RecipeRememberingBlockEntity<GratingRecipe> implements Synchronizable {
 
-    private GratingRecipe recipe;
+    private RecipeHolder<GratingRecipe> recipe;
     private int gratingAmount;
 
     public GraterBlockEntity(BlockPos pos, BlockState state) {
@@ -34,7 +36,7 @@ public class GraterBlockEntity extends RecipeRememberingBlockEntity<GratingRecip
             setRecipe(null);
         } else if (recipe == null && level != null) {
             RecipeManager manager = level.getRecipeManager();
-            Optional<GratingRecipe> optional = manager.getRecipeFor(BlockyChefRecipeTypes.GRATING_RECIPE, this, level);
+            Optional<RecipeHolder<GratingRecipe>> optional = manager.getRecipeFor(BlockyChefRecipeTypes.GRATING_RECIPE, this, level);
             optional.ifPresent(this::setRecipe);
         }
     }
@@ -47,9 +49,9 @@ public class GraterBlockEntity extends RecipeRememberingBlockEntity<GratingRecip
 
     public void processRecipe(ServerPlayer player) {
         if (hasActiveRecipe()) {
-            if (++gratingAmount >= recipe.getGratingAmount()) {
+            if (++gratingAmount >= recipe.value().getGratingAmount()) {
                 storeRecipe(recipe);
-                ItemStack output = recipe.assemble(this, level.registryAccess());
+                ItemStack output = recipe.value().assemble(this, level.registryAccess());
                 setRecipe(null);
                 setItem(0, ItemStack.EMPTY);
                 MenuInventoryHelper.giveItemOrDrop(player, output);
@@ -71,9 +73,9 @@ public class GraterBlockEntity extends RecipeRememberingBlockEntity<GratingRecip
         if (stack.isEmpty())
             return false;
         RecipeManager manager = level.getRecipeManager();
-        List<GratingRecipe> gratingRecipes = manager.getAllRecipesFor(BlockyChefRecipeTypes.GRATING_RECIPE);
-        for (GratingRecipe gratingRecipe : gratingRecipes) {
-            if (gratingRecipe.isValidInput(stack)) {
+        List<RecipeHolder<GratingRecipe>> gratingRecipes = manager.getAllRecipesFor(BlockyChefRecipeTypes.GRATING_RECIPE);
+        for (RecipeHolder<GratingRecipe> gratingRecipe : gratingRecipes) {
+            if (gratingRecipe.value().isValidInput(stack)) {
                 return true;
             }
         }
@@ -81,7 +83,7 @@ public class GraterBlockEntity extends RecipeRememberingBlockEntity<GratingRecip
     }
 
     public float getGratingProgress() {
-        return recipe != null ? (float) this.gratingAmount / recipe.getGratingAmount() : 0.0F;
+        return recipe != null ? (float) this.gratingAmount / recipe.value().getGratingAmount() : 0.0F;
     }
 
     @Override
@@ -118,7 +120,7 @@ public class GraterBlockEntity extends RecipeRememberingBlockEntity<GratingRecip
         gratingAmount = tag.getInt("gratingAmount");
     }
 
-    private void setRecipe(GratingRecipe recipe) {
+    private void setRecipe(@Nullable RecipeHolder<GratingRecipe> recipe) {
         this.recipe = recipe;
         this.gratingAmount = 0;
         setChanged();

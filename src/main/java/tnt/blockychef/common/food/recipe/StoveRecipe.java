@@ -3,7 +3,6 @@ package tnt.blockychef.common.food.recipe;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -18,15 +17,15 @@ import java.util.List;
 
 public class StoveRecipe extends AbstractFoodRecipe<StoveBlockEntity> implements BurnableRecipe {
 
-    public static final CodecRecipeSerializer.CodecProvider<StoveRecipe> CODEC_PROVIDER = recipeId -> RecordCodecBuilder.create(instance -> instance.group(
-            Codecs.INGREDIENT_CODEC.fieldOf("input").forGetter(StoveRecipe::getInput),
+    public static final Codec<StoveRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(StoveRecipe::getInput),
             CookingConfiguration.CODEC.fieldOf("cookingConfiguration").forGetter(StoveRecipe::getConfiguration),
             Codecs.SIMPLE_ITEMSTACK_CODEC.fieldOf("result").forGetter(StoveRecipe::getResult),
             Codecs.SIMPLE_ITEMSTACK_CODEC.fieldOf("burntResult").forGetter(StoveRecipe::getBurntResult),
             Codec.BOOL.optionalFieldOf("overcooking", false).forGetter(StoveRecipe::isOvercooking),
             resolveRemainderConsumer(),
             resolveExperience()
-    ).apply(instance, (in, cfg, res, brnt, oc, rem, exp) -> new StoveRecipe(recipeId, in, cfg, res, brnt, oc, rem, exp)));
+    ).apply(instance, StoveRecipe::new));
 
     private final Ingredient input;
     private final CookingConfiguration configuration;
@@ -34,8 +33,8 @@ public class StoveRecipe extends AbstractFoodRecipe<StoveBlockEntity> implements
     private final ItemStack burntResult;
     private final boolean isOvercooking;
 
-    public StoveRecipe(ResourceLocation id, Ingredient input, CookingConfiguration configuration, ItemStack result, ItemStack burntResult, boolean isOvercooking, List<MultiIngredient> outputConsumers, float experience) {
-        super(id, outputConsumers, experience);
+    public StoveRecipe(Ingredient input, CookingConfiguration configuration, ItemStack result, ItemStack burntResult, boolean isOvercooking, List<MultiIngredient> outputConsumers, float experience) {
+        super(outputConsumers, experience);
         this.input = input;
         this.configuration = configuration;
         this.result = result;

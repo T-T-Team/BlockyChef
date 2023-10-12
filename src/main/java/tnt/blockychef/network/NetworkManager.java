@@ -11,5 +11,5 @@ public final class NetworkManager {
     @Network.Instance
     public static NetworkDispatcher DISPATCHER;
     @Network.Version
-    public static final SimpleVersion VERSION = SimpleVersion.parse("1.0.0");
+    public static final SimpleVersion VERSION = SimpleVersion.parseString("1.0.0");
 }

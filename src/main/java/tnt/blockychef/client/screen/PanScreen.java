@@ -99,7 +99,7 @@ public class PanScreen extends AbstractContainerScreen<PanMenu> {
 
     @Override
     public void render(GuiGraphics pGuiGraphics, int mouseX, int mouseY, float pPartialTick) {
-        renderBackground(pGuiGraphics);
+        renderBackground(pGuiGraphics, mouseX, mouseY, pPartialTick);
         super.render(pGuiGraphics, mouseX, mouseY, pPartialTick);
         renderTooltip(pGuiGraphics, mouseX, mouseY);
         PanBlockEntity pan = menu.getBlockEntity();

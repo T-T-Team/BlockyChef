@@ -6,6 +6,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import org.jetbrains.annotations.NotNull;
@@ -112,7 +113,7 @@ public class StoveMenu extends AbstractBlockEntityMenu<StoveBlockEntity> {
 
         @Override
         public boolean mayPlace(@NotNull ItemStack stack) {
-            Optional<StoveRecipe> opt = Helper.findRecipeFor(stove.getLevel().getRecipeManager(), BlockyChefRecipeTypes.STOVE_RECIPE, recipe -> recipe.matches(stack) && !recipe.isOvercooking());
+            Optional<RecipeHolder<StoveRecipe>> opt = Helper.findRecipeFor(stove.getLevel().getRecipeManager(), BlockyChefRecipeTypes.STOVE_RECIPE, recipe -> recipe.value().matches(stack) && !recipe.value().isOvercooking());
             return super.mayPlace(stack) && opt.isPresent();
         }
     }

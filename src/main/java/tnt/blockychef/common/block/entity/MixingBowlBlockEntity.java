@@ -3,6 +3,7 @@ package tnt.blockychef.common.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -25,7 +26,7 @@ public class MixingBowlBlockEntity extends RecipeRememberingBlockEntity<MixingBo
     public static final int[] INPUTS = {0, 1, 2, 3, 4, 5};
     public static final int[] OUTPUTS = {6, 7, 8};
 
-    private MixingBowlRecipe activeRecipe;
+    private RecipeHolder<MixingBowlRecipe> activeRecipe;
     private boolean mixing;
     private int mixingTime;
 
@@ -37,19 +38,20 @@ public class MixingBowlBlockEntity extends RecipeRememberingBlockEntity<MixingBo
         if (mixingBowl.activeRecipe == null || !mixingBowl.mixing) {
             return;
         }
+        MixingBowlRecipe recipe = mixingBowl.activeRecipe.value();
         RecipeManager manager = level.getRecipeManager();
-        if (manager.getRecipeFor(BlockyChefRecipeTypes.MIXING_BOWL_RECIPE, mixingBowl, level, mixingBowl.activeRecipe.getId()).isEmpty()) {
+        if (manager.getRecipeFor(BlockyChefRecipeTypes.MIXING_BOWL_RECIPE, mixingBowl, level, mixingBowl.activeRecipe.id()).isEmpty()) {
             mixingBowl.setRecipe(null);
             return;
         }
-        ItemStack[] outputs = mixingBowl.activeRecipe.getOutputs();
+        ItemStack[] outputs = recipe.getOutputs();
         if (!MenuInventoryHelper.canFitItems(outputs, mixingBowl, OUTPUTS)) {
             mixingBowl.setRecipe(null);
             return;
         }
-        if (++mixingBowl.mixingTime >= mixingBowl.activeRecipe.getMixingTime() && !level.isClientSide) {
+        if (++mixingBowl.mixingTime >= recipe.getMixingTime() && !level.isClientSide) {
             mixingBowl.mixingTime = 0;
-            mixingBowl.consumeIngredientsAndApplyCraftRemainder(mixingBowl.activeRecipe, INPUTS, OUTPUTS, in -> mixingBowl.activeRecipe.getInputs().forEach(multiIngredient -> multiIngredient.consume(mixingBowl, in)));
+            mixingBowl.consumeIngredientsAndApplyCraftRemainder(recipe, INPUTS, OUTPUTS, in -> recipe.getInputs().forEach(multiIngredient -> multiIngredient.consume(mixingBowl, in)));
             ItemStack[] assembledOutputs = Arrays.stream(outputs).map(ItemStack::copy).toArray(ItemStack[]::new);
             MenuInventoryHelper.insertItems(assembledOutputs, mixingBowl, OUTPUTS);
             mixingBowl.storeRecipe(mixingBowl.activeRecipe);
@@ -91,7 +93,7 @@ public class MixingBowlBlockEntity extends RecipeRememberingBlockEntity<MixingBo
         if (activeRecipe == null || !mixing)
             return 0.0F;
         int oldTick = Math.max(0, mixingTime - 1);
-        int total = activeRecipe.getMixingTime();
+        int total = activeRecipe.value().getMixingTime();
         float f0 = oldTick / (float) total;
         float f1 = mixingTime / (float) total;
         return Interpolation.linear(f0, f1, partialTicks);
@@ -121,11 +123,11 @@ public class MixingBowlBlockEntity extends RecipeRememberingBlockEntity<MixingBo
         if (level == null)
             return;
         RecipeManager manager = level.getRecipeManager();
-        Optional<MixingBowlRecipe> optional = manager.getRecipeFor(BlockyChefRecipeTypes.MIXING_BOWL_RECIPE, this, level);
+        Optional<RecipeHolder<MixingBowlRecipe>> optional = manager.getRecipeFor(BlockyChefRecipeTypes.MIXING_BOWL_RECIPE, this, level);
         setRecipe(optional.orElse(null));
     }
 
-    private void setRecipe(@Nullable MixingBowlRecipe recipe) {
+    private void setRecipe(@Nullable RecipeHolder<MixingBowlRecipe> recipe) {
         if (activeRecipe != recipe) {
             activeRecipe = recipe;
             mixingTime = 0;

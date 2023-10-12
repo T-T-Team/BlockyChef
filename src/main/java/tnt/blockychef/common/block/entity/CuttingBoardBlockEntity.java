@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -25,8 +26,8 @@ public class CuttingBoardBlockEntity extends RecipeRememberingBlockEntity<Cuttin
     public static final int SLOT_INPUT = 0;
     public static final int[] SLOT_OUTPUTS = {1, 2, 3};
 
-    private List<CuttingBoardRecipe> availableRecipes = Collections.emptyList();
-    private CuttingBoardRecipe recipe;
+    private List<RecipeHolder<CuttingBoardRecipe>> availableRecipes = Collections.emptyList();
+    private RecipeHolder<CuttingBoardRecipe> recipe;
     private boolean processing;
     private int timeProcessing;
 
@@ -37,9 +38,10 @@ public class CuttingBoardBlockEntity extends RecipeRememberingBlockEntity<Cuttin
     public static void tickServer(Level level, BlockPos pos, BlockState state, CuttingBoardBlockEntity cuttingBoard) {
         if (cuttingBoard.processing) {
             if (cuttingBoard.recipe != null) {
-                ItemStack[] outputs = cuttingBoard.recipe.getOutputs();
+                CuttingBoardRecipe cuttingBoardRecipe = cuttingBoard.recipe.value();
+                ItemStack[] outputs = cuttingBoardRecipe.getOutputs();
                 if (MenuInventoryHelper.canFitItems(outputs, cuttingBoard, SLOT_OUTPUTS)) {
-                    if (++cuttingBoard.timeProcessing >= cuttingBoard.recipe.getProcessingTime()) {
+                    if (++cuttingBoard.timeProcessing >= cuttingBoardRecipe.getProcessingTime()) {
                         cuttingBoard.completeRecipe();
                     }
                 } else {
@@ -57,7 +59,7 @@ public class CuttingBoardBlockEntity extends RecipeRememberingBlockEntity<Cuttin
 
     public static void tickClient(Level level, BlockPos pos, BlockState state, CuttingBoardBlockEntity cuttingBoard) {
         if (cuttingBoard.processing && cuttingBoard.recipe != null) {
-            int max = cuttingBoard.recipe.getProcessingTime();
+            int max = cuttingBoard.recipe.value().getProcessingTime();
             if (cuttingBoard.timeProcessing < max) {
                 cuttingBoard.timeProcessing++;
             }
@@ -89,7 +91,7 @@ public class CuttingBoardBlockEntity extends RecipeRememberingBlockEntity<Cuttin
         if (recipe == null)
             return 0.0F;
         int prevTime = Math.max(0, timeProcessing - 1);
-        int total = recipe.getProcessingTime();
+        int total = recipe.value().getProcessingTime();
         float previousTickProgress = prevTime / (float) total;
         float currentTickProgress = timeProcessing / (float) total;
         return Interpolation.linear(previousTickProgress, currentTickProgress, partialTicks);
@@ -135,7 +137,7 @@ public class CuttingBoardBlockEntity extends RecipeRememberingBlockEntity<Cuttin
     }
 
     @Nullable
-    public CuttingBoardRecipe getRecipe() {
+    public RecipeHolder<CuttingBoardRecipe> getRecipe() {
         return recipe;
     }
 
@@ -152,14 +154,14 @@ public class CuttingBoardBlockEntity extends RecipeRememberingBlockEntity<Cuttin
         int index = getRecipeIndex();
         int next = index + direction;
         if (next >= 0 && next < getAvailableRecipeCount()) {
-            CuttingBoardRecipe recipe = availableRecipes.get(next);
+            RecipeHolder<CuttingBoardRecipe> recipe = availableRecipes.get(next);
             setRecipe(recipe);
         }
     }
 
     private void saveCommonData(CompoundTag tag) {
         if (recipe != null) {
-            tag.putString("recipe", recipe.getId().toString());
+            tag.putString("recipe", recipe.id().toString());
         }
         tag.putBoolean("processing", processing);
         tag.putInt("processingTime", timeProcessing);
@@ -169,7 +171,7 @@ public class CuttingBoardBlockEntity extends RecipeRememberingBlockEntity<Cuttin
         refreshAvailableRecipes();
         if (tag.contains("recipe")) {
             ResourceLocation location = new ResourceLocation(tag.getString("recipe"));
-            recipe = Helper.find(availableRecipes, recipe -> recipe.getId().equals(location))
+            recipe = Helper.find(availableRecipes, recipe -> recipe.id().equals(location))
                     .orElse(null);
         } else {
             recipe = null;
@@ -191,7 +193,7 @@ public class CuttingBoardBlockEntity extends RecipeRememberingBlockEntity<Cuttin
         BlockEntityHelper.sendBlockEntityClientData(this);
     }
 
-    private void setRecipe(@Nullable CuttingBoardRecipe recipe) {
+    private void setRecipe(@Nullable RecipeHolder<CuttingBoardRecipe> recipe) {
         boolean changed = this.recipe != recipe;
         this.recipe = recipe;
         if (changed) {
@@ -204,8 +206,8 @@ public class CuttingBoardBlockEntity extends RecipeRememberingBlockEntity<Cuttin
     private void completeRecipe() {
         timeProcessing = 0;
         storeRecipe(recipe);
-        ItemStack[] outputs = recipe.getOutputs();
-        consumeIngredientsAndApplyCraftRemainder(recipe, new int[] {SLOT_INPUT}, SLOT_OUTPUTS, in -> getInputItem().shrink(1));
+        ItemStack[] outputs = recipe.value().getOutputs();
+        consumeIngredientsAndApplyCraftRemainder(recipe.value(), new int[] {SLOT_INPUT}, SLOT_OUTPUTS, in -> getInputItem().shrink(1));
         MenuInventoryHelper.insertItems(outputs, this, SLOT_OUTPUTS);
         refreshAvailableRecipes();
     }

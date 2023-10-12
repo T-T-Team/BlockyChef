@@ -5,6 +5,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
@@ -232,38 +233,38 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
         }
 
         @Override
-        public Optional<StoveRecipe> getRecipe(RecipeManager manager, ItemStack input) {
-            return Helper.findRecipeFor(manager, getRecipeType(), r -> r.matches(input));
+        public Optional<RecipeHolder<StoveRecipe>> getRecipe(RecipeManager manager, ItemStack input) {
+            return Helper.findRecipeFor(manager, getRecipeType(), r -> r.value().matches(input));
         }
 
         @Override
-        protected void recipeLoaded(StoveRecipe recipe) {
-            totalTimer = recipe.getConfiguration().time();
+        protected void recipeLoaded(RecipeHolder<StoveRecipe> recipe) {
+            totalTimer = recipe.value().getConfiguration().time();
         }
 
         public boolean isLocked() {
-            return StoveBlockEntity.this.canCook() && recipe != null && !recipe.isOvercooking() && BlockyChef.config.cooking.lockCookingSlots;
+            return StoveBlockEntity.this.canCook() && recipe != null && !recipe.value().isOvercooking() && BlockyChef.config.cooking.lockCookingSlots;
         }
 
         public void updateSlot() {
             ItemStack stack = this.getItem();
             if (stack.isEmpty() || recipe == null)
                 return;
-            CookingConfiguration configuration = recipe.getConfiguration();
+            CookingConfiguration configuration = recipe.value().getConfiguration();
             float temp = StoveBlockEntity.this.temperature;
             if (configuration.isCooking(temp)) {
                 if (configuration.isBurning(temp)) {
                     float temperatureDifference = temp - configuration.maxTemperature();
                     float burnScale = temperatureDifference * (0.015F * configuration.burnSpeed());
                     if ((burnAmount += burnScale) >= 1.0F) {
-                        ItemStack burntResult = recipe.getBurntResult().copy();
+                        ItemStack burntResult = recipe.value().getBurntResult().copy();
                         StoveBlockEntity.this.setItem(getSlotIndex(), burntResult);
                         loadRecipe(StoveBlockEntity.this.level.getRecipeManager());
                         return;
                     }
                 }
                 if (++progressionTimer >= totalTimer) {
-                    ItemStack result = recipe.getResult().copy();
+                    ItemStack result = recipe.value().getResult().copy();
                     StoveBlockEntity stove = StoveBlockEntity.this;
                     stove.setItem(getSlotIndex(), result);
                     stove.storeRecipe(recipe);

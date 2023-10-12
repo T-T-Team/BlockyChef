@@ -12,7 +12,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -66,18 +66,18 @@ public abstract class RecipeRememberingBlockEntity<R extends AbstractFoodRecipe<
     }
 
     public void awardUsedRecipesAndPopExperience(ServerPlayer player) {
-        List<Recipe<?>> list = this.getRecipesToAwardAndPopExperience(player.serverLevel(), player.position());
+        List<RecipeHolder<?>> list = this.getRecipesToAwardAndPopExperience(player.serverLevel(), player.position());
         player.awardRecipes(list);
         this.recipesUsed.clear();
     }
 
     @SuppressWarnings("unchecked")
-    public List<Recipe<?>> getRecipesToAwardAndPopExperience(ServerLevel level, Vec3 position) {
-        List<Recipe<?>> list = Lists.newArrayList();
+    public List<RecipeHolder<?>> getRecipesToAwardAndPopExperience(ServerLevel level, Vec3 position) {
+        List<RecipeHolder<?>> list = Lists.newArrayList();
         for(Object2IntMap.Entry<ResourceLocation> entry : this.recipesUsed.object2IntEntrySet()) {
             level.getRecipeManager().byKey(entry.getKey()).ifPresent(recipe -> {
                 list.add(recipe);
-                createExperience(level, position, entry.getIntValue(), ((R) recipe).getExperience());
+                createExperience(level, position, entry.getIntValue(), ((RecipeHolder<R>) recipe).value().getExperience());
             });
         }
 
@@ -91,8 +91,8 @@ public abstract class RecipeRememberingBlockEntity<R extends AbstractFoodRecipe<
         getRecipesToAwardAndPopExperience((ServerLevel) level, Vec3.atCenterOf(worldPosition));
     }
 
-    public void storeRecipe(R recipe) {
-        this.recipesUsed.addTo(recipe.getId(), 1);
+    public void storeRecipe(RecipeHolder<R> recipe) {
+        this.recipesUsed.addTo(recipe.id(), 1);
     }
 
     protected void consumeIngredientsAndApplyCraftRemainder(R recipe, int[] inputs, int[] outputs, Consumer<int[]> ingredientConsumer) {

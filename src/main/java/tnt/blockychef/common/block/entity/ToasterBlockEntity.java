@@ -7,6 +7,7 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -140,11 +141,11 @@ public class ToasterBlockEntity extends RecipeRememberingBlockEntity<ToasterReci
         loadSharedData(tag);
     }
 
-    public Optional<ToasterRecipe> getRecipe(ItemStack stack) {
+    public Optional<RecipeHolder<ToasterRecipe>> getRecipe(ItemStack stack) {
         if (level == null)
             return Optional.empty();
         RecipeManager manager = level.getRecipeManager();
-        return Helper.findRecipeFor(manager, BlockyChefRecipeTypes.TOASTER_RECIPE, recipe -> recipe.matches(stack));
+        return Helper.findRecipeFor(manager, BlockyChefRecipeTypes.TOASTER_RECIPE, recipe -> recipe.value().matches(stack));
     }
 
     private void saveSharedData(CompoundTag tag) {
@@ -191,14 +192,15 @@ public class ToasterBlockEntity extends RecipeRememberingBlockEntity<ToasterReci
         }
 
         boolean toast() {
-            Optional<ToasterRecipe> optional = getRecipe();
+            Optional<RecipeHolder<ToasterRecipe>> optional = getRecipe();
             if (optional.isPresent()) {
-                ToasterRecipe recipe = optional.get();
+                RecipeHolder<ToasterRecipe> holder = optional.get();
+                ToasterRecipe recipe = holder.value();
                 int limit = recipe.getToastingTime();
                 if (++time >= limit) {
                     ItemStack result = recipe.assemble(toaster, toaster.getLevel().registryAccess());
                     toaster.setItem(slot, result);
-                    toaster.storeRecipe(recipe);
+                    toaster.storeRecipe(holder);
                     time = 0;
                     return true;
                 }
@@ -206,7 +208,7 @@ public class ToasterBlockEntity extends RecipeRememberingBlockEntity<ToasterReci
             return false;
         }
 
-        Optional<ToasterRecipe> getRecipe() {
+        Optional<RecipeHolder<ToasterRecipe>> getRecipe() {
             ItemStack stack = toaster.getItem(slot);
             return toaster.getRecipe(stack);
         }

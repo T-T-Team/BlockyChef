@@ -4,7 +4,6 @@ import com.google.gson.JsonParseException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -19,20 +18,20 @@ import java.util.List;
 
 public class DryingRecipe extends AbstractFoodRecipe<DryingRackBlockEntity> {
 
-    public static final CodecRecipeSerializer.CodecProvider<DryingRecipe> CODEC_PROVIDER = recipeId -> RecordCodecBuilder.create(instance -> instance.group(
-            Codecs.INGREDIENT_CODEC.fieldOf("input").forGetter(t -> t.input),
+    public static final Codec<DryingRecipe> CODEC_PROVIDER = RecordCodecBuilder.create(instance -> instance.group(
+            Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(t -> t.input),
             Codecs.SIMPLE_ITEMSTACK_CODEC.fieldOf("output").forGetter(t -> t.output),
             Codec.INT.fieldOf("dryingTime").forGetter(DryingRecipe::getDryingTime),
             resolveExperience(),
             resolveRemainderConsumer()
-    ).apply(instance, (ingredient, stack, time, exp, rem) -> new DryingRecipe(recipeId, ingredient, stack, time, exp, rem)));
+    ).apply(instance, DryingRecipe::new));
 
     private final Ingredient input;
     private final ItemStack output;
     private final int dryingTime;
 
-    private DryingRecipe(ResourceLocation id, Ingredient input, ItemStack output, int dryingTime, float experience, List<MultiIngredient> remainderConsumer) throws JsonParseException {
-        super(id, remainderConsumer, experience);
+    private DryingRecipe(Ingredient input, ItemStack output, int dryingTime, float experience, List<MultiIngredient> remainderConsumer) throws JsonParseException {
+        super(remainderConsumer, experience);
         this.input = input;
         this.output = output;
         this.dryingTime = dryingTime;

@@ -1,4 +1,4 @@
-package tnt.blockychef.integrations.waila;
+/*package tnt.blockychef.integrations.waila;
 
 import net.minecraft.resources.ResourceLocation;
 import snownee.jade.api.IWailaClientRegistration;
@@ -34,3 +34,4 @@ public class WailaIntegrationPlugin implements IWailaPlugin {
         registration.registerBlockComponent(BarrelComponentProvider.INSTANCE, BarrelBlock.class);
     }
 }
+*/

@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
@@ -77,8 +78,8 @@ public class PanBlockEntity extends RecipeRememberingBlockEntity<PanRecipe> impl
         }
 
         @Override
-        public Optional<PanRecipe> getRecipe(RecipeManager manager, ItemStack input) {
-            return Helper.findRecipeFor(manager, getRecipeType(), t -> t.matches(input));
+        public Optional<RecipeHolder<PanRecipe>> getRecipe(RecipeManager manager, ItemStack input) {
+            return Helper.findRecipeFor(manager, getRecipeType(), t -> t.value().matches(input));
         }
     }
 }

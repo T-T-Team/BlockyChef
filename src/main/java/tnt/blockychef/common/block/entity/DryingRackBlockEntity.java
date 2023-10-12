@@ -6,6 +6,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -25,7 +26,7 @@ import java.util.Optional;
 
 public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRecipe> implements Synchronizable {
 
-    private DryingRecipe recipe;
+    private RecipeHolder<DryingRecipe> recipe;
     private int ticksDrying;
 
     public DryingRackBlockEntity(BlockPos pos, BlockState state) {
@@ -39,11 +40,12 @@ public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRe
 
     public boolean isValidInput(ItemStack stack, Level level) {
         RecipeManager manager = level.getRecipeManager();
-        List<DryingRecipe> recipeList = manager.getAllRecipesFor(BlockyChefRecipeTypes.DRYING_RECIPE);
+        List<RecipeHolder<DryingRecipe>> recipeList = manager.getAllRecipesFor(BlockyChefRecipeTypes.DRYING_RECIPE);
         if (stack.isEmpty())
             return false;
-        for (DryingRecipe dryingRecipe : recipeList) {
-            if (dryingRecipe.isValidInput(stack)) {
+        for (RecipeHolder<DryingRecipe> dryingRecipeHolder : recipeList) {
+            DryingRecipe recipe = dryingRecipeHolder.value();
+            if (recipe.isValidInput(stack)) {
                 return true;
             }
         }
@@ -66,7 +68,7 @@ public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRe
     }
 
     public int getTotalTime() {
-        return recipe != null ? recipe.getDryingTime() : 1;
+        return recipe != null ? recipe.value().getDryingTime() : 1;
     }
 
     public void clearInventoryAndProcessRecipe(@Nullable Player player) {
@@ -88,7 +90,7 @@ public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRe
 
     public static void tick(Level level, BlockPos pos, BlockState state, DryingRackBlockEntity dryingRack) {
         if (dryingRack.recipe != null) {
-            if (dryingRack.ticksDrying++ >= dryingRack.recipe.getDryingTime()) {
+            if (dryingRack.ticksDrying++ >= dryingRack.recipe.value().getDryingTime()) {
                 dryingRack.completeRecipe();
             }
         } else {
@@ -96,7 +98,7 @@ public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRe
         }
     }
 
-    public DryingRecipe getRecipe() {
+    public RecipeHolder<DryingRecipe> getRecipe() {
         return recipe;
     }
 
@@ -135,7 +137,7 @@ public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRe
             if (level == null)
                 return;
             RecipeManager manager = level.getRecipeManager();
-            Optional<DryingRecipe> optional = manager.getRecipeFor(BlockyChefRecipeTypes.DRYING_RECIPE, this, level);
+            Optional<RecipeHolder<DryingRecipe>> optional = manager.getRecipeFor(BlockyChefRecipeTypes.DRYING_RECIPE, this, level);
             clearRecipe();
             optional.ifPresent(recipe -> this.recipe = recipe);
         }
@@ -149,7 +151,7 @@ public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRe
     private void completeRecipe() {
         ticksDrying = 0;
         if (recipe != null) {
-            ItemStack result = recipe.assemble(this, level.registryAccess());
+            ItemStack result = recipe.value().assemble(this, level.registryAccess());
             storeRecipe(recipe);
             setItem(result);
         }

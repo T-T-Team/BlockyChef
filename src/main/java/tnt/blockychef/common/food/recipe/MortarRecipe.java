@@ -3,7 +3,6 @@ package tnt.blockychef.common.food.recipe;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -18,7 +17,7 @@ import java.util.List;
 
 public class MortarRecipe extends AbstractFoodRecipe<MortarAndPestleBlockEntity> {
 
-    public static final CodecRecipeSerializer.CodecProvider<MortarRecipe> CODEC_PROVIDER = recipeId -> RecordCodecBuilder.create(instance -> instance.group(
+    public static final Codec<MortarRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             MultiIngredient.CODEC.listOf().fieldOf("inputs").forGetter(t -> t.inputs),
             Codecs.SIMPLE_ITEMSTACK_CODEC.listOf().xmap(
                     list -> list.toArray(ItemStack[]::new),
@@ -27,14 +26,14 @@ public class MortarRecipe extends AbstractFoodRecipe<MortarAndPestleBlockEntity>
             Codec.INT.fieldOf("processingTime").forGetter(MortarRecipe::getProcessingTime),
             resolveExperience(),
             resolveRemainderConsumer()
-    ).apply(instance, (inputs, output, time, exp, rem) -> new MortarRecipe(recipeId, inputs, output, time, exp, rem)));
+    ).apply(instance, MortarRecipe::new));
 
     private final List<MultiIngredient> inputs;
     private final ItemStack[] output;
     private final int processingTime;
 
-    public MortarRecipe(ResourceLocation recipeId, List<MultiIngredient> inputs, ItemStack[] output, int processingTime, float exp, List<MultiIngredient> remainderConsumer) {
-        super(recipeId, remainderConsumer, exp);
+    public MortarRecipe(List<MultiIngredient> inputs, ItemStack[] output, int processingTime, float exp, List<MultiIngredient> remainderConsumer) {
+        super(remainderConsumer, exp);
         this.inputs = inputs;
         this.output = output;
         this.processingTime = processingTime;

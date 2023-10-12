@@ -3,7 +3,6 @@ package tnt.blockychef.common.food.recipe;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -18,7 +17,7 @@ import java.util.List;
 
 public class DoughMakerRecipe extends AbstractFoodRecipe<DoughMakerBlockEntity> {
 
-    public static final CodecRecipeSerializer.CodecProvider<DoughMakerRecipe> CODEC_PROVIDER = recipeId -> RecordCodecBuilder.create(instance -> instance.group(
+    public static final Codec<DoughMakerRecipe> CODEC_PROVIDER = RecordCodecBuilder.create(instance -> instance.group(
             MultiIngredient.CODEC.listOf().fieldOf("inputs").forGetter(DoughMakerRecipe::getInputs),
             Codecs.SIMPLE_ITEMSTACK_CODEC.listOf().xmap(
                     list -> list.toArray(ItemStack[]::new),
@@ -27,14 +26,14 @@ public class DoughMakerRecipe extends AbstractFoodRecipe<DoughMakerBlockEntity> 
             Codec.INT.fieldOf("processingTime").forGetter(DoughMakerRecipe::getProcessingTime),
             resolveExperience(),
             resolveRemainderConsumer()
-    ).apply(instance, (in, out, time, exp, rem) -> new DoughMakerRecipe(recipeId, in, out, time, exp, rem)));
+    ).apply(instance, DoughMakerRecipe::new));
 
     private final List<MultiIngredient> inputs;
     private final ItemStack[] outputs;
     private final int processingTime;
 
-    public DoughMakerRecipe(ResourceLocation recipeId, List<MultiIngredient> inputs, ItemStack[] outputs, int processingTime, float experience, List<MultiIngredient> remainderConsumer) {
-        super(recipeId, remainderConsumer, experience);
+    public DoughMakerRecipe(List<MultiIngredient> inputs, ItemStack[] outputs, int processingTime, float experience, List<MultiIngredient> remainderConsumer) {
+        super(remainderConsumer, experience);
         this.inputs = inputs;
         this.outputs = outputs;
         this.processingTime = processingTime;

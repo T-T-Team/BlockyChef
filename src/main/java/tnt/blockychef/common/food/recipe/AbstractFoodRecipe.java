@@ -4,9 +4,7 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 
 import java.util.Collections;
@@ -14,12 +12,10 @@ import java.util.List;
 
 public abstract class AbstractFoodRecipe<C extends Container> implements Recipe<C> {
 
-    private final ResourceLocation id;
     private final float experience;
     private final List<MultiIngredient> outputConsumers;
 
-    protected AbstractFoodRecipe(ResourceLocation id, List<MultiIngredient> outputConsumers, float experience) throws JsonParseException {
-        this.id = id;
+    protected AbstractFoodRecipe(List<MultiIngredient> outputConsumers, float experience) throws JsonParseException {
         this.outputConsumers = outputConsumers;
         this.experience = experience;
         if (experience < 0.0F) {
@@ -44,21 +40,11 @@ public abstract class AbstractFoodRecipe<C extends Container> implements Recipe<
     }
 
     @Override
-    public ResourceLocation getId() {
-        return this.id;
-    }
-
-    @Override
     public boolean canCraftInDimensions(int x, int y) {
         return true;
     }
 
     void throwValidationError(String message) {
-        throw new JsonSyntaxException(String.format("Error in recipe [%s, %s]: %s", this.getType(), this.getId(), message));
-    }
-
-    @Override
-    public String toString() {
-        return getId().toString();
+        throw new JsonSyntaxException(String.format("Error in recipe [%s]: %s", this.getType(), message));
     }
 }

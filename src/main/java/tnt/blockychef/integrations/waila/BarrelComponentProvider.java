@@ -1,4 +1,4 @@
-package tnt.blockychef.integrations.waila;
+/*package tnt.blockychef.integrations.waila;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
@@ -59,3 +59,4 @@ public enum BarrelComponentProvider implements IBlockComponentProvider, IServerD
         return WailaIntegrationPlugin.BARREL;
     }
 }
+*/

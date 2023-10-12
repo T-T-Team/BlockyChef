@@ -22,8 +22,8 @@ import java.util.List;
 
 public class CuttingBoardRecipe extends AbstractFoodRecipe<CuttingBoardBlockEntity> {
 
-    public static final CodecRecipeSerializer.CodecProvider<CuttingBoardRecipe> CODEC_PROVIDER = recipeId -> RecordCodecBuilder.create(instance -> instance.group(
-            Codecs.INGREDIENT_CODEC.fieldOf("input").forGetter(t -> t.input),
+    public static final Codec<CuttingBoardRecipe> CODEC_PROVIDER = RecordCodecBuilder.create(instance -> instance.group(
+            Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(t -> t.input),
             ResourceLocation.CODEC.comapFlatMap(
                     location -> RecipeProcessingTypes.getById(location).map(DataResult::success).orElse(DataResult.error(() -> "Unknown recipe processing type '" + location + "'")),
                     RecipeProcessingType::getLocation
@@ -35,15 +35,15 @@ public class CuttingBoardRecipe extends AbstractFoodRecipe<CuttingBoardBlockEnti
             ).fieldOf("outputs").forGetter(CuttingBoardRecipe::getOutputs),
             resolveExperience(),
             resolveRemainderConsumer()
-    ).apply(instance, (input, type, time, outputs, exp, rem) -> new CuttingBoardRecipe(recipeId, input, type, time, outputs, exp, rem)));
+    ).apply(instance, CuttingBoardRecipe::new));
 
     private final Ingredient input;
     private final RecipeProcessingType processingType;
     private final int processingTime;
     private final ItemStack[] outputs;
 
-    private CuttingBoardRecipe(ResourceLocation id, Ingredient input, RecipeProcessingType processingType, int processingTime, ItemStack[] outputs, float experience, List<MultiIngredient> remainderConsumer) {
-        super(id, remainderConsumer, experience);
+    private CuttingBoardRecipe(Ingredient input, RecipeProcessingType processingType, int processingTime, ItemStack[] outputs, float experience, List<MultiIngredient> remainderConsumer) {
+        super(remainderConsumer, experience);
         this.processingType = processingType;
         this.processingTime = processingTime;
         this.outputs = outputs;
@@ -100,22 +100,5 @@ public class CuttingBoardRecipe extends AbstractFoodRecipe<CuttingBoardBlockEnti
     @Override
     public RecipeSerializer<?> getSerializer() {
         return BlockyChefRecipeSerializers.CUTTING_BOARD_RECIPE_SERIALIZER;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        CuttingBoardRecipe recipe = (CuttingBoardRecipe) o;
-
-        return getId().equals(recipe.getId()) && processingType.equals(recipe.processingType);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getId().hashCode();
-        result = 31 * result + processingType.hashCode();
-        return result;
     }
 }

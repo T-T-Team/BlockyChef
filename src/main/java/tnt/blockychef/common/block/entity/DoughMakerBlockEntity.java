@@ -3,6 +3,7 @@ package tnt.blockychef.common.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -25,7 +26,7 @@ public class DoughMakerBlockEntity extends RecipeRememberingBlockEntity<DoughMak
     public static final int[] INPUTS = {0, 1, 2, 3, 4, 5};
     public static final int[] OUTPUTS = {6, 7, 8};
 
-    private DoughMakerRecipe activeRecipe;
+    private RecipeHolder<DoughMakerRecipe> activeRecipe;
     private boolean processing;
     private int processingTime;
     private int[] colors;
@@ -41,18 +42,18 @@ public class DoughMakerBlockEntity extends RecipeRememberingBlockEntity<DoughMak
             return;
         }
         RecipeManager manager = level.getRecipeManager();
-        if (manager.getRecipeFor(BlockyChefRecipeTypes.DOUGH_MAKER_RECIPE, doughMaker, level, doughMaker.activeRecipe.getId()).isEmpty()) {
+        if (manager.getRecipeFor(BlockyChefRecipeTypes.DOUGH_MAKER_RECIPE, doughMaker, level, doughMaker.activeRecipe.id()).isEmpty()) {
             doughMaker.setRecipe(null);
             return;
         }
-        ItemStack[] outputs = doughMaker.activeRecipe.getOutputs();
+        ItemStack[] outputs = doughMaker.activeRecipe.value().getOutputs();
         if (!MenuInventoryHelper.canFitItems(outputs, doughMaker, OUTPUTS)) {
             doughMaker.setRecipe(null);
             return;
         }
-        if (++doughMaker.processingTime >= doughMaker.activeRecipe.getProcessingTime() && !level.isClientSide) {
+        if (++doughMaker.processingTime >= doughMaker.activeRecipe.value().getProcessingTime() && !level.isClientSide) {
             doughMaker.processingTime = 0;
-            doughMaker.consumeIngredientsAndApplyCraftRemainder(doughMaker.activeRecipe, INPUTS, OUTPUTS, in -> doughMaker.activeRecipe.getInputs().forEach(multiIngredient -> multiIngredient.consume(doughMaker, in)));
+            doughMaker.consumeIngredientsAndApplyCraftRemainder(doughMaker.activeRecipe.value(), INPUTS, OUTPUTS, in -> doughMaker.activeRecipe.value().getInputs().forEach(multiIngredient -> multiIngredient.consume(doughMaker, in)));
             ItemStack[] assembled = Arrays.stream(outputs).map(ItemStack::copy).toArray(ItemStack[]::new);
             MenuInventoryHelper.insertItems(assembled, doughMaker, OUTPUTS);
             doughMaker.storeRecipe(doughMaker.activeRecipe);
@@ -128,7 +129,7 @@ public class DoughMakerBlockEntity extends RecipeRememberingBlockEntity<DoughMak
         if (activeRecipe == null || !processing)
             return 0.0F;
         int oldTick = Math.max(0, processingTime - 1);
-        int total = activeRecipe.getProcessingTime();
+        int total = activeRecipe.value().getProcessingTime();
         float f0 = oldTick / (float) total;
         float f1 = processingTime / (float) total;
         return Interpolation.linear(f0, f1, partialTicks);
@@ -138,7 +139,7 @@ public class DoughMakerBlockEntity extends RecipeRememberingBlockEntity<DoughMak
         if (level == null)
             return;
         RecipeManager manager = level.getRecipeManager();
-        Optional<DoughMakerRecipe> optional = manager.getRecipeFor(BlockyChefRecipeTypes.DOUGH_MAKER_RECIPE, this, level);
+        Optional<RecipeHolder<DoughMakerRecipe>> optional = manager.getRecipeFor(BlockyChefRecipeTypes.DOUGH_MAKER_RECIPE, this, level);
         setRecipe(optional.orElse(null));
     }
 
@@ -155,7 +156,7 @@ public class DoughMakerBlockEntity extends RecipeRememberingBlockEntity<DoughMak
         refreshRecipe();
     }
 
-    private void setRecipe(@Nullable DoughMakerRecipe recipe) {
+    private void setRecipe(@Nullable RecipeHolder<DoughMakerRecipe> recipe) {
         if (activeRecipe != recipe) {
             activeRecipe = recipe;
             processing = false;

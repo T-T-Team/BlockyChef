@@ -1,4 +1,4 @@
-package tnt.blockychef.integrations.waila.element;
+/*package tnt.blockychef.integrations.waila.element;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -39,3 +39,4 @@ public class FluidStackElementExt extends Element {
         DisplayHelper.INSTANCE.drawText(guiGraphics, Component.translatable("label.blockychef.fluid_amount", fluid.getAmount()), x + size.y + 3, y + 10, fluidColor);
     }
 }
+*/
