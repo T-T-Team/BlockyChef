@@ -189,7 +189,7 @@ public class ThirstOverlay implements IGuiOverlay {
         float value = exhaustion / 4.0F;
         setAlpha(0.75F);
         int xSize = (int) (value * 81);
-        graphics.blit(TEXTURE, left - xSize, top, left, top + 9, 81 - xSize, 18, 81, 27, 256, 256);
+        graphics.blit(TEXTURE, left - xSize, top, 81 - xSize, 18, xSize, 9);
         resetAlpha();
     }
 
