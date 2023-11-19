@@ -1,4 +1,4 @@
-/*package tnt.blockychef.integrations.waila;
+package tnt.blockychef.integrations.waila;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -57,4 +57,3 @@ public enum JuicerComponentProvider implements IBlockComponentProvider, IServerD
         return WailaIntegrationPlugin.JUICER;
     }
 }
-*/

@@ -1,4 +1,4 @@
-/*package tnt.blockychef.integrations.waila;
+package tnt.blockychef.integrations.waila;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -11,7 +11,6 @@ import snownee.jade.api.IServerDataProvider;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 import snownee.jade.api.ui.IElementHelper;
-import snownee.jade.impl.ui.ProgressArrowElement;
 import tnt.blockychef.common.block.entity.DryingRackBlockEntity;
 import tnt.blockychef.common.food.recipe.DryingRecipe;
 
@@ -34,7 +33,7 @@ public enum DryingRackComponentProvider implements IBlockComponentProvider, ISer
                 ItemStack input = ItemStack.of(tag.getCompound("input"));
                 ItemStack output = ItemStack.of(tag.getCompound("output"));
                 tooltip.add(helper.item(input));
-                tooltip.append(new ProgressArrowElement(time / (float) total));
+                tooltip.append(helper.progress(time / (float) total));
                 tooltip.append(helper.item(output));
             }
         }
@@ -59,4 +58,3 @@ public enum DryingRackComponentProvider implements IBlockComponentProvider, ISer
         return WailaIntegrationPlugin.DRYING_RACK;
     }
 }
-*/

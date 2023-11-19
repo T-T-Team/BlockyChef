@@ -1,7 +1,6 @@
-/*package tnt.blockychef.integrations.waila;
+package tnt.blockychef.integrations.waila;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtUtils;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -14,7 +13,6 @@ import snownee.jade.api.IServerDataProvider;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
 import snownee.jade.api.ui.IElementHelper;
-import snownee.jade.impl.ui.ProgressArrowElement;
 import tnt.blockychef.common.block.entity.BarrelBlockEntity;
 import tnt.tntlib.api.serialization.NbtUtil;
 
@@ -38,7 +36,7 @@ public enum BarrelComponentProvider implements IBlockComponentProvider, IServerD
         IElementHelper helper = IElementHelper.get();
         iTooltip.add(CommonComponents.EMPTY);
         inputs.forEach(in -> iTooltip.append(helper.item(in)));
-        iTooltip.append(new ProgressArrowElement(fermentTime / (float) totalFermentTime));
+        iTooltip.append(helper.progress(fermentTime / (float) totalFermentTime));
         outputs.forEach(out -> iTooltip.append(helper.item(out)));
     }
 
@@ -59,4 +57,3 @@ public enum BarrelComponentProvider implements IBlockComponentProvider, IServerD
         return WailaIntegrationPlugin.BARREL;
     }
 }
-*/

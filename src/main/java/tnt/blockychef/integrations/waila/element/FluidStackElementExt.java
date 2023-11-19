@@ -1,12 +1,10 @@
-/*package tnt.blockychef.integrations.waila.element;
+package tnt.blockychef.integrations.waila.element;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.phys.Vec2;
 import net.minecraftforge.fluids.FluidStack;
-import org.jetbrains.annotations.Nullable;
 import snownee.jade.api.fluid.JadeFluidObject;
 import snownee.jade.api.ui.Element;
 import snownee.jade.overlay.DisplayHelper;
@@ -39,4 +37,3 @@ public class FluidStackElementExt extends Element {
         DisplayHelper.INSTANCE.drawText(guiGraphics, Component.translatable("label.blockychef.fluid_amount", fluid.getAmount()), x + size.y + 3, y + 10, fluidColor);
     }
 }
-*/
