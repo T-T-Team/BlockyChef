@@ -13,6 +13,7 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.minecraftforge.client.event.RenderTooltipEvent;
+import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.thirst.DrinkProperties;
 
 public final class ThirstTooltipHandler {
@@ -42,11 +43,16 @@ public final class ThirstTooltipHandler {
 
         @Override
         public int getHeight() {
-            return tooltip.renderSaturation ? 20 : 13;
+            boolean disabled = BlockyChef.config.thirst.thirstDisabled;
+            return disabled ? 0 : tooltip.renderSaturation ? 20 : 13;
         }
 
         @Override
         public int getWidth(Font font) {
+            boolean disabled = BlockyChef.config.thirst.thirstDisabled;
+            if (disabled) {
+                return 0;
+            }
             int hydration = tooltip.hydrationLevel / 2 * 9;
             if (tooltip.hydrationDescriptor != null) {
                 hydration += font.width(tooltip.hydrationDescriptor);
@@ -62,7 +68,8 @@ public final class ThirstTooltipHandler {
         @Override
         public void renderImage(Font font, int x, int y, GuiGraphics graphics) {
             ItemStack stack = tooltip.stack;
-            if (shouldIgnoreRender(stack)) {
+            boolean disabled = BlockyChef.config.thirst.thirstDisabled;
+            if (shouldIgnoreRender(stack) || disabled) {
                 return;
             }
             Minecraft minecraft = Minecraft.getInstance();

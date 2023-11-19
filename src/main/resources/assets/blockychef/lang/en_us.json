@@ -682,8 +682,7 @@
   "config.blockychef.option.crops": "Crops Config",
   "config.blockychef.option.restrictBonemealUsage": "Restrict bonemeal usage",
   "config.blockychef.option.thirst": "Thirst Config",
-  "config.blockychef.option.thirstFromFreshWaterChance": "Fresh water thirst chance",
-  "config.blockychef.option.thirstFromSaltWaterChance": "Salt water thirst chance",
+  "config.blockychef.option.thirstDisabled": "Disable thirst",
   "config.screen.blockychef-client": "BlockyChef Client Configuration",
   "config.blockychef-client.option.forceFancyThirstOverlay": "Fancy thirst overlay",
 

@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 import org.lwjgl.opengl.GL11;
+import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.init.BlockyChefMobEffects;
 import tnt.blockychef.common.thirst.DrinkProperties;
 import tnt.blockychef.common.thirst.PlayerThirstStatsProvider;
@@ -38,6 +39,9 @@ public class ThirstOverlay implements IGuiOverlay {
         minecraft.getProfiler().push("blockychef:thirst");
         Player player = (Player) minecraft.getCameraEntity();
 
+        boolean disabled = BlockyChef.config.thirst.thirstDisabled;
+        if (disabled)
+            return;
         boolean isMounted = player.getVehicle() instanceof LivingEntity;
         if (!(!isMounted && !gui.getMinecraft().options.hideGui && gui.shouldDrawSurvivalElements())) {
             return;

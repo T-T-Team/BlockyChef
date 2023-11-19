@@ -1,8 +1,8 @@
 package tnt.blockychef.config;
 
+import tnt.blockychef.BlockyChef;
 import tnt.tntlib.api.module.configuration.config.Config;
 import tnt.tntlib.api.module.configuration.config.Configurable;
-import tnt.blockychef.BlockyChef;
 
 @Config(id = BlockyChef.MODID, filename = "blockychef/blockychef")
 public final class BlockyChefConfig {

@@ -11,6 +11,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.init.BlockyChefDamageTypes;
 import tnt.blockychef.network.NetworkManager;
 import tnt.blockychef.network.message.S2C_SendThirstData;
@@ -31,6 +32,9 @@ public class PlayerThirstStats implements ThirstStats {
     public void tick() {
         Level level = player.level();
         Difficulty difficulty = level.getDifficulty();
+        if (BlockyChef.config.thirst.thirstDisabled) {
+            return;
+        }
         if (exhaustion > 4.0F) {
             exhaustion -= 4.0F;
             if (saturation > 0.0F) {
