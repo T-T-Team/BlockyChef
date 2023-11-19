@@ -73,9 +73,9 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
             for (StoveCookingSlot slot : stove.slots) {
                 slot.updateSlot();
             }
-            if (level.getGameTime() % 2L == 0L) {
-                stove.consumeEnergy();
-            }
+        }
+        if (stove.shouldConsumeEnergy(level)) {
+            stove.consumeEnergy();
         }
     }
 
@@ -112,6 +112,10 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
 
     public boolean hasEnergy() {
         return energyBuffer > 0;
+    }
+
+    public boolean shouldConsumeEnergy(Level level) {
+        return hasEnergy() && level.getGameTime() % 2L == 0L && (stoveHeatSource.isProducingHeat() || externalHeatSource.isProducingHeat());
     }
 
     public int getStoredEnergyAmount() {
@@ -218,6 +222,7 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
         }
         float f = source.getHeat() + stepSize;
         source.set(f, decreased);
+        BlockEntityHelper.sendBlockEntityClientData(this);
         setChanged();
     }
 
