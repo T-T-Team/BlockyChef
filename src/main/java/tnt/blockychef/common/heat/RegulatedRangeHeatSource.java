@@ -5,12 +5,17 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+import java.util.function.BooleanSupplier;
+
 public class RegulatedRangeHeatSource implements RegulatedHeatSource {
 
     private final RegulationHandler regulationHandler;
     private final float minValue;
     private final float maxValue;
     private float amount;
+
+    private BooleanSupplier heatingCondition = () -> true;
 
     public RegulatedRangeHeatSource(RegulationHandler regulationHandler, float minValue, float maxValue) {
         this.regulationHandler = regulationHandler;
@@ -20,16 +25,21 @@ public class RegulatedRangeHeatSource implements RegulatedHeatSource {
 
     @Override
     public boolean isProducingHeat() {
-        return amount > 0;
+        return heatingCondition.getAsBoolean() && amount > 0;
     }
 
     @Override
     public float getHeat(@Nullable Direction direction) {
+        return heatingCondition.getAsBoolean() ? amount : 0.0F;
+    }
+
+    @Override
+    public float getConfiguredHeat(@Nullable Direction direction) {
         return amount;
     }
 
-    public float getHeat() {
-        return amount;
+    public void addHeatingCondition(BooleanSupplier heatingCondition) {
+        this.heatingCondition = Objects.requireNonNull(heatingCondition);
     }
 
     public void set(float amount, boolean decrease) {

@@ -50,7 +50,9 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
         RegulationHandler stoveHandler = new StoveRegulationHandler(this::handleStoveHeatEvent);
         RegulationHandler externalHandler = new StoveRegulationHandler(this::handleExternalHeatEvent);
         this.stoveHeatSource = new RegulatedRangeHeatSource(stoveHandler, 0, HeatValues.MAX_TEMPERATURE);
+        this.stoveHeatSource.addHeatingCondition(this::hasEnergy);
         this.externalHeatSource = new RegulatedRangeHeatSource(externalHandler, 0, HeatValues.MAX_TEMPERATURE);
+        this.externalHeatSource.addHeatingCondition(this::hasEnergy);
         this.slots = ArrayUtils.indexedFill(new StoveCookingSlot[INPUTS.length], index -> new StoveCookingSlot(index, this));
         this.colors = new int[1];
         Arrays.fill(this.colors, Integer.MIN_VALUE);
@@ -58,7 +60,7 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
 
     public static void tick(Level level, BlockPos pos, BlockState state, StoveBlockEntity stove) {
         // Temperature tick
-        stove.temperature = HeatHelper.regulateHeat(stove.temperature, stove.stoveHeatSource.getHeat(), 0.01F);
+        stove.temperature = HeatHelper.regulateHeat(stove.temperature, stove.stoveHeatSource.getHeat(null), 0.01F);
         // Fuel slot tick
         ItemStack fuelStack = stove.getItem(FUEL[0]);
         if (!fuelStack.isEmpty() && stove.shouldReplenishEnergyBuffer()) {
@@ -220,7 +222,7 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
         if (decreased) {
             stepSize = -stepSize;
         }
-        float f = source.getHeat() + stepSize;
+        float f = source.getConfiguredHeat(null) + stepSize;
         source.set(f, decreased);
         BlockEntityHelper.sendBlockEntityClientData(this);
         setChanged();

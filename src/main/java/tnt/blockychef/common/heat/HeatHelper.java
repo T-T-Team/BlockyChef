@@ -15,7 +15,6 @@ import tnt.blockychef.common.init.BlockyChefTags;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public final class HeatHelper {
 
@@ -27,14 +26,6 @@ public final class HeatHelper {
         DEFAULT_HEAT_SOURCES.add(new BlockHeatSourceProvider(BlockyChefTags.Blocks.STRONG_CONSTANT_HEAT, HeatValues.STRONG_HEAT));
         DEFAULT_HEAT_SOURCES.add(new VariableBlockHeatSourceProvider(BlockyChefTags.Blocks.WEAK_VARIABLE_HEAT, HeatValues.WEAK_HEAT, BlockStateProperties.LIT));
         DEFAULT_HEAT_SOURCES.add(new VariableBlockHeatSourceProvider(BlockyChefTags.Blocks.STRONG_VARIABLE_HEAT, HeatValues.STRONG_HEAT, BlockStateProperties.LIT));
-    }
-
-    public static float getHeatValue(Level level, BlockPos pos, @Nullable Direction direction) {
-        HeatSource heatSource = getHeatSource(level, pos, direction);
-        if (isEmpty(heatSource)) {
-            return 0.0F;
-        }
-        return heatSource.getHeat(direction);
     }
 
     public static HeatSource getHeatSource(Level level, BlockPos pos, @Nullable Direction direction) {

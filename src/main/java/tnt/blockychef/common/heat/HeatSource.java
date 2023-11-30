@@ -8,6 +8,10 @@ public interface HeatSource {
 
     float getHeat(@Nullable Direction direction);
 
+    default float getConfiguredHeat(@Nullable Direction direction) {
+        return getHeat(direction);
+    }
+
     default float getHeatLimit() {
         return 10.0F;
     }

@@ -57,7 +57,7 @@ public class StoveScreen extends AbstractContainerScreen<StoveMenu> {
         GraphicsHelper.drawRightAlignedText(pGuiGraphics, Component.literal(String.valueOf(HeatValues.MAX_TEMPERATURE)), font, 163, 17, 0x404040);
         GraphicsHelper.drawRightAlignedText(pGuiGraphics, Component.literal("0"), font, 163, 78, 0x404040);
 
-        float setTemperature = menu.getBlockEntity().getStoveHeatSource().getHeat();
+        float setTemperature = menu.getBlockEntity().getStoveHeatSource().getConfiguredHeat(null);
         GraphicsHelper.drawAlignedText(pGuiGraphics, Component.literal(String.format(Locale.ROOT, "%.1f", setTemperature)), font, HorizontalAlignment.RIGHT, VerticalAlignment.CENTER, 145, 17, 18, 68, 0x404040);
     }
 

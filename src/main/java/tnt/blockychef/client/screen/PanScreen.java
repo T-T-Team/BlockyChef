@@ -65,7 +65,7 @@ public class PanScreen extends AbstractContainerScreen<PanMenu> {
         GraphicsHelper.drawRightAlignedText(pGuiGraphics, Component.literal("0"), font, 163, 78, 0x404040);
 
         HeatSource heatSource = HeatHelper.getHeatSource(minecraft.level, menu.getBlockEntity().getBlockPos(), Direction.DOWN);
-        float setTemperature = heatSource.getHeat(Direction.UP);
+        float setTemperature = heatSource.getConfiguredHeat(Direction.UP);
         GraphicsHelper.drawAlignedText(pGuiGraphics, Component.literal(String.format(Locale.ROOT, "%.1f", setTemperature)), font, HorizontalAlignment.RIGHT, VerticalAlignment.CENTER, 145, 17, 18, 68, 0x404040);
     }
 
