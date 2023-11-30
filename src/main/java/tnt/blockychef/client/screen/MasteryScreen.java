@@ -94,7 +94,7 @@ public class MasteryScreen extends Screen {
 
     @Override
     public boolean mouseScrolled(double pMouseX, double pMouseY, double pDelta, double deltaY) {
-        return UiHelper.handleMouseScrolled(pDelta, scrollIndex, grid.getRows(), grid.getTotalRowCountFor(masteryCount), value -> {
+        return UiHelper.handleMouseScrolled(deltaY, scrollIndex, grid.getRows(), grid.getTotalRowCountFor(masteryCount), value -> {
             scrollIndex = value;
             init(minecraft, width, height);
         });
