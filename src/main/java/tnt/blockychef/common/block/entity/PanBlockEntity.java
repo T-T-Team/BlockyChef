@@ -16,8 +16,10 @@ import tnt.blockychef.common.heat.HeatHelper;
 import tnt.blockychef.common.heat.HeatSource;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
+import tnt.blockychef.common.init.BlockyChefTags;
 import tnt.blockychef.util.Helper;
 import tnt.tntlib.api.ArrayUtils;
+import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.blockentity.Synchronizable;
 
 import java.util.Optional;
@@ -51,19 +53,55 @@ public class PanBlockEntity extends RecipeRememberingBlockEntity<PanRecipe> impl
         return temperature;
     }
 
+    public int getOil() {
+        return oilValue;
+    }
+
+    public void oilItemChanged(ItemStack stack) {
+        if (stack.is(BlockyChefTags.Items.OIL) && oilValue < OIL_BUFFER_SIZE) {
+            oilValue += 500;
+            ItemStack returnItem = stack.getCraftingRemainingItem();
+            if (!returnItem.isEmpty()) {
+                setItem(OIL[0], returnItem);
+            }
+            setChanged();
+            BlockEntityHelper.sendBlockEntityClientData(this);
+        }
+    }
+
     @Override
     public IItemHandlerModifiable setUpInventory() {
         return new ItemStackHandler(6);
     }
 
     @Override
-    public void encodeData(CompoundTag compoundTag) {
+    protected void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
+        saveSharedData(tag);
+    }
 
+    @Override
+    public void load(CompoundTag tag) {
+        super.load(tag);
+        loadSharedData(tag);
+    }
+
+    @Override
+    public void encodeData(CompoundTag compoundTag) {
+        saveSharedData(compoundTag);
     }
 
     @Override
     public void decodeData(CompoundTag compoundTag) {
+        loadSharedData(compoundTag);
+    }
 
+    private void saveSharedData(CompoundTag nbt) {
+        nbt.putInt("oil", oilValue);
+    }
+
+    private void loadSharedData(CompoundTag nbt) {
+        oilValue = nbt.getInt("oil");
     }
 
     public static final class PanCookingSlot extends CookingSlot<PanRecipe, PanBlockEntity> {

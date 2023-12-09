@@ -709,6 +709,7 @@
   "label.blockychef.fluid_capacity": "Capacity: %s / %s",
   "label.blockychef.energy": "Energy: %s",
   "label.blockychef.temperature": "Temperature: %s",
+  "label.blockychef.oil": "Oil: %smB",
   "label.blockychef.tier.max": "MAX",
   "label.blockychef.stir": "Stir",
 

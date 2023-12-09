@@ -7,6 +7,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraftforge.fluids.FluidStack;
 import org.joml.Vector2i;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.entity.PanBlockEntity;
@@ -14,9 +15,11 @@ import tnt.blockychef.common.heat.HeatHelper;
 import tnt.blockychef.common.heat.HeatSource;
 import tnt.blockychef.common.heat.HeatValues;
 import tnt.blockychef.common.heat.RegulatedHeatSource;
+import tnt.blockychef.common.init.BlockyChefFluids;
 import tnt.blockychef.common.menu.PanMenu;
 import tnt.blockychef.network.NetworkManager;
 import tnt.blockychef.network.message.C2S_RegulateTemperature;
+import tnt.tntlib.api.FluidRenderHelper;
 import tnt.tntlib.api.GraphicsHelper;
 import tnt.tntlib.api.HorizontalAlignment;
 import tnt.tntlib.api.VerticalAlignment;
@@ -26,6 +29,7 @@ import java.util.Locale;
 public class PanScreen extends AbstractContainerScreen<PanMenu> {
 
     public static final ResourceLocation TEXTURE = BlockyChef.resource("textures/screen/pan.png");
+    private FluidStack renderStack;
     private static final Vector2i[] SLOT_POSITIONS = {
             new Vector2i(80, 8), new Vector2i(107, 34), new Vector2i(97, 65),
             new Vector2i(63, 65), new Vector2i(53, 34)
@@ -34,6 +38,7 @@ public class PanScreen extends AbstractContainerScreen<PanMenu> {
     public PanScreen(PanMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
         imageHeight = 188;
+        this.renderStack = new FluidStack(BlockyChefFluids.OIL_FLUID.get(), 0);
     }
 
     @Override
@@ -67,6 +72,8 @@ public class PanScreen extends AbstractContainerScreen<PanMenu> {
         HeatSource heatSource = HeatHelper.getHeatSource(minecraft.level, menu.getBlockEntity().getBlockPos(), Direction.DOWN);
         float setTemperature = heatSource.getConfiguredHeat(Direction.UP);
         GraphicsHelper.drawAlignedText(pGuiGraphics, Component.literal(String.format(Locale.ROOT, "%.1f", setTemperature)), font, HorizontalAlignment.RIGHT, VerticalAlignment.CENTER, 145, 17, 18, 68, 0x404040);
+
+        pGuiGraphics.blit(TEXTURE, 8, 24, 200, 176, 0, 16, 51, 256, 256);
     }
 
     @Override
@@ -95,6 +102,13 @@ public class PanScreen extends AbstractContainerScreen<PanMenu> {
         graphics.fill(leftPos + 164, topPos + top, leftPos + 168, topPos + height, 0xFF666666);
         //graphics.fill(leftPos + 8, topPos + top + (int) ((height - top) * pan.getEnergyBufferValue()), leftPos + 12, topPos + height, 0xFFE2B100);
         graphics.fill(leftPos + 164, topPos + top + (int) ((height - top) * (1.0F - pan.getTemperature() / HeatValues.MAX_TEMPERATURE)), leftPos + 168, topPos + height, 0xFFFF0000);
+
+        // Oil
+        int oil = pan.getOil();
+        if (oil > 0) {
+            this.renderStack.setAmount(oil);
+            FluidRenderHelper.renderFluid(renderStack, graphics, leftPos + 8, topPos + 24, 16, 51, PanBlockEntity.OIL_BUFFER_SIZE);
+        }
     }
 
     @Override
@@ -108,6 +122,10 @@ public class PanScreen extends AbstractContainerScreen<PanMenu> {
         }*/
         if (mouseX >= leftPos + 164 && mouseX <= leftPos + 168 && mouseY >= topPos + 16 && mouseY <= topPos + 85) {
             pGuiGraphics.renderTooltip(font, Component.translatable("label.blockychef.temperature", String.format(Locale.ROOT, "%.1f", pan.getTemperature())), mouseX, mouseY);
+        }
+        int oilValue = pan.getOil();
+        if (mouseX >= leftPos + 7 && mouseX <= leftPos + 24 && mouseY >= topPos + 23 && mouseY <= topPos + 75) {
+            pGuiGraphics.renderTooltip(font, Component.translatable("label.blockychef.oil", oilValue), mouseX, mouseY);
         }
     }
 
