@@ -11,6 +11,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
+import tnt.blockychef.BlockyChef;
+import tnt.blockychef.common.food.recipe.CookingConfiguration;
 import tnt.blockychef.common.food.recipe.PanRecipe;
 import tnt.blockychef.common.heat.HeatHelper;
 import tnt.blockychef.common.heat.HeatSource;
@@ -43,6 +45,28 @@ public class PanBlockEntity extends RecipeRememberingBlockEntity<PanRecipe> impl
     public static void tick(Level level, BlockPos pos, BlockState state, PanBlockEntity pan) {
         HeatSource source = HeatHelper.getHeatSource(level, pos, Direction.DOWN);
         pan.temperature = HeatHelper.regulateHeat(pan.temperature, source.getHeat(Direction.UP), 0.01F);
+
+        if (pan.canCook()) {
+            for (PanCookingSlot slot : pan.slots) {
+                slot.updateSlot(pan.oilValue > 0);
+            }
+            pan.consumeOil(level);
+        }
+    }
+
+    public boolean canCook() {
+        return temperature > 0;
+    }
+
+    public void consumeOil(Level level) {
+        if (level.getGameTime() % 6L == 0L) {
+            for (int slotIndex : INPUTS) {
+                ItemStack itemStack = getItem(slotIndex);
+                if (!itemStack.isEmpty()) {
+                    oilValue = Math.max(0, oilValue - 1);
+                }
+            }
+        }
     }
 
     public PanCookingSlot[] getSlots() {
@@ -67,6 +91,13 @@ public class PanBlockEntity extends RecipeRememberingBlockEntity<PanRecipe> impl
             setChanged();
             BlockEntityHelper.sendBlockEntityClientData(this);
         }
+    }
+
+    public void refreshSlot(int index) {
+        if (index >= 0 && index < slots.length) {
+            slots[index].loadRecipe(level.getRecipeManager());
+        }
+        setChanged();
     }
 
     @Override
@@ -104,10 +135,52 @@ public class PanBlockEntity extends RecipeRememberingBlockEntity<PanRecipe> impl
         oilValue = nbt.getInt("oil");
     }
 
-    public static final class PanCookingSlot extends CookingSlot<PanRecipe, PanBlockEntity> {
+    public final class PanCookingSlot extends CookingSlot<PanRecipe, PanBlockEntity> {
 
         public PanCookingSlot(int slotIndex, PanBlockEntity blockEntity) {
             super(slotIndex, blockEntity);
+        }
+
+        @Override
+        protected void recipeLoaded(RecipeHolder<PanRecipe> recipe) {
+            this.totalTimer = recipe.value().getConfiguration().time();
+        }
+
+        public boolean isLocked() {
+            return PanBlockEntity.this.canCook() && recipe != null && !recipe.value().isBurning() && BlockyChef.config.cooking.lockCookingSlots;
+        }
+
+        public void updateSlot(boolean hasOil) {
+            ItemStack stack = getItem();
+            if (stack.isEmpty() || recipe == null) {
+                return;
+            }
+            CookingConfiguration configuration = recipe.value().getConfiguration();
+            float temperature = PanBlockEntity.this.temperature;
+            if (configuration.isCooking(temperature)) {
+                float burnScale = 0.0F;
+                if (configuration.isBurning(temperature)) {
+                    float diff = temperature - configuration.maxTemperature();
+                    burnScale = diff * (0.015F * configuration.burnSpeed());
+                } else if (!hasOil && !recipe.value().isBurning()) {
+                    burnScale += (0.015F * 5);
+                }
+
+                if ((burnAmount += burnScale) >= 1.0F) {
+                    ItemStack burnResult = recipe.value().getResult().copy();
+                    PanBlockEntity.this.setItem(getSlotIndex(), burnResult);
+                    loadRecipe(PanBlockEntity.this.level.getRecipeManager());
+                    return;
+                }
+
+                if (++progressionTimer >= totalTimer) {
+                    ItemStack result = recipe.value().getResult().copy();
+                    PanBlockEntity pan = PanBlockEntity.this;
+                    pan.setItem(getSlotIndex(), result);
+                    pan.storeRecipe(recipe);
+                    loadRecipe(pan.level.getRecipeManager());
+                }
+            }
         }
 
         @Override

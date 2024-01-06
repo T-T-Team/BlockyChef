@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pan",
+  "input": {
+    "item": "blockychef:fried_potato_slice"
+  },
+  "result": {
+    "item": "blockychef:burnt_potato_slice"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_potato_slice"
+  },
+  "overcooking": true,
+  "configuration": {
+    "time": 400,
+    "minTemperature": 0.10,
+    "maxTemperature": 10.0,
+    "burnSpeed": 0.8
+  }
+}

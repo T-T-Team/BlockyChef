@@ -146,7 +146,7 @@ public final class Registry {
         helper.register("juicing", CodecRecipeSerializer.forCodec(JuicerRecipe.CODEC_PROVIDER));
         helper.register("mixer", CodecRecipeSerializer.forCodec(MixerRecipe.CODEC));
         helper.register("stove", CodecRecipeSerializer.forCodec(StoveRecipe.CODEC));
-        helper.register("pan", CodecRecipeSerializer.forCodec(null)); // TODO
+        helper.register("pan", CodecRecipeSerializer.forCodec(PanRecipe.CODEC));
     }
 
     private static void registerFeatures(RegisterEvent.RegisterHelper<Feature<?>> helper) {

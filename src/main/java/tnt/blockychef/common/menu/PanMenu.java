@@ -53,7 +53,7 @@ public class PanMenu extends AbstractBlockEntityMenu<PanBlockEntity> {
 
     private void slotChanged(AbstractContainerMenu menu, int index, ItemStack stack) {
         if (index >= 0 && index < PanBlockEntity.INPUTS.length) {
-            //blockEntity.refreshSlot(index);
+            blockEntity.refreshSlot(index);
         }
         if (index == PanBlockEntity.OIL[0]) {
             blockEntity.oilItemChanged(stack);

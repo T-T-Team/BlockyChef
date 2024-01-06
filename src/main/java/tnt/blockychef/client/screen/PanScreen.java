@@ -117,9 +117,6 @@ public class PanScreen extends AbstractContainerScreen<PanMenu> {
         super.render(pGuiGraphics, mouseX, mouseY, pPartialTick);
         renderTooltip(pGuiGraphics, mouseX, mouseY);
         PanBlockEntity pan = menu.getBlockEntity();
-        /*if (mouseX >= leftPos + 8 && mouseX <= leftPos + 12 && mouseY >= topPos + 16 && mouseY <= topPos + 85) {
-            pGuiGraphics.renderTooltip(font, Component.translatable("label.blockychef.energy", pan.getStoredEnergyAmount()), mouseX, mouseY);
-        }*/
         if (mouseX >= leftPos + 164 && mouseX <= leftPos + 168 && mouseY >= topPos + 16 && mouseY <= topPos + 85) {
             pGuiGraphics.renderTooltip(font, Component.translatable("label.blockychef.temperature", String.format(Locale.ROOT, "%.1f", pan.getTemperature())), mouseX, mouseY);
         }
