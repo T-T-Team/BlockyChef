@@ -18,10 +18,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.lwjgl.glfw.GLFW;
 import tnt.blockychef.BlockyChef;
-import tnt.blockychef.client.render.block.DryingRackBlockEntityRenderer;
-import tnt.blockychef.client.render.block.GraterBlockEntityRenderer;
-import tnt.blockychef.client.render.block.JuicerBlockEntityRenderer;
-import tnt.blockychef.client.render.block.MixerBlockEntityRenderer;
+import tnt.blockychef.client.render.block.*;
 import tnt.blockychef.client.render.thirst.ThirstOverlay;
 import tnt.blockychef.client.render.thirst.ThirstTooltipHandler;
 import tnt.blockychef.client.screen.*;
@@ -90,6 +87,7 @@ public final class BlockyChefClient {
         event.registerBlockEntityRenderer(BlockyChefBlockEntities.GRATER, GraterBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(BlockyChefBlockEntities.JUICER, JuicerBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(BlockyChefBlockEntities.MIXER, MixerBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(BlockyChefBlockEntities.PAN, PanBlockEntityRenderer::new);
     }
 
     private void registerScreenFactories() {
