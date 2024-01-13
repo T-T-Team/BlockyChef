@@ -756,6 +756,7 @@
   "jei.recipe_category.blockychef.mixer": "Mixer",
   "jei.recipe_category.blockychef.pasta_machine": "Pasta Machine",
   "jei.recipe_category.blockychef.stove": "Baking",
+  "jei.recipe_category.blockychef.pan": "Frying",
 
   "config.jade.plugin_blockychef.drying_rack": "Drying Rack",
   "config.jade.plugin_blockychef.juicer": "Juicer",

@@ -47,7 +47,7 @@ public class StoveBlock extends DyeableBlock implements EntityBlock, HeatSourceP
             }
             return InteractionResult.SUCCESS;
         }
-        return InteractionResult.PASS;
+        return InteractionResult.CONSUME;
     }
 
     @Override

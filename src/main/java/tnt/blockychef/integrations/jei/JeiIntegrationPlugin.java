@@ -47,6 +47,7 @@ public class JeiIntegrationPlugin implements IModPlugin {
     static final RecipeType<MixerRecipe> MIXER = new RecipeType<>(BlockyChef.resource("mixer"), MixerRecipe.class);
     static final RecipeType<FluidExtraction> FLUID_EXTRACTION = new RecipeType<>(BlockyChef.resource("fluid_extraction"), FluidExtraction.class);
     static final RecipeType<StoveRecipe> STOVE = new RecipeType<>(BlockyChef.resource("stove"), StoveRecipe.class);
+    static final RecipeType<PanRecipe> PAN = new RecipeType<>(BlockyChef.resource("pan"), PanRecipe.class);
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
@@ -64,6 +65,7 @@ public class JeiIntegrationPlugin implements IModPlugin {
         registration.addRecipes(MIXER, getRecipes(BlockyChefRecipeTypes.MIXER_RECIPE));
         registration.addRecipes(FLUID_EXTRACTION, BlockyChef.EXTRACTION_MANAGER.getLoadedExtractionRecipes());
         registration.addRecipes(STOVE, getRecipes(BlockyChefRecipeTypes.STOVE_RECIPE));
+        registration.addRecipes(PAN, getRecipes(BlockyChefRecipeTypes.PAN_RECIPE));
     }
 
     @Override
@@ -83,7 +85,8 @@ public class JeiIntegrationPlugin implements IModPlugin {
                 new JuicerRecipeCategory(helper),
                 new MixerRecipeCategory(helper),
                 new FluidExtractionRecipeCategory(helper),
-                new StoveRecipeCategory(helper)
+                new StoveRecipeCategory(helper),
+                new PanRecipeCategory(helper)
         );
     }
 
@@ -132,6 +135,7 @@ public class JeiIntegrationPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.JUICER), FLUID_EXTRACTION);
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.MIXER), FLUID_EXTRACTION);
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.STOVE), STOVE);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.PAN), PAN);
     }
 
     @Override

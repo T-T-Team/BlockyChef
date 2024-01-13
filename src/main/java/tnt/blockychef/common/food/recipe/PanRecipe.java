@@ -51,6 +51,15 @@ public class PanRecipe extends AbstractFoodRecipe<PanBlockEntity> implements Bur
         return configuration;
     }
 
+    public int getRequiredOilAmount() {
+        int rem = configuration.time % configuration.oilConsumptionRate;
+        int oilUnits = configuration.time / configuration.oilConsumptionRate;
+        if (rem > 0) {
+            oilUnits++;
+        }
+        return oilUnits;
+    }
+
     public ItemStack getResult() {
         return result;
     }
