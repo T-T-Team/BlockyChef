@@ -19,6 +19,7 @@ import tnt.blockychef.common.init.BlockyChefFluids;
 import tnt.blockychef.common.menu.PanMenu;
 import tnt.blockychef.network.NetworkManager;
 import tnt.blockychef.network.message.C2S_RegulateTemperature;
+import tnt.blockychef.network.message.C2S_SendApplianceEvent;
 import tnt.tntlib.api.FluidRenderHelper;
 import tnt.tntlib.api.GraphicsHelper;
 import tnt.tntlib.api.HorizontalAlignment;
@@ -29,7 +30,7 @@ import java.util.Locale;
 public class PanScreen extends AbstractContainerScreen<PanMenu> {
 
     public static final ResourceLocation TEXTURE = BlockyChef.resource("textures/screen/pan.png");
-    private FluidStack renderStack;
+    private final FluidStack renderStack;
     private static final Vector2i[] SLOT_POSITIONS = {
             new Vector2i(80, 8), new Vector2i(107, 34), new Vector2i(97, 65),
             new Vector2i(63, 65), new Vector2i(53, 34)
@@ -56,13 +57,14 @@ public class PanScreen extends AbstractContainerScreen<PanMenu> {
                     .size(12, 12)
                     .build()
             );
-            addRenderableWidget(new Button.Builder(Component.translatable("label.blockychef.stir"), t -> {})
+            addRenderableWidget(new Button.Builder(Component.translatable("label.blockychef.stir"), this::stir)
                     .pos(leftPos + 60, topPos + 86)
                     .size(56, 16)
                     .build()
             );
         }
     }
+
     @Override
     protected void renderLabels(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
         pGuiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 0x404040, false);
@@ -98,9 +100,7 @@ public class PanScreen extends AbstractContainerScreen<PanMenu> {
         }
         int height = 85;
         int top = 16;
-        //graphics.fill(leftPos + 8, topPos + top, leftPos + 12, topPos + height, 0xFF666666);
         graphics.fill(leftPos + 164, topPos + top, leftPos + 168, topPos + height, 0xFF666666);
-        //graphics.fill(leftPos + 8, topPos + top + (int) ((height - top) * pan.getEnergyBufferValue()), leftPos + 12, topPos + height, 0xFFE2B100);
         graphics.fill(leftPos + 164, topPos + top + (int) ((height - top) * (1.0F - pan.getTemperature() / HeatValues.MAX_TEMPERATURE)), leftPos + 168, topPos + height, 0xFFFF0000);
 
         // Oil
@@ -132,5 +132,9 @@ public class PanScreen extends AbstractContainerScreen<PanMenu> {
 
     private void increaseTemperature(Button button) {
         NetworkManager.DISPATCHER.sendToServer(new C2S_RegulateTemperature(menu.getBlockEntity().getBlockPos(), Direction.DOWN, false));
+    }
+
+    private void stir(Button button) {
+        NetworkManager.DISPATCHER.sendToServer(new C2S_SendApplianceEvent(menu.getBlockEntity(), PanBlockEntity.STIR_EVENT_ID));
     }
 }

@@ -20,7 +20,7 @@ public class PanRecipe extends AbstractFoodRecipe<PanBlockEntity> implements Bur
 
     public static final Codec<PanRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(PanRecipe::getInput),
-            CookingConfiguration.CODEC.fieldOf("configuration").forGetter(PanRecipe::getConfiguration),
+            PanCookingConfiguration.CODEC.fieldOf("configuration").forGetter(PanRecipe::getConfiguration),
             Codecs.SIMPLE_ITEMSTACK_CODEC.fieldOf("result").forGetter(PanRecipe::getResult),
             Codecs.SIMPLE_ITEMSTACK_CODEC.fieldOf("burntResult").forGetter(PanRecipe::getBurntResult),
             Codec.BOOL.optionalFieldOf("overcooking", false).forGetter(t -> t.overcooking),
@@ -29,12 +29,12 @@ public class PanRecipe extends AbstractFoodRecipe<PanBlockEntity> implements Bur
     ).apply(instance, PanRecipe::new));
 
     private final Ingredient input;
-    private final CookingConfiguration configuration;
+    private final PanCookingConfiguration configuration;
     private final ItemStack result;
     private final ItemStack burntResult;
     private final boolean overcooking;
 
-    public PanRecipe(Ingredient input, CookingConfiguration configuration, ItemStack result, ItemStack burntResult, boolean overcooking, List<MultiIngredient> outputConsumers, float experience) throws JsonParseException {
+    public PanRecipe(Ingredient input, PanCookingConfiguration configuration, ItemStack result, ItemStack burntResult, boolean overcooking, List<MultiIngredient> outputConsumers, float experience) throws JsonParseException {
         super(outputConsumers, experience);
         this.input = input;
         this.configuration = configuration;
@@ -47,7 +47,7 @@ public class PanRecipe extends AbstractFoodRecipe<PanBlockEntity> implements Bur
         return input;
     }
 
-    public CookingConfiguration getConfiguration() {
+    public PanCookingConfiguration getConfiguration() {
         return configuration;
     }
 
@@ -91,5 +91,18 @@ public class PanRecipe extends AbstractFoodRecipe<PanBlockEntity> implements Bur
     @Override
     public RecipeType<?> getType() {
         return BlockyChefRecipeTypes.PAN_RECIPE;
+    }
+
+    public record PanCookingConfiguration(int time, float minTemperature, float maxTemperature, float burnSpeed, int oilConsumptionRate, int stirProgressLoss, float stirBurnLoss) implements BaseCookConfiguration {
+
+        public static final Codec<PanCookingConfiguration> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                Codec.intRange(1, Integer.MAX_VALUE).fieldOf("time").forGetter(PanCookingConfiguration::time),
+                Codec.FLOAT.fieldOf("minTemperature").forGetter(PanCookingConfiguration::minTemperature),
+                Codec.FLOAT.fieldOf("maxTemperature").forGetter(PanCookingConfiguration::maxTemperature),
+                Codec.FLOAT.optionalFieldOf("burnSpeed", 1.0F).forGetter(PanCookingConfiguration::burnSpeed),
+                Codec.INT.optionalFieldOf("oilConsumptionInterval", 6).forGetter(PanCookingConfiguration::oilConsumptionRate),
+                Codec.INT.optionalFieldOf("stirProgressLoss", 20).forGetter(PanCookingConfiguration::stirProgressLoss),
+                Codec.FLOAT.optionalFieldOf("stirBurnLoss", 0.05F).forGetter(PanCookingConfiguration::stirBurnLoss)
+        ).apply(instance, PanCookingConfiguration::new));
     }
 }
