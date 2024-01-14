@@ -36,4 +36,6 @@ public final class BlockyChefRecipeTypes {
     public static final RecipeType<StoveRecipe> STOVE_RECIPE = null;
     @ObjectHolder(value = "blockychef:pan_recipe", registryName = KEY)
     public static final RecipeType<PanRecipe> PAN_RECIPE = null;
+    @ObjectHolder(value = "blockychef:pot_recipe", registryName = KEY)
+    public static final RecipeType<PotRecipe> POT_RECIPE = null;
 }

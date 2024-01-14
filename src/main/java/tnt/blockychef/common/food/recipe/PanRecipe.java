@@ -75,7 +75,7 @@ public class PanRecipe extends AbstractFoodRecipe<PanBlockEntity> implements Bur
 
     @Override
     public boolean matches(PanBlockEntity pContainer, Level pLevel) {
-        throw new UnsupportedOperationException();
+        return false;
     }
 
     public boolean matches(ItemStack stack) {

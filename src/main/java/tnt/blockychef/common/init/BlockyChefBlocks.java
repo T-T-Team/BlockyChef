@@ -213,4 +213,6 @@ public final class BlockyChefBlocks {
     public static final BarrelBlock WARPED_BARREL = null;
     @ObjectHolder(value = "blockychef:pan", registryName = KEY)
     public static final PanBlock PAN = null;
+    @ObjectHolder(value = "blockychef:pot", registryName = KEY)
+    public static final PotBlock POT = null;
 }

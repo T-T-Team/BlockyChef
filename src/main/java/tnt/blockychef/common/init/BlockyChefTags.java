@@ -24,6 +24,7 @@ public final class BlockyChefTags {
     }
 
     public static final class Items {
+        public static final TagKey<Item> WATER = itemTag("water");
         public static final TagKey<Item> OIL = itemTag("oil");
     }
 

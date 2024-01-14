@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:fried_shrimp"
+  },
+  "result": {
+    "item": "blockychef:burnt_shrimp"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_shrimp"
+  },
+  "overcooking": true,
+  "configuration": {
+    "time": 100,
+    "minTemperature": 0.01,
+    "maxTemperature": 9.0,
+    "minWaterLevel": 0
+  }
+}
