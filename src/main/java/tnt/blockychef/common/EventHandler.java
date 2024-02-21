@@ -1,24 +1,31 @@
 package tnt.blockychef.common;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
 import tnt.blockychef.BlockyChef;
-import tnt.blockychef.common.food.mastery.PlayerMasteryData;
-import tnt.blockychef.common.food.mastery.PlayerMasteryDataProvider;
+import tnt.blockychef.common.block.FluidInteractBlock;
 import tnt.blockychef.common.thirst.PlayerThirstStatsProvider;
 import tnt.blockychef.common.thirst.ThirstStats;
+import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 @Mod.EventBusSubscriber(modid = BlockyChef.MODID)
 public final class EventHandler {
@@ -89,6 +96,34 @@ public final class EventHandler {
         if (entity instanceof Player player) {
             float exhaustion = player.isSprinting() ? 0.2F : 0.05F;
             player.getCapability(PlayerThirstStatsProvider.CAPABILITY).ifPresent(stats -> stats.addExhaustion(exhaustion));
+        }
+    }
+
+    @SubscribeEvent
+    public static void onItemInteract(PlayerInteractEvent.RightClickBlock event) {
+        if (event.isCanceled())
+            return;
+        BlockHitResult hitResult = event.getHitVec();
+        if (hitResult.getType() == HitResult.Type.BLOCK) {
+            BlockPos pos = event.getPos();
+            Level level = event.getLevel();
+            if (level.isClientSide())
+                return;
+            BlockState state = level.getBlockState(pos);
+            ItemStack itemStack = event.getItemStack();
+            if (state.getBlock() instanceof FluidInteractBlock fluidInteraction) {
+                Player player = event.getEntity();
+                ItemStack interactionResult = fluidInteraction.getPickupItem(itemStack, level, pos, state, player);
+                Vec3 vec = Vec3.atCenterOf(pos);
+                if (!interactionResult.isEmpty()) {
+                    if (!player.isCreative())
+                        itemStack.shrink(1);
+                    MenuInventoryHelper.giveItemOrDrop(player, interactionResult);
+                    fluidInteraction.getPickupSound(state).ifPresent(soundEvent ->
+                            level.playSound(null, vec.x, vec.y, vec.z, soundEvent, SoundSource.PLAYERS, 1.0F, 1.0F));
+                    event.setCanceled(true);
+                }
+            }
         }
     }
 
