@@ -26,6 +26,7 @@ import tnt.blockychef.common.food.mastery.PlayerMasteryData;
 import tnt.blockychef.common.food.mastery.PlayerMasteryDataProvider;
 import tnt.blockychef.common.init.BlockyChefFluidTypes;
 import tnt.blockychef.common.init.BlockyChefFluids;
+import tnt.blockychef.common.init.BlockyChefLootModifiers;
 import tnt.blockychef.common.thirst.ConfigDrinkLoader;
 import tnt.blockychef.common.thirst.DrinkConsumeHandler;
 import tnt.blockychef.common.thirst.PlayerThirstStatsProvider;
@@ -54,6 +55,7 @@ public final class BlockyChef {
         CreativeTabs.TABS.register(modBus);
         BlockyChefFluidTypes.register(modBus);
         BlockyChefFluids.register(modBus);
+        BlockyChefLootModifiers.register(modBus);
         modBus.addListener(this::setup);
 
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;

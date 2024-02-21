@@ -1,0 +1,10 @@
+{
+  "type": "blockychef:replace_drops",
+  "conditions": [],
+  "targetTable": "minecraft:gameplay/fishing",
+  "chance": 0.15,
+  "replacementDrop": {
+    "id": "blockychef:shrimp",
+    "Count": 1
+  }
+}
