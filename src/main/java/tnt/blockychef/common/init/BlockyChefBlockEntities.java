@@ -50,4 +50,6 @@ public final class BlockyChefBlockEntities {
     public static final BlockEntityType<PanBlockEntity> PAN = null;
     @ObjectHolder(value = "blockychef:pot", registryName = KEY)
     public static final BlockEntityType<PotBlockEntity> POT = null;
+    @ObjectHolder(value = "blockychef:teapot", registryName = KEY)
+    public static final BlockEntityType<TeapotBlockEntity> TEAPOT = null;
 }

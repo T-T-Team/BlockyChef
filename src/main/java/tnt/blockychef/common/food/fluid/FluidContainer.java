@@ -20,6 +20,10 @@ public final class FluidContainer {
         this.fluids = new ArrayList<>();
     }
 
+    public void clear() {
+        fluids.clear();
+    }
+
     public List<FluidStack> getFluids() {
         return fluids;
     }

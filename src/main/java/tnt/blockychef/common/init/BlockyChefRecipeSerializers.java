@@ -37,4 +37,6 @@ public final class BlockyChefRecipeSerializers {
     public static final RecipeSerializer<?> PAN_RECIPE_SERIALIZER = null;
     @ObjectHolder(value = "blockychef:pot", registryName = KEY)
     public static final RecipeSerializer<?> POT_RECIPE_SERIALIZER = null;
+    @ObjectHolder(value = "blockychef:teapot", registryName = KEY)
+    public static final RecipeSerializer<?> TEAPOT_RECIPE_SERIALIZER = null;
 }

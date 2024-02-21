@@ -30,4 +30,6 @@ public final class BlockyChefMenuTypes {
     public static final MenuType<PanMenu> PAN = null;
     @ObjectHolder(value = "blockychef:pot", registryName = KEY)
     public static final MenuType<PotMenu> POT = null;
+    @ObjectHolder(value = "blockychef:teapot", registryName = KEY)
+    public static final MenuType<TeapotMenu> TEAPOT = null;
 }

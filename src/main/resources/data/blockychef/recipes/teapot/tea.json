@@ -1,0 +1,21 @@
+{
+  "type": "blockychef:teapot",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "blockychef:tea_leaf"
+      },
+      "count": 3
+    }
+  ],
+  "inputFluid": {
+    "FluidName": "minecraft:water",
+    "Amount": 1000
+  },
+  "result": {
+    "FluidName": "blockychef:ice_tea",
+    "Amount": 750
+  },
+  "cookingTime": 300,
+  "minTemperature": 7.0
+}

@@ -89,6 +89,7 @@ public final class Registry {
         helper.register("barrel", BlockEntityType.Builder.of(BarrelBlockEntity::new, BlockyChefBlocks.OAK_BARREL, BlockyChefBlocks.SPRUCE_BARREL, BlockyChefBlocks.BIRCH_BARREL, BlockyChefBlocks.JUNGLE_BARREL, BlockyChefBlocks.ACACIA_BARREL, BlockyChefBlocks.DARK_OAK_BARREL, BlockyChefBlocks.MANGROVE_BARREL, BlockyChefBlocks.CRIMSON_BARREL, BlockyChefBlocks.WARPED_BARREL).build(null));
         helper.register("pan", BlockEntityType.Builder.of(PanBlockEntity::new, BlockyChefBlocks.PAN).build(null));
         helper.register("pot", BlockEntityType.Builder.of(PotBlockEntity::new, BlockyChefBlocks.POT).build(null));
+        helper.register("teapot", BlockEntityType.Builder.of(TeapotBlockEntity::new, BlockyChefBlocks.TEAPOT).build(null));
     }
 
     private static void registerMenuTypes(RegisterEvent.RegisterHelper<MenuType<?>> helper) {
@@ -103,6 +104,7 @@ public final class Registry {
         helper.register("stove", IForgeMenuType.create(StoveMenu::new));
         helper.register("pan", IForgeMenuType.create(PanMenu::new));
         helper.register("pot", IForgeMenuType.create(PotMenu::new));
+        helper.register("teapot", IForgeMenuType.create(TeapotMenu::new));
     }
 
     private static void registerMobEffects(RegisterEvent.RegisterHelper<MobEffect> helper) {
@@ -133,6 +135,7 @@ public final class Registry {
         helper.register("stove_recipe");
         helper.register("pan_recipe");
         helper.register("pot_recipe");
+        helper.register("teapot_recipe");
     }
 
     private static void registerRecipeSerializers(RegisterEvent.RegisterHelper<RecipeSerializer<?>> helper) {
@@ -151,6 +154,7 @@ public final class Registry {
         helper.register("stove", CodecRecipeSerializer.forCodec(StoveRecipe.CODEC));
         helper.register("pan", CodecRecipeSerializer.forCodec(PanRecipe.CODEC));
         helper.register("pot", CodecRecipeSerializer.forCodec(PotRecipe.CODEC));
+        helper.register("teapot", CodecRecipeSerializer.forCodec(TeapotRecipe.CODEC));
     }
 
     private static void registerFeatures(RegisterEvent.RegisterHelper<Feature<?>> helper) {

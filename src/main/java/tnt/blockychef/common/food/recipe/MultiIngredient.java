@@ -24,6 +24,16 @@ public final class MultiIngredient {
         this.count = count;
     }
 
+    public boolean acceptsItem(ItemStack itemStack) {
+        List<ItemStack> itemStacks = toItemStackList();
+        for (ItemStack stack : itemStacks) {
+            if (!ItemStack.isSameItem(stack, itemStack)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public List<ItemStack> toItemStackList() {
         List<ItemStack> list = new ArrayList<>();
         for (ItemStack stack : ingredient.getItems()) {
