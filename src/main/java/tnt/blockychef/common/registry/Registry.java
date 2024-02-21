@@ -105,6 +105,8 @@ public final class Registry {
         helper.register("pan", IForgeMenuType.create(PanMenu::new));
         helper.register("pot", IForgeMenuType.create(PotMenu::new));
         helper.register("teapot", IForgeMenuType.create(TeapotMenu::new));
+        helper.register("kitchen_counter", IForgeMenuType.create(KitchenCounterMenu::new));
+        helper.register("kitchen_cabinet", IForgeMenuType.create(KitchenCabinetMenu::new));
     }
 
     private static void registerMobEffects(RegisterEvent.RegisterHelper<MobEffect> helper) {

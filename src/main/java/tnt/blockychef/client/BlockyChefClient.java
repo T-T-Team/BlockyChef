@@ -103,6 +103,8 @@ public final class BlockyChefClient {
         MenuScreens.register(BlockyChefMenuTypes.PAN, PanScreen::new);
         MenuScreens.register(BlockyChefMenuTypes.POT, PotScreen::new);
         MenuScreens.register(BlockyChefMenuTypes.TEAPOT, TeapotScreen::new);
+        MenuScreens.register(BlockyChefMenuTypes.KITCHEN_COUNTER_MENU, KitchenCounterScreen::new);
+        MenuScreens.register(BlockyChefMenuTypes.KITCHEN_CABINET_MENU, KitchenCabinetScreen::new);
     }
 
     private void registerBlockColors(RegisterColorHandlersEvent.Block event) {
