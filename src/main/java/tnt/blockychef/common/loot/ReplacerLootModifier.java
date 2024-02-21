@@ -38,7 +38,7 @@ public class ReplacerLootModifier extends LootModifier {
         ResourceLocation contextTable = context.getQueriedLootTableId();
         if (this.targetTable.equals(contextTable)) {
             RandomSource random = context.getRandom();
-            if (random.nextFloat() >= this.chance) {
+            if (random.nextFloat() <= this.chance) {
                 generatedLoot.clear();
                 generatedLoot.add(this.droppedItem.copy());
             }

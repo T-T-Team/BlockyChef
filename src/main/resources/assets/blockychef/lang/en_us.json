@@ -739,6 +739,8 @@
   "screen.blockychef.stove": "Stove",
   "screen.blockychef.masteries": "Masteries",
   "screen.blockychef.pan": "Pan",
+  "screen.blockychef.kitchen_counter": "Kitchen Counter",
+  "screen.blockychef.kitchen_cabinet": "Kitchen Cabinet",
 
   "death.attack.blockychef.dehydration": "%s has died due to dehydration",
   "death.attack.blockychef.dehydration.player": "%1$s has died due to dehydration whilst fighting %2$s",
@@ -758,6 +760,7 @@
   "jei.recipe_category.blockychef.pasta_machine": "Pasta Machine",
   "jei.recipe_category.blockychef.stove": "Baking",
   "jei.recipe_category.blockychef.pan": "Frying",
+  "jei.recipe_category.blockychef.pot": "Boiling",
 
   "config.jade.plugin_blockychef.drying_rack": "Drying Rack",
   "config.jade.plugin_blockychef.juicer": "Juicer",
