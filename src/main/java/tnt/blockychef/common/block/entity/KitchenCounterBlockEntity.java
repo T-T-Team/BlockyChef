@@ -19,6 +19,6 @@ public class KitchenCounterBlockEntity extends ColorableBlockEntity {
 
     @Override
     public IItemHandlerModifiable setUpInventory() {
-        return new ItemStackHandler(27);
+        return new ItemStackHandler(54);
     }
 }

@@ -19,14 +19,14 @@ public class KitchenCounterMenu extends AbstractBlockEntityMenu<KitchenCounterBl
         super(BlockyChefMenuTypes.KITCHEN_COUNTER_MENU, menuId, blockEntity);
 
         MenuQuickMoveHelper.QuickMoveContext ctx = this.getQuickMoveContext();
-        this.quickMoveHelper = MenuQuickMoveHelper.simpleInventory(ctx, 27);
+        this.quickMoveHelper = MenuQuickMoveHelper.simpleInventory(ctx, 54);
 
-        for (int y = 0; y < 3; y++) {
+        for (int y = 0; y < 6; y++) {
             for (int x = 0; x < 9; x++) {
                 addSlot(new SlotItemHandler(blockEntity.getItemHandler(), x + y * 9, 8 + x * 18, 18 + y * 18));
             }
         }
-        addPlayerSlots(inventory, 8, 86);
+        addPlayerSlots(inventory, 8, 140);
     }
 
     public KitchenCounterMenu(int menuId, Inventory inventory, FriendlyByteBuf buffer) {

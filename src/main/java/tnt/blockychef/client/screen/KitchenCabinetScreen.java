@@ -14,7 +14,7 @@ public class KitchenCabinetScreen extends AbstractContainerScreen<KitchenCabinet
 
     public KitchenCabinetScreen(KitchenCabinetMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
-        this.imageHeight = 222;
+        this.imageHeight = 168;
         this.inventoryLabelY = this.imageHeight - 94;
     }
 
