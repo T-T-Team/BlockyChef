@@ -3,6 +3,8 @@ package tnt.blockychef.common.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
@@ -46,6 +48,7 @@ public class KitchenCabinetBlock extends DyeableBlock implements EntityBlock {
                     (menuId, inv, owner) -> new KitchenCabinetMenu(menuId, inv, cabinetBlockEntity),
                     TITLE
             ), pos);
+            level.playSound(null, pos, SoundEvents.BARREL_OPEN, SoundSource.BLOCKS);
         }
         return InteractionResult.SUCCESS;
     }
