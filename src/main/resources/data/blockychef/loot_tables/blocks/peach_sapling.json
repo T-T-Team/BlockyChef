@@ -11,13 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:copy_name",
-              "source": "block_entity"
-            }
-          ],
-          "name": "blockychef:drying_rack"
+          "name": "blockychef:peach_sapling"
         }
       ],
       "rolls": 1.0

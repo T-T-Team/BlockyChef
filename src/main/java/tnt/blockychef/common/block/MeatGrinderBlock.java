@@ -28,7 +28,7 @@ public class MeatGrinderBlock extends FullHorizontalAxisBlock implements EntityB
     private static final VoxelShape HITBOX = Block.box(3.0, 0.0, 3.0, 13.0, 8.0, 13.0);
 
     public MeatGrinderBlock() {
-        super(Properties.of().sound(SoundType.STONE).strength(3.0F).noOcclusion());
+        super(Properties.of().sound(SoundType.STONE).strength(2.0F).noOcclusion());
     }
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter blockGetter, BlockPos pos, CollisionContext context) {

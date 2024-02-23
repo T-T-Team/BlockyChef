@@ -14,6 +14,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -39,7 +40,7 @@ public class DryingRackBlock extends FullHorizontalAxisBlock implements EntityBl
     };
 
     public DryingRackBlock() {
-        super(Properties.of().strength(1.4F).noOcclusion());
+        super(Properties.of().sound(SoundType.WOOD).strength(1.4F).noOcclusion());
     }
 
     @Override

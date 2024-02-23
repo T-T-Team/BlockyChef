@@ -37,7 +37,7 @@ public class MixerBlock extends DyeableBlock implements EntityBlock {
     private static final Component TITLE = Component.translatable("screen.blockychef.mixer");
 
     public MixerBlock() {
-        super(Properties.of().sound(SoundType.STONE).strength(3.0F).noOcclusion());
+        super(Properties.of().sound(SoundType.STONE).strength(2.0F).noOcclusion());
     }
 
     @Override
