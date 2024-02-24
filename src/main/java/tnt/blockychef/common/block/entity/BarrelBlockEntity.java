@@ -2,6 +2,9 @@ package tnt.blockychef.common.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -154,6 +157,20 @@ public class BarrelBlockEntity extends RecipeRememberingBlockEntity<BarrelRecipe
         setRecipe(optional.orElse(null));
     }
 
+    @Override
+    public void startOpen(Player pPlayer) {
+        if (!remove && !pPlayer.isSpectator()) {
+            this.openContainer(level, worldPosition, getBlockState());
+        }
+    }
+
+    @Override
+    public void stopOpen(Player pPlayer) {
+        if (!remove && !pPlayer.isSpectator()) {
+            this.closeContainer(level, worldPosition, getBlockState());
+        }
+    }
+
     private void setRecipe(@Nullable RecipeHolder<BarrelRecipe> recipe) {
         if (activeRecipe != recipe) {
             activeRecipe = recipe;
@@ -173,5 +190,13 @@ public class BarrelBlockEntity extends RecipeRememberingBlockEntity<BarrelRecipe
         fermentingTime = tag.getInt("fermentingTime");
         fermenting = tag.getBoolean("fermenting");
         refreshRecipe();
+    }
+
+    private void openContainer(Level level, BlockPos pos, BlockState state) {
+        level.playSound(null, pos, SoundEvents.BARREL_OPEN, SoundSource.BLOCKS);
+    }
+
+    private void closeContainer(Level level, BlockPos pos, BlockState state) {
+        level.playSound(null, pos, SoundEvents.BARREL_CLOSE, SoundSource.BLOCKS);
     }
 }

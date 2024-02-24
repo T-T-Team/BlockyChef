@@ -1,6 +1,9 @@
 package tnt.blockychef.common.block.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
@@ -20,5 +23,17 @@ public class KitchenCounterBlockEntity extends ColorableBlockEntity {
     @Override
     public IItemHandlerModifiable setUpInventory() {
         return new ItemStackHandler(54);
+    }
+
+    public void onOpen(Player player) {
+        if (!remove && !player.isSpectator()) {
+            level.playSound(null, worldPosition, SoundEvents.BARREL_OPEN, SoundSource.BLOCKS);
+        }
+    }
+
+    public void onClose(Player player) {
+        if (!remove && !player.isSpectator()) {
+            level.playSound(null, worldPosition, SoundEvents.BARREL_CLOSE, SoundSource.BLOCKS);
+        }
     }
 }

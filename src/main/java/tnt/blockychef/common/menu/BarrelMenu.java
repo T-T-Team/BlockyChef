@@ -33,6 +33,8 @@ public class BarrelMenu extends AbstractBlockEntityMenu<BarrelBlockEntity> {
 
         addPlayerSlots(inventory, 8, 93);
         addSlotListener(new SimpleSlotListener(this::slotChanged));
+
+        barrel.startOpen(inventory.player);
     }
 
     public BarrelMenu(int menuId, Inventory inventory, FriendlyByteBuf buffer) {
@@ -47,6 +49,12 @@ public class BarrelMenu extends AbstractBlockEntityMenu<BarrelBlockEntity> {
     @Override
     public ItemStack quickMoveStack(Player player, int index) {
         return moveHelper.quickMove(player, index);
+    }
+
+    @Override
+    public void removed(Player pPlayer) {
+        super.removed(pPlayer);
+        this.blockEntity.stopOpen(pPlayer);
     }
 
     private void slotChanged(AbstractContainerMenu menu, int index, ItemStack stack) {

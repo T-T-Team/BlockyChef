@@ -27,6 +27,7 @@ public class KitchenCabinetMenu extends AbstractBlockEntityMenu<KitchenCabinetBl
             }
         }
         addPlayerSlots(inventory, 8, 86);
+        blockEntity.onOpen(inventory.player);
     }
 
     public KitchenCabinetMenu(int menuId, Inventory inventory, FriendlyByteBuf buffer) {
@@ -41,5 +42,11 @@ public class KitchenCabinetMenu extends AbstractBlockEntityMenu<KitchenCabinetBl
     @Override
     public ItemStack quickMoveStack(Player pPlayer, int pIndex) {
         return quickMoveHelper.quickMove(pPlayer, pIndex);
+    }
+
+    @Override
+    public void removed(Player pPlayer) {
+        super.removed(pPlayer);
+        blockEntity.onClose(pPlayer);
     }
 }
