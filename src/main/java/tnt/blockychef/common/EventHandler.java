@@ -107,8 +107,6 @@ public final class EventHandler {
         if (hitResult.getType() == HitResult.Type.BLOCK) {
             BlockPos pos = event.getPos();
             Level level = event.getLevel();
-            if (level.isClientSide())
-                return;
             BlockState state = level.getBlockState(pos);
             ItemStack itemStack = event.getItemStack();
             if (state.getBlock() instanceof FluidInteractBlock fluidInteraction) {
@@ -116,12 +114,15 @@ public final class EventHandler {
                 ItemStack interactionResult = fluidInteraction.getPickupItem(itemStack, level, pos, state, player);
                 Vec3 vec = Vec3.atCenterOf(pos);
                 if (!interactionResult.isEmpty()) {
-                    if (!player.isCreative())
-                        itemStack.shrink(1);
-                    MenuInventoryHelper.giveItemOrDrop(player, interactionResult);
-                    fluidInteraction.getPickupSound(state).ifPresent(soundEvent ->
-                            level.playSound(null, vec.x, vec.y, vec.z, soundEvent, SoundSource.PLAYERS, 1.0F, 1.0F));
-                    event.setCanceled(true);
+                    fluidInteraction.onInteractionEvent(level, pos, state, player);
+                    if (!level.isClientSide()) {
+                        if (!player.isCreative())
+                            itemStack.shrink(1);
+                        MenuInventoryHelper.giveItemOrDrop(player, interactionResult);
+                        fluidInteraction.getPickupSound(state).ifPresent(soundEvent ->
+                                level.playSound(null, vec.x, vec.y, vec.z, soundEvent, SoundSource.PLAYERS, 1.0F, 1.0F));
+                        event.setCanceled(true);
+                    }
                 }
             }
         }

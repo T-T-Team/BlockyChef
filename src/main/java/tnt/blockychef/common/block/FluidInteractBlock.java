@@ -10,4 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public interface FluidInteractBlock extends BucketPickup {
 
     ItemStack getPickupItem(ItemStack interactionItem, Level level, BlockPos pos, BlockState state, Player player);
+
+    default void onInteractionEvent(Level level, BlockPos pos, BlockState state, Player player) {
+    }
 }

@@ -1,12 +1,13 @@
 package tnt.blockychef.common.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
@@ -61,5 +62,25 @@ public class KitchenSinkBlock extends DyeableBlock implements EntityBlock, Fluid
     @Override
     public Optional<SoundEvent> getPickupSound() {
         return Optional.of(SoundEvents.BUCKET_FILL);
+    }
+
+    @Override
+    public void onInteractionEvent(Level level, BlockPos pos, BlockState state, Player player) {
+        if (!level.isClientSide())
+            return;
+        RandomSource random = level.getRandom();
+        double multiplier = 3.0;
+        for (int i = 0; i < 40; i++) {
+            double x = randomValue(random) * 0.4 + pos.getX() + 0.5;
+            double z = randomValue(random) * 0.4 + pos.getZ() + 0.5;
+            double xs = randomValue(random) * multiplier;
+            double ys = 0.0;
+            double zs = randomValue(random) * multiplier;
+            level.addParticle(ParticleTypes.FALLING_WATER, x, pos.getY() + 1.0, z, xs, ys, zs);
+        }
+    }
+
+    private static double randomValue(RandomSource random) {
+        return random.nextDouble() - random.nextDouble();
     }
 }
