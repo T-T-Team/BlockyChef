@@ -1,5 +1,6 @@
 package tnt.blockychef.common.registry;
 
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.inventory.MenuType;
@@ -42,10 +43,22 @@ public final class Registry {
         event.register(ForgeRegistries.BLOCK_ENTITY_TYPES.getRegistryKey(), Registry::registerBlockEntities);
         event.register(ForgeRegistries.MENU_TYPES.getRegistryKey(), Registry::registerMenuTypes);
         event.register(ForgeRegistries.MOB_EFFECTS.getRegistryKey(), Registry::registerMobEffects);
-        event.register(ForgeRegistries.RECIPE_TYPES.getRegistryKey(), Registry::registerRecipeTypes);
+        event.register(ForgeRegistries.RECIPE_TYPES.getRegistryKey(), helper -> {
+            RegistrationHelper typeHelper = id -> helper.register(id, new RecipeType<>() {
+                @Override
+                public String toString() {
+                    return BlockyChef.MODID + ":" + id;
+                }
+            });
+            registerRecipeTypes(typeHelper);
+        });
         event.register(ForgeRegistries.RECIPE_SERIALIZERS.getRegistryKey(), Registry::registerRecipeSerializers);
         event.register(ForgeRegistries.FEATURES.getRegistryKey(), Registry::registerFeatures);
         event.register(ForgeRegistries.TREE_DECORATOR_TYPES.getRegistryKey(), Registry::registerTreeDecorators);
+        event.register(ForgeRegistries.SOUND_EVENTS.getRegistryKey(), helper -> {
+            RegistrationHelper soundHelper = id -> helper.register(id, SoundEvent.createVariableRangeEvent(BlockyChef.resource(id)));
+            registerSoundEvents(soundHelper);
+        });
     }
 
     private static void registerBlocks(RegisterEvent.RegisterHelper<Block> helper) {
@@ -114,14 +127,7 @@ public final class Registry {
         helper.register("hydration", new HydrationMobEffect(MobEffectCategory.BENEFICIAL, 0x3080E8));
     }
 
-    private static void registerRecipeTypes(RegisterEvent.RegisterHelper<RecipeType<?>> simpleHelper) {
-        RecipeTypeRegistryHelper helper = id -> simpleHelper.register(id, new RecipeType<>() {
-            @Override
-            public String toString() {
-                return BlockyChef.MODID + ":" + id;
-            }
-        });
-
+    private static void registerRecipeTypes(RegistrationHelper helper) {
         helper.register("drying_recipe");
         helper.register("grating_recipe");
         helper.register("cutting_board_recipe");
@@ -167,8 +173,12 @@ public final class Registry {
         helper.register("fruit_decorator", new TreeDecoratorType<>(TreeFruitDecorator.CODEC));
     }
 
+    private static void registerSoundEvents(RegistrationHelper helper) {
+        helper.register("sound_id");
+    }
+
     @FunctionalInterface
-    private interface RecipeTypeRegistryHelper {
+    private interface RegistrationHelper {
         void register(String id);
     }
 }
