@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -22,6 +23,7 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefItems;
+import tnt.blockychef.common.init.BlockyChefSounds;
 
 import java.util.Optional;
 
@@ -70,7 +72,7 @@ public class KitchenSinkBlock extends DyeableBlock implements EntityBlock, Fluid
             return;
         RandomSource random = level.getRandom();
         double multiplier = 3.0;
-        for (int i = 0; i < 40; i++) {
+        for (int i = 0; i < 30; i++) {
             double x = randomValue(random) * 0.4 + pos.getX() + 0.5;
             double z = randomValue(random) * 0.4 + pos.getZ() + 0.5;
             double xs = randomValue(random) * multiplier;
@@ -78,6 +80,7 @@ public class KitchenSinkBlock extends DyeableBlock implements EntityBlock, Fluid
             double zs = randomValue(random) * multiplier;
             level.addParticle(ParticleTypes.FALLING_WATER, x, pos.getY() + 1.0, z, xs, ys, zs);
         }
+        level.playSound(null, pos, BlockyChefSounds.GRILL, SoundSource.AMBIENT);
     }
 
     private static double randomValue(RandomSource random) {

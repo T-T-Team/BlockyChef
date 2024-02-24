@@ -174,7 +174,24 @@ public final class Registry {
     }
 
     private static void registerSoundEvents(RegistrationHelper helper) {
-        helper.register("sound_id");
+        helper.register("cutting_board");
+        helper.register("dough_maker");
+        helper.register("grater_a");
+        helper.register("grater_b");
+        helper.register("grill");
+        helper.register("juicer");
+        helper.register("meat_grinder");
+        helper.register("mixer");
+        helper.register("mixing_bowl");
+        helper.register("mortar_and_pestle");
+        helper.register("oven");
+        helper.register("pan");
+        helper.register("pasta_machine");
+        helper.register("pot");
+        helper.register("saucepan");
+        helper.register("teapot");
+        helper.register("toaster_a");
+        helper.register("toaster_b");
     }
 
     @FunctionalInterface

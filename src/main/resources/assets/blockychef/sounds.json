@@ -1,8 +1,183 @@
 {
-  "sound_id": {
+  "cutting_board": {
     "sounds": [
       {
-        "name": "blockychef:sound_id"
+        "name": "blockychef:cutting_board",
+        "stream": true,
+        "volume": 1.0
+      }
+    ]
+  },
+  "dough_maker": {
+    "sounds": [
+      {
+        "name": "blockychef:dough_maker",
+        "stream": true,
+        "volume": 1.0
+      }
+    ]
+  },
+  "grater_a": {
+    "sounds": [
+      {
+        "name": "blockychef:grater_a",
+        "stream": true,
+        "volume": 1.0
+      }
+    ]
+  },
+  "grater_b": {
+    "sounds": [
+      {
+        "name": "blockychef:grater_b",
+        "stream": true,
+        "volume": 1.0
+      }
+    ]
+  },
+  "blockychef:grill": {
+    "sounds": [
+      {
+        "name": "blockychef:grill",
+        "stream": true,
+        "volume": 1.0
+      }
+    ]
+  },
+  "juicer": {
+    "sounds": [
+      {
+        "name": "blockychef:juicer_a",
+        "stream": true,
+        "volume": 1.0
+      },
+      {
+        "name": "blockychef:juicer_b",
+        "stream": true,
+        "volume": 1.0
+      },
+      {
+        "name": "blockychef:juicer_c",
+        "stream": true,
+        "volume": 1.0
+      }
+    ]
+  },
+  "meat_grinder": {
+    "sounds": [
+      {
+        "name": "blockychef:meat_grinder_a",
+        "stream": true,
+        "volume": 1.0
+      },
+      {
+        "name": "blockychef:meat_grinder_b",
+        "stream": true,
+        "volume": 1.0
+      },
+      {
+        "name": "blockychef:meat_grinder_c",
+        "stream": true,
+        "volume": 1.0
+      }
+    ]
+  },
+  "mixer": {
+    "sounds": [
+      {
+        "name": "blockychef:mixer",
+        "stream": true,
+        "volume": 1.0
+      }
+    ]
+  },
+  "mixing_bowl": {
+    "sounds": [
+      {
+        "name": "blockychef:mixing_bowl",
+        "stream": true,
+        "volume": 1.0
+      }
+    ]
+  },
+  "mortar_and_pestle": {
+    "sounds": [
+      {
+        "name": "blockychef:mortar_and_pestle",
+        "stream": true,
+        "volume": 1.0
+      }
+    ]
+  },
+  "oven": {
+    "sounds": [
+      {
+        "name": "blockychef:oven",
+        "stream": true,
+        "volume": 1.0
+      }
+    ]
+  },
+  "pan": {
+    "sounds": [
+      {
+        "name": "blockychef:pan",
+        "stream": true,
+        "volume": 1.0
+      }
+    ]
+  },
+  "pasta_machine": {
+    "sounds": [
+      {
+        "name": "blockychef:pasta_machine",
+        "stream": true,
+        "volume": 1.0
+      }
+    ]
+  },
+  "pot": {
+    "sounds": [
+      {
+        "name": "blockychef:pot",
+        "stream": true,
+        "volume": 1.0
+      }
+    ]
+  },
+  "saucepan": {
+    "sounds": [
+      {
+        "name": "blockychef:saucepan",
+        "stream": true,
+        "volume": 1.0
+      }
+    ]
+  },
+  "teapot": {
+    "sounds": [
+      {
+        "name": "blockychef:teapot",
+        "stream": true,
+        "volume": 1.0
+      }
+    ]
+  },
+  "toaster_a": {
+    "sounds": [
+      {
+        "name": "blockychef:toaster_a",
+        "stream": true,
+        "volume": 1.0
+      }
+    ]
+  },
+  "toaster_b": {
+    "sounds": [
+      {
+        "name": "blockychef:toaster_B",
+        "stream": true,
+        "volume": 1.0
       }
     ]
   }
