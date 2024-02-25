@@ -24,12 +24,12 @@ public abstract class ColorableBlockEntity extends InventoryBlockEntity implemen
 
     @Override
     public int getColor(int index) {
-        return index >= 0 && index < colors.length ? colors[index] : Integer.MIN_VALUE;
+        return checkIndex(index, this.colors) ? colors[index] : Integer.MIN_VALUE;
     }
 
     @Override
     public void setColor(int index, int color) {
-        if (index >= 0 && index < colors.length) {
+        if (checkIndex(index, this.colors)) {
             colors[index] = color;
             this.setChanged();
             BlockEntityHelper.sendBlockEntityClientData(this);
@@ -58,5 +58,9 @@ public abstract class ColorableBlockEntity extends InventoryBlockEntity implemen
     public void load(CompoundTag tag) {
         super.load(tag);
         colors = tag.getIntArray("colors");
+    }
+
+    public static boolean checkIndex(int index, int[] colorStorage) {
+        return index >= 0 && index < colorStorage.length;
     }
 }

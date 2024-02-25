@@ -203,7 +203,7 @@ public class CropsBlock extends DecayingGrowingBlock implements BonemealableBloc
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader reader, BlockPos pos) {
-        return (reader.getRawBrightness(pos, 0) >= 8 || reader.canSeeSky(pos)) && super.canSurvive(state, reader, pos);
+        return reader instanceof WorldGenRegion || ((reader.getRawBrightness(pos, 0) >= 8 || reader.canSeeSky(pos)) && super.canSurvive(state, reader, pos));
     }
 
     @Override
