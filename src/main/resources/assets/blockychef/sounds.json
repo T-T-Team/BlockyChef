@@ -35,7 +35,7 @@
       }
     ]
   },
-  "blockychef:grill": {
+  "grill": {
     "sounds": [
       {
         "name": "blockychef:grill",
@@ -175,7 +175,7 @@
   "toaster_b": {
     "sounds": [
       {
-        "name": "blockychef:toaster_B",
+        "name": "blockychef:toaster_b",
         "stream": true,
         "volume": 1.0
       }

@@ -741,6 +741,7 @@
   "screen.blockychef.pan": "Pan",
   "screen.blockychef.kitchen_counter": "Kitchen Counter",
   "screen.blockychef.kitchen_cabinet": "Kitchen Cabinet",
+  "screen.blockychef.teapot": "Teapot",
 
   "death.attack.blockychef.dehydration": "%s has died due to dehydration",
   "death.attack.blockychef.dehydration.player": "%1$s has died due to dehydration whilst fighting %2$s",
