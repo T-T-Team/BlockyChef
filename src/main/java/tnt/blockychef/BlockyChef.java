@@ -1,5 +1,7 @@
 package tnt.blockychef;
 
+import dev.toma.configuration.Configuration;
+import dev.toma.configuration.config.format.ConfigFormats;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -22,7 +24,6 @@ import tnt.blockychef.common.CreativeTabs;
 import tnt.blockychef.common.data.fluids.FluidExtractionManager;
 import tnt.blockychef.common.food.mastery.CookingMasteryManager;
 import tnt.blockychef.common.food.mastery.MasteryDataProvider;
-import tnt.blockychef.common.food.mastery.PlayerMasteryData;
 import tnt.blockychef.common.food.mastery.PlayerMasteryDataProvider;
 import tnt.blockychef.common.init.BlockyChefFluidTypes;
 import tnt.blockychef.common.init.BlockyChefFluids;
@@ -35,8 +36,7 @@ import tnt.blockychef.integrations.Integrations;
 import tnt.blockychef.network.NetworkManager;
 import tnt.blockychef.network.message.S2C_SendFluidExtractors;
 import tnt.blockychef.network.message.S2C_SendMasteriesToClient;
-import tnt.tntlib.api.module.configuration.Configuration;
-import tnt.tntlib.api.module.configuration.config.format.ConfigFormats;
+import tnt.tntlib.core.network.manager.AutomaticNetworkManager;
 
 @Mod(BlockyChef.MODID)
 public final class BlockyChef {
@@ -68,6 +68,7 @@ public final class BlockyChef {
 
     private void setup(FMLCommonSetupEvent event) {
         ConfigDrinkLoader.loadData();
+        AutomaticNetworkManager.init();
         Integrations.accept(layer -> layer.setup(event));
     }
 

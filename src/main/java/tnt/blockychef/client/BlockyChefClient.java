@@ -1,5 +1,7 @@
 package tnt.blockychef.client;
 
+import dev.toma.configuration.Configuration;
+import dev.toma.configuration.config.format.ConfigFormats;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -30,8 +32,6 @@ import tnt.blockychef.common.init.BlockyChefBlocks;
 import tnt.blockychef.common.init.BlockyChefItems;
 import tnt.blockychef.common.init.BlockyChefMenuTypes;
 import tnt.blockychef.integrations.Integrations;
-import tnt.tntlib.api.module.configuration.Configuration;
-import tnt.tntlib.api.module.configuration.config.format.ConfigFormats;
 
 public final class BlockyChefClient {
 

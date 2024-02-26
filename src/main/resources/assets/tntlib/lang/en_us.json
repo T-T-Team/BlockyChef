@@ -1,0 +1,21 @@
+{
+  "label.time.unit.ticks": "Ticks",
+  "label.time.unit.seconds": "Seconds",
+  "label.time.unit.minutes": "Minutes",
+  "label.time.unit.hours": "Hours",
+  "label.time.unit.days": "Days",
+  "label.time.unit.weeks": "Weeks",
+  "label.time.unit.months": "Months",
+  "label.time.unit.years": "Years",
+
+  "label.filters": "Filters:",
+  "label.filters.add": "Add Filter",
+  "label.sorters": "Sorters:",
+  "label.sorters.add": "Add Sorter",
+  "sorter.value.asc": "Ascending",
+  "sorter.value.desc": "Descending",
+  "label.suggest.enter_text": "Enter text",
+
+  "screen.dialog.select_filter": "Select filter",
+  "screen.dialog.select_sorter": "Select sorter"
+}
