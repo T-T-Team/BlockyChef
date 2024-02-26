@@ -1,0 +1,48 @@
+{
+  "type": "blockychef:cooking_table",
+  "assemblyTime": 100,
+  "inputs": [
+    {
+      "count": 20,
+      "ingredient": {
+        "item": "blockychef:blueberry"
+      }
+    },
+    {
+      "count": 5,
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
+    },
+    {
+      "count": 5,
+      "ingredient": {
+        "item": "minecraft:snowball"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:ice_cream"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:blueberry_ice_cream",
+      "count": 1
+    },
+    {
+      "item": "minecraft:blue_dye",
+      "count": 4
+    }
+  ],
+  "craftRemainderConsumers": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:bowl"
+      }
+    }
+  ],
+  "experience": 1.5
+}

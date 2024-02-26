@@ -9,6 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.SlotItemHandler;
 import tnt.blockychef.common.block.MixingBowlBlock;
 import tnt.blockychef.common.block.entity.MixingBowlBlockEntity;
+import tnt.blockychef.common.food.mastery.CookingMastery;
 import tnt.blockychef.common.init.BlockyChefMenuTypes;
 import tnt.tntlib.api.menu.AbstractBlockEntityMenu;
 import tnt.tntlib.api.menu.MenuQuickMoveHelper;
@@ -56,6 +57,7 @@ public class MixingBowlMenu extends AbstractBlockEntityMenu<MixingBowlBlockEntit
     }
 
     private void onResultTaken(Player player, ItemStack stack) {
+        CookingMastery.applyMastery(player, stack);
         if (player instanceof ServerPlayer serverPlayer) {
             blockEntity.awardUsedRecipesAndPopExperience(serverPlayer);
             blockEntity.setChanged();

@@ -722,6 +722,7 @@
 
   "tooltip.blockychef.quality": "Quality: %s",
   "filter.key.blockychef.group": "Group",
+  "filter.key.blockychef.mastery": "Mastery",
   "sorter.key.blockychef.cook_count": "Cook Count",
   "sorter.key.blockychef.mastery_name": "Name",
   "sorter.value.asc": "Ascending",

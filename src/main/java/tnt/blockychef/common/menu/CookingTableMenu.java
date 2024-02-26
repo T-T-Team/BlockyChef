@@ -1,14 +1,15 @@
 package tnt.blockychef.common.menu;
 
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import tnt.blockychef.common.block.CookingTableBlock;
 import tnt.blockychef.common.block.entity.CookingTableBlockEntity;
+import tnt.blockychef.common.food.mastery.CookingMastery;
 import tnt.blockychef.common.init.BlockyChefMenuTypes;
 import tnt.tntlib.api.menu.AbstractBlockEntityMenu;
 import tnt.tntlib.api.menu.MenuQuickMoveHelper;
@@ -30,7 +31,7 @@ public class CookingTableMenu extends AbstractBlockEntityMenu<CookingTableBlockE
         }
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 2; x++) {
-                addSlot(new OutputSlot(blockEntity.getItemHandler(), 9 + x + y * 2, 134 + x * 18, 29 + y * 18));
+                addSlot(new ItemHandlerOutputSlotWithCallback(blockEntity.getItemHandler(), 9 + x + y * 2, 134 + x * 18, 29 + y * 18, this::onResultTaken));
             }
         }
 
@@ -53,13 +54,16 @@ public class CookingTableMenu extends AbstractBlockEntityMenu<CookingTableBlockE
     }
 
     private void slotChanged(AbstractContainerMenu menu, int index, ItemStack stack) {
-
+        if (index < CookingTableBlockEntity.INPUTS.length) {
+            blockEntity.refreshRecipe();
+        }
     }
 
-    private static final class OutputSlot extends SlotItemHandler {
-
-        public OutputSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
-            super(itemHandler, index, xPosition, yPosition);
+    private void onResultTaken(Player player, ItemStack stack) {
+        CookingMastery.applyMastery(player, stack);
+        if (player instanceof ServerPlayer serverPlayer) {
+            blockEntity.awardUsedRecipesAndPopExperience(serverPlayer);
+            blockEntity.setChanged();
         }
     }
 }

@@ -117,6 +117,7 @@ public class MixingBowlBlockEntity extends RecipeRememberingBlockEntity<MixingBo
         mixingTime = 0;
         mixing = true;
         BlockEntityHelper.sendBlockEntityClientData(this);
+        setChanged();
     }
 
     public void refreshRecipe() {

@@ -13,6 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.food.mastery.CookingMastery;
 import tnt.blockychef.common.food.mastery.MasteryGroup;
@@ -29,6 +30,7 @@ public class MasteryScreen extends Screen {
     private static final Component TITLE = Component.translatable("screen.blockychef.masteries");
     // Filters
     private static final FilterType<MasteryData> FILTER_GROUP = new FilterType<>(BlockyChef.resource("group"), t -> new EnumListFilter<>(t, data -> data.mastery.groups(), MasteryScreen::filterOrAll, EnumSet.noneOf(MasteryGroup.class), MasteryGroup.class, true));
+    private static final FilterType<MasteryData> FILTER_MASTERY = new FilterType<>(BlockyChef.resource("mastery"), t -> new TextFilter<>(t, data -> ForgeRegistries.ITEMS.getKey(data.mastery.item()).toString(), String::contains, "", true));
     // Sorters
     private static final SorterType<MasteryData> SORT_COOK_COUNT = new SorterType<>(BlockyChef.resource("cook_count"), () -> Comparator.comparingInt(MasteryData::cookCount), type -> new Sorter.SimpleSorter<>(type, false, true));
     private static final SorterType<MasteryData> SORT_MASTERY_NAME = new SorterType<>(BlockyChef.resource("mastery_name"), () -> Comparator.comparing(t -> t.mastery().item().getDescription().getString()), type -> new Sorter.SimpleSorter<>(type, true, true));
@@ -80,7 +82,7 @@ public class MasteryScreen extends Screen {
                 }
                 widgets.addWidget(grid);
                 lastView = dataview;
-            }, List.of(FILTER_GROUP), Arrays.asList(SORT_COOK_COUNT, SORT_MASTERY_NAME));
+            }, List.of(FILTER_GROUP, FILTER_MASTERY), Arrays.asList(SORT_COOK_COUNT, SORT_MASTERY_NAME));
             addRenderableWidget(new DataManagerWidget<>(PADDING, PADDING, width - 2 * PADDING, height - PADDING, properties, data, this));
         });
     }
