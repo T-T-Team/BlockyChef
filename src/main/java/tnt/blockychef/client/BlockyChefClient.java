@@ -105,15 +105,11 @@ public final class BlockyChefClient {
         MenuScreens.register(BlockyChefMenuTypes.TEAPOT, TeapotScreen::new);
         MenuScreens.register(BlockyChefMenuTypes.KITCHEN_COUNTER_MENU, KitchenCounterScreen::new);
         MenuScreens.register(BlockyChefMenuTypes.KITCHEN_CABINET_MENU, KitchenCabinetScreen::new);
+        MenuScreens.register(BlockyChefMenuTypes.COOKING_TABLE, CookingTableScreen::new);
     }
 
     private void registerBlockColors(RegisterColorHandlersEvent.Block event) {
         event.register(DyeableBlock::getColor,
-                BlockyChefBlocks.CC_KITCHEN_COUNTER, BlockyChefBlocks.CP_KITCHEN_COUNTER, BlockyChefBlocks.PC_KITCHEN_COUNTER, BlockyChefBlocks.PP_KITCHEN_COUNTER,
-                BlockyChefBlocks.CC_KITCHEN_SINK, BlockyChefBlocks.CP_KITCHEN_SINK, BlockyChefBlocks.PC_KITCHEN_SINK, BlockyChefBlocks.PP_KITCHEN_SINK,
-                BlockyChefBlocks.C_KITCHEN_CABINET, BlockyChefBlocks.P_KITCHEN_CABINET,
-                BlockyChefBlocks.CC_COOKING_TABLE, BlockyChefBlocks.CP_COOKING_TABLE, BlockyChefBlocks.PC_COOKING_TABLE, BlockyChefBlocks.PP_COOKING_TABLE,
-                BlockyChefBlocks.CC_KITCHEN_COUNTER_CORNER, BlockyChefBlocks.CP_KITCHEN_COUNTER_CORNER, BlockyChefBlocks.PC_KITCHEN_COUNTER_CORNER, BlockyChefBlocks.PP_KITCHEN_COUNTER_CORNER,
                 BlockyChefBlocks.STOVE,
                 BlockyChefBlocks.DOUGH_MAKER,
                 BlockyChefBlocks.MIXER,
@@ -121,6 +117,13 @@ public final class BlockyChefClient {
                 BlockyChefBlocks.JUICER,
                 BlockyChefBlocks.GRILL,
                 BlockyChefBlocks.PASTA_MACHINE
+        );
+        event.register(MultiVariantFurnitureBlock::getVariantColor,
+                BlockyChefBlocks.CC_KITCHEN_COUNTER, BlockyChefBlocks.CP_KITCHEN_COUNTER, BlockyChefBlocks.PC_KITCHEN_COUNTER, BlockyChefBlocks.PP_KITCHEN_COUNTER,
+                BlockyChefBlocks.CC_KITCHEN_SINK, BlockyChefBlocks.CP_KITCHEN_SINK, BlockyChefBlocks.PC_KITCHEN_SINK, BlockyChefBlocks.PP_KITCHEN_SINK,
+                BlockyChefBlocks.C_KITCHEN_CABINET, BlockyChefBlocks.P_KITCHEN_CABINET,
+                BlockyChefBlocks.CC_COOKING_TABLE, BlockyChefBlocks.CP_COOKING_TABLE, BlockyChefBlocks.PC_COOKING_TABLE, BlockyChefBlocks.PP_COOKING_TABLE,
+                BlockyChefBlocks.CC_KITCHEN_COUNTER_CORNER, BlockyChefBlocks.CP_KITCHEN_COUNTER_CORNER, BlockyChefBlocks.PC_KITCHEN_COUNTER_CORNER, BlockyChefBlocks.PP_KITCHEN_COUNTER_CORNER
         );
         event.register((state, tintGetter, pos, layer) -> tintGetter != null && pos != null ? BiomeColors.getAverageFoliageColor(tintGetter, pos) : FoliageColor.getDefaultColor(),
                 BlockyChefBlocks.CINNAMON_LEAVES);

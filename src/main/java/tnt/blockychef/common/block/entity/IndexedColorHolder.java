@@ -1,8 +1,11 @@
 package tnt.blockychef.common.block.entity;
 
+import javax.annotation.Nullable;
+
 public interface IndexedColorHolder {
 
-    int getColor(int index);
+    @Nullable
+    Integer getColor(int index);
 
-    void setColor(int index, int color);
+    void setColor(int index, @Nullable Integer color);
 }

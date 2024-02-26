@@ -28,6 +28,7 @@ import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.blockentity.Synchronizable;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
 
+import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -43,7 +44,7 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
 
     private int energyBuffer;
     private float temperature;
-    private int[] colors;
+    private final Integer[] colors;
 
     public StoveBlockEntity(BlockPos pos, BlockState state) {
         super(BlockyChefBlockEntities.STOVE, pos, state);
@@ -54,8 +55,7 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
         this.externalHeatSource = new RegulatedRangeHeatSource(externalHandler, 0, HeatValues.MAX_TEMPERATURE);
         this.externalHeatSource.addHeatingCondition(this::hasEnergy);
         this.slots = ArrayUtils.indexedFill(new StoveCookingSlot[INPUTS.length], index -> new StoveCookingSlot(index, this));
-        this.colors = new int[1];
-        Arrays.fill(this.colors, Integer.MIN_VALUE);
+        this.colors = new Integer[1];
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, StoveBlockEntity stove) {
@@ -94,12 +94,12 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
     }
 
     @Override
-    public int getColor(int index) {
-        return index >= 0 && index < colors.length ? colors[index] : Integer.MIN_VALUE;
+    public @Nullable Integer getColor(int index) {
+        return index >= 0 && index < colors.length ? colors[index] : null;
     }
 
     @Override
-    public void setColor(int index, int color) {
+    public void setColor(int index, @Nullable Integer color) {
         if (index >= 0 && index < colors.length) {
             colors[index] = color;
             this.setChanged();
@@ -185,7 +185,7 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
     }
 
     private void saveSharedData(CompoundTag tag) {
-        tag.putIntArray("colors", colors);
+        ColorableBlockEntity.saveColorData(colors, tag);
         tag.put("stoveHeat", stoveHeatSource.encodeData());
         tag.put("externalHeat", externalHeatSource.encodeData());
         tag.putInt("energyBuffer", energyBuffer);
@@ -198,7 +198,7 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
     }
 
     private void loadSharedData(CompoundTag tag) {
-        colors = tag.getIntArray("colors");
+        ColorableBlockEntity.loadColorData(colors, tag);
         stoveHeatSource.decodeData(tag.getCompound("stoveHeat"));
         externalHeatSource.decodeData(tag.getCompound("externalHeat"));
         energyBuffer = tag.getInt("energyBuffer");

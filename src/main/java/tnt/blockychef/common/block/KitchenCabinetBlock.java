@@ -19,12 +19,13 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+import tnt.blockychef.client.screen.MultiVariantFurnitureBlock;
 import tnt.blockychef.common.block.entity.KitchenCabinetBlockEntity;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.menu.KitchenCabinetMenu;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
 
-public class KitchenCabinetBlock extends DyeableBlock implements EntityBlock {
+public class KitchenCabinetBlock extends MultiVariantFurnitureBlock implements EntityBlock {
 
     private static final Component TITLE = Component.translatable("screen.blockychef.kitchen_cabinet");
     private static final VoxelShape[] HITBOX = {
@@ -34,8 +35,8 @@ public class KitchenCabinetBlock extends DyeableBlock implements EntityBlock {
             Block.box(0.0, 2.0, 0.0, 7.0, 16.0, 16.0)  // EAST
     };
 
-    public KitchenCabinetBlock() {
-        super(Properties.of().sound(SoundType.STONE).strength(1.5F).noOcclusion());
+    public KitchenCabinetBlock(Variant variant) {
+        super(Properties.of().sound(SoundType.STONE).strength(1.5F).noOcclusion(), variant);
     }
 
     @Override

@@ -29,12 +29,11 @@ public class DoughMakerBlockEntity extends RecipeRememberingBlockEntity<DoughMak
     private RecipeHolder<DoughMakerRecipe> activeRecipe;
     private boolean processing;
     private int processingTime;
-    private int[] colors;
+    private final Integer[] colors;
 
     public DoughMakerBlockEntity(BlockPos pos, BlockState state) {
         super(BlockyChefBlockEntities.DOUGH_MAKER, pos, state);
-        this.colors = new int[1];
-        Arrays.fill(this.colors, Integer.MIN_VALUE);
+        this.colors = new Integer[1];
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, DoughMakerBlockEntity doughMaker) {
@@ -68,12 +67,12 @@ public class DoughMakerBlockEntity extends RecipeRememberingBlockEntity<DoughMak
     }
 
     @Override
-    public int getColor(int index) {
-        return index >= 0 && index < colors.length ? colors[index] : Integer.MIN_VALUE;
+    public @Nullable Integer getColor(int index) {
+        return index >= 0 && index < colors.length ? colors[index] : null;
     }
 
     @Override
-    public void setColor(int index, int color) {
+    public void setColor(int index, @Nullable Integer color) {
         if (index >= 0 && index < colors.length) {
             colors[index] = color;
             this.setChanged();
@@ -146,13 +145,13 @@ public class DoughMakerBlockEntity extends RecipeRememberingBlockEntity<DoughMak
     private void saveSharedData(CompoundTag tag) {
         tag.putBoolean("processing", processing);
         tag.putInt("processingTime", processingTime);
-        tag.putIntArray("colors", colors);
+        ColorableBlockEntity.saveColorData(colors, tag);
     }
 
     private void loadSharedData(CompoundTag tag) {
         processing = tag.getBoolean("processing");
         processingTime = tag.getInt("processingTime");
-        colors = tag.getIntArray("colors");
+        ColorableBlockEntity.loadColorData(colors, tag);
         refreshRecipe();
     }
 

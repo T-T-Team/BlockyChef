@@ -3,10 +3,12 @@ package tnt.blockychef.util;
 import net.minecraft.world.item.DyeColor;
 import tnt.blockychef.common.block.entity.IndexedColorHolder;
 
+import javax.annotation.Nullable;
+
 public final class ColorHelper {
 
     public static void setColor(IndexedColorHolder colorHolder, int layer, DyeColor color, boolean mixPrevious) {
-        int oldColor = colorHolder.getColor(layer);
+        Integer oldColor = colorHolder.getColor(layer);
         int newColor = color.getTextColor();
         if (mixPrevious) {
             newColor = mix(oldColor, color);
@@ -14,11 +16,11 @@ public final class ColorHelper {
         colorHolder.setColor(layer, newColor);
     }
 
-    public static int mix(int prevColor, DyeColor... dyeColors) {
+    public static int mix(@Nullable Integer prevColor, DyeColor... dyeColors) {
         int[] colors = new int[3];
         int i = 0;
         int j = 0;
-        if (prevColor != Integer.MIN_VALUE) {
+        if (prevColor != null) {
             float r = getColorAsFloat(getRedColorComponent(prevColor));
             float g = getColorAsFloat(getGreenColorComponent(prevColor));
             float b = getColorAsFloat(getBlueColorComponent(prevColor));

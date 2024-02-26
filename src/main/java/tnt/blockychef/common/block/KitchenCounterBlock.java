@@ -16,17 +16,18 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
+import tnt.blockychef.client.screen.MultiVariantFurnitureBlock;
 import tnt.blockychef.common.block.entity.KitchenCounterBlockEntity;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.menu.KitchenCounterMenu;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
 
-public class KitchenCounterBlock extends DyeableBlock implements EntityBlock {
+public class KitchenCounterBlock extends MultiVariantFurnitureBlock implements EntityBlock {
 
     private static final Component TITLE = Component.translatable("screen.blockychef.kitchen_counter");
 
-    public KitchenCounterBlock() {
-        super(Properties.of().sound(SoundType.STONE).strength(1.5F).noOcclusion());
+    public KitchenCounterBlock(Variant variant) {
+        super(Properties.of().sound(SoundType.STONE).strength(1.5F).noOcclusion(), variant);
     }
 
     @Override

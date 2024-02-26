@@ -21,7 +21,7 @@ import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.blockentity.Synchronizable;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
 
-import java.util.Arrays;
+import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class ToasterBlockEntity extends RecipeRememberingBlockEntity<ToasterRecipe> implements Synchronizable, IndexedColorHolder {
@@ -31,15 +31,14 @@ public class ToasterBlockEntity extends RecipeRememberingBlockEntity<ToasterReci
     public static final int MAX_TIMER_VALUE = 6000; // 5 minutes
     private static final int[] SLOTS = { 0, 1 };
     private final NonNullList<ToastingUnit> units;
-    private int[] colors;
+    private final Integer[] colors;
     private boolean toasting;
     private int timeToasting;
     private int targetToastingTime = 600;
 
     public ToasterBlockEntity(BlockPos pos, BlockState state) {
         super(BlockyChefBlockEntities.TOASTER, pos, state);
-        this.colors = new int[1];
-        Arrays.fill(this.colors, Integer.MIN_VALUE);
+        this.colors = new Integer[1];
         units = NonNullList.createWithCapacity(SLOTS.length);
         for (int slot : SLOTS) {
             units.add(new ToastingUnit(this, slot));
@@ -104,12 +103,12 @@ public class ToasterBlockEntity extends RecipeRememberingBlockEntity<ToasterReci
     }
 
     @Override
-    public int getColor(int index) {
-        return index >= 0 && index < colors.length ? colors[index] : Integer.MIN_VALUE;
+    public @Nullable Integer getColor(int index) {
+        return index >= 0 && index < colors.length ? colors[index] : null;
     }
 
     @Override
-    public void setColor(int index, int color) {
+    public void setColor(int index, @Nullable Integer color) {
         if (index >= 0 && index < colors.length) {
             colors[index] = color;
             this.setChanged();
@@ -149,7 +148,7 @@ public class ToasterBlockEntity extends RecipeRememberingBlockEntity<ToasterReci
     }
 
     private void saveSharedData(CompoundTag tag) {
-        tag.putIntArray("colors", colors);
+        ColorableBlockEntity.saveColorData(colors, tag);
         tag.putBoolean("toasting", toasting);
         tag.putInt("timeToasting", timeToasting);
         tag.putInt("targetToastingTime", targetToastingTime);
@@ -159,7 +158,7 @@ public class ToasterBlockEntity extends RecipeRememberingBlockEntity<ToasterReci
     }
 
     private void loadSharedData(CompoundTag tag) {
-        colors = tag.getIntArray("colors");
+        ColorableBlockEntity.loadColorData(colors, tag);
         toasting = tag.getBoolean("toasting");
         timeToasting = tag.getInt("timeToasting");
         targetToastingTime = tag.getInt("targetToastingTime");

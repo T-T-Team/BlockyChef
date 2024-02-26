@@ -40,4 +40,6 @@ public final class BlockyChefRecipeTypes {
     public static final RecipeType<PotRecipe> POT_RECIPE = null;
     @ObjectHolder(value = "blockychef:teapot_recipe", registryName = KEY)
     public static final RecipeType<TeapotRecipe> TEAPOT_RECIPE = null;
+    @ObjectHolder(value = "blockychef:cooking_table_recipe", registryName = KEY)
+    public static final RecipeType<CookingTableRecipe> COOKING_TABLE_RECIPE = null;
 }

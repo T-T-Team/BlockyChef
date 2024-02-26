@@ -20,15 +20,16 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
+import tnt.blockychef.client.screen.MultiVariantFurnitureBlock;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefItems;
 
 import java.util.Optional;
 
-public class KitchenSinkBlock extends DyeableBlock implements EntityBlock, FluidInteractBlock {
+public class KitchenSinkBlock extends MultiVariantFurnitureBlock implements EntityBlock, FluidInteractBlock {
 
-    public KitchenSinkBlock() {
-        super(Properties.of().sound(SoundType.STONE).strength(1.5F).noOcclusion());
+    public KitchenSinkBlock(Variant variant) {
+        super(Properties.of().sound(SoundType.STONE).strength(1.5F).noOcclusion(), variant);
     }
 
     @Override

@@ -120,6 +120,7 @@ public final class Registry {
         helper.register("teapot", IForgeMenuType.create(TeapotMenu::new));
         helper.register("kitchen_counter", IForgeMenuType.create(KitchenCounterMenu::new));
         helper.register("kitchen_cabinet", IForgeMenuType.create(KitchenCabinetMenu::new));
+        helper.register("cooking_table", IForgeMenuType.create(CookingTableMenu::new));
     }
 
     private static void registerMobEffects(RegisterEvent.RegisterHelper<MobEffect> helper) {
@@ -144,6 +145,7 @@ public final class Registry {
         helper.register("pan_recipe");
         helper.register("pot_recipe");
         helper.register("teapot_recipe");
+        helper.register("cooking_table_recipe");
     }
 
     private static void registerRecipeSerializers(RegisterEvent.RegisterHelper<RecipeSerializer<?>> helper) {
@@ -163,6 +165,7 @@ public final class Registry {
         helper.register("pan", CodecRecipeSerializer.forCodec(PanRecipe.CODEC));
         helper.register("pot", CodecRecipeSerializer.forCodec(PotRecipe.CODEC));
         helper.register("teapot", CodecRecipeSerializer.forCodec(TeapotRecipe.CODEC));
+        helper.register("cooking_table", CodecRecipeSerializer.forCodec(CookingTableRecipe.CODEC));
     }
 
     private static void registerFeatures(RegisterEvent.RegisterHelper<Feature<?>> helper) {

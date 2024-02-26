@@ -8,25 +8,24 @@ import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.blockentity.Synchronizable;
 
-import java.util.Arrays;
+import javax.annotation.Nullable;
 
 public class GrillBlockEntity extends BlockEntity implements Synchronizable, IndexedColorHolder {
 
-    private int[] colors;
+    private final Integer[] colors;
 
     public GrillBlockEntity(BlockPos pos, BlockState state) {
         super(BlockyChefBlockEntities.GRILL, pos, state);
-        this.colors = new int[1];
-        Arrays.fill(this.colors, Integer.MIN_VALUE);
+        this.colors = new Integer[1];
     }
 
     @Override
-    public int getColor(int index) {
-        return index >= 0 && index < colors.length ? colors[index] : Integer.MIN_VALUE;
+    public @Nullable Integer getColor(int index) {
+        return index >= 0 && index < colors.length ? colors[index] : null;
     }
 
     @Override
-    public void setColor(int index, int color) {
+    public void setColor(int index, @Nullable Integer color) {
         if (index >= 0 && index < colors.length) {
             colors[index] = color;
             this.setChanged();
@@ -36,12 +35,12 @@ public class GrillBlockEntity extends BlockEntity implements Synchronizable, Ind
 
     @Override
     public void encodeData(CompoundTag tag) {
-        tag.putIntArray("colors", colors);
+        ColorableBlockEntity.saveColorData(colors, tag);
     }
 
     @Override
     public void decodeData(CompoundTag tag) {
-        colors = tag.getIntArray("colors");
+        ColorableBlockEntity.loadColorData(colors, tag);
     }
 
     @Override

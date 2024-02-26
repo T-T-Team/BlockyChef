@@ -20,7 +20,6 @@ import tnt.tntlib.api.blockentity.Synchronizable;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import javax.annotation.Nullable;
-import java.util.Arrays;
 import java.util.Optional;
 
 public class MixerBlockEntity extends RecipeRememberingBlockEntity<MixerRecipe> implements Synchronizable, IndexedColorHolder, FluidHolder {
@@ -31,13 +30,12 @@ public class MixerBlockEntity extends RecipeRememberingBlockEntity<MixerRecipe> 
     private final FluidContainer container;
     private MixerRecipe.RpmValue selectedRpm = MixerRecipe.RpmValue.MEDIUM;
     private RecipeHolder<MixerRecipe> activeRecipe;
-    private int[] colors;
+    private final Integer[] colors;
 
     public MixerBlockEntity(BlockPos pos, BlockState state) {
         super(BlockyChefBlockEntities.MIXER, pos, state);
         this.container = new FluidContainer(FLUID_CAPACITY, false);
-        this.colors = new int[1];
-        Arrays.fill(this.colors, Integer.MIN_VALUE);
+        this.colors = new Integer[1];
     }
 
     @Override
@@ -106,12 +104,12 @@ public class MixerBlockEntity extends RecipeRememberingBlockEntity<MixerRecipe> 
     }
 
     @Override
-    public int getColor(int index) {
-        return index >= 0 && index < colors.length ? colors[index] : Integer.MIN_VALUE;
+    public @Nullable Integer getColor(int index) {
+        return index >= 0 && index < colors.length ? colors[index] : null;
     }
 
     @Override
-    public void setColor(int index, int color) {
+    public void setColor(int index, @Nullable Integer color) {
         if (index >= 0 && index < colors.length) {
             colors[index] = color;
             this.setChanged();
@@ -152,13 +150,13 @@ public class MixerBlockEntity extends RecipeRememberingBlockEntity<MixerRecipe> 
     }
 
     private void saveSharedData(CompoundTag tag) {
-        tag.putIntArray("colors", colors);
+        ColorableBlockEntity.saveColorData(colors, tag);
         tag.putInt("rpm", selectedRpm.ordinal());
         tag.put("fluids", container.serialize());
     }
 
     private void loadSharedData(CompoundTag tag) {
-        colors = tag.getIntArray("colors");
+        ColorableBlockEntity.loadColorData(colors, tag);
         selectedRpm = MixerRecipe.RpmValue.values()[tag.getInt("rpm") % MixerRecipe.RpmValue.values().length];
         container.deserialize(tag.getCompound("fluids"));
         refreshRecipe();

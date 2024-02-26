@@ -1,8 +1,13 @@
 package tnt.blockychef.common.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -13,15 +18,34 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
+import tnt.blockychef.client.screen.MultiVariantFurnitureBlock;
 import tnt.blockychef.common.block.entity.CookingTableBlockEntity;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
+import tnt.blockychef.common.menu.CookingTableMenu;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
-import tnt.tntlib.api.menu.MenuInventoryHelper;
 
-public class KitchenTableBlock extends DyeableBlock implements EntityBlock {
+public class CookingTableBlock extends MultiVariantFurnitureBlock implements EntityBlock {
 
-    public KitchenTableBlock() {
-        super(Properties.of().sound(SoundType.STONE).strength(1.5F).noOcclusion());
+    private static final Component TITLE = Component.translatable("screen.blockychef.cooking_table");
+
+    public CookingTableBlock(Variant variant) {
+        super(Properties.of().sound(SoundType.STONE).strength(1.5F).noOcclusion(), variant);
+    }
+
+    @Override
+    protected InteractionResult handleDefaultInteraction(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult, ItemStack stack) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof CookingTableBlockEntity table && !level.isClientSide()) {
+            ((ServerPlayer) player).openMenu(
+                    new SimpleMenuProvider(
+                            (menuId, inv, owner) -> new CookingTableMenu(menuId, inv, table),
+                            TITLE
+                    ),
+                    pos
+            );
+            return InteractionResult.SUCCESS;
+        }
+        return InteractionResult.PASS;
     }
 
     @Override
