@@ -49,6 +49,7 @@ public class JeiIntegrationPlugin implements IModPlugin {
     static final RecipeType<StoveRecipe> STOVE = new RecipeType<>(BlockyChef.resource("stove"), StoveRecipe.class);
     static final RecipeType<PanRecipe> PAN = new RecipeType<>(BlockyChef.resource("pan"), PanRecipe.class);
     static final RecipeType<PotRecipe> POT = new RecipeType<>(BlockyChef.resource("pot"), PotRecipe.class);
+    static final RecipeType<CookingTableRecipe> COOKING_TABLE = new RecipeType<>(BlockyChef.resource("cooking_table"), CookingTableRecipe.class);
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
@@ -68,6 +69,7 @@ public class JeiIntegrationPlugin implements IModPlugin {
         registration.addRecipes(STOVE, getRecipes(BlockyChefRecipeTypes.STOVE_RECIPE));
         registration.addRecipes(PAN, getRecipes(BlockyChefRecipeTypes.PAN_RECIPE));
         registration.addRecipes(POT, getRecipes(BlockyChefRecipeTypes.POT_RECIPE));
+        registration.addRecipes(COOKING_TABLE, getRecipes(BlockyChefRecipeTypes.COOKING_TABLE_RECIPE));
     }
 
     @Override
@@ -89,7 +91,8 @@ public class JeiIntegrationPlugin implements IModPlugin {
                 new FluidExtractionRecipeCategory(helper),
                 new StoveRecipeCategory(helper),
                 new PanRecipeCategory(helper),
-                new PotRecipeCategory(helper)
+                new PotRecipeCategory(helper),
+                new CookingTableRecipeCategory(helper)
         );
     }
 
@@ -140,6 +143,10 @@ public class JeiIntegrationPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.STOVE), STOVE);
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.PAN), PAN);
         registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.POT), POT);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.PP_COOKING_TABLE), COOKING_TABLE);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.PC_COOKING_TABLE), COOKING_TABLE);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.CP_COOKING_TABLE), COOKING_TABLE);
+        registration.addRecipeCatalyst(new ItemStack(BlockyChefBlocks.CC_COOKING_TABLE), COOKING_TABLE);
     }
 
     @Override

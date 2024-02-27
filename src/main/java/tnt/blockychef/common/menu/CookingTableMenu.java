@@ -22,7 +22,9 @@ public class CookingTableMenu extends AbstractBlockEntityMenu<CookingTableBlockE
         super(BlockyChefMenuTypes.COOKING_TABLE, menuId, blockEntity);
 
         MenuQuickMoveHelper.QuickMoveContext ctx = this.getQuickMoveContext();
-        this.quickMoveHelper = MenuQuickMoveHelper.inputOutputInventory(ctx, CookingTableBlockEntity.INPUTS, CookingTableBlockEntity.OUTPUTS);
+        this.quickMoveHelper = MenuQuickMoveHelper.Builder.withContext(ctx)
+                .addRule2(0, CookingTableBlockEntity.INPUTS.length, 15, 51)
+                .build();
 
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 3; x++) {
