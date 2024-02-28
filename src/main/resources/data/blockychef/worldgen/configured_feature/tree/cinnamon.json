@@ -44,7 +44,9 @@
       "state": {
         "Name": "blockychef:cinnamon_log",
         "Properties": {
-          "axis": "y"
+          "axis": "y",
+          "age": "3",
+          "regrowable": "true"
         }
       }
     }

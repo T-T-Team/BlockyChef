@@ -1,22 +1,30 @@
 package tnt.blockychef.common.block;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootDataManager;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ToolAction;
 import org.jetbrains.annotations.Nullable;
-import tnt.blockychef.common.init.BlockyChefBlocks;
-import tnt.blockychef.common.init.BlockyChefItems;
+import tnt.blockychef.BlockyChef;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
 
-public class CinnamonLogBlock extends RotatedPillarBlock {
+import java.util.List;
+
+public class CinnamonLogBlock extends RegrowingLogBlock {
+
+    public static final ResourceLocation STRIPPING_LOG_LOOT_TABLE = BlockyChef.resource("blocks/cinnamon_log_stripping");
 
     public CinnamonLogBlock(Properties properties) {
         super(properties);
@@ -24,28 +32,50 @@ public class CinnamonLogBlock extends RotatedPillarBlock {
 
     @Override
     public @Nullable BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
-        if (!simulate) {
+        if (!simulate && state.getValue(AGE) > 0) {
             Level level = context.getLevel();
             if (!level.isClientSide) {
-                dropCinnamonBark(context, level);
+                dropCinnamonBark(context, (ServerLevel) level);
             }
-            Direction.Axis axis = state.getValue(AXIS);
-            return BlockyChefBlocks.CINNAMON_STRIPPED_LOG.defaultBlockState().setValue(AXIS, axis);
+            return state.setValue(AGE, 0);
         }
         return null;
     }
 
-    private void dropCinnamonBark(UseOnContext context, Level level) {
+    @Override
+    protected int getDefaultAge() {
+        return 3;
+    }
+
+    private void dropCinnamonBark(UseOnContext context, ServerLevel level) {
         BlockPos pos = context.getClickedPos();
         Player player = context.getPlayer();
-        int dropCount = 1 + level.random.nextInt(3);
-        ItemStack bark = new ItemStack(BlockyChefItems.CINNAMON_BARK, dropCount);
-        if (player != null) {
-            MenuInventoryHelper.giveItemOrDrop(player, bark);
-        } else {
-            Vec3 center = pos.getCenter();
-            ItemEntity entity = new ItemEntity(level, center.x, center.y, center.z, new ItemStack(BlockyChefItems.CINNAMON_BARK, dropCount));
-            level.addFreshEntity(entity);
+        LootDataManager lootDataManager = level.getServer().getLootData();
+        LootTable table = lootDataManager.getLootTable(STRIPPING_LOG_LOOT_TABLE);
+        LootParams params = this.createStrippingLootParams(level, context);
+        List<ItemStack> drops = table.getRandomItems(params);
+        Vec3 center = pos.getCenter();
+        for (ItemStack stack : drops) {
+            if (player != null) {
+                MenuInventoryHelper.giveItemOrDrop(player, stack);
+            } else {
+                ItemEntity entity = new ItemEntity(level, center.x, center.y, center.z, stack);
+                level.addFreshEntity(entity);
+            }
+
         }
+    }
+
+    private LootParams createStrippingLootParams(ServerLevel level, UseOnContext ctx) {
+        BlockPos pos = ctx.getClickedPos();
+        BlockState state = level.getBlockState(pos);
+        ItemStack tool = ctx.getItemInHand();
+        Player player = ctx.getPlayer();
+        return new LootParams.Builder(level)
+                .withParameter(LootContextParams.BLOCK_STATE, state)
+                .withParameter(LootContextParams.ORIGIN, pos.getCenter())
+                .withParameter(LootContextParams.TOOL, tool)
+                .withParameter(LootContextParams.THIS_ENTITY, player)
+                .create(LootContextParamSets.BLOCK);
     }
 }

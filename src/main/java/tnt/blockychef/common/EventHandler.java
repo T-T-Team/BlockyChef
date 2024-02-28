@@ -32,7 +32,7 @@ public final class EventHandler {
 
     @SubscribeEvent
     public static void onBonemeal(BonemealEvent event) {
-        if (BlockyChef.config.crops.restrictBonemealUsage)
+        if (BlockyChef.config.plants.restrictBonemealUsage)
             event.setCanceled(true);
     }
 

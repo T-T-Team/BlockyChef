@@ -23,7 +23,6 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.fml.config.IConfigEvent;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.config.PlantDecay;
 
@@ -86,7 +85,7 @@ public class TreeHangingFruitBlock extends BushBlock implements BonemealableBloc
         if (nextAge > 2) {
             nextAge = 2;
         }
-        level.setBlock(pos, state.setValue(AGE, nextAge), 2);
+        level.setBlock(pos, state.setValue(AGE, nextAge), Block.UPDATE_CLIENTS);
     }
 
     @Override
@@ -99,7 +98,7 @@ public class TreeHangingFruitBlock extends BushBlock implements BonemealableBloc
         if (!level.isClientSide) {
             if (this.isRipe(state)) {
                 dropResources(state, level, pos);
-                level.setBlock(pos, state.setValue(AGE, 0), 2);
+                level.setBlock(pos, state.setValue(AGE, 0), Block.UPDATE_CLIENTS);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -118,14 +117,14 @@ public class TreeHangingFruitBlock extends BushBlock implements BonemealableBloc
                     if (decay.treeFruitDecayDropsFruit) {
                         dropResources(state, level, pos);
                     }
-                    level.setBlock(pos, state.setValue(AGE, 0), 2);
+                    level.setBlock(pos, state.setValue(AGE, 0), Block.UPDATE_CLIENTS);
                 }
             }
         } else {
-            float growthChance = 0.15F;
+            float growthChance = BlockyChef.config.plants.fruitGrowthChance;
             if (random.nextFloat() < growthChance) {
                 int age = state.getValue(AGE);
-                level.setBlock(pos, state.setValue(AGE, age + 1), 2);
+                level.setBlock(pos, state.setValue(AGE, age + 1), Block.UPDATE_CLIENTS);
             }
         }
     }

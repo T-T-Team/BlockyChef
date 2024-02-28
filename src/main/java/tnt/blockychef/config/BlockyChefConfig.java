@@ -13,7 +13,7 @@ public final class BlockyChefConfig {
 
     @Configurable
     @Configurable.Comment("Crops configuration")
-    public CropsConfig crops = new CropsConfig();
+    public PlantsConfig plants = new PlantsConfig();
 
     @Configurable
     @Configurable.Comment("Thirst configuration")
