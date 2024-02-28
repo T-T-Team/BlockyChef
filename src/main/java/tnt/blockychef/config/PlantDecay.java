@@ -28,7 +28,7 @@ public final class PlantDecay {
     @Configurable.DecimalRange(min = 0.0F, max = 1.0F)
     @Configurable.Gui.NumberFormat("0.0###")
     @Configurable.Comment("Chance that tree fruits will decay")
-    public float treeFruitDecayChance = 0.1F;
+    public float treeFruitDecayChance = 0.05F;
 
     @Configurable
     @Configurable.Comment("Determines whether fruit crop will be destroyed upon decaying")

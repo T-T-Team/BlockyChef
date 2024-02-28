@@ -75,7 +75,7 @@ public final class ConfigDrinkLoader {
     private static void initVanillaDrinkables(List<CompatDrinkable> list) {
         new DefaultDrinkBuilder(Items.POTION)
                 .stats(2, 2)
-                .addEffect(0.15F, BlockyChefMobEffects.THIRST, 300)
+                .addEffect(0.40F, BlockyChefMobEffects.THIRST, 600)
                 .buildAndExport(list);
         new DefaultDrinkBuilder(Items.COOKED_BEEF)
                 .hydrationLoss(2)
