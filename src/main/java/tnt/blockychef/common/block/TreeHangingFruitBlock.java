@@ -23,14 +23,17 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.fml.config.IConfigEvent;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.config.PlantDecay;
 
 public class TreeHangingFruitBlock extends BushBlock implements BonemealableBlock {
 
-    public static final IntegerProperty AGE = BlockStateProperties.AGE_2;
+    public static final IntegerProperty AGE = BlockStateProperties.AGE_4;
     public static final VoxelShape[] SHAPES = {
             Block.box(6.5, 11.0, 6.5,  9.5, 16.0,  9.5),
+            Block.box(6.5, 11.0, 6.5,  9.5, 16.0,  9.5),
+            Block.box(5.0,  8.0, 5.0, 11.0, 16.0, 11.0),
             Block.box(5.0,  8.0, 5.0, 11.0, 16.0, 11.0),
             Block.box(4.0,  6.0, 4.0, 12.0, 16.0, 12.0)
     };
@@ -41,7 +44,7 @@ public class TreeHangingFruitBlock extends BushBlock implements BonemealableBloc
     }
 
     public boolean isRipe(BlockState state) {
-        return state.getValue(AGE) == 2;
+        return state.getValue(AGE) == 4;
     }
 
     @Override
@@ -119,7 +122,7 @@ public class TreeHangingFruitBlock extends BushBlock implements BonemealableBloc
                 }
             }
         } else {
-            float growthChance = 0.05F;
+            float growthChance = 0.15F;
             if (random.nextFloat() < growthChance) {
                 int age = state.getValue(AGE);
                 level.setBlock(pos, state.setValue(AGE, age + 1), 2);

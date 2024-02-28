@@ -13,7 +13,7 @@ public final class FoodList {
 
     public static final Map<FoodProperties, FoodProperties> FOOD_OVERRIDES = new IdentityHashMap<>();
 
-    private static final Supplier<MobEffectInstance> HUNGER = () -> new MobEffectInstance(MobEffects.HUNGER, 300, 7);
+    private static final Supplier<MobEffectInstance> HUNGER = () -> new MobEffectInstance(MobEffects.HUNGER, 600, 7);
     private static final float PROBABILITY = 0.20F;
 
 

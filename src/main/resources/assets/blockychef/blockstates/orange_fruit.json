@@ -4,9 +4,15 @@
       "model": "blockychef:block/orange/orange_0"
     },
     "age=1": {
-      "model": "blockychef:block/orange/orange_1"
+      "model": "blockychef:block/orange/orange_0"
     },
     "age=2": {
+      "model": "blockychef:block/orange/orange_1"
+    },
+    "age=3": {
+      "model": "blockychef:block/orange/orange_1"
+    },
+    "age=4": {
       "model": "blockychef:block/orange/orange_2"
     }
   }

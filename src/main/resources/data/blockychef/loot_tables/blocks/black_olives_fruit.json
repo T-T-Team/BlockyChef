@@ -14,7 +14,7 @@
           "condition": "minecraft:block_state_property",
           "block": "blockychef:black_olives_fruit",
           "properties": {
-            "age": "2"
+            "age": "4"
           }
         }
       ],
