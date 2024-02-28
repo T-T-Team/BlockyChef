@@ -1,5 +1,6 @@
 package tnt.blockychef.common.registry;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -23,6 +24,7 @@ import tnt.blockychef.common.effect.HydrationMobEffect;
 import tnt.blockychef.common.effect.ThirstMobEffect;
 import tnt.blockychef.common.food.recipe.*;
 import tnt.blockychef.common.init.BlockyChefBlocks;
+import tnt.blockychef.common.init.BlockyChefVanillaExtensions;
 import tnt.blockychef.common.menu.*;
 import tnt.blockychef.levelgen.feature.WeightedFeatureConfiguration;
 import tnt.blockychef.levelgen.feature.WeightedSelectorFeature;
@@ -59,6 +61,7 @@ public final class Registry {
             RegistrationHelper soundHelper = id -> helper.register(id, SoundEvent.createVariableRangeEvent(BlockyChef.resource(id)));
             registerSoundEvents(soundHelper);
         });
+        registerVanilla();
     }
 
     private static void registerBlocks(RegisterEvent.RegisterHelper<Block> helper) {
@@ -195,6 +198,14 @@ public final class Registry {
         helper.register("teapot");
         helper.register("toaster_a");
         helper.register("toaster_b");
+    }
+
+    private static void registerVanilla() {
+        registerEntry(BuiltInRegistries.LOOT_POOL_ENTRY_TYPE, "item_group", BlockyChefVanillaExtensions.LOOT_GROUP_ITEMS);
+    }
+
+    private static <T> void registerEntry(net.minecraft.core.Registry<T> registry, String id, T entry) {
+        net.minecraft.core.Registry.register(registry, BlockyChef.resource(id), entry);
     }
 
     @FunctionalInterface
