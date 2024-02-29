@@ -26,7 +26,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.PlantType;
 import tnt.blockychef.BlockyChef;
 
-public class DecayingGrowingBlock extends BushBlock {
+public class DecayingGrowingBlock extends BushBlock implements Decaying {
 
     private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[] {
             Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D),
@@ -40,6 +40,21 @@ public class DecayingGrowingBlock extends BushBlock {
     public DecayingGrowingBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(createDefaultState(stateDefinition.any()));
+    }
+
+    @Override
+    public int getCurrentDecay(BlockState state) {
+        return state.getValue(WEEDS_AGE);
+    }
+
+    @Override
+    public int getMaxDecay(BlockState state) {
+        return this.getMaxDecayValue();
+    }
+
+    @Override
+    public String getTooltipBase() {
+        return "tooltip.blockychef.decay_progress.crops";
     }
 
     public IntegerProperty getDecayProperty() {

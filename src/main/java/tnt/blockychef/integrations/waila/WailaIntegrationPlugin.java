@@ -1,6 +1,7 @@
 package tnt.blockychef.integrations.waila;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
 import snownee.jade.api.IWailaClientRegistration;
 import snownee.jade.api.IWailaCommonRegistration;
 import snownee.jade.api.IWailaPlugin;
@@ -18,6 +19,7 @@ public class WailaIntegrationPlugin implements IWailaPlugin {
     static final ResourceLocation JUICER = BlockyChef.resource("juicer");
     static final ResourceLocation BARREL = BlockyChef.resource("barrel");
     static final ResourceLocation GROWABLES = BlockyChef.resource("growables");
+    static final ResourceLocation DECAYABLES = BlockyChef.resource("decayables");
 
     @Override
     public void register(IWailaCommonRegistration registration) {
@@ -33,5 +35,6 @@ public class WailaIntegrationPlugin implements IWailaPlugin {
         registration.registerBlockComponent(BarrelComponentProvider.INSTANCE, BarrelBlock.class);
         registration.registerBlockComponent(CustomGrowthProgressProvider.INSTANCE, TreeHangingFruitBlock.class);
         registration.registerBlockComponent(CustomGrowthProgressProvider.INSTANCE, RegrowingLogBlock.class);
+        registration.registerBlockComponent(DecayComponentProvider.INSTANCE, Block.class);
     }
 }

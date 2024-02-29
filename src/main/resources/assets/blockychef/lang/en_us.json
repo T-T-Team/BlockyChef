@@ -721,6 +721,9 @@
   "label.blockychef.variant.furniture.mixed_concrete_top": "Mixed, Concrete top",
 
   "tooltip.blockychef.quality": "Quality: %s",
+  "tooltip.blockychef.decay_progress.default": "Decay: %s",
+  "tooltip.blockychef.decay_progress.crops": "Weeds: %s",
+  "tooltip.blockychef.decay_max": "Critical",
   "filter.key.blockychef.group": "Group",
   "filter.key.blockychef.mastery": "Mastery",
   "sorter.key.blockychef.cook_count": "Cook Count",
@@ -776,6 +779,7 @@
   "config.jade.plugin_blockychef.juicer": "Juicer",
   "config.jade.plugin_blockychef.barrel": "Barrel",
   "config.jade.plugin_blockychef.growables": "Growables",
+  "config.jade.plugin_blockychef.decayables": "Decayables",
 
   "fluid_type.blockychef.orange_fluid": "Orange Extract",
   "fluid_type.blockychef.cherry_fluid": "Cherry Extract",
