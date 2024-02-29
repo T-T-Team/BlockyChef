@@ -6,9 +6,7 @@ import snownee.jade.api.IWailaCommonRegistration;
 import snownee.jade.api.IWailaPlugin;
 import snownee.jade.api.WailaPlugin;
 import tnt.blockychef.BlockyChef;
-import tnt.blockychef.common.block.BarrelBlock;
-import tnt.blockychef.common.block.DryingRackBlock;
-import tnt.blockychef.common.block.JuicerBlock;
+import tnt.blockychef.common.block.*;
 import tnt.blockychef.common.block.entity.BarrelBlockEntity;
 import tnt.blockychef.common.block.entity.DryingRackBlockEntity;
 import tnt.blockychef.common.block.entity.JuicerBlockEntity;
@@ -19,6 +17,7 @@ public class WailaIntegrationPlugin implements IWailaPlugin {
     static final ResourceLocation DRYING_RACK = BlockyChef.resource("drying_rack");
     static final ResourceLocation JUICER = BlockyChef.resource("juicer");
     static final ResourceLocation BARREL = BlockyChef.resource("barrel");
+    static final ResourceLocation GROWABLES = BlockyChef.resource("growables");
 
     @Override
     public void register(IWailaCommonRegistration registration) {
@@ -32,5 +31,7 @@ public class WailaIntegrationPlugin implements IWailaPlugin {
         registration.registerBlockComponent(DryingRackComponentProvider.INSTANCE, DryingRackBlock.class);
         registration.registerBlockComponent(JuicerComponentProvider.INSTANCE, JuicerBlock.class);
         registration.registerBlockComponent(BarrelComponentProvider.INSTANCE, BarrelBlock.class);
+        registration.registerBlockComponent(CustomGrowthProgressProvider.INSTANCE, TreeHangingFruitBlock.class);
+        registration.registerBlockComponent(CustomGrowthProgressProvider.INSTANCE, RegrowingLogBlock.class);
     }
 }

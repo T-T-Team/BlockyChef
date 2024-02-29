@@ -775,6 +775,7 @@
   "config.jade.plugin_blockychef.drying_rack": "Drying Rack",
   "config.jade.plugin_blockychef.juicer": "Juicer",
   "config.jade.plugin_blockychef.barrel": "Barrel",
+  "config.jade.plugin_blockychef.growables": "Growables",
 
   "fluid_type.blockychef.orange_fluid": "Orange Extract",
   "fluid_type.blockychef.cherry_fluid": "Cherry Extract",

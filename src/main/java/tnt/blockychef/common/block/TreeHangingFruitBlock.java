@@ -43,7 +43,11 @@ public class TreeHangingFruitBlock extends BushBlock implements BonemealableBloc
     }
 
     public boolean isRipe(BlockState state) {
-        return state.getValue(AGE) == 4;
+        return getAge(state) == 4;
+    }
+
+    public int getAge(BlockState state) {
+        return state.getValue(AGE);
     }
 
     @Override
@@ -82,8 +86,8 @@ public class TreeHangingFruitBlock extends BushBlock implements BonemealableBloc
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
         int age = state.getValue(AGE);
         int nextAge = age + 1;
-        if (nextAge > 2) {
-            nextAge = 2;
+        if (nextAge > 4) {
+            nextAge = 4;
         }
         level.setBlock(pos, state.setValue(AGE, nextAge), Block.UPDATE_CLIENTS);
     }

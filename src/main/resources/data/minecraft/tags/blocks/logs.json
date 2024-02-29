@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "blockychef:cinnamon_log"
+    "blockychef:cinnamon_log",
+    "blockychef:cinnamon_stripped_log"
   ]
 }

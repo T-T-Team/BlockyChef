@@ -6,23 +6,14 @@
       "bonus_rolls": 0,
       "conditions": [
         {
-          "condition": "minecraft:any_of",
-          "terms": [
-            {
-              "condition": "minecraft:block_state_property",
-              "block": "blockychef:cinnamon_log",
-              "properties": {
-                "age": "1"
-              }
-            },
-            {
-              "condition": "minecraft:block_state_property",
-              "block": "blockychef:cinnamon_log",
-              "properties": {
-                "age": "2"
-              }
+          "condition": "minecraft:block_state_property",
+          "block": "blockychef:cinnamon_log",
+          "properties": {
+            "age": {
+              "min": "1",
+              "max": "2"
             }
-          ]
+          }
         }
       ],
       "entries": [

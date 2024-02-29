@@ -1,51 +1,58 @@
 {
+  "type": "minecraft:block",
+  "functions": [
+    {
+      "function": "minecraft:explosion_decay"
+    }
+  ],
   "pools": [
     {
-      "rolls": 1,
       "entries": [
         {
-          "type": "minecraft:item",
-          "name": "blockychef:cinnamon_log",
-          "conditions": [
+          "type": "minecraft:alternatives",
+          "children": [
             {
-              "condition": "minecraft:block_state_property",
-              "block": "blockychef:cinnamon_log",
-              "properties": {
-                "age": "3"
-              }
-            }
-          ]
-        },
-        {
-          "type": "blockychef:item_group",
-          "items": [
-            "blockychef:cinnamon_stripped_log",
-            "blockychef:cinnamon_bark"
-          ],
-          "conditions": [
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "block": "blockychef:cinnamon_log",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "age": "3"
+                  }
+                }
+              ],
+              "name": "blockychef:cinnamon_log"
+            },
             {
-              "condition": "minecraft:block_state_property",
-              "block": "blockychef:cinnamon_log",
-              "properties": {
-                "age": { "min": "1", "max": "2" }
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "blockychef:cinnamon_stripped_log",
-          "conditions": [
-            {
-              "condition": "minecraft:block_state_property",
-              "block": "blockychef:cinnamon_log",
-              "properties": {
-                "age": "0"
-              }
+              "type": "minecraft:item",
+              "name": "blockychef:cinnamon_stripped_log"
             }
           ]
         }
-      ]
+      ],
+      "rolls": 1
+    },
+    {
+      "conditions": [
+        {
+          "block": "blockychef:cinnamon_log",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": {
+              "min": "1",
+              "max": "2"
+            }
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "blockychef:cinnamon_bark"
+        }
+      ],
+      "rolls": 1
     }
   ]
 }

@@ -26,11 +26,19 @@ public class RegrowingLogBlock extends RotatedPillarBlock implements Bonemealabl
     }
 
     public boolean hasRegrown(BlockState state) {
-        return state.getValue(AGE) == 3;
+        return getRegrowthAge(state) == 3;
+    }
+
+    public int getRegrowthAge(BlockState state) {
+        return state.getValue(AGE);
     }
 
     public boolean canRegrow(BlockState state) {
-        return state.getValue(REGROWABLE) && !hasRegrown(state);
+        return isRegrowable(state) && !hasRegrown(state);
+    }
+
+    public boolean isRegrowable(BlockState state) {
+        return state.getValue(REGROWABLE);
     }
 
     @Override
