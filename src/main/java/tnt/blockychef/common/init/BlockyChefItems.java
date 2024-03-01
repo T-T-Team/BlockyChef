@@ -82,6 +82,8 @@ public final class BlockyChefItems {
     public static final Item EMPTY_BOTTLE = null;
     @ObjectHolder(value = "blockychef:bottle_of_water", registryName = KEY)
     public static final Item BOTTLE_OF_WATER = null;
+    @ObjectHolder(value = "blockychef:milk", registryName = KEY)
+    public static final Item MILK = null;
     @ObjectHolder(value = "blockychef:empty_jar", registryName = KEY)
     public static final Item EMPTY_JAR = null;
     @ObjectHolder(value = "blockychef:empty_glass", registryName = KEY)

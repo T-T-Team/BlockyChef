@@ -1,6 +1,7 @@
 package tnt.blockychef.common.registry;
 
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.UseAnim;
 import net.minecraftforge.registries.RegisterEvent;
@@ -132,7 +133,7 @@ public final class ItemRegistry {
         helper.register("dried_vanilla_pods", new DrinkableConsumableItem(new Item.Properties().food(FoodList.DRIED_VANILLA_PODS), DrinkList.DRIED_VANILLA_PODS));
         helper.register("eggplant_slice", new DrinkableConsumableItem(new Item.Properties().food(FoodList.EGGPLANT_SLICE), DrinkList.EGGPLANT_SLICE));
         helper.register("egg_yolk", new MasteryApplicableItem(new Item.Properties().food(FoodList.EGG_YOLK)));
-        helper.register("empty_bottle", new Item(new Item.Properties()));
+        helper.register("empty_bottle", new FillableBottleItem(new Item.Properties()).fillMilkFromEntity(() -> new ItemStack(BlockyChefItems.MILK)).fillWaterFromSource(() -> new ItemStack(BlockyChefItems.BOTTLE_OF_WATER)));
         helper.register("empty_jar", new Item(new Item.Properties()));
         helper.register("fried_egg", new DrinkableConsumableItem(new Item.Properties().food(FoodList.FRIED_EGG), DrinkList.FRIED_EGG));
         helper.register("garlic_clove", new DrinkableConsumableItem(new Item.Properties().food(FoodList.GARLIC_CLOVE), DrinkList.GARLIC_CLOVE));
