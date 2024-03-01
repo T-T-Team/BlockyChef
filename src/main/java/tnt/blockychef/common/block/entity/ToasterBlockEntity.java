@@ -5,6 +5,8 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -16,6 +18,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import tnt.blockychef.common.food.recipe.ToasterRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
+import tnt.blockychef.common.init.BlockyChefSounds;
 import tnt.blockychef.util.Helper;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.blockentity.Synchronizable;
@@ -62,7 +65,7 @@ public class ToasterBlockEntity extends RecipeRememberingBlockEntity<ToasterReci
                 MenuInventoryHelper.dropInventoryContents(level, pos, toaster.getItemHandler());
                 isChanged = true;
                 toaster.units.forEach(ToastingUnit::cancel);
-                toaster.toasting = false;
+                toaster.setToasting(false);
                 toaster.timeToasting = 0;
             }
             if (isChanged) {
@@ -72,6 +75,10 @@ public class ToasterBlockEntity extends RecipeRememberingBlockEntity<ToasterReci
     }
 
     public void setToasting(boolean toasting) {
+        if (toasting != this.toasting) {
+            SoundEvent event = toasting ? BlockyChefSounds.TOASTER_A : BlockyChefSounds.TOASTER_B;
+            level.playSound(null, worldPosition, event, SoundSource.BLOCKS);
+        }
         this.toasting = toasting;
         setChanged();
     }
