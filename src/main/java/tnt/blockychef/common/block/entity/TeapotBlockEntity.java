@@ -95,6 +95,10 @@ public class TeapotBlockEntity extends RecipeRememberingBlockEntity<TeapotRecipe
         return fluidContainer;
     }
 
+    public float getTemperature() {
+        return temperature;
+    }
+
     public void reloadRecipe() {
         if (level == null)
             return;

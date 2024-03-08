@@ -1,6 +1,7 @@
 package tnt.blockychef.client.screen;
 
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -9,12 +10,16 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.fluids.FluidStack;
 import tnt.blockychef.BlockyChef;
+import tnt.blockychef.common.block.entity.PanBlockEntity;
 import tnt.blockychef.common.block.entity.TeapotBlockEntity;
 import tnt.blockychef.common.food.fluid.FluidContainer;
 import tnt.blockychef.common.heat.HeatHelper;
 import tnt.blockychef.common.heat.HeatSource;
 import tnt.blockychef.common.heat.HeatValues;
+import tnt.blockychef.common.heat.RegulatedHeatSource;
 import tnt.blockychef.common.menu.TeapotMenu;
+import tnt.blockychef.network.NetworkManager;
+import tnt.blockychef.network.message.C2S_RegulateTemperature;
 import tnt.tntlib.api.FluidRenderHelper;
 import tnt.tntlib.api.GraphicsHelper;
 import tnt.tntlib.api.HorizontalAlignment;
@@ -38,6 +43,20 @@ public class TeapotScreen extends AbstractContainerScreen<TeapotMenu> {
     @Override
     protected void init() {
         super.init();
+
+        HeatSource heatSource = HeatHelper.getHeatSource(minecraft.level, menu.getBlockEntity().getBlockPos(), Direction.DOWN);
+        if (heatSource instanceof RegulatedHeatSource) {
+            addRenderableWidget(new Button.Builder(Component.literal("-"), this::reduceTemperature)
+                    .pos(leftPos + 143, topPos + 89)
+                    .size(12, 12)
+                    .build()
+            );
+            addRenderableWidget(new Button.Builder(Component.literal("+"), this::increaseTemperature)
+                    .pos(leftPos + 156, topPos + 89)
+                    .size(12, 12)
+                    .build()
+            );
+        }
     }
 
     @Override
@@ -57,6 +76,11 @@ public class TeapotScreen extends AbstractContainerScreen<TeapotMenu> {
             int progress = Mth.ceil(cookingProgress * (sizeY - 1.0F)) + 1;
             pGuiGraphics.blitSprite(BUBBLES_SPRITE, 12, 29, 0, 29 - progress, leftPos + 61, topPos + 34 + 29 - progress, 12, progress);
         }
+
+        int height = 85;
+        int top = 16;
+        pGuiGraphics.fill(leftPos + 164, topPos + top, leftPos + 168, topPos + height, 0xFF666666);
+        pGuiGraphics.fill(leftPos + 164, topPos + top + (int) ((height - top) * (1.0F - menu.getBlockEntity().getTemperature() / HeatValues.MAX_TEMPERATURE)), leftPos + 168, topPos + height, 0xFFFF0000);
 
         FluidContainer container = teapot.getFluidContainer();
         List<FluidStack> fluids = container.getFluids();
@@ -85,5 +109,18 @@ public class TeapotScreen extends AbstractContainerScreen<TeapotMenu> {
         renderBackground(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
         super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
         renderTooltip(pGuiGraphics, pMouseX, pMouseY);
+
+        TeapotBlockEntity teapot = menu.getBlockEntity();
+        if (pMouseX >= leftPos + 164 && pMouseX <= leftPos + 168 && pMouseY >= topPos + 16 && pMouseY <= topPos + 85) {
+            pGuiGraphics.renderTooltip(font, Component.translatable("label.blockychef.temperature", String.format(Locale.ROOT, "%.1f", teapot.getTemperature())), pMouseX, pMouseY);
+        }
+    }
+
+    private void reduceTemperature(Button button) {
+        NetworkManager.DISPATCHER.sendToServer(new C2S_RegulateTemperature(menu.getBlockEntity().getBlockPos(), Direction.DOWN, true));
+    }
+
+    private void increaseTemperature(Button button) {
+        NetworkManager.DISPATCHER.sendToServer(new C2S_RegulateTemperature(menu.getBlockEntity().getBlockPos(), Direction.DOWN, false));
     }
 }

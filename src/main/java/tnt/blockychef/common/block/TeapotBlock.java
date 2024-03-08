@@ -8,6 +8,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -25,10 +26,15 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import squeek.appleskin.network.NetworkHelper;
+import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.entity.TeapotBlockEntity;
+import tnt.blockychef.common.data.fluids.FluidExtraction;
+import tnt.blockychef.common.data.fluids.FluidExtractionManager;
+import tnt.blockychef.common.food.mastery.CookingMastery;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.menu.TeapotMenu;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
+import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 public class TeapotBlock extends FullHorizontalAxisBlock implements EntityBlock {
 
@@ -59,8 +65,19 @@ public class TeapotBlock extends FullHorizontalAxisBlock implements EntityBlock 
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-        // TODO mastery and extractions
         if (blockEntity instanceof TeapotBlockEntity teapot) {
+            ItemStack itemStack = pPlayer.getItemInHand(pHand);
+            FluidExtraction extraction = BlockyChef.EXTRACTION_MANAGER.getExtractor(itemStack, teapot);
+            if (extraction != null) {
+                ItemStack result = extraction.extractFluid(teapot);
+                if (!result.isEmpty()) {
+                    CookingMastery.applyMastery(pPlayer, result);
+                    MenuInventoryHelper.giveItemOrDrop(pPlayer, result);
+                    if (!pPlayer.isCreative())
+                        itemStack.shrink(1);
+                    return InteractionResult.SUCCESS;
+                }
+            }
             if (!pLevel.isClientSide) {
                 ((ServerPlayer) pPlayer).openMenu(new SimpleMenuProvider((menuId, inv, owner) -> new TeapotMenu(menuId, inv, teapot), TITLE), pPos);
             }
