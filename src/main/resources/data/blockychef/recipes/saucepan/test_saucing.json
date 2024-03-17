@@ -1,0 +1,50 @@
+{
+  "type": "blockychef:saucepan",
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:bottle_of_water"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:empty_jar"
+      }
+    },
+    {
+      "count": 3,
+      "ingredient": {
+        "item": "blockychef:strawberry"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:strawberry_marmalade"
+    }
+  ],
+  "burnOutputs": [
+    {
+      "item": "blockychef:burnt_marmalade"
+    }
+  ],
+  "configuration": {
+    "time": 200,
+    "minTemperature": 4.5,
+    "maxTemperature": 5.5
+  },
+  "craftRemainderConsumers": [
+    {
+      "ingredient": {
+        "item": "blockychef:empty_jar"
+      }
+    }
+  ],
+  "experience": 0.7
+}

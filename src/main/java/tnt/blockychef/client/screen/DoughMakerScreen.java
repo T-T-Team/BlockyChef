@@ -34,6 +34,7 @@ public class DoughMakerScreen extends AbstractContainerScreen<DoughMakerMenu> {
                 .size(80, 20)
                 .build()
         );
+        processButton.active = false;
     }
 
     @Override

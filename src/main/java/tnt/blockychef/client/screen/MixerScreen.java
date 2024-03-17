@@ -38,6 +38,7 @@ public class MixerScreen extends AbstractContainerScreen<MixerMenu> {
                 .pos(leftPos + 97, topPos + 56).size(72, 20)
                 .build()
         );
+        mixButton.active = false;
     }
 
     @Override

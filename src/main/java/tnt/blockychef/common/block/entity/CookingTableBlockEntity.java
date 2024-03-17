@@ -48,7 +48,7 @@ public class CookingTableBlockEntity extends RecipeRememberingBlockEntity<Cookin
             table.setRecipe(null);
             return;
         }
-        if (!table.isEmpty(OUTPUTS)) {
+        if (!MenuInventoryHelper.isEmpty(table, OUTPUTS)) {
             table.setRecipe(null);
             return;
         }
@@ -76,7 +76,7 @@ public class CookingTableBlockEntity extends RecipeRememberingBlockEntity<Cookin
     }
 
     public boolean canCraft() {
-        return recipeHolder != null && isEmpty(OUTPUTS) && !cooking;
+        return recipeHolder != null && MenuInventoryHelper.isEmpty(this, OUTPUTS) && !cooking;
     }
 
     @Override
@@ -164,14 +164,5 @@ public class CookingTableBlockEntity extends RecipeRememberingBlockEntity<Cookin
             BlockEntityHelper.sendBlockEntityClientData(this);
         }
         setChanged();
-    }
-
-    private boolean isEmpty(int[] slots) {
-        for (int slot : slots) {
-            ItemStack stack = getItem(slot);
-            if (!stack.isEmpty())
-                return false;
-        }
-        return true;
     }
 }

@@ -74,6 +74,15 @@ public final class MenuInventoryHelper {
         insertItems(items, container, container::getMaxStackSize, Container::getItem, Container::setItem, outputSlots);
     }
 
+    public static boolean isEmpty(Container container, int[] slots) {
+        for (int slot : slots) {
+            ItemStack stack = container.getItem(slot);
+            if (!stack.isEmpty())
+                return false;
+        }
+        return true;
+    }
+
     private static <T> boolean insertItems(ItemStack[] items, T t, IntSupplier maxSize, BiFunction<T, Integer, ItemStack> itemGetter, TriConsumer<T, Integer, ItemStack> itemSetter, int[] outputSlots) {
         for (ItemStack itemStack : items) {
             boolean result = insertItem(itemStack.copy(), t, maxSize, itemGetter, itemSetter, outputSlots);

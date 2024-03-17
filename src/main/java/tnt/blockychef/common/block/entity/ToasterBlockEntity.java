@@ -76,7 +76,7 @@ public class ToasterBlockEntity extends RecipeRememberingBlockEntity<ToasterReci
 
     public void setToasting(boolean toasting) {
         if (toasting != this.toasting) {
-            SoundEvent event = toasting ? BlockyChefSounds.TOASTER_A : BlockyChefSounds.TOASTER_B;
+            SoundEvent event = toasting ? BlockyChefSounds.TOASTER_B : BlockyChefSounds.TOASTER_A;
             level.playSound(null, worldPosition, event, SoundSource.BLOCKS);
         }
         this.toasting = toasting;

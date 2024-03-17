@@ -38,4 +38,6 @@ public final class BlockyChefMenuTypes {
     public static final MenuType<KitchenCabinetMenu> KITCHEN_CABINET_MENU = null;
     @ObjectHolder(value = "blockychef:cooking_table", registryName = KEY)
     public static final MenuType<CookingTableMenu> COOKING_TABLE = null;
+    @ObjectHolder(value = "blockychef:saucepan", registryName = KEY)
+    public static final MenuType<SaucepanMenu> SAUCEPAN = null;
 }

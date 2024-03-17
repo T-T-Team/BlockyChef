@@ -57,12 +57,12 @@ public class PanScreen extends AbstractContainerScreen<PanMenu> {
                     .size(12, 12)
                     .build()
             );
-            addRenderableWidget(new Button.Builder(Component.translatable("label.blockychef.stir"), this::stir)
-                    .pos(leftPos + 60, topPos + 86)
-                    .size(56, 16)
-                    .build()
-            );
         }
+        addRenderableWidget(new Button.Builder(Component.translatable("label.blockychef.stir"), this::stir)
+                .pos(leftPos + 60, topPos + 86)
+                .size(56, 16)
+                .build()
+        );
     }
 
     @Override

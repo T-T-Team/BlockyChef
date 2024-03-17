@@ -217,4 +217,6 @@ public final class BlockyChefBlocks {
     public static final PotBlock POT = null;
     @ObjectHolder(value = "blockychef:teapot", registryName = KEY)
     public static final TeapotBlock TEAPOT = null;
+    @ObjectHolder(value = "blockychef:saucepan", registryName = KEY)
+    public static final SaucepanBlock SAUCEPAN = null;
 }

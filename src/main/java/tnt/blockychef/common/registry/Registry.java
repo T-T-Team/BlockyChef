@@ -103,6 +103,7 @@ public final class Registry {
         helper.register("pan", BlockEntityType.Builder.of(PanBlockEntity::new, BlockyChefBlocks.PAN).build(null));
         helper.register("pot", BlockEntityType.Builder.of(PotBlockEntity::new, BlockyChefBlocks.POT).build(null));
         helper.register("teapot", BlockEntityType.Builder.of(TeapotBlockEntity::new, BlockyChefBlocks.TEAPOT).build(null));
+        helper.register("saucepan", BlockEntityType.Builder.of(SaucepanBlockEntity::new, BlockyChefBlocks.SAUCEPAN).build(null));
     }
 
     private static void registerMenuTypes(RegisterEvent.RegisterHelper<MenuType<?>> helper) {
@@ -121,6 +122,7 @@ public final class Registry {
         helper.register("kitchen_counter", IForgeMenuType.create(KitchenCounterMenu::new));
         helper.register("kitchen_cabinet", IForgeMenuType.create(KitchenCabinetMenu::new));
         helper.register("cooking_table", IForgeMenuType.create(CookingTableMenu::new));
+        helper.register("saucepan", IForgeMenuType.create(SaucepanMenu::new));
     }
 
     private static void registerMobEffects(RegisterEvent.RegisterHelper<MobEffect> helper) {
@@ -146,6 +148,7 @@ public final class Registry {
         helper.register("pot_recipe");
         helper.register("teapot_recipe");
         helper.register("cooking_table_recipe");
+        helper.register("saucepan_recipe");
     }
 
     private static void registerRecipeSerializers(RegisterEvent.RegisterHelper<RecipeSerializer<?>> helper) {
@@ -166,6 +169,7 @@ public final class Registry {
         helper.register("pot", CodecRecipeSerializer.forCodec(PotRecipe.CODEC));
         helper.register("teapot", CodecRecipeSerializer.forCodec(TeapotRecipe.CODEC));
         helper.register("cooking_table", CodecRecipeSerializer.forCodec(CookingTableRecipe.CODEC));
+        helper.register("saucepan", CodecRecipeSerializer.forCodec(SaucepanRecipe.CODEC));
     }
 
     private static void registerFeatures(RegisterEvent.RegisterHelper<Feature<?>> helper) {

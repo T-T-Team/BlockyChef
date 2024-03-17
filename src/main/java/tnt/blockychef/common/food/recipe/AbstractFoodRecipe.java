@@ -44,6 +44,11 @@ public abstract class AbstractFoodRecipe<C extends Container> implements Recipe<
         return true;
     }
 
+    @Override
+    public boolean isSpecial() {
+        return true;
+    }
+
     void throwValidationError(String message) {
         throw new JsonSyntaxException(String.format("Error in recipe [%s]: %s", this.getType(), message));
     }

@@ -34,6 +34,7 @@ public class MortarAndPestleScreen extends AbstractContainerScreen<MortarAndPest
                 .size(80, 20)
                 .build()
         );
+        grindButton.active = false;
     }
 
     @Override

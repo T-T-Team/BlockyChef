@@ -53,7 +53,12 @@ public class ToasterMenu extends AbstractBlockEntityMenu<ToasterBlockEntity> {
 
         @Override
         public boolean mayPlace(@NotNull ItemStack stack) {
-            return toaster.getRecipe(stack).isPresent();
+            return !toaster.isToasting() && toaster.getRecipe(stack).isPresent();
+        }
+
+        @Override
+        public boolean mayPickup(Player playerIn) {
+            return !toaster.isToasting();
         }
 
         @Override
