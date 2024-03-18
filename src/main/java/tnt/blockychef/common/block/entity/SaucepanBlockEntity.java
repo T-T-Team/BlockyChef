@@ -23,7 +23,6 @@ import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class SaucepanBlockEntity extends RecipeRememberingBlockEntity<SaucepanRecipe> implements Synchronizable, ProcessableRecipeHolder, ApplianceEventConsumer {
 
@@ -62,6 +61,16 @@ public class SaucepanBlockEntity extends RecipeRememberingBlockEntity<SaucepanRe
 
         SaucepanRecipe.SaucePanCookingConfiguration configuration = recipe.getConfiguration();
         if (configuration.isCooking(saucepan.temperature)) {
+            if (++saucepan.timeCooking >= configuration.time() && !level.isClientSide()) {
+                saucepan.timeCooking = 0;
+                saucepan.consumeIngredientsAndApplyCraftRemainder(recipe, INPUTS, OUTPUTS, in -> recipe.getInputs().forEach(ing -> ing.consume(saucepan, in)));
+                ItemStack[] assembledOutput = outputs.stream().map(ItemStack::copy).toArray(ItemStack[]::new);
+                MenuInventoryHelper.insertItems(assembledOutput, saucepan, OUTPUTS);
+                saucepan.storeRecipe(saucepan.recipeHolder);
+                saucepan.reloadRecipe();
+                BlockEntityHelper.sendBlockEntityClientData(saucepan);
+                return;
+            }
             if (configuration.isBurning(saucepan.temperature)) {
                 float f = configuration.burnSpeed() * 0.015F;
                 saucepan.burnAmount += f;
@@ -76,16 +85,6 @@ public class SaucepanBlockEntity extends RecipeRememberingBlockEntity<SaucepanRe
                     } else {
                         MenuInventoryHelper.insertItems(burned, saucepan, OUTPUTS);
                     }
-                }
-            } else {
-                if (++saucepan.timeCooking >= configuration.time() && !level.isClientSide()) {
-                    saucepan.timeCooking = 0;
-                    saucepan.consumeIngredientsAndApplyCraftRemainder(recipe, INPUTS, OUTPUTS, in -> recipe.getInputs().forEach(ing -> ing.consume(saucepan, in)));
-                    ItemStack[] assembledOutput = outputs.stream().map(ItemStack::copy).toArray(ItemStack[]::new);
-                    MenuInventoryHelper.insertItems(assembledOutput, saucepan, OUTPUTS);
-                    saucepan.storeRecipe(saucepan.recipeHolder);
-                    saucepan.reloadRecipe();
-                    BlockEntityHelper.sendBlockEntityClientData(saucepan);
                 }
             }
         }
