@@ -35,14 +35,15 @@ public abstract class CookingSlot<R extends AbstractFoodRecipe<B> & BurnableReci
     public void loadRecipe(RecipeManager manager) {
         ItemStack input = getItem();
         RecipeHolder<R> rRecipe = getRecipe(manager, input).orElse(null);
-        if (rRecipe == null || recipe != rRecipe) {
+        boolean updated = recipe != rRecipe;
+        if (rRecipe == null || updated) {
             progressionTimer = 0;
             totalTimer = 0;
             burnAmount = 0;
             recipe = rRecipe;
         }
         if (recipe != null) {
-            this.recipeLoaded(recipe);
+            this.recipeLoaded(recipe, updated);
         }
         BlockEntityHelper.sendBlockEntityClientData(blockEntity);
         blockEntity.setChanged();
@@ -70,7 +71,7 @@ public abstract class CookingSlot<R extends AbstractFoodRecipe<B> & BurnableReci
         return this.slotIndex;
     }
 
-    protected void recipeLoaded(RecipeHolder<R> recipe) {}
+    protected void recipeLoaded(RecipeHolder<R> recipe, boolean updated) {}
 
     public CompoundTag serialize() {
         CompoundTag tag = new CompoundTag();

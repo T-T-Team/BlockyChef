@@ -240,7 +240,7 @@ public class PotBlockEntity extends RecipeRememberingBlockEntity<PotRecipe> impl
         }
 
         @Override
-        protected void recipeLoaded(RecipeHolder<PotRecipe> recipe) {
+        protected void recipeLoaded(RecipeHolder<PotRecipe> recipe, boolean updated) {
             this.totalTimer = recipe.value().getConfiguration().time();
         }
 

@@ -50,7 +50,7 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
 
     public static void tick(Level level, BlockPos pos, BlockState state, GrillBlockEntity grill) {
         float heat = grill.heatSource.getHeat(null);
-        grill.temperature = HeatHelper.regulateHeat(grill.temperature, heat, 0.01F);
+        grill.temperature = HeatHelper.regulateHeat(grill.temperature, heat, 0.02F);
 
         // fuel tick
         boolean hasRecipeQueued = grill.shouldInitiateCooking();
@@ -346,6 +346,7 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
                 flippedProgressionTimer = amount;
             else
                 progressionTimer = amount;
+            GrillBlockEntity.this.setChanged();
         }
 
         public float getBurnAmount() {
@@ -357,6 +358,7 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
                 flippedBurnAmount = amount;
             else
                 burnAmount = amount;
+            GrillBlockEntity.this.setChanged();
         }
 
         private void resetState() {
@@ -365,6 +367,7 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
             this.flippedProgressionTimer = 0;
             this.flippedBurnAmount = 0.0F;
             this.burnAmount = 0.0F;
+            GrillBlockEntity.this.setChanged();
         }
 
         @Override
@@ -378,9 +381,11 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
         }
 
         @Override
-        protected void recipeLoaded(RecipeHolder<GrillRecipe> recipe) {
+        protected void recipeLoaded(RecipeHolder<GrillRecipe> recipe, boolean updated) {
             totalTimer = recipe.value().getConfiguration().time();
-            resetState();
+            if (updated) {
+                resetState();
+            }
         }
 
         @Override

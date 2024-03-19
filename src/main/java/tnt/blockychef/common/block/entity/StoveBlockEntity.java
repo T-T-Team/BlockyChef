@@ -245,7 +245,7 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
         }
 
         @Override
-        protected void recipeLoaded(RecipeHolder<StoveRecipe> recipe) {
+        protected void recipeLoaded(RecipeHolder<StoveRecipe> recipe, boolean updated) {
             totalTimer = recipe.value().getConfiguration().time();
         }
 

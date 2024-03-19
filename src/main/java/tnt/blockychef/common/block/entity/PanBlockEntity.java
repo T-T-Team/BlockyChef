@@ -174,7 +174,7 @@ public class PanBlockEntity extends RecipeRememberingBlockEntity<PanRecipe> impl
         }
 
         @Override
-        protected void recipeLoaded(RecipeHolder<PanRecipe> recipe) {
+        protected void recipeLoaded(RecipeHolder<PanRecipe> recipe, boolean updated) {
             this.totalTimer = recipe.value().getConfiguration().time();
         }
 
