@@ -714,6 +714,7 @@
   "label.blockychef.tier.max": "MAX",
   "label.blockychef.stir": "Stir",
   "label.blockychef.cook": "Cook",
+  "label.blockychef.flip": "Flip",
   "label.blockychef.dyeable": "Dyeable",
   "label.blockychef.variant": "Variant: %s",
   "label.blockychef.variant.furniture.full_wood": "Wooden",

@@ -107,6 +107,7 @@ public final class BlockyChefClient {
         MenuScreens.register(BlockyChefMenuTypes.KITCHEN_CABINET_MENU, KitchenCabinetScreen::new);
         MenuScreens.register(BlockyChefMenuTypes.COOKING_TABLE, CookingTableScreen::new);
         MenuScreens.register(BlockyChefMenuTypes.SAUCEPAN, SaucepanScreen::new);
+        MenuScreens.register(BlockyChefMenuTypes.GRILL, GrillScreen::new);
     }
 
     private void registerBlockColors(RegisterColorHandlersEvent.Block event) {

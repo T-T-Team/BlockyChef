@@ -10,7 +10,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.fluids.FluidStack;
 import tnt.blockychef.BlockyChef;
-import tnt.blockychef.common.block.entity.PanBlockEntity;
+import tnt.blockychef.client.ColorPalette;
 import tnt.blockychef.common.block.entity.TeapotBlockEntity;
 import tnt.blockychef.common.food.fluid.FluidContainer;
 import tnt.blockychef.common.heat.HeatHelper;
@@ -31,7 +31,7 @@ import java.util.Locale;
 public class TeapotScreen extends AbstractContainerScreen<TeapotMenu> {
 
     private static final ResourceLocation TEXTURE = BlockyChef.resource("textures/screen/teapot.png");
-    private static final ResourceLocation LIT_PROGRESS_SPRITE = new ResourceLocation("container/furnace/lit_progress");
+    public static final ResourceLocation LIT_PROGRESS_SPRITE = new ResourceLocation("container/furnace/lit_progress");
     private static final ResourceLocation BUBBLES_SPRITE = new ResourceLocation("container/brewing_stand/bubbles");
 
     public TeapotScreen(TeapotMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
@@ -94,12 +94,12 @@ public class TeapotScreen extends AbstractContainerScreen<TeapotMenu> {
     protected void renderLabels(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
         super.renderLabels(pGuiGraphics, pMouseX, pMouseY);
 
-        GraphicsHelper.drawRightAlignedText(pGuiGraphics, Component.literal(String.valueOf(HeatValues.MAX_TEMPERATURE)), font, 163, 17, 0x404040);
-        GraphicsHelper.drawRightAlignedText(pGuiGraphics, Component.literal("0"), font, 163, 78, 0x404040);
+        GraphicsHelper.drawRightAlignedText(pGuiGraphics, Component.literal(String.valueOf(HeatValues.MAX_TEMPERATURE)), font, 163, 17, ColorPalette.GUI_TEXT_GRAY);
+        GraphicsHelper.drawRightAlignedText(pGuiGraphics, Component.literal("0"), font, 163, 78, ColorPalette.GUI_TEXT_GRAY);
 
         HeatSource heatSource = HeatHelper.getHeatSource(minecraft.level, menu.getBlockEntity().getBlockPos(), Direction.DOWN);
         float setTemperature = heatSource.getConfiguredHeat(Direction.UP);
-        GraphicsHelper.drawAlignedText(pGuiGraphics, Component.literal(String.format(Locale.ROOT, "%.1f", setTemperature)), font, HorizontalAlignment.RIGHT, VerticalAlignment.CENTER, 145, 17, 18, 68, 0x404040);
+        GraphicsHelper.drawAlignedText(pGuiGraphics, Component.literal(String.format(Locale.ROOT, "%.1f", setTemperature)), font, HorizontalAlignment.RIGHT, VerticalAlignment.CENTER, 145, 17, 18, 68, ColorPalette.GUI_TEXT_GRAY);
 
         pGuiGraphics.blit(TEXTURE, 112, 8, 200, 176, 0, 16, 63, 256, 256);
     }

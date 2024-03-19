@@ -10,6 +10,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.fluids.FluidStack;
 import org.joml.Vector2i;
 import tnt.blockychef.BlockyChef;
+import tnt.blockychef.client.ColorPalette;
 import tnt.blockychef.common.block.entity.PanBlockEntity;
 import tnt.blockychef.common.heat.HeatHelper;
 import tnt.blockychef.common.heat.HeatSource;
@@ -89,19 +90,19 @@ public class PanScreen extends AbstractContainerScreen<PanMenu> {
             int slotY = topPos + slotPos.y;
             float cookingProgress = slot.getProgress();
             float burnProgress = slot.getBurnProgress();
-            graphics.fill(slotX - 4, slotY - 1, slotX - 2, slotY + 17, 0xFF666666);
-            graphics.fill(slotX + 18, slotY - 1, slotX + 20, slotY + 17, 0xFF666666);
+            graphics.fill(slotX - 4, slotY - 1, slotX - 2, slotY + 17, ColorPalette.PROGRESSION_BAR_BACKGROUND);
+            graphics.fill(slotX + 18, slotY - 1, slotX + 20, slotY + 17, ColorPalette.PROGRESSION_BAR_BACKGROUND);
             if (cookingProgress > 0.0F) {
-                graphics.fill(slotX - 4, slotY + 17 - (int) (18 * cookingProgress), slotX - 2, slotY + 17, 0xFF00DD00);
+                graphics.fill(slotX - 4, slotY + 17 - (int) (18 * cookingProgress), slotX - 2, slotY + 17, ColorPalette.PROGRESSION_BAR_GOOD);
             }
             if (burnProgress > 0.0F) {
-                graphics.fill(slotX + 18, slotY + 17 - (int) (18 * burnProgress), slotX + 20, slotY + 17, 0xFFFF0000);
+                graphics.fill(slotX + 18, slotY + 17 - (int) (18 * burnProgress), slotX + 20, slotY + 17, ColorPalette.PROGRESSION_BAR_BAD);
             }
         }
         int height = 85;
         int top = 16;
-        graphics.fill(leftPos + 164, topPos + top, leftPos + 168, topPos + height, 0xFF666666);
-        graphics.fill(leftPos + 164, topPos + top + (int) ((height - top) * (1.0F - pan.getTemperature() / HeatValues.MAX_TEMPERATURE)), leftPos + 168, topPos + height, 0xFFFF0000);
+        graphics.fill(leftPos + 164, topPos + top, leftPos + 168, topPos + height, ColorPalette.PROGRESSION_BAR_BACKGROUND);
+        graphics.fill(leftPos + 164, topPos + top + (int) ((height - top) * (1.0F - pan.getTemperature() / HeatValues.MAX_TEMPERATURE)), leftPos + 168, topPos + height, ColorPalette.TEMPERATURE_BAR);
 
         // Oil
         int oil = pan.getOil();

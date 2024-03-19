@@ -26,6 +26,7 @@ public final class BlockyChefTags {
     public static final class Items {
         public static final TagKey<Item> WATER = itemTag("water");
         public static final TagKey<Item> OIL = itemTag("oil");
+        public static final TagKey<Item> GRILL_FUEL = itemTag("grill_fuel");
     }
 
     private static TagKey<Block> blockTag(String path) {
