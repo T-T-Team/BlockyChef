@@ -3,6 +3,7 @@ package tnt.blockychef.common.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -16,6 +17,7 @@ import tnt.blockychef.common.food.fluid.FluidContainer;
 import tnt.blockychef.common.food.recipe.JuicerRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
+import tnt.blockychef.common.init.BlockyChefSounds;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.blockentity.Synchronizable;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
@@ -87,6 +89,7 @@ public class JuicerBlockEntity extends RecipeRememberingBlockEntity<JuicerRecipe
             return;
         }
         JuicerRecipe recipe = activeRecipe.value();
+        level.playSound(null, worldPosition, BlockyChefSounds.JUICER, SoundSource.BLOCKS, 1.0F, 1.0F);
         if (++pressCounter >= recipe.getPressAmount()) {
             FluidStack result = recipe.getOutput().copy();
             container.insert(result);

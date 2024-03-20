@@ -2,8 +2,10 @@ package tnt.blockychef.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
@@ -22,14 +24,13 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
-import squeek.appleskin.network.NetworkHelper;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.entity.TeapotBlockEntity;
 import tnt.blockychef.common.data.fluids.FluidExtraction;
-import tnt.blockychef.common.data.fluids.FluidExtractionManager;
 import tnt.blockychef.common.food.mastery.CookingMastery;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.menu.TeapotMenu;
@@ -96,5 +97,17 @@ public class TeapotBlock extends FullHorizontalAxisBlock implements EntityBlock 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
         return BlockEntityHelper.createBlockEntityTicker(pBlockEntityType, BlockyChefBlockEntities.TEAPOT, TeapotBlockEntity::tick);
+    }
+
+    @Override
+    public void animateTick(BlockState pState, Level level, BlockPos pos, RandomSource rand) {
+        BlockEntity entity = level.getBlockEntity(pos);
+        if (entity instanceof TeapotBlockEntity teapot && teapot.isBurning()) {
+            Vec3 vec = Vec3.atCenterOf(pos);
+            double dx = rand.nextDouble() - rand.nextDouble();
+            double dz = rand.nextDouble() - rand.nextDouble();
+            float scale = 0.0625F;
+            level.addParticle(ParticleTypes.SMOKE, vec.x, vec.y, vec.z, dx * scale, 0.05, dz * scale);
+        }
     }
 }

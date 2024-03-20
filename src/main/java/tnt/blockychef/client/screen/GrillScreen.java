@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import tnt.blockychef.BlockyChef;
+import tnt.blockychef.common.block.entity.TeapotBlockEntity;
 import tnt.tntlib.api.ColorPalette;
 import tnt.blockychef.common.block.entity.GrillBlockEntity;
 import tnt.blockychef.common.heat.HeatValues;
@@ -138,6 +139,11 @@ public class GrillScreen extends AbstractContainerScreen<GrillMenu> {
         renderBackground(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
         super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
         renderTooltip(pGuiGraphics, pMouseX, pMouseY);
+
+        GrillBlockEntity grill = menu.getBlockEntity();
+        if (pMouseX >= leftPos + 165 && pMouseX <= leftPos + 168 && pMouseY >= topPos + 7 && pMouseY <= topPos + 107) {
+            pGuiGraphics.renderTooltip(font, Component.translatable("label.blockychef.temperature", String.format(Locale.ROOT, "%.1f", grill.getTemperature())), pMouseX, pMouseY);
+        }
     }
 
     private void flip(Button button, int index) {

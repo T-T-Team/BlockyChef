@@ -91,6 +91,10 @@ public class TeapotBlockEntity extends RecipeRememberingBlockEntity<TeapotRecipe
         }
     }
 
+    public boolean isBurning() {
+        return recipeHolder != null && recipeHolder.value().isBurning() && temperature >= recipeHolder.value().getMinTemperature();
+    }
+
     public FluidContainer getFluidContainer() {
         return fluidContainer;
     }

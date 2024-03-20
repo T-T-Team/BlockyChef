@@ -3,6 +3,7 @@ package tnt.blockychef.common.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -15,6 +16,7 @@ import tnt.blockychef.common.food.fluid.FluidContainer;
 import tnt.blockychef.common.food.recipe.MixerRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
+import tnt.blockychef.common.init.BlockyChefSounds;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.blockentity.Synchronizable;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
@@ -81,6 +83,7 @@ public class MixerBlockEntity extends RecipeRememberingBlockEntity<MixerRecipe> 
                 }
             }
         }
+        level.playSound(null, worldPosition, BlockyChefSounds.MIXER, SoundSource.BLOCKS, 0.8F, 0.8F + selectedRpm.ordinal() * 0.2F);
         refreshRecipe();
         BlockEntityHelper.sendBlockEntityClientData(this);
     }

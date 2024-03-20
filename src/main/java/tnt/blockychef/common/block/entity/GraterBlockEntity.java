@@ -3,6 +3,8 @@ package tnt.blockychef.common.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -13,6 +15,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import tnt.blockychef.common.food.recipe.GratingRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
+import tnt.blockychef.common.init.BlockyChefSounds;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.blockentity.Synchronizable;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
@@ -57,6 +60,8 @@ public class GraterBlockEntity extends RecipeRememberingBlockEntity<GratingRecip
 
     public void processRecipe(ServerPlayer player) {
         if (hasActiveRecipe()) {
+            SoundEvent event = gratingAmount % 2 == 0 ? BlockyChefSounds.GRATER_A : BlockyChefSounds.GRATER_B;
+            level.playSound(null, worldPosition, event, SoundSource.BLOCKS, 1.0F, 1.0F);
             if (++gratingAmount >= recipe.value().getGratingAmount()) {
                 storeRecipe(recipe);
                 ItemStack output = recipe.value().assemble(this, level.registryAccess());
