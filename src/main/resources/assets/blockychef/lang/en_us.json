@@ -704,8 +704,9 @@
   "label.blockychef.high": "Power High",
   "label.blockychef.fluid_amount": "%s mB",
   "label.blockychef.drying": "Drying: %ss",
+  "label.blockychef.grinding": "Grinding: %s%%",
+  "label.blockychef.grating": "Grating: %s%%",
   "label.blockychef.juicing": "Juicing: %s%%",
-  "label.blockychef.fermenting": "Fermenting: %ss",
   "label.blockychef.fluid_capacity": "Capacity: %s / %s",
   "label.blockychef.energy": "Energy: %s",
   "label.blockychef.temperature": "Temperature: %s",
@@ -779,7 +780,10 @@
 
   "config.jade.plugin_blockychef.drying_rack": "Drying Rack",
   "config.jade.plugin_blockychef.juicer": "Juicer",
-  "config.jade.plugin_blockychef.barrel": "Barrel",
+  "config.jade.plugin_blockychef.grater": "Grater",
+  "config.jade.plugin_blockychef.meat_grinder": "Meat Grinder",
+  "config.jade.plugin_blockychef.mixer": "Mixer",
+  "config.jade.plugin_blockychef.teapot": "Teapot",
   "config.jade.plugin_blockychef.growables": "Growables",
   "config.jade.plugin_blockychef.decayables": "Decayables",
 

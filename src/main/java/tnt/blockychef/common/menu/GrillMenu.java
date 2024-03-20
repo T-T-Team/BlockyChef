@@ -27,10 +27,9 @@ public class GrillMenu extends AbstractBlockEntityMenu<GrillBlockEntity> {
         super(BlockyChefMenuTypes.GRILL, menuId, grill);
 
         MenuQuickMoveHelper.QuickMoveContext ctx = this.getQuickMoveContext();
-        // TODO fix pls
         this.moveHelper = MenuQuickMoveHelper.Builder.withContext(ctx)
-                .addRule(0, 0, 8, 44)
-                .addRule(8, 44, 0, 1, itemstack -> itemstack.is(BlockyChefTags.Items.GRILL_FUEL))
+                .addRule(0, 1, 8, 43)
+                .addRule(8, 43, 0, 1, itemstack -> itemstack.is(BlockyChefTags.Items.GRILL_FUEL))
                 .build();
 
         addSlot(new GrillFuelSlot(grill.getItemHandler(), 0, 80, 91));

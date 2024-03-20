@@ -48,6 +48,14 @@ public class MeatGrinderBlockEntity extends RecipeRememberingBlockEntity<MeatGri
         refreshRecipe();
     }
 
+    public int getGrindAmount() {
+        return grindAmount;
+    }
+
+    public MeatGrinderRecipe getRecipe() {
+        return recipe != null ? recipe.value() : null;
+    }
+
     public void processRecipe(Player player) {
         if (recipe == null) {
             return;

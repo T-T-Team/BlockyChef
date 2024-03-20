@@ -60,7 +60,7 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
         }
         if (isActive) {
             // fuel restore
-            if (grill.fuelAmount <= 0) {
+            if (grill.fuelAmount <= 0 && !level.isClientSide()) {
                 int amount = grill.getFuelAmountFromInput();
                 if (amount > 0) {
                     grill.setFuelAmount(grill.fuelAmount + amount);

@@ -41,6 +41,14 @@ public class GraterBlockEntity extends RecipeRememberingBlockEntity<GratingRecip
         }
     }
 
+    public boolean hasInputItem() {
+        return !getInputItem().isEmpty();
+    }
+
+    public ItemStack getInputItem() {
+        return getItem(0);
+    }
+
     public void place(ItemStack stack) {
         setItem(0, stack);
         refreshRecipes();
@@ -84,6 +92,14 @@ public class GraterBlockEntity extends RecipeRememberingBlockEntity<GratingRecip
 
     public float getGratingProgress() {
         return recipe != null ? (float) this.gratingAmount / recipe.value().getGratingAmount() : 0.0F;
+    }
+
+    public int getGratingAmount() {
+        return gratingAmount;
+    }
+
+    public GratingRecipe getRecipe() {
+        return recipe != null ? recipe.value() : null;
     }
 
     @Override

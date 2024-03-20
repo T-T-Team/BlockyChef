@@ -24,6 +24,19 @@ public final class FluidContainer {
         fluids.clear();
     }
 
+    public void clear(int limit) {
+        int clearing = limit;
+        for (FluidStack fluidStack : fluids) {
+            int toClear = Math.min(clearing, fluidStack.getAmount());
+            if (toClear == fluidStack.getAmount()) {
+                fluids.remove(fluidStack);
+            } else {
+                fluidStack.setAmount(fluidStack.getAmount() - toClear);
+            }
+            clearing -= toClear;
+        }
+    }
+
     public List<FluidStack> getFluids() {
         return fluids;
     }
@@ -33,6 +46,10 @@ public final class FluidContainer {
     }
 
     public boolean insert(FluidStack fluid) {
+        if (fluid.isEmpty()) {
+            this.clear(fluid.getAmount());
+            return true;
+        }
         if (!fluids.isEmpty()) {
             if (allowMultipleTypes) {
                 return insertFluid(fluid);
