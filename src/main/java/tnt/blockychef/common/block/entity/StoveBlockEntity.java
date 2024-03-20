@@ -209,20 +209,19 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
         }
     }
 
-    private void handleStoveHeatEvent(boolean decreased) {
-        handleHeatEvent(stoveHeatSource, decreased);
+    private void handleStoveHeatEvent(boolean decreased, float amount) {
+        handleHeatEvent(stoveHeatSource, decreased, amount);
     }
 
-    private void handleExternalHeatEvent(boolean decreased) {
-        handleHeatEvent(externalHeatSource, decreased);
+    private void handleExternalHeatEvent(boolean decreased, float amount) {
+        handleHeatEvent(externalHeatSource, decreased, amount);
     }
 
-    private void handleHeatEvent(RegulatedRangeHeatSource source, boolean decreased) {
-        float stepSize = 0.5F;
+    private void handleHeatEvent(RegulatedRangeHeatSource source, boolean decreased, float amount) {
         if (decreased) {
-            stepSize = -stepSize;
+            amount = -amount;
         }
-        float f = source.getConfiguredHeat(null) + stepSize;
+        float f = source.getConfiguredHeat(null) + amount;
         source.set(f, decreased);
         BlockEntityHelper.sendBlockEntityClientData(this);
         setChanged();
@@ -284,18 +283,18 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
     private record StoveRegulationHandler(RegulationEvent event) implements RegulationHandler {
 
         @Override
-        public void decrease() {
-            event.changed(true);
+        public void decrease(float amount) {
+            event.changed(true, amount);
         }
 
         @Override
-        public void increase() {
-            event.changed(false);
+        public void increase(float amount) {
+            event.changed(false, amount);
         }
     }
 
     @FunctionalInterface
     private interface RegulationEvent {
-        void changed(boolean decrease);
+        void changed(boolean decrease, float amount);
     }
 }

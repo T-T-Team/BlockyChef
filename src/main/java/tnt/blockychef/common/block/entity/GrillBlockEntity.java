@@ -229,12 +229,11 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
         temperature = tag.getFloat("temperature");
     }
 
-    private void handleHeatEvent(RegulatedRangeHeatSource source, boolean decreased) {
-        float stepSize = 0.5F;
+    private void handleHeatEvent(RegulatedRangeHeatSource source, boolean decreased, float amount) {
         if (decreased) {
-            stepSize = -stepSize;
+            amount = -amount;
         }
-        float f = source.getConfiguredHeat(null) + stepSize;
+        float f = source.getConfiguredHeat(null) + amount;
         source.set(f, decreased);
         BlockEntityHelper.sendBlockEntityClientData(this);
         setChanged();
@@ -243,13 +242,13 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
     private final class GrillHeatRegulator implements RegulationHandler {
 
         @Override
-        public void increase() {
-            handleHeatEvent(GrillBlockEntity.this.heatSource, false);
+        public void increase(float amount) {
+            handleHeatEvent(GrillBlockEntity.this.heatSource, false, amount);
         }
 
         @Override
-        public void decrease() {
-            handleHeatEvent(GrillBlockEntity.this.heatSource, true);
+        public void decrease(float amount) {
+            handleHeatEvent(GrillBlockEntity.this.heatSource, true, amount);
         }
     }
 

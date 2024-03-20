@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import tnt.blockychef.BlockyChef;
-import tnt.blockychef.client.ColorPalette;
+import tnt.tntlib.api.ColorPalette;
 import tnt.blockychef.common.block.entity.GrillBlockEntity;
 import tnt.blockychef.common.heat.HeatValues;
 import tnt.blockychef.common.menu.GrillMenu;

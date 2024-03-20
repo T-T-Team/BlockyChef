@@ -1,4 +1,4 @@
-package tnt.blockychef.client;
+package tnt.tntlib.api;
 
 public final class ColorPalette {
 
@@ -10,4 +10,5 @@ public final class ColorPalette {
 
     // Text
     public static final int GUI_TEXT_GRAY = 0x404040;
+    public static final int GUI_TEXT_LIGHT_GRAY = 0x808080;
 }

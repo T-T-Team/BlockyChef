@@ -10,7 +10,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.fluids.FluidStack;
 import tnt.blockychef.BlockyChef;
-import tnt.blockychef.client.ColorPalette;
+import tnt.tntlib.api.ColorPalette;
 import tnt.blockychef.common.block.entity.TeapotBlockEntity;
 import tnt.blockychef.common.food.fluid.FluidContainer;
 import tnt.blockychef.common.heat.HeatHelper;

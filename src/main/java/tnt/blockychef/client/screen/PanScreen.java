@@ -10,7 +10,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.fluids.FluidStack;
 import org.joml.Vector2i;
 import tnt.blockychef.BlockyChef;
-import tnt.blockychef.client.ColorPalette;
+import tnt.tntlib.api.ColorPalette;
 import tnt.blockychef.common.block.entity.PanBlockEntity;
 import tnt.blockychef.common.heat.HeatHelper;
 import tnt.blockychef.common.heat.HeatSource;
