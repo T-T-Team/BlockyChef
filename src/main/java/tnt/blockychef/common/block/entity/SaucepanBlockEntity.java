@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
+import tnt.blockychef.common.food.CookingStatus;
 import tnt.blockychef.common.food.recipe.SaucepanRecipe;
 import tnt.blockychef.common.heat.HeatHelper;
 import tnt.blockychef.common.heat.HeatSource;
@@ -35,12 +36,14 @@ public class SaucepanBlockEntity extends RecipeRememberingBlockEntity<SaucepanRe
     private int timeCooking;
     private float temperature;
     private float burnAmount;
+    private CookingStatus status = CookingStatus.NONE;
 
     public SaucepanBlockEntity(BlockPos pos, BlockState state) {
         super(BlockyChefBlockEntities.SAUCEPAN, pos, state);
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, SaucepanBlockEntity saucepan) {
+        saucepan.status = CookingStatus.NONE;
         HeatSource source = HeatHelper.getHeatSource(level, pos, Direction.DOWN);
         saucepan.temperature = HeatHelper.regulateHeat(saucepan.temperature, source.getHeat(Direction.UP), 0.01F);
 
@@ -61,6 +64,7 @@ public class SaucepanBlockEntity extends RecipeRememberingBlockEntity<SaucepanRe
 
         SaucepanRecipe.SaucePanCookingConfiguration configuration = recipe.getConfiguration();
         if (configuration.isCooking(saucepan.temperature)) {
+            saucepan.status = CookingStatus.COOKING;
             if (++saucepan.timeCooking >= configuration.time() && !level.isClientSide()) {
                 saucepan.timeCooking = 0;
                 saucepan.consumeIngredientsAndApplyCraftRemainder(recipe, INPUTS, OUTPUTS, in -> recipe.getInputs().forEach(ing -> ing.consume(saucepan, in)));
@@ -72,6 +76,7 @@ public class SaucepanBlockEntity extends RecipeRememberingBlockEntity<SaucepanRe
                 return;
             }
             if (configuration.isBurning(saucepan.temperature)) {
+                saucepan.status = CookingStatus.BURNING;
                 float f = configuration.burnSpeed() * 0.015F;
                 saucepan.burnAmount += f;
                 if (saucepan.burnAmount >= 1.0F) {
@@ -88,6 +93,10 @@ public class SaucepanBlockEntity extends RecipeRememberingBlockEntity<SaucepanRe
                 }
             }
         }
+    }
+
+    public CookingStatus getCookingStatus() {
+        return status;
     }
 
     public float getBurnAmount() {

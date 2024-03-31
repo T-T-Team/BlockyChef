@@ -23,12 +23,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.block.entity.StoveBlockEntity;
+import tnt.blockychef.common.food.CookingStatus;
 import tnt.blockychef.common.heat.HeatSource;
 import tnt.blockychef.common.heat.HeatSourceProvider;
 import tnt.blockychef.common.heat.NoHeatSource;
 import tnt.blockychef.common.heat.RegulatedHeatSource;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.menu.StoveMenu;
+import tnt.tntlib.api.TNTUtils;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 
 public class StoveBlock extends DyeableBlock implements EntityBlock, HeatSourceProvider {
@@ -96,6 +98,11 @@ public class StoveBlock extends DyeableBlock implements EntityBlock, HeatSourceP
                 double mz = direction$axis == Direction.Axis.Z ? direction.getStepZ() * 0.52D : modifier;
                 level.addParticle(ParticleTypes.SMOKE, x + mx, y + my, z + mz, 0.0D, 0.0D, 0.0D);
                 level.addParticle(ParticleTypes.FLAME, x + mx, y + my, z + mz, 0.0D, 0.0D, 0.0D);
+
+                CookingStatus status = stove.getCookingStatus();
+                if (status.isBurning()) {
+                    level.addParticle(ParticleTypes.LARGE_SMOKE, x + mx, y + my, z + mz, 0.0F, 0.08F, 0.0F);
+                }
             }
         }
     }

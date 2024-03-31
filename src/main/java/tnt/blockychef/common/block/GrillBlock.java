@@ -2,8 +2,12 @@ package tnt.blockychef.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
@@ -22,15 +26,18 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.block.entity.GrillBlockEntity;
+import tnt.blockychef.common.food.CookingStatus;
 import tnt.blockychef.common.heat.HeatSource;
 import tnt.blockychef.common.heat.HeatSourceProvider;
 import tnt.blockychef.common.heat.NoHeatSource;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.menu.GrillMenu;
+import tnt.tntlib.api.TNTUtils;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 
 public class GrillBlock extends DyeableBlock implements EntityBlock, HeatSourceProvider {
@@ -100,5 +107,26 @@ public class GrillBlock extends DyeableBlock implements EntityBlock, HeatSourceP
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
         return BlockEntityHelper.createBlockEntityTicker(pBlockEntityType, BlockyChefBlockEntities.GRILL, GrillBlockEntity::tick);
+    }
+
+    @Override
+    public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
+        BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+        if (blockEntity instanceof GrillBlockEntity grill) {
+            CookingStatus status = grill.getCookingStatus();
+            Vec3 pos = Vec3.atCenterOf(pPos);
+            if (grill.hasFuel()) {
+                pLevel.addParticle(ParticleTypes.FLAME, pos.x + TNTUtils.randomRange(pRandom, 0.35F), pos.y + 0.45, pos.z + TNTUtils.randomRange(pRandom, 0.35F), 0.0F, 0.01F, 0.0F);
+                if (pRandom.nextDouble() < 0.1) {
+                    pLevel.playLocalSound(pos.x, pos.y, pos.z, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
+                }
+            }
+            if (status != CookingStatus.NONE) {
+                pLevel.addParticle(ParticleTypes.SMOKE, pos.x, pos.y + 0.45, pos.z, 0.0F, 0.05F, 0.0F);
+            }
+            if (status.isBurning()) {
+                pLevel.addParticle(ParticleTypes.LARGE_SMOKE, pos.x, pos.y + 0.45, pos.z, 0.0F, 0.05F, 0.0F);
+            }
+        }
     }
 }

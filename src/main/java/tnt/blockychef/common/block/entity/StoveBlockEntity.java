@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -14,6 +15,7 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import tnt.blockychef.BlockyChef;
+import tnt.blockychef.common.food.CookingStatus;
 import tnt.blockychef.common.food.recipe.CookingConfiguration;
 import tnt.blockychef.common.food.recipe.StoveRecipe;
 import tnt.blockychef.common.heat.HeatHelper;
@@ -22,6 +24,7 @@ import tnt.blockychef.common.heat.RegulatedRangeHeatSource;
 import tnt.blockychef.common.heat.RegulationHandler;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
+import tnt.blockychef.common.init.BlockyChefSounds;
 import tnt.blockychef.util.Helper;
 import tnt.tntlib.api.ArrayUtils;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
@@ -75,10 +78,18 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
             for (StoveCookingSlot slot : stove.slots) {
                 slot.updateSlot();
             }
+            CookingStatus status = stove.getCookingStatus();
+            if (status != CookingStatus.NONE && level.getGameTime() % 40 == 0) {
+                level.playSound(null, pos, BlockyChefSounds.OVEN, SoundSource.BLOCKS, 1.0F, 1.0F);
+            }
         }
         if (stove.shouldConsumeEnergy(level)) {
             stove.consumeEnergy();
         }
+    }
+
+    public CookingStatus getCookingStatus() {
+        return getCookingStatus(slots, slot -> slot.cookingStatus);
     }
 
     public void refreshSlot(int slotIndex) {
@@ -229,6 +240,8 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
 
     public final class StoveCookingSlot extends CookingSlot<StoveRecipe, StoveBlockEntity> {
 
+        private CookingStatus cookingStatus = CookingStatus.NONE;
+
         public StoveCookingSlot(int slotIndex, StoveBlockEntity blockEntity) {
             super(slotIndex, blockEntity);
         }
@@ -253,13 +266,16 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
         }
 
         public void updateSlot() {
+            cookingStatus = CookingStatus.NONE;
             ItemStack stack = this.getItem();
             if (stack.isEmpty() || recipe == null)
                 return;
             CookingConfiguration configuration = recipe.value().getConfiguration();
             float temp = StoveBlockEntity.this.temperature;
             if (configuration.isCooking(temp)) {
+                cookingStatus = CookingStatus.COOKING;
                 if (configuration.isBurning(temp)) {
+                    cookingStatus = CookingStatus.BURNING;
                     float temperatureDifference = temp - configuration.maxTemperature();
                     float burnScale = temperatureDifference * (0.015F * configuration.burnSpeed());
                     if ((burnAmount += burnScale) >= 1.0F) {
@@ -268,6 +284,8 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
                         loadRecipe(StoveBlockEntity.this.level.getRecipeManager());
                         return;
                     }
+                } else if (recipe.value().isOvercooking()) {
+                    cookingStatus = CookingStatus.BURNING;
                 }
                 if (++progressionTimer >= totalTimer) {
                     ItemStack result = recipe.value().getResult().copy();

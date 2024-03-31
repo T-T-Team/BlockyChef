@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import tnt.blockychef.BlockyChef;
+import tnt.blockychef.common.food.CookingStatus;
 import tnt.blockychef.common.food.recipe.PotRecipe;
 import tnt.blockychef.common.heat.HeatHelper;
 import tnt.blockychef.common.heat.HeatSource;
@@ -56,6 +57,10 @@ public class PotBlockEntity extends RecipeRememberingBlockEntity<PotRecipe> impl
             }
             pot.evaporateWater(level);
         }
+    }
+
+    public CookingStatus getCookingStatus() {
+        return getCookingStatus(slots, slot -> slot.cookingStatus);
     }
 
     @Override
@@ -168,6 +173,8 @@ public class PotBlockEntity extends RecipeRememberingBlockEntity<PotRecipe> impl
 
     public final class PotCookingSlot extends CookingSlot<PotRecipe, PotBlockEntity> {
 
+        private CookingStatus cookingStatus = CookingStatus.NONE;
+
         public PotCookingSlot(int slotIndex, PotBlockEntity blockEntity) {
             super(slotIndex, blockEntity);
         }
@@ -199,6 +206,7 @@ public class PotBlockEntity extends RecipeRememberingBlockEntity<PotRecipe> impl
         }
 
         public void updateSlot(int waterAmount) {
+            cookingStatus = CookingStatus.NONE;
             ItemStack stack = getItem();
             if (stack.isEmpty() || recipe == null) {
                 burnAmount = 0.0F;
@@ -208,12 +216,15 @@ public class PotBlockEntity extends RecipeRememberingBlockEntity<PotRecipe> impl
             PotRecipe.PotCookingConfiguration configuration = recipe.value().getConfiguration();
             float temperature = PotBlockEntity.this.temperature;
             if (configuration.isCooking(temperature)) {
+                cookingStatus = CookingStatus.COOKING;
                 int requiredWaterLevel = configuration.minWaterLevel();
                 float burnScale = 0.0F;
                 if (configuration.isBurning(temperature)) {
+                    cookingStatus = CookingStatus.BURNING;
                     float diff = temperature - configuration.maxTemperature();
                     burnScale = diff * (0.015F * configuration.burnSpeed());
                 } else if (waterAmount < requiredWaterLevel) {
+                    cookingStatus = CookingStatus.BURNING;
                     burnScale += (0.015F * 5);
                 }
 

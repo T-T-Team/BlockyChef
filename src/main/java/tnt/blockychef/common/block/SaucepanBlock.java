@@ -3,6 +3,7 @@ package tnt.blockychef.common.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
@@ -67,5 +68,10 @@ public class SaucepanBlock extends FullHorizontalAxisBlock implements EntityBloc
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new SaucepanBlockEntity(pPos, pState);
+    }
+
+    @Override
+    public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
+        super.animateTick(pState, pLevel, pPos, pRandom);
     }
 }

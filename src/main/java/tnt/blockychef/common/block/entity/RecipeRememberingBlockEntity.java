@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import tnt.blockychef.common.food.CookingStatus;
 import tnt.blockychef.common.food.recipe.AbstractFoodRecipe;
 import tnt.blockychef.common.food.recipe.MultiIngredient;
 import tnt.tntlib.api.blockentity.VanillaInventoryBlockEntity;
@@ -26,6 +27,7 @@ import tnt.tntlib.api.menu.MenuInventoryHelper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 public abstract class RecipeRememberingBlockEntity<R extends AbstractFoodRecipe<?>> extends VanillaInventoryBlockEntity {
 
@@ -134,5 +136,16 @@ public abstract class RecipeRememberingBlockEntity<R extends AbstractFoodRecipe<
 
     public static boolean canPlaySound(int soundInterval, int currentProcessingTime, int recipeProcessingTime) {
         return currentProcessingTime % soundInterval == 0 && currentProcessingTime + soundInterval < recipeProcessingTime;
+    }
+
+    public static <T> CookingStatus getCookingStatus(T[] values, Function<T, CookingStatus> statusProvider) {
+        CookingStatus status = CookingStatus.NONE;
+        for (T t : values) {
+            CookingStatus slotStatus = statusProvider.apply(t);
+            if (slotStatus.ordinal() > status.ordinal()) {
+                status = slotStatus;
+            }
+        }
+        return status;
     }
 }

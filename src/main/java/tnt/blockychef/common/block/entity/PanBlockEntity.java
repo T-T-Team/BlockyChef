@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import tnt.blockychef.BlockyChef;
+import tnt.blockychef.common.food.CookingStatus;
 import tnt.blockychef.common.food.recipe.BaseCookConfiguration;
 import tnt.blockychef.common.food.recipe.PanRecipe;
 import tnt.blockychef.common.heat.HeatHelper;
@@ -57,6 +58,10 @@ public class PanBlockEntity extends RecipeRememberingBlockEntity<PanRecipe> impl
             }
             pan.consumeOil(level);
         }
+    }
+
+    public CookingStatus getCookingStatus() {
+        return getCookingStatus(slots, slot -> slot.status);
     }
 
     @Override
@@ -169,6 +174,8 @@ public class PanBlockEntity extends RecipeRememberingBlockEntity<PanRecipe> impl
 
     public final class PanCookingSlot extends CookingSlot<PanRecipe, PanBlockEntity> {
 
+        private CookingStatus status = CookingStatus.NONE;
+
         public PanCookingSlot(int slotIndex, PanBlockEntity blockEntity) {
             super(slotIndex, blockEntity);
         }
@@ -205,6 +212,7 @@ public class PanBlockEntity extends RecipeRememberingBlockEntity<PanRecipe> impl
         }
 
         public void updateSlot(boolean hasOil) {
+            status = CookingStatus.NONE;
             ItemStack stack = getItem();
             if (stack.isEmpty() || recipe == null) {
                 burnAmount = 0.0F;
@@ -214,11 +222,14 @@ public class PanBlockEntity extends RecipeRememberingBlockEntity<PanRecipe> impl
             BaseCookConfiguration configuration = recipe.value().getConfiguration();
             float temperature = PanBlockEntity.this.temperature;
             if (configuration.isCooking(temperature)) {
+                status = CookingStatus.COOKING;
                 float burnScale = 0.0F;
                 if (configuration.isBurning(temperature)) {
+                    status = CookingStatus.BURNING;
                     float diff = temperature - configuration.maxTemperature();
                     burnScale = diff * (0.015F * configuration.burnSpeed());
                 } else if (!hasOil) {
+                    status = CookingStatus.BURNING;
                     burnScale += (0.015F * 5);
                 }
 

@@ -3,6 +3,7 @@ package tnt.blockychef.common.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -14,6 +15,7 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import tnt.blockychef.BlockyChef;
+import tnt.blockychef.common.food.CookingStatus;
 import tnt.blockychef.common.food.recipe.GrillRecipe;
 import tnt.blockychef.common.heat.HeatHelper;
 import tnt.blockychef.common.heat.HeatValues;
@@ -21,6 +23,7 @@ import tnt.blockychef.common.heat.RegulatedRangeHeatSource;
 import tnt.blockychef.common.heat.RegulationHandler;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
+import tnt.blockychef.common.init.BlockyChefSounds;
 import tnt.blockychef.common.init.BlockyChefTags;
 import tnt.blockychef.util.Helper;
 import tnt.tntlib.api.ArrayUtils;
@@ -75,6 +78,14 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
         for (GrillSlot slot : grill.slots) {
             slot.updateSlot();
         }
+        CookingStatus status = grill.getCookingStatus();
+        if (status != CookingStatus.NONE && level.getGameTime() % 50L == 0) {
+            level.playSound(null, pos, BlockyChefSounds.GRILL, SoundSource.BLOCKS, 0.4F, 1.0F);
+        }
+    }
+
+    public CookingStatus getCookingStatus() {
+        return getCookingStatus(slots, slot -> slot.status);
     }
 
     @Override
@@ -257,12 +268,14 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
         protected boolean flipped;
         protected int flippedProgressionTimer;
         protected float flippedBurnAmount;
+        private CookingStatus status = CookingStatus.NONE;
 
         public GrillSlot(int slotIndex, GrillBlockEntity blockEntity) {
             super(slotIndex, blockEntity);
         }
 
         public void updateSlot() {
+            status = CookingStatus.NONE;
             ItemStack itemStack = this.getItem();
             if (itemStack.isEmpty() || recipe == null) {
                 resetState();
@@ -272,8 +285,10 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
             GrillRecipe.GrillingConfiguration conf = recipe.value().getConfiguration();
             float temperature = GrillBlockEntity.this.temperature;
             if (conf.isCooking(temperature)) {
+                status = CookingStatus.COOKING;
                 int progress = this.getProgressAmount();
                 if (conf.isBurning(temperature) || progress >= totalTimer) {
+                    status = CookingStatus.BURNING;
                     float f = conf.burnSpeed() * 0.015F;
                     float newBurnAmount = this.getBurnAmount() + f;
                     this.setBurnAmount(newBurnAmount);
@@ -284,6 +299,8 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
                         loadRecipe(GrillBlockEntity.this.level.getRecipeManager());
                         return;
                     }
+                } else if (recipe.value().isBurning()) {
+                    status = CookingStatus.BURNING;
                 }
                 int newProgress = progress + 1;
                 this.setProgressAmount(newProgress);
