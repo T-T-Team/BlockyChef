@@ -3,6 +3,7 @@ package tnt.blockychef.common.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -19,6 +20,7 @@ import tnt.blockychef.common.heat.HeatHelper;
 import tnt.blockychef.common.heat.HeatSource;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
+import tnt.blockychef.common.init.BlockyChefSounds;
 import tnt.blockychef.common.init.BlockyChefTags;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.blockentity.Synchronizable;
@@ -58,6 +60,9 @@ public class TeapotBlockEntity extends RecipeRememberingBlockEntity<TeapotRecipe
             }
             if (recipe.isBurning() && teapot.temperature >= recipe.getMinTemperature()) {
                 // Vaporization
+                if (level.getGameTime() % 40L == 0L) {
+                    level.playSound(null, pos, BlockyChefSounds.TEAPOT, SoundSource.BLOCKS, 0.4F, 1.0F);
+                }
                 if (++teapot.cookingTime >= recipe.getCookingTime() && !level.isClientSide) {
                     teapot.fluidContainer.clear();
                     teapot.waterBoilTime = 0;
@@ -71,6 +76,9 @@ public class TeapotBlockEntity extends RecipeRememberingBlockEntity<TeapotRecipe
             float requiredTemperature = recipe.getMinTemperature();
             if (teapot.temperature >= requiredTemperature) {
                 // boil water / cook
+                if (level.getGameTime() % 40L == 0L) {
+                    level.playSound(null, pos, BlockyChefSounds.TEAPOT, SoundSource.BLOCKS, 0.4F, 1.0F);
+                }
                 if (teapot.waterBoilTime < WATER_BOILING_TIME) {
                     teapot.waterBoilTime++;
                 } else if (++teapot.cookingTime >= recipe.getCookingTime() && !level.isClientSide) {

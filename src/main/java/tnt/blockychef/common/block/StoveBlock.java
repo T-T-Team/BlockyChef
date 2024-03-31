@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
+import tnt.blockychef.common.block.entity.RecipeRememberingBlockEntity;
 import tnt.blockychef.common.block.entity.StoveBlockEntity;
 import tnt.blockychef.common.food.CookingStatus;
 import tnt.blockychef.common.heat.HeatSource;
@@ -30,7 +31,6 @@ import tnt.blockychef.common.heat.NoHeatSource;
 import tnt.blockychef.common.heat.RegulatedHeatSource;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.menu.StoveMenu;
-import tnt.tntlib.api.TNTUtils;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 
 public class StoveBlock extends DyeableBlock implements EntityBlock, HeatSourceProvider {
@@ -76,6 +76,12 @@ public class StoveBlock extends DyeableBlock implements EntityBlock, HeatSourceP
             return direction != null ? stove.getExternalHeatSource() : stove.getStoveHeatSource();
         }
         return NoHeatSource.INSTANCE;
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState replacementState, boolean flag) {
+        RecipeRememberingBlockEntity.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, replacementState);
+        super.onRemove(state, level, pos, replacementState, flag);
     }
 
     @Override

@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -21,6 +22,7 @@ import tnt.blockychef.common.heat.HeatHelper;
 import tnt.blockychef.common.heat.HeatSource;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
+import tnt.blockychef.common.init.BlockyChefSounds;
 import tnt.blockychef.common.init.BlockyChefTags;
 import tnt.blockychef.util.Helper;
 import tnt.tntlib.api.ArrayUtils;
@@ -56,6 +58,10 @@ public class PotBlockEntity extends RecipeRememberingBlockEntity<PotRecipe> impl
                 slot.updateSlot(pot.waterAmount);
             }
             pot.evaporateWater(level);
+            CookingStatus status = pot.getCookingStatus();
+            if (status != CookingStatus.NONE && level.getGameTime() % 50L == 0L) {
+                level.playSound(null, pos, BlockyChefSounds.POT, SoundSource.BLOCKS, 0.4F, 1.0F);
+            }
         }
     }
 

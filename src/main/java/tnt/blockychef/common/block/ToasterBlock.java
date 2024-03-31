@@ -2,8 +2,10 @@ package tnt.blockychef.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
@@ -22,6 +24,7 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
@@ -93,5 +96,16 @@ public class ToasterBlock extends DyeableBlock implements EntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return level.isClientSide ? null : BlockEntityHelper.createBlockEntityTicker(type, BlockyChefBlockEntities.TOASTER, ToasterBlockEntity::tickServer);
+    }
+
+    @Override
+    public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
+        BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+        if (blockEntity instanceof ToasterBlockEntity toaster) {
+            if (toaster.getCookingStatus().isBurning()) {
+                Vec3 vec3 = Vec3.atBottomCenterOf(pPos);
+                pLevel.addParticle(ParticleTypes.SMOKE, vec3.x, vec3.y + 0.3, vec3.z, 0.0, 0.1, 0.0);
+            }
+        }
     }
 }

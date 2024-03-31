@@ -29,6 +29,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.BlockyChef;
+import tnt.blockychef.common.block.entity.RecipeRememberingBlockEntity;
 import tnt.blockychef.common.block.entity.TeapotBlockEntity;
 import tnt.blockychef.common.data.fluids.FluidExtraction;
 import tnt.blockychef.common.food.mastery.CookingMastery;
@@ -85,6 +86,12 @@ public class TeapotBlock extends FullHorizontalAxisBlock implements EntityBlock 
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.CONSUME;
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState replacementState, boolean flag) {
+        RecipeRememberingBlockEntity.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, replacementState);
+        super.onRemove(state, level, pos, replacementState, flag);
     }
 
     @Nullable

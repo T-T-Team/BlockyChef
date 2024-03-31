@@ -3,6 +3,7 @@ package tnt.blockychef.common.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -18,6 +19,7 @@ import tnt.blockychef.common.heat.HeatHelper;
 import tnt.blockychef.common.heat.HeatSource;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
+import tnt.blockychef.common.init.BlockyChefSounds;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.blockentity.Synchronizable;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
@@ -65,6 +67,9 @@ public class SaucepanBlockEntity extends RecipeRememberingBlockEntity<SaucepanRe
         SaucepanRecipe.SaucePanCookingConfiguration configuration = recipe.getConfiguration();
         if (configuration.isCooking(saucepan.temperature)) {
             saucepan.status = CookingStatus.COOKING;
+            if (canPlaySound(40, saucepan.timeCooking, configuration.time())) {
+                level.playSound(null, pos, BlockyChefSounds.SAUCEPAN, SoundSource.BLOCKS, 0.4F, 1.0F);
+            }
             if (++saucepan.timeCooking >= configuration.time() && !level.isClientSide()) {
                 saucepan.timeCooking = 0;
                 saucepan.consumeIngredientsAndApplyCraftRemainder(recipe, INPUTS, OUTPUTS, in -> recipe.getInputs().forEach(ing -> ing.consume(saucepan, in)));
@@ -72,6 +77,7 @@ public class SaucepanBlockEntity extends RecipeRememberingBlockEntity<SaucepanRe
                 MenuInventoryHelper.insertItems(assembledOutput, saucepan, OUTPUTS);
                 saucepan.storeRecipe(saucepan.recipeHolder);
                 saucepan.reloadRecipe();
+                saucepan.burnAmount = 0.0F;
                 BlockEntityHelper.sendBlockEntityClientData(saucepan);
                 return;
             }
@@ -91,6 +97,8 @@ public class SaucepanBlockEntity extends RecipeRememberingBlockEntity<SaucepanRe
                         MenuInventoryHelper.insertItems(burned, saucepan, OUTPUTS);
                     }
                 }
+            } else if (recipe.isBurning()) {
+                saucepan.status = CookingStatus.BURNING;
             }
         }
     }

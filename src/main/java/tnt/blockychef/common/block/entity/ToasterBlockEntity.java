@@ -15,6 +15,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
+import tnt.blockychef.common.food.CookingStatus;
 import tnt.blockychef.common.food.recipe.ToasterRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
@@ -72,6 +73,10 @@ public class ToasterBlockEntity extends RecipeRememberingBlockEntity<ToasterReci
                 BlockEntityHelper.sendBlockEntityClientData(toaster);
             }
         }
+    }
+
+    public CookingStatus getCookingStatus() {
+        return getCookingStatus(units.toArray(ToastingUnit[]::new), unit -> unit.status);
     }
 
     public void setToasting(boolean toasting) {
@@ -183,6 +188,7 @@ public class ToasterBlockEntity extends RecipeRememberingBlockEntity<ToasterReci
         private final ToasterBlockEntity toaster;
         private final int slot;
         private int time;
+        private CookingStatus status = CookingStatus.NONE;
 
         ToastingUnit(ToasterBlockEntity toaster, int slot) {
             this.toaster = toaster;
@@ -198,11 +204,13 @@ public class ToasterBlockEntity extends RecipeRememberingBlockEntity<ToasterReci
         }
 
         boolean toast() {
+            status = CookingStatus.NONE;
             Optional<RecipeHolder<ToasterRecipe>> optional = getRecipe();
             if (optional.isPresent()) {
                 RecipeHolder<ToasterRecipe> holder = optional.get();
                 ToasterRecipe recipe = holder.value();
                 int limit = recipe.getToastingTime();
+                status = recipe.isBurning() ? CookingStatus.BURNING : CookingStatus.COOKING;
                 if (++time >= limit) {
                     ItemStack result = recipe.assemble(toaster, toaster.getLevel().registryAccess());
                     toaster.setItem(slot, result);

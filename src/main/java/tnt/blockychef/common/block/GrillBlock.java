@@ -31,6 +31,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.block.entity.GrillBlockEntity;
+import tnt.blockychef.common.block.entity.RecipeRememberingBlockEntity;
 import tnt.blockychef.common.food.CookingStatus;
 import tnt.blockychef.common.heat.HeatSource;
 import tnt.blockychef.common.heat.HeatSourceProvider;
@@ -107,6 +108,12 @@ public class GrillBlock extends DyeableBlock implements EntityBlock, HeatSourceP
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
         return BlockEntityHelper.createBlockEntityTicker(pBlockEntityType, BlockyChefBlockEntities.GRILL, GrillBlockEntity::tick);
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState replacementState, boolean flag) {
+        RecipeRememberingBlockEntity.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, replacementState);
+        super.onRemove(state, level, pos, replacementState, flag);
     }
 
     @Override

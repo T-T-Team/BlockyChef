@@ -80,7 +80,6 @@ public class DoughMakerBlock extends DyeableBlock implements EntityBlock {
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState replacementState, boolean flag) {
         RecipeRememberingBlockEntity.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, replacementState);
         super.onRemove(state, level, pos, replacementState, flag);
-
     }
 
     @Nullable

@@ -85,8 +85,8 @@ public class MixerBlock extends DyeableBlock implements EntityBlock {
 
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState replacementState, boolean p_60519_) {
-        super.onRemove(state, level, pos, replacementState, p_60519_);
         RecipeRememberingBlockEntity.dropRecipeBlockInventoryContentsAndAwardExp(state, level, pos, replacementState);
+        super.onRemove(state, level, pos, replacementState, p_60519_);
     }
 
     @Nullable

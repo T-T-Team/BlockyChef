@@ -29,6 +29,10 @@ public final class BlockyChefSounds {
     public static final SoundEvent MORTAR_AND_PESTLE = null;
     @ObjectHolder(value = "blockychef:oven", registryName = KEY)
     public static final SoundEvent OVEN = null;
+    @ObjectHolder(value = "blockychef:pot", registryName = KEY)
+    public static final SoundEvent POT = null;
+    @ObjectHolder(value = "blockychef:pan", registryName = KEY)
+    public static final SoundEvent PAN = null;
     @ObjectHolder(value = "blockychef:saucepan", registryName = KEY)
     public static final SoundEvent SAUCEPAN = null;
     @ObjectHolder(value = "blockychef:teapot", registryName = KEY)
