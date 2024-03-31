@@ -33,6 +33,7 @@ public class CookingTableScreen extends AbstractContainerScreen<CookingTableMenu
                 .pos(leftPos + 89, topPos + 85)
                 .size(80, 20)
                 .build());
+        craftBtn.active = false;
     }
 
     @Override

@@ -3,6 +3,7 @@ package tnt.blockychef.common.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
@@ -12,6 +13,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import tnt.blockychef.common.food.recipe.CuttingBoardRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
+import tnt.blockychef.common.init.BlockyChefSounds;
 import tnt.blockychef.util.Helper;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.math.Interpolation;
@@ -40,6 +42,9 @@ public class CuttingBoardBlockEntity extends RecipeRememberingBlockEntity<Cuttin
             if (cuttingBoard.recipe != null) {
                 CuttingBoardRecipe cuttingBoardRecipe = cuttingBoard.recipe.value();
                 ItemStack[] outputs = cuttingBoardRecipe.getOutputs();
+                if (canPlaySound(80, cuttingBoard.timeProcessing, cuttingBoardRecipe.getProcessingTime())) {
+                    level.playSound(null, pos, BlockyChefSounds.CUTTING_BOARD, SoundSource.BLOCKS, 1.0F, 1.0F);
+                }
                 if (MenuInventoryHelper.canFitItems(outputs, cuttingBoard, SLOT_OUTPUTS)) {
                     if (++cuttingBoard.timeProcessing >= cuttingBoardRecipe.getProcessingTime()) {
                         cuttingBoard.completeRecipe();

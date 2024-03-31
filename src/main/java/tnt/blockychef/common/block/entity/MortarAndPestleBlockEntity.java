@@ -2,6 +2,7 @@ package tnt.blockychef.common.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -12,6 +13,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import tnt.blockychef.common.food.recipe.MortarRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
+import tnt.blockychef.common.init.BlockyChefSounds;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.blockentity.Synchronizable;
 import tnt.tntlib.api.math.Interpolation;
@@ -46,6 +48,9 @@ public class MortarAndPestleBlockEntity extends RecipeRememberingBlockEntity<Mor
         if (!MenuInventoryHelper.canFitItems(result, mortarAndPestle, OUTPUT)) {
             mortarAndPestle.setRecipe(null);
             return;
+        }
+        if (canPlaySound(80, mortarAndPestle.currentProcessingTime, recipe.getProcessingTime())) {
+            level.playSound(null, pos, BlockyChefSounds.MORTAR_AND_PESTLE, SoundSource.BLOCKS, 1.0F, 1.0F);
         }
         if (++mortarAndPestle.currentProcessingTime >= recipe.getProcessingTime() && !level.isClientSide) {
             mortarAndPestle.currentProcessingTime = 0;

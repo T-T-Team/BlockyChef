@@ -34,6 +34,7 @@ public class BarrelScreen extends AbstractContainerScreen<BarrelMenu> {
                 .size(80, 20)
                 .build()
         );
+        fermentButton.active = false;
     }
 
     @Override

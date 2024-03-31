@@ -2,6 +2,7 @@ package tnt.blockychef.common.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -12,6 +13,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import tnt.blockychef.common.food.recipe.MixingBowlRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
+import tnt.blockychef.common.init.BlockyChefSounds;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.blockentity.Synchronizable;
 import tnt.tntlib.api.math.Interpolation;
@@ -48,6 +50,9 @@ public class MixingBowlBlockEntity extends RecipeRememberingBlockEntity<MixingBo
         if (!MenuInventoryHelper.canFitItems(outputs, mixingBowl, OUTPUTS)) {
             mixingBowl.setRecipe(null);
             return;
+        }
+        if (canPlaySound(60, mixingBowl.mixingTime, recipe.getMixingTime())) {
+            level.playSound(null, pos, BlockyChefSounds.MIXING_BOWL, SoundSource.BLOCKS, 1.0F, 1.0F);
         }
         if (++mixingBowl.mixingTime >= recipe.getMixingTime() && !level.isClientSide) {
             mixingBowl.mixingTime = 0;

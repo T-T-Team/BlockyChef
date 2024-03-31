@@ -3,6 +3,7 @@ package tnt.blockychef.common.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
@@ -12,6 +13,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import tnt.blockychef.common.food.recipe.PastaMachineRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
+import tnt.blockychef.common.init.BlockyChefSounds;
 import tnt.blockychef.util.Helper;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.math.Interpolation;
@@ -42,6 +44,9 @@ public class PastaMachineBlockEntity extends RecipeRememberingBlockEntity<PastaM
             PastaMachineRecipe pastaMachineRecipe = pastaMachine.recipe.value();
             ItemStack[] outputs = pastaMachineRecipe.getOutputs();
             if (MenuInventoryHelper.canFitItems(outputs, pastaMachine, OUTPUTS)) {
+                if (canPlaySound(55, pastaMachine.processingTime, pastaMachineRecipe.getProcessingTime())) {
+                    level.playSound(null, pos, BlockyChefSounds.PASTA_MACHINE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                }
                 if (++pastaMachine.processingTime >= pastaMachineRecipe.getProcessingTime()) {
                     pastaMachine.processingTime = 0;
                     pastaMachine.storeRecipe(pastaMachine.recipe);

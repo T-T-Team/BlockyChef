@@ -2,6 +2,7 @@ package tnt.blockychef.common.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -12,6 +13,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import tnt.blockychef.common.food.recipe.DoughMakerRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
+import tnt.blockychef.common.init.BlockyChefSounds;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.blockentity.Synchronizable;
 import tnt.tntlib.api.math.Interpolation;
@@ -50,7 +52,11 @@ public class DoughMakerBlockEntity extends RecipeRememberingBlockEntity<DoughMak
             doughMaker.setRecipe(null);
             return;
         }
-        if (++doughMaker.processingTime >= doughMaker.activeRecipe.value().getProcessingTime() && !level.isClientSide) {
+        int craftTime = doughMaker.activeRecipe.value().getProcessingTime();
+        if (canPlaySound(40, doughMaker.processingTime, craftTime)) {
+            level.playSound(null, pos, BlockyChefSounds.DOUGH_MAKER, SoundSource.BLOCKS, 1.0F, 1.0F);
+        }
+        if (++doughMaker.processingTime >= craftTime && !level.isClientSide) {
             doughMaker.processingTime = 0;
             doughMaker.consumeIngredientsAndApplyCraftRemainder(doughMaker.activeRecipe.value(), INPUTS, OUTPUTS, in -> doughMaker.activeRecipe.value().getInputs().forEach(multiIngredient -> multiIngredient.consume(doughMaker, in)));
             ItemStack[] assembled = Arrays.stream(outputs).map(ItemStack::copy).toArray(ItemStack[]::new);

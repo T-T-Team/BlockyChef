@@ -131,4 +131,8 @@ public abstract class RecipeRememberingBlockEntity<R extends AbstractFoodRecipe<
 
         ExperienceOrb.award(level, position, i);
     }
+
+    public static boolean canPlaySound(int soundInterval, int currentProcessingTime, int recipeProcessingTime) {
+        return currentProcessingTime % soundInterval == 0 && currentProcessingTime + soundInterval < recipeProcessingTime;
+    }
 }

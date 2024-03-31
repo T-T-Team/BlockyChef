@@ -37,4 +37,6 @@ public final class BlockyChefSounds {
     public static final SoundEvent TOASTER_A = null;
     @ObjectHolder(value = "blockychef:toaster_b", registryName = KEY)
     public static final SoundEvent TOASTER_B = null;
+    @ObjectHolder(value = "blockychef:pasta_machine", registryName = KEY)
+    public static final SoundEvent PASTA_MACHINE = null;
 }
