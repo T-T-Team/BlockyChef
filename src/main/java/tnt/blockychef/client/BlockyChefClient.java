@@ -88,6 +88,7 @@ public final class BlockyChefClient {
         event.registerBlockEntityRenderer(BlockyChefBlockEntities.JUICER, JuicerBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(BlockyChefBlockEntities.MIXER, MixerBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(BlockyChefBlockEntities.PAN, PanBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(BlockyChefBlockEntities.MEAT_GRINDER, MeatGrinderBlockEntityRenderer::new);
     }
 
     private void registerScreenFactories() {

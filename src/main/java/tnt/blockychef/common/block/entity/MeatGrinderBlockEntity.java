@@ -59,7 +59,7 @@ public class MeatGrinderBlockEntity extends RecipeRememberingBlockEntity<MeatGri
     }
 
     public void processRecipe(Player player) {
-        if (recipe == null) {
+        if (recipe == null || !recipe.value().matches(this, level)) {
             return;
         }
         level.playSound(null, worldPosition, BlockyChefSounds.MEAT_GRINDER, SoundSource.BLOCKS, 1.0F, 1.0F);
