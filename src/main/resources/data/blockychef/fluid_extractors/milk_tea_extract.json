@@ -1,0 +1,10 @@
+{
+  "item": "blockychef:mug",
+  "output": {
+    "item": "blockychef:milk_tea"
+  },
+  "fluidFilter": {
+    "FluidName": "blockychef:milk_tea",
+    "Amount": 250
+  }
+}

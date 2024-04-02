@@ -71,6 +71,17 @@ public final class BlockyChefFluidTypes {
     public static final RegistryObject<EdibleFluidType> ICE_COFFEE_FLUID = registerEdible("ice_coffee_fluid", 0xAAE8C6A2);
 
 
+    public static final RegistryObject<EdibleFluidType> BLACK_COFFEE_FLUID = registerEdible("black_coffee_fluid", 0xAA35271A);
+    public static final RegistryObject<EdibleFluidType> TEA_FLUID = registerEdible("tea_fluid", 0xAAAA903B);
+    public static final RegistryObject<EdibleFluidType> BERRY_TEA_FLUID = registerEdible("berry_tea_fluid", 0xAAA86E37);
+    public static final RegistryObject<EdibleFluidType> CITRUS_TEA_FLUID = registerEdible("citrus_tea_fluid", 0xAAA8A550);
+    public static final RegistryObject<EdibleFluidType> DANDELION_TEA_FLUID = registerEdible("dandelion_tea_fluid", 0xAAB7B743);
+    public static final RegistryObject<EdibleFluidType> FRUIT_TEA_FLUID = registerEdible("fruit_tea_fluid", 0xAAD3A437);
+    public static final RegistryObject<EdibleFluidType> GINGER_TEA_FLUID = registerEdible("ginger_tea_fluid", 0xAABA8D4A);
+    public static final RegistryObject<EdibleFluidType> HONEY_TEA_FLUID = registerEdible("honey_tea_fluid", 0xAAB78F00);
+    public static final RegistryObject<EdibleFluidType> MILK_TEA_FLUID = registerEdible("milk_tea_fluid", 0xAAB7A775);
+
+
 
     public static final RegistryObject<EdibleFluidType> PEANUT_BUTTER_FLUID = registerEdible("peanut_butter_fluid", 0xFFD8A564);
     public static final RegistryObject<EdibleFluidType> COCOA_SPREAD_FLUID = registerEdible("cocoa_spread_fluid", 0xFF3A2C1B);

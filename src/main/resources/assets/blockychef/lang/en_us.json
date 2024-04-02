@@ -844,6 +844,15 @@
   "fluid_type.blockychef.ketchup_fluid": "Ketchup",
   "fluid_type.blockychef.tomato_sauce_fluid": "Tomato Sauce",
   "fluid_type.blockychef.mayo_fluid": "Mayo",
+  "fluid_type.blockychef.black_coffee_fluid": "Black Coffee",
+  "fluid_type.blockychef.tea_fluid": "Tea",
+  "fluid_type.blockychef.berry_tea_fluid": "Berry Tea",
+  "fluid_type.blockychef.citrus_tea_fluid": "Citrus Tea",
+  "fluid_type.blockychef.dandelion_tea_fluid": "Dandelion Tea",
+  "fluid_type.blockychef.fruit_tea_fluid": "Fruit Tea",
+  "fluid_type.blockychef.ginger_tea_fluid": "Ginger Tea",
+  "fluid_type.blockychef.honey_tea_fluid": "Honey Tea",
+  "fluid_type.blockychef.milk_tea_fluid": "Milk Tea",
 
 
   "blockychef.food.quality.bad": "Bad",

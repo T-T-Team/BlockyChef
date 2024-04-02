@@ -71,6 +71,15 @@ public final class BlockyChefFluids {
     public static final RegistryObject<Fluid> KETCHUP_FLUID = registerSource("ketchup", () -> BlockyChefFluids.KETCHUP_FLUID_PROPERTIES);
     public static final RegistryObject<Fluid> TOMATO_SAUCE_FLUID = registerSource("tomato_sauce", () -> BlockyChefFluids.TOMATO_SAUCE_FLUID_PROPERTIES);
     public static final RegistryObject<Fluid> MAYO_FLUID = registerSource("mayo", () -> BlockyChefFluids.MAYO_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> BLACK_COFFEE_FLUID = registerSource("black_coffee", () -> BlockyChefFluids.BLACK_COFFEE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> TEA_FLUID = registerSource("tea", () -> BlockyChefFluids.TEA_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> BERRY_TEA_FLUID = registerSource("berry_tea", () -> BlockyChefFluids.BERRY_TEA_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> CITRUS_TEA_FLUID = registerSource("citrus_tea", () -> BlockyChefFluids.CITRUS_TEA_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> DANDELION_TEA_FLUID = registerSource("dandelion_tea", () -> BlockyChefFluids.DANDELION_TEA_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> FRUIT_TEA_FLUID = registerSource("fruit_tea", () -> BlockyChefFluids.FRUIT_TEA_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> GINGER_TEA_FLUID = registerSource("ginger_tea", () -> BlockyChefFluids.GINGER_TEA_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> HONEY_TEA_FLUID = registerSource("honey_tea", () -> BlockyChefFluids.HONEY_TEA_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> MILK_TEA_FLUID = registerSource("milk_tea", () -> BlockyChefFluids.MILK_TEA_FLUID_PROPERTIES);
 
 
 
@@ -131,6 +140,15 @@ public final class BlockyChefFluids {
     public static final RegistryObject<Fluid> KETCHUP_FLOWING_FLUID = registerSource("ketchup_flowing", () -> BlockyChefFluids.KETCHUP_FLUID_PROPERTIES);
     public static final RegistryObject<Fluid> TOMATO_SAUCE_FLOWING_FLUID = registerSource("tomato_sauce_flowing", () -> BlockyChefFluids.TOMATO_SAUCE_FLUID_PROPERTIES);
     public static final RegistryObject<Fluid> MAYO_FLOWING_FLUID = registerSource("mayo_flowing", () -> BlockyChefFluids.MAYO_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> BLACK_COFFEE_FLOWING_FLUID = registerSource("black_coffee_flowing", () -> BlockyChefFluids.BLACK_COFFEE_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> TEA_FLOWING_FLUID = registerSource("tea_flowing", () -> BlockyChefFluids.TEA_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> BERRY_TEA_FLOWING_FLUID = registerSource("berry_tea_flowing", () -> BlockyChefFluids.BERRY_TEA_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> CITRUS_TEA_FLOWING_FLUID = registerSource("citrus_tea_flowing", () -> BlockyChefFluids.CITRUS_TEA_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> DANDELION_TEA_FLOWING_FLUID = registerSource("dandelion_tea_flowing", () -> BlockyChefFluids.DANDELION_TEA_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> FRUIT_TEA_FLOWING_FLUID = registerSource("fruit_tea_flowing", () -> BlockyChefFluids.FRUIT_TEA_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> GINGER_TEA_FLOWING_FLUID = registerSource("ginger_tea_flowing", () -> BlockyChefFluids.GINGER_TEA_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> HONEY_TEA_FLOWING_FLUID = registerSource("honey_tea_flowing", () -> BlockyChefFluids.HONEY_TEA_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> MILK_TEA_FLOWING_FLUID = registerSource("milk_tea_flowing", () -> BlockyChefFluids.MILK_TEA_FLUID_PROPERTIES);
 
 
 
@@ -191,6 +209,15 @@ public final class BlockyChefFluids {
     private static final ForgeFlowingFluid.Properties KETCHUP_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.KETCHUP_FLUID, KETCHUP_FLUID, KETCHUP_FLOWING_FLUID);
     private static final ForgeFlowingFluid.Properties TOMATO_SAUCE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.TOMATO_SAUCE_FLUID, TOMATO_SAUCE_FLUID, TOMATO_SAUCE_FLOWING_FLUID);
     private static final ForgeFlowingFluid.Properties MAYO_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.MAYO_FLUID, MAYO_FLUID, MAYO_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties BLACK_COFFEE_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.BLACK_COFFEE_FLUID, BLACK_COFFEE_FLUID, BLACK_COFFEE_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties TEA_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.TEA_FLUID, TEA_FLUID, TEA_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties BERRY_TEA_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.BERRY_TEA_FLUID, BERRY_TEA_FLUID, BERRY_TEA_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties CITRUS_TEA_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.CITRUS_TEA_FLUID, CITRUS_TEA_FLUID, CITRUS_TEA_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties DANDELION_TEA_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.DANDELION_TEA_FLUID, DANDELION_TEA_FLUID, DANDELION_TEA_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties FRUIT_TEA_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.FRUIT_TEA_FLUID, FRUIT_TEA_FLUID, FRUIT_TEA_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties GINGER_TEA_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.GINGER_TEA_FLUID, GINGER_TEA_FLUID, GINGER_TEA_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties HONEY_TEA_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.HONEY_TEA_FLUID, HONEY_TEA_FLUID, HONEY_TEA_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties MILK_TEA_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.MILK_TEA_FLUID, MILK_TEA_FLUID, MILK_TEA_FLOWING_FLUID);
 
     public static void register(IEventBus bus) {
         REGISTER.register(bus);

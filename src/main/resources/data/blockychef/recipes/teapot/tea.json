@@ -13,9 +13,9 @@
     "Amount": 1000
   },
   "result": {
-    "FluidName": "blockychef:ice_tea",
+    "FluidName": "blockychef:tea",
     "Amount": 750
   },
-  "cookingTime": 300,
+  "cookingTime": 400,
   "minTemperature": 7.0
 }

@@ -42,7 +42,7 @@ public class CuttingBoardBlockEntity extends RecipeRememberingBlockEntity<Cuttin
             if (cuttingBoard.recipe != null) {
                 CuttingBoardRecipe cuttingBoardRecipe = cuttingBoard.recipe.value();
                 ItemStack[] outputs = cuttingBoardRecipe.getOutputs();
-                if (canPlaySound(80, cuttingBoard.timeProcessing, cuttingBoardRecipe.getProcessingTime())) {
+                if (canPlaySound(60, cuttingBoard.timeProcessing, cuttingBoardRecipe.getProcessingTime())) {
                     level.playSound(null, pos, BlockyChefSounds.CUTTING_BOARD, SoundSource.BLOCKS, 1.0F, 1.0F);
                 }
                 if (MenuInventoryHelper.canFitItems(outputs, cuttingBoard, SLOT_OUTPUTS)) {
