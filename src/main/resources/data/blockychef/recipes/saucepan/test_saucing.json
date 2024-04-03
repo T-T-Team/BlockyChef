@@ -13,12 +13,13 @@
       }
     },
     {
-      "count": 3,
+      "count": 6,
       "ingredient": {
-        "item": "blockychef:strawberry"
+        "item": "blockychef:strawberry_slice"
       }
     },
     {
+      "count": 2,
       "ingredient": {
         "item": "minecraft:sugar"
       }
@@ -35,7 +36,7 @@
     }
   ],
   "configuration": {
-    "time": 200,
+    "time": 240,
     "minTemperature": 4.5,
     "maxTemperature": 5.5
   },
@@ -45,6 +46,5 @@
         "item": "blockychef:empty_jar"
       }
     }
-  ],
-  "experience": 0.7
+  ]
 }

@@ -669,6 +669,7 @@
   "item.blockychef.coconut_flakes": "Coconut Flakes",
   "item.blockychef.sweet_berry_juice": "Sweet Berry Juice",
   "item.blockychef.frappe_coffee": "Frappe Coffee",
+  "item.blockychef.dried_tea_leaf": "Dried Tea Leaf",
 
   "config.screen.blockychef": "BlockyChef Configuration",
   "config.blockychef.option.decay": "Plant Decay Config",
@@ -757,6 +758,7 @@
   "screen.blockychef.teapot": "Teapot",
   "screen.blockychef.cooking_table.widget.craft": "Craft",
   "screen.blockychef.cooking_table": "Cooking Table",
+  "screen.blockychef.saucepan": "Saucepan",
 
   "death.attack.blockychef.dehydration": "%s has died due to dehydration",
   "death.attack.blockychef.dehydration.player": "%1$s has died due to dehydration whilst fighting %2$s",
@@ -777,6 +779,7 @@
   "jei.recipe_category.blockychef.stove": "Baking",
   "jei.recipe_category.blockychef.pan": "Frying",
   "jei.recipe_category.blockychef.pot": "Boiling",
+  "jei.recipe_category.blockychef.saucepan": "Saucepan",
 
   "config.jade.plugin_blockychef.drying_rack": "Drying Rack",
   "config.jade.plugin_blockychef.juicer": "Juicer",

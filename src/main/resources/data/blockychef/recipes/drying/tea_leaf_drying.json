@@ -1,0 +1,10 @@
+{
+  "type": "blockychef:drying",
+  "input": {
+    "item": "blockychef:tea_leaf"
+  },
+  "output": {
+    "item": "blockychef:dried_tea_leaf"
+  },
+  "dryingTime": 2400
+}

@@ -94,8 +94,8 @@ public class SaucepanRecipe extends AbstractFoodRecipe<SaucepanBlockEntity> impl
                 Codec.FLOAT.fieldOf("minTemperature").forGetter(SaucePanCookingConfiguration::minTemperature),
                 Codec.FLOAT.fieldOf("maxTemperature").forGetter(SaucePanCookingConfiguration::maxTemperature),
                 Codec.FLOAT.optionalFieldOf("burnSpeed", 1.0F).forGetter(SaucePanCookingConfiguration::burnSpeed),
-                Codec.INT.optionalFieldOf("stirProgressLoss", 20).forGetter(SaucePanCookingConfiguration::stirProgressLoss),
-                Codec.FLOAT.optionalFieldOf("stirBurnLoss", 0.05F).forGetter(SaucePanCookingConfiguration::stirBurnLoss)
+                Codec.INT.optionalFieldOf("stirProgressLoss", 40).forGetter(SaucePanCookingConfiguration::stirProgressLoss),
+                Codec.FLOAT.optionalFieldOf("stirBurnLoss", 0.5F).forGetter(SaucePanCookingConfiguration::stirBurnLoss)
         ).apply(instance, SaucePanCookingConfiguration::new));
     }
 }
