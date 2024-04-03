@@ -177,7 +177,7 @@ public final class ConfigDrinkLoader {
                 .hydrationLoss(1)
                 .buildAndExport(list);
         new DefaultDrinkBuilder(Items.MELON_SLICE)
-                .stats(2, 1)
+                .stats(1, 1)
                 .buildAndExport(list);
     }
 

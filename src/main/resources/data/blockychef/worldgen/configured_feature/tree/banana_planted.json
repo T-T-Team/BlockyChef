@@ -4,7 +4,7 @@
     "decorators": [
       {
         "type": "blockychef:fruit_decorator",
-        "chance": 0.18,
+        "chance": 0.30,
         "fruitProvider": {
           "type": "minecraft:simple_state_provider",
           "state": {
