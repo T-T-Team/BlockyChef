@@ -11,4 +11,9 @@ public record CookingConfiguration(int time, float minTemperature, float maxTemp
             Codec.FLOAT.fieldOf("maxTemperature").forGetter(CookingConfiguration::maxTemperature),
             Codec.FLOAT.optionalFieldOf("burnSpeed", 1.0F).forGetter(CookingConfiguration::burnSpeed)
     ).apply(instance, CookingConfiguration::new));
+
+    @Override
+    public boolean isBurning(float temperature) {
+        return temperature >= maxTemperature();
+    }
 }
