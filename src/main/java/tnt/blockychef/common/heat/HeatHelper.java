@@ -54,6 +54,14 @@ public final class HeatHelper {
         return currentHeat + adjust;
     }
 
+    public static float burn(float temperature, float endOptimalTemperature, float multiplier) {
+        float baseDiff = temperature - endOptimalTemperature + 0.01F;
+        if (baseDiff <= 0)
+            return 0.0F;
+        float mod = baseDiff / HeatValues.MAX_TEMPERATURE;
+        return mod * multiplier * 0.1F;
+    }
+
     public static boolean isEmpty(HeatSource source) {
         return source == NoHeatSource.INSTANCE;
     }

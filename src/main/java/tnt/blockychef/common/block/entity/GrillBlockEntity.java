@@ -289,7 +289,7 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
                 int progress = this.getProgressAmount();
                 if (conf.isBurning(temperature) || progress >= totalTimer) {
                     status = CookingStatus.BURNING;
-                    float f = conf.burnSpeed() * 0.015F;
+                    float f = HeatHelper.burn(temperature, conf.minTemperature(), conf.burnSpeed());
                     float newBurnAmount = this.getBurnAmount() + f;
                     this.setBurnAmount(newBurnAmount);
                     if (newBurnAmount >= 1.0F) {

@@ -23,6 +23,8 @@ public interface BaseCookConfiguration {
     }
 
     default Component getTemperatureRange() {
-        return Component.literal(String.format(Locale.ROOT, "%.1f-%.1f", minTemperature(), maxTemperature()));
+        String s1 = String.format(Locale.ROOT, "%.2f", minTemperature());
+        String s2 = String.format(Locale.ROOT, "%.2f", maxTemperature());
+        return s1.equals(s2) ? Component.literal(s1) : Component.literal(s1 + "-" + s2);
     }
 }

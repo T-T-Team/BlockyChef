@@ -276,8 +276,7 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
                 cookingStatus = CookingStatus.COOKING;
                 if (configuration.isBurning(temp)) {
                     cookingStatus = CookingStatus.BURNING;
-                    float temperatureDifference = temp - configuration.maxTemperature();
-                    float burnScale = temperatureDifference * (0.015F * configuration.burnSpeed());
+                    float burnScale = HeatHelper.burn(temp, configuration.minTemperature(), configuration.burnSpeed());
                     if ((burnAmount += burnScale) >= 1.0F) {
                         ItemStack burntResult = recipe.value().getBurntResult().copy();
                         StoveBlockEntity.this.setItem(getSlotIndex(), burntResult);

@@ -21,6 +21,7 @@ import tnt.blockychef.common.food.recipe.BaseCookConfiguration;
 import tnt.blockychef.common.food.recipe.PanRecipe;
 import tnt.blockychef.common.heat.HeatHelper;
 import tnt.blockychef.common.heat.HeatSource;
+import tnt.blockychef.common.heat.HeatValues;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.common.init.BlockyChefSounds;
@@ -232,11 +233,10 @@ public class PanBlockEntity extends RecipeRememberingBlockEntity<PanRecipe> impl
                 float burnScale = 0.0F;
                 if (configuration.isBurning(temperature)) {
                     status = CookingStatus.BURNING;
-                    float diff = temperature - configuration.maxTemperature();
-                    burnScale = diff * (0.015F * configuration.burnSpeed());
+                    burnScale = HeatHelper.burn(temperature, configuration.minTemperature(), configuration.burnSpeed());
                 } else if (!hasOil) {
                     status = CookingStatus.BURNING;
-                    burnScale += (0.015F * 5);
+                    burnScale += HeatHelper.burn(HeatValues.MAX_TEMPERATURE, 0.0F, 0.2F);
                 } else if (recipe.value().isBurning()) {
                     status = CookingStatus.BURNING;
                 }

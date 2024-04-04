@@ -83,7 +83,7 @@ public class SaucepanBlockEntity extends RecipeRememberingBlockEntity<SaucepanRe
             }
             if (configuration.isBurning(saucepan.temperature)) {
                 saucepan.status = CookingStatus.BURNING;
-                float f = configuration.burnSpeed() * 0.015F;
+                float f = HeatHelper.burn(saucepan.temperature, configuration.minTemperature(), configuration.burnSpeed());
                 saucepan.burnAmount += f;
                 if (saucepan.burnAmount >= 1.0F) {
                     saucepan.consumeInputs();
