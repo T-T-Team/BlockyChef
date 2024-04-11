@@ -90,6 +90,9 @@ public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRe
 
     public static void tick(Level level, BlockPos pos, BlockState state, DryingRackBlockEntity dryingRack) {
         for (DryingSlot slot : dryingRack.slots) {
+            if (slot.requireRefresh) {
+                slot.refresh(level);
+            }
             slot.update();
         }
     }
@@ -134,6 +137,7 @@ public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRe
     private void loadSharedData(CompoundTag tag) {
         NbtUtil.arrayFromNbt(slots, tag.getList("slots", Tag.TAG_COMPOUND), (dryingSlot, tag1) -> {
             dryingSlot.deserialize(tag1);
+            dryingSlot.requireRefresh = true;
             return dryingSlot;
         }, CompoundTag.class);
     }
@@ -154,6 +158,7 @@ public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRe
 
         private int timeDrying;
         private RecipeHolder<DryingRecipe> holder;
+        private boolean requireRefresh;
 
         public DryingSlot(int index) {
             this.index = index;
@@ -199,6 +204,7 @@ public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRe
         }
 
         void refresh(Level level) {
+            this.requireRefresh = false;
             RecipeManager manager = level.getRecipeManager();
 
             Optional<RecipeHolder<DryingRecipe>> optional = Helper.findRecipeFor(manager, BlockyChefRecipeTypes.DRYING_RECIPE, recipe -> recipe.value().isValidInput(this.getItemStack()));
