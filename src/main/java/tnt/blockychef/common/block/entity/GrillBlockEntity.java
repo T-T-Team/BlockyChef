@@ -56,8 +56,7 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
         grill.temperature = HeatHelper.regulateHeat(grill.temperature, heat, 0.02F);
 
         // fuel tick
-        boolean hasRecipeQueued = grill.shouldInitiateCooking();
-        boolean isActive = grill.heatSource.getConfiguredHeat(null) > 0.0F && hasRecipeQueued;
+        boolean isActive = grill.heatSource.getConfiguredHeat(null) > 0.0F;
         if (grill.fuelAmount > 0) {
             --grill.fuelAmount;
         }
