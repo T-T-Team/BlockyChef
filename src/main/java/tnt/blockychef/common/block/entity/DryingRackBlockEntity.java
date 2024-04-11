@@ -2,8 +2,10 @@ package tnt.blockychef.common.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.Containers;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -17,25 +19,29 @@ import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.food.recipe.DryingRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
+import tnt.blockychef.util.Helper;
+import tnt.tntlib.api.ArrayUtils;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.blockentity.Synchronizable;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
+import tnt.tntlib.api.serialization.NbtUtil;
 
 import java.util.List;
 import java.util.Optional;
 
 public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRecipe> implements Synchronizable {
 
-    private RecipeHolder<DryingRecipe> recipe;
-    private int ticksDrying;
+    public static final int DRYING_CAPACITY = 3;
+    private final DryingSlot[] slots;
 
     public DryingRackBlockEntity(BlockPos pos, BlockState state) {
         super(BlockyChefBlockEntities.DRYING_RACK, pos, state);
+        this.slots = ArrayUtils.indexedFill(new DryingSlot[DRYING_CAPACITY], DryingSlot::new);
     }
 
     @Override
     public IItemHandlerModifiable setUpInventory() {
-        return new ItemStackHandler(1);
+        return new ItemStackHandler(DRYING_CAPACITY);
     }
 
     public boolean isValidInput(ItemStack stack, Level level) {
@@ -52,109 +58,159 @@ public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRe
         return false;
     }
 
-    public void setItem(ItemStack stack) {
-        inventoryHandler.setStackInSlot(0, stack);
-        updateRecipes();
-        BlockEntityHelper.sendBlockEntityClientData(this);
-        setChanged();
+    public boolean hasItem(int slot) {
+        return slot >= 0 && slot < DRYING_CAPACITY && !getItem(slot).isEmpty();
     }
 
-    public boolean hasItem() {
-        return !inventoryHandler.getStackInSlot(0).isEmpty();
-    }
-
-    public int getTicksDrying() {
-        return ticksDrying;
-    }
-
-    public int getTotalTime() {
-        return recipe != null ? recipe.value().getDryingTime() : 1;
-    }
-
-    public void clearInventoryAndProcessRecipe(@Nullable Player player) {
+    public void takeOut(@Nullable Player player, int slot) {
         if (level.isClientSide)
             return;
+        if (slot < 0 || slot >= DRYING_CAPACITY)
+            return;
+        DryingSlot dryingSlot = slots[slot];
+        ItemStack itemStack = this.getItem(slot);
+        if (itemStack.isEmpty())
+            return;
         if (player == null) {
-            getRecipesToAwardAndPopExperience((ServerLevel) level, Vec3.atCenterOf(worldPosition));
-            MenuInventoryHelper.dropInventoryContents(level, worldPosition, inventoryHandler);
+            Vec3 vec3 = Vec3.atCenterOf(worldPosition);
+            getRecipesToAwardAndPopExperience((ServerLevel) level, vec3);
+            Containers.dropItemStack(level, vec3.x, vec3.y, vec3.z, itemStack.copy());
         } else {
-            ItemStack stack = inventoryHandler.getStackInSlot(0);
-            if (!stack.isEmpty()) {
-                MenuInventoryHelper.giveItemOrDrop(player, stack.copy());
-            }
-            setItem(ItemStack.EMPTY);
+            MenuInventoryHelper.giveItemOrDrop(player, itemStack.copy());
             awardUsedRecipesAndPopExperience((ServerPlayer) player);
         }
-        setChanged();
+        this.setItem(slot, ItemStack.EMPTY);
+        dryingSlot.refresh(level);
+        BlockEntityHelper.sendBlockEntityClientData(this);
+    }
+
+    public DryingSlot getSlot(int slotIndex) {
+        return slots[slotIndex];
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, DryingRackBlockEntity dryingRack) {
-        if (dryingRack.recipe != null) {
-            if (dryingRack.ticksDrying++ >= dryingRack.recipe.value().getDryingTime()) {
-                dryingRack.completeRecipe();
-            }
-        } else {
-            dryingRack.updateRecipes();
+        for (DryingSlot slot : dryingRack.slots) {
+            slot.update();
         }
     }
 
-    public RecipeHolder<DryingRecipe> getRecipe() {
-        return recipe;
+    @Override
+    public void setItem(int index, ItemStack stack) {
+        super.setItem(index, stack);
+        if (index >= 0 && index < DRYING_CAPACITY) {
+            slots[index].refresh(level);
+            BlockEntityHelper.sendBlockEntityClientData(this);
+        }
     }
 
     @Override
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
-        tag.putInt("ticksDrying", ticksDrying);
+        saveSharedData(tag);
     }
 
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
-        ticksDrying = tag.getInt("ticksDrying");
-        this.updateRecipes();
+        loadSharedData(tag);
     }
 
     @Override
     public void encodeData(CompoundTag tag) {
-        ItemStack stack = inventoryHandler.getStackInSlot(0);
-        if (!stack.isEmpty()) {
-            tag.put("item", stack.serializeNBT());
-        }
+        MenuInventoryHelper.encodeInventory(getItemHandler(), tag);
+        saveSharedData(tag);
     }
 
     @Override
     public void decodeData(CompoundTag tag) {
-        ItemStack stack = tag.contains("item") ? ItemStack.of(tag.getCompound("item")) : ItemStack.EMPTY;
-        inventoryHandler.setStackInSlot(0, stack);
+        MenuInventoryHelper.decodeInventory(getItemHandler(), tag);
+        loadSharedData(tag);
     }
 
-    private void updateRecipes() {
-        ItemStack stack = inventoryHandler.getStackInSlot(0);
-        if (stack.isEmpty()) {
-            clearRecipe();
-        } else {
-            if (level == null)
+    private void saveSharedData(CompoundTag tag) {
+        tag.put("slots", NbtUtil.arrayToNbt(slots, DryingSlot::serialize));
+    }
+
+    private void loadSharedData(CompoundTag tag) {
+        NbtUtil.arrayFromNbt(slots, tag.getList("slots", Tag.TAG_COMPOUND), (dryingSlot, tag1) -> {
+            dryingSlot.deserialize(tag1);
+            return dryingSlot;
+        }, CompoundTag.class);
+    }
+
+    private void completedRecipe(RecipeHolder<DryingRecipe> holder, int slotIndex) {
+        ItemStack result = holder.value().getOutput().copy();
+        this.setItem(slotIndex, result);
+        this.storeRecipe(holder);
+
+        DryingSlot slot = slots[slotIndex];
+        slot.refresh(level);
+        BlockEntityHelper.sendBlockEntityClientData(this);
+    }
+
+    public final class DryingSlot {
+
+        private final int index;
+
+        private int timeDrying;
+        private RecipeHolder<DryingRecipe> holder;
+
+        public DryingSlot(int index) {
+            this.index = index;
+        }
+
+        public boolean hasRecipe() {
+            return holder != null;
+        }
+
+        public int getTotalDryingTime() {
+            return hasRecipe() ? holder.value().getDryingTime() : 0;
+        }
+
+        public int getCurrentDryingTime() {
+            return hasRecipe() ? timeDrying : 0;
+        }
+
+        public ItemStack getResult() {
+            return hasRecipe() ? holder.value().getOutput() : ItemStack.EMPTY;
+        }
+
+        void update() {
+            if (holder == null)
                 return;
+
+            DryingRecipe recipe = holder.value();
+            int totalDryingTime = recipe.getDryingTime();
+            if (++timeDrying < totalDryingTime)
+                return;
+
+            this.timeDrying = 0;
+            DryingRackBlockEntity.this.completedRecipe(this.holder, this.index);
+        }
+
+        CompoundTag serialize() {
+            CompoundTag tag = new CompoundTag();
+            tag.putInt("timeDrying", timeDrying);
+            return tag;
+        }
+
+        void deserialize(CompoundTag tag) {
+            this.timeDrying = tag.getInt("timeDrying");
+        }
+
+        void refresh(Level level) {
             RecipeManager manager = level.getRecipeManager();
-            Optional<RecipeHolder<DryingRecipe>> optional = manager.getRecipeFor(BlockyChefRecipeTypes.DRYING_RECIPE, this, level);
-            clearRecipe();
-            optional.ifPresent(recipe -> this.recipe = recipe);
-        }
-    }
 
-    private void clearRecipe() {
-        recipe = null;
-        ticksDrying = 0;
-    }
-
-    private void completeRecipe() {
-        ticksDrying = 0;
-        if (recipe != null) {
-            ItemStack result = recipe.value().assemble(this, level.registryAccess());
-            storeRecipe(recipe);
-            setItem(result);
+            Optional<RecipeHolder<DryingRecipe>> optional = Helper.findRecipeFor(manager, BlockyChefRecipeTypes.DRYING_RECIPE, recipe -> recipe.value().isValidInput(this.getItemStack()));
+            RecipeHolder<DryingRecipe> recipeHolder = optional.orElse(null);
+            if (this.holder != recipeHolder) {
+                this.timeDrying = 0;
+                this.holder = recipeHolder;
+            }
         }
-        updateRecipes();
+
+        ItemStack getItemStack() {
+            return DryingRackBlockEntity.this.getItem(index);
+        }
     }
 }

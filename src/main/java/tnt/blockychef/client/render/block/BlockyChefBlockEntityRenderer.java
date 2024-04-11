@@ -20,7 +20,9 @@ public abstract class BlockyChefBlockEntityRenderer<T extends BlockEntity> imple
         double mx = x;
         double mz = z;
         switch (direction) {
-            case SOUTH -> mx = 1.0 - x;
+            case SOUTH -> {
+                mx = 1.0 - x;
+            }
             case EAST -> {
                 mx = z;
                 mz = x;

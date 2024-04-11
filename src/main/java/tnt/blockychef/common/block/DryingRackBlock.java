@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
@@ -82,15 +83,16 @@ public class DryingRackBlock extends FullHorizontalAxisBlock implements EntityBl
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         Optional<DryingRackBlockEntity> optional = level.getBlockEntity(pos, BlockyChefBlockEntities.DRYING_RACK);
+        int slotIndex = this.resolveClickedSlot(player, pos, state, hitResult);
         return optional.map(dryingRack -> {
             ItemStack stack = player.getItemInHand(hand);
-            if (dryingRack.hasItem()) {
-                dryingRack.clearInventoryAndProcessRecipe(player);
+            if (dryingRack.hasItem(slotIndex)) {
+                dryingRack.takeOut(player, slotIndex);
             } else if (dryingRack.isValidInput(stack, level)) {
                 if (!level.isClientSide) {
                     ItemStack insertionItem = stack.copy();
                     insertionItem.setCount(1);
-                    dryingRack.setItem(insertionItem);
+                    dryingRack.setItem(slotIndex, insertionItem);
                     if (!player.getAbilities().instabuild) {
                         stack.shrink(1);
                     }
@@ -116,6 +118,20 @@ public class DryingRackBlock extends FullHorizontalAxisBlock implements EntityBl
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return level.isClientSide ? null : BlockEntityHelper.createBlockEntityTicker(type, BlockyChefBlockEntities.DRYING_RACK, DryingRackBlockEntity::tick);
+        return BlockEntityHelper.createBlockEntityTicker(type, BlockyChefBlockEntities.DRYING_RACK, DryingRackBlockEntity::tick);
+    }
+
+    protected int resolveClickedSlot(Player player, BlockPos pos, BlockState state, BlockHitResult hitResult) {
+        Direction direction = state.getValue(FACING);
+        Vec3 relativeVec = hitResult.getLocation().subtract(pos.getX(), pos.getY(), pos.getZ());
+        Direction.Axis axis = direction.getAxis();
+        Direction.AxisDirection axisDirection = direction.getOpposite().getAxisDirection();
+        double value = axis == Direction.Axis.X ? relativeVec.z : relativeVec.x;
+        boolean invert = (axis == Direction.Axis.X && axisDirection == Direction.AxisDirection.NEGATIVE) || (axis == Direction.Axis.Z && axisDirection == Direction.AxisDirection.POSITIVE);
+        if (invert) {
+            value = 1.0 - value;
+        }
+        double step = 1.0 / DryingRackBlockEntity.DRYING_CAPACITY;
+        return Math.min(DryingRackBlockEntity.DRYING_CAPACITY - 1, (int) (value / step));
     }
 }

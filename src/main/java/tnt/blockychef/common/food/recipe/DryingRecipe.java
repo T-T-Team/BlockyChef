@@ -42,8 +42,7 @@ public class DryingRecipe extends AbstractFoodRecipe<DryingRackBlockEntity> {
 
     @Override
     public boolean matches(DryingRackBlockEntity container, Level level) {
-        ItemStack stack = container.getItem(0);
-        return isValidInput(stack);
+        return false;
     }
 
     public boolean isValidInput(ItemStack stack) {
