@@ -13,6 +13,6 @@
     "time": 700,
     "minTemperature": 5,
     "maxTemperature": 6,
-    "burnSpeed": 0.6
+    "burnSpeed": 0.2
   }
 }

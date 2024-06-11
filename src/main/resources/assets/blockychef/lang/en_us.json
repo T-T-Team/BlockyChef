@@ -761,6 +761,7 @@
   "screen.blockychef.cooking_table": "Cooking Table",
   "screen.blockychef.saucepan": "Saucepan",
   "screen.blockychef.grill": "Grill",
+  "screen.blockychef.pot": "Pot",
 
   "death.attack.blockychef.dehydration": "%s has died due to dehydration",
   "death.attack.blockychef.dehydration.player": "%1$s has died due to dehydration whilst fighting %2$s",

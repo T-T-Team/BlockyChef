@@ -14,6 +14,6 @@ public record CookingConfiguration(int time, float minTemperature, float maxTemp
 
     @Override
     public boolean isBurning(float temperature) {
-        return temperature >= maxTemperature();
+        return temperature > maxTemperature();
     }
 }

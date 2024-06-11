@@ -14,6 +14,7 @@
     "time": 100,
     "minTemperature": 0.01,
     "maxTemperature": 9.0,
-    "minWaterLevel": 0
+    "minWaterLevel": 0,
+    "burnSpeed": 0.0
   }
 }

@@ -233,7 +233,7 @@ public class PanBlockEntity extends RecipeRememberingBlockEntity<PanRecipe> impl
                 float burnScale = 0.0F;
                 if (configuration.isBurning(temperature)) {
                     status = CookingStatus.BURNING;
-                    if (configuration.withinMinMaxTemperature(temperature) || recipe.value().isOvercooked()) {
+                    if (configuration.withinMinMaxTemperature(temperature)) {
                         burnScale = 0.01F * configuration.burnSpeed();
                     } else if (configuration.overMaxTemperature(temperature)) {
                         burnScale = 0.01F + HeatHelper.burn(temperature, configuration.maxTemperature(), configuration.burnSpeed());

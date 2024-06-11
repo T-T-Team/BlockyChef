@@ -228,7 +228,11 @@ public class PotBlockEntity extends RecipeRememberingBlockEntity<PotRecipe> impl
                 float burnScale = 0.0F;
                 if (configuration.isBurning(temperature)) {
                     cookingStatus = CookingStatus.BURNING;
-                    burnScale = HeatHelper.burn(temperature, configuration.minTemperature(), configuration.burnSpeed());
+                    if (configuration.withinMinMaxTemperature(temperature)) {
+                        burnScale = 0.01F * configuration.burnSpeed();
+                    } else if (configuration.overMaxTemperature(temperature)) {
+                        burnScale = 0.01F + HeatHelper.burn(temperature, configuration.maxTemperature(), configuration.burnSpeed());
+                    }
                 } else if (waterAmount < requiredWaterLevel) {
                     cookingStatus = CookingStatus.BURNING;
                     burnScale += HeatHelper.burn(HeatValues.MAX_TEMPERATURE, 0.0F, 0.2F);

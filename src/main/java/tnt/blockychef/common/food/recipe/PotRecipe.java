@@ -102,7 +102,7 @@ public class PotRecipe extends AbstractFoodRecipe<PotBlockEntity> implements Bur
                 Codec.FLOAT.optionalFieldOf("burnSpeed", 1.0F).forGetter(PotCookingConfiguration::burnSpeed),
                 Codec.INT.optionalFieldOf("waterEvaporationRate", 40).forGetter(PotCookingConfiguration::waterEvaporationRate),
                 Codec.INT.optionalFieldOf("stirProgressLoss", 20).forGetter(PotCookingConfiguration::stirProgressLoss),
-                Codec.FLOAT.optionalFieldOf("stirBurnLoss", 0.05F).forGetter(PotCookingConfiguration::stirBurnLoss),
+                Codec.FLOAT.optionalFieldOf("stirBurnLoss", 0.3F).forGetter(PotCookingConfiguration::stirBurnLoss),
                 Codec.INT.optionalFieldOf("minWaterLevel", 100).forGetter(PotCookingConfiguration::minWaterLevel)
         ).apply(instance, PotCookingConfiguration::new));
     }
