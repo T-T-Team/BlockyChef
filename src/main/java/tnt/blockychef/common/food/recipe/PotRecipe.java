@@ -79,7 +79,7 @@ public class PotRecipe extends AbstractFoodRecipe<PotBlockEntity> implements Bur
     }
 
     @Override
-    public boolean isBurning() {
+    public boolean isOvercooked() {
         return overcooking;
     }
 

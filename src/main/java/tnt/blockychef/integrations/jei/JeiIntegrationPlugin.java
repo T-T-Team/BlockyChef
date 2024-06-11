@@ -172,7 +172,7 @@ public class JeiIntegrationPlugin implements IModPlugin {
     }
 
     private static <I extends Container, R extends Recipe<I>> List<R> getRecipes(net.minecraft.world.item.crafting.RecipeType<R> type) {
-        return getRecipes(type, recipe -> !(recipe instanceof BurnableRecipe burnable) || !burnable.isBurning());
+        return getRecipes(type, recipe -> !(recipe instanceof BurnableRecipe burnable) || !burnable.isOvercooked());
     }
 
     private static <I extends Container, R extends Recipe<I>> List<R> getRecipes(net.minecraft.world.item.crafting.RecipeType<R> type, @Nullable Predicate<R> filter) {

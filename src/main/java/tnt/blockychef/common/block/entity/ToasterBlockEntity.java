@@ -210,7 +210,7 @@ public class ToasterBlockEntity extends RecipeRememberingBlockEntity<ToasterReci
                 RecipeHolder<ToasterRecipe> holder = optional.get();
                 ToasterRecipe recipe = holder.value();
                 int limit = recipe.getToastingTime();
-                status = recipe.isBurning() ? CookingStatus.BURNING : CookingStatus.COOKING;
+                status = recipe.isOvercooked() ? CookingStatus.BURNING : CookingStatus.COOKING;
                 if (++time >= limit) {
                     ItemStack result = recipe.assemble(toaster, toaster.getLevel().registryAccess());
                     toaster.setItem(slot, result);

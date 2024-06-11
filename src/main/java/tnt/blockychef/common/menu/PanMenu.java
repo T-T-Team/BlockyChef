@@ -111,7 +111,7 @@ public class PanMenu extends AbstractBlockEntityMenu<PanBlockEntity> {
 
         @Override
         public boolean mayPlace(@NotNull ItemStack stack) {
-            Optional<RecipeHolder<PanRecipe>> opt = Helper.findRecipeFor(panBlockEntity.getLevel().getRecipeManager(), BlockyChefRecipeTypes.PAN_RECIPE, recipe -> recipe.value().matches(stack) && !recipe.value().isBurning());
+            Optional<RecipeHolder<PanRecipe>> opt = Helper.findRecipeFor(panBlockEntity.getLevel().getRecipeManager(), BlockyChefRecipeTypes.PAN_RECIPE, recipe -> recipe.value().matches(stack) && !recipe.value().isOvercooked());
             return super.mayPlace(stack) && opt.isPresent();
         }
     }

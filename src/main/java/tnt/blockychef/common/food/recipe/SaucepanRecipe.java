@@ -21,7 +21,7 @@ public class SaucepanRecipe extends AbstractFoodRecipe<SaucepanBlockEntity> impl
             Codecs.SIMPLE_ITEMSTACK_CODEC.listOf().fieldOf("outputs").forGetter(SaucepanRecipe::getOutputs),
             Codecs.SIMPLE_ITEMSTACK_CODEC.listOf().fieldOf("burnOutputs").forGetter(SaucepanRecipe::getBurnOutputs),
             SaucePanCookingConfiguration.CODEC.fieldOf("configuration").forGetter(SaucepanRecipe::getConfiguration),
-            Codec.BOOL.optionalFieldOf("overcooking", false).forGetter(SaucepanRecipe::isBurning),
+            Codec.BOOL.optionalFieldOf("overcooking", false).forGetter(SaucepanRecipe::isOvercooked),
             resolveRemainderConsumer(),
             resolveExperience()
     ).apply(instance, SaucepanRecipe::new));
@@ -58,7 +58,7 @@ public class SaucepanRecipe extends AbstractFoodRecipe<SaucepanBlockEntity> impl
     }
 
     @Override
-    public boolean isBurning() {
+    public boolean isOvercooked() {
         return overcooking;
     }
 

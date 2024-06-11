@@ -298,12 +298,12 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
                         loadRecipe(GrillBlockEntity.this.level.getRecipeManager());
                         return;
                     }
-                } else if (recipe.value().isBurning()) {
+                } else if (recipe.value().isOvercooked()) {
                     status = CookingStatus.BURNING;
                 }
                 int newProgress = progress + 1;
                 this.setProgressAmount(newProgress);
-                if (this.areBothSidesDone() || (recipe.value().isBurning() && this.isEitherSideDone())) {
+                if (this.areBothSidesDone() || (recipe.value().isOvercooked() && this.isEitherSideDone())) {
                     ItemStack result = recipe.value().getResult().copy();
                     GrillBlockEntity grill = GrillBlockEntity.this;
                     grill.setItem(getSlotIndex(), result);
@@ -315,7 +315,7 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
         }
 
         public boolean isSlotLocked() {
-            return GrillBlockEntity.this.canGrill() && recipe != null && !recipe.value().isBurning() && BlockyChef.config.cooking.lockCookingSlots;
+            return GrillBlockEntity.this.canGrill() && recipe != null && !recipe.value().isOvercooked() && BlockyChef.config.cooking.lockCookingSlots;
         }
 
         public boolean areBothSidesDone() {
@@ -327,14 +327,14 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
         }
 
         public float getProgress(boolean flipSide) {
-            if (recipe != null && recipe.value().isBurning()) {
+            if (recipe != null && recipe.value().isOvercooked()) {
                 return 0.0F;
             }
             return (flipSide ? flippedProgressionTimer : progressionTimer) / (float) totalTimer;
         }
 
         public float getBurnProgress(boolean flipSide) {
-            if (recipe != null && recipe.value().isBurning()) {
+            if (recipe != null && recipe.value().isOvercooked()) {
                 return (flipSide ? flippedProgressionTimer : progressionTimer) / (float) totalTimer;
             }
             return (flipSide ? flippedBurnAmount : burnAmount);

@@ -43,7 +43,7 @@ public class StoveRecipe extends AbstractFoodRecipe<StoveBlockEntity> implements
     }
 
     @Override
-    public boolean isBurning() {
+    public boolean isOvercooked() {
         return isOvercooking;
     }
 

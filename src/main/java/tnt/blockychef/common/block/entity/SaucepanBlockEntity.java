@@ -97,7 +97,7 @@ public class SaucepanBlockEntity extends RecipeRememberingBlockEntity<SaucepanRe
                         MenuInventoryHelper.insertItems(burned, saucepan, OUTPUTS);
                     }
                 }
-            } else if (recipe.isBurning()) {
+            } else if (recipe.isOvercooked()) {
                 saucepan.status = CookingStatus.BURNING;
             }
         }
@@ -116,7 +116,7 @@ public class SaucepanBlockEntity extends RecipeRememberingBlockEntity<SaucepanRe
     }
 
     public float getProgress() {
-        if (recipeHolder == null || recipeHolder.value().isBurning()) {
+        if (recipeHolder == null || recipeHolder.value().isOvercooked()) {
             return 0.0F;
         }
         return timeCooking / (float) recipeHolder.value().getConfiguration().time();
@@ -131,7 +131,7 @@ public class SaucepanBlockEntity extends RecipeRememberingBlockEntity<SaucepanRe
                 SaucepanRecipe recipe = recipeHolder.value();
                 SaucepanRecipe.SaucePanCookingConfiguration cfg = recipe.getConfiguration();
                 burnAmount = Math.max(0, burnAmount - cfg.stirBurnLoss());
-                if (!recipe.isBurning()) {
+                if (!recipe.isOvercooked()) {
                     timeCooking = Math.max(0, timeCooking - cfg.stirProgressLoss());
                 }
                 BlockEntityHelper.sendBlockEntityClientData(this);

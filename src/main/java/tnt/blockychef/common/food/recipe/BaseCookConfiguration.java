@@ -19,7 +19,15 @@ public interface BaseCookConfiguration {
     }
 
     default boolean isBurning(float temperature) {
-        return temperature > minTemperature();
+        return temperature >= minTemperature();
+    }
+
+    default boolean withinMinMaxTemperature(float temperature) {
+        return temperature >= minTemperature() && temperature <= maxTemperature();
+    }
+
+    default boolean overMaxTemperature(float temperature) {
+        return temperature > maxTemperature();
     }
 
     default Component getTemperatureRange() {

@@ -69,7 +69,7 @@ public class PanRecipe extends AbstractFoodRecipe<PanBlockEntity> implements Bur
     }
 
     @Override
-    public boolean isBurning() {
+    public boolean isOvercooked() {
         return overcooking;
     }
 
@@ -111,7 +111,7 @@ public class PanRecipe extends AbstractFoodRecipe<PanBlockEntity> implements Bur
                 Codec.FLOAT.optionalFieldOf("burnSpeed", 1.0F).forGetter(PanCookingConfiguration::burnSpeed),
                 Codec.INT.optionalFieldOf("oilConsumptionInterval", 6).forGetter(PanCookingConfiguration::oilConsumptionRate),
                 Codec.INT.optionalFieldOf("stirProgressLoss", 20).forGetter(PanCookingConfiguration::stirProgressLoss),
-                Codec.FLOAT.optionalFieldOf("stirBurnLoss", 0.05F).forGetter(PanCookingConfiguration::stirBurnLoss)
+                Codec.FLOAT.optionalFieldOf("stirBurnLoss", 0.3F).forGetter(PanCookingConfiguration::stirBurnLoss)
         ).apply(instance, PanCookingConfiguration::new));
     }
 }

@@ -41,13 +41,13 @@ public class TeapotRecipe extends AbstractFoodRecipe<TeapotBlockEntity> implemen
         this.cookingTime = cookTime;
         this.minTemperature = minTemperature;
 
-        if (!isBurning() && result.isEmpty()) {
+        if (!isOvercooked() && result.isEmpty()) {
             throw new JsonSyntaxException("Unknown fluid");
         }
     }
 
     @Override
-    public boolean isBurning() {
+    public boolean isOvercooked() {
         return inputs.isEmpty();
     }
 
@@ -58,7 +58,7 @@ public class TeapotRecipe extends AbstractFoodRecipe<TeapotBlockEntity> implemen
                 return false;
             }
         }
-        if (!isBurning()) {
+        if (!isOvercooked()) {
             for (int inputSlot : TeapotBlockEntity.INPUTS) {
                 ItemStack itemStack = pContainer.getItem(inputSlot);
                 if (itemStack.isEmpty())

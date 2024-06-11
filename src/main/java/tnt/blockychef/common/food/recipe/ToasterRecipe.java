@@ -43,7 +43,7 @@ public class ToasterRecipe extends AbstractFoodRecipe<ToasterBlockEntity> implem
     }
 
     @Override
-    public boolean isBurning() {
+    public boolean isOvercooked() {
         return overcooking;
     }
 

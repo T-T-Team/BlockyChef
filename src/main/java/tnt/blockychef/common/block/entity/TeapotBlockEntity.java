@@ -58,7 +58,7 @@ public class TeapotBlockEntity extends RecipeRememberingBlockEntity<TeapotRecipe
                 teapot.setRecipe(null);
                 return;
             }
-            if (recipe.isBurning() && teapot.temperature >= recipe.getMinTemperature()) {
+            if (recipe.isOvercooked() && teapot.temperature >= recipe.getMinTemperature()) {
                 // Vaporization
                 if (level.getGameTime() % 40L == 0L) {
                     level.playSound(null, pos, BlockyChefSounds.TEAPOT, SoundSource.BLOCKS, 0.4F, 1.0F);
@@ -100,7 +100,7 @@ public class TeapotBlockEntity extends RecipeRememberingBlockEntity<TeapotRecipe
     }
 
     public boolean isBurning() {
-        return recipeHolder != null && recipeHolder.value().isBurning() && temperature >= recipeHolder.value().getMinTemperature();
+        return recipeHolder != null && recipeHolder.value().isOvercooked() && temperature >= recipeHolder.value().getMinTemperature();
     }
 
     public FluidContainer getFluidContainer() {
@@ -124,7 +124,7 @@ public class TeapotBlockEntity extends RecipeRememberingBlockEntity<TeapotRecipe
     }
 
     public float getWaterBoilProgress() {
-        return recipeHolder != null ? recipeHolder.value().isBurning() ? 1.0F : waterBoilTime / (float) WATER_BOILING_TIME : 0.0F;
+        return recipeHolder != null ? recipeHolder.value().isOvercooked() ? 1.0F : waterBoilTime / (float) WATER_BOILING_TIME : 0.0F;
     }
 
     public void setRecipe(@Nullable RecipeHolder<TeapotRecipe> recipe) {

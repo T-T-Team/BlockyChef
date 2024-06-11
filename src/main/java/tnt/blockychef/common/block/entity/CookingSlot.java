@@ -50,14 +50,14 @@ public abstract class CookingSlot<R extends AbstractFoodRecipe<B> & BurnableReci
     }
 
     public float getProgress() {
-        if (recipe != null && recipe.value().isBurning()) {
+        if (recipe != null && recipe.value().isOvercooked()) {
             return 0.0F;
         }
         return progressionTimer / (float) totalTimer;
     }
 
     public float getBurnProgress() {
-        if (recipe != null && recipe.value().isBurning()) {
+        if (recipe != null && recipe.value().isOvercooked()) {
             return progressionTimer / (float) totalTimer;
         }
         return burnAmount;

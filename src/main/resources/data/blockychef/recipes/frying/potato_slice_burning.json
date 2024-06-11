@@ -12,8 +12,8 @@
   "overcooking": true,
   "configuration": {
     "time": 400,
-    "minTemperature": 0.10,
-    "maxTemperature": 10.0,
-    "burnSpeed": 0.8
+    "minTemperature": 1.0,
+    "maxTemperature": 2.0,
+    "burnSpeed": 0.05
   }
 }

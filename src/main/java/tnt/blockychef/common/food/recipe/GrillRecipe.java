@@ -25,7 +25,7 @@ public class GrillRecipe extends AbstractFoodRecipe<GrillBlockEntity> implements
             Codecs.SIMPLE_ITEMSTACK_CODEC.fieldOf("result").forGetter(GrillRecipe::getResult),
             Codecs.SIMPLE_ITEMSTACK_CODEC.optionalFieldOf("burntResult", ItemStack.EMPTY).forGetter(GrillRecipe::getBurnResult),
             GrillingConfiguration.CODEC.fieldOf("configuration").forGetter(GrillRecipe::getConfiguration),
-            Codec.BOOL.optionalFieldOf("overcooking", false).forGetter(GrillRecipe::isBurning),
+            Codec.BOOL.optionalFieldOf("overcooking", false).forGetter(GrillRecipe::isOvercooked),
             resolveRemainderConsumer(),
             resolveExperience()
     ).apply(instance, GrillRecipe::new));
@@ -71,7 +71,7 @@ public class GrillRecipe extends AbstractFoodRecipe<GrillBlockEntity> implements
     }
 
     @Override
-    public boolean isBurning() {
+    public boolean isOvercooked() {
         return overcooking;
     }
 

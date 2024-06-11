@@ -198,7 +198,7 @@ public class PanBlockEntity extends RecipeRememberingBlockEntity<PanRecipe> impl
             PanRecipe panRecipe = recipe.value();
             PanRecipe.PanCookingConfiguration configuration = panRecipe.getConfiguration();
             this.burnAmount = Math.max(0, burnAmount - configuration.stirBurnLoss());
-            if (!panRecipe.isBurning()) {
+            if (!panRecipe.isOvercooked()) {
                 this.progressionTimer = Math.max(0, progressionTimer - configuration.stirProgressLoss());
             }
         }
@@ -215,7 +215,7 @@ public class PanBlockEntity extends RecipeRememberingBlockEntity<PanRecipe> impl
         }
 
         public boolean isLocked() {
-            return PanBlockEntity.this.canCook() && recipe != null && !recipe.value().isBurning() && BlockyChef.config.cooking.lockCookingSlots;
+            return PanBlockEntity.this.canCook() && recipe != null && !recipe.value().isOvercooked() && BlockyChef.config.cooking.lockCookingSlots;
         }
 
         public void updateSlot(boolean hasOil) {
@@ -233,11 +233,15 @@ public class PanBlockEntity extends RecipeRememberingBlockEntity<PanRecipe> impl
                 float burnScale = 0.0F;
                 if (configuration.isBurning(temperature)) {
                     status = CookingStatus.BURNING;
-                    burnScale = HeatHelper.burn(temperature, configuration.minTemperature(), configuration.burnSpeed());
+                    if (configuration.withinMinMaxTemperature(temperature) || recipe.value().isOvercooked()) {
+                        burnScale = 0.01F * configuration.burnSpeed();
+                    } else if (configuration.overMaxTemperature(temperature)) {
+                        burnScale = 0.01F + HeatHelper.burn(temperature, configuration.maxTemperature(), configuration.burnSpeed());
+                    }
                 } else if (!hasOil) {
                     status = CookingStatus.BURNING;
                     burnScale += HeatHelper.burn(HeatValues.MAX_TEMPERATURE, 0.0F, 0.2F);
-                } else if (recipe.value().isBurning()) {
+                } else if (recipe.value().isOvercooked()) {
                     status = CookingStatus.BURNING;
                 }
 

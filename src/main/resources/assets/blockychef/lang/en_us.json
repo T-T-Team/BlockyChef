@@ -705,7 +705,7 @@
   "label.blockychef.high": "Power High",
   "label.blockychef.fluid_amount": "%s mB",
   "label.blockychef.drying": "Slot: %s - Drying: %ss",
-  "label.blockychef.drying.no_recipe": "Slot: %s - Waiting",
+  "label.blockychef.drying.no_recipe": "Slot: %s - Empty",
   "label.blockychef.grinding": "Grinding: %s%%",
   "label.blockychef.grating": "Grating: %s%%",
   "label.blockychef.juicing": "Juicing: %s%%",
@@ -760,6 +760,7 @@
   "screen.blockychef.cooking_table.widget.craft": "Craft",
   "screen.blockychef.cooking_table": "Cooking Table",
   "screen.blockychef.saucepan": "Saucepan",
+  "screen.blockychef.grill": "Grill",
 
   "death.attack.blockychef.dehydration": "%s has died due to dehydration",
   "death.attack.blockychef.dehydration.player": "%1$s has died due to dehydration whilst fighting %2$s",

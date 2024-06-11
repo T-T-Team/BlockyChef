@@ -111,7 +111,7 @@ public class PotMenu extends AbstractBlockEntityMenu<PotBlockEntity> {
 
         @Override
         public boolean mayPlace(@NotNull ItemStack stack) {
-            Optional<RecipeHolder<PotRecipe>> opt = Helper.findRecipeFor(potBlockEntity.getLevel().getRecipeManager(), BlockyChefRecipeTypes.POT_RECIPE, recipe -> recipe.value().matches(stack) && !recipe.value().isBurning());
+            Optional<RecipeHolder<PotRecipe>> opt = Helper.findRecipeFor(potBlockEntity.getLevel().getRecipeManager(), BlockyChefRecipeTypes.POT_RECIPE, recipe -> recipe.value().matches(stack) && !recipe.value().isOvercooked());
             return super.mayPlace(stack) && opt.isPresent();
         }
     }

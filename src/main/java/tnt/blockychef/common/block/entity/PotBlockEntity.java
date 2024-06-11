@@ -187,7 +187,7 @@ public class PotBlockEntity extends RecipeRememberingBlockEntity<PotRecipe> impl
         }
 
         public boolean isLocked() {
-            return PotBlockEntity.this.canCook() && recipe != null && !recipe.value().isBurning() && BlockyChef.config.cooking.lockCookingSlots;
+            return PotBlockEntity.this.canCook() && recipe != null && !recipe.value().isOvercooked() && BlockyChef.config.cooking.lockCookingSlots;
         }
 
         public boolean shouldEvaporateWater(long gameTime) {
@@ -207,7 +207,7 @@ public class PotBlockEntity extends RecipeRememberingBlockEntity<PotRecipe> impl
             PotRecipe potRecipe = recipe.value();
             PotRecipe.PotCookingConfiguration configuration = potRecipe.getConfiguration();
             burnAmount = Math.max(0, burnAmount - configuration.stirBurnLoss());
-            if (!potRecipe.isBurning()) {
+            if (!potRecipe.isOvercooked()) {
                 progressionTimer = Math.max(0, progressionTimer - configuration.stirProgressLoss());
             }
         }
