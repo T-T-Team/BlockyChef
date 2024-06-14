@@ -81,9 +81,14 @@ public class SaucepanBlockEntity extends RecipeRememberingBlockEntity<SaucepanRe
                 BlockEntityHelper.sendBlockEntityClientData(saucepan);
                 return;
             }
-            if (configuration.isBurning(saucepan.temperature)) {
+            if (configuration.isBurning(saucepan.temperature) && !saucepan.recipeHolder.value().isOvercooked()) {
                 saucepan.status = CookingStatus.BURNING;
-                float f = HeatHelper.burn(saucepan.temperature, configuration.minTemperature(), configuration.burnSpeed());
+                float f = 0.0F;
+                if (configuration.withinMinMaxTemperature(saucepan.temperature)) {
+                    f = 0.01F * configuration.burnSpeed();
+                } else if (configuration.overMaxTemperature(saucepan.temperature)) {
+                    f = 0.01F + HeatHelper.burn(saucepan.temperature, configuration.maxTemperature(), configuration.burnSpeed());
+                }
                 saucepan.burnAmount += f;
                 if (saucepan.burnAmount >= 1.0F) {
                     saucepan.consumeInputs();

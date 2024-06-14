@@ -3,6 +3,7 @@ package tnt.blockychef.common.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -69,6 +70,7 @@ public class TeapotBlockEntity extends RecipeRememberingBlockEntity<TeapotRecipe
                     teapot.cookingTime = 0;
                     teapot.reloadRecipe();
                     BlockEntityHelper.sendBlockEntityClientData(teapot);
+                    level.playSound(null, pos, SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, 0.8F, 1.0F);
                 }
                 return;
             }

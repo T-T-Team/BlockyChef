@@ -2,7 +2,7 @@
   "type": "blockychef:teapot",
   "inputs": [],
   "inputFluid": {
-    "FluidName": "blockychef:ice_tea",
+    "FluidName": "blockychef:tea",
     "Amount": 1
   },
   "result": {

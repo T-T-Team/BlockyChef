@@ -226,7 +226,7 @@ public class PotBlockEntity extends RecipeRememberingBlockEntity<PotRecipe> impl
                 cookingStatus = CookingStatus.COOKING;
                 int requiredWaterLevel = configuration.minWaterLevel();
                 float burnScale = 0.0F;
-                if (configuration.isBurning(temperature)) {
+                if (configuration.isBurning(temperature) && !recipe.value().isOvercooked()) {
                     cookingStatus = CookingStatus.BURNING;
                     if (configuration.withinMinMaxTemperature(temperature)) {
                         burnScale = 0.01F * configuration.burnSpeed();

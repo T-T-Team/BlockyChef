@@ -37,8 +37,8 @@
   ],
   "configuration": {
     "time": 240,
-    "minTemperature": 3.9998,
-    "maxTemperature": 3.9999,
+    "minTemperature": 4.0,
+    "maxTemperature": 5.0,
     "burnSpeed": 0.45
   },
   "craftRemainderConsumers": [
