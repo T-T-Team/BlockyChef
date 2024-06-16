@@ -10,9 +10,9 @@
     "item": "blockychef:burnt_beef_burger_patty"
   },
   "configuration": {
-    "grillTime": 200,
+    "grillTime": 500,
     "minTemperature": 7.5,
-    "maxTemperature": 9.0
-  },
-  "experience": 1.5
+    "maxTemperature": 9.0,
+    "burnSpeed": 0.3
+  }
 }

@@ -288,9 +288,14 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
                 int progress = this.getProgressAmount();
                 if (conf.isBurning(temperature) || progress >= totalTimer) {
                     status = CookingStatus.BURNING;
-                    float f = HeatHelper.burn(temperature, conf.minTemperature(), conf.burnSpeed());
-                    float newBurnAmount = this.getBurnAmount() + f;
-                    this.setBurnAmount(newBurnAmount);
+                    float f = 0.0F;
+                    if (conf.withinMinMaxTemperature(temperature)) {
+                        f = 0.01F * conf.burnSpeed();
+                    } else if (conf.overMaxTemperature(temperature)) {
+                        f = 0.01F + HeatHelper.burn(temperature, conf.maxTemperature(), conf.burnSpeed());
+                    }
+                    float newBurnAmount = this.getBurnAmount(flipped) + f;
+                    this.setBurnAmount(newBurnAmount, flipped);
                     if (newBurnAmount >= 1.0F) {
                         ItemStack burntResult = recipe.value().getBurnResult().copy();
                         GrillBlockEntity.this.setItem(getSlotIndex(), burntResult);
@@ -300,6 +305,11 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
                     }
                 } else if (recipe.value().isOvercooked()) {
                     status = CookingStatus.BURNING;
+                }
+                float oppositeBurn = this.getBurnAmount(!flipped);
+                if (oppositeBurn > 0) {
+                    oppositeBurn = Math.max(0.0F, oppositeBurn - 0.01F * conf.burnSpeed());
+                    this.setBurnAmount(oppositeBurn, !flipped);
                 }
                 int newProgress = progress + 1;
                 this.setProgressAmount(newProgress);
@@ -364,12 +374,12 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
             GrillBlockEntity.this.setChanged();
         }
 
-        public float getBurnAmount() {
-            return flipped ? flippedBurnAmount : burnAmount;
+        public float getBurnAmount(boolean flippedSide) {
+            return flippedSide ? flippedBurnAmount : burnAmount;
         }
 
-        public void setBurnAmount(float amount) {
-            if (flipped)
+        public void setBurnAmount(float amount, boolean flippedSide) {
+            if (flippedSide)
                 flippedBurnAmount = amount;
             else
                 burnAmount = amount;
