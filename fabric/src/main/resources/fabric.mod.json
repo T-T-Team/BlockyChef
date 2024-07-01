@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${version}",
+  "name": "${mod_name}",
+  "description": "${mod_description}",
+  "authors": [
+    "${mod_authors}"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/collectors-album",
+    "sources": "https://github.com/T-T-Team/CollectorsAlbum",
+    "issues": "https://github.com/T-T-Team/CollectorsAlbum/issues"
+  },
+  "license": "${mod_licence}",
+  "_icon": "assets/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "tnt.blockychef.BlockyChefFabric"
+    ],
+    "client": [
+      "tnt.blockychef.client.BlockyChefClientFabric"
+    ]
+  },
+  "mixins": [
+    "blockychef.mixins.json",
+    "blockychef.fabric.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${fabric_loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}",
+    "java": ">=${java_version}",
+    "configuration": "^2.2.0"
+  },
+  "custom": {
+    "modmenu": {
+      "modmenu.discord": "https://discord.gg/WEFYxwS8E3"
+    }
+  }
+}
