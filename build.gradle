@@ -1,87 +1,126 @@
 plugins {
-    id "org.jetbrains.gradle.plugin.idea-ext" version "1.1.7"
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '[6.0.14,6.2)'
+    id 'org.spongepowered.mixin' version '0.7-SNAPSHOT'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
 }
 
-subprojects {
-    apply plugin: 'java'
+version = mod_version
+group = mod_group_id
+base {
+    archivesName = "${mod_id}-forge-${minecraft_version}"
+}
 
-    java.toolchain.languageVersion = JavaLanguageVersion.of("${java_version}")
-    // Uncomment to generate sources jar file
-    //java.withSourcesJar()
-    // Uncomment to generate javadoc file
-    //java.withJavadocJar()
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
-    jar {
-        manifest {
-            attributes([
-                    'Specification-Title'       : "${mod_name}",
-                    'Specification-Vendor'      : "${mod_authors}",
-                    'Specification-Version'     : "${project.jar.archiveVersion}",
-                    'Implementation-Title'      : "${project.name}",
-                    'Implementation-Version'    : "${project.jar.archiveVersion}",
-                    'Implementation-Vendor'     : "${mod_authors}",
-                    'Implementation-Timestamp'  : new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                    'Timestamp'                 : System.currentTimeMillis()
-            ])
+minecraft {
+    mappings channel: mapping_channel, version: mapping_version
+    copyIdeResources = true
+
+    //accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+
+    runs {
+        client {
+            workingDirectory project.file('run/client')
+            property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'blockychef'
+            properties 'mixin.env.remapRefMap': 'true'
+            property 'mixin.env.refMapRemappingFile', "${project.projectDir}/build/createSrgToMcp/output.srg"
+
+            arg "-mixin.config=blockychef.mixins.json"
+
+            mods {
+                "${mod_id}" {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run/server')
+            property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'blockychef'
+            properties 'mixin.env.remapRefMap': 'true'
+            property 'mixin.env.refMapRemappingFile', "${project.projectDir}/build/createSrgToMcp/output.srg"
+
+            arg "-mixin.config=blockychef.mixins.json"
+
+            mods {
+                "${mod_id}" {
+                    source sourceSets.main
+                }
+            }
         }
     }
+}
 
-    repositories {
-        mavenCentral()
+sourceSets.main.resources { srcDir 'src/generated/resources' }
 
-        maven {
-            name = "Sponge / Mixin"
-            url  = "https://repo.spongepowered.org/repository/maven-public/"
-        }
+repositories {
+    flatDir { dir 'libs' }
+    maven { url 'https://www.cursemaven.com' }
+    maven { url "https://maven.ryanliptak.com/" }
+    maven { url "https://maven.blamejared.com/" }
+    maven { url "https://modmaven.dev" }
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    // Configuration
+    implementation fg.deobf("curse.maven:configuration-444699:${configuration_version}")
+    // Mixin
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    // Appleskin
+    implementation fg.deobf("squeek.appleskin:appleskin-forge:${appleskin_version}")
+    // Waila
+    implementation fg.deobf("curse.maven:jade-324717:${jade_version}")
+    // JEI
+    compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"))
+    compileOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}"))
+    runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}"))
+}
+
+def resourceTargets = ['META-INF/mods.toml', 'pack.mcmeta']
+def replaceProperties = [
+        minecraft_version: minecraft_version, minecraft_version_range: minecraft_version_range,
+        forge_version: forge_version, forge_version_range: forge_version_range,
+        loader_version_range: loader_version_range,
+        mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
+        mod_authors: mod_authors, mod_description: mod_description,
+        tntlib_version_range: tntlib_version_range
+]
+processResources {
+    inputs.properties replaceProperties
+    replaceProperties.put 'project', project
+
+    filesMatching(resourceTargets) {
+        expand replaceProperties
     }
+}
 
-    processResources {
-        def props = [
-                // Mod
-                "version": project.version,
-                "mod_id": "${mod_id}",
-                "mod_name": "${mod_name}",
-                "mod_authors": "${mod_authors}",
-                "mod_licence": "${mod_licence}",
-                "mod_description": "${mod_description}",
-                "mod_group": "${mod_group}",
-
-                // Minecraft env
-                "java_version": "${java_version}",
-                "minecraft_version": "${minecraft_version}",
-                "minecraft_version_range": "${minecraft_version_range}",
-                "vanilla_gradle_version": "${vanilla_gradle_version}",
-
-                // Mixin env
-                "mixin_loader": "${mixin_loader}",
-                "mixin_version": "${mixin_version}",
-                "mixin_min_version": "${mixin_min_version}",
-
-                // Neoforge
-                "neoforge_version": "${neoforge_version}",
-                "neoforge_loader_range": "${neoforge_loader_range}",
-                "neoforge_version_range": "${neoforge_version_range}",
-                "neogradle_userdev": "${neogradle_userdev}",
-
-                // Forge
-                "forge_version": "${forge_version}",
-                "forge_version_range": "${forge_version_range}",
-                "forge_gradle_version": "${forge_gradle_version}",
-
-                // Fabric
-                "fabric_version": "${fabric_version}",
-                "fabric_loader_version": "${fabric_loader_version}",
-                "fabric_loom": "${fabric_loom}"
-        ]
-
-        filesMatching(["pack.mcmeta", "fabric.mod.json", "META-INF/*.toml", "*.mixins.json"]) {
-            expand(props)
-        }
-        inputs.properties(props)
+jar {
+    manifest {
+        attributes([
+                "Specification-Title"     : mod_id,
+                "Specification-Vendor"    : mod_authors,
+                "Specification-Version"   : "1",
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : project.jar.archiveVersion,
+                "Implementation-Vendor"   : mod_authors,
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                "MixinConfigs": "blockychef.mixins.json"
+        ])
     }
+}
 
-    tasks.withType(JavaCompile).configureEach {
-        it.options.encoding = "UTF-8"
-        it.options.getRelease().set(project.java_version.toInteger())
-    }
+mixin {
+    add sourceSets.main, "blockychef.refmap.json"
+}
+
+jar.finalizedBy('reobfJar')
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
 }
