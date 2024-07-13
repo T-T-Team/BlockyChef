@@ -5,6 +5,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.state.BlockState;
@@ -22,6 +23,8 @@ import tnt.tntlib.api.blockentity.Synchronizable;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class MixerBlockEntity extends RecipeRememberingBlockEntity<MixerRecipe> implements Synchronizable, IndexedColorHolder, FluidHolder {
@@ -73,7 +76,11 @@ public class MixerBlockEntity extends RecipeRememberingBlockEntity<MixerRecipe> 
         MixerRecipe.RpmValue recipeRpm = recipe.getRpm();
         int rpmDiff = recipeRpm.ordinal() - selectedRpm.ordinal();
         if (rpmDiff <= 0) {
-            consumeIngredientsAndApplyCraftRemainder(recipe, INPUTS, new int[0], in -> recipe.getInputs().forEach(multiIngredient -> multiIngredient.consume(this, in)));
+            consumeIngredientsAndApplyCraftRemainder(recipe, INPUTS, new int[0], in -> {
+                List<ItemStack> allConsumed = new ArrayList<>();
+                recipe.getInputs().forEach(multiIngredient -> allConsumed.addAll(multiIngredient.consume(this, in)));
+                return allConsumed;
+            });
             if (rpmDiff == 0) {
                 FluidStack stack = recipe.getOutput().copy();
                 container.insert(stack);

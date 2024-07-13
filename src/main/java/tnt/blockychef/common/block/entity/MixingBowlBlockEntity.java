@@ -20,7 +20,9 @@ import tnt.tntlib.api.math.Interpolation;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 public class MixingBowlBlockEntity extends RecipeRememberingBlockEntity<MixingBowlRecipe> implements Synchronizable, ProcessableRecipeHolder {
@@ -56,7 +58,11 @@ public class MixingBowlBlockEntity extends RecipeRememberingBlockEntity<MixingBo
         }
         if (++mixingBowl.mixingTime >= recipe.getMixingTime() && !level.isClientSide) {
             mixingBowl.mixingTime = 0;
-            mixingBowl.consumeIngredientsAndApplyCraftRemainder(recipe, INPUTS, OUTPUTS, in -> recipe.getInputs().forEach(multiIngredient -> multiIngredient.consume(mixingBowl, in)));
+            mixingBowl.consumeIngredientsAndApplyCraftRemainder(recipe, INPUTS, OUTPUTS, in -> {
+                List<ItemStack> allConsumed = new ArrayList<>();
+                recipe.getInputs().forEach(multiIngredient -> allConsumed.addAll(multiIngredient.consume(mixingBowl, in)));
+                return allConsumed;
+            });
             ItemStack[] assembledOutputs = Arrays.stream(outputs).map(ItemStack::copy).toArray(ItemStack[]::new);
             MenuInventoryHelper.insertItems(assembledOutputs, mixingBowl, OUTPUTS);
             mixingBowl.storeRecipe(mixingBowl.activeRecipe);

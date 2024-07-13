@@ -86,12 +86,16 @@ public final class MultiIngredient {
         return remaining <= 0;
     }
 
-    public void consume(Container container, int[] slots) {
+    public List<ItemStack> consume(Container container, int[] slots) {
+        List<ItemStack> consumed = new ArrayList<>();
         int remaining = count;
         for (int slot : slots) {
             ItemStack stack = container.getItem(slot);
             if (ingredient.test(stack)) {
                 int toConsume = Math.min(remaining, stack.getCount());
+                ItemStack consumedItem = stack.copy();
+                consumedItem.setCount(toConsume);
+                consumed.add(consumedItem);
                 stack.shrink(toConsume);
                 remaining -= toConsume;
                 if (remaining <= 0) {
@@ -99,6 +103,7 @@ public final class MultiIngredient {
                 }
             }
         }
+        return consumed;
     }
 
     public void consume(List<ItemStack> list) {

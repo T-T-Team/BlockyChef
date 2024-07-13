@@ -28,6 +28,8 @@ import tnt.tntlib.api.blockentity.Synchronizable;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class TeapotBlockEntity extends RecipeRememberingBlockEntity<TeapotRecipe> implements Synchronizable, FluidHolder {
@@ -85,7 +87,11 @@ public class TeapotBlockEntity extends RecipeRememberingBlockEntity<TeapotRecipe
                     teapot.waterBoilTime++;
                 } else if (++teapot.cookingTime >= recipe.getCookingTime() && !level.isClientSide) {
                     teapot.cookingTime = 0;
-                    teapot.consumeIngredientsAndApplyCraftRemainder(recipe, INPUTS, new int[0], in -> recipe.getInputs().forEach(multiIngredient -> multiIngredient.consume(teapot, in)));
+                    teapot.consumeIngredientsAndApplyCraftRemainder(recipe, INPUTS, new int[0], in -> {
+                        List<ItemStack> allConsumed = new ArrayList<>();
+                        recipe.getInputs().forEach(multiIngredient -> allConsumed.addAll(multiIngredient.consume(teapot, in)));
+                        return allConsumed;
+                    });
                     teapot.storeRecipe(teapot.recipeHolder);
                     FluidStack baseFluid = recipe.getBaseFluid().copy();
                     teapot.fluidContainer.extract(baseFluid);

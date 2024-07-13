@@ -20,7 +20,9 @@ import tnt.tntlib.api.math.Interpolation;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 public class DoughMakerBlockEntity extends RecipeRememberingBlockEntity<DoughMakerRecipe> implements Synchronizable, IndexedColorHolder, ProcessableRecipeHolder {
@@ -58,7 +60,11 @@ public class DoughMakerBlockEntity extends RecipeRememberingBlockEntity<DoughMak
         }
         if (++doughMaker.processingTime >= craftTime && !level.isClientSide) {
             doughMaker.processingTime = 0;
-            doughMaker.consumeIngredientsAndApplyCraftRemainder(doughMaker.activeRecipe.value(), INPUTS, OUTPUTS, in -> doughMaker.activeRecipe.value().getInputs().forEach(multiIngredient -> multiIngredient.consume(doughMaker, in)));
+            doughMaker.consumeIngredientsAndApplyCraftRemainder(doughMaker.activeRecipe.value(), INPUTS, OUTPUTS, in -> {
+                List<ItemStack> allConsumed = new ArrayList<>();
+                doughMaker.activeRecipe.value().getInputs().forEach(multiIngredient -> allConsumed.addAll(multiIngredient.consume(doughMaker, in)));
+                return allConsumed;
+            });
             ItemStack[] assembled = Arrays.stream(outputs).map(ItemStack::copy).toArray(ItemStack[]::new);
             MenuInventoryHelper.insertItems(assembled, doughMaker, OUTPUTS);
             doughMaker.storeRecipe(doughMaker.activeRecipe);

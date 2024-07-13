@@ -20,6 +20,7 @@ import tnt.tntlib.api.math.Interpolation;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -50,7 +51,12 @@ public class PastaMachineBlockEntity extends RecipeRememberingBlockEntity<PastaM
                 if (++pastaMachine.processingTime >= pastaMachineRecipe.getProcessingTime()) {
                     pastaMachine.processingTime = 0;
                     pastaMachine.storeRecipe(pastaMachine.recipe);
-                    pastaMachine.consumeIngredientsAndApplyCraftRemainder(pastaMachineRecipe, INPUTS, OUTPUTS, in -> pastaMachine.getInputItem().shrink(1));
+                    pastaMachine.consumeIngredientsAndApplyCraftRemainder(pastaMachineRecipe, INPUTS, OUTPUTS, in -> {
+                        ItemStack input = pastaMachine.getInputItem().copy();
+                        input.setCount(1);
+                        pastaMachine.getInputItem().shrink(1);
+                        return Collections.singletonList(input);
+                    });
                     MenuInventoryHelper.insertItems(pastaMachineRecipe.getOutputs(), pastaMachine, OUTPUTS);
                     pastaMachine.refreshRecipes();
                 }

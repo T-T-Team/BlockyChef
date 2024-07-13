@@ -26,6 +26,7 @@ import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -97,19 +98,20 @@ public abstract class RecipeRememberingBlockEntity<R extends AbstractFoodRecipe<
         this.recipesUsed.addTo(recipe.id(), 1);
     }
 
-    protected void consumeIngredientsAndApplyCraftRemainder(R recipe, int[] inputs, int[] outputs, Consumer<int[]> ingredientConsumer) {
+    protected void consumeIngredientsAndApplyCraftRemainder(R recipe, int[] inputs, int[] outputs, Function<int[], List<ItemStack>> ingredientConsumer) {
         List<ItemStack> craftingRemainder = new ArrayList<>();
-        for (int slot : inputs) {
-            ItemStack stack = getItem(slot);
-            if (!stack.isEmpty() && stack.hasCraftingRemainingItem()) {
-                craftingRemainder.add(stack.getCraftingRemainingItem());
+        List<ItemStack> consumed = ingredientConsumer.apply(inputs);
+        for (ItemStack consumedItemStack : consumed) {
+            ItemStack craftRemainderStack = consumedItemStack.getCraftingRemainingItem().copy();
+            if (!craftRemainderStack.isEmpty()) {
+                craftRemainderStack.setCount(consumedItemStack.getCount());
             }
+            craftingRemainder.add(craftRemainderStack);
         }
         List<MultiIngredient> craftRemainderConsumer = recipe.getOutputConsumers();
         for (MultiIngredient ingredient : craftRemainderConsumer) {
             ingredient.consume(craftingRemainder);
         }
-        ingredientConsumer.accept(inputs);
         int[] slots = new int[inputs.length + outputs.length];
         System.arraycopy(outputs, 0, slots, 0, outputs.length);
         System.arraycopy(inputs, 0, slots, outputs.length, inputs.length);

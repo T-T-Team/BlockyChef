@@ -24,6 +24,7 @@ import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.blockentity.Synchronizable;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,7 +73,11 @@ public class SaucepanBlockEntity extends RecipeRememberingBlockEntity<SaucepanRe
             }
             if (++saucepan.timeCooking >= configuration.time() && !level.isClientSide()) {
                 saucepan.timeCooking = 0;
-                saucepan.consumeIngredientsAndApplyCraftRemainder(recipe, INPUTS, OUTPUTS, in -> recipe.getInputs().forEach(ing -> ing.consume(saucepan, in)));
+                saucepan.consumeIngredientsAndApplyCraftRemainder(recipe, INPUTS, OUTPUTS, in -> {
+                    List<ItemStack> allConsumed = new ArrayList<>();
+                    recipe.getInputs().forEach(ing -> allConsumed.addAll(ing.consume(saucepan, in)));
+                    return allConsumed;
+                });
                 ItemStack[] assembledOutput = outputs.stream().map(ItemStack::copy).toArray(ItemStack[]::new);
                 MenuInventoryHelper.insertItems(assembledOutput, saucepan, OUTPUTS);
                 saucepan.storeRecipe(saucepan.recipeHolder);

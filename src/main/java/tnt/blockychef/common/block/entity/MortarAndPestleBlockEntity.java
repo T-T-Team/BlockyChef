@@ -20,6 +20,8 @@ import tnt.tntlib.api.math.Interpolation;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class MortarAndPestleBlockEntity extends RecipeRememberingBlockEntity<MortarRecipe> implements Synchronizable, ProcessableRecipeHolder {
@@ -54,7 +56,11 @@ public class MortarAndPestleBlockEntity extends RecipeRememberingBlockEntity<Mor
         }
         if (++mortarAndPestle.currentProcessingTime >= recipe.getProcessingTime() && !level.isClientSide) {
             mortarAndPestle.currentProcessingTime = 0;
-            mortarAndPestle.consumeIngredientsAndApplyCraftRemainder(recipe, INPUTS, OUTPUT, in -> recipe.getInputs().forEach(multiIngredient -> multiIngredient.consume(mortarAndPestle, in)));
+            mortarAndPestle.consumeIngredientsAndApplyCraftRemainder(recipe, INPUTS, OUTPUT, in -> {
+                List<ItemStack> allConsumed = new ArrayList<>();
+                recipe.getInputs().forEach(multiIngredient -> allConsumed.addAll(multiIngredient.consume(mortarAndPestle, in)));
+                return allConsumed;
+            });
             MenuInventoryHelper.insertItems(result, mortarAndPestle, OUTPUT);
             mortarAndPestle.storeRecipe(mortarAndPestle.activeRecipe);
             mortarAndPestle.refreshRecipe();

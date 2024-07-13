@@ -19,6 +19,8 @@ import tnt.tntlib.api.math.Interpolation;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class CookingTableBlockEntity extends RecipeRememberingBlockEntity<CookingTableRecipe> implements Synchronizable, IndexedColorHolder, ProcessableRecipeHolder {
@@ -55,7 +57,11 @@ public class CookingTableBlockEntity extends RecipeRememberingBlockEntity<Cookin
         if (++table.cookingTime >= recipe.getAssemblyTime() && !level.isClientSide()) {
             table.cooking = false;
             table.cookingTime = 0;
-            table.consumeIngredientsAndApplyCraftRemainder(recipe, INPUTS, OUTPUTS, in -> recipe.getInputs().forEach(ing -> ing.consume(table, in)));
+            table.consumeIngredientsAndApplyCraftRemainder(recipe, INPUTS, OUTPUTS, in -> {
+                List<ItemStack> allConsumed = new ArrayList<>();
+                recipe.getInputs().forEach(ing -> allConsumed.addAll(ing.consume(table, in)));
+                return allConsumed;
+            });
             ItemStack[] outputs = recipe.getOutputs().stream().map(ItemStack::copy).toArray(ItemStack[]::new);
             MenuInventoryHelper.insertItems(outputs, table, OUTPUTS);
             table.storeRecipe(table.recipeHolder);
