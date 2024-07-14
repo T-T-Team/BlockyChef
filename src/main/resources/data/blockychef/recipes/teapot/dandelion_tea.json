@@ -6,9 +6,16 @@
         "item": "blockychef:dried_tea_leaf"
       },
       "count": 6
-    },    {
+    },
+    {
       "ingredient": {
         "item": "minecraft:sugar"
+      },
+      "count": 3
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:dandelion"
       },
       "count": 3
     }
@@ -18,9 +25,9 @@
     "Amount": 1000
   },
   "result": {
-    "FluidName": "blockychef:tea",
+    "FluidName": "blockychef:dandelion_tea",
     "Amount": 750
   },
   "cookingTime": 400,
-  "minTemperature": 7.0
+  "minTemperature": 6.0
 }

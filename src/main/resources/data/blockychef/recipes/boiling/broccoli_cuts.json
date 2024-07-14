@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:broccoli_cuts"
+  },
+  "result": {
+    "item": "blockychef:boiled_broccoli_cuts"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_broccoli_cuts"
+  },
+  "configuration": {
+    "time": 550,
+    "minTemperature": 6.0,
+    "maxTemperature": 7.5,
+    "minWaterLevel": 250,
+    "burnSpeed": 0.3
+  }
+}

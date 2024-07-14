@@ -1,0 +1,51 @@
+{
+  "type": "blockychef:saucepan",
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:bottle_of_water"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:empty_jar"
+      }
+    },
+    {
+      "count": 4,
+      "ingredient": {
+        "item": "blockychef:peach_slice"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:peach_marmalade"
+    }
+  ],
+  "burnOutputs": [
+    {
+      "item": "blockychef:burnt_marmalade"
+    }
+  ],
+  "configuration": {
+    "time": 240,
+    "minTemperature": 4.0,
+    "maxTemperature": 5.0,
+    "burnSpeed": 0.55
+  },
+  "craftRemainderConsumers": [
+    {
+      "ingredient": {
+        "item": "blockychef:empty_jar"
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "type": "blockychef:teapot",
+  "inputs": [],
+  "inputFluid": {
+    "FluidName": "blockychef:honey_tea",
+    "Amount": 1
+  },
+  "result": {
+    "FluidName": "minecraft:empty",
+    "Amount": 750
+  },
+  "cookingTime": 500,
+  "minTemperature": 7.0
+}

@@ -508,7 +508,7 @@ public final class ItemRegistry {
         helper.register("burnt_spinach", new Item(new Item.Properties()));
         helper.register("cooked_onion", new DrinkableConsumableItem(new Item.Properties().food(FoodList.COOKED_ONION), DrinkList.COOKED_ONION));
         helper.register("cooked_soy_meat", new DrinkableConsumableItem(new Item.Properties().food(FoodList.COOKED_SOY_MEAT), DrinkList.COOKED_SOY_MEAT));
-        helper.register("ice_tea", new DrinkableConsumableItem(new Item.Properties(), DrinkList.ICE_TEA, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_BOTTLE));
+        helper.register("ice_tea", new DrinkableConsumableItem(new Item.Properties(), DrinkList.ICE_TEA, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_GLASS));
         helper.register("pesto", new DrinkableConsumableItem(new Item.Properties().food(FoodList.PESTO), DrinkList.PESTO).returns(() -> BlockyChefItems.EMPTY_JAR));
         helper.register("raw_soy_meat", new DrinkableConsumableItem(new Item.Properties().food(FoodList.RAW_SOY_MEAT), DrinkList.RAW_SOY_MEAT));
         helper.register("rice_dumpling_wrapper", new DrinkableConsumableItem(new Item.Properties().food(FoodList.RICE_DUMPLING_WRAPPER), DrinkList.RICE_DUMPLING_WRAPPER));

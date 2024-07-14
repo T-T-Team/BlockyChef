@@ -5,12 +5,31 @@
       "ingredient": {
         "item": "blockychef:dried_tea_leaf"
       },
-      "count": 6
-    },    {
+      "count": 5
+    },
+    {
       "ingredient": {
         "item": "minecraft:sugar"
       },
       "count": 3
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:lemon_slice"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:lime_slice"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:orange_slice"
+      },
+      "count": 1
     }
   ],
   "inputFluid": {
@@ -18,7 +37,7 @@
     "Amount": 1000
   },
   "result": {
-    "FluidName": "blockychef:tea",
+    "FluidName": "blockychef:citrus_tea",
     "Amount": 750
   },
   "cookingTime": 400,

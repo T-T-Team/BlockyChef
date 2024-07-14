@@ -1,13 +1,13 @@
 {
   "type": "blockychef:pot",
   "input": {
-    "item": "blockychef:fried_shrimp"
+    "item": "blockychef:boiled_broccoli_cuts"
   },
   "result": {
-    "item": "blockychef:burnt_shrimp"
+    "item": "blockychef:burnt_broccoli_cuts"
   },
   "burntResult": {
-    "item": "blockychef:burnt_shrimp"
+    "item": "blockychef:burnt_broccoli_cuts"
   },
   "overcooking": true,
   "configuration": {

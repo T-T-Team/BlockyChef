@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:potato",
+    "minecraft:carrot",
+    "minecraft:beetroot",
+    "blockychef:leek",
+    "blockychef:bell_pepper",
+    "blockychef:broccoli",
+    "blockychef:cabbage",
+    "blockychef:parsley",
+    "blockychef:spring_onion",
+    "blockychef:tomato"
+  ]
+}

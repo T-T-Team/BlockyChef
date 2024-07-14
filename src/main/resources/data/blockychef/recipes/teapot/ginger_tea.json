@@ -6,9 +6,16 @@
         "item": "blockychef:dried_tea_leaf"
       },
       "count": 6
-    },    {
+    },
+    {
       "ingredient": {
         "item": "minecraft:sugar"
+      },
+      "count": 3
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:ginger_slice"
       },
       "count": 3
     }
@@ -18,7 +25,7 @@
     "Amount": 1000
   },
   "result": {
-    "FluidName": "blockychef:tea",
+    "FluidName": "blockychef:ginger_tea",
     "Amount": 750
   },
   "cookingTime": 400,

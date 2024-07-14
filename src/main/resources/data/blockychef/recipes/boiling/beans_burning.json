@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:boiled_beans"
+  },
+  "result": {
+    "item": "blockychef:burnt_beans"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_beans"
+  },
+  "overcooking": true,
+  "configuration": {
+    "time": 200,
+    "minTemperature": 0.01,
+    "maxTemperature": 9.0,
+    "minWaterLevel": 0
+  }
+}

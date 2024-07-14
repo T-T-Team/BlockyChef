@@ -1,0 +1,38 @@
+{
+  "type": "blockychef:saucepan",
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:bottle_of_water"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:bowl"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "tag": "blockychef:vegetable_soup"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:raw_corn_cob"
+    }
+  ],
+  "burnOutputs": [
+    {
+      "item": "blockychef:burnt_corn_cob"
+    }
+  ],
+  "configuration": {
+    "time": 240,
+    "minTemperature": 4.5,
+    "maxTemperature": 5.5,
+    "burnSpeed": 0.55
+  }
+}

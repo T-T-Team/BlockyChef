@@ -1,0 +1,45 @@
+{
+  "type": "blockychef:teapot",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "blockychef:dried_tea_leaf"
+      },
+      "count": 5
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:sugar"
+      },
+      "count": 3
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:strawberry_slice"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:apple_slice"
+      },
+      "count": 1
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:orange_slice"
+      },
+      "count": 1
+    }
+  ],
+  "inputFluid": {
+    "FluidName": "minecraft:water",
+    "Amount": 1000
+  },
+  "result": {
+    "FluidName": "blockychef:fruit_tea",
+    "Amount": 750
+  },
+  "cookingTime": 400,
+  "minTemperature": 7.5
+}

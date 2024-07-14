@@ -3,14 +3,14 @@
   "inputs": [
     {
       "ingredient": {
-        "item": "blockychef:dried_tea_leaf"
+        "item": "blockychef:coffee_powder"
       },
       "count": 6
     },    {
       "ingredient": {
         "item": "minecraft:sugar"
       },
-      "count": 3
+      "count": 1
     }
   ],
   "inputFluid": {
@@ -18,9 +18,9 @@
     "Amount": 1000
   },
   "result": {
-    "FluidName": "blockychef:tea",
+    "FluidName": "blockychef:black_coffee",
     "Amount": 750
   },
-  "cookingTime": 400,
-  "minTemperature": 7.0
+  "cookingTime": 500,
+  "minTemperature": 8.0
 }

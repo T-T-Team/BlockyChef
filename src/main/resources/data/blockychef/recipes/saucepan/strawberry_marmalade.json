@@ -13,7 +13,7 @@
       }
     },
     {
-      "count": 6,
+      "count": 4,
       "ingredient": {
         "item": "blockychef:strawberry_slice"
       }
@@ -39,7 +39,7 @@
     "time": 240,
     "minTemperature": 4.0,
     "maxTemperature": 5.0,
-    "burnSpeed": 0.45
+    "burnSpeed": 0.55
   },
   "craftRemainderConsumers": [
     {

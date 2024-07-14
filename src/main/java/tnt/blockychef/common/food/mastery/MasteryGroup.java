@@ -14,6 +14,7 @@ public enum MasteryGroup {
     CAKE,
     YOGURT,
     HOT_DRINK,
+    COLD_DRINK,
     MEAL,
     ICE_CREAM,
     PASTA,

@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:cabbage_leaf"
+  },
+  "result": {
+    "item": "blockychef:boiled_cabbage_leaf"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_cabbage_leaf"
+  },
+  "configuration": {
+    "time": 450,
+    "minTemperature": 5.0,
+    "maxTemperature": 6.5,
+    "minWaterLevel": 200,
+    "burnSpeed": 0.4
+  }
+}
