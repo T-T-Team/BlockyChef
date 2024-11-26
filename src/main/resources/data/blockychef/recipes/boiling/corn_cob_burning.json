@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:boiled_corn_cob"
+  },
+  "result": {
+    "item": "blockychef:burnt_corn_cob"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_corn_cob"
+  },
+  "overcooking": true,
+  "configuration": {
+    "time": 250,
+    "minTemperature": 0.01,
+    "maxTemperature": 9.0,
+    "minWaterLevel": 0
+  }
+}

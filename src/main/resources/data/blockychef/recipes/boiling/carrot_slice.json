@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:carrot_slice"
+  },
+  "result": {
+    "item": "blockychef:boiled_carrot_slice"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_carrot_slice"
+  },
+  "configuration": {
+    "time": 450,
+    "minTemperature": 6.0,
+    "maxTemperature": 7.5,
+    "minWaterLevel": 200,
+    "burnSpeed": 0.4
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:raw_cheese_tortellini"
+  },
+  "result": {
+    "item": "blockychef:boiled_cheese_tortellini"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_cheese_tortellini"
+  },
+  "configuration": {
+    "time": 550,
+    "minTemperature": 5.5,
+    "maxTemperature": 6.5,
+    "minWaterLevel": 200,
+    "burnSpeed": 0.35
+  }
+}

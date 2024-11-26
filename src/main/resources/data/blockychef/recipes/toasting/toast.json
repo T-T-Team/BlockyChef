@@ -6,6 +6,5 @@
   "output": {
     "item": "blockychef:toast"
   },
-  "toastingTime": 200,
-  "experience": 0.2
+  "toastingTime": 200
 }

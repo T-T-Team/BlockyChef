@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:boiled_cheese_tortellini"
+  },
+  "result": {
+    "item": "blockychef:burnt_cheese_tortellini"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_cheese_tortellini"
+  },
+  "overcooking": true,
+  "configuration": {
+    "time": 250,
+    "minTemperature": 0.01,
+    "maxTemperature": 9.0,
+    "minWaterLevel": 0
+  }
+}

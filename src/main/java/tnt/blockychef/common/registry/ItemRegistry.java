@@ -324,6 +324,7 @@ public final class ItemRegistry {
         helper.register("burnt_bell_pepper_slice", new Item(new Item.Properties()));
         helper.register("burnt_broccoli_cuts", new Item(new Item.Properties()));
         helper.register("burnt_cabbage_leaf", new Item(new Item.Properties()));
+        helper.register("burnt_carrot_slice", new Item(new Item.Properties()));
         helper.register("burnt_chicken_breast", new Item(new Item.Properties()));
         helper.register("burnt_chicken_drumstick", new Item(new Item.Properties()));
         helper.register("burnt_chicken_wing", new Item(new Item.Properties()));

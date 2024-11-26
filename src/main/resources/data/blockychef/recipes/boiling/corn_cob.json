@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:raw_corn_cob"
+  },
+  "result": {
+    "item": "blockychef:boiled_corn_cob"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_corn_cob"
+  },
+  "configuration": {
+    "time": 500,
+    "minTemperature": 7.5,
+    "maxTemperature": 8.5,
+    "minWaterLevel": 250,
+    "burnSpeed": 0.4
+  }
+}

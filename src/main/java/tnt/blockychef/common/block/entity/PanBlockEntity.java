@@ -114,7 +114,7 @@ public class PanBlockEntity extends RecipeRememberingBlockEntity<PanRecipe> impl
     }
 
     public void oilItemChanged(ItemStack stack) {
-        if (stack.is(BlockyChefTags.Items.OIL) && oilValue < OIL_BUFFER_SIZE) {
+        if (stack.is(BlockyChefTags.Items.OIL) && oilValue <= OIL_BUFFER_SIZE - 500) {
             oilValue += 500;
             ItemStack returnItem = stack.getCraftingRemainingItem();
             if (!returnItem.isEmpty()) {

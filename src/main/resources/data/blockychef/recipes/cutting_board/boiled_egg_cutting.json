@@ -1,0 +1,14 @@
+{
+  "type": "blockychef:cutting_board",
+  "input": {
+    "item": "blockychef:boiled_egg"
+  },
+  "processingType": "blockychef:cutting",
+  "processingTime": 100,
+  "outputs": [
+    {
+      "item": "blockychef:boiled_egg_cuts",
+      "count": 2
+    }
+  ]
+}

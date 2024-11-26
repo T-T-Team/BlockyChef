@@ -113,7 +113,7 @@ public class PotBlockEntity extends RecipeRememberingBlockEntity<PotRecipe> impl
     }
 
     public void waterInputItemChanged(ItemStack stack) {
-        if (stack.is(BlockyChefTags.Items.WATER) && waterAmount < WATER_CAPACITY) {
+        if (stack.is(BlockyChefTags.Items.WATER) && waterAmount <= WATER_CAPACITY - 500) {
             waterAmount += 500;
             ItemStack returnItem = stack.getCraftingRemainingItem();
             if (!returnItem.isEmpty()) {

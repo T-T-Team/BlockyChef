@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "minecraft:egg"
+  },
+  "result": {
+    "item": "blockychef:boiled_egg"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_egg"
+  },
+  "configuration": {
+    "time": 450,
+    "minTemperature": 5.5,
+    "maxTemperature": 7.0,
+    "minWaterLevel": 200,
+    "burnSpeed": 0.35
+  }
+}
