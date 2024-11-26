@@ -27,6 +27,7 @@ import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.entity.MixerBlockEntity;
 import tnt.blockychef.common.block.entity.RecipeRememberingBlockEntity;
 import tnt.blockychef.common.data.fluids.FluidExtraction;
+import tnt.blockychef.common.food.mastery.CookingMastery;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.menu.MixerMenu;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
@@ -70,6 +71,7 @@ public class MixerBlock extends DyeableBlock implements EntityBlock {
             if (extraction != null) {
                 ItemStack result = extraction.extractFluid(mixer);
                 if (!result.isEmpty()) {
+                    CookingMastery.applyMastery(player, result);
                     MenuInventoryHelper.giveItemOrDrop(player, result);
                 }
             } else if (!level.isClientSide) {
