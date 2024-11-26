@@ -191,7 +191,7 @@ public class PotBlockEntity extends RecipeRememberingBlockEntity<PotRecipe> impl
         }
 
         public boolean shouldEvaporateWater(long gameTime) {
-            if (recipe == null)
+            if (recipe == null || cookingStatus == CookingStatus.NONE)
                 return false;
             PotRecipe.PotCookingConfiguration configuration = recipe.value().getConfiguration();
             if (configuration.isCooking(PotBlockEntity.this.temperature)) {

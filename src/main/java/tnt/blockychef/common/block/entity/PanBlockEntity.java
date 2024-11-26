@@ -204,7 +204,7 @@ public class PanBlockEntity extends RecipeRememberingBlockEntity<PanRecipe> impl
         }
 
         public boolean shouldConsumeOil(long gameTime) {
-            if (recipe == null)
+            if (recipe == null || status == CookingStatus.NONE)
                 return false;
             PanRecipe.PanCookingConfiguration configuration = recipe.value().getConfiguration();
             if (configuration.isCooking(PanBlockEntity.this.temperature)) {
