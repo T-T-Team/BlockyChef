@@ -1,3 +1,5 @@
+import net.darkhax.curseforgegradle.*
+
 plugins {
     id 'eclipse'
     id 'idea'
@@ -5,12 +7,13 @@ plugins {
     id 'net.minecraftforge.gradle' version '[6.0.14,6.2)'
     id 'org.spongepowered.mixin' version '0.7-SNAPSHOT'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'net.darkhax.curseforgegradle' version "${cursegradle_version}"
 }
 
 version = mod_version
 group = mod_group_id
 base {
-    archivesName = "${mod_id}-forge-${minecraft_version}"
+    archivesName = "${mod_id}-${minecraft_version}"
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -120,6 +123,22 @@ mixin {
 }
 
 jar.finalizedBy('reobfJar')
+
+tasks.register('curseforge', TaskPublishCurseForge).configure {
+    group = 'publishing'
+    apiToken = project.hasProperty("CURSEFORGE_TOKEN") ? project.findProperty("CURSEFORGE_TOKEN") : ""
+    debugMode = debug.toBoolean()
+
+    def buildFile = upload(project_id, tasks.jar.archiveFile)
+    buildFile.releaseType = Constants.RELEASE_TYPE_RELEASE
+    buildFile.changelogType = Constants.CHANGELOG_MARKDOWN
+    buildFile.changelog = file("./CHANGELOG.md").exists() ? file("./CHANGELOG.md").text : "-- No changelog provided --"
+    buildFile.displayName = "${mod_id}-${minecraft_version}-${mod_version}"
+    buildFile.addModLoader("Forge")
+    buildFile.addJavaVersion("Java 17")
+    buildFile.addRequirement("configuration")
+    buildFile.addGameVersion(minecraft_version)
+}
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'

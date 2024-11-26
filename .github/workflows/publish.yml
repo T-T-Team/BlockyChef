@@ -1,0 +1,29 @@
+name: "Release mod"
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'version/*'
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Make gradle executable
+        run: chmod +x ./gradlew
+
+      - name: Setup gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Release
+        run: ./gradlew curseforge -PCURSEFORGE_TOKEN=${{ secrets.CF_TOKEN }}
+
+      # TODO schedule bot event
