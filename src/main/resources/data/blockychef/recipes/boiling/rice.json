@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:rice"
+  },
+  "result": {
+    "item": "blockychef:boiled_rice"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_rice"
+  },
+  "configuration": {
+    "time": 550,
+    "minTemperature": 5.5,
+    "maxTemperature": 6.0,
+    "minWaterLevel": 250,
+    "burnSpeed": 0.43
+  }
+}

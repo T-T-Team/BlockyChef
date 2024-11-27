@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:raw_gnocchi"
+  },
+  "result": {
+    "item": "blockychef:boiled_gnocchi"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_gnocchi"
+  },
+  "configuration": {
+    "time": 500,
+    "minTemperature": 6.0,
+    "maxTemperature": 6.5,
+    "minWaterLevel": 300,
+    "burnSpeed": 0.4
+  }
+}

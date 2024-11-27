@@ -366,6 +366,7 @@ public final class ItemRegistry {
         helper.register("burnt_toast", new Item(new Item.Properties()));
         helper.register("burnt_tortellini_pasta", new Item(new Item.Properties()));
         helper.register("burnt_rice_cake", new Item(new Item.Properties()));
+        helper.register("burnt_tomato_slice", new Item(new Item.Properties()));
         helper.register("chocolate_yogurt", new Item(new Item.Properties().food(FoodList.CHOCOLATE_YOGURT)));
         helper.register("cooked_bacon", new DrinkableConsumableItem(new Item.Properties().food(FoodList.COOKED_BACON), DrinkList.COOKED_BACON));
         helper.register("cooked_beef_slice", new DrinkableConsumableItem(new Item.Properties().food(FoodList.COOKED_BEEF_SLICE), DrinkList.COOKED_BEEF_SLICE));
@@ -421,7 +422,7 @@ public final class ItemRegistry {
         helper.register("cheese_cuts", new DrinkableConsumableItem(new Item.Properties().food(FoodList.CHEESE_CUTS), DrinkList.CHEESE_CUTS));
         helper.register("cheese_slice", new DrinkableConsumableItem(new Item.Properties().food(FoodList.CHEESE_SLICE), DrinkList.CHEESE_SLICE));
         helper.register("chicken_jerky", new DrinkableConsumableItem(new Item.Properties().food(FoodList.CHICKEN_JERKY), DrinkList.CHICKEN_JERKY));
-        helper.register("cream", new MasteryApplicableItem(new Item.Properties().food(FoodList.CREAM)));
+        helper.register("cream", new ConsumableItem(new Item.Properties().food(FoodList.CREAM)).returns(() -> Items.BOWL));
         helper.register("cured_beef_steak", new DrinkableConsumableItem(new Item.Properties().food(FoodList.CURRED_BEEF_STEAK), DrinkList.CURRED_BEEF_STEAK));
         helper.register("cured_chicken_breast", new DrinkableConsumableItem(new Item.Properties().food(FoodList.CURRED_CHICKEN_STEAK), DrinkList.CURRED_CHICKEN_STEAK));
         helper.register("cured_pork_steak", new DrinkableConsumableItem(new Item.Properties().food(FoodList.CURRED_PORK_STEAK), DrinkList.CURRED_PORK_STEAK));
@@ -433,7 +434,7 @@ public final class ItemRegistry {
         helper.register("shredded_garlic", new DrinkableConsumableItem(new Item.Properties().food(FoodList.SHREDDED_GARLIC), DrinkList.SHREDDED_GARLIC));
         helper.register("sweet_rice_dough", new DrinkableConsumableItem(new Item.Properties().food(FoodList.SWEET_RICE_DOUGH), DrinkList.SWEET_RICE_DOUGH));
         helper.register("tomato_sauce", new DrinkableConsumableItem(new Item.Properties().food(FoodList.TOMATO_SAUCE), DrinkList.TOMATO_SAUCE).returns(() -> BlockyChefItems.EMPTY_JAR));
-        helper.register("whipped_cream", new ConsumableItem(new Item.Properties().food(FoodList.WHIPPED_CREAM)).returns(() -> Items.BOW));
+        helper.register("whipped_cream", new ConsumableItem(new Item.Properties().food(FoodList.WHIPPED_CREAM)).returns(() -> Items.BOWL));
         helper.register("baguette", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BAGUETTE), DrinkList.BAGUETTE));
         helper.register("blueberry_ice_cream", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BLUEBERRY_ICE_CREAM), DrinkList.BLUEBERRY_ICE_CREAM).returns(() -> Items.BOWL));
         helper.register("burger_bun", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BURGER_BUN), DrinkList.BURGER_BUN));

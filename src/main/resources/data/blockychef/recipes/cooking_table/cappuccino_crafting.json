@@ -1,46 +1,43 @@
 {
   "type": "blockychef:cooking_table",
-  "assemblyTime": 100,
+  "assemblyTime": 120,
   "inputs": [
     {
-      "count": 20,
+      "count": 1,
       "ingredient": {
-        "item": "blockychef:blueberry"
+        "item": "blockychef:black_coffee"
       }
     },
     {
-      "count": 5,
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:cream"
+      }
+    },
+    {
+      "count": 1,
       "ingredient": {
         "item": "minecraft:sugar"
       }
     },
     {
-      "count": 5,
+      "count": 1,
       "ingredient": {
-        "item": "minecraft:snowball"
-      }
-    },
-    {
-      "ingredient": {
-        "item": "blockychef:ice_cream"
+        "item": "blockychef:cinnamon_powder"
       }
     }
   ],
   "outputs": [
     {
-      "item": "blockychef:blueberry_ice_cream",
+      "item": "blockychef:cappuccino",
       "count": 1
-    },
-    {
-      "item": "minecraft:blue_dye",
-      "count": 4
     }
   ],
   "craftRemainderConsumers": [
     {
       "count": 1,
       "ingredient": {
-        "item": "minecraft:bowl"
+        "item": "blockychef:mug"
       }
     }
   ]

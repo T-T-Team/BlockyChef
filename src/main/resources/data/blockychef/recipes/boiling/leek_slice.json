@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:leek_slice"
+  },
+  "result": {
+    "item": "blockychef:boiled_leek_slice"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_leek_slice"
+  },
+  "configuration": {
+    "time": 450,
+    "minTemperature": 4.0,
+    "maxTemperature": 4.5,
+    "minWaterLevel": 200,
+    "burnSpeed": 0.4
+  }
+}

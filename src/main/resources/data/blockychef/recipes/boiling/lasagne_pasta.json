@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:raw_lasagne_pasta"
+  },
+  "result": {
+    "item": "blockychef:boiled_lasagne_pasta"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_lasagne_pasta"
+  },
+  "configuration": {
+    "time": 450,
+    "minTemperature": 5.0,
+    "maxTemperature": 6.0,
+    "minWaterLevel": 300,
+    "burnSpeed": 0.4
+  }
+}

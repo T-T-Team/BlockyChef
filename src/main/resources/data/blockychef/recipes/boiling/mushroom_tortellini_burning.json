@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:boiled_mushroom_tortellini"
+  },
+  "result": {
+    "item": "blockychef:burnt_mushroom_tortellini"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_mushroom_tortellini"
+  },
+  "overcooking": true,
+  "configuration": {
+    "time": 250,
+    "minTemperature": 0.01,
+    "maxTemperature": 9.0,
+    "minWaterLevel": 0
+  }
+}

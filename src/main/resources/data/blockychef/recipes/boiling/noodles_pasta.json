@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:raw_noodles_pasta"
+  },
+  "result": {
+    "item": "blockychef:boiled_noodles_pasta"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_noodles_pasta"
+  },
+  "configuration": {
+    "time": 500,
+    "minTemperature": 4.5,
+    "maxTemperature": 5.5,
+    "minWaterLevel": 250,
+    "burnSpeed": 0.35
+  }
+}

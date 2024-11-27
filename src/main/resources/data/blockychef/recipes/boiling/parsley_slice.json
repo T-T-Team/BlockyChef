@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:parsley_slice"
+  },
+  "result": {
+    "item": "blockychef:boiled_parsley_slice"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_parsley_slice"
+  },
+  "configuration": {
+    "time": 600,
+    "minTemperature": 6.0,
+    "maxTemperature": 7.5,
+    "minWaterLevel": 200,
+    "burnSpeed": 0.35
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:raw_spinach_tortellini"
+  },
+  "result": {
+    "item": "blockychef:boiled_spinach_tortellini"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_spinach_tortellini"
+  },
+  "configuration": {
+    "time": 550,
+    "minTemperature": 5.5,
+    "maxTemperature": 6.5,
+    "minWaterLevel": 200,
+    "burnSpeed": 0.35
+  }
+}

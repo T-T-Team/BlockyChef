@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:raw_spaghetti_pasta"
+  },
+  "result": {
+    "item": "blockychef:boiled_spaghetti_pasta"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_spaghetti_pasta"
+  },
+  "configuration": {
+    "time": 500,
+    "minTemperature": 6.0,
+    "maxTemperature": 7.0,
+    "minWaterLevel": 300,
+    "burnSpeed": 0.4
+  }
+}

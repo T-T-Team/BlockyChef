@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:raw_penne_pasta"
+  },
+  "result": {
+    "item": "blockychef:boiled_penne_pasta"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_penne_pasta"
+  },
+  "configuration": {
+    "time": 500,
+    "minTemperature": 5.0,
+    "maxTemperature": 5.5,
+    "minWaterLevel": 250,
+    "burnSpeed": 0.4
+  }
+}

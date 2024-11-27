@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:tomato"
+  },
+  "result": {
+    "item": "blockychef:boiled_tomato"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_tomato"
+  },
+  "configuration": {
+    "time": 450,
+    "minTemperature": 3.5,
+    "maxTemperature": 4.5,
+    "minWaterLevel": 300,
+    "burnSpeed": 0.4
+  }
+}

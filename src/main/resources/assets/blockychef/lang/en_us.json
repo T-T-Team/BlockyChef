@@ -671,6 +671,7 @@
   "item.blockychef.frappe_coffee": "Frappe Coffee",
   "item.blockychef.dried_tea_leaf": "Dried Tea Leaf",
   "item.blockychef.burnt_carrot_slice": "Burnt Carrot Slice",
+  "item.blockychef.burnt_tomato_slice": "Burnt Tomato Slice",
 
   "config.screen.blockychef": "BlockyChef Configuration",
   "config.blockychef.option.decay": "Plant Decay Config",

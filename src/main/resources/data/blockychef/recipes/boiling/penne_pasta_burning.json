@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:boiled_penne_pasta"
+  },
+  "result": {
+    "item": "blockychef:burnt_penne_pasta"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_penne_pasta"
+  },
+  "overcooking": true,
+  "configuration": {
+    "time": 250,
+    "minTemperature": 0.01,
+    "maxTemperature": 9.0,
+    "minWaterLevel": 0
+  }
+}

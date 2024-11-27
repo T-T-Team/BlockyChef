@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:boiled_potato_cuts"
+  },
+  "result": {
+    "item": "blockychef:burnt_potato_cuts"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_potato_cuts"
+  },
+  "overcooking": true,
+  "configuration": {
+    "time": 250,
+    "minTemperature": 0.01,
+    "maxTemperature": 9.0,
+    "minWaterLevel": 0
+  }
+}

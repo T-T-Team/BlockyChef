@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:peas"
+  },
+  "result": {
+    "item": "blockychef:boiled_peas"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_peas"
+  },
+  "configuration": {
+    "time": 350,
+    "minTemperature": 3.0,
+    "maxTemperature": 3.5,
+    "minWaterLevel": 150,
+    "burnSpeed": 0.45
+  }
+}

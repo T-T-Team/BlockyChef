@@ -5,13 +5,13 @@
       "ingredient": {
         "item": "blockychef:basil"
       },
-      "count": 2
+      "count": 5
     },
     {
       "ingredient": {
         "item": "blockychef:shredded_garlic"
       },
-      "count": 1
+      "count": 2
     },
     {
       "ingredient": {
@@ -23,26 +23,26 @@
       "ingredient": {
         "item": "blockychef:salt"
       },
-      "count": 1
+      "count": 2
     },
     {
       "ingredient": {
         "item": "blockychef:avocado_slice"
       },
-      "count": 1
+      "count": 2
     },
     {
       "ingredient": {
         "item": "blockychef:empty_jar"
       },
-      "count": 1
+      "count": 3
     }
   ],
   "outputs": [
     {
       "item": "blockychef:avocado_pesto",
-      "count": 1
+      "count": 3
     }
   ],
-  "processingTime": 160
+  "processingTime": 180
 }
