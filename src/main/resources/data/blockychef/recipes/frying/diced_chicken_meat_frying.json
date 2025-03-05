@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:pan",
+  "input": {
+    "item": "blockychef:diced_chicken_meat"
+  },
+  "result": {
+    "item": "blockychef:cooked_diced_chicken_meat"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_diced_chicken_meat"
+  },
+  "configuration": {
+    "time": 360,
+    "minTemperature": 6.5,
+    "maxTemperature": 7.5,
+    "burnSpeed": 0.45
+  }
+}

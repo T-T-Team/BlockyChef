@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:pan",
+  "input": {
+    "item": "blockychef:raw_rabbit_slice"
+  },
+  "result": {
+    "item": "blockychef:cooked_rabbit_slice"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_rabbit_slice"
+  },
+  "configuration": {
+    "time": 450,
+    "minTemperature": 6.5,
+    "maxTemperature": 7.0,
+    "burnSpeed": 0.35
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:boiled_rice_noodles"
+  },
+  "result": {
+    "item": "blockychef:burnt_rice_noodles"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_rice_noodles"
+  },
+  "overcooking": true,
+  "configuration": {
+    "time": 200,
+    "minTemperature": 0.01,
+    "maxTemperature": 9.0,
+    "minWaterLevel": 0
+  }
+}

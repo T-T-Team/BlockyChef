@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:pan",
+  "input": {
+    "item": "blockychef:cracked_egg"
+  },
+  "result": {
+    "item": "blockychef:fried_egg"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_fried_egg"
+  },
+  "configuration": {
+    "time": 350,
+    "minTemperature": 2.5,
+    "maxTemperature": 3.0,
+    "burnSpeed": 0.5
+  }
+}

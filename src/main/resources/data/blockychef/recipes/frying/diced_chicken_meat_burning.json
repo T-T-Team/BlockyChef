@@ -1,17 +1,17 @@
 {
   "type": "blockychef:pan",
   "input": {
-    "item": "blockychef:fried_potato_slice"
+    "item": "blockychef:cooked_diced_chicken_meat"
   },
   "result": {
-    "item": "blockychef:burnt_potato_slice"
+    "item": "blockychef:burnt_diced_chicken_meat"
   },
   "burntResult": {
-    "item": "blockychef:burnt_potato_slice"
+    "item": "blockychef:burnt_diced_chicken_meat"
   },
   "overcooking": true,
   "configuration": {
-    "time": 400,
+    "time": 180,
     "minTemperature": 0.01,
     "maxTemperature": 9.0
   }

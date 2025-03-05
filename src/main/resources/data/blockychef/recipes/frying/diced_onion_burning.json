@@ -1,17 +1,17 @@
 {
   "type": "blockychef:pan",
   "input": {
-    "item": "blockychef:fried_potato_slice"
+    "item": "blockychef:cooked_onion"
   },
   "result": {
-    "item": "blockychef:burnt_potato_slice"
+    "item": "blockychef:burnt_onion"
   },
   "burntResult": {
-    "item": "blockychef:burnt_potato_slice"
+    "item": "blockychef:burnt_onion"
   },
   "overcooking": true,
   "configuration": {
-    "time": 400,
+    "time": 150,
     "minTemperature": 0.01,
     "maxTemperature": 9.0
   }

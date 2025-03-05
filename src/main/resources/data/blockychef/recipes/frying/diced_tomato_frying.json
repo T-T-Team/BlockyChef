@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:pan",
+  "input": {
+    "item": "blockychef:diced_tomato"
+  },
+  "result": {
+    "item": "blockychef:cooked_diced_tomato"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_diced_tomato"
+  },
+  "configuration": {
+    "time": 300,
+    "minTemperature": 3.0,
+    "maxTemperature": 3.5,
+    "burnSpeed": 0.6
+  }
+}

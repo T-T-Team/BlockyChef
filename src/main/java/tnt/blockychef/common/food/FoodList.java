@@ -283,6 +283,7 @@ public final class FoodList {
     public static final FoodProperties RAW_GNOCCHI = food(2, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties RAW_LASAGNE_PASTA = food(2, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties RAW_NOODLES_PASTA = food(2, 1).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties RAW_RICE_NOODLES = food(2, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties RAW_PENNE_PASTA = food(2, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties RAW_SPAGHETTI_PASTA = food(2, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties RAW_TORTELLINI_PASTA = food(2, 1).effect(HUNGER, PROBABILITY).build();
@@ -300,6 +301,7 @@ public final class FoodList {
     public static final FoodProperties BOILED_CORN_COB = food(2, 2).build();
     public static final FoodProperties BOILED_LEEK_SLICE = food(2, 1).build();
     public static final FoodProperties BOILED_NOODLES_PASTA = food(3, 2).build();
+    public static final FoodProperties BOILED_RICE_NOODLES = food(3, 2).build();
     public static final FoodProperties BOILED_PARSLEY_SLICE = food(2, 1).build();
     public static final FoodProperties BOILED_PEAS = food(1, 1).build();
     public static final FoodProperties BOILED_PENNE_PASTA = food(3, 2).build();

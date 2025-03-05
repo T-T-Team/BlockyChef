@@ -109,7 +109,7 @@ public class PanRecipe extends AbstractFoodRecipe<PanBlockEntity> implements Bur
                 Codec.FLOAT.fieldOf("minTemperature").forGetter(PanCookingConfiguration::minTemperature),
                 Codec.FLOAT.fieldOf("maxTemperature").forGetter(PanCookingConfiguration::maxTemperature),
                 Codec.FLOAT.optionalFieldOf("burnSpeed", 1.0F).forGetter(PanCookingConfiguration::burnSpeed),
-                Codec.INT.optionalFieldOf("oilConsumptionInterval", 6).forGetter(PanCookingConfiguration::oilConsumptionRate),
+                Codec.INT.optionalFieldOf("oilConsumptionInterval", 16).forGetter(PanCookingConfiguration::oilConsumptionRate),
                 Codec.INT.optionalFieldOf("stirProgressLoss", 20).forGetter(PanCookingConfiguration::stirProgressLoss),
                 Codec.FLOAT.optionalFieldOf("stirBurnLoss", 0.3F).forGetter(PanCookingConfiguration::stirBurnLoss)
         ).apply(instance, PanCookingConfiguration::new));

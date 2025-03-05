@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:pan",
+  "input": {
+    "item": "blockychef:diced_beetroot"
+  },
+  "result": {
+    "item": "blockychef:cooked_diced_beetroot"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_diced_beetroot"
+  },
+  "configuration": {
+    "time": 450,
+    "minTemperature": 6.0,
+    "maxTemperature": 7.0,
+    "burnSpeed": 0.4
+  }
+}

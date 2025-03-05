@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:pan",
+  "input": {
+    "item": "blockychef:leek_slice"
+  },
+  "result": {
+    "item": "blockychef:cooked_leek_slice"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_leek_slice"
+  },
+  "configuration": {
+    "time": 440,
+    "minTemperature": 4.5,
+    "maxTemperature": 5.0,
+    "burnSpeed": 0.4
+  }
+}

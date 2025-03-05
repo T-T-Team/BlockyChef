@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:pan",
+  "input": {
+    "item": "blockychef:beef_slice"
+  },
+  "result": {
+    "item": "blockychef:cooked_beef_slice"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_beef_slice"
+  },
+  "configuration": {
+    "time": 600,
+    "minTemperature": 7.5,
+    "maxTemperature": 8.5,
+    "burnSpeed": 0.3
+  }
+}

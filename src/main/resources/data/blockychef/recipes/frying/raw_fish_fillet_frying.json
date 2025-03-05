@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:pan",
+  "input": {
+    "item": "blockychef:raw_fish_fillet"
+  },
+  "result": {
+    "item": "blockychef:cooked_fish_fillet"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_fish_fillet"
+  },
+  "configuration": {
+    "time": 450,
+    "minTemperature": 5.5,
+    "maxTemperature": 6.5,
+    "burnSpeed": 0.4
+  }
+}

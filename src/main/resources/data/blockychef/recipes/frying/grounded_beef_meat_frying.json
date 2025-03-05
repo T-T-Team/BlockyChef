@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:pan",
+  "input": {
+    "item": "blockychef:grounded_beef_meat"
+  },
+  "result": {
+    "item": "blockychef:cooked_grounded_beef_meat"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_grounded_beef_meat"
+  },
+  "configuration": {
+    "time": 550,
+    "minTemperature": 6.0,
+    "maxTemperature": 7.0,
+    "burnSpeed": 0.4
+  }
+}

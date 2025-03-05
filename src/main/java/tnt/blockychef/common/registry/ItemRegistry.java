@@ -93,6 +93,8 @@ public final class ItemRegistry {
         helper.register("burnt_chicken_burger_patty", new Item(new Item.Properties()));
         helper.register("burnt_pork_burger_patty", new Item(new Item.Properties()));
         helper.register("burnt_rice", new Item(new Item.Properties()));
+        helper.register("burnt_grounded_pork_meat", new Item(new Item.Properties()));
+        helper.register("burnt_grounded_beef_meat", new Item(new Item.Properties()));
         helper.register("cabbage_leaf", new DrinkableConsumableItem(new Item.Properties().food(FoodList.CABBAGE_LEAF), DrinkList.CABBAGE_LEAF));
         helper.register("carrot_extract", new DrinkableConsumableItem(new Item.Properties(), DrinkList.CARROT_EXTRACT, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_BOTTLE));
         helper.register("carrot_slice", new DrinkableConsumableItem(new Item.Properties().food(FoodList.CARROT_SLICE), DrinkList.CARROT_SLICE));
@@ -293,6 +295,7 @@ public final class ItemRegistry {
         helper.register("raw_gnocchi", new DrinkableConsumableItem(new Item.Properties().food(FoodList.RAW_GNOCCHI), DrinkList.RAW_GNOCCHI));
         helper.register("raw_lasagne_pasta", new DrinkableConsumableItem(new Item.Properties().food(FoodList.RAW_LASAGNE_PASTA), DrinkList.RAW_LASAGNE_PASTA));
         helper.register("raw_noodles_pasta", new DrinkableConsumableItem(new Item.Properties().food(FoodList.RAW_NOODLES_PASTA), DrinkList.RAW_NOODLES_PASTA));
+        helper.register("raw_rice_noodles", new DrinkableConsumableItem(new Item.Properties().food(FoodList.RAW_RICE_NOODLES), DrinkList.RAW_RICE_NOODLES));
         helper.register("raw_penne_pasta", new DrinkableConsumableItem(new Item.Properties().food(FoodList.RAW_PENNE_PASTA), DrinkList.RAW_PENNE_PASTA));
         helper.register("raw_spaghetti_pasta", new DrinkableConsumableItem(new Item.Properties().food(FoodList.RAW_SPAGHETTI_PASTA), DrinkList.RAW_SPAGHETTI_PASTA));
         helper.register("raw_tortellini_pasta", new DrinkableConsumableItem(new Item.Properties().food(FoodList.RAW_TORTELLINI_PASTA), DrinkList.RAW_TORTELLINI_PASTA));
@@ -312,6 +315,7 @@ public final class ItemRegistry {
         helper.register("boiled_lasagne_pasta", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BOILED_LASAGNE_PASTA), DrinkList.BOILED_LASAGNE_PASTA));
         helper.register("boiled_leek_slice", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BOILED_LEEK_SLICE), DrinkList.BOILED_LEEK_SLICE));
         helper.register("boiled_noodles_pasta", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BOILED_NOODLES_PASTA), DrinkList.BOILED_NOODLES_PASTA));
+        helper.register("boiled_rice_noodles", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BOILED_RICE_NOODLES), DrinkList.BOILED_RICE_NOODLES));
         helper.register("boiled_parsley_slice", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BOILED_PARSLEY_SLICE), DrinkList.BOILED_PARSLEY_SLICE));
         helper.register("boiled_peas", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BOILED_PEAS), DrinkList.BOILED_PEAS));
         helper.register("boiled_penne_pasta", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BOILED_PENNE_PASTA), DrinkList.BOILED_PENNE_PASTA));
@@ -348,6 +352,7 @@ public final class ItemRegistry {
         helper.register("burnt_mutton_ribs", new Item(new Item.Properties()));
         helper.register("burnt_mutton_slice", new Item(new Item.Properties()));
         helper.register("burnt_noodles_pasta", new Item(new Item.Properties()));
+        helper.register("burnt_rice_noodles", new Item(new Item.Properties()));
         helper.register("burnt_parsley_slice", new Item(new Item.Properties()));
         helper.register("burnt_peanuts", new Item(new Item.Properties()));
         helper.register("burnt_peas", new Item(new Item.Properties()));

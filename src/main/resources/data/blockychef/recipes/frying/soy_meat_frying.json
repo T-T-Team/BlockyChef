@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:pan",
+  "input": {
+    "item": "blockychef:raw_soy_meat"
+  },
+  "result": {
+    "item": "blockychef:cooked_soy_meat"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_soy_meat"
+  },
+  "configuration": {
+    "time": 550,
+    "minTemperature": 6.0,
+    "maxTemperature": 7.5,
+    "burnSpeed": 0.35
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:pan",
+  "input": {
+    "item": "blockychef:diced_beef_meat"
+  },
+  "result": {
+    "item": "blockychef:cooked_diced_beef_meat"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_diced_beef_meat"
+  },
+  "configuration": {
+    "time": 450,
+    "minTemperature": 6.5,
+    "maxTemperature": 7.5,
+    "burnSpeed": 0.4
+  }
+}

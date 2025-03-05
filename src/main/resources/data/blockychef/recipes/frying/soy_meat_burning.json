@@ -1,17 +1,17 @@
 {
   "type": "blockychef:pan",
   "input": {
-    "item": "blockychef:fried_potato_slice"
+    "item": "blockychef:cooked_soy_meat"
   },
   "result": {
-    "item": "blockychef:burnt_potato_slice"
+    "item": "blockychef:burnt_soy_meat"
   },
   "burntResult": {
-    "item": "blockychef:burnt_potato_slice"
+    "item": "blockychef:burnt_soy_meat"
   },
   "overcooking": true,
   "configuration": {
-    "time": 400,
+    "time": 350,
     "minTemperature": 0.01,
     "maxTemperature": 9.0
   }

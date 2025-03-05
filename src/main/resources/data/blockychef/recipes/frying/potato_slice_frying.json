@@ -12,7 +12,7 @@
   "configuration": {
     "time": 500,
     "minTemperature": 7.0,
-    "maxTemperature": 9.0,
+    "maxTemperature": 8.5,
     "burnSpeed": 0.4
   }
 }

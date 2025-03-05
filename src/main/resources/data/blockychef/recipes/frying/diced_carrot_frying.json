@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:pan",
+  "input": {
+    "item": "blockychef:diced_carrot"
+  },
+  "result": {
+    "item": "blockychef:cooked_diced_carrot"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_diced_carrot"
+  },
+  "configuration": {
+    "time": 350,
+    "minTemperature": 4.5,
+    "maxTemperature": 6.0,
+    "burnSpeed": 0.45
+  }
+}

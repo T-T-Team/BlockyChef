@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:pan",
+  "input": {
+    "item": "blockychef:bell_pepper_slice"
+  },
+  "result": {
+    "item": "blockychef:cooked_bell_pepper_slice"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_bell_pepper_slice"
+  },
+  "configuration": {
+    "time": 400,
+    "minTemperature": 3.5,
+    "maxTemperature": 4.5,
+    "burnSpeed": 0.4
+  }
+}

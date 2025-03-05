@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:pan",
+  "input": {
+    "item": "blockychef:garlic_slice"
+  },
+  "result": {
+    "item": "blockychef:cooked_garlic_slice"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_garlic_slice"
+  },
+  "configuration": {
+    "time": 300,
+    "minTemperature": 2.5,
+    "maxTemperature": 3.0,
+    "burnSpeed": 0.5
+  }
+}

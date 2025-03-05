@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:pan",
+  "input": {
+    "item": "blockychef:raw_potato_fries"
+  },
+  "result": {
+    "item": "blockychef:cooked_fries"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_fries"
+  },
+  "configuration": {
+    "time": 450,
+    "minTemperature": 4.5,
+    "maxTemperature": 5.5,
+    "burnSpeed": 0.35
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:pan",
+  "input": {
+    "item": "blockychef:diced_pork_meat"
+  },
+  "result": {
+    "item": "blockychef:cooked_diced_pork_meat"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_diced_pork_meat"
+  },
+  "configuration": {
+    "time": 400,
+    "minTemperature": 7.0,
+    "maxTemperature": 8.0,
+    "burnSpeed": 0.45
+  }
+}

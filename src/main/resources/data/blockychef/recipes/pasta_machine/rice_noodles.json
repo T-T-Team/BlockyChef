@@ -1,0 +1,14 @@
+{
+  "type": "blockychef:pasta_machine",
+  "input": {
+    "item": "blockychef:rice_dough"
+  },
+  "processingType": "blockychef:rolling",
+  "processingTime": 120,
+  "outputs": [
+    {
+      "item": "blockychef:raw_rice_noodles",
+      "count": 2
+    }
+  ]
+}

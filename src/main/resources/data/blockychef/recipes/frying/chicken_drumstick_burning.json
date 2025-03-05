@@ -1,17 +1,17 @@
 {
   "type": "blockychef:pan",
   "input": {
-    "item": "blockychef:fried_potato_slice"
+    "item": "blockychef:cooked_chicken_drumstick"
   },
   "result": {
-    "item": "blockychef:burnt_potato_slice"
+    "item": "blockychef:burnt_chicken_drumstick"
   },
   "burntResult": {
-    "item": "blockychef:burnt_potato_slice"
+    "item": "blockychef:burnt_chicken_drumstick"
   },
   "overcooking": true,
   "configuration": {
-    "time": 400,
+    "time": 300,
     "minTemperature": 0.01,
     "maxTemperature": 9.0
   }

@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:pan",
+  "input": {
+    "item": "blockychef:raw_bacon"
+  },
+  "result": {
+    "item": "blockychef:cooked_bacon"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_bacon"
+  },
+  "configuration": {
+    "time": 450,
+    "minTemperature": 3.5,
+    "maxTemperature": 4.0,
+    "burnSpeed": 0.4
+  }
+}

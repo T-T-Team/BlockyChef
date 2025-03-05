@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:pan",
+  "input": {
+    "item": "blockychef:raw_chicken_breast"
+  },
+  "result": {
+    "item": "blockychef:cooked_chicken_breast"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_chicken_breast"
+  },
+  "configuration": {
+    "time": 550,
+    "minTemperature": 5.5,
+    "maxTemperature": 6.5,
+    "burnSpeed": 0.35
+  }
+}

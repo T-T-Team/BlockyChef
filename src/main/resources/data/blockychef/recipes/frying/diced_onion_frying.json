@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:pan",
+  "input": {
+    "item": "blockychef:diced_onion"
+  },
+  "result": {
+    "item": "blockychef:cooked_onion"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_onion"
+  },
+  "configuration": {
+    "time": 350,
+    "minTemperature": 3.5,
+    "maxTemperature": 4.5,
+    "burnSpeed": 0.5
+  }
+}

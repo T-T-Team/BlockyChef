@@ -222,6 +222,7 @@ public final class DrinkList {
     public static final DrinkProperties RAW_GNOCCHI = DrinkProperties.Builder.create().stats(-2, 0).build();
     public static final DrinkProperties RAW_LASAGNE_PASTA = DrinkProperties.Builder.create().stats(-2, 0).build();
     public static final DrinkProperties RAW_NOODLES_PASTA = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties RAW_RICE_NOODLES = DrinkProperties.Builder.create().stats(-2, 0).build();
     public static final DrinkProperties RAW_PENNE_PASTA = DrinkProperties.Builder.create().stats(-2, 0).build();
     public static final DrinkProperties RAW_SPAGHETTI_PASTA = DrinkProperties.Builder.create().stats(-2, 0).build();
     public static final DrinkProperties RAW_TORTELLINI_PASTA = DrinkProperties.Builder.create().stats(-2, 0).build();
@@ -240,6 +241,7 @@ public final class DrinkList {
     public static final DrinkProperties BOILED_LASAGNE_PASTA = DrinkProperties.Builder.create().stats(-2, 0).build();
     public static final DrinkProperties BOILED_LEEK_SLICE = DrinkProperties.Builder.create().stats(-1, 0).build();
     public static final DrinkProperties BOILED_NOODLES_PASTA = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties BOILED_RICE_NOODLES = DrinkProperties.Builder.create().stats(-2, 0).build();
     public static final DrinkProperties BOILED_PARSLEY_SLICE = DrinkProperties.Builder.create().stats(-1, 0).build();
     public static final DrinkProperties BOILED_PEAS = DrinkProperties.Builder.create().stats(-1, 0).build();
     public static final DrinkProperties BOILED_PENNE_PASTA = DrinkProperties.Builder.create().stats(-2, 0).build();
