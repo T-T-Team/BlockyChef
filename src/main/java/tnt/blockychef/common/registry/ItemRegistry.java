@@ -512,7 +512,7 @@ public final class ItemRegistry {
         helper.register("burnt_beans", new Item(new Item.Properties()));
         helper.register("burnt_onion", new Item(new Item.Properties()));
         helper.register("burnt_soy_meat", new Item(new Item.Properties()));
-        helper.register("burnt_spinach", new Item(new Item.Properties()));
+        helper.register("burnt_spinach", new DumpItem(new Item.Properties()).returns(() -> Items.BOWL));
         helper.register("cooked_onion", new DrinkableConsumableItem(new Item.Properties().food(FoodList.COOKED_ONION), DrinkList.COOKED_ONION));
         helper.register("cooked_soy_meat", new DrinkableConsumableItem(new Item.Properties().food(FoodList.COOKED_SOY_MEAT), DrinkList.COOKED_SOY_MEAT));
         helper.register("ice_tea", new DrinkableConsumableItem(new Item.Properties(), DrinkList.ICE_TEA, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_GLASS));
