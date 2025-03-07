@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:grill",
+  "input": {
+    "item": "blockychef:raw_chicken_wing"
+  },
+  "result": {
+    "item": "blockychef:grilled_chicken_wing"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_chicken_wing"
+  },
+  "configuration": {
+    "grillTime": 500,
+    "minTemperature": 6.5,
+    "maxTemperature": 7.5,
+    "burnSpeed": 0.3
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:grill",
+  "input": {
+    "item": "blockychef:raw_chicken_breast"
+  },
+  "result": {
+    "item": "blockychef:grilled_chicken_breast"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_chicken_breast"
+  },
+  "configuration": {
+    "grillTime": 400,
+    "minTemperature": 4.5,
+    "maxTemperature": 5.0,
+    "burnSpeed": 0.35
+  }
+}

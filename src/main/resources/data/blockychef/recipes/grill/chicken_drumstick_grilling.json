@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:grill",
+  "input": {
+    "item": "blockychef:raw_chicken_drumstick"
+  },
+  "result": {
+    "item": "blockychef:grilled_chicken_drumstick"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_chicken_drumstick"
+  },
+  "configuration": {
+    "grillTime": 550,
+    "minTemperature": 7.0,
+    "maxTemperature": 7.5,
+    "burnSpeed": 0.3
+  }
+}

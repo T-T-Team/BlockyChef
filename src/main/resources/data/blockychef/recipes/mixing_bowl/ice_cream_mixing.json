@@ -32,5 +32,12 @@
       "count": 1
     }
   ],
+  "craftRemainderConsumers": [
+    {
+      "ingredient": {
+        "item": "minecraft:bowl"
+      }
+    }
+  ],
   "mixingTime": 120
 }

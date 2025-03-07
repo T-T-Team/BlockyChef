@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:grill",
+  "input": {
+    "item": "blockychef:raw_pork_steak"
+  },
+  "result": {
+    "item": "blockychef:grilled_pork_steak"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_pork_steak"
+  },
+  "configuration": {
+    "grillTime": 600,
+    "minTemperature": 8.0,
+    "maxTemperature": 8.5,
+    "burnSpeed": 0.35
+  }
+}

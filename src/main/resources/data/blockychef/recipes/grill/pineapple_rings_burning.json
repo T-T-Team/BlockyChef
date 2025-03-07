@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:grill",
+  "input": {
+    "item": "blockychef:grilled_pineapple_rings"
+  },
+  "result": {
+    "item": "blockychef:burnt_pineapple_rings"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_pineapple_rings"
+  },
+  "configuration": {
+    "grillTime": 200,
+    "minTemperature": 0.1,
+    "maxTemperature": 10.0,
+    "burnSpeed": 0.0
+  },
+  "overcooking": true
+}

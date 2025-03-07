@@ -12,7 +12,7 @@
   "configuration": {
     "grillTime": 500,
     "minTemperature": 7.5,
-    "maxTemperature": 9.0,
+    "maxTemperature": 8.5,
     "burnSpeed": 0.3
   }
 }

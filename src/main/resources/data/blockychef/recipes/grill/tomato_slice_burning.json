@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:grill",
+  "input": {
+    "item": "blockychef:grilled_tomato_slice"
+  },
+  "result": {
+    "item": "blockychef:burnt_tomato_slice"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_tomato_slice"
+  },
+  "configuration": {
+    "grillTime": 200,
+    "minTemperature": 0.1,
+    "maxTemperature": 10.0,
+    "burnSpeed": 0.0
+  },
+  "overcooking": true
+}

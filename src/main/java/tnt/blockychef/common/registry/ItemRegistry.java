@@ -98,7 +98,7 @@ public final class ItemRegistry {
         helper.register("cabbage_leaf", new DrinkableConsumableItem(new Item.Properties().food(FoodList.CABBAGE_LEAF), DrinkList.CABBAGE_LEAF));
         helper.register("carrot_extract", new DrinkableConsumableItem(new Item.Properties(), DrinkList.CARROT_EXTRACT, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_BOTTLE));
         helper.register("carrot_slice", new DrinkableConsumableItem(new Item.Properties().food(FoodList.CARROT_SLICE), DrinkList.CARROT_SLICE));
-        helper.register("cherry_extract", new DrinkableConsumableItem(new Item.Properties(), DrinkList.CHERRY_EXTRACT, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_BOTTLE));;
+        helper.register("cherry_extract", new DrinkableConsumableItem(new Item.Properties(), DrinkList.CHERRY_EXTRACT, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_BOTTLE));
         helper.register("cherry_marmalade", new DrinkableConsumableItem(new Item.Properties().food(FoodList.CHERRY_MARMALADE), DrinkList.CHERRY_MARMALADE).returns(() -> BlockyChefItems.EMPTY_JAR));
         helper.register("chicken_burger_patty", new DrinkableConsumableItem(new Item.Properties().food(FoodList.CHICKEN_BURGER_PATTY), DrinkList.CHICKEN_BURGER_PATTY));
         helper.register("chilli_powder", new DrinkableConsumableItem(new Item.Properties().food(FoodList.CHILLI_POWDER), DrinkList.CHILLI_POWDER));

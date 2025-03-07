@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:grill",
+  "input": {
+    "item": "blockychef:carrot_slice"
+  },
+  "result": {
+    "item": "blockychef:grilled_carrot_slice"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_carrot_slice"
+  },
+  "configuration": {
+    "grillTime": 500,
+    "minTemperature": 5.5,
+    "maxTemperature": 6.5,
+    "burnSpeed": 0.4
+  }
+}

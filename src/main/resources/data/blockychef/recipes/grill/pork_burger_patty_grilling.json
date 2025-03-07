@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:grill",
+  "input": {
+    "item": "blockychef:pork_burger_patty"
+  },
+  "result": {
+    "item": "blockychef:grilled_pork_burger_patty"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_pork_burger_patty"
+  },
+  "configuration": {
+    "grillTime": 450,
+    "minTemperature": 7.0,
+    "maxTemperature": 7.5,
+    "burnSpeed": 0.3
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:grill",
+  "input": {
+    "item": "blockychef:raw_pork_ribs"
+  },
+  "result": {
+    "item": "blockychef:grilled_pork_ribs"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_pork_ribs"
+  },
+  "configuration": {
+    "grillTime": 600,
+    "minTemperature": 9.0,
+    "maxTemperature": 9.5,
+    "burnSpeed": 0.4
+  }
+}

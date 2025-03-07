@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:grill",
+  "input": {
+    "item": "blockychef:grilled_camembert"
+  },
+  "result": {
+    "item": "blockychef:burnt_camembert"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_camembert"
+  },
+  "configuration": {
+    "grillTime": 200,
+    "minTemperature": 0.1,
+    "maxTemperature": 10.0,
+    "burnSpeed": 0.0
+  },
+  "overcooking": true
+}

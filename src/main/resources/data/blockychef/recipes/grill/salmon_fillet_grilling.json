@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:grill",
+  "input": {
+    "item": "blockychef:raw_salmon_fillet"
+  },
+  "result": {
+    "item": "blockychef:grilled_salmon_fillet"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_salmon_fillet"
+  },
+  "configuration": {
+    "grillTime": 450,
+    "minTemperature": 6.5,
+    "maxTemperature": 7.0,
+    "burnSpeed": 0.4
+  }
+}

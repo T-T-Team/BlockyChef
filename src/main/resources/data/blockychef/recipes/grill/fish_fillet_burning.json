@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:grill",
+  "input": {
+    "item": "blockychef:grilled_fish_fillet"
+  },
+  "result": {
+    "item": "blockychef:burnt_fish_fillet"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_fish_fillet"
+  },
+  "configuration": {
+    "grillTime": 300,
+    "minTemperature": 0.1,
+    "maxTemperature": 10.0,
+    "burnSpeed": 0.0
+  },
+  "overcooking": true
+}

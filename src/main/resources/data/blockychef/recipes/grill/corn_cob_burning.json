@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:grill",
+  "input": {
+    "item": "blockychef:grilled_corn_cob"
+  },
+  "result": {
+    "item": "blockychef:burnt_corn_cob"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_corn_cob"
+  },
+  "configuration": {
+    "grillTime": 250,
+    "minTemperature": 0.1,
+    "maxTemperature": 10.0,
+    "burnSpeed": 0.0
+  },
+  "overcooking": true
+}

@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:grill",
+  "input": {
+    "item": "blockychef:raw_mutton_ribs"
+  },
+  "result": {
+    "item": "blockychef:grilled_mutton_ribs"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_mutton_ribs"
+  },
+  "configuration": {
+    "grillTime": 600,
+    "minTemperature": 8.5,
+    "maxTemperature": 9.0,
+    "burnSpeed": 0.35
+  }
+}
