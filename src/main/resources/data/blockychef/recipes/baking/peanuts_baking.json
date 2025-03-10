@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:stove",
+  "input": {
+    "item": "blockychef:peanuts"
+  },
+  "result": {
+    "item": "blockychef:roasted_peanuts"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_peanuts"
+  },
+  "cookingConfiguration": {
+    "time": 550,
+    "minTemperature": 4.0,
+    "maxTemperature": 5.0,
+    "burnSpeed": 0.3
+  }
+}

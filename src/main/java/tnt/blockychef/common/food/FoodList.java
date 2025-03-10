@@ -375,7 +375,7 @@ public final class FoodList {
     public static final FoodProperties BAGUETTE = food(3, 2).build();
     public static final FoodProperties BLUEBERRY_ICE_CREAM = food(4, 3).build();
     public static final FoodProperties BURGER_BUN = food(2, 1).build();
-    public static final FoodProperties CARAMEL = food(1, 2).build();
+    public static final FoodProperties CARAMEL = food(2, 3).build();
     public static final FoodProperties CARAMEL_ICE_CREAM = food(4, 3).build();
     public static final FoodProperties CHERRY_ICE_CREAM = food(4, 3).build();
     public static final FoodProperties CHOCOLATE_BAR = food(2, 2).build();
@@ -437,6 +437,10 @@ public final class FoodList {
     public static final FoodProperties PEELED_ONION = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties COCONUT_FLAKES = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties FRAPPE_COFFEE = food(2, 2).build();
+    public static final FoodProperties VEGETABLE_STOCK_BASE = food(1, 0).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties MEAT_STOCK_BASE = food(1, 0).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties MEAT_STOCK = food(2, 1).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties VEGETABLE_STOCK = food(2, 1).effect(HUNGER, PROBABILITY).build();
 
     private static FoodProperties.Builder food(int nutrition, int saturation) {
         return new FoodProperties.Builder().nutrition(nutrition).saturationMod(saturation / (nutrition * 2.0F));

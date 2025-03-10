@@ -1,0 +1,44 @@
+{
+  "type": "blockychef:cooking_table",
+  "assemblyTime": 120,
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:bottle_of_water"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "tag": "blockychef:vegetable_soup"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:bowl"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:salt"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:vegetable_stock_base",
+      "count": 1
+    }
+  ],
+  "craftRemainderConsumers": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:bowl"
+      }
+    }
+  ]
+}

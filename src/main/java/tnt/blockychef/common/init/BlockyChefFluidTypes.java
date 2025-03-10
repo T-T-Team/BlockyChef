@@ -80,6 +80,7 @@ public final class BlockyChefFluidTypes {
     public static final RegistryObject<EdibleFluidType> GINGER_TEA_FLUID = registerEdible("ginger_tea_fluid", 0xAABA8D4A);
     public static final RegistryObject<EdibleFluidType> HONEY_TEA_FLUID = registerEdible("honey_tea_fluid", 0xAAB78F00);
     public static final RegistryObject<EdibleFluidType> MILK_TEA_FLUID = registerEdible("milk_tea_fluid", 0xAAB7A775);
+    public static final RegistryObject<EdibleFluidType> ESPRESSO_FLUID = registerEdible("espresso_fluid", 0xAA1E160F);
 
 
 

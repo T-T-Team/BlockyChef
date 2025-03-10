@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:pan",
+  "input": {
+    "item": "blockychef:nachos"
+  },
+  "result": {
+    "item": "blockychef:burnt_nachos"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_nachos"
+  },
+  "overcooking": true,
+  "configuration": {
+    "time": 200,
+    "minTemperature": 0.01,
+    "maxTemperature": 9.0
+  }
+}

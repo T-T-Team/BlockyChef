@@ -1,0 +1,50 @@
+{
+  "type": "blockychef:saucepan",
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:bottle_of_water"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "blockychef:shredded_garlic"
+      }
+    },
+    {
+      "count": 5,
+      "ingredient": {
+        "item": "blockychef:spinach_leaf"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:salt"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:bowl"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:spinach"
+    }
+  ],
+  "burnOutputs": [
+    {
+      "item": "blockychef:burnt_spinach"
+    }
+  ],
+  "configuration": {
+    "time": 220,
+    "minTemperature": 5.5,
+    "maxTemperature": 6.0,
+    "burnSpeed": 0.55
+  }
+}

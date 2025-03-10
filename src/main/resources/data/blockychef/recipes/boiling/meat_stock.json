@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:meat_stock_base"
+  },
+  "result": {
+    "item": "blockychef:meat_stock"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_meat_stock"
+  },
+  "configuration": {
+    "time": 550,
+    "minTemperature": 7.5,
+    "maxTemperature": 8.0,
+    "minWaterLevel": 200,
+    "burnSpeed": 0.35
+  }
+}

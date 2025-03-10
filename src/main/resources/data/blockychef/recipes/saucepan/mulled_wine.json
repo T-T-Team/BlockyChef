@@ -1,0 +1,60 @@
+{
+  "type": "blockychef:saucepan",
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:wine"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "blockychef:cinnamon_powder"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "blockychef:orange_slice"
+      }
+    },
+    {
+      "count": 3,
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "blockychef:mug"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 2,
+      "item": "blockychef:mulled_wine"
+    }
+  ],
+  "burnOutputs": [
+    {
+      "count": 2,
+      "item": "blockychef:mug"
+    }
+  ],
+  "configuration": {
+    "time": 320,
+    "minTemperature": 6.0,
+    "maxTemperature": 6.5,
+    "burnSpeed": 0.4
+  },
+  "craftRemainderConsumers": [
+    {
+      "ingredient": {
+        "item": "blockychef:mug"
+      }
+    }
+  ]
+}

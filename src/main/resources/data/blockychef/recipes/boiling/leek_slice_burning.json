@@ -11,7 +11,7 @@
   },
   "overcooking": true,
   "configuration": {
-    "time": 250,
+    "time": 200,
     "minTemperature": 0.01,
     "maxTemperature": 9.0,
     "minWaterLevel": 0

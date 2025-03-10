@@ -1,0 +1,10 @@
+{
+  "type": "blockychef:toasting",
+  "input": {
+    "item": "blockychef:raw_waffle"
+  },
+  "output": {
+    "item": "blockychef:waffle"
+  },
+  "toastingTime": 280
+}

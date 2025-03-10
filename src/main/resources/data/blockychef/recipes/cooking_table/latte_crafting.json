@@ -1,0 +1,38 @@
+{
+  "type": "blockychef:cooking_table",
+  "assemblyTime": 120,
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:espresso"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:cream"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:latte",
+      "count": 1
+    }
+  ],
+  "craftRemainderConsumers": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:mug"
+      }
+    }
+  ]
+}

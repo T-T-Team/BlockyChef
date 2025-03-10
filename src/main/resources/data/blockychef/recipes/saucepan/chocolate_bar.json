@@ -4,35 +4,36 @@
     {
       "count": 1,
       "ingredient": {
-        "item": "blockychef:bottle_of_water"
-      }
-    },
-    {
-      "ingredient": {
-        "item": "minecraft:bowl"
+        "item": "blockychef:butter"
       }
     },
     {
       "count": 2,
       "ingredient": {
-        "tag": "blockychef:vegetable_soup"
+        "item": "blockychef:cocoa_powder"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "minecraft:sugar"
       }
     }
   ],
   "outputs": [
     {
-      "item": "blockychef:raw_corn_cob"
+      "item": "blockychef:chocolate_bar"
     }
   ],
   "burnOutputs": [
     {
-      "item": "blockychef:burnt_corn_cob"
+      "item": "blockychef:burnt_chocolate_bar"
     }
   ],
   "configuration": {
-    "time": 240,
-    "minTemperature": 4.5,
-    "maxTemperature": 5.5,
-    "burnSpeed": 0.55
+    "time": 320,
+    "minTemperature": 2.5,
+    "maxTemperature": 3.0,
+    "burnSpeed": 0.45
   }
 }

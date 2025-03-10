@@ -1,17 +1,17 @@
 {
   "type": "blockychef:pot",
   "input": {
-    "item": "blockychef:boiled_rice"
+    "item": "blockychef:vegetable_stock"
   },
   "result": {
-    "item": "blockychef:burnt_rice"
+    "item": "blockychef:burnt_vegetable_stock"
   },
   "burntResult": {
-    "item": "blockychef:burnt_rice"
+    "item": "blockychef:burnt_vegetable_stock"
   },
   "overcooking": true,
   "configuration": {
-    "time": 200,
+    "time": 250,
     "minTemperature": 0.01,
     "maxTemperature": 9.0,
     "minWaterLevel": 0

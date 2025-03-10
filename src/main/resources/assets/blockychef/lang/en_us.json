@@ -677,6 +677,12 @@
   "item.blockychef.dried_tea_leaf": "Dried Tea Leaf",
   "item.blockychef.burnt_carrot_slice": "Burnt Carrot Slice",
   "item.blockychef.burnt_tomato_slice": "Burnt Tomato Slice",
+  "item.blockychef.vegetable_stock_base": "Vegetable Stock Base",
+  "item.blockychef.meat_stock_base": "Meat Stock Base",
+  "item.blockychef.meat_stock": "Meat Stock ",
+  "item.blockychef.burnt_meat_stock": "Burnt Meat Stock ",
+  "item.blockychef.vegetable_stock": "Vegetable Stock ",
+  "item.blockychef.burnt_vegetable_stock": "Burnt Vegetable Stock ",
 
   "config.screen.blockychef": "BlockyChef Configuration",
   "config.blockychef.option.decay": "Plant Decay Config",
@@ -869,6 +875,7 @@
   "fluid_type.blockychef.ginger_tea_fluid": "Ginger Tea",
   "fluid_type.blockychef.honey_tea_fluid": "Honey Tea",
   "fluid_type.blockychef.milk_tea_fluid": "Milk Tea",
+  "fluid_type.blockychef.espresso_fluid": "Espresso",
 
 
   "blockychef.food.quality.bad": "Bad",

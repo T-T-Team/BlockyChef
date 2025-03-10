@@ -1,0 +1,50 @@
+{
+  "type": "blockychef:cooking_table",
+  "assemblyTime": 120,
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:bottle_of_water"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "blockychef:meat_soup"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:bowl"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:bone"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:salt"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:meat_stock_base",
+      "count": 1
+    }
+  ],
+  "craftRemainderConsumers": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:bowl"
+      }
+    }
+  ]
+}

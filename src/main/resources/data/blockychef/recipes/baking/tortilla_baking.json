@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:stove",
+  "input": {
+    "item": "blockychef:raw_tortilla"
+  },
+  "result": {
+    "item": "blockychef:tortilla"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_tortilla"
+  },
+  "cookingConfiguration": {
+    "time": 400,
+    "minTemperature": 3.5,
+    "maxTemperature": 4.5,
+    "burnSpeed": 0.4
+  }
+}

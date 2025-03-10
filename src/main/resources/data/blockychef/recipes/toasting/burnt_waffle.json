@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:toasting",
+  "input": {
+    "item": "blockychef:waffle"
+  },
+  "output": {
+    "item": "blockychef:burnt_waffle"
+  },
+  "toastingTime": 80,
+  "overcooking": true
+}

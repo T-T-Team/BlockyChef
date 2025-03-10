@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:vegetable_stock_base"
+  },
+  "result": {
+    "item": "blockychef:vegetable_stock"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_vegetable_stock"
+  },
+  "configuration": {
+    "time": 500,
+    "minTemperature": 6.5,
+    "maxTemperature": 7.0,
+    "minWaterLevel": 200,
+    "burnSpeed": 0.35
+  }
+}

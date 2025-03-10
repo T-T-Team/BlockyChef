@@ -80,6 +80,7 @@ public final class BlockyChefFluids {
     public static final RegistryObject<Fluid> GINGER_TEA_FLUID = registerSource("ginger_tea", () -> BlockyChefFluids.GINGER_TEA_FLUID_PROPERTIES);
     public static final RegistryObject<Fluid> HONEY_TEA_FLUID = registerSource("honey_tea", () -> BlockyChefFluids.HONEY_TEA_FLUID_PROPERTIES);
     public static final RegistryObject<Fluid> MILK_TEA_FLUID = registerSource("milk_tea", () -> BlockyChefFluids.MILK_TEA_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> ESPRESSO_FLUID = registerSource("espresso", () -> BlockyChefFluids.ESPRESSO_FLUID_PROPERTIES);
 
 
 
@@ -149,6 +150,7 @@ public final class BlockyChefFluids {
     public static final RegistryObject<Fluid> GINGER_TEA_FLOWING_FLUID = registerSource("ginger_tea_flowing", () -> BlockyChefFluids.GINGER_TEA_FLUID_PROPERTIES);
     public static final RegistryObject<Fluid> HONEY_TEA_FLOWING_FLUID = registerSource("honey_tea_flowing", () -> BlockyChefFluids.HONEY_TEA_FLUID_PROPERTIES);
     public static final RegistryObject<Fluid> MILK_TEA_FLOWING_FLUID = registerSource("milk_tea_flowing", () -> BlockyChefFluids.MILK_TEA_FLUID_PROPERTIES);
+    public static final RegistryObject<Fluid> ESPRESSO_FLOWING_FLUID = registerSource("espresso_flowing", () -> BlockyChefFluids.ESPRESSO_FLUID_PROPERTIES);
 
 
 
@@ -218,6 +220,7 @@ public final class BlockyChefFluids {
     private static final ForgeFlowingFluid.Properties GINGER_TEA_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.GINGER_TEA_FLUID, GINGER_TEA_FLUID, GINGER_TEA_FLOWING_FLUID);
     private static final ForgeFlowingFluid.Properties HONEY_TEA_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.HONEY_TEA_FLUID, HONEY_TEA_FLUID, HONEY_TEA_FLOWING_FLUID);
     private static final ForgeFlowingFluid.Properties MILK_TEA_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.MILK_TEA_FLUID, MILK_TEA_FLUID, MILK_TEA_FLOWING_FLUID);
+    private static final ForgeFlowingFluid.Properties ESPRESSO_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(BlockyChefFluidTypes.ESPRESSO_FLUID, ESPRESSO_FLUID, ESPRESSO_FLOWING_FLUID);
 
     public static void register(IEventBus bus) {
         REGISTER.register(bus);

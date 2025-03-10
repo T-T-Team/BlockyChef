@@ -1,0 +1,21 @@
+{
+  "type": "blockychef:teapot",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "blockychef:coffee_powder"
+      },
+      "count": 8
+    }
+  ],
+  "inputFluid": {
+    "FluidName": "minecraft:water",
+    "Amount": 1000
+  },
+  "result": {
+    "FluidName": "blockychef:espresso",
+    "Amount": 750
+  },
+  "cookingTime": 550,
+  "minTemperature": 9.0
+}

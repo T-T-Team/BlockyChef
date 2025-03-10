@@ -345,7 +345,7 @@ public final class DrinkList {
     public static final DrinkProperties HOT_CHILLI_CHOCOLATE = DrinkProperties.Builder.create().stats(7, 6).build();
     public static final DrinkProperties HOT_CHOCOLATE = DrinkProperties.Builder.create().stats(6, 5).build();
     public static final DrinkProperties ICE_COFFEE = DrinkProperties.Builder.create().stats(6, 6).build();
-    public static final DrinkProperties LATTE = DrinkProperties.Builder.create().stats(5, 5).build();
+    public static final DrinkProperties LATTE = DrinkProperties.Builder.create().stats(5, 7).build();
     public static final DrinkProperties MILK_TEA = DrinkProperties.Builder.create().stats(5, 5).build();
     public static final DrinkProperties MULLED_WINE = DrinkProperties.Builder.create().stats(7, 7).build();
     public static final DrinkProperties NACHOS = DrinkProperties.Builder.create().stats(-2, 0).build();
@@ -389,6 +389,10 @@ public final class DrinkList {
     public static final DrinkProperties PEELED_ONION = DrinkProperties.Builder.create().stats(-3, 0).build();
     public static final DrinkProperties SWEET_BERRY_JUICE = DrinkProperties.Builder.create().stats(5, 4).build();
     public static final DrinkProperties FRAPPE_COFFEE = DrinkProperties.Builder.create().stats(7, 7).build();
+    public static final DrinkProperties VEGETABLE_STOCK_BASE = DrinkProperties.Builder.create().stats(2, 1).giveSingleEffect(PROBABILITY, THIRST).build();
+    public static final DrinkProperties MEAT_STOCK_BASE = DrinkProperties.Builder.create().stats(2, 1).giveSingleEffect(PROBABILITY, THIRST).build();
+    public static final DrinkProperties MEAT_STOCK = DrinkProperties.Builder.create().stats(3, 1).build();
+    public static final DrinkProperties VEGETABLE_STOCK = DrinkProperties.Builder.create().stats(3, 1).build();
 
     private DrinkList() {}
 }

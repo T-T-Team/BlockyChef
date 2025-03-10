@@ -1,0 +1,39 @@
+{
+  "type": "blockychef:saucepan",
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:butter"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:cream"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:caramel"
+    }
+  ],
+  "burnOutputs": [
+    {
+      "item": "blockychef:burnt_caramel"
+    }
+  ],
+  "configuration": {
+    "time": 320,
+    "minTemperature": 3.0,
+    "maxTemperature": 3.5,
+    "burnSpeed": 0.45
+  }
+}
