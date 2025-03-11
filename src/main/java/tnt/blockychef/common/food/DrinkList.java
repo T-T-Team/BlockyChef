@@ -341,7 +341,7 @@ public final class DrinkList {
     public static final DrinkProperties FRUIT_TEA = DrinkProperties.Builder.create().stats(6, 5).build();
     public static final DrinkProperties GINGER_TEA = DrinkProperties.Builder.create().stats(6, 5).build();
     public static final DrinkProperties HONEY_TEA = DrinkProperties.Builder.create().stats(6, 5).build();
-    public static final DrinkProperties HOT_CARAMEL_CHOCOLATE = DrinkProperties.Builder.create().stats(7, 6).build();
+    public static final DrinkProperties HOT_CARAMEL_CHOCOLATE = DrinkProperties.Builder.create().stats(7, 8).build();
     public static final DrinkProperties HOT_CHILLI_CHOCOLATE = DrinkProperties.Builder.create().stats(7, 6).build();
     public static final DrinkProperties HOT_CHOCOLATE = DrinkProperties.Builder.create().stats(6, 5).build();
     public static final DrinkProperties ICE_COFFEE = DrinkProperties.Builder.create().stats(6, 6).build();
@@ -393,6 +393,22 @@ public final class DrinkList {
     public static final DrinkProperties MEAT_STOCK_BASE = DrinkProperties.Builder.create().stats(2, 1).giveSingleEffect(PROBABILITY, THIRST).build();
     public static final DrinkProperties MEAT_STOCK = DrinkProperties.Builder.create().stats(3, 1).build();
     public static final DrinkProperties VEGETABLE_STOCK = DrinkProperties.Builder.create().stats(3, 1).build();
+    public static final DrinkProperties BUBBLY_WATER = DrinkProperties.Builder.create().stats(4, 3).build();
+    public static final DrinkProperties BUBBLY_APPLE_JUICE = DrinkProperties.Builder.create().stats(7, 8).build();
+    public static final DrinkProperties BUBBLY_BLUEBERRY_JUICE = DrinkProperties.Builder.create().stats(7, 8).build();
+    public static final DrinkProperties BUBBLY_CHERRY_JUICE = DrinkProperties.Builder.create().stats(7, 8).build();
+    public static final DrinkProperties BUBBLY_GRAPE_JUICE = DrinkProperties.Builder.create().stats(7, 8).build();
+    public static final DrinkProperties BUBBLY_LEMONADE = DrinkProperties.Builder.create().stats(7, 8).build();
+    public static final DrinkProperties BUBBLY_LIME_JUICE = DrinkProperties.Builder.create().stats(7, 8).build();
+    public static final DrinkProperties BUBBLY_MELON_JUICE = DrinkProperties.Builder.create().stats(7, 8).build();
+    public static final DrinkProperties BUBBLY_ORANGE_JUICE = DrinkProperties.Builder.create().stats(7, 8).build();
+    public static final DrinkProperties BUBBLY_PEACH_JUICE = DrinkProperties.Builder.create().stats(7, 8).build();
+    public static final DrinkProperties BUBBLY_PEAR_JUICE = DrinkProperties.Builder.create().stats(7, 8).build();
+    public static final DrinkProperties BUBBLY_PLUM_JUICE = DrinkProperties.Builder.create().stats(7, 8).build();
+    public static final DrinkProperties BUBBLY_RASPBERRY_JUICE = DrinkProperties.Builder.create().stats(7, 8).build();
+    public static final DrinkProperties BUBBLY_PINEAPPLE_JUICE = DrinkProperties.Builder.create().stats(7, 8).build();
+    public static final DrinkProperties BUBBLY_SWEET_BERRY_JUICE = DrinkProperties.Builder.create().stats(7, 8).build();
+    public static final DrinkProperties BUBBLY_STRAWBERRY_JUICE = DrinkProperties.Builder.create().stats(7, 8).build();
 
     private DrinkList() {}
 }

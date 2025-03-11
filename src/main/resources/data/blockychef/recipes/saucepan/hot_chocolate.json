@@ -1,0 +1,48 @@
+{
+  "type": "blockychef:saucepan",
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:milk"
+      }
+    },
+    {
+      "count": 3,
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
+    },
+    {
+      "count": 3,
+      "ingredient": {
+        "item": "blockychef:grated_chocolate"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "blockychef:mug"
+      }
+    }
+
+  ],
+  "outputs": [
+    {
+      "count": 2,
+      "item": "blockychef:hot_chocolate"
+    }
+  ],
+  "burnOutputs": [
+    {
+      "count": 2,
+      "item": "blockychef:burnt_hot_chocolate"
+    }
+  ],
+  "configuration": {
+    "time": 400,
+    "minTemperature": 4.0,
+    "maxTemperature": 4.5,
+    "burnSpeed": 0.4
+  }
+}

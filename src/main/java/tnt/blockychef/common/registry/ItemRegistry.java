@@ -517,6 +517,7 @@ public final class ItemRegistry {
         helper.register("burnt_onion", new Item(new Item.Properties()));
         helper.register("burnt_soy_meat", new Item(new Item.Properties()));
         helper.register("burnt_spinach", new DumpItem(new Item.Properties()).returns(() -> Items.BOWL));
+        helper.register("burnt_hot_chocolate", new DumpItem(new Item.Properties()).returns(() -> BlockyChefItems.MUG));
         helper.register("burnt_vegetable_stock", new DumpItem(new Item.Properties()).returns(() -> Items.BOWL));
         helper.register("burnt_meat_stock", new DumpItem(new Item.Properties()).returns(() -> Items.BOWL));
         helper.register("cooked_onion", new DrinkableConsumableItem(new Item.Properties().food(FoodList.COOKED_ONION), DrinkList.COOKED_ONION));
@@ -557,6 +558,23 @@ public final class ItemRegistry {
         helper.register("sweet_berry_juice", new DrinkableConsumableItem(new Item.Properties(), DrinkList.SWEET_BERRY_JUICE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_GLASS));
         helper.register("frappe_coffee", new DrinkableConsumableItem(new Item.Properties().food(FoodList.FRAPPE_COFFEE), DrinkList.FRAPPE_COFFEE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_LARGE_GLASS));
         helper.register("dried_tea_leaf", new Item(new Item.Properties()));
+        helper.register("bubbly_water", new DrinkableConsumableItem(new Item.Properties(), DrinkList.BUBBLY_WATER, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_BOTTLE));
+        helper.register("bubbly_apple_juice", new DrinkableConsumableItem(new Item.Properties(), DrinkList.BUBBLY_APPLE_JUICE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_BOTTLE));
+        helper.register("bubbly_blueberry_juice", new DrinkableConsumableItem(new Item.Properties(), DrinkList.BUBBLY_BLUEBERRY_JUICE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_BOTTLE));
+        helper.register("bubbly_cherry_juice", new DrinkableConsumableItem(new Item.Properties(), DrinkList.BUBBLY_CHERRY_JUICE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_BOTTLE));
+        helper.register("bubbly_grape_juice", new DrinkableConsumableItem(new Item.Properties(), DrinkList.BUBBLY_GRAPE_JUICE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_BOTTLE));
+        helper.register("bubbly_lemonade", new DrinkableConsumableItem(new Item.Properties(), DrinkList.BUBBLY_LEMONADE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_BOTTLE));
+        helper.register("bubbly_lime_juice", new DrinkableConsumableItem(new Item.Properties(), DrinkList.BUBBLY_LIME_JUICE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_BOTTLE));
+        helper.register("bubbly_melon_juice", new DrinkableConsumableItem(new Item.Properties(), DrinkList.BUBBLY_MELON_JUICE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_BOTTLE));
+        helper.register("bubbly_orange_juice", new DrinkableConsumableItem(new Item.Properties(), DrinkList.BUBBLY_ORANGE_JUICE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_BOTTLE));
+        helper.register("bubbly_peach_juice", new DrinkableConsumableItem(new Item.Properties(), DrinkList.BUBBLY_PEACH_JUICE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_BOTTLE));
+        helper.register("bubbly_pear_juice", new DrinkableConsumableItem(new Item.Properties(), DrinkList.BUBBLY_PEAR_JUICE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_BOTTLE));
+        helper.register("bubbly_pineapple_juice", new DrinkableConsumableItem(new Item.Properties(), DrinkList.BUBBLY_PINEAPPLE_JUICE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_BOTTLE));
+        helper.register("bubbly_plum_juice", new DrinkableConsumableItem(new Item.Properties(), DrinkList.BUBBLY_PLUM_JUICE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_BOTTLE));
+        helper.register("bubbly_raspberry_juice", new DrinkableConsumableItem(new Item.Properties(), DrinkList.BUBBLY_RASPBERRY_JUICE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_BOTTLE));
+        helper.register("bubbly_sweet_berry_juice", new DrinkableConsumableItem(new Item.Properties(), DrinkList.BUBBLY_SWEET_BERRY_JUICE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_BOTTLE));
+        helper.register("bubbly_strawberry_juice", new DrinkableConsumableItem(new Item.Properties(), DrinkList.BUBBLY_STRAWBERRY_JUICE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_BOTTLE));
+
 
     }
 }
