@@ -1,0 +1,38 @@
+{
+  "type": "blockychef:barrel",
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:bottle_of_water"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:yeast"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:bubbly_water",
+      "count": 1
+    }
+  ],
+  "craftRemainderConsumers": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:empty_bottle"
+      }
+    }
+  ],
+  "fermentTime": 1600
+}

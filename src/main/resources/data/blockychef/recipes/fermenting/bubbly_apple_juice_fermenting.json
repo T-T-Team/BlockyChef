@@ -1,0 +1,44 @@
+{
+  "type": "blockychef:barrel",
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:apple_juice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:sugar"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:yeast"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:empty_bottle"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:bubbly_apple_juice",
+      "count": 1
+    }
+  ],
+  "craftRemainderConsumers": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:empty_bottle"
+      }
+    }
+  ],
+  "fermentTime": 1600
+}
