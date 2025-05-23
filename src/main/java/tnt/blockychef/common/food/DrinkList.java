@@ -409,6 +409,14 @@ public final class DrinkList {
     public static final DrinkProperties BUBBLY_PINEAPPLE_JUICE = DrinkProperties.Builder.create().stats(7, 9).build();
     public static final DrinkProperties BUBBLY_SWEET_BERRY_JUICE = DrinkProperties.Builder.create().stats(7, 9).build();
     public static final DrinkProperties BUBBLY_STRAWBERRY_JUICE = DrinkProperties.Builder.create().stats(7, 9).build();
+    public static final DrinkProperties RAW_DELUXE_SKEWER = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties RAW_CHICKEN_SKEWER = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties RAW_PORK_SKEWER = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties RAW_VEGGIE_SKEWER = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties DELUXE_SKEWER = DrinkProperties.Builder.create().stats(-4, 0).build();
+    public static final DrinkProperties CHICKEN_SKEWER = DrinkProperties.Builder.create().stats(-3, 0).build();
+    public static final DrinkProperties PORK_SKEWER = DrinkProperties.Builder.create().stats(-3, 0).build();
+    public static final DrinkProperties VEGGIE_SKEWER = DrinkProperties.Builder.create().stats(-2, 0).build();
 
     private DrinkList() {}
 }

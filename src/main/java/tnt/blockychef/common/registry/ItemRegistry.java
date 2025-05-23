@@ -259,6 +259,14 @@ public final class ItemRegistry {
         helper.register("vegetable_stock", new DrinkableConsumableItem(new Item.Properties().food(FoodList.VEGETABLE_STOCK), DrinkList.VEGETABLE_STOCK, UseAnim.DRINK).returns(() -> Items.BOWL));
         helper.register("meat_stock_base", new DrinkableConsumableItem(new Item.Properties().food(FoodList.MEAT_STOCK_BASE), DrinkList.MEAT_STOCK_BASE, UseAnim.DRINK).returns(() -> Items.BOWL));
         helper.register("meat_stock", new DrinkableConsumableItem(new Item.Properties().food(FoodList.MEAT_STOCK), DrinkList.MEAT_STOCK, UseAnim.DRINK).returns(() -> Items.BOWL));
+        helper.register("raw_deluxe_skewer", new DrinkableConsumableItem(new Item.Properties().food(FoodList.RAW_DELUXE_SKEWER), DrinkList.RAW_DELUXE_SKEWER).returns(() -> Items.STICK));
+        helper.register("raw_chicken_skewer", new DrinkableConsumableItem(new Item.Properties().food(FoodList.RAW_CHICKEN_SKEWER), DrinkList.RAW_CHICKEN_SKEWER).returns(() -> Items.STICK));
+        helper.register("raw_pork_skewer", new DrinkableConsumableItem(new Item.Properties().food(FoodList.RAW_PORK_SKEWER), DrinkList.RAW_PORK_SKEWER).returns(() -> Items.STICK));
+        helper.register("raw_veggie_skewer", new DrinkableConsumableItem(new Item.Properties().food(FoodList.RAW_VEGGIE_SKEWER), DrinkList.RAW_VEGGIE_SKEWER).returns(() -> Items.STICK));
+        helper.register("deluxe_skewer", new DrinkableConsumableItem(new Item.Properties().food(FoodList.DELUXE_SKEWER), DrinkList.DELUXE_SKEWER).returns(() -> Items.STICK));
+        helper.register("chicken_skewer", new DrinkableConsumableItem(new Item.Properties().food(FoodList.CHICKEN_SKEWER), DrinkList.CHICKEN_SKEWER).returns(() -> Items.STICK));
+        helper.register("pork_skewer", new DrinkableConsumableItem(new Item.Properties().food(FoodList.PORK_SKEWER), DrinkList.PORK_SKEWER).returns(() -> Items.STICK));
+        helper.register("veggie_skewer", new DrinkableConsumableItem(new Item.Properties().food(FoodList.VEGGIE_SKEWER), DrinkList.VEGGIE_SKEWER).returns(() -> Items.STICK));
         helper.register("blueberry_juice", new DrinkableConsumableItem(new Item.Properties(), DrinkList.BLUEBERRY_JUICE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_GLASS));
         helper.register("blueberry_milkshake", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BLUEBERRY_MILKSHAKE), DrinkList.BLUEBERRY_MILKSHAKE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_LARGE_GLASS));
         helper.register("blueberry_yogurt", new MasteryApplicableItem(new Item.Properties().food(FoodList.BLUEBERRY_YOGURT)));
@@ -553,6 +561,10 @@ public final class ItemRegistry {
         helper.register("burnt_pork_tortellini", new Item(new Item.Properties()));
         helper.register("burnt_mushroom_tortellini", new Item(new Item.Properties()));
         helper.register("burnt_spinach_tortellini", new Item(new Item.Properties()));
+        helper.register("burnt_deluxe_skewer", new Item(new Item.Properties()));
+        helper.register("burnt_chicken_skewer", new Item(new Item.Properties()));
+        helper.register("burnt_pork_skewer", new Item(new Item.Properties()));
+        helper.register("burnt_veggie_skewer", new Item(new Item.Properties()));
         helper.register("peeled_onion", new DrinkableConsumableItem(new Item.Properties().food(FoodList.PEELED_ONION), DrinkList.PEELED_ONION));
         helper.register("coconut_flakes", new MasteryApplicableItem(new Item.Properties().food(FoodList.COCONUT_FLAKES)));
         helper.register("sweet_berry_juice", new DrinkableConsumableItem(new Item.Properties(), DrinkList.SWEET_BERRY_JUICE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_GLASS));

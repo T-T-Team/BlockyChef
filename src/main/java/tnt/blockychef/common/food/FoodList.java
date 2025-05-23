@@ -441,6 +441,14 @@ public final class FoodList {
     public static final FoodProperties MEAT_STOCK_BASE = food(1, 0).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties MEAT_STOCK = food(2, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties VEGETABLE_STOCK = food(2, 1).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties RAW_DELUXE_SKEWER = food(5, 3).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties RAW_CHICKEN_SKEWER = food(4, 2).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties RAW_PORK_SKEWER = food(4, 3).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties RAW_VEGGIE_SKEWER = food(3, 2).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties DELUXE_SKEWER = food(7, 8).build();
+    public static final FoodProperties CHICKEN_SKEWER = food(6, 6).build();
+    public static final FoodProperties PORK_SKEWER = food(6, 7).build();
+    public static final FoodProperties VEGGIE_SKEWER = food(5, 5).build();
 
     private static FoodProperties.Builder food(int nutrition, int saturation) {
         return new FoodProperties.Builder().nutrition(nutrition).saturationMod(saturation / (nutrition * 2.0F));
