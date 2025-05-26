@@ -10,6 +10,7 @@ import tnt.tntlib.api.screen.widgets.DataManagerWidget;
 import tnt.tntlib.api.screen.widgets.ObjectCheckboxWidget;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -30,7 +31,7 @@ public class EnumFilterDialog<T, E extends Enum<E>> extends ModalDialogScreen {
     protected void init() {
         super.init();
         Class<E> type = filter.getEnumType();
-        List<E> elementList = Arrays.asList(type.getEnumConstants());
+        List<E> elementList = Arrays.stream(type.getEnumConstants()).sorted(Comparator.comparing(E::name)).toList();
         Set<E> selectedValues = filter.getAllowedValues();
         addRenderableWidget(new ComponentListWidget<>(leftPosition + 5, topPosition + 15, dialogWidth - 10, dialogHeight - 45, elementList, (x, y, w, data) -> {
             ObjectCheckboxWidget<E> checkboxWidget = new ObjectCheckboxWidget<>(data, x, y, w, 20, selectedValues.contains(data));
