@@ -2,6 +2,7 @@
   "item": "blockychef:grilled_pineapple_rings",
   "groups": [
     "FOOD",
+    "GRILL",
     "FRUIT"
   ]
 }

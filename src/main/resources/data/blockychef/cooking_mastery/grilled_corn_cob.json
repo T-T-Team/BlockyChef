@@ -2,6 +2,7 @@
   "item": "blockychef:grilled_corn_cob",
   "groups": [
     "FOOD",
+    "GRILL",
     "VEGGIE"
   ]
 }

@@ -1,0 +1,54 @@
+{
+  "type": "blockychef:cooking_table",
+  "assemblyTime": 120,
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:stick"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:onion_slice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:bell_pepper_slice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:tomato_slice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:diced_pork_meat"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:salt"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:pepper_powder"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:raw_pork_skewer",
+      "count": 1
+    }
+  ]
+}

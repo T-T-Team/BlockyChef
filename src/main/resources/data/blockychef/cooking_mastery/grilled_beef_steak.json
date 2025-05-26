@@ -2,6 +2,7 @@
   "item": "blockychef:grilled_beef_steak",
   "groups": [
     "FOOD",
+    "GRILL",
     "MEAT"
   ]
 }

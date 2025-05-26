@@ -2,6 +2,7 @@
   "item": "blockychef:grilled_chicken_drumstick",
   "groups": [
     "FOOD",
+    "GRILL",
     "MEAT"
   ]
 }

@@ -6,6 +6,7 @@ public enum MasteryGroup {
     DRINK,
     JUICE,
     MEAT,
+    GRILL,
     PASTRY,
     BURGER,
     PIZZA,

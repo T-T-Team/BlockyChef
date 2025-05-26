@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:grill",
+  "input": {
+    "item": "blockychef:raw_pork_skewer"
+  },
+  "result": {
+    "item": "blockychef:pork_skewer"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_pork_skewer"
+  },
+  "configuration": {
+    "grillTime": 550,
+    "minTemperature": 5.5,
+    "maxTemperature": 6.5,
+    "burnSpeed": 0.4
+  }
+}

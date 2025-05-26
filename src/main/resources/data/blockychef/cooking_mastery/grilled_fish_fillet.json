@@ -2,6 +2,7 @@
   "item": "blockychef:grilled_fish_fillet",
   "groups": [
     "FOOD",
+    "GRILL",
     "MEAT"
   ]
 }

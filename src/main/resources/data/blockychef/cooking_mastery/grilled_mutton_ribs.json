@@ -2,6 +2,7 @@
   "item": "blockychef:grilled_mutton_ribs",
   "groups": [
     "FOOD",
+    "GRILL",
     "MEAT"
   ]
 }

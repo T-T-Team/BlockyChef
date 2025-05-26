@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:grill",
+  "input": {
+    "item": "blockychef:raw_veggie_skewer"
+  },
+  "result": {
+    "item": "blockychef:veggie_skewer"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_veggie_skewer"
+  },
+  "configuration": {
+    "grillTime": 500,
+    "minTemperature": 4.5,
+    "maxTemperature": 5.0,
+    "burnSpeed": 0.4
+  }
+}

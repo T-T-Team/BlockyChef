@@ -150,6 +150,6 @@ public class MasteryScreen extends Screen {
     private static boolean filterOrAll(EnumSet<MasteryGroup> filter, Collection<MasteryGroup> groups) {
         if (filter.isEmpty())
             return true;
-        return CollectionUtils.containsAny(groups, filter);
+        return groups.containsAll(filter);
     }
 }

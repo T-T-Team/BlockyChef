@@ -771,7 +771,7 @@
   "tooltip.blockychef.decay_progress.crops": "Weeds: %s",
   "tooltip.blockychef.decay_max": "Critical",
   "filter.key.blockychef.group": "Group",
-  "filter.key.blockychef.mastery": "Mastery",
+  "filter.key.blockychef.mastery": "Name",
   "sorter.key.blockychef.cook_count": "Cook Count",
   "sorter.key.blockychef.mastery_name": "Name",
   "sorter.value.asc": "Ascending",

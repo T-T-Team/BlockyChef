@@ -1,0 +1,60 @@
+{
+  "type": "blockychef:cooking_table",
+  "assemblyTime": 120,
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:stick"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:onion_slice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:bell_pepper_slice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:tomato_slice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:eggplant_slice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:portobello_slice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:salt"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:grounded_basil"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:raw_veggie_skewer",
+      "count": 1
+    }
+  ]
+}

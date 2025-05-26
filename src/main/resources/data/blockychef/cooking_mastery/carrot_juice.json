@@ -3,6 +3,7 @@
   "groups": [
     "DRINK",
     "JUICE",
-    "VEGGIE"
+    "VEGGIE",
+    "COLD_DRINK"
   ]
 }

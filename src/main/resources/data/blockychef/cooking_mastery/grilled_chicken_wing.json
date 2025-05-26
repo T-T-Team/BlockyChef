@@ -2,6 +2,7 @@
   "item": "blockychef:grilled_chicken_wing",
   "groups": [
     "FOOD",
+    "GRILL",
     "MEAT"
   ]
 }
