@@ -4,6 +4,7 @@ import com.google.gson.JsonParseException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -18,20 +19,20 @@ import java.util.List;
 
 public class DryingRecipe extends AbstractFoodRecipe<DryingRackBlockEntity> {
 
-    public static final Codec<DryingRecipe> CODEC_PROVIDER = RecordCodecBuilder.create(instance -> instance.group(
-            Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(t -> t.input),
+    public static final CodecRecipeSerializer.CodecProvider<DryingRecipe> CODEC_PROVIDER = id -> RecordCodecBuilder.create(instance -> instance.group(
+            Codecs.INGREDIENT.fieldOf("input").forGetter(t -> t.input),
             Codecs.SIMPLE_ITEMSTACK_CODEC.fieldOf("output").forGetter(t -> t.output),
             Codec.INT.fieldOf("dryingTime").forGetter(DryingRecipe::getDryingTime),
             resolveExperience(),
             resolveRemainderConsumer()
-    ).apply(instance, DryingRecipe::new));
+    ).apply(instance, (ingredient, itemStack, integer, aFloat, multiIngredients) -> new DryingRecipe(id, ingredient, itemStack, integer, aFloat, multiIngredients)));
 
     private final Ingredient input;
     private final ItemStack output;
     private final int dryingTime;
 
-    private DryingRecipe(Ingredient input, ItemStack output, int dryingTime, float experience, List<MultiIngredient> remainderConsumer) throws JsonParseException {
-        super(remainderConsumer, experience);
+    private DryingRecipe(ResourceLocation id, Ingredient input, ItemStack output, int dryingTime, float experience, List<MultiIngredient> remainderConsumer) throws JsonParseException {
+        super(id, remainderConsumer, experience);
         this.input = input;
         this.output = output;
         this.dryingTime = dryingTime;

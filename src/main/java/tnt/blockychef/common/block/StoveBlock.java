@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.block.entity.RecipeRememberingBlockEntity;
 import tnt.blockychef.common.block.entity.StoveBlockEntity;
@@ -45,7 +46,7 @@ public class StoveBlock extends DyeableBlock implements EntityBlock, HeatSourceP
     protected InteractionResult handleDefaultInteraction(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult, ItemStack stack) {
         if (!level.isClientSide) {
             if (level.getBlockEntity(pos) instanceof StoveBlockEntity stove) {
-               ((ServerPlayer) player).openMenu(new SimpleMenuProvider((id, inv, owner) -> new StoveMenu(id, inv, stove), TITLE), pos);
+               NetworkHooks.openScreen((ServerPlayer) player, new SimpleMenuProvider((id, inv, owner) -> new StoveMenu(id, inv, stove), TITLE), pos);
             }
             return InteractionResult.SUCCESS;
         }

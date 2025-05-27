@@ -9,7 +9,9 @@ import snownee.jade.api.IBlockComponentProvider;
 import snownee.jade.api.IServerDataProvider;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
+import snownee.jade.api.ui.BoxStyle;
 import snownee.jade.api.ui.IElementHelper;
+import snownee.jade.impl.ui.ProgressStyle;
 import tnt.blockychef.common.block.entity.GraterBlockEntity;
 import tnt.blockychef.common.food.recipe.GratingRecipe;
 
@@ -30,7 +32,7 @@ public enum GraterComponentProvider implements IBlockComponentProvider, IServerD
         Component title = Component.translatable("label.blockychef.grating", Math.round(progress * 100.0F));
         iTooltip.add(title);
         iTooltip.add(helper.item(inputStack));
-        iTooltip.append(helper.progress(progress));
+        iTooltip.append(helper.progress(progress, null, new ProgressStyle(), new BoxStyle(), false));
         iTooltip.append(helper.item(outputStack));
     }
 

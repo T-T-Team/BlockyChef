@@ -22,6 +22,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.block.entity.PotBlockEntity;
 import tnt.blockychef.common.block.entity.RecipeRememberingBlockEntity;
@@ -53,7 +54,7 @@ public class PotBlock extends FullHorizontalAxisBlock implements EntityBlock {
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
         if (blockEntity instanceof PotBlockEntity pot && !pLevel.isClientSide) {
-            ((ServerPlayer) pPlayer).openMenu(new SimpleMenuProvider((menuId, inv, owner) -> new PotMenu(menuId, inv, pot), TITLE), pPos);
+            NetworkHooks.openScreen((ServerPlayer) pPlayer, new SimpleMenuProvider((menuId, inv, owner) -> new PotMenu(menuId, inv, pot), TITLE), pPos);
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.CONSUME;

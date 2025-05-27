@@ -6,7 +6,6 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
@@ -281,7 +280,7 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
                 recipe = null;
                 return;
             }
-            GrillRecipe.GrillingConfiguration conf = recipe.value().getConfiguration();
+            GrillRecipe.GrillingConfiguration conf = recipe.getConfiguration();
             float temperature = GrillBlockEntity.this.temperature;
             if (conf.isCooking(temperature)) {
                 status = CookingStatus.COOKING;
@@ -297,13 +296,13 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
                     float newBurnAmount = this.getBurnAmount(flipped) + f;
                     this.setBurnAmount(newBurnAmount, flipped);
                     if (newBurnAmount >= 1.0F) {
-                        ItemStack burntResult = recipe.value().getBurnResult().copy();
+                        ItemStack burntResult = recipe.getBurnResult().copy();
                         GrillBlockEntity.this.setItem(getSlotIndex(), burntResult);
                         this.resetState();
                         loadRecipe(GrillBlockEntity.this.level.getRecipeManager());
                         return;
                     }
-                } else if (recipe.value().isOvercooked()) {
+                } else if (recipe.isOvercooked()) {
                     status = CookingStatus.BURNING;
                 }
                 float oppositeBurn = this.getBurnAmount(!flipped);
@@ -313,8 +312,8 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
                 }
                 int newProgress = progress + 1;
                 this.setProgressAmount(newProgress);
-                if (this.areBothSidesDone() || (recipe.value().isOvercooked() && this.isEitherSideDone())) {
-                    ItemStack result = recipe.value().getResult().copy();
+                if (this.areBothSidesDone() || (recipe.isOvercooked() && this.isEitherSideDone())) {
+                    ItemStack result = recipe.getResult().copy();
                     GrillBlockEntity grill = GrillBlockEntity.this;
                     grill.setItem(getSlotIndex(), result);
                     grill.storeRecipe(recipe);
@@ -325,7 +324,7 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
         }
 
         public boolean isSlotLocked() {
-            return GrillBlockEntity.this.canGrill() && recipe != null && !recipe.value().isOvercooked() && BlockyChef.config.cooking.lockCookingSlots;
+            return GrillBlockEntity.this.canGrill() && recipe != null && !recipe.isOvercooked() && BlockyChef.config.cooking.lockCookingSlots;
         }
 
         public boolean areBothSidesDone() {
@@ -337,14 +336,14 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
         }
 
         public float getProgress(boolean flipSide) {
-            if (recipe != null && recipe.value().isOvercooked()) {
+            if (recipe != null && recipe.isOvercooked()) {
                 return 0.0F;
             }
             return (flipSide ? flippedProgressionTimer : progressionTimer) / (float) totalTimer;
         }
 
         public float getBurnProgress(boolean flipSide) {
-            if (recipe != null && recipe.value().isOvercooked()) {
+            if (recipe != null && recipe.isOvercooked()) {
                 return (flipSide ? flippedProgressionTimer : progressionTimer) / (float) totalTimer;
             }
             return (flipSide ? flippedBurnAmount : burnAmount);
@@ -401,13 +400,13 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
         }
 
         @Override
-        public Optional<RecipeHolder<GrillRecipe>> getRecipe(RecipeManager manager, ItemStack input) {
-            return Helper.findRecipeFor(manager, this.getRecipeType(), recipe -> recipe.value().matches(input));
+        public Optional<GrillRecipe> getRecipe(RecipeManager manager, ItemStack input) {
+            return Helper.findRecipeFor(manager, this.getRecipeType(), recipe -> recipe.matches(input));
         }
 
         @Override
-        protected void recipeLoaded(RecipeHolder<GrillRecipe> recipe, boolean updated) {
-            totalTimer = recipe.value().getConfiguration().time();
+        protected void recipeLoaded(GrillRecipe recipe, boolean updated) {
+            totalTimer = recipe.getConfiguration().time();
             if (updated) {
                 resetState();
             }

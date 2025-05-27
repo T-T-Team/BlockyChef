@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -30,7 +29,7 @@ public class DoughMakerBlockEntity extends RecipeRememberingBlockEntity<DoughMak
     public static final int[] INPUTS = {0, 1, 2, 3, 4, 5};
     public static final int[] OUTPUTS = {6, 7, 8};
 
-    private RecipeHolder<DoughMakerRecipe> activeRecipe;
+    private DoughMakerRecipe activeRecipe;
     private boolean processing;
     private int processingTime;
     private final Integer[] colors;
@@ -45,24 +44,24 @@ public class DoughMakerBlockEntity extends RecipeRememberingBlockEntity<DoughMak
             return;
         }
         RecipeManager manager = level.getRecipeManager();
-        if (manager.getRecipeFor(BlockyChefRecipeTypes.DOUGH_MAKER_RECIPE, doughMaker, level, doughMaker.activeRecipe.id()).isEmpty()) {
+        if (manager.getRecipeFor(BlockyChefRecipeTypes.DOUGH_MAKER_RECIPE, doughMaker, level, doughMaker.activeRecipe.getId()).isEmpty()) {
             doughMaker.setRecipe(null);
             return;
         }
-        ItemStack[] outputs = doughMaker.activeRecipe.value().getOutputs();
+        ItemStack[] outputs = doughMaker.activeRecipe.getOutputs();
         if (!MenuInventoryHelper.canFitItems(outputs, doughMaker, OUTPUTS)) {
             doughMaker.setRecipe(null);
             return;
         }
-        int craftTime = doughMaker.activeRecipe.value().getProcessingTime();
+        int craftTime = doughMaker.activeRecipe.getProcessingTime();
         if (canPlaySound(40, doughMaker.processingTime, craftTime)) {
             level.playSound(null, pos, BlockyChefSounds.DOUGH_MAKER, SoundSource.BLOCKS, 1.0F, 1.0F);
         }
         if (++doughMaker.processingTime >= craftTime && !level.isClientSide) {
             doughMaker.processingTime = 0;
-            doughMaker.consumeIngredientsAndApplyCraftRemainder(doughMaker.activeRecipe.value(), INPUTS, OUTPUTS, in -> {
+            doughMaker.consumeIngredientsAndApplyCraftRemainder(doughMaker.activeRecipe, INPUTS, OUTPUTS, in -> {
                 List<ItemStack> allConsumed = new ArrayList<>();
-                doughMaker.activeRecipe.value().getInputs().forEach(multiIngredient -> allConsumed.addAll(multiIngredient.consume(doughMaker, in)));
+                doughMaker.activeRecipe.getInputs().forEach(multiIngredient -> allConsumed.addAll(multiIngredient.consume(doughMaker, in)));
                 return allConsumed;
             });
             ItemStack[] assembled = Arrays.stream(outputs).map(ItemStack::copy).toArray(ItemStack[]::new);
@@ -140,7 +139,7 @@ public class DoughMakerBlockEntity extends RecipeRememberingBlockEntity<DoughMak
         if (activeRecipe == null || !processing)
             return 0.0F;
         int oldTick = Math.max(0, processingTime - 1);
-        int total = activeRecipe.value().getProcessingTime();
+        int total = activeRecipe.getProcessingTime();
         float f0 = oldTick / (float) total;
         float f1 = processingTime / (float) total;
         return Interpolation.linear(f0, f1, partialTicks);
@@ -150,7 +149,7 @@ public class DoughMakerBlockEntity extends RecipeRememberingBlockEntity<DoughMak
         if (level == null)
             return;
         RecipeManager manager = level.getRecipeManager();
-        Optional<RecipeHolder<DoughMakerRecipe>> optional = manager.getRecipeFor(BlockyChefRecipeTypes.DOUGH_MAKER_RECIPE, this, level);
+        Optional<DoughMakerRecipe> optional = manager.getRecipeFor(BlockyChefRecipeTypes.DOUGH_MAKER_RECIPE, this, level);
         setRecipe(optional.orElse(null));
     }
 
@@ -167,7 +166,7 @@ public class DoughMakerBlockEntity extends RecipeRememberingBlockEntity<DoughMak
         refreshRecipe();
     }
 
-    private void setRecipe(@Nullable RecipeHolder<DoughMakerRecipe> recipe) {
+    private void setRecipe(@Nullable DoughMakerRecipe recipe) {
         if (activeRecipe != recipe) {
             activeRecipe = recipe;
             processing = false;

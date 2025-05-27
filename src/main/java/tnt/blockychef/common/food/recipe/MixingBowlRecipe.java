@@ -3,6 +3,7 @@ package tnt.blockychef.common.food.recipe;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -17,7 +18,7 @@ import java.util.List;
 
 public class MixingBowlRecipe extends AbstractFoodRecipe<MixingBowlBlockEntity> {
 
-    public static final Codec<MixingBowlRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final CodecRecipeSerializer.CodecProvider<MixingBowlRecipe> CODEC = id -> RecordCodecBuilder.create(instance -> instance.group(
             MultiIngredient.CODEC.listOf().fieldOf("inputs").forGetter(MixingBowlRecipe::getInputs),
             Codecs.SIMPLE_ITEMSTACK_CODEC.listOf().xmap(
                     list -> list.toArray(ItemStack[]::new),
@@ -26,14 +27,14 @@ public class MixingBowlRecipe extends AbstractFoodRecipe<MixingBowlBlockEntity> 
             Codec.INT.fieldOf("mixingTime").forGetter(MixingBowlRecipe::getMixingTime),
             resolveExperience(),
             resolveRemainderConsumer()
-    ).apply(instance, MixingBowlRecipe::new));
+    ).apply(instance, (in, out, time, exp, cons) -> new MixingBowlRecipe(id, in, out, time, exp, cons)));
 
     private final List<MultiIngredient> ingredients;
     private final ItemStack[] outputs;
     private final int mixingTime;
 
-    public MixingBowlRecipe(List<MultiIngredient> inputs, ItemStack[] outputs, int mixingTime, float experience, List<MultiIngredient> remainderConsumer) {
-        super(remainderConsumer, experience);
+    public MixingBowlRecipe(ResourceLocation id, List<MultiIngredient> inputs, ItemStack[] outputs, int mixingTime, float experience, List<MultiIngredient> remainderConsumer) {
+        super(id, remainderConsumer, experience);
         this.ingredients = inputs;
         this.outputs = outputs;
         this.mixingTime = mixingTime;

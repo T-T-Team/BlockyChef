@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.block.entity.BarrelBlockEntity;
 import tnt.blockychef.common.block.entity.RecipeRememberingBlockEntity;
@@ -67,10 +68,14 @@ public class BarrelBlock extends Block implements EntityBlock {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof BarrelBlockEntity barrel) {
             if (!level.isClientSide) {
-                ((ServerPlayer) player).openMenu(new SimpleMenuProvider(
-                        (menuId, inv, owner) -> new BarrelMenu(menuId, inv, barrel),
-                        TITLE
-                ), pos);
+                NetworkHooks.openScreen(
+                        (ServerPlayer) player,
+                        new SimpleMenuProvider(
+                                (menuId, inv, owner) -> new BarrelMenu(menuId, inv, barrel),
+                                TITLE
+                        ),
+                        pos
+                );
             }
             return InteractionResult.SUCCESS;
         }

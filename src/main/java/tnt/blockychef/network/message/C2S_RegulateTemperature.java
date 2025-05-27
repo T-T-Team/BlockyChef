@@ -8,7 +8,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.network.CustomPayloadEvent;
+import net.minecraftforge.network.NetworkEvent;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.client.BlockyChefClient;
 import tnt.blockychef.common.heat.HeatHelper;
@@ -63,7 +63,7 @@ public class C2S_RegulateTemperature extends Client2ServerMessage {
     }
 
     @Override
-    public void handle(ServerPlayer serverPlayer, CustomPayloadEvent.Context context) {
+    public void handle(ServerPlayer serverPlayer, NetworkEvent.Context context) {
         ServerLevel level = serverPlayer.serverLevel();
         HeatSource source = HeatHelper.getHeatSource(level, position, direction);
         if (source instanceof RegulatedHeatSource regulatedHeatSource) {

@@ -22,8 +22,8 @@ import java.util.List;
 
 public class CuttingBoardRecipe extends AbstractFoodRecipe<CuttingBoardBlockEntity> {
 
-    public static final Codec<CuttingBoardRecipe> CODEC_PROVIDER = RecordCodecBuilder.create(instance -> instance.group(
-            Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(t -> t.input),
+    public static final CodecRecipeSerializer.CodecProvider<CuttingBoardRecipe> CODEC_PROVIDER = id -> RecordCodecBuilder.create(instance -> instance.group(
+            Codecs.INGREDIENT.fieldOf("input").forGetter(t -> t.input),
             ResourceLocation.CODEC.comapFlatMap(
                     location -> RecipeProcessingTypes.getById(location).map(DataResult::success).orElse(DataResult.error(() -> "Unknown recipe processing type '" + location + "'")),
                     RecipeProcessingType::getLocation
@@ -35,15 +35,15 @@ public class CuttingBoardRecipe extends AbstractFoodRecipe<CuttingBoardBlockEnti
             ).fieldOf("outputs").forGetter(CuttingBoardRecipe::getOutputs),
             resolveExperience(),
             resolveRemainderConsumer()
-    ).apply(instance, CuttingBoardRecipe::new));
+    ).apply(instance, (in, type, time, outs, exp, consumer) -> new CuttingBoardRecipe(id, in, type, time, outs, exp, consumer)));
 
     private final Ingredient input;
     private final RecipeProcessingType processingType;
     private final int processingTime;
     private final ItemStack[] outputs;
 
-    private CuttingBoardRecipe(Ingredient input, RecipeProcessingType processingType, int processingTime, ItemStack[] outputs, float experience, List<MultiIngredient> remainderConsumer) {
-        super(remainderConsumer, experience);
+    private CuttingBoardRecipe(ResourceLocation id, Ingredient input, RecipeProcessingType processingType, int processingTime, ItemStack[] outputs, float experience, List<MultiIngredient> remainderConsumer) {
+        super(id, remainderConsumer, experience);
         this.processingType = processingType;
         this.processingTime = processingTime;
         this.outputs = outputs;

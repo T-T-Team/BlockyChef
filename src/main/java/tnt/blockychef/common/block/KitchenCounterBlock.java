@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.client.screen.MultiVariantFurnitureBlock;
 import tnt.blockychef.common.block.entity.KitchenCounterBlockEntity;
@@ -34,7 +35,7 @@ public class KitchenCounterBlock extends MultiVariantFurnitureBlock implements E
     protected InteractionResult handleDefaultInteraction(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult, ItemStack stack) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof KitchenCounterBlockEntity counterBlockEntity && !level.isClientSide) {
-            ((ServerPlayer) player).openMenu(new SimpleMenuProvider(
+            NetworkHooks.openScreen((ServerPlayer) player, new SimpleMenuProvider(
                     (menuId, inv, owner) -> new KitchenCounterMenu(menuId, inv, counterBlockEntity),
                     TITLE
             ), pos);

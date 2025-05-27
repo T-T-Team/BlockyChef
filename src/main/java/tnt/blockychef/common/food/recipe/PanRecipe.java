@@ -4,6 +4,7 @@ import com.google.gson.JsonParseException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -18,15 +19,15 @@ import java.util.List;
 
 public class PanRecipe extends AbstractFoodRecipe<PanBlockEntity> implements BurnableRecipe {
 
-    public static final Codec<PanRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(PanRecipe::getInput),
+    public static final CodecRecipeSerializer.CodecProvider<PanRecipe> CODEC = id -> RecordCodecBuilder.create(instance -> instance.group(
+            Codecs.INGREDIENT.fieldOf("input").forGetter(PanRecipe::getInput),
             PanCookingConfiguration.CODEC.fieldOf("configuration").forGetter(PanRecipe::getConfiguration),
             Codecs.SIMPLE_ITEMSTACK_CODEC.fieldOf("result").forGetter(PanRecipe::getResult),
             Codecs.SIMPLE_ITEMSTACK_CODEC.fieldOf("burntResult").forGetter(PanRecipe::getBurntResult),
             Codec.BOOL.optionalFieldOf("overcooking", false).forGetter(t -> t.overcooking),
             resolveRemainderConsumer(),
             resolveExperience()
-    ).apply(instance, PanRecipe::new));
+    ).apply(instance, (in, cfg, res, burn, overcook, cons, exp) -> new PanRecipe(id, in, cfg, res, burn, overcook, cons, exp)));
 
     private final Ingredient input;
     private final PanCookingConfiguration configuration;
@@ -34,8 +35,8 @@ public class PanRecipe extends AbstractFoodRecipe<PanBlockEntity> implements Bur
     private final ItemStack burntResult;
     private final boolean overcooking;
 
-    public PanRecipe(Ingredient input, PanCookingConfiguration configuration, ItemStack result, ItemStack burntResult, boolean overcooking, List<MultiIngredient> outputConsumers, float experience) throws JsonParseException {
-        super(outputConsumers, experience);
+    public PanRecipe(ResourceLocation id, Ingredient input, PanCookingConfiguration configuration, ItemStack result, ItemStack burntResult, boolean overcooking, List<MultiIngredient> outputConsumers, float experience) throws JsonParseException {
+        super(id, outputConsumers, experience);
         this.input = input;
         this.configuration = configuration;
         this.result = result;

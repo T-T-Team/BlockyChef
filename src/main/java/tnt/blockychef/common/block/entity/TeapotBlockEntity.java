@@ -6,7 +6,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -40,7 +39,7 @@ public class TeapotBlockEntity extends RecipeRememberingBlockEntity<TeapotRecipe
     public static final int WATER_BOILING_TIME = 400;
     private final FluidContainer fluidContainer;
 
-    private RecipeHolder<TeapotRecipe> recipeHolder;
+    private TeapotRecipe recipeHolder;
     private int cookingTime;
     private int waterBoilTime;
     private float temperature;
@@ -55,7 +54,7 @@ public class TeapotBlockEntity extends RecipeRememberingBlockEntity<TeapotRecipe
         teapot.temperature = HeatHelper.regulateHeat(teapot.temperature, heatSource.getHeat(Direction.UP), 0.025F);
 
         if (teapot.recipeHolder != null) {
-            TeapotRecipe recipe = teapot.recipeHolder.value();
+            TeapotRecipe recipe = teapot.recipeHolder;
             if (teapot.waterBoilTime > 0 && !recipe.matches(teapot, level)) {
                 // recipe is not valid and boiling has started
                 teapot.setRecipe(null);
@@ -108,7 +107,7 @@ public class TeapotBlockEntity extends RecipeRememberingBlockEntity<TeapotRecipe
     }
 
     public boolean isBurning() {
-        return recipeHolder != null && recipeHolder.value().isOvercooked() && temperature >= recipeHolder.value().getMinTemperature();
+        return recipeHolder != null && recipeHolder.isOvercooked() && temperature >= recipeHolder.getMinTemperature();
     }
 
     public FluidContainer getFluidContainer() {
@@ -123,19 +122,19 @@ public class TeapotBlockEntity extends RecipeRememberingBlockEntity<TeapotRecipe
         if (level == null)
             return;
         RecipeManager manager = level.getRecipeManager();
-        Optional<RecipeHolder<TeapotRecipe>> optional = manager.getRecipeFor(BlockyChefRecipeTypes.TEAPOT_RECIPE, this, level);
+        Optional<TeapotRecipe> optional = manager.getRecipeFor(BlockyChefRecipeTypes.TEAPOT_RECIPE, this, level);
         optional.ifPresentOrElse(this::setRecipe, () -> setRecipe(null));
     }
 
     public float getCookProgress() {
-        return recipeHolder != null ? cookingTime / (float) recipeHolder.value().getCookingTime() : 0.0F;
+        return recipeHolder != null ? cookingTime / (float) recipeHolder.getCookingTime() : 0.0F;
     }
 
     public float getWaterBoilProgress() {
-        return recipeHolder != null ? recipeHolder.value().isOvercooked() ? 1.0F : waterBoilTime / (float) WATER_BOILING_TIME : 0.0F;
+        return recipeHolder != null ? recipeHolder.isOvercooked() ? 1.0F : waterBoilTime / (float) WATER_BOILING_TIME : 0.0F;
     }
 
-    public void setRecipe(@Nullable RecipeHolder<TeapotRecipe> recipe) {
+    public void setRecipe(@Nullable TeapotRecipe recipe) {
         if (this.recipeHolder != recipe) {
             this.recipeHolder = recipe;
             this.waterBoilTime = 0;

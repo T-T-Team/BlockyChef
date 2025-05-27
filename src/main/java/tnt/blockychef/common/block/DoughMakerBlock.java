@@ -24,6 +24,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.block.entity.DoughMakerBlockEntity;
 import tnt.blockychef.common.block.entity.RecipeRememberingBlockEntity;
@@ -39,6 +40,7 @@ public class DoughMakerBlock extends DyeableBlock implements EntityBlock {
     public DoughMakerBlock() {
         super(Properties.of().sound(SoundType.STONE).strength(2.0F).noOcclusion());
     }
+
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter blockGetter, BlockPos pos, CollisionContext context) {
         return HITBOX;
@@ -66,10 +68,12 @@ public class DoughMakerBlock extends DyeableBlock implements EntityBlock {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof DoughMakerBlockEntity doughMaker) {
             if (!level.isClientSide) {
-                ((ServerPlayer) player).openMenu(new SimpleMenuProvider(
-                        (menuId, inv, owner) -> new DoughMakerMenu(menuId, inv, doughMaker),
-                        TITLE
-                ), pos);
+                NetworkHooks.openScreen(
+                        (ServerPlayer) player,
+                        new SimpleMenuProvider(
+                                (menuId, inv, owner) -> new DoughMakerMenu(menuId, inv, doughMaker),
+                                TITLE
+                        ), pos);
             }
             return InteractionResult.SUCCESS;
         }

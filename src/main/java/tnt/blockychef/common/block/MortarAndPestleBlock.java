@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.block.entity.MortarAndPestleBlockEntity;
 import tnt.blockychef.common.block.entity.RecipeRememberingBlockEntity;
@@ -79,7 +80,7 @@ public class MortarAndPestleBlock extends FullHorizontalAxisBlock implements Ent
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof MortarAndPestleBlockEntity mortarAndPestle) {
             if (!level.isClientSide) {
-                ((ServerPlayer) player).openMenu(new SimpleMenuProvider(
+                NetworkHooks.openScreen((ServerPlayer) player, new SimpleMenuProvider(
                         (menuId, inv, owner) -> new MortarAndPestleMenu(menuId, inv, mortarAndPestle),
                         TITLE
                 ), pos);

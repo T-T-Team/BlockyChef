@@ -92,7 +92,7 @@ public class StoveScreen extends AbstractContainerScreen<StoveMenu> {
 
     @Override
     public void render(GuiGraphics pGuiGraphics, int mouseX, int mouseY, float pPartialTick) {
-        renderBackground(pGuiGraphics, mouseX, mouseY, pPartialTick);
+        renderBackground(pGuiGraphics);
         super.render(pGuiGraphics, mouseX, mouseY, pPartialTick);
         renderTooltip(pGuiGraphics, mouseX, mouseY);
         StoveBlockEntity stove = menu.getBlockEntity();

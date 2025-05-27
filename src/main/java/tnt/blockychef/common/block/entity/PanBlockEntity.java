@@ -8,7 +8,6 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
@@ -188,17 +187,16 @@ public class PanBlockEntity extends RecipeRememberingBlockEntity<PanRecipe> impl
         }
 
         @Override
-        protected void recipeLoaded(RecipeHolder<PanRecipe> recipe, boolean updated) {
-            this.totalTimer = recipe.value().getConfiguration().time();
+        protected void recipeLoaded(PanRecipe recipe, boolean updated) {
+            this.totalTimer = recipe.getConfiguration().time();
         }
 
         public void stir() {
             if (recipe == null)
                 return;
-            PanRecipe panRecipe = recipe.value();
-            PanRecipe.PanCookingConfiguration configuration = panRecipe.getConfiguration();
+            PanRecipe.PanCookingConfiguration configuration = recipe.getConfiguration();
             this.burnAmount = Math.max(0, burnAmount - configuration.stirBurnLoss());
-            if (!panRecipe.isOvercooked()) {
+            if (!recipe.isOvercooked()) {
                 this.progressionTimer = Math.max(0, progressionTimer - configuration.stirProgressLoss());
             }
         }
@@ -206,7 +204,7 @@ public class PanBlockEntity extends RecipeRememberingBlockEntity<PanRecipe> impl
         public boolean shouldConsumeOil(long gameTime) {
             if (recipe == null || status == CookingStatus.NONE)
                 return false;
-            PanRecipe.PanCookingConfiguration configuration = recipe.value().getConfiguration();
+            PanRecipe.PanCookingConfiguration configuration = recipe.getConfiguration();
             if (configuration.isCooking(PanBlockEntity.this.temperature)) {
                 long consumeInterval = configuration.oilConsumptionRate();
                 return gameTime % consumeInterval == 0L;
@@ -215,7 +213,7 @@ public class PanBlockEntity extends RecipeRememberingBlockEntity<PanRecipe> impl
         }
 
         public boolean isLocked() {
-            return PanBlockEntity.this.canCook() && recipe != null && !recipe.value().isOvercooked() && BlockyChef.config.cooking.lockCookingSlots;
+            return PanBlockEntity.this.canCook() && recipe != null && !recipe.isOvercooked() && BlockyChef.config.cooking.lockCookingSlots;
         }
 
         public void updateSlot(boolean hasOil) {
@@ -226,12 +224,12 @@ public class PanBlockEntity extends RecipeRememberingBlockEntity<PanRecipe> impl
                 progressionTimer = 0;
                 return;
             }
-            BaseCookConfiguration configuration = recipe.value().getConfiguration();
+            BaseCookConfiguration configuration = recipe.getConfiguration();
             float temperature = PanBlockEntity.this.temperature;
             if (configuration.isCooking(temperature)) {
                 status = CookingStatus.COOKING;
                 float burnScale = 0.0F;
-                if (configuration.isBurning(temperature) && !recipe.value().isOvercooked()) {
+                if (configuration.isBurning(temperature) && !recipe.isOvercooked()) {
                     status = CookingStatus.BURNING;
                     if (configuration.withinMinMaxTemperature(temperature)) {
                         burnScale = 0.01F * configuration.burnSpeed();
@@ -241,19 +239,19 @@ public class PanBlockEntity extends RecipeRememberingBlockEntity<PanRecipe> impl
                 } else if (!hasOil) {
                     status = CookingStatus.BURNING;
                     burnScale += HeatHelper.burn(HeatValues.MAX_TEMPERATURE, 0.0F, 0.2F);
-                } else if (recipe.value().isOvercooked()) {
+                } else if (recipe.isOvercooked()) {
                     status = CookingStatus.BURNING;
                 }
 
                 if ((burnAmount += burnScale) >= 1.0F) {
-                    ItemStack burnResult = recipe.value().getBurntResult().copy();
+                    ItemStack burnResult = recipe.getBurntResult().copy();
                     PanBlockEntity.this.setItem(getSlotIndex(), burnResult);
                     loadRecipe(PanBlockEntity.this.level.getRecipeManager());
                     return;
                 }
 
                 if (++progressionTimer >= totalTimer) {
-                    ItemStack result = recipe.value().getResult().copy();
+                    ItemStack result = recipe.getResult().copy();
                     PanBlockEntity pan = PanBlockEntity.this;
                     pan.setItem(getSlotIndex(), result);
                     pan.storeRecipe(recipe);
@@ -268,8 +266,8 @@ public class PanBlockEntity extends RecipeRememberingBlockEntity<PanRecipe> impl
         }
 
         @Override
-        public Optional<RecipeHolder<PanRecipe>> getRecipe(RecipeManager manager, ItemStack input) {
-            return Helper.findRecipeFor(manager, getRecipeType(), t -> t.value().matches(input));
+        public Optional<PanRecipe> getRecipe(RecipeManager manager, ItemStack input) {
+            return Helper.findRecipeFor(manager, getRecipeType(), t -> t.matches(input));
         }
     }
 }

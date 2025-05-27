@@ -11,7 +11,9 @@ import snownee.jade.api.IBlockComponentProvider;
 import snownee.jade.api.IServerDataProvider;
 import snownee.jade.api.ITooltip;
 import snownee.jade.api.config.IPluginConfig;
+import snownee.jade.api.ui.BoxStyle;
 import snownee.jade.api.ui.IElementHelper;
+import snownee.jade.impl.ui.ProgressStyle;
 import tnt.blockychef.common.block.entity.DryingRackBlockEntity;
 
 public enum DryingRackComponentProvider implements IBlockComponentProvider, IServerDataProvider<BlockAccessor> {
@@ -36,7 +38,7 @@ public enum DryingRackComponentProvider implements IBlockComponentProvider, ISer
                 float progress = (float) current / total;
                 tooltip.add(Component.translatable("label.blockychef.drying", i + 1, seconds));
                 tooltip.add(helper.item(input));
-                tooltip.append(helper.progress(progress));
+                tooltip.append(helper.progress(progress, null, new ProgressStyle(), new BoxStyle(), false));
                 tooltip.append(helper.item(result));
             } else {
                 tooltip.add(Component.translatable("label.blockychef.drying.no_recipe", i + 1));

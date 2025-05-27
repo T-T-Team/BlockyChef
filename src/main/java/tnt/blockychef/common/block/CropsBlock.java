@@ -170,7 +170,7 @@ public class CropsBlock extends DecayingGrowingBlock implements BonemealableBloc
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader reader, BlockPos pos, BlockState state) {
+    public boolean isValidBonemealTarget(LevelReader reader, BlockPos pos, BlockState state, boolean isClient) {
         return !isMaxAge(state);
     }
 

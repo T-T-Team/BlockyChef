@@ -56,7 +56,7 @@ public class KitchenSinkBlock extends MultiVariantFurnitureBlock implements Enti
     }
 
     @Override
-    public ItemStack pickupBlock(@Nullable Player pPlayer, LevelAccessor pLevel, BlockPos pPos, BlockState pState) {
+    public ItemStack pickupBlock(LevelAccessor pLevel, BlockPos pPos, BlockState pState) {
         return new ItemStack(Items.WATER_BUCKET);
     }
 

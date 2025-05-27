@@ -22,8 +22,8 @@ import java.util.List;
 
 public class PastaMachineRecipe extends AbstractFoodRecipe<PastaMachineBlockEntity> {
 
-    public static final Codec<PastaMachineRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(t -> t.input),
+    public static final CodecRecipeSerializer.CodecProvider<PastaMachineRecipe> CODEC = id -> RecordCodecBuilder.create(instance -> instance.group(
+            Codecs.INGREDIENT.fieldOf("input").forGetter(t -> t.input),
             ResourceLocation.CODEC.comapFlatMap(
                     location -> RecipeProcessingTypes.getById(location).map(DataResult::success).orElse(DataResult.error(() -> "Unknown recipe processing type '" + location + "'")),
                     RecipeProcessingType::getLocation
@@ -35,15 +35,15 @@ public class PastaMachineRecipe extends AbstractFoodRecipe<PastaMachineBlockEnti
             ).fieldOf("outputs").forGetter(PastaMachineRecipe::getOutputs),
             resolveExperience(),
             resolveRemainderConsumer()
-    ).apply(instance, (input, type, time, outputs, exp, rem) -> new PastaMachineRecipe(input, type, outputs, time, exp, rem)));
+    ).apply(instance, (input, type, time, outputs, exp, rem) -> new PastaMachineRecipe(id, input, type, outputs, time, exp, rem)));
 
     private final Ingredient input;
     private final RecipeProcessingType processingType;
     private final ItemStack[] outputs;
     private final int processingTime;
 
-    public PastaMachineRecipe(Ingredient input, RecipeProcessingType processingType, ItemStack[] outputs, int processingTime, float experience, List<MultiIngredient> remainderConsumer) {
-        super(remainderConsumer, experience);
+    public PastaMachineRecipe(ResourceLocation id, Ingredient input, RecipeProcessingType processingType, ItemStack[] outputs, int processingTime, float experience, List<MultiIngredient> remainderConsumer) {
+        super(id, remainderConsumer, experience);
         this.input = input;
         this.processingType = processingType;
         this.outputs = outputs;

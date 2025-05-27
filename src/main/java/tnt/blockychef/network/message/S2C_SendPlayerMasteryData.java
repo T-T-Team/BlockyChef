@@ -6,7 +6,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.network.CustomPayloadEvent;
+import net.minecraftforge.network.NetworkEvent;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.food.mastery.PlayerMasteryDataProvider;
 import tnt.tntlib.api.network.Network;
@@ -32,7 +32,7 @@ public final class S2C_SendPlayerMasteryData extends Server2ClientMessage {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void handle(Minecraft minecraft, CustomPayloadEvent.Context context) {
+    public void handle(Minecraft minecraft, NetworkEvent.Context context) {
         Player player = minecraft.player;
         PlayerMasteryDataProvider.getMasteryData(player).ifPresent(data -> data.deserializeNBT(tag));
     }

@@ -8,7 +8,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.entity.CuttingBoardBlockEntity;
 import tnt.blockychef.common.food.recipe.CuttingBoardRecipe;
@@ -75,9 +74,9 @@ public class CuttingBoardScreen extends AbstractContainerScreen<CuttingBoardMenu
         float minColor = 0.4F;
         float maxColor = 0.9F;
         float color = minColor + f * (maxColor - minColor);
-        RecipeHolder<CuttingBoardRecipe> recipe = entity.getRecipe();
+        CuttingBoardRecipe recipe = entity.getRecipe();
         if (recipe != null) {
-            ItemStack[] outputs = recipe.value().getOutputs();
+            ItemStack[] outputs = recipe.getOutputs();
             for (int i = 0; i < outputs.length; i++) {
                 int slotIndex = CuttingBoardBlockEntity.SLOT_OUTPUTS[i];
                 ItemStack slotItem = entity.getItem(slotIndex);
@@ -92,7 +91,7 @@ public class CuttingBoardScreen extends AbstractContainerScreen<CuttingBoardMenu
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
-        renderBackground(graphics, mouseX, mouseY, partialTicks);
+        renderBackground(graphics);
         super.render(graphics, mouseX, mouseY, partialTicks);
         renderTooltip(graphics, mouseX, mouseY);
     }
@@ -129,7 +128,7 @@ public class CuttingBoardScreen extends AbstractContainerScreen<CuttingBoardMenu
         int index = entity.getRecipeIndex();
         int max = entity.getAvailableRecipeCount() - 1;
         if (cutButton.active) {
-            label = entity.getRecipe().value().getProcessingType().getTranslatedComponent();
+            label = entity.getRecipe().getProcessingType().getTranslatedComponent();
         }
         cutButton.setMessage(entity.isProcessing() ? Localizations.CANCEL : label);
         prevRecipe.active = index > 0;

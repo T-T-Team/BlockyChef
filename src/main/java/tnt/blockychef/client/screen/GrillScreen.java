@@ -105,7 +105,8 @@ public class GrillScreen extends AbstractContainerScreen<GrillMenu> {
             int size = 14;
             float fuelPct = fuelAmount / 1600.0F;
             int progress = Mth.ceil(fuelPct * (size - 1.0F)) + 1;
-            pGuiGraphics.blitSprite(TeapotScreen.LIT_PROGRESS_SPRITE, 14, 14, 0, 14 - progress, leftPos + 62, topPos + 107 - progress, 14, progress);
+            // FIXME
+            //pGuiGraphics.blitSprite(TeapotScreen.LIT_PROGRESS_SPRITE, 14, 14, 0, 14 - progress, leftPos + 62, topPos + 107 - progress, 14, progress);
         }
 
         // temperature
@@ -136,7 +137,7 @@ public class GrillScreen extends AbstractContainerScreen<GrillMenu> {
 
     @Override
     public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
-        renderBackground(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
+        renderBackground(pGuiGraphics);
         super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
         renderTooltip(pGuiGraphics, pMouseX, pMouseY);
 

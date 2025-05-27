@@ -67,7 +67,7 @@ public abstract class DialogScreen extends Screen {
     }
 
     protected void drawDefaultBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
-        renderBackground(graphics, mouseX, mouseY, partialTicks);
+        renderBackground(graphics);
     }
 
     @FunctionalInterface

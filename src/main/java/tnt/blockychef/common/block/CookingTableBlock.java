@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.client.screen.MultiVariantFurnitureBlock;
 import tnt.blockychef.common.block.entity.CookingTableBlockEntity;
@@ -37,7 +38,8 @@ public class CookingTableBlock extends MultiVariantFurnitureBlock implements Ent
     protected InteractionResult handleDefaultInteraction(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult, ItemStack stack) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof CookingTableBlockEntity table && !level.isClientSide()) {
-            ((ServerPlayer) player).openMenu(
+            NetworkHooks.openScreen(
+                    (ServerPlayer) player,
                     new SimpleMenuProvider(
                             (menuId, inv, owner) -> new CookingTableMenu(menuId, inv, table),
                             TITLE
