@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.entity.MixerBlockEntity;
@@ -75,7 +76,7 @@ public class MixerBlock extends DyeableBlock implements EntityBlock {
                     MenuInventoryHelper.giveItemOrDrop(player, result);
                 }
             } else if (!level.isClientSide) {
-                ((ServerPlayer) player).openMenu(new SimpleMenuProvider(
+                NetworkHooks.openScreen((ServerPlayer) player, new SimpleMenuProvider(
                         (menuId, inv, owner) -> new MixerMenu(menuId, inv, mixer),
                         TITLE
                 ), pos);

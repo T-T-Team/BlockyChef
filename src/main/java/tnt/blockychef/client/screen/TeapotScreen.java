@@ -10,7 +10,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.fluids.FluidStack;
 import tnt.blockychef.BlockyChef;
-import tnt.tntlib.api.ColorPalette;
 import tnt.blockychef.common.block.entity.TeapotBlockEntity;
 import tnt.blockychef.common.food.fluid.FluidContainer;
 import tnt.blockychef.common.heat.HeatHelper;
@@ -20,10 +19,7 @@ import tnt.blockychef.common.heat.RegulatedHeatSource;
 import tnt.blockychef.common.menu.TeapotMenu;
 import tnt.blockychef.network.NetworkManager;
 import tnt.blockychef.network.message.C2S_RegulateTemperature;
-import tnt.tntlib.api.FluidRenderHelper;
-import tnt.tntlib.api.GraphicsHelper;
-import tnt.tntlib.api.HorizontalAlignment;
-import tnt.tntlib.api.VerticalAlignment;
+import tnt.tntlib.api.*;
 
 import java.util.List;
 import java.util.Locale;
@@ -31,8 +27,8 @@ import java.util.Locale;
 public class TeapotScreen extends AbstractContainerScreen<TeapotMenu> {
 
     private static final ResourceLocation TEXTURE = BlockyChef.resource("textures/screen/teapot.png");
-    public static final ResourceLocation LIT_PROGRESS_SPRITE = new ResourceLocation("container/furnace/lit_progress");
-    private static final ResourceLocation BUBBLES_SPRITE = new ResourceLocation("container/brewing_stand/bubbles");
+    public static final ResourceLocation LIT_PROGRESS_SPRITE = ResourceLocation.withDefaultNamespace("container/furnace/lit_progress");
+    private static final ResourceLocation BUBBLES_SPRITE = ResourceLocation.withDefaultNamespace("container/brewing_stand/bubbles");
 
     public TeapotScreen(TeapotMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
@@ -69,12 +65,14 @@ public class TeapotScreen extends AbstractContainerScreen<TeapotMenu> {
         if (waterBoilProgress > 0) {
             int sizeY = 14;
             int progress = Mth.ceil(waterBoilProgress * (sizeY - 1.0F)) + 1;
-            pGuiGraphics.blitSprite(LIT_PROGRESS_SPRITE, 14, 14, 0, 14 - progress, leftPos + 113, topPos + 88 - progress, 14, progress);
+            // FIXME
+            //pGuiGraphics.blitSprite(LIT_PROGRESS_SPRITE, 14, 14, 0, 14 - progress, leftPos + 113, topPos + 88 - progress, 14, progress);
         }
         if (cookingProgress > 0) {
             int sizeY = 29;
             int progress = Mth.ceil(cookingProgress * (sizeY - 1.0F)) + 1;
-            pGuiGraphics.blitSprite(BUBBLES_SPRITE, 12, 29, 0, 29 - progress, leftPos + 61, topPos + 34 + 29 - progress, 12, progress);
+            // FIXME
+            //pGuiGraphics.blitSprite(BUBBLES_SPRITE, 12, 29, 0, 29 - progress, leftPos + 61, topPos + 34 + 29 - progress, 12, progress);
         }
 
         int height = 85;
@@ -106,7 +104,7 @@ public class TeapotScreen extends AbstractContainerScreen<TeapotMenu> {
 
     @Override
     public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
-        renderBackground(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
+        renderBackground(pGuiGraphics);
         super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
         renderTooltip(pGuiGraphics, pMouseX, pMouseY);
 

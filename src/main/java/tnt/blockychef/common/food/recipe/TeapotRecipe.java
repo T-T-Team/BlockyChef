@@ -4,6 +4,7 @@ import com.google.gson.JsonSyntaxException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -17,7 +18,7 @@ import java.util.List;
 
 public class TeapotRecipe extends AbstractFoodRecipe<TeapotBlockEntity> implements BurnableRecipe {
 
-    public static final Codec<TeapotRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final CodecRecipeSerializer.CodecProvider<TeapotRecipe> CODEC = id -> RecordCodecBuilder.create(instance -> instance.group(
             MultiIngredient.CODEC.listOf().fieldOf("inputs").forGetter(TeapotRecipe::getInputs),
             FluidStack.CODEC.fieldOf("inputFluid").forGetter(TeapotRecipe::getBaseFluid),
             FluidStack.CODEC.fieldOf("result").forGetter(TeapotRecipe::getResult),
@@ -25,7 +26,7 @@ public class TeapotRecipe extends AbstractFoodRecipe<TeapotBlockEntity> implemen
             Codec.FLOAT.optionalFieldOf("minTemperature", 7.0F).forGetter(TeapotRecipe::getMinTemperature),
             resolveRemainderConsumer(),
             resolveExperience()
-    ).apply(instance, TeapotRecipe::new));
+    ).apply(instance, (in, fluid, res, cook, temp, cons, exp) -> new TeapotRecipe(id, in, fluid, res, cook, temp, cons, exp)));
 
     private final List<MultiIngredient> inputs;
     private final FluidStack baseFluid;
@@ -33,8 +34,8 @@ public class TeapotRecipe extends AbstractFoodRecipe<TeapotBlockEntity> implemen
     private final int cookingTime;
     private final float minTemperature;
 
-    public TeapotRecipe(List<MultiIngredient> inputs, FluidStack baseFluid, FluidStack result, int cookTime, float minTemperature, List<MultiIngredient> outputConsumers, float experience) {
-        super(outputConsumers, experience);
+    public TeapotRecipe(ResourceLocation id, List<MultiIngredient> inputs, FluidStack baseFluid, FluidStack result, int cookTime, float minTemperature, List<MultiIngredient> outputConsumers, float experience) {
+        super(id, outputConsumers, experience);
         this.inputs = inputs;
         this.baseFluid = baseFluid;
         this.result = result;

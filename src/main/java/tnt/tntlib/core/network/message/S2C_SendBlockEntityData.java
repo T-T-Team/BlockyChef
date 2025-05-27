@@ -8,7 +8,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.network.CustomPayloadEvent;
+import net.minecraftforge.network.NetworkEvent;
 import tnt.tntlib.TNTLib;
 import tnt.tntlib.api.blockentity.Synchronizable;
 import tnt.tntlib.api.network.Network;
@@ -43,7 +43,7 @@ public class S2C_SendBlockEntityData extends Server2ClientMessage {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void handle(Minecraft minecraft, CustomPayloadEvent.Context context) {
+    public void handle(Minecraft minecraft, NetworkEvent.Context context) {
         Minecraft client = Minecraft.getInstance();
         ClientLevel level = client.level;
         BlockEntity blockEntity = level.getBlockEntity(pos);

@@ -6,7 +6,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -28,7 +27,7 @@ public class BarrelBlockEntity extends RecipeRememberingBlockEntity<BarrelRecipe
     public static final int[] INPUTS = {0, 1, 2, 3, 4, 5};
     public static final int[] OUTPUTS = {6, 7, 8};
 
-    private RecipeHolder<BarrelRecipe> activeRecipe;
+    private BarrelRecipe activeRecipe;
     private boolean fermenting;
     private int fermentingTime;
 
@@ -45,9 +44,9 @@ public class BarrelBlockEntity extends RecipeRememberingBlockEntity<BarrelRecipe
         if (barrel.activeRecipe == null || !barrel.fermenting) {
             return;
         }
-        BarrelRecipe recipe = barrel.activeRecipe.value();
+        BarrelRecipe recipe = barrel.activeRecipe;
         RecipeManager manager = level.getRecipeManager();
-        if (manager.getRecipeFor(BlockyChefRecipeTypes.BARREL_RECIPE, barrel, level, barrel.activeRecipe.id()).isEmpty()) {
+        if (manager.getRecipeFor(BlockyChefRecipeTypes.BARREL_RECIPE, barrel, level, barrel.activeRecipe.getId()).isEmpty()) {
             barrel.setRecipe(null);
             return;
         }
@@ -84,7 +83,7 @@ public class BarrelBlockEntity extends RecipeRememberingBlockEntity<BarrelRecipe
     }
 
     public List<ItemStack> getOutputs() {
-        return activeRecipe != null ? Arrays.asList(activeRecipe.value().getOutputs()) : Collections.emptyList();
+        return activeRecipe != null ? Arrays.asList(activeRecipe.getOutputs()) : Collections.emptyList();
     }
 
     public int getFermentingTime() {
@@ -92,7 +91,7 @@ public class BarrelBlockEntity extends RecipeRememberingBlockEntity<BarrelRecipe
     }
 
     public int getTotalFermentTime() {
-        return activeRecipe != null ? activeRecipe.value().getFermentTime() : 1;
+        return activeRecipe != null ? activeRecipe.getFermentTime() : 1;
     }
 
     @Override
@@ -128,7 +127,7 @@ public class BarrelBlockEntity extends RecipeRememberingBlockEntity<BarrelRecipe
         if (activeRecipe == null || !fermenting)
             return 0.0F;
         int oldTick = Math.max(0, fermentingTime - 1);
-        int total = activeRecipe.value().getFermentTime();
+        int total = activeRecipe.getFermentTime();
         float f0 = oldTick / (float) total;
         float f1 = fermentingTime / (float) total;
         return Interpolation.linear(f0, f1, partialTicks);
@@ -158,7 +157,7 @@ public class BarrelBlockEntity extends RecipeRememberingBlockEntity<BarrelRecipe
         if (level == null)
             return;
         RecipeManager manager = level.getRecipeManager();
-        Optional<RecipeHolder<BarrelRecipe>> optional = manager.getRecipeFor(BlockyChefRecipeTypes.BARREL_RECIPE, this, level);
+        Optional<BarrelRecipe> optional = manager.getRecipeFor(BlockyChefRecipeTypes.BARREL_RECIPE, this, level);
         setRecipe(optional.orElse(null));
     }
 
@@ -176,7 +175,7 @@ public class BarrelBlockEntity extends RecipeRememberingBlockEntity<BarrelRecipe
         }
     }
 
-    private void setRecipe(@Nullable RecipeHolder<BarrelRecipe> recipe) {
+    private void setRecipe(@Nullable BarrelRecipe recipe) {
         if (activeRecipe != recipe) {
             activeRecipe = recipe;
             fermentingTime = 0;

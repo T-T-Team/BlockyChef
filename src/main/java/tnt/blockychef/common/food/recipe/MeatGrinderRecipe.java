@@ -3,6 +3,7 @@ package tnt.blockychef.common.food.recipe;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -18,20 +19,20 @@ import java.util.List;
 
 public class MeatGrinderRecipe extends AbstractFoodRecipe<MeatGrinderBlockEntity> {
 
-    public static final Codec<MeatGrinderRecipe> CODEC_PROVIDER = RecordCodecBuilder.create(instance -> instance.group(
-            Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(t -> t.input),
+    public static final CodecRecipeSerializer.CodecProvider<MeatGrinderRecipe> CODEC_PROVIDER = id -> RecordCodecBuilder.create(instance -> instance.group(
+            Codecs.INGREDIENT.fieldOf("input").forGetter(t -> t.input),
             ExtraCodecs.POSITIVE_INT.optionalFieldOf("processingAmount", 1).forGetter(MeatGrinderRecipe::getProcessingAmount),
             Codecs.SIMPLE_ITEMSTACK_CODEC.fieldOf("output").forGetter(t -> t.result),
             resolveExperience(),
             resolveRemainderConsumer()
-    ).apply(instance, MeatGrinderRecipe::new));
+    ).apply(instance, (in, amount, res, exp, cons) -> new MeatGrinderRecipe(id, in, amount, res, exp, cons)));
 
     private final Ingredient input;
     private final int processingAmount;
     private final ItemStack result;
 
-    public MeatGrinderRecipe(Ingredient input, int processingAmount, ItemStack result, float experience, List<MultiIngredient> remainderConsumer) {
-        super(remainderConsumer, experience);
+    public MeatGrinderRecipe(ResourceLocation id, Ingredient input, int processingAmount, ItemStack result, float experience, List<MultiIngredient> remainderConsumer) {
+        super(id, remainderConsumer, experience);
         this.input = input;
         this.processingAmount = processingAmount;
         this.result = result;

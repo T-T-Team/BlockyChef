@@ -7,7 +7,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -34,7 +33,7 @@ public class SaucepanBlockEntity extends RecipeRememberingBlockEntity<SaucepanRe
     public static final int[] OUTPUTS = {6, 7, 8, 9};
     public static final int STIR_EVENT_ID = 0;
 
-    private RecipeHolder<SaucepanRecipe> recipeHolder;
+    private SaucepanRecipe recipeHolder;
     private boolean cooking;
     private int timeCooking;
     private float temperature;
@@ -58,7 +57,7 @@ public class SaucepanBlockEntity extends RecipeRememberingBlockEntity<SaucepanRe
         if (!saucepan.cooking)
             return;
 
-        SaucepanRecipe recipe = saucepan.recipeHolder.value();
+        SaucepanRecipe recipe = saucepan.recipeHolder;
         List<ItemStack> outputs = recipe.getOutputs();
         if (!MenuInventoryHelper.canFitItems(outputs.toArray(ItemStack[]::new), saucepan, OUTPUTS)) {
             saucepan.setRecipe(null);
@@ -86,7 +85,7 @@ public class SaucepanBlockEntity extends RecipeRememberingBlockEntity<SaucepanRe
                 BlockEntityHelper.sendBlockEntityClientData(saucepan);
                 return;
             }
-            if (configuration.isBurning(saucepan.temperature) && !saucepan.recipeHolder.value().isOvercooked()) {
+            if (configuration.isBurning(saucepan.temperature) && !saucepan.recipeHolder.isOvercooked()) {
                 saucepan.status = CookingStatus.BURNING;
                 float f = 0.0F;
                 if (configuration.withinMinMaxTemperature(saucepan.temperature)) {
@@ -126,10 +125,10 @@ public class SaucepanBlockEntity extends RecipeRememberingBlockEntity<SaucepanRe
     }
 
     public float getProgress() {
-        if (recipeHolder == null || recipeHolder.value().isOvercooked()) {
+        if (recipeHolder == null || recipeHolder.isOvercooked()) {
             return 0.0F;
         }
-        return timeCooking / (float) recipeHolder.value().getConfiguration().time();
+        return timeCooking / (float) recipeHolder.getConfiguration().time();
     }
 
     @Override
@@ -138,7 +137,7 @@ public class SaucepanBlockEntity extends RecipeRememberingBlockEntity<SaucepanRe
             case STIR_EVENT_ID:
                 if (recipeHolder == null)
                     return;
-                SaucepanRecipe recipe = recipeHolder.value();
+                SaucepanRecipe recipe = recipeHolder;
                 SaucepanRecipe.SaucePanCookingConfiguration cfg = recipe.getConfiguration();
                 burnAmount = Math.max(0, burnAmount - cfg.stirBurnLoss());
                 if (!recipe.isOvercooked()) {
@@ -176,11 +175,11 @@ public class SaucepanBlockEntity extends RecipeRememberingBlockEntity<SaucepanRe
         if (level == null)
             return;
         RecipeManager manager = level.getRecipeManager();
-        Optional<RecipeHolder<SaucepanRecipe>> optional = manager.getRecipeFor(BlockyChefRecipeTypes.SAUCEPAN_RECIPE, this, level);
+        Optional<SaucepanRecipe> optional = manager.getRecipeFor(BlockyChefRecipeTypes.SAUCEPAN_RECIPE, this, level);
         this.setRecipe(optional.orElse(null));
     }
 
-    public void setRecipe(RecipeHolder<SaucepanRecipe> recipeHolder) {
+    public void setRecipe(SaucepanRecipe recipeHolder) {
         if (this.recipeHolder != recipeHolder) {
             this.recipeHolder = recipeHolder;
             this.cooking = false;
@@ -237,7 +236,7 @@ public class SaucepanBlockEntity extends RecipeRememberingBlockEntity<SaucepanRe
 
     private void consumeInputs() {
         if (recipeHolder != null) {
-            recipeHolder.value().getInputs().forEach(input -> input.consume(this, INPUTS));
+            recipeHolder.getInputs().forEach(input -> input.consume(this, INPUTS));
         }
     }
 }

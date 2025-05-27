@@ -3,7 +3,6 @@ package tnt.blockychef.util;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
@@ -26,23 +25,23 @@ public final class Helper {
         return Optional.empty();
     }
 
-    public static <C extends Container, R extends Recipe<C>> List<RecipeHolder<R>> getAllValidRecipes(Level level, RecipeType<R> recipeType, C container) {
+    public static <C extends Container, R extends Recipe<C>> List<R> getAllValidRecipes(Level level, RecipeType<R> recipeType, C container) {
         RecipeManager manager = level.getRecipeManager();
         return manager.getAllRecipesFor(recipeType).stream()
-                .filter(recipe -> recipe.value().matches(container, level))
-                .sorted(Comparator.comparing(RecipeHolder::id))
+                .filter(recipe -> recipe.matches(container, level))
+                .sorted(Comparator.comparing(Recipe::getId))
                 .collect(Collectors.toList());
     }
 
-    public static <C extends Container, R extends Recipe<C>> Optional<RecipeHolder<R>> findRecipeFor(RecipeManager manager, RecipeType<R> type, Predicate<RecipeHolder<R>> recipeTest) {
+    public static <C extends Container, R extends Recipe<C>> Optional<R> findRecipeFor(RecipeManager manager, RecipeType<R> type, Predicate<R> recipeTest) {
         return manager.getAllRecipesFor(type).stream()
                 .filter(recipeTest)
                 .findFirst();
     }
 
-    public static <C extends Container, R extends Recipe<C>> Optional<RecipeHolder<R>> findRecipeByIdFor(RecipeManager manager, RecipeType<R> type, ResourceLocation recipeId) {
+    public static <C extends Container, R extends Recipe<C>> Optional<R> findRecipeByIdFor(RecipeManager manager, RecipeType<R> type, ResourceLocation recipeId) {
         return manager.getAllRecipesFor(type).stream()
-                .filter(r -> r.id().equals(recipeId))
+                .filter(r -> r.getId().equals(recipeId))
                 .findFirst();
     }
 

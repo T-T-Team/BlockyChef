@@ -8,6 +8,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.network.*;
+import net.minecraftforge.network.simple.SimpleChannel;
 import tnt.tntlib.api.SimpleVersion;
 import tnt.tntlib.api.network.NetworkDispatcher;
 import tnt.tntlib.api.network.message.ClientMessage;
@@ -22,62 +23,63 @@ import java.util.List;
 public final class AnnotatedNetworkHandler implements NetworkDispatcher {
 
     private final SimpleChannel channel;
+    private int packetDiscriminator;
 
     AnnotatedNetworkHandler(String modId, SimpleVersion version, SimpleVersion.ComparationType type) {
-        this.channel = ChannelBuilder.named(new ResourceLocation(modId, "network"))
-                .networkProtocolVersion(version.encode())
-                .clientAcceptedVersions((status, networkVersion) -> status == Channel.VersionTest.Status.PRESENT && SimpleVersion.parse(networkVersion).matches(version, type))
-                .serverAcceptedVersions((status, networkVersion) -> status == Channel.VersionTest.Status.PRESENT && SimpleVersion.parse(networkVersion).matches(version, type))
+        this.channel = NetworkRegistry.ChannelBuilder.named(ResourceLocation.fromNamespaceAndPath(modId, "network"))
+                .networkProtocolVersion(version::toString)
+                .clientAcceptedVersions(clientVersion -> SimpleVersion.parseString(clientVersion).matches(version, type))
+                .serverAcceptedVersions(serverVersion -> SimpleVersion.parseString(serverVersion).matches(version, type))
                 .simpleChannel();
     }
 
     @Override
     public void sendToClient(ServerPlayer player, ClientMessage message) {
-        channel.send(message, PacketDistributor.PLAYER.with(player));
+        channel.send(PacketDistributor.PLAYER.with(() -> player), message);
     }
 
     @Override
     public void sendToLevel(Level level, ClientMessage message) {
-        channel.send(message, PacketDistributor.DIMENSION.with(level.dimension()));
+        channel.send(PacketDistributor.DIMENSION.with(level::dimension), message);
     }
 
     @Override
     public void sendToNearby(PacketDistributor.TargetPoint point, ClientMessage message) {
-        channel.send(message, PacketDistributor.NEAR.with(point));
+        channel.send(PacketDistributor.NEAR.with(() -> point), message);
     }
 
     @Override
     public void sendToAll(ClientMessage message) {
-        channel.send(message, PacketDistributor.ALL.noArg());
+        channel.send(PacketDistributor.ALL.noArg(), message);
     }
 
     @Override
     public void sendToAllTracking(Entity trackedEntity, ClientMessage message) {
-        channel.send(message, PacketDistributor.TRACKING_ENTITY.with(trackedEntity));
+        channel.send(PacketDistributor.TRACKING_ENTITY.with(() -> trackedEntity), message);
     }
 
     @Override
     public void sendToClientAndAllTracking(Entity trackedEntity, ClientMessage message) {
-        channel.send(message, PacketDistributor.TRACKING_ENTITY_AND_SELF.with(trackedEntity));
+        channel.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> trackedEntity), message);
     }
 
     @Override
     public void sendToChunk(LevelChunk chunk, ClientMessage message) {
-        channel.send(message, PacketDistributor.TRACKING_CHUNK.with(chunk));
+        channel.send(PacketDistributor.TRACKING_CHUNK.with(() -> chunk), message);
     }
 
     @Override
     public void sendToAllConnections(List<Connection> connections, ClientMessage message) {
-        channel.send(message, PacketDistributor.NMLIST.with(connections));
+        channel.send(PacketDistributor.NMLIST.with(() -> connections), message);
     }
 
     @Override
     public void sendToServer(ServerMessage message) {
-        channel.send(message, PacketDistributor.SERVER.noArg());
+        channel.send(PacketDistributor.SERVER.noArg(), message);
     }
 
     <T extends EncodeableMessage & HandledMessage> void registerMessage(Class<T> type, NetworkDirection direction) {
-        channel.messageBuilder(type, direction)
+        channel.messageBuilder(type, this.packetDiscriminator++, direction)
                 .encoder(EncodeableMessage::encode)
                 .decoder(data -> decode(type, data))
                 .consumerNetworkThread(HandledMessage::handle)

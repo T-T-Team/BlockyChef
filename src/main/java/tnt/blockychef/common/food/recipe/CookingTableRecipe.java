@@ -1,8 +1,8 @@
 package tnt.blockychef.common.food.recipe;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -17,20 +17,20 @@ import java.util.List;
 
 public class CookingTableRecipe extends AbstractFoodRecipe<CookingTableBlockEntity> {
 
-    public static final Codec<CookingTableRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final CodecRecipeSerializer.CodecProvider<CookingTableRecipe> CODEC = id -> RecordCodecBuilder.create(instance -> instance.group(
             MultiIngredient.CODEC.listOf().fieldOf("inputs").forGetter(CookingTableRecipe::getInputs),
             Codecs.SIMPLE_ITEMSTACK_CODEC.listOf().fieldOf("outputs").forGetter(CookingTableRecipe::getOutputs),
             ExtraCodecs.POSITIVE_INT.fieldOf("assemblyTime").forGetter(CookingTableRecipe::getAssemblyTime),
             resolveRemainderConsumer(),
             resolveExperience()
-    ).apply(instance, CookingTableRecipe::new));
+    ).apply(instance, (in, out, time, cons, exp) -> new CookingTableRecipe(id, in, out, time, cons, exp)));
 
     private final List<MultiIngredient> inputs;
     private final List<ItemStack> outputs;
     private final int assemblyTime;
 
-    public CookingTableRecipe(List<MultiIngredient> inputs, List<ItemStack> outputs, int assemblyTime, List<MultiIngredient> inputConsumers, float experience) {
-        super(inputConsumers, experience);
+    public CookingTableRecipe(ResourceLocation id, List<MultiIngredient> inputs, List<ItemStack> outputs, int assemblyTime, List<MultiIngredient> inputConsumers, float experience) {
+        super(id, inputConsumers, experience);
         this.inputs = inputs;
         this.outputs = outputs;
         this.assemblyTime = assemblyTime;

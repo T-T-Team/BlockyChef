@@ -27,6 +27,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.block.entity.RecipeRememberingBlockEntity;
 import tnt.blockychef.common.block.entity.ToasterBlockEntity;
@@ -76,7 +77,7 @@ public class ToasterBlock extends DyeableBlock implements EntityBlock {
         if (!level.isClientSide) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof ToasterBlockEntity toasterBlockEntity) {
-                ((ServerPlayer) player).openMenu(new SimpleMenuProvider(
+                NetworkHooks.openScreen((ServerPlayer) player, new SimpleMenuProvider(
                         (menuId, inventory, user) -> new ToasterMenu(menuId, inventory, toasterBlockEntity),
                         TITLE
                 ), pos);

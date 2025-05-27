@@ -25,7 +25,7 @@ public class KitchenCounterScreen extends AbstractContainerScreen<KitchenCounter
 
     @Override
     public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
-        renderBackground(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
+        renderBackground(pGuiGraphics);
         super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
         renderTooltip(pGuiGraphics, pMouseX, pMouseY);
     }

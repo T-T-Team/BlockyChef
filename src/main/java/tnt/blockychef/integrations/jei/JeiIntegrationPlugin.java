@@ -13,7 +13,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import tnt.blockychef.BlockyChef;
@@ -31,7 +30,7 @@ import java.util.function.Predicate;
 @JeiPlugin
 public class JeiIntegrationPlugin implements IModPlugin {
 
-    public static final ResourceLocation PLUGIN_ID = new ResourceLocation(BlockyChef.MODID, "jei_integration");
+    public static final ResourceLocation PLUGIN_ID = ResourceLocation.fromNamespaceAndPath(BlockyChef.MODID, "jei_integration");
 
     static final RecipeType<DryingRecipe> DRYING_RECIPE = new RecipeType<>(BlockyChef.resource("drying"), DryingRecipe.class);
     static final RecipeType<CuttingBoardRecipe> CUTTING_BOARD_RECIPE = new RecipeType<>(BlockyChef.resource("cutting_board"), CuttingBoardRecipe.class);
@@ -178,10 +177,10 @@ public class JeiIntegrationPlugin implements IModPlugin {
     private static <I extends Container, R extends Recipe<I>> List<R> getRecipes(net.minecraft.world.item.crafting.RecipeType<R> type, @Nullable Predicate<R> filter) {
         Level level = Minecraft.getInstance().level;
         RecipeManager manager = level.getRecipeManager();
-        List<RecipeHolder<R>> list = manager.getAllRecipesFor(type);
+        List<R> list = manager.getAllRecipesFor(type);
         if (filter == null) {
-            return list.stream().map(RecipeHolder::value).toList();
+            return list.stream().toList();
         }
-        return list.stream().map(RecipeHolder::value).filter(filter).toList();
+        return list.stream().filter(filter).toList();
     }
 }

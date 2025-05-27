@@ -8,7 +8,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -46,12 +45,11 @@ public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRe
 
     public boolean isValidInput(ItemStack stack, Level level) {
         RecipeManager manager = level.getRecipeManager();
-        List<RecipeHolder<DryingRecipe>> recipeList = manager.getAllRecipesFor(BlockyChefRecipeTypes.DRYING_RECIPE);
+        List<DryingRecipe> recipeList = manager.getAllRecipesFor(BlockyChefRecipeTypes.DRYING_RECIPE);
         if (stack.isEmpty())
             return false;
-        for (RecipeHolder<DryingRecipe> dryingRecipeHolder : recipeList) {
-            DryingRecipe recipe = dryingRecipeHolder.value();
-            if (recipe.isValidInput(stack)) {
+        for (DryingRecipe dryingRecipeHolder : recipeList) {
+            if (dryingRecipeHolder.isValidInput(stack)) {
                 return true;
             }
         }
@@ -142,8 +140,8 @@ public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRe
         }, CompoundTag.class);
     }
 
-    private void completedRecipe(RecipeHolder<DryingRecipe> holder, int slotIndex) {
-        ItemStack result = holder.value().getOutput().copy();
+    private void completedRecipe(DryingRecipe holder, int slotIndex) {
+        ItemStack result = holder.getOutput().copy();
         this.setItem(slotIndex, result);
         this.storeRecipe(holder);
 
@@ -157,7 +155,7 @@ public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRe
         private final int index;
 
         private int timeDrying;
-        private RecipeHolder<DryingRecipe> holder;
+        private DryingRecipe recipe;
         private boolean requireRefresh;
 
         public DryingSlot(int index) {
@@ -165,11 +163,11 @@ public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRe
         }
 
         public boolean hasRecipe() {
-            return holder != null;
+            return recipe != null;
         }
 
         public int getTotalDryingTime() {
-            return hasRecipe() ? holder.value().getDryingTime() : 0;
+            return hasRecipe() ? recipe.getDryingTime() : 0;
         }
 
         public int getCurrentDryingTime() {
@@ -177,20 +175,19 @@ public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRe
         }
 
         public ItemStack getResult() {
-            return hasRecipe() ? holder.value().getOutput() : ItemStack.EMPTY;
+            return hasRecipe() ? recipe.getOutput() : ItemStack.EMPTY;
         }
 
         void update() {
-            if (holder == null)
+            if (recipe == null)
                 return;
 
-            DryingRecipe recipe = holder.value();
             int totalDryingTime = recipe.getDryingTime();
             if (++timeDrying < totalDryingTime)
                 return;
 
             this.timeDrying = 0;
-            DryingRackBlockEntity.this.completedRecipe(this.holder, this.index);
+            DryingRackBlockEntity.this.completedRecipe(this.recipe, this.index);
         }
 
         CompoundTag serialize() {
@@ -207,11 +204,11 @@ public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRe
             this.requireRefresh = false;
             RecipeManager manager = level.getRecipeManager();
 
-            Optional<RecipeHolder<DryingRecipe>> optional = Helper.findRecipeFor(manager, BlockyChefRecipeTypes.DRYING_RECIPE, recipe -> recipe.value().isValidInput(this.getItemStack()));
-            RecipeHolder<DryingRecipe> recipeHolder = optional.orElse(null);
-            if (this.holder != recipeHolder) {
+            Optional<DryingRecipe> optional = Helper.findRecipeFor(manager, BlockyChefRecipeTypes.DRYING_RECIPE, recipe -> recipe.isValidInput(this.getItemStack()));
+            DryingRecipe recipeHolder = optional.orElse(null);
+            if (this.recipe != recipeHolder) {
                 this.timeDrying = 0;
-                this.holder = recipeHolder;
+                this.recipe = recipeHolder;
             }
         }
 

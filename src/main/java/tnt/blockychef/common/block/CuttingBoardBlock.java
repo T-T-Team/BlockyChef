@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.block.entity.CuttingBoardBlockEntity;
 import tnt.blockychef.common.block.entity.RecipeRememberingBlockEntity;
@@ -67,10 +68,12 @@ public class CuttingBoardBlock extends FullHorizontalAxisBlock implements Entity
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof CuttingBoardBlockEntity cuttingBoard) {
             if (!level.isClientSide) {
-                ((ServerPlayer) player).openMenu(new SimpleMenuProvider(
-                        (menuId, inventory, interactionPlayer) -> new CuttingBoardMenu(menuId, inventory, cuttingBoard),
-                        SCREEN_TITLE
-                ), pos);
+                NetworkHooks.openScreen(
+                        (ServerPlayer) player,
+                        new SimpleMenuProvider(
+                                (menuId, inventory, interactionPlayer) -> new CuttingBoardMenu(menuId, inventory, cuttingBoard),
+                                SCREEN_TITLE
+                        ), pos);
                 return InteractionResult.SUCCESS;
             }
         }

@@ -5,7 +5,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.event.network.CustomPayloadEvent;
+import net.minecraftforge.network.NetworkEvent;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.block.entity.ProcessableRecipeHolder;
 import tnt.tntlib.api.network.Network;
@@ -30,7 +30,7 @@ public class C2S_InitiateRecipeProcessing extends Client2ServerMessage {
     }
 
     @Override
-    public void handle(ServerPlayer player, CustomPayloadEvent.Context context) {
+    public void handle(ServerPlayer player, NetworkEvent.Context context) {
         ServerLevel level = player.serverLevel();
         if (!level.isLoaded(pos)) {
             return;

@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -30,7 +29,7 @@ public class MixingBowlBlockEntity extends RecipeRememberingBlockEntity<MixingBo
     public static final int[] INPUTS = {0, 1, 2, 3, 4, 5};
     public static final int[] OUTPUTS = {6, 7, 8};
 
-    private RecipeHolder<MixingBowlRecipe> activeRecipe;
+    private MixingBowlRecipe activeRecipe;
     private boolean mixing;
     private int mixingTime;
 
@@ -42,9 +41,9 @@ public class MixingBowlBlockEntity extends RecipeRememberingBlockEntity<MixingBo
         if (mixingBowl.activeRecipe == null || !mixingBowl.mixing) {
             return;
         }
-        MixingBowlRecipe recipe = mixingBowl.activeRecipe.value();
+        MixingBowlRecipe recipe = mixingBowl.activeRecipe;
         RecipeManager manager = level.getRecipeManager();
-        if (manager.getRecipeFor(BlockyChefRecipeTypes.MIXING_BOWL_RECIPE, mixingBowl, level, mixingBowl.activeRecipe.id()).isEmpty()) {
+        if (manager.getRecipeFor(BlockyChefRecipeTypes.MIXING_BOWL_RECIPE, mixingBowl, level, mixingBowl.activeRecipe.getId()).isEmpty()) {
             mixingBowl.setRecipe(null);
             return;
         }
@@ -104,7 +103,7 @@ public class MixingBowlBlockEntity extends RecipeRememberingBlockEntity<MixingBo
         if (activeRecipe == null || !mixing)
             return 0.0F;
         int oldTick = Math.max(0, mixingTime - 1);
-        int total = activeRecipe.value().getMixingTime();
+        int total = activeRecipe.getMixingTime();
         float f0 = oldTick / (float) total;
         float f1 = mixingTime / (float) total;
         return Interpolation.linear(f0, f1, partialTicks);
@@ -135,11 +134,11 @@ public class MixingBowlBlockEntity extends RecipeRememberingBlockEntity<MixingBo
         if (level == null)
             return;
         RecipeManager manager = level.getRecipeManager();
-        Optional<RecipeHolder<MixingBowlRecipe>> optional = manager.getRecipeFor(BlockyChefRecipeTypes.MIXING_BOWL_RECIPE, this, level);
+        Optional<MixingBowlRecipe> optional = manager.getRecipeFor(BlockyChefRecipeTypes.MIXING_BOWL_RECIPE, this, level);
         setRecipe(optional.orElse(null));
     }
 
-    private void setRecipe(@Nullable RecipeHolder<MixingBowlRecipe> recipe) {
+    private void setRecipe(@Nullable MixingBowlRecipe recipe) {
         if (activeRecipe != recipe) {
             activeRecipe = recipe;
             mixingTime = 0;

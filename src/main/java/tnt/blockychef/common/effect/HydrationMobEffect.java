@@ -1,6 +1,5 @@
 package tnt.blockychef.common.effect;
 
-import net.minecraft.world.effect.InstantenousMobEffect;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,7 +13,7 @@ public class HydrationMobEffect extends MobEffect {
     }
 
     @Override
-    public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
+    public boolean isDurationEffectTick(int duration, int amplifier) {
         return duration > 1;
     }
 

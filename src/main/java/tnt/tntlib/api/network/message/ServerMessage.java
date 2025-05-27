@@ -1,9 +1,9 @@
 package tnt.tntlib.api.network.message;
 
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.event.network.CustomPayloadEvent;
+import net.minecraftforge.network.NetworkEvent;
 
 public interface ServerMessage extends EncodeableMessage {
 
-    void handle(ServerPlayer sender, CustomPayloadEvent.Context context);
+    void handle(ServerPlayer sender, NetworkEvent.Context context);
 }

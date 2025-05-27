@@ -6,7 +6,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -24,7 +23,7 @@ import java.util.Optional;
 
 public class MeatGrinderBlockEntity extends RecipeRememberingBlockEntity<MeatGrinderRecipe> implements Synchronizable {
 
-    private RecipeHolder<MeatGrinderRecipe> recipe;
+    private MeatGrinderRecipe recipe;
     private int grindAmount;
 
     public MeatGrinderBlockEntity(BlockPos pos, BlockState state) {
@@ -55,17 +54,16 @@ public class MeatGrinderBlockEntity extends RecipeRememberingBlockEntity<MeatGri
     }
 
     public MeatGrinderRecipe getRecipe() {
-        return recipe != null ? recipe.value() : null;
+        return this.recipe;
     }
 
     public void processRecipe(Player player) {
-        if (recipe == null || !recipe.value().matches(this, level)) {
+        if (recipe == null || !recipe.matches(this, level)) {
             return;
         }
         level.playSound(null, worldPosition, BlockyChefSounds.MEAT_GRINDER, SoundSource.BLOCKS, 1.0F, 1.0F);
-        MeatGrinderRecipe grinderRecipe = recipe.value();
-        if (++grindAmount >= grinderRecipe.getProcessingAmount()) {
-            ItemStack result = grinderRecipe.assemble(this, level.registryAccess());
+        if (++grindAmount >= recipe.getProcessingAmount()) {
+            ItemStack result = recipe.assemble(this, level.registryAccess());
             inventoryHandler.setStackInSlot(0, result);
             storeRecipe(recipe);
             grindAmount = 0;
@@ -107,14 +105,14 @@ public class MeatGrinderBlockEntity extends RecipeRememberingBlockEntity<MeatGri
         if (level == null)
             return;
         RecipeManager recipeManager = level.getRecipeManager();
-        Optional<RecipeHolder<MeatGrinderRecipe>> optional = recipeManager.getRecipeFor(BlockyChefRecipeTypes.MEAT_GRINDER_RECIPE, this, level);
+        Optional<MeatGrinderRecipe> optional = recipeManager.getRecipeFor(BlockyChefRecipeTypes.MEAT_GRINDER_RECIPE, this, level);
         setRecipe(optional.orElse(null));
         if (!level.isClientSide) {
             BlockEntityHelper.sendBlockEntityClientData(this);
         }
     }
 
-    private void setRecipe(@Nullable RecipeHolder<MeatGrinderRecipe> recipe) {
+    private void setRecipe(@Nullable MeatGrinderRecipe recipe) {
         boolean changed = this.recipe != recipe;
         this.recipe = recipe;
         if (changed) {

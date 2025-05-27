@@ -4,6 +4,7 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Recipe;
 
@@ -12,10 +13,12 @@ import java.util.List;
 
 public abstract class AbstractFoodRecipe<C extends Container> implements Recipe<C> {
 
+    private final ResourceLocation id;
     private final float experience;
     private final List<MultiIngredient> outputConsumers;
 
-    protected AbstractFoodRecipe(List<MultiIngredient> outputConsumers, float experience) throws JsonParseException {
+    protected AbstractFoodRecipe(ResourceLocation id, List<MultiIngredient> outputConsumers, float experience) throws JsonParseException {
+        this.id = id;
         this.outputConsumers = outputConsumers;
         this.experience = experience;
         if (experience < 0.0F) {
@@ -47,6 +50,11 @@ public abstract class AbstractFoodRecipe<C extends Container> implements Recipe<
     @Override
     public boolean isSpecial() {
         return true;
+    }
+
+    @Override
+    public final ResourceLocation getId() {
+        return id;
     }
 
     void throwValidationError(String message) {

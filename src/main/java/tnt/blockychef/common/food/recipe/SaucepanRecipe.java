@@ -3,6 +3,7 @@ package tnt.blockychef.common.food.recipe;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class SaucepanRecipe extends AbstractFoodRecipe<SaucepanBlockEntity> implements BurnableRecipe {
 
-    public static final Codec<SaucepanRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final CodecRecipeSerializer.CodecProvider<SaucepanRecipe> CODEC = id -> RecordCodecBuilder.create(instance -> instance.group(
             MultiIngredient.CODEC.listOf().fieldOf("inputs").forGetter(SaucepanRecipe::getInputs),
             Codecs.SIMPLE_ITEMSTACK_CODEC.listOf().fieldOf("outputs").forGetter(SaucepanRecipe::getOutputs),
             Codecs.SIMPLE_ITEMSTACK_CODEC.listOf().fieldOf("burnOutputs").forGetter(SaucepanRecipe::getBurnOutputs),
@@ -24,7 +25,7 @@ public class SaucepanRecipe extends AbstractFoodRecipe<SaucepanBlockEntity> impl
             Codec.BOOL.optionalFieldOf("overcooking", false).forGetter(SaucepanRecipe::isOvercooked),
             resolveRemainderConsumer(),
             resolveExperience()
-    ).apply(instance, SaucepanRecipe::new));
+    ).apply(instance, (in, out, burn, cfg, overcook, cons, exp) -> new SaucepanRecipe(id, in, out, burn, cfg, overcook, cons, exp)));
 
     private final List<MultiIngredient> inputs;
     private final List<ItemStack> outputs;
@@ -32,8 +33,8 @@ public class SaucepanRecipe extends AbstractFoodRecipe<SaucepanBlockEntity> impl
     private final SaucePanCookingConfiguration configuration;
     private final boolean overcooking;
 
-    public SaucepanRecipe(List<MultiIngredient> inputs, List<ItemStack> outputs, List<ItemStack> burnOutputs, SaucePanCookingConfiguration configuration, boolean overcooking, List<MultiIngredient> outputConsumer, float experience) {
-        super(outputConsumer, experience);
+    public SaucepanRecipe(ResourceLocation id, List<MultiIngredient> inputs, List<ItemStack> outputs, List<ItemStack> burnOutputs, SaucePanCookingConfiguration configuration, boolean overcooking, List<MultiIngredient> outputConsumer, float experience) {
+        super(id, outputConsumer, experience);
         this.inputs = inputs;
         this.outputs = outputs;
         this.burnOutputs = burnOutputs;

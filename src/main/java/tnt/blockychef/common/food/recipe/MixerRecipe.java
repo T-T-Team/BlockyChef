@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -18,20 +19,20 @@ import java.util.List;
 
 public class MixerRecipe extends AbstractFoodRecipe<MixerBlockEntity> {
 
-    public static final Codec<MixerRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final CodecRecipeSerializer.CodecProvider<MixerRecipe> CODEC = id -> RecordCodecBuilder.create(instance -> instance.group(
             MultiIngredient.CODEC.listOf().fieldOf("inputs").forGetter(MixerRecipe::getInputs),
             Codecs.enumCodec(RpmValue.class).fieldOf("rpm").forGetter(MixerRecipe::getRpm),
             FluidStack.CODEC.fieldOf("output").forGetter(MixerRecipe::getOutput),
             resolveExperience(),
             resolveRemainderConsumer()
-    ).apply(instance, MixerRecipe::new));
+    ).apply(instance, (in, rpm, fluid, exp, cons) -> new MixerRecipe(id, in, rpm, fluid, exp, cons)));
 
     private final List<MultiIngredient> inputs;
     private final RpmValue rpm;
     private final FluidStack output;
 
-    public MixerRecipe(List<MultiIngredient> inputs, RpmValue rpm, FluidStack output, float experience, List<MultiIngredient> remainderConsumer) {
-        super(remainderConsumer, experience);
+    public MixerRecipe(ResourceLocation id, List<MultiIngredient> inputs, RpmValue rpm, FluidStack output, float experience, List<MultiIngredient> remainderConsumer) {
+        super(id, remainderConsumer, experience);
         this.inputs = inputs;
         this.rpm = rpm;
         this.output = output;

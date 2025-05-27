@@ -6,7 +6,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraftforge.items.SlotItemHandler;
 import org.jetbrains.annotations.NotNull;
 import tnt.blockychef.common.block.entity.PanBlockEntity;
@@ -111,7 +110,7 @@ public class PanMenu extends AbstractBlockEntityMenu<PanBlockEntity> {
 
         @Override
         public boolean mayPlace(@NotNull ItemStack stack) {
-            Optional<RecipeHolder<PanRecipe>> opt = Helper.findRecipeFor(panBlockEntity.getLevel().getRecipeManager(), BlockyChefRecipeTypes.PAN_RECIPE, recipe -> recipe.value().matches(stack) && !recipe.value().isOvercooked());
+            Optional<PanRecipe> opt = Helper.findRecipeFor(panBlockEntity.getLevel().getRecipeManager(), BlockyChefRecipeTypes.PAN_RECIPE, recipe -> recipe.matches(stack) && !recipe.isOvercooked());
             return super.mayPlace(stack) && opt.isPresent();
         }
     }

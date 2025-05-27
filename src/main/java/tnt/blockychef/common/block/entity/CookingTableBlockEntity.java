@@ -3,7 +3,6 @@ package tnt.blockychef.common.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -31,7 +30,7 @@ public class CookingTableBlockEntity extends RecipeRememberingBlockEntity<Cookin
     private final Integer[] colors = new Integer[2];
     private boolean cooking;
     private int cookingTime;
-    private RecipeHolder<CookingTableRecipe> recipeHolder;
+    private CookingTableRecipe recipeHolder;
 
     public CookingTableBlockEntity(BlockPos pos, BlockState state) {
         super(BlockyChefBlockEntities.COOKING_TABLE, pos, state);
@@ -44,9 +43,9 @@ public class CookingTableBlockEntity extends RecipeRememberingBlockEntity<Cookin
     public static void tick(Level level, BlockPos pos, BlockState state, CookingTableBlockEntity table) {
         if (table.recipeHolder == null || !table.cooking)
             return;
-        CookingTableRecipe recipe = table.recipeHolder.value();
+        CookingTableRecipe recipe = table.recipeHolder;
         RecipeManager manager = level.getRecipeManager();
-        if (manager.getRecipeFor(BlockyChefRecipeTypes.COOKING_TABLE_RECIPE, table, level, table.recipeHolder.id()).isEmpty()) {
+        if (manager.getRecipeFor(BlockyChefRecipeTypes.COOKING_TABLE_RECIPE, table, level, table.recipeHolder.getId()).isEmpty()) {
             table.setRecipe(null);
             return;
         }
@@ -75,7 +74,7 @@ public class CookingTableBlockEntity extends RecipeRememberingBlockEntity<Cookin
         if (recipeHolder == null || !cooking)
             return 0.0F;
         int oldTick = Math.max(0, cookingTime - 1);
-        int total = recipeHolder.value().getAssemblyTime();
+        int total = recipeHolder.getAssemblyTime();
         float f0 = oldTick / (float) total;
         float f1 = cookingTime / (float) total;
         return Interpolation.linear(f0, f1, partialTicks);
@@ -158,11 +157,11 @@ public class CookingTableBlockEntity extends RecipeRememberingBlockEntity<Cookin
         if (level == null)
             return;
         RecipeManager manager = level.getRecipeManager();
-        Optional<RecipeHolder<CookingTableRecipe>> optional = manager.getRecipeFor(BlockyChefRecipeTypes.COOKING_TABLE_RECIPE, this, level);
+        Optional<CookingTableRecipe> optional = manager.getRecipeFor(BlockyChefRecipeTypes.COOKING_TABLE_RECIPE, this, level);
         setRecipe(optional.orElse(null));
     }
 
-    private void setRecipe(@Nullable RecipeHolder<CookingTableRecipe> recipe) {
+    private void setRecipe(@Nullable CookingTableRecipe recipe) {
         if (recipeHolder != recipe) {
             recipeHolder = recipe;
             cooking = false;

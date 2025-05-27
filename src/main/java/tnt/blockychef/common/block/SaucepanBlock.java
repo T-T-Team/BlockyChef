@@ -22,6 +22,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.block.entity.RecipeRememberingBlockEntity;
 import tnt.blockychef.common.block.entity.SaucepanBlockEntity;
@@ -48,7 +49,8 @@ public class SaucepanBlock extends FullHorizontalAxisBlock implements EntityBloc
         BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
         if (blockEntity instanceof SaucepanBlockEntity saucepan) {
             if (!pLevel.isClientSide()) {
-                ((ServerPlayer) pPlayer).openMenu(
+                NetworkHooks.openScreen(
+                        (ServerPlayer) pPlayer,
                         new SimpleMenuProvider(
                                 (menuId, inv, owner) -> new SaucepanMenu(menuId, inv, saucepan),
                                 TITLE

@@ -4,7 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.network.CustomPayloadEvent;
+import net.minecraftforge.network.NetworkEvent;
 import tnt.blockychef.BlockyChef;
 import tnt.blockychef.common.data.fluids.FluidExtraction;
 import tnt.tntlib.api.network.Network;
@@ -38,7 +38,7 @@ public final class S2C_SendFluidExtractors extends Server2ClientMessage {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void handle(Minecraft minecraft, CustomPayloadEvent.Context context) {
+    public void handle(Minecraft minecraft, NetworkEvent.Context context) {
         BlockyChef.EXTRACTION_MANAGER.loadFromNetwork(extractionList);
     }
 }

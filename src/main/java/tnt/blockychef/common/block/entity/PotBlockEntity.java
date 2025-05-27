@@ -8,7 +8,6 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
@@ -187,13 +186,13 @@ public class PotBlockEntity extends RecipeRememberingBlockEntity<PotRecipe> impl
         }
 
         public boolean isLocked() {
-            return PotBlockEntity.this.canCook() && recipe != null && !recipe.value().isOvercooked() && BlockyChef.config.cooking.lockCookingSlots;
+            return PotBlockEntity.this.canCook() && recipe != null && !recipe.isOvercooked() && BlockyChef.config.cooking.lockCookingSlots;
         }
 
         public boolean shouldEvaporateWater(long gameTime) {
             if (recipe == null || cookingStatus == CookingStatus.NONE)
                 return false;
-            PotRecipe.PotCookingConfiguration configuration = recipe.value().getConfiguration();
+            PotRecipe.PotCookingConfiguration configuration = recipe.getConfiguration();
             if (configuration.isCooking(PotBlockEntity.this.temperature)) {
                 long consumeInterval = configuration.waterEvaporationRate();
                 return gameTime % consumeInterval == 0L;
@@ -204,10 +203,9 @@ public class PotBlockEntity extends RecipeRememberingBlockEntity<PotRecipe> impl
         public void stir() {
             if (recipe == null)
                 return;
-            PotRecipe potRecipe = recipe.value();
-            PotRecipe.PotCookingConfiguration configuration = potRecipe.getConfiguration();
+            PotRecipe.PotCookingConfiguration configuration = recipe.getConfiguration();
             burnAmount = Math.max(0, burnAmount - configuration.stirBurnLoss());
-            if (!potRecipe.isOvercooked()) {
+            if (!recipe.isOvercooked()) {
                 progressionTimer = Math.max(0, progressionTimer - configuration.stirProgressLoss());
             }
         }
@@ -220,13 +218,13 @@ public class PotBlockEntity extends RecipeRememberingBlockEntity<PotRecipe> impl
                 progressionTimer = 0;
                 return;
             }
-            PotRecipe.PotCookingConfiguration configuration = recipe.value().getConfiguration();
+            PotRecipe.PotCookingConfiguration configuration = recipe.getConfiguration();
             float temperature = PotBlockEntity.this.temperature;
             if (configuration.isCooking(temperature)) {
                 cookingStatus = CookingStatus.COOKING;
                 int requiredWaterLevel = configuration.minWaterLevel();
                 float burnScale = 0.0F;
-                if (configuration.isBurning(temperature) && !recipe.value().isOvercooked()) {
+                if (configuration.isBurning(temperature) && !recipe.isOvercooked()) {
                     cookingStatus = CookingStatus.BURNING;
                     if (configuration.withinMinMaxTemperature(temperature)) {
                         burnScale = 0.01F * configuration.burnSpeed();
@@ -239,14 +237,14 @@ public class PotBlockEntity extends RecipeRememberingBlockEntity<PotRecipe> impl
                 }
 
                 if ((burnAmount += burnScale) >= 1.0F) {
-                    ItemStack burnResult = recipe.value().getBurntResult().copy();
+                    ItemStack burnResult = recipe.getBurntResult().copy();
                     PotBlockEntity.this.setItem(getSlotIndex(), burnResult);
                     loadRecipe(PotBlockEntity.this.level.getRecipeManager());
                     return;
                 }
 
                 if (++progressionTimer >= totalTimer) {
-                    ItemStack result = recipe.value().getResult().copy();
+                    ItemStack result = recipe.getResult().copy();
                     PotBlockEntity pot = PotBlockEntity.this;
                     pot.setItem(getSlotIndex(), result);
                     pot.storeRecipe(recipe);
@@ -256,13 +254,13 @@ public class PotBlockEntity extends RecipeRememberingBlockEntity<PotRecipe> impl
         }
 
         @Override
-        public Optional<RecipeHolder<PotRecipe>> getRecipe(RecipeManager manager, ItemStack input) {
-            return Helper.findRecipeFor(manager, getRecipeType(), t -> t.value().matches(input));
+        public Optional<PotRecipe> getRecipe(RecipeManager manager, ItemStack input) {
+            return Helper.findRecipeFor(manager, getRecipeType(), t -> t.matches(input));
         }
 
         @Override
-        protected void recipeLoaded(RecipeHolder<PotRecipe> recipe, boolean updated) {
-            this.totalTimer = recipe.value().getConfiguration().time();
+        protected void recipeLoaded(PotRecipe recipe, boolean updated) {
+            this.totalTimer = recipe.getConfiguration().time();
         }
 
         @Override

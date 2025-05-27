@@ -29,6 +29,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.block.entity.GrillBlockEntity;
 import tnt.blockychef.common.block.entity.RecipeRememberingBlockEntity;
@@ -85,7 +86,8 @@ public class GrillBlock extends DyeableBlock implements EntityBlock, HeatSourceP
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof GrillBlockEntity grill) {
             if (!level.isClientSide()) {
-                ((ServerPlayer) player).openMenu(
+                NetworkHooks.openScreen(
+                        (ServerPlayer) player,
                         new SimpleMenuProvider(
                                 (menuId, inv, owner) -> new GrillMenu(menuId, inv, grill),
                                 TITLE

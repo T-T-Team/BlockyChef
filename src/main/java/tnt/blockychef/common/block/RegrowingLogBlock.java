@@ -42,7 +42,7 @@ public class RegrowingLogBlock extends RotatedPillarBlock implements Bonemealabl
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader pLevel, BlockPos pPos, BlockState pState) {
+    public boolean isValidBonemealTarget(LevelReader pLevel, BlockPos pPos, BlockState pState, boolean pIsClient) {
         return this.canRegrow(pState);
     }
 

@@ -4,6 +4,7 @@ import com.google.gson.JsonParseException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -18,15 +19,15 @@ import java.util.List;
 
 public class PotRecipe extends AbstractFoodRecipe<PotBlockEntity> implements BurnableRecipe {
 
-    public static final Codec<PotRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(PotRecipe::getInput),
+    public static final CodecRecipeSerializer.CodecProvider<PotRecipe> CODEC = id -> RecordCodecBuilder.create(instance -> instance.group(
+            Codecs.INGREDIENT.fieldOf("input").forGetter(PotRecipe::getInput),
             PotCookingConfiguration.CODEC.fieldOf("configuration").forGetter(PotRecipe::getConfiguration),
             Codecs.SIMPLE_ITEMSTACK_CODEC.fieldOf("result").forGetter(PotRecipe::getResult),
             Codecs.SIMPLE_ITEMSTACK_CODEC.fieldOf("burntResult").forGetter(PotRecipe::getBurntResult),
             Codec.BOOL.optionalFieldOf("overcooking", false).forGetter(t -> t.overcooking),
             resolveRemainderConsumer(),
             resolveExperience()
-    ).apply(instance, PotRecipe::new));
+    ).apply(instance, (in, cfg, res, burn, overcook, cons, exp) -> new PotRecipe(id, in, cfg, res, burn, overcook, cons, exp)));
 
     private final Ingredient input;
     private final PotCookingConfiguration configuration;
@@ -34,8 +35,8 @@ public class PotRecipe extends AbstractFoodRecipe<PotBlockEntity> implements Bur
     private final ItemStack burntResult;
     private final boolean overcooking;
 
-    public PotRecipe(Ingredient input, PotCookingConfiguration configuration, ItemStack result, ItemStack burntResult, boolean overcooking, List<MultiIngredient> outputConsumers, float experience) throws JsonParseException {
-        super(outputConsumers, experience);
+    public PotRecipe(ResourceLocation id, Ingredient input, PotCookingConfiguration configuration, ItemStack result, ItemStack burntResult, boolean overcooking, List<MultiIngredient> outputConsumers, float experience) throws JsonParseException {
+        super(id, outputConsumers, experience);
         this.input = input;
         this.configuration = configuration;
         this.result = result;

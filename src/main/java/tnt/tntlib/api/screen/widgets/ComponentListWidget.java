@@ -28,8 +28,8 @@ public class ComponentListWidget<T> extends ContainerWidget {
     }
 
     @Override
-    public boolean mouseScrolled(double pMouseX, double pMouseY, double pDelta, double deltaY) {
-        return UiHelper.handleMouseScrolled(deltaY, index, displayedCount, data.size(), newIndex -> {
+    public boolean mouseScrolled(double pMouseX, double pMouseY, double pDelta) {
+        return UiHelper.handleMouseScrolled(pDelta, index, displayedCount, data.size(), newIndex -> {
             this.index = newIndex;
             init();
         });

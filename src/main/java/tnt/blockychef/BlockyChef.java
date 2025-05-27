@@ -102,6 +102,6 @@ public final class BlockyChef {
     }
 
     public static ResourceLocation resource(String path) {
-        return new ResourceLocation(MODID, path);
+        return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
 }

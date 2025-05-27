@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import tnt.blockychef.common.block.entity.MixingBowlBlockEntity;
 import tnt.blockychef.common.block.entity.RecipeRememberingBlockEntity;
@@ -61,7 +62,7 @@ public class MixingBowlBlock extends FullHorizontalAxisBlock implements EntityBl
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (blockEntity instanceof MixingBowlBlockEntity mixingBowl) {
             if (!level.isClientSide) {
-                ((ServerPlayer) player).openMenu(new SimpleMenuProvider(
+                NetworkHooks.openScreen((ServerPlayer) player, new SimpleMenuProvider(
                         (menuId, inv, owner) -> new MixingBowlMenu(menuId, inv, mixingBowl),
                         TITLE
                 ), pos);

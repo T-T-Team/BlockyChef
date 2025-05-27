@@ -6,7 +6,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
@@ -34,7 +33,7 @@ public class MixerBlockEntity extends RecipeRememberingBlockEntity<MixerRecipe> 
 
     private final FluidContainer container;
     private MixerRecipe.RpmValue selectedRpm = MixerRecipe.RpmValue.MEDIUM;
-    private RecipeHolder<MixerRecipe> activeRecipe;
+    private MixerRecipe activeRecipe;
     private final Integer[] colors;
 
     public MixerBlockEntity(BlockPos pos, BlockState state) {
@@ -56,8 +55,7 @@ public class MixerBlockEntity extends RecipeRememberingBlockEntity<MixerRecipe> 
     public boolean canBlend() {
         if (activeRecipe == null)
             return false;
-        MixerRecipe recipe = activeRecipe.value();
-        FluidStack result = recipe.getOutput();
+        FluidStack result = activeRecipe.getOutput();
         FluidStack check = result.copy();
         check.setAmount(1);
         if (container.getFluids().size() > 0 && !container.hasFluid(check))
@@ -70,19 +68,18 @@ public class MixerBlockEntity extends RecipeRememberingBlockEntity<MixerRecipe> 
         if (activeRecipe == null)
             return;
         RecipeManager manager = level.getRecipeManager();
-        if (manager.getRecipeFor(BlockyChefRecipeTypes.MIXER_RECIPE, this, level, activeRecipe.id()).isEmpty())
+        if (manager.getRecipeFor(BlockyChefRecipeTypes.MIXER_RECIPE, this, level, activeRecipe.getId()).isEmpty())
             return;
-        MixerRecipe recipe = activeRecipe.value();
-        MixerRecipe.RpmValue recipeRpm = recipe.getRpm();
+        MixerRecipe.RpmValue recipeRpm = activeRecipe.getRpm();
         int rpmDiff = recipeRpm.ordinal() - selectedRpm.ordinal();
         if (rpmDiff <= 0) {
-            consumeIngredientsAndApplyCraftRemainder(recipe, INPUTS, new int[0], in -> {
+            consumeIngredientsAndApplyCraftRemainder(activeRecipe, INPUTS, new int[0], in -> {
                 List<ItemStack> allConsumed = new ArrayList<>();
-                recipe.getInputs().forEach(multiIngredient -> allConsumed.addAll(multiIngredient.consume(this, in)));
+                activeRecipe.getInputs().forEach(multiIngredient -> allConsumed.addAll(multiIngredient.consume(this, in)));
                 return allConsumed;
             });
             if (rpmDiff == 0) {
-                FluidStack stack = recipe.getOutput().copy();
+                FluidStack stack = activeRecipe.getOutput().copy();
                 container.insert(stack);
                 storeRecipe(activeRecipe);
                 if (!level.isClientSide) {
@@ -155,7 +152,7 @@ public class MixerBlockEntity extends RecipeRememberingBlockEntity<MixerRecipe> 
         if (level == null)
             return;
         RecipeManager manager = level.getRecipeManager();
-        Optional<RecipeHolder<MixerRecipe>> optional = manager.getRecipeFor(BlockyChefRecipeTypes.MIXER_RECIPE, this, level);
+        Optional<MixerRecipe> optional = manager.getRecipeFor(BlockyChefRecipeTypes.MIXER_RECIPE, this, level);
         setRecipe(optional.orElse(null));
     }
 
@@ -172,7 +169,7 @@ public class MixerBlockEntity extends RecipeRememberingBlockEntity<MixerRecipe> 
         refreshRecipe();
     }
 
-    private void setRecipe(@Nullable RecipeHolder<MixerRecipe> recipe) {
+    private void setRecipe(@Nullable MixerRecipe recipe) {
         if (recipe != activeRecipe) {
             activeRecipe = recipe;
             BlockEntityHelper.sendBlockEntityClientData(this);

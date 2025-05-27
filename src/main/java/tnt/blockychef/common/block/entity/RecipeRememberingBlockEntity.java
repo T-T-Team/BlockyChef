@@ -12,7 +12,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -26,8 +26,6 @@ import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiFunction;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 public abstract class RecipeRememberingBlockEntity<R extends AbstractFoodRecipe<?>> extends VanillaInventoryBlockEntity {
@@ -55,7 +53,7 @@ public abstract class RecipeRememberingBlockEntity<R extends AbstractFoodRecipe<
 
         CompoundTag usedRecipesTag = tag.getCompound("recipesUsed");
         for (String key : usedRecipesTag.getAllKeys()) {
-            this.recipesUsed.put(new ResourceLocation(key), usedRecipesTag.getInt(key));
+            this.recipesUsed.put(ResourceLocation.parse(key), usedRecipesTag.getInt(key));
         }
     }
 
@@ -69,18 +67,18 @@ public abstract class RecipeRememberingBlockEntity<R extends AbstractFoodRecipe<
     }
 
     public void awardUsedRecipesAndPopExperience(ServerPlayer player) {
-        List<RecipeHolder<?>> list = this.getRecipesToAwardAndPopExperience(player.serverLevel(), player.position());
+        List<Recipe<?>> list = this.getRecipesToAwardAndPopExperience(player.serverLevel(), player.position());
         player.awardRecipes(list);
         this.recipesUsed.clear();
     }
 
     @SuppressWarnings("unchecked")
-    public List<RecipeHolder<?>> getRecipesToAwardAndPopExperience(ServerLevel level, Vec3 position) {
-        List<RecipeHolder<?>> list = Lists.newArrayList();
+    public List<Recipe<?>> getRecipesToAwardAndPopExperience(ServerLevel level, Vec3 position) {
+        List<Recipe<?>> list = Lists.newArrayList();
         for(Object2IntMap.Entry<ResourceLocation> entry : this.recipesUsed.object2IntEntrySet()) {
             level.getRecipeManager().byKey(entry.getKey()).ifPresent(recipe -> {
                 list.add(recipe);
-                createExperience(level, position, entry.getIntValue(), ((RecipeHolder<R>) recipe).value().getExperience());
+                createExperience(level, position, entry.getIntValue(), ((R) recipe).getExperience());
             });
         }
 
@@ -94,8 +92,8 @@ public abstract class RecipeRememberingBlockEntity<R extends AbstractFoodRecipe<
         getRecipesToAwardAndPopExperience((ServerLevel) level, Vec3.atCenterOf(worldPosition));
     }
 
-    public void storeRecipe(RecipeHolder<R> recipe) {
-        this.recipesUsed.addTo(recipe.id(), 1);
+    public void storeRecipe(R recipe) {
+        this.recipesUsed.addTo(recipe.getId(), 1);
     }
 
     protected void consumeIngredientsAndApplyCraftRemainder(R recipe, int[] inputs, int[] outputs, Function<int[], List<ItemStack>> ingredientConsumer) {

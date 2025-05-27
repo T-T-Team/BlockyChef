@@ -66,8 +66,8 @@ public class ContainerWidget extends AbstractWidget implements ContainerEventHan
     }
 
     @Override
-    public boolean mouseScrolled(double pMouseX, double pMouseY, double pDeltaX, double pDeltaY) {
-        return ContainerEventHandler.super.mouseScrolled(pMouseX, pMouseY, pDeltaX, pDeltaY);
+    public boolean mouseScrolled(double pMouseX, double pMouseY, double pDelta) {
+        return ContainerEventHandler.super.mouseScrolled(pMouseX, pMouseY, pDelta);
     }
 
     @Override
