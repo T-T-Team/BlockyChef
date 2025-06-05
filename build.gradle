@@ -122,7 +122,7 @@ mixin {
 
 jar.finalizedBy('reobfJar')
 
-tasks.register('curseforge', TaskPublishCurseForge).configure {
+tasks.register('releaseMod', TaskPublishCurseForge).configure {
     group = 'publishing'
     apiToken = project.hasProperty("CURSEFORGE_TOKEN") ? project.findProperty("CURSEFORGE_TOKEN") : ""
     debugMode = debug.toBoolean()
@@ -132,7 +132,7 @@ tasks.register('curseforge', TaskPublishCurseForge).configure {
     buildFile.changelogType = Constants.CHANGELOG_MARKDOWN
     buildFile.changelog = file("./CHANGELOG.md").exists() ? file("./CHANGELOG.md").text : "-- No changelog provided --"
     buildFile.displayName = "${mod_id}-${minecraft_version}-${mod_version}"
-    buildFile.addModLoader("Forge")
+    buildFile.addModLoader("Forge", "NeoForge")
     buildFile.addJavaVersion("Java 17")
     buildFile.addRequirement("configuration")
     buildFile.addGameVersion(minecraft_version)

@@ -24,6 +24,14 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
 
       - name: Release
-        run: ./gradlew curseforge -PCURSEFORGE_TOKEN=${{ secrets.CF_TOKEN }}
+        run: ./gradlew releaseMod -PCURSEFORGE_TOKEN=${{ secrets.CF_TOKEN }}
 
-      # TODO schedule bot event
+  notify:
+    runs-on: ubuntu-latest
+    needs:
+      release
+
+    steps:
+      - name: Trigger webhook
+        run: |
+          curl ${{ secrets.WEBHOOK_URL }} --json '{"username":"Release bot","avatar_url":"https://cdn.discordapp.com/avatars/1308464796831711244/e886df028da3a37ad84b05e3fb0c3b8b.webp?size=32","content":"<@&1050082657511411763>","embeds":[{"title":"BlockyChef","url":"https://github.com/T-T-Team/BlockyChef","description":"New update available","color":16179907,"author":{"name":"Mod updates","icon_url":"https://cdn.discordapp.com/avatars/1308464796831711244/e886df028da3a37ad84b05e3fb0c3b8b.webp?size=32"},"thumbnail":{"url":"https://media.forgecdn.net/avatars/1303/786/638847625782417518.png"},"fields":[{"name":"CurseForge","value":"[Download](<https://www.curseforge.com/minecraft/mc-mods/blockychef>)","inline":true},{"name":"Sources","value":"[GitHub](<https://github.com/T-T-Team/BlockyChef>)","inline":true},{"name":"Support","value":"[Patreon](<https://www.patreon.com/c/tnt_team>)","inline":false},{"name":"Report issue","value":"[GitHub](<https://github.com/T-T-Team/BlockyChef/issues>)","inline":true}],"footer":{"text":"CurseForge file may take up to 1 hour to be published"}}]}'
