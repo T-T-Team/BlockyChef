@@ -21,7 +21,7 @@ import tnt.blockychef.integrations.Integrations;
 
 public class ThirstOverlay implements IGuiOverlay {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation("blockychef:textures/icon/hydration_icons.png");
+    public static final ResourceLocation TEXTURE = BlockyChef.resource("textures/icon/hydration_icons.png");
     private static int fadeMultiplier = 1;
     private static float alpha;
     private static float lastAlpha;

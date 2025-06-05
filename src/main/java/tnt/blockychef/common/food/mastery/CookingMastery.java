@@ -6,13 +6,17 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
+import net.minecraftforge.registries.ForgeRegistries;
 import tnt.blockychef.BlockyChef;
+import tnt.blockychef.network.NetworkManager;
+import tnt.blockychef.network.message.S2C_SendMasteryLevelUpEvent;
 import tnt.tntlib.api.serialization.Codecs;
 
 import java.util.*;
@@ -45,8 +49,15 @@ public record CookingMastery(Item item, List<Tier> tiers, List<MasteryGroup> gro
             CompoundTag tag = stack.getOrCreateTag();
             tag.putInt(QUALITY_TAG_KEY, quality.ordinal());
             int count = stack.getCount();
+            Tier tier = cookingMastery.getTier(cookCounter);
+            Tier nextTier = cookingMastery.getTier(cookCounter + count);
             masteryDataProvider.addCookedCount(item, count);
             masteryDataProvider.sendClientData();
+            if (tier != nextTier && player instanceof ServerPlayer serverPlayer) {
+                ResourceLocation id = ForgeRegistries.ITEMS.getKey(item);
+                NetworkManager.DISPATCHER.sendToClient(serverPlayer, new S2C_SendMasteryLevelUpEvent(id, cookCounter));
+                // TODO play sound
+            }
         }));
     }
 
@@ -156,6 +167,11 @@ public record CookingMastery(Item item, List<Tier> tiers, List<MasteryGroup> gro
 
             Badge() {
                 this.icon = BlockyChef.resource("textures/icon/badge_" + name().toLowerCase(Locale.ROOT) + ".png");
+            }
+
+            public int getTexturePositionX() {
+                int index = ordinal();
+                return (32 * index) % 256;
             }
 
             public ResourceLocation getIconPath() {

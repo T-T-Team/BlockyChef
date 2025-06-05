@@ -11,6 +11,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
@@ -21,6 +22,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import tnt.blockychef.client.BlockyChefClient;
 import tnt.blockychef.common.CreativeTabs;
+import tnt.blockychef.common.MasteryCommand;
 import tnt.blockychef.common.data.fluids.FluidExtractionManager;
 import tnt.blockychef.common.food.mastery.CookingMasteryManager;
 import tnt.blockychef.common.food.mastery.MasteryDataProvider;
@@ -48,7 +50,7 @@ public final class BlockyChef {
     public static BlockyChefConfig config;
 
     public BlockyChef() {
-        config = Configuration.registerConfig(BlockyChefConfig.class, ConfigFormats.yaml()).getConfigInstance();
+        config = Configuration.registerConfig(BlockyChefConfig.class, ConfigFormats.YAML).getConfigInstance();
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> BlockyChefClient.CLIENT::constructClient);
 
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -64,6 +66,7 @@ public final class BlockyChef {
         forgeBus.addListener(this::addDatapackLoaders);
         forgeBus.addListener(this::persistPlayerData);
         forgeBus.addListener(this::sendLoginPayloads);
+        forgeBus.addListener(this::registerCommands);
     }
 
     private void setup(FMLCommonSetupEvent event) {
@@ -99,6 +102,10 @@ public final class BlockyChef {
     private void addDatapackLoaders(AddReloadListenerEvent event) {
         event.addListener(EXTRACTION_MANAGER);
         event.addListener(MASTERY_MANAGER);
+    }
+
+    private void registerCommands(RegisterCommandsEvent event) {
+        MasteryCommand.create(event.getDispatcher());
     }
 
     public static ResourceLocation resource(String path) {

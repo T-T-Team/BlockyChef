@@ -10,7 +10,6 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -120,10 +119,9 @@ public class MasteryScreen extends Screen {
             int border = 2;
             pGuiGraphics.renderItem(cachedItemStack, getX() + border, getY() + border);
             CookingMastery.Tier.Badge badge = data.tier().badge();
-            ResourceLocation icon = badge.getIconPath();
             RenderSystem.enableBlend();
             int badgeSize = MASTERY_SIZE + border * 2;
-            pGuiGraphics.blit(icon, getX() - border, getY() + border, 0, 0, badgeSize, badgeSize, badgeSize, badgeSize);
+            pGuiGraphics.blit(badge.getIconPath(), getX() - border, getY() + border, 0, 0, badgeSize, badgeSize, badgeSize, badgeSize);
             RenderSystem.disableBlend();
             Component text;
             if (badge == CookingMastery.Tier.Badge.DIAMOND) {

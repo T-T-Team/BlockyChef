@@ -20,6 +20,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.lwjgl.glfw.GLFW;
 import tnt.blockychef.BlockyChef;
+import tnt.blockychef.client.render.MasteryOverlay;
 import tnt.blockychef.client.render.block.*;
 import tnt.blockychef.client.render.thirst.ThirstOverlay;
 import tnt.blockychef.client.render.thirst.ThirstTooltipHandler;
@@ -38,11 +39,12 @@ public final class BlockyChefClient {
     public static final BlockyChefClient CLIENT = new BlockyChefClient();
 
     public BlockyChefClientConfig config;
+    private final MasteryOverlay masteryOverlay = new MasteryOverlay();
 
     private KeyMapping masteryKey;
 
     public void constructClient() {
-        config = Configuration.registerConfig(BlockyChefClientConfig.class, ConfigFormats.yaml()).getConfigInstance();
+        config = Configuration.registerConfig(BlockyChefClientConfig.class, ConfigFormats.YAML).getConfigInstance();
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
 
@@ -59,6 +61,10 @@ public final class BlockyChefClient {
         forgeEventBus.addListener(this::tickClient);
         forgeEventBus.addListener(this::adjustTooltip);
         forgeEventBus.addListener(this::handleKeyPress);
+    }
+
+    public MasteryOverlay getMasteryOverlay() {
+        return masteryOverlay;
     }
 
     private void setup(FMLClientSetupEvent event) {
@@ -79,7 +85,8 @@ public final class BlockyChefClient {
     }
 
     private void registerGuiOverlays(RegisterGuiOverlaysEvent event) {
-        event.registerAbove(new ResourceLocation("minecraft:food_level"), "thirst", new ThirstOverlay());
+        event.registerAbove(ResourceLocation.parse("minecraft:food_level"), "thirst", new ThirstOverlay());
+        event.registerAboveAll("mastery", masteryOverlay);
     }
 
     private void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
@@ -150,5 +157,6 @@ public final class BlockyChefClient {
             return;
         }
         ThirstOverlay.tick();
+        MasteryOverlay.tick();
     }
 }
