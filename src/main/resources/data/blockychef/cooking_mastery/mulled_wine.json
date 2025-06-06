@@ -2,6 +2,7 @@
   "item": "blockychef:mulled_wine",
   "groups": [
     "DRINK",
-    "HOT_DRINK"
+    "HOT_DRINK",
+    "ALCOHOL"
   ]
 }
