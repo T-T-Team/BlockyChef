@@ -29,12 +29,12 @@ public record CookingMastery(Item item, List<Tier> tiers, List<MasteryGroup> gro
     public static final String QUALITY_TAG_KEY = "blockychef.quality";
     public static final List<Tier> DEFAULT_TIER_LIST = ImmutableList.<Tier>builder()
             .add(
-                    new Tier(Tier.Badge.NONE, 0, createQualitiesMap(0.45F, 0.15F, 0.0F, 0.0F), SoundEvents.EMPTY),
-                    new Tier(Tier.Badge.BRONZE, 15, createQualitiesMap(0.55F, 0.30F, 0.15F, 0.0F), SoundEvents.ALLAY_HURT),
-                    new Tier(Tier.Badge.SILVER, 35, createQualitiesMap(0.7F, 0.45F, 0.3F, 0.1F), SoundEvents.EMPTY),
-                    new Tier(Tier.Badge.GOLD, 60, createQualitiesMap(1.0F, 0.65F, 0.45F, 0.15F), SoundEvents.EMPTY),
-                    new Tier(Tier.Badge.EMERALD, 90, createQualitiesMap(1.0F, 0.85F, 0.6F, 0.25F), SoundEvents.EMPTY),
-                    new Tier(Tier.Badge.DIAMOND, 130, createQualitiesMap(0.0F, 1.0F, 0.75F, 0.45F), SoundEvents.EMPTY)
+                    new Tier(Tier.Badge.NONE, 0, createQualitiesMap(0.45F, 0.15F, 0.0F, 0.0F), SoundEvents.EMPTY, 1.0F, 1.0F),
+                    new Tier(Tier.Badge.BRONZE, 15, createQualitiesMap(0.55F, 0.30F, 0.15F, 0.0F), SoundEvents.ALLAY_HURT, 1.0F, 1.0F),
+                    new Tier(Tier.Badge.SILVER, 35, createQualitiesMap(0.7F, 0.45F, 0.3F, 0.1F), SoundEvents.EMPTY, 1.0F, 1.0F),
+                    new Tier(Tier.Badge.GOLD, 60, createQualitiesMap(1.0F, 0.65F, 0.45F, 0.15F), SoundEvents.EMPTY, 1.0F, 1.0F),
+                    new Tier(Tier.Badge.EMERALD, 90, createQualitiesMap(1.0F, 0.85F, 0.6F, 0.25F), SoundEvents.EMPTY, 1.0F, 1.0F),
+                    new Tier(Tier.Badge.DIAMOND, 130, createQualitiesMap(0.0F, 1.0F, 0.75F, 0.45F), SoundEvents.EMPTY, 1.0F, 1.0F)
             )
             .build();
     public static final Codec<CookingMastery> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -59,7 +59,7 @@ public record CookingMastery(Item item, List<Tier> tiers, List<MasteryGroup> gro
             if (tier != nextTier && player instanceof ServerPlayer serverPlayer) {
                 ResourceLocation id = ForgeRegistries.ITEMS.getKey(item);
                 NetworkManager.DISPATCHER.sendToClient(serverPlayer, new S2C_SendMasteryLevelUpEvent(id, cookCounter));
-                player.level().playSound(player, player.blockPosition(), nextTier.sound(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                player.level().playSound(player, player.blockPosition(), nextTier.sound(), SoundSource.PLAYERS, nextTier.volume(), nextTier.pitch());
             }
         }));
     }
@@ -141,7 +141,7 @@ public record CookingMastery(Item item, List<Tier> tiers, List<MasteryGroup> gro
         return quality != null ? quality.applyFood(original) : original;
     }
 
-    public record Tier(Badge badge, int cookAmount, Map<FoodQuality, Float> qualityChancesMap, SoundEvent sound) {
+    public record Tier(Badge badge, int cookAmount, Map<FoodQuality, Float> qualityChancesMap, SoundEvent sound, float volume, float pitch) {
 
         public static final Codec<Tier> TIER_CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 Codecs.enumCodec(Badge.class).optionalFieldOf("badge", Badge.NONE).forGetter(Tier::badge),
@@ -150,9 +150,11 @@ public record CookingMastery(Item item, List<Tier> tiers, List<MasteryGroup> gro
                         Codecs.enumCodec(FoodQuality.class),
                         Codec.FLOAT
                 ).fieldOf("qualities").forGetter(Tier::qualityChancesMap),
-                BuiltInRegistries.SOUND_EVENT.byNameCodec().fieldOf("sound").forGetter(Tier::sound)
+                BuiltInRegistries.SOUND_EVENT.byNameCodec().fieldOf("sound").forGetter(Tier::sound),
+                Codec.FLOAT.fieldOf("volume").forGetter(Tier::volume),
+                Codec.FLOAT.fieldOf("pitch").forGetter(Tier::pitch)
         ).apply(instance, Tier::new));
-        public static final Tier DEFAULT_TIER = new Tier(Badge.NONE, -1, createQualitiesMap(1.0F, 0.0F, 0.0F, 0.0F), SoundEvents.EMPTY);
+        public static final Tier DEFAULT_TIER = new Tier(Badge.NONE, -1, createQualitiesMap(1.0F, 0.0F, 0.0F, 0.0F), SoundEvents.EMPTY, 1.0F, 1.0F);
 
         public float getChanceForQuality(FoodQuality quality) {
             return qualityChancesMap.getOrDefault(quality, 0.0F);
