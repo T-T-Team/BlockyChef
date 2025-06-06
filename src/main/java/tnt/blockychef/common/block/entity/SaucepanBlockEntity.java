@@ -95,7 +95,11 @@ public class SaucepanBlockEntity extends RecipeRememberingBlockEntity<SaucepanRe
                 }
                 saucepan.burnAmount += f;
                 if (saucepan.burnAmount >= 1.0F) {
-                    saucepan.consumeInputs();
+                    saucepan.consumeIngredientsAndApplyCraftRemainder(recipe, INPUTS, OUTPUTS, in -> {
+                        List<ItemStack> allConsumed = new ArrayList<>();
+                        recipe.getInputs().forEach(ing -> allConsumed.addAll(ing.consume(saucepan, in)));
+                        return allConsumed;
+                    });
                     saucepan.setRecipe(null);
                     ItemStack[] burned = recipe.getBurnOutputs().stream().map(ItemStack::copy).toArray(ItemStack[]::new);
                     if (!MenuInventoryHelper.canFitItems(burned, saucepan, OUTPUTS)) {
