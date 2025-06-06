@@ -774,6 +774,13 @@
   "label.blockychef.variant.furniture.full_concrete": "Concrete",
   "label.blockychef.variant.furniture.mixed_wood_top": "Mixed, Wooden top",
   "label.blockychef.variant.furniture.mixed_concrete_top": "Mixed, Concrete top",
+  "label.blockychef.mastery_level": "Mastery for item %s has been upgraded to %s tier",
+  "label.blockychef.badge.none": "NONE",
+  "label.blockychef.badge.bronze": "BRONZE",
+  "label.blockychef.badge.silver": "SILVER",
+  "label.blockychef.badge.gold": "GOLD",
+  "label.blockychef.badge.emerald": "EMERALD",
+  "label.blockychef.badge.diamond": "DIAMOND",
 
   "tooltip.blockychef.quality": "Quality: %s",
   "tooltip.blockychef.decay_progress.default": "Decay: %s",
@@ -913,7 +920,6 @@
   "fluid_type.blockychef.honey_tea_fluid": "Honey Tea",
   "fluid_type.blockychef.milk_tea_fluid": "Milk Tea",
   "fluid_type.blockychef.espresso_fluid": "Espresso",
-
 
   "blockychef.food.quality.bad": "Bad",
   "blockychef.food.quality.average": "Average",
