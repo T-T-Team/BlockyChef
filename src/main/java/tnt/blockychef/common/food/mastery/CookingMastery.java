@@ -59,7 +59,7 @@ public record CookingMastery(Item item, List<Tier> tiers, List<MasteryGroup> gro
             if (tier != nextTier && player instanceof ServerPlayer serverPlayer) {
                 ResourceLocation id = ForgeRegistries.ITEMS.getKey(item);
                 NetworkManager.DISPATCHER.sendToClient(serverPlayer, new S2C_SendMasteryLevelUpEvent(id, cookCounter));
-                player.level().playSound(player, player.blockPosition(), nextTier.sound(), SoundSource.PLAYERS, nextTier.volume(), nextTier.pitch());
+                player.level().playSound(null, player.blockPosition(), nextTier.sound(), SoundSource.PLAYERS, nextTier.volume(), nextTier.pitch());
             }
         }));
     }
