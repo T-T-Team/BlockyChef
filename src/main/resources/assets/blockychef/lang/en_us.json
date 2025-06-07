@@ -774,7 +774,7 @@
   "label.blockychef.variant.furniture.full_concrete": "Concrete",
   "label.blockychef.variant.furniture.mixed_wood_top": "Mixed, Wooden top",
   "label.blockychef.variant.furniture.mixed_concrete_top": "Mixed, Concrete top",
-  "label.blockychef.mastery_level": "Mastery for item %s has been upgraded to %s tier",
+  "label.blockychef.mastery_level": " %s has Leveled Up to %s Tier",
   "label.blockychef.badge.none": "NONE",
   "label.blockychef.badge.bronze": "BRONZE",
   "label.blockychef.badge.silver": "SILVER",
