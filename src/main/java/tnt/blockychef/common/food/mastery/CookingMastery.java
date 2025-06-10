@@ -32,7 +32,7 @@ public record CookingMastery(Item item, List<Tier> tiers, List<MasteryGroup> gro
             .add(
                     new Tier(Tier.Badge.NONE, 0, createQualitiesMap(0.45F, 0.15F, 0.0F, 0.0F), SoundEvents.EMPTY, 1.0F, 1.0F, 0x606060),
                     new Tier(Tier.Badge.BRONZE, 15, createQualitiesMap(0.55F, 0.30F, 0.15F, 0.0F), SoundEvents.EXPERIENCE_ORB_PICKUP, 0.6F, 1.0F, 0xCD7F32),
-                    new Tier(Tier.Badge.SILVER, 35, createQualitiesMap(0.7F, 0.45F, 0.3F, 0.1F), SoundEvents.EXPERIENCE_ORB_PICKUP, 1.0F, 0.5F, 0xC0C0C0),
+                    new Tier(Tier.Badge.SILVER, 35, createQualitiesMap(0.75F, 0.45F, 0.3F, 0.1F), SoundEvents.EXPERIENCE_ORB_PICKUP, 1.0F, 0.5F, 0xC0C0C0),
                     new Tier(Tier.Badge.GOLD, 60, createQualitiesMap(1.0F, 0.65F, 0.45F, 0.15F), SoundEvents.PLAYER_LEVELUP, 0.6F, 1.0F, 0xA58512),
                     new Tier(Tier.Badge.EMERALD, 90, createQualitiesMap(1.0F, 0.85F, 0.6F, 0.25F), SoundEvents.PLAYER_LEVELUP, 1.0F, 0.6F, 0x12A514),
                     new Tier(Tier.Badge.DIAMOND, 130, createQualitiesMap(0.0F, 1.0F, 0.75F, 0.45F), SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, 1.0F, 0.8F, 0x00B0BA)
