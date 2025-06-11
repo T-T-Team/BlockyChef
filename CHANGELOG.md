@@ -14,10 +14,15 @@ Bear in mind that some crops and trees grow in different biomes.
 ![wild_crops](https://media.forgecdn.net/attachments/1212/219/wild-crops-png.png)
 
 ### Farming
-When you gather some wild crops around the world you can simply farm then in the plowed soil as you usually do in vanilla but those crops grows slower, and you can not use bone meal on them. You collect ripe crops with RMB so they always stay planted.
+When you gather some wild crops around the world you can simply farm them in the plowed soil as you usually do in vanilla but those crops grows slower, and you can not use bone meal on them.
+You can collect ripe crops with RMB so they always stay planted.
 
 ### Weeds
-Beware of weed infesting your farm. After a while weed starts to occur in your farm, and you need to get rid of it before it will destroy your crops. To remove these pesky weeds you need to use a hoe with RMB. Only the fully grown weed can destroy your plant so you don't need to treat your garden everytime you see some tiny weeds.
+Beware of weeds infesting your farm.
+After a while weed starts to occur in your farm, and you need to get rid of it before it will destroy your crops.
+To remove these pesky weeds you need to use a hoe with RMB.
+Only the fully grown weed can destroy your plant so you don't need to treat your garden everytime you see some tiny weeds.
+Wow, nteherite hoe finally got its purpose. :-)
 
 ![weeds](https://media.forgecdn.net/attachments/1212/218/weeds-png.png)
 
@@ -26,17 +31,20 @@ As you collect some wild fruits from trees you can combine three of them with va
 Again after the tree will grow you can not use bone meal on fruits to speed up growing process.
 
 ### Tree fruit decay
-When fruits on a tree reach the ripe stage you need to harvest them before they fall on the ground, and you will not be able to use them. Don't worry after fruit falling or harvesting they will keep regrowing again and again so you don't need to plant the tree again. Just from time to time check your orchard and collect all ripe fruits.
+When fruits on a tree reach the ripe stage you need to harvest them before they fall on the ground, and you will not be able to use them.
+Don't worry after fruit falling or harvesting they will keep regrowing again and again so you don't need to plant the tree anymore.
+Just from time to time check your orchard and collect all ripe fruits.
 
 ![fruit_trees](https://media.forgecdn.net/attachments/1212/223/fruit-trees-png.png)
 
 
 ### Cooking ware
-All cooking ware in BlockyChef is essential for preparing drinks and meals so try to craft them all.
-There are a lot of were you can use for cooking but beware that some of them need coal, water or oil to operate properly.
+Every cooking ware in BlockyChef is essential for preparing drinks and meals so try to craft them all.
+There are a lot of machines you can use for cooking but beware that some of them need coal, water or oil to operate properly.
 
 ### Furniture
-You can craft some decorative blocks to make your kitchen look better. Kitchen counter and cabinets are also useful for its accessible storage. All those blocks are dyeable with Minecraft dyes and even some cooking ware can be dyed as well for example Mixer, Stove, Pasta machine, Juicer and more.
+You can craft some decorative blocks to make your kitchen look better.
+Kitchen counters and cabinets are also useful for its accessible storage. All those blocks are dyeable with Minecraft dyes and even some cooking ware can be dyed as well for example Mixer, Stove, Pasta machine, Juicer and more.
 
 ![kitchen](https://media.forgecdn.net/attachments/1212/225/kitchen-png.png)
 
@@ -56,19 +64,20 @@ After the food is done you need to put it out from cooking were quickly because 
 
 
 ### Vaporizing
-Vaporizing is similar mechanics as overcooking, but it's for teapot. When your drink is ready turn off the heat in teapot, or it will vaporize after a while.
+Vaporizing is similar mechanics as overcooking, but it's for teapot.
+When your drink is ready, turn off the heat in teapot or it will vaporize after a while.
 
 ### Mixer's power
 Be careful when using a mixer. When you are operating it make sure to start with low power. Using high power may cause your ingredients splash all over the kitchen wasting all its contents.
 
 ### Toaster's timer
-When using toaster make sure you set the right amount of time for toasting.
+When using a toaster make sure you set the right amount of time for toasting.
 If you set too short interval the food will not cook.
 And if you use too long interval the food will burn.
 
 ### Food Quality
 As you will be preparing certain types of foods and drinks you will see that item has its quality.
-Quality of the food is randomly rolled and is influenced by the level of you mastery skill.
+Quality of the food is randomly rolled and is influenced by the level of your mastery skill.
 Quality also determines the nutrition of the meal. The higher the quality the better nutrition you can get.
 There are five qualities:
 - Bad > -1 hunger/hydration and -1 saturation
