@@ -22,7 +22,7 @@ Beware of weeds infesting your farm.
 After a while weed starts to occur in your farm, and you need to get rid of it before it will destroy your crops.
 To remove these pesky weeds you need to use a hoe with RMB.
 Only the fully grown weed can destroy your plant so you don't need to treat your garden everytime you see some tiny weeds.
-Wow, nteherite hoe finally got its purpose. :-)
+Wow, netherite hoe finally got its purpose. :-)
 
 ![weeds](https://media.forgecdn.net/attachments/1212/218/weeds-png.png)
 
@@ -53,10 +53,10 @@ Kitchen counters and cabinets are also useful for its accessible storage. All th
 
 ### Burning and overcooking
 When you will be using any heat related cooking ware (pot, saucepan, pan, stove, teapot and grill) you need to pay attention to food preparation requirements.
-Firstly you need to set propper temperature.
-Too low temperature will cause the food never be cooked.
+Firstly you need to set proper temperature.
+Too low temperature will cause the food to never be cooked.
 Too high temperatures will lead food to burn.
-You also need to add oil to frying pan or watter to pot so the food will not burn instantly.
+You also need to add oil to frying pan or water to pot so the food will not burn instantly.
 When you set all things in the right values you still can burn the food if you don't stir/flip it during a cooking process. So make sure that red indicator never reaches max value, otherwise it will burn your food, and you will waste all ingredients. 
 After the food is done you need to put it out from cooking were quickly because once the food is prepared it starts to overcook.
 
@@ -109,6 +109,9 @@ Stove and grill needs some energy to generate heat for cooking (stove also gener
 Stove accepts all kinds of fuel same as vanilla furnace. So you can put into stove coal, wood or even lava bucket.
 Grill can use only coal and charcoal.
 
+## Required mod !!!
+[Configuration](https://www.curseforge.com/minecraft/mc-mods/configuration) 
+
 ## Mod recommendations
 For the best experience with BlockyChef we highly recommend you to use these three other mods.
 
@@ -120,6 +123,7 @@ For the best experience with BlockyChef we highly recommend you to use these thr
 Currently, there are not too many complex meals to be found, but we will be adding content frequently.
 
 ## Join our Discord
+[T&T Team](https://discord.gg/WEFYxwS8E3)
 
  
 
