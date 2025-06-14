@@ -28,30 +28,30 @@ public class GraterBlockEntityRenderer implements BlockEntityRenderer<GraterBloc
             return;
         }
         float renderScale = 0.4F;
-        float gratingProgress = grater.getGratingProgress();
-        float gratingAmount = 0.05F * gratingProgress;
+        int gratingProgress = grater.getGratingAmount();
+        float itemPosition = gratingProgress % 2 == 0 ? 0.15f : -0.2f;
         Direction direction = grater.getBlockState().getValue(GraterBlock.FACING);
         poseStack.pushPose();
         poseStack.translate(0.5, 0.25, 0.5);
         poseStack.scale(renderScale, renderScale, renderScale);
         switch (direction) {
             case NORTH -> {
-                poseStack.translate(0.0, 0.0, -0.27 + gratingAmount);
                 poseStack.mulPose(Axis.XP.rotationDegrees(22.5F));
+                poseStack.translate(0.0, itemPosition, -0.27);
             }
             case SOUTH -> {
-                poseStack.translate(0.0, 0.0, 0.27 - gratingAmount);
                 poseStack.mulPose(Axis.XN.rotationDegrees(22.5F));
+                poseStack.translate(0.0, itemPosition, 0.27);
             }
             case EAST -> {
                 poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
                 poseStack.mulPose(Axis.XN.rotationDegrees(22.5F));
-                poseStack.translate(0.0, 0.0, 0.26 - gratingAmount);
+                poseStack.translate(0.0, itemPosition, 0.26);
             }
             case WEST -> {
                 poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
                 poseStack.mulPose(Axis.XP.rotationDegrees(22.5F));
-                poseStack.translate(0.0, 0.0, -0.26 + gratingAmount);
+                poseStack.translate(0.0, itemPosition, -0.26);
             }
         }
         renderer.renderStatic(stack, ItemDisplayContext.FIXED, light, OverlayTexture.NO_OVERLAY, poseStack, bufferSource, grater.getLevel(), 0);
