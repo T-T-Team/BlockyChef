@@ -111,7 +111,7 @@ public class MasteryScreen extends Screen {
             super(pX, pY, pWidth, pHeight, pMessage);
             this.data = data;
             this.cachedItemStack = new ItemStack(data.mastery().item());
-            this.setTooltip(Tooltip.create(cachedItemStack.getDisplayName()));
+            this.setTooltip(Tooltip.create(cachedItemStack.getHoverName()));
         }
 
         @Override
