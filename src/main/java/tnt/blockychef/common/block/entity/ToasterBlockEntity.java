@@ -62,7 +62,6 @@ public class ToasterBlockEntity extends RecipeRememberingBlockEntity<ToasterReci
                 }
             }
             if (++toaster.timeToasting >= toaster.targetToastingTime) {
-                MenuInventoryHelper.dropInventoryContents(level, pos, toaster.getItemHandler());
                 isChanged = true;
                 toaster.units.forEach(ToastingUnit::cancel);
                 toaster.setToasting(false);

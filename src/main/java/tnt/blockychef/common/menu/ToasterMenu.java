@@ -1,6 +1,7 @@
 package tnt.blockychef.common.menu;
 
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -8,10 +9,14 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import org.jetbrains.annotations.NotNull;
 import tnt.blockychef.common.block.entity.ToasterBlockEntity;
+import tnt.blockychef.common.food.mastery.CookingMastery;
+import tnt.blockychef.common.food.recipe.ToasterRecipe;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 import tnt.blockychef.common.init.BlockyChefMenuTypes;
 import tnt.tntlib.api.menu.AbstractBlockEntityMenu;
 import tnt.tntlib.api.menu.MenuQuickMoveHelper;
+
+import java.util.Optional;
 
 public class ToasterMenu extends AbstractBlockEntityMenu<ToasterBlockEntity> {
 
@@ -52,8 +57,19 @@ public class ToasterMenu extends AbstractBlockEntityMenu<ToasterBlockEntity> {
         }
 
         @Override
+        public void onTake(Player pPlayer, ItemStack pStack) {
+            CookingMastery.applyMastery(pPlayer, pStack);
+            if (pPlayer instanceof ServerPlayer serverPlayer) {
+                toaster.awardUsedRecipesAndPopExperience(serverPlayer);
+                toaster.setChanged();
+            }
+            super.onTake(pPlayer, pStack);
+        }
+
+        @Override
         public boolean mayPlace(@NotNull ItemStack stack) {
-            return !toaster.isToasting() && toaster.getRecipe(stack).isPresent();
+            Optional<ToasterRecipe> recipe = toaster.getRecipe(stack);
+            return !toaster.isToasting() && recipe.isPresent() && !recipe.get().isOvercooked();
         }
 
         @Override
