@@ -16,10 +16,10 @@ public abstract class VillagerGoalPackagesMixin {
             method = "getWorkPackage",
             at = @At(
                     value = "INVOKE",
-                    target = "Lcom/google/common/collect/ImmutableList;of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList;"
+                    target = "Lcom/google/common/collect/ImmutableList;of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Lcom/google/common/collect/ImmutableList;",
+                    remap = false
             ),
-            index = 4,
-            remap = false
+            index = 4
     )
     @SuppressWarnings("unchecked")
     private static <E> E blockychef$replaceFarmingTask(E e1) {
