@@ -51,7 +51,7 @@ jobs:
             '{
               username: "Release bot",
               avatar_url: "https://cdn.discordapp.com/avatars/1308464796831711244/e886df028da3a37ad84b05e3fb0c3b8b.webp?size=32",
-              content: "",
+              content: "<@&1384152798232580197>",
               embeds: [
                 {
                   title: "BlockyChef",
