@@ -1,4 +1,2 @@
-# 1.0.1 
-- Improved mechanics for Toaster
-- Add animations for Toaster
-- Add Mastery support for Toaster
+# 1.0.2 
+- Fixed problem with game crashing during villager spawn
