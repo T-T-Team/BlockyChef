@@ -61,7 +61,7 @@ jobs:
                   url: "https://github.com/T-T-Team/BlockyChef",
                   description: ($snippet),
                   color: 16179907,
-                  thumbnail: { url: "https://media.forgecdn.net/avatars/1303/786/638847625782417518.png" },
+                  thumbnail: { url: "https://media.forgecdn.net/avatars/1303/802/638847636021579214.png" },
                   fields: [
                     {
                       name: "CurseForge",
