@@ -36,21 +36,19 @@ jobs:
         uses: actions/checkout@v4
         
       - name: Read changelog
-        id: read_changelog
         run: |
           {
-            echo "changelog_snippet<<EOF"
+            echo "CHANGELOG<<EOF"
             head -n 11 ./CHANGELOG.md
             echo "EOF"
-          } >> "$GITHUB_OUTPUT"
+          } >> $GITHUB_ENV
 
       - name: Trigger webhook
         env:
           WEBHOOK: ${{ secrets.WEBHOOK_URL }}
-          SNIPPET: ${{ steps.read_changelog.outputs.changelog_snippet }}
         run: |
           jq -n \
-          --arg snippet "$SNIPPET" \
+          --arg snippet "$CHANGELOG" \
             '{
               username: "Release bot",
               avatar_url: "https://cdn.discordapp.com/avatars/1308464796831711244/e886df028da3a37ad84b05e3fb0c3b8b.webp?size=32",
