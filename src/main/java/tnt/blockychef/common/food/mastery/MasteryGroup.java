@@ -25,7 +25,8 @@ public enum MasteryGroup {
     FRUIT,
     ALCOHOL,
     TOAST,
-    WAFFLE
+    WAFFLE,
+    SWEET
 
 
 }

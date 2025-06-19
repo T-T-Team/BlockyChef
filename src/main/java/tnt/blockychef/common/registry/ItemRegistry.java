@@ -546,6 +546,16 @@ public final class ItemRegistry {
         helper.register("boiled_spinach_tortellini", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BOILED_SPINACH_TORTELLINI), DrinkList.BOILED_SPINACH_TORTELLINI));
         helper.register("cooked_grounded_beef_meat", new DrinkableConsumableItem(new Item.Properties().food(FoodList.COOKED_GROUNDED_BEEF_MEAT), DrinkList.COOKED_GROUNDED_BEEF_MEAT));
         helper.register("cooked_grounded_pork_meat", new DrinkableConsumableItem(new Item.Properties().food(FoodList.COOKED_GROUNDED_PORK_MEAT), DrinkList.COOKED_GROUNDED_PORK_MEAT));
+        helper.register("ham_toast", new DrinkableConsumableItem(new Item.Properties().food(FoodList.HAM_TOAST), DrinkList.HAM_TOAST));
+        helper.register("bacon_toast", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BACON_TOAST), DrinkList.BACON_TOAST));
+        helper.register("chocolate_toast", new DrinkableConsumableItem(new Item.Properties().food(FoodList.CHOCOLATE_TOAST), DrinkList.CHOCOLATE_TOAST));
+        helper.register("cheesy_toast", new DrinkableConsumableItem(new Item.Properties().food(FoodList.CHEESY_TOAST), DrinkList.CHEESY_TOAST));
+        helper.register("chicken_toast", new DrinkableConsumableItem(new Item.Properties().food(FoodList.CHICKEN_TOAST), DrinkList.CHICKEN_TOAST));
+        helper.register("raw_ham_toast", new DrinkableConsumableItem(new Item.Properties().food(FoodList.RAW_HAM_TOAST), DrinkList.RAW_HAM_TOAST));
+        helper.register("raw_bacon_toast", new DrinkableConsumableItem(new Item.Properties().food(FoodList.RAW_BACON_TOAST), DrinkList.RAW_BACON_TOAST));
+        helper.register("raw_chocolate_toast", new DrinkableConsumableItem(new Item.Properties().food(FoodList.RAW_CHOCOLATE_TOAST), DrinkList.RAW_CHOCOLATE_TOAST));
+        helper.register("raw_cheesy_toast", new DrinkableConsumableItem(new Item.Properties().food(FoodList.RAW_CHEESY_TOAST), DrinkList.RAW_CHEESY_TOAST));
+        helper.register("raw_chicken_toast", new DrinkableConsumableItem(new Item.Properties().food(FoodList.RAW_CHICKEN_TOAST), DrinkList.RAW_CHICKEN_TOAST));
         helper.register("cupcake_base", new DrinkableConsumableItem(new Item.Properties().food(FoodList.CUPCAKE_BASE), DrinkList.CUPCAKE_BASE));
         helper.register("mashed_potatoes", new DrinkableConsumableItem(new Item.Properties().food(FoodList.MASHED_POTATOES), DrinkList.MASHED_POTATOES).returns(() -> Items.BOWL));
         helper.register("pie_crust", new DrinkableConsumableItem(new Item.Properties().food(FoodList.PIE_CRUST), DrinkList.PIE_CRUST));
@@ -564,6 +574,11 @@ public final class ItemRegistry {
         helper.register("burnt_deluxe_skewer", new Item(new Item.Properties()));
         helper.register("burnt_chicken_skewer", new Item(new Item.Properties()));
         helper.register("burnt_pork_skewer", new Item(new Item.Properties()));
+        helper.register("burnt_ham_toast", new Item(new Item.Properties()));
+        helper.register("burnt_bacon_toast", new Item(new Item.Properties()));
+        helper.register("burnt_chocolate_toast", new Item(new Item.Properties()));
+        helper.register("burnt_cheesy_toast", new Item(new Item.Properties()));
+        helper.register("burnt_chicken_toast", new Item(new Item.Properties()));
         helper.register("burnt_veggie_skewer", new Item(new Item.Properties()));
         helper.register("peeled_onion", new DrinkableConsumableItem(new Item.Properties().food(FoodList.PEELED_ONION), DrinkList.PEELED_ONION));
         helper.register("coconut_flakes", new MasteryApplicableItem(new Item.Properties().food(FoodList.COCONUT_FLAKES)));

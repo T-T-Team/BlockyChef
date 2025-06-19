@@ -449,6 +449,16 @@ public final class FoodList {
     public static final FoodProperties CHICKEN_SKEWER = food(6, 6).build();
     public static final FoodProperties PORK_SKEWER = food(6, 7).build();
     public static final FoodProperties VEGGIE_SKEWER = food(5, 5).build();
+    public static final FoodProperties RAW_HAM_TOAST = food(4, 2).build();
+    public static final FoodProperties HAM_TOAST = food(6, 5).build();
+    public static final FoodProperties RAW_BACON_TOAST = food(4, 3).build();
+    public static final FoodProperties BACON_TOAST = food(7, 6).build();
+    public static final FoodProperties RAW_CHEESY_TOAST = food(4, 4).build();
+    public static final FoodProperties CHEESY_TOAST = food(6, 8).build();
+    public static final FoodProperties RAW_CHOCOLATE_TOAST = food(3, 3).build();
+    public static final FoodProperties CHOCOLATE_TOAST = food(5, 5).build();
+    public static final FoodProperties RAW_CHICKEN_TOAST = food(6, 3).build();
+    public static final FoodProperties CHICKEN_TOAST = food(7, 5).build();
 
     private static FoodProperties.Builder food(int nutrition, int saturation) {
         return new FoodProperties.Builder().nutrition(nutrition).saturationMod(saturation / (nutrition * 2.0F));

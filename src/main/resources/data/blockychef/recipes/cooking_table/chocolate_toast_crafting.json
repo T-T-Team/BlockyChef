@@ -1,0 +1,30 @@
+{
+  "type": "blockychef:cooking_table",
+  "assemblyTime": 120,
+  "inputs": [
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "blockychef:bread_slice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:cocoa_spread"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:cinnamon_powder"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:raw_chocolate_toast",
+      "count": 1
+    }
+  ]
+}

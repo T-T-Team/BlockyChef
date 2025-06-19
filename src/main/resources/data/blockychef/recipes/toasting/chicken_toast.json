@@ -1,0 +1,10 @@
+{
+  "type": "blockychef:toasting",
+  "input": {
+    "item": "blockychef:raw_chicken_toast"
+  },
+  "output": {
+    "item": "blockychef:chicken_toast"
+  },
+  "toastingTime": 400
+}

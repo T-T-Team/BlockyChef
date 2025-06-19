@@ -1,0 +1,10 @@
+{
+  "type": "blockychef:toasting",
+  "input": {
+    "item": "blockychef:raw_ham_toast"
+  },
+  "output": {
+    "item": "blockychef:ham_toast"
+  },
+  "toastingTime": 360
+}

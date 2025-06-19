@@ -1,0 +1,10 @@
+{
+  "type": "blockychef:toasting",
+  "input": {
+    "item": "blockychef:raw_bacon_toast"
+  },
+  "output": {
+    "item": "blockychef:bacon_toast"
+  },
+  "toastingTime": 440
+}

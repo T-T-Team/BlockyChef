@@ -417,6 +417,16 @@ public final class DrinkList {
     public static final DrinkProperties CHICKEN_SKEWER = DrinkProperties.Builder.create().stats(-3, 0).build();
     public static final DrinkProperties PORK_SKEWER = DrinkProperties.Builder.create().stats(-3, 0).build();
     public static final DrinkProperties VEGGIE_SKEWER = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties RAW_HAM_TOAST = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties HAM_TOAST = DrinkProperties.Builder.create().stats(-3, 0).build();
+    public static final DrinkProperties RAW_BACON_TOAST = DrinkProperties.Builder.create().stats(-3, 0).build();
+    public static final DrinkProperties BACON_TOAST = DrinkProperties.Builder.create().stats(-4, 0).build();
+    public static final DrinkProperties RAW_CHEESY_TOAST = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties CHEESY_TOAST = DrinkProperties.Builder.create().stats(-3, 0).build();
+    public static final DrinkProperties RAW_CHOCOLATE_TOAST = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties CHOCOLATE_TOAST = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties RAW_CHICKEN_TOAST = DrinkProperties.Builder.create().stats(-3, 0).build();
+    public static final DrinkProperties CHICKEN_TOAST = DrinkProperties.Builder.create().stats(-4, 0).build();
 
     private DrinkList() {}
 }

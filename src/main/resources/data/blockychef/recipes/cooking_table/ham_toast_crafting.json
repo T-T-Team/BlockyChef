@@ -1,0 +1,36 @@
+{
+  "type": "blockychef:cooking_table",
+  "assemblyTime": 120,
+  "inputs": [
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "blockychef:bread_slice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:ham_slice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:cheese_slice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:ketchup"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:raw_ham_toast",
+      "count": 1
+    }
+  ]
+}

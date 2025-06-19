@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:toasting",
+  "input": {
+    "item": "blockychef:chicken_toast"
+  },
+  "output": {
+    "item": "blockychef:burnt_chicken_toast"
+  },
+  "toastingTime": 60,
+  "overcooking": true
+}

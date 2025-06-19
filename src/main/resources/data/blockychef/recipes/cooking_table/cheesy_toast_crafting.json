@@ -1,0 +1,36 @@
+{
+  "type": "blockychef:cooking_table",
+  "assemblyTime": 120,
+  "inputs": [
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "blockychef:bread_slice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:camembert_slice"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "blockychef:cheese_slice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:mayo"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:raw_cheesy_toast",
+      "count": 1
+    }
+  ]
+}

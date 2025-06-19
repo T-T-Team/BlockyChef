@@ -1,0 +1,42 @@
+{
+  "type": "blockychef:cooking_table",
+  "assemblyTime": 120,
+  "inputs": [
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "blockychef:bread_slice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:cooked_diced_chicken_meat"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:cheese_slice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:onion_slice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:sweet_chilli_sauce"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:raw_chicken_toast",
+      "count": 1
+    }
+  ]
+}

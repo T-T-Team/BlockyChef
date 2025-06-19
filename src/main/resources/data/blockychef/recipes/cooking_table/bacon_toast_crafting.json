@@ -1,0 +1,42 @@
+{
+  "type": "blockychef:cooking_table",
+  "assemblyTime": 120,
+  "inputs": [
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "blockychef:bread_slice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:raw_bacon"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:cheese_slice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:fried_egg"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:bbq_sauce"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:raw_bacon_toast",
+      "count": 1
+    }
+  ]
+}

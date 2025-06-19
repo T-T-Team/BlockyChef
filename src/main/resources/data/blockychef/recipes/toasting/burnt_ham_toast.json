@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:toasting",
+  "input": {
+    "item": "blockychef:ham_toast"
+  },
+  "output": {
+    "item": "blockychef:burnt_ham_toast"
+  },
+  "toastingTime": 80,
+  "overcooking": true
+}

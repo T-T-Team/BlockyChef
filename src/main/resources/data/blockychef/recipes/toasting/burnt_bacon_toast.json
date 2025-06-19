@@ -1,0 +1,11 @@
+{
+  "type": "blockychef:toasting",
+  "input": {
+    "item": "blockychef:bacon_toast"
+  },
+  "output": {
+    "item": "blockychef:burnt_bacon_toast"
+  },
+  "toastingTime": 80,
+  "overcooking": true
+}
