@@ -14,17 +14,13 @@ import tnt.blockychef.common.food.recipe.ToasterRecipe;
 import tnt.blockychef.common.init.BlockyChefBlocks;
 import tnt.blockychef.common.init.BlockyChefMenuTypes;
 import tnt.tntlib.api.menu.AbstractBlockEntityMenu;
-import tnt.tntlib.api.menu.MenuQuickMoveHelper;
 
 import java.util.Optional;
 
 public class ToasterMenu extends AbstractBlockEntityMenu<ToasterBlockEntity> {
 
-    private final MenuQuickMoveHelper moveHelper;
-
     public ToasterMenu(int menuId, Inventory inventory, ToasterBlockEntity toaster) {
         super(BlockyChefMenuTypes.TOASTER, menuId, toaster);
-        this.moveHelper = MenuQuickMoveHelper.simpleInventory(getQuickMoveContext(), 2);
 
         IItemHandler handler = toaster.getItemHandler();
         addSlot(new ToasterSlot(handler, 0, 44, 18, toaster));
@@ -44,7 +40,7 @@ public class ToasterMenu extends AbstractBlockEntityMenu<ToasterBlockEntity> {
 
     @Override
     public ItemStack quickMoveStack(Player player, int slotIndex) {
-        return moveHelper.quickMove(player, slotIndex);
+        return ItemStack.EMPTY;
     }
 
     private static final class ToasterSlot extends SlotItemHandler {
