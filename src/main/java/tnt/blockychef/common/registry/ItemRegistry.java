@@ -601,6 +601,18 @@ public final class ItemRegistry {
         helper.register("bubbly_raspberry_juice", new DrinkableConsumableItem(new Item.Properties(), DrinkList.BUBBLY_RASPBERRY_JUICE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_BOTTLE));
         helper.register("bubbly_sweet_berry_juice", new DrinkableConsumableItem(new Item.Properties(), DrinkList.BUBBLY_SWEET_BERRY_JUICE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_BOTTLE));
         helper.register("bubbly_strawberry_juice", new DrinkableConsumableItem(new Item.Properties(), DrinkList.BUBBLY_STRAWBERRY_JUICE, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_BOTTLE));
+        helper.register("hamburger", new DrinkableConsumableItem(new Item.Properties().food(FoodList.HAMBURGER), DrinkList.HAMBURGER));
+        helper.register("cheeseburger", new DrinkableConsumableItem(new Item.Properties().food(FoodList.CHEESEBURGER), DrinkList.CHEESEBURGER));
+        helper.register("double_cheeseburger", new DrinkableConsumableItem(new Item.Properties().food(FoodList.DOUBLE_CHEESEBURGER), DrinkList.DOUBLE_CHEESEBURGER));
+        helper.register("bacon_burger", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BACON_BURGER), DrinkList.BACON_BURGER));
+        helper.register("chicken_burger", new DrinkableConsumableItem(new Item.Properties().food(FoodList.CHICKEN_BURGER), DrinkList.CHICKEN_BURGER));
+        helper.register("country_burger", new DrinkableConsumableItem(new Item.Properties().food(FoodList.COUNTRY_BURGER), DrinkList.COUNTRY_BURGER));
+        helper.register("tower_burger", new DrinkableConsumableItem(new Item.Properties().food(FoodList.TOWER_BURGER), DrinkList.TOWER_BURGER));
+        helper.register("big_party_burger", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BIG_PARTY_BURGER), DrinkList.BIG_PARTY_BURGER));
+        helper.register("veggie_burger", new DrinkableConsumableItem(new Item.Properties().food(FoodList.VEGGIE_BURGER), DrinkList.VEGGIE_BURGER));
+        helper.register("samurai_burger", new DrinkableConsumableItem(new Item.Properties().food(FoodList.SAMURAI_BURGER), DrinkList.SAMURAI_BURGER));
+        helper.register("filet_o_fish", new DrinkableConsumableItem(new Item.Properties().food(FoodList.FILET_O_FISH), DrinkList.FILET_O_FISH));
+
 
 
     }

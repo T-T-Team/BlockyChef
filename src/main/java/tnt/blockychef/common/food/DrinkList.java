@@ -427,6 +427,17 @@ public final class DrinkList {
     public static final DrinkProperties CHOCOLATE_TOAST = DrinkProperties.Builder.create().stats(-2, 0).build();
     public static final DrinkProperties RAW_CHICKEN_TOAST = DrinkProperties.Builder.create().stats(-3, 0).build();
     public static final DrinkProperties CHICKEN_TOAST = DrinkProperties.Builder.create().stats(-4, 0).build();
+    public static final DrinkProperties HAMBURGER = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties CHEESEBURGER = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties DOUBLE_CHEESEBURGER = DrinkProperties.Builder.create().stats(-3, 0).build();
+    public static final DrinkProperties BACON_BURGER = DrinkProperties.Builder.create().stats(-3, 0).build();
+    public static final DrinkProperties CHICKEN_BURGER = DrinkProperties.Builder.create().stats(-3, 0).build();
+    public static final DrinkProperties COUNTRY_BURGER = DrinkProperties.Builder.create().stats(-3, 0).build();
+    public static final DrinkProperties TOWER_BURGER = DrinkProperties.Builder.create().stats(-5, 0).build();
+    public static final DrinkProperties BIG_PARTY_BURGER = DrinkProperties.Builder.create().stats(-4, 0).build();
+    public static final DrinkProperties VEGGIE_BURGER = DrinkProperties.Builder.create().stats(-3, 0).build();
+    public static final DrinkProperties SAMURAI_BURGER = DrinkProperties.Builder.create().stats(-6, 0).build();
+    public static final DrinkProperties FILET_O_FISH = DrinkProperties.Builder.create().stats(-3, 0).build();
 
     private DrinkList() {}
 }

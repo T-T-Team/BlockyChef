@@ -1,0 +1,48 @@
+{
+  "type": "blockychef:cooking_table",
+  "assemblyTime": 160,
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:burger_bun"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:cooked_portobello_slice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:onion_slice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:lettuce_leaf"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:tomato_slice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:mustard"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:veggie_burger",
+      "count": 1
+    }
+  ]
+}

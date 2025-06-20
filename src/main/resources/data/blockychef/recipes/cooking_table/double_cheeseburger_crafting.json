@@ -1,0 +1,42 @@
+{
+  "type": "blockychef:cooking_table",
+  "assemblyTime": 160,
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:burger_bun"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "blockychef:grilled_beef_burger_patty"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:onion_slice"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "blockychef:cheese_slice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:ketchup"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:double_cheeseburger",
+      "count": 1
+    }
+  ]
+}

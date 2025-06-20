@@ -1,0 +1,54 @@
+{
+  "type": "blockychef:cooking_table",
+  "assemblyTime": 160,
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:burger_bun"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:grilled_beef_burger_patty"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:cooked_bacon"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:cheese_slice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:lettuce_leaf"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:chilli_powder"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:ketchup"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:samurai_burger",
+      "count": 1
+    }
+  ]
+}

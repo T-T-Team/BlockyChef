@@ -1,0 +1,42 @@
+{
+  "type": "blockychef:cooking_table",
+  "assemblyTime": 160,
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:burger_bun"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:grilled_chicken_burger_patty"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:lettuce_leaf"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:tomato_slice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:mayo"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:chicken_burger",
+      "count": 1
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "type": "blockychef:cooking_table",
+  "assemblyTime": 160,
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:burger_bun"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:cooked_fish_fillet"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:cheese_slice"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:mayo"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:filet_o_fish",
+      "count": 1
+    }
+  ]
+}
