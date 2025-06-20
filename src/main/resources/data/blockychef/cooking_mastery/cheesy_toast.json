@@ -2,6 +2,7 @@
   "item": "blockychef:cheesy_toast",
   "groups": [
     "FOOD",
-    "TOAST"
+    "TOAST",
+    "MEAL"
   ]
 }

@@ -2,6 +2,7 @@
   "item": "blockychef:ham_toast",
   "groups": [
     "FOOD",
-    "TOAST"
+    "TOAST",
+    "MEAL"
   ]
 }
