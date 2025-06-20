@@ -14,17 +14,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Changelog snippet
-        run: |
-          {
-            echo 'CHANGELOG<<EOF'
-            head -n 11 ./CHANGELOG.md
-            echo 'EOF'
-          } >> $GITHUB_ENV
+      - name: Read changelog
+        id: changelog
+        uses: andstor/file-reader-action@v1
+        with:
+          path: "CHANGELOG.md"
 
       - name: Discord notification
         env:
           WEBHOOK: ${{ secrets.WEBHOOK_URL }}
+          CHANGELOG: ${{ steps.changelog.outputs.contents }}
         run: |
           jq -n \
           --arg snippet "$CHANGELOG" \
