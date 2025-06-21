@@ -16,14 +16,16 @@ jobs:
 
       - name: Read changelog
         id: changelog
-        uses: andstor/file-reader-action@v1
+        uses: Toma1O6/file-read-action@v1
         with:
-          path: "CHANGELOG.md"
+          file: "CHANGELOG.md"
+          max-lines: '31' # 30 lines + title
+          max-chars: '4096' # discord embed description has limit of 4096 characters
 
       - name: Discord notification
         env:
           WEBHOOK: ${{ secrets.WEBHOOK_URL }}
-          CHANGELOG: ${{ steps.changelog.outputs.contents }}
+          CHANGELOG: ${{ steps.changelog.outputs.content }}
         run: |
           jq -n \
           --arg snippet "$CHANGELOG" \
