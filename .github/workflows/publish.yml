@@ -25,3 +25,60 @@ jobs:
 
       - name: Release
         run: ./gradlew releaseMod -PCURSEFORGE_TOKEN=${{ secrets.CF_TOKEN }}
+
+      - name: Read changelog
+        id: changelog
+        uses: Toma1O6/file-read-action@v1
+        with:
+          file: "CHANGELOG.md"
+          max-lines: '31' # 30 lines + title
+          max-chars: '4096' # discord embed description has limit of 4096 characters
+
+      - name: Discord notification
+        env:
+          WEBHOOK: ${{ secrets.WEBHOOK_URL }}
+          CHANGELOG: ${{ steps.changelog.outputs.content }}
+        run: |
+          jq -n \
+          --arg snippet "$CHANGELOG" \
+            '{
+              username: "Release bot",
+              avatar_url: "https://cdn.discordapp.com/avatars/1308464796831711244/e886df028da3a37ad84b05e3fb0c3b8b.webp?size=32",
+              content: "<@&1384152798232580197>",
+              embeds: [
+                {
+                  title: "BlockyChef",
+                  url: "https://github.com/T-T-Team/BlockyChef",
+                  description: ($snippet),
+                  color: 16179907,
+                  thumbnail: { url: "https://media.forgecdn.net/avatars/1303/802/638847636021579214.png" },
+                  fields: [
+                    {
+                      name: "CurseForge",
+                      value: "[Download](<https://www.curseforge.com/minecraft/mc-mods/blockychef>)",
+                      inline: true
+                    },
+                    {
+                      name: "Sources",
+                      value: "[GitHub](<https://github.com/T-T-Team/BlockyChef>)",
+                      inline: true
+                    },
+                    {
+                      name: "Support",
+                      value: "[Patreon](<https://www.patreon.com/c/tnt_team>)",
+                      inline: false
+                    },
+                    {
+                      name: "Report issue",
+                      value: "[GitHub](<https://github.com/T-T-Team/BlockyChef/issues>)",
+                      inline: false
+                    }
+                  ],
+                  footer: { text: "CurseForge file may take up to 1 hour to be published" }
+                }
+              ]
+            }' > payload.json
+
+          curl "$WEBHOOK" \
+            -H "Content-Type: application/json" \
+            --data @payload.json
