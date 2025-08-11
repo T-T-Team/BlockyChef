@@ -87,7 +87,12 @@ public class FillableBottleItem extends Item {
             }
             FluidState state = level.getFluidState(pos);
             ItemStack result = this.fromFluidFiller.doFill(itemStack, state, player, pos);
-            return !result.isEmpty() ? InteractionResultHolder.sidedSuccess(result, level.isClientSide()) : InteractionResultHolder.pass(itemStack);
+            if (result.isEmpty())
+                return InteractionResultHolder.pass(itemStack);
+            if (!player.isCreative())
+                itemStack.shrink(1);
+            MenuInventoryHelper.giveItemOrDrop(player, result);
+            return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());
         }
         return super.use(level, player, hand);
     }
