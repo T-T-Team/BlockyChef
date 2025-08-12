@@ -94,7 +94,7 @@ public final class EventHandler {
     public static void onJump(LivingEvent.LivingJumpEvent event) {
         LivingEntity entity = event.getEntity();
         if (entity instanceof Player player) {
-            float exhaustion = player.isSprinting() ? 0.2F : 0.05F;
+            float exhaustion = player.isSprinting() ? 0.3F : 0.15F;
             player.getCapability(PlayerThirstStatsProvider.CAPABILITY).ifPresent(stats -> stats.addExhaustion(exhaustion));
         }
     }

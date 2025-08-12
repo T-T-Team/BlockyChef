@@ -29,25 +29,25 @@ public abstract class PlayerMixin extends LivingEntity {
     @SuppressWarnings("InvalidInjectorMethodSignature")
     @Inject(method = "checkMovementStatistics", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;causeFoodExhaustion(F)V", ordinal = 0), locals = LocalCapture.CAPTURE_FAILHARD)
     private void blockychef$addThirstExhaustionFromSwimming(double x, double y, double z, CallbackInfo ci, int i) {
-        addExhaustion(0.01F * i * 0.01F);
+        addExhaustion(0.016F * i * 0.01F);
     }
 
     @SuppressWarnings("InvalidInjectorMethodSignature")
     @Inject(method = "checkMovementStatistics", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;causeFoodExhaustion(F)V", ordinal = 1), locals = LocalCapture.CAPTURE_FAILHARD)
     private void blockychef$addThirstExhaustionFromUnderwaterWalking(double x, double y, double z, CallbackInfo ci, int j) {
-        addExhaustion(0.01F * j * 0.01F);
+        addExhaustion(0.016F * j * 0.01F);
     }
 
     @SuppressWarnings("InvalidInjectorMethodSignature")
     @Inject(method = "checkMovementStatistics", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;causeFoodExhaustion(F)V", ordinal = 2), locals = LocalCapture.CAPTURE_FAILHARD)
     private void blockychef$addThirstExhaustionFromWaterWalking(double x, double y, double z, CallbackInfo ci, int k) {
-        addExhaustion(0.01F * k * 0.01F);
+        addExhaustion(0.016F * k * 0.01F);
     }
 
     @SuppressWarnings("InvalidInjectorMethodSignature")
     @Inject(method = "checkMovementStatistics", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;causeFoodExhaustion(F)V", ordinal = 3), locals = LocalCapture.CAPTURE_FAILHARD)
     private void blockychef$addThirstExhaustionFromSprinting(double x, double y, double z, CallbackInfo ci, int l) {
-        addExhaustion(0.1F * l * 0.01F);
+        addExhaustion(0.16F * l * 0.01F);
     }
 
     private void addExhaustion(float exhaustion) {

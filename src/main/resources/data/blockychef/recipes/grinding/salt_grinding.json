@@ -10,7 +10,8 @@
   ],
   "outputs": [
     {
-      "item": "blockychef:salt"
+      "item": "blockychef:salt",
+      "count": 2
     }
   ],
   "processingTime": 120
