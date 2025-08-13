@@ -7,7 +7,7 @@ import tnt.blockychef.common.thirst.DrinkProperties;
 
 public final class DrinkList {
 
-    private static final Supplier<MobEffectInstance> THIRST = () -> new MobEffectInstance(BlockyChefMobEffects.THIRST, 300, 0);
+    private static final Supplier<MobEffectInstance> THIRST = () -> new MobEffectInstance(BlockyChefMobEffects.THIRST, 400, 1);
     private static final float PROBABILITY = 0.3F;
 
 
