@@ -104,7 +104,7 @@ public final class ItemRegistry {
         helper.register("chilli_powder", new DrinkableConsumableItem(new Item.Properties().food(FoodList.CHILLI_POWDER), DrinkList.CHILLI_POWDER));
         helper.register("cinnamon_powder", new DrinkableConsumableItem(new Item.Properties().food(FoodList.CINNAMON_POWDER), DrinkList.CINNAMON_POWDER));
         helper.register("cocoa_powder", new DrinkableConsumableItem(new Item.Properties().food(FoodList.COCOA_POWDER), DrinkList.COCOA_POWDER));
-        helper.register("cocoa_spread", new DrinkableConsumableItem(new Item.Properties().food(FoodList.COCOA_SPREAD), DrinkList.COCOA_SPREAD));
+        helper.register("cocoa_spread", new DrinkableConsumableItem(new Item.Properties().food(FoodList.COCOA_SPREAD), DrinkList.COCOA_SPREAD).returns(() -> BlockyChefItems.EMPTY_JAR));
         helper.register("coconut_half", new MasteryApplicableItem(new Item.Properties().food(FoodList.COCONUT_HALF)));
         helper.register("coconut_milk", new DrinkableConsumableItem(new Item.Properties(), DrinkList.COCONUT_MILK, UseAnim.DRINK).returns(() -> BlockyChefItems.EMPTY_BOTTLE));
         helper.register("coffee_beans", new DrinkableConsumableItem(new Item.Properties().food(FoodList.COFFEE_BEANS), DrinkList.COFFEE_BEANS));
