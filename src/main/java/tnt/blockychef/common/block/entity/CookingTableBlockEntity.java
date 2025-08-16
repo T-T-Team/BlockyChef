@@ -49,12 +49,7 @@ public class CookingTableBlockEntity extends RecipeRememberingBlockEntity<Cookin
             table.setRecipe(null);
             return;
         }
-        if (!MenuInventoryHelper.isEmpty(table, OUTPUTS)) {
-            table.setRecipe(null);
-            return;
-        }
         if (++table.cookingTime >= recipe.getAssemblyTime() && !level.isClientSide()) {
-            table.cooking = false;
             table.cookingTime = 0;
             table.consumeIngredientsAndApplyCraftRemainder(recipe, INPUTS, OUTPUTS, in -> {
                 List<ItemStack> allConsumed = new ArrayList<>();
