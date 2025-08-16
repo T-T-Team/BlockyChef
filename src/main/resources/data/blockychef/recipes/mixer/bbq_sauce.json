@@ -5,7 +5,7 @@
       "ingredient": {
         "item": "blockychef:boiled_tomato"
       },
-      "count": 2
+      "count": 3
     },
     {
       "ingredient": {
@@ -41,6 +41,6 @@
   "rpm": "HIGH",
   "output": {
     "FluidName": "blockychef:bbq_sauce",
-    "Amount": 300
+    "Amount": 500
   }
 }

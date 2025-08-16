@@ -5,7 +5,7 @@
       "ingredient": {
         "item": "blockychef:dried_mustard_pods"
       },
-      "count": 2
+      "count": 5
     },
     {
       "ingredient": {
@@ -17,19 +17,19 @@
       "ingredient": {
         "item": "blockychef:salt"
       },
-      "count": 1
+      "count": 2
     },
     {
       "ingredient": {
         "item": "blockychef:empty_jar"
       },
-      "count": 1
+      "count": 3
     }
   ],
   "outputs": [
     {
       "item": "blockychef:mustard",
-      "count": 1
+      "count": 3
     }
   ],
   "processingTime": 160

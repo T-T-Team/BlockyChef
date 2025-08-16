@@ -5,13 +5,13 @@
       "ingredient": {
         "item": "blockychef:diced_chilli_pepper"
       },
-      "count": 2
+      "count": 5
     },
     {
       "ingredient": {
         "item": "blockychef:shredded_garlic"
       },
-      "count": 1
+      "count": 2
     },
     {
       "ingredient": {
@@ -23,7 +23,7 @@
       "ingredient": {
         "item": "blockychef:salt"
       },
-      "count": 1
+      "count": 2
     },
     {
       "ingredient": {
@@ -35,13 +35,13 @@
       "ingredient": {
         "item": "blockychef:empty_jar"
       },
-      "count": 1
+      "count": 3
     }
   ],
   "outputs": [
     {
       "item": "blockychef:sweet_chilli_sauce",
-      "count": 1
+      "count": 3
     }
   ],
   "processingTime": 160
