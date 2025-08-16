@@ -1,9 +1,11 @@
-# Release 1.20.1 - 1.1.1
+# Release 1.20.1 - 1.1.2
 Fixed
-- Fixed bug where filling up water bottles from water source consumed all bottles at once
+- Fixed problem when extracting fluids from Mixer did not consume jar, bottle and glass
+- Fixed loosing empty jar when crafting with Cocoa Spread
 
 Changed
-- Salt ores now spawn up to y16 (previously only up to y32)
-- Salt ores now spawn in slightly bigger clusters
-- Grinding Rock salt in mortar now gives you 2 pieces of salt (previously only 1)
-- Increased thirst consumption by 50%
+- Cooking Table now craft continuously
+- Set default config value for Tree fruit decay to "true"
+- Changed recipe for Mustard (now count of 3)
+- Changed recipe for Sweet Chilli Sauce (now count of 3)
+- Changed recipe for BBQ Sauce (now count of 500ml)
