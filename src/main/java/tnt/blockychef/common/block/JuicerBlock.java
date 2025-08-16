@@ -25,6 +25,7 @@ import tnt.blockychef.common.block.entity.JuicerBlockEntity;
 import tnt.blockychef.common.block.entity.RecipeRememberingBlockEntity;
 import tnt.blockychef.common.data.fluids.FluidExtraction;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
+import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
 
 public class JuicerBlock extends DyeableBlock implements EntityBlock {
@@ -69,6 +70,7 @@ public class JuicerBlock extends DyeableBlock implements EntityBlock {
                     if (!player.isCreative()) {
                         stack.shrink(1);
                     }
+                    BlockEntityHelper.sendBlockEntityClientData(juicer);
                     return InteractionResult.SUCCESS;
                 }
             } else if (juicer.hasInputItem()) {
