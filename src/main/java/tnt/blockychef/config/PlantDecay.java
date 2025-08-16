@@ -36,5 +36,5 @@ public final class PlantDecay {
 
     @Configurable
     @Configurable.Comment("Determines wheter fruit will be dropped on ground upon decaying")
-    public boolean treeFruitDecayDropsFruit = false;
+    public boolean treeFruitDecayDropsFruit = true;
 }
