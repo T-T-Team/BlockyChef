@@ -20,6 +20,17 @@
       ],
       "entries": [
         {
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 5.0,
+                "min": 2.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
           "type": "minecraft:item",
           "name": "blockychef:green_olives"
         }
