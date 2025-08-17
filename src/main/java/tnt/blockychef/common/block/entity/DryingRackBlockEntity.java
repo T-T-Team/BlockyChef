@@ -15,6 +15,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
+import tnt.blockychef.common.food.mastery.CookingMastery;
 import tnt.blockychef.common.food.recipe.DryingRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
@@ -77,6 +78,7 @@ public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRe
             MenuInventoryHelper.giveItemOrDrop(player, itemStack.copy());
             awardUsedRecipesAndPopExperience((ServerPlayer) player);
         }
+        CookingMastery.applyMastery(player, itemStack);
         this.setItem(slot, ItemStack.EMPTY);
         dryingSlot.refresh(level);
         BlockEntityHelper.sendBlockEntityClientData(this);
