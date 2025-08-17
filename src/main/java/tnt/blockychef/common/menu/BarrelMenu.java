@@ -20,7 +20,9 @@ public class BarrelMenu extends AbstractBlockEntityMenu<BarrelBlockEntity> {
 
     public BarrelMenu(int menuId, Inventory inventory, BarrelBlockEntity barrel) {
         super(BlockyChefMenuTypes.BARREL, menuId, barrel);
-        this.moveHelper = MenuQuickMoveHelper.inputOutputInventory(getQuickMoveContext(), BarrelBlockEntity.INPUTS, BarrelBlockEntity.OUTPUTS);
+        this.moveHelper = MenuQuickMoveHelper.Builder.withContext(getQuickMoveContext())
+                .addRule2(0, BarrelBlockEntity.INPUTS.length, 9, 45)
+                .build();
 
         for (int y = 0; y < 2; y++) {
             for (int x = 0; x < 3; x++) {
