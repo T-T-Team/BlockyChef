@@ -75,10 +75,10 @@ public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRe
             getRecipesToAwardAndPopExperience((ServerLevel) level, vec3);
             Containers.dropItemStack(level, vec3.x, vec3.y, vec3.z, itemStack.copy());
         } else {
+            CookingMastery.applyMastery(player, itemStack);
             MenuInventoryHelper.giveItemOrDrop(player, itemStack.copy());
             awardUsedRecipesAndPopExperience((ServerPlayer) player);
         }
-        CookingMastery.applyMastery(player, itemStack);
         this.setItem(slot, ItemStack.EMPTY);
         dryingSlot.refresh(level);
         BlockEntityHelper.sendBlockEntityClientData(this);
