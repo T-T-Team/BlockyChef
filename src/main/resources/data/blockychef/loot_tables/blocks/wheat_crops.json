@@ -23,6 +23,17 @@
                   }
                 }
               ],
+              "functions": [
+                {
+                  "add": false,
+                  "count": {
+                    "type": "minecraft:uniform",
+                    "max": 8.0,
+                    "min": 3.0
+                  },
+                  "function": "minecraft:set_count"
+                }
+              ],
               "name": "minecraft:wheat"
             },
             {
