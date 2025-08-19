@@ -19,6 +19,7 @@ import tnt.blockychef.common.food.recipe.ToasterRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.common.init.BlockyChefSounds;
+import tnt.blockychef.common.menu.BlockEntityStackHandler;
 import tnt.blockychef.util.Helper;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.blockentity.Synchronizable;
@@ -104,12 +105,7 @@ public class ToasterBlockEntity extends RecipeRememberingBlockEntity<ToasterReci
 
     @Override
     public IItemHandlerModifiable setUpInventory() {
-        return new ItemStackHandler(SLOTS.length) {
-            @Override
-            protected void onContentsChanged(int slot) {
-                ToasterBlockEntity.this.setChanged();
-            }
-        };
+        return new BlockEntityStackHandler(SLOTS.length, this::setChanged);
     }
 
     @Override

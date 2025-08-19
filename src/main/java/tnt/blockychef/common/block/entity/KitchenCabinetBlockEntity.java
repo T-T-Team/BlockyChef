@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
+import tnt.blockychef.common.menu.BlockEntityStackHandler;
 
 public class KitchenCabinetBlockEntity extends ColorableBlockEntity {
 
@@ -22,7 +23,7 @@ public class KitchenCabinetBlockEntity extends ColorableBlockEntity {
 
     @Override
     public IItemHandlerModifiable setUpInventory() {
-        return new ItemStackHandler(27);
+        return new BlockEntityStackHandler(27, this::setChanged);
     }
 
     public void onOpen(Player player) {
