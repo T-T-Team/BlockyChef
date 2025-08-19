@@ -169,7 +169,12 @@ public class TeapotBlockEntity extends RecipeRememberingBlockEntity<TeapotRecipe
 
     @Override
     public boolean extract(FluidStack fluid) {
-        return fluidContainer.extract(fluid);
+        boolean extracted = fluidContainer.extract(fluid);
+        if (extracted) {
+            this.setChanged();
+            BlockEntityHelper.sendBlockEntityClientData(this);
+        }
+        return extracted;
     }
 
     @Override

@@ -49,7 +49,12 @@ public class MixerBlockEntity extends RecipeRememberingBlockEntity<MixerRecipe> 
 
     @Override
     public boolean extract(FluidStack fluid) {
-        return container.extract(fluid);
+        boolean extracted = container.extract(fluid);
+        if (extracted) {
+            this.setChanged();
+            BlockEntityHelper.sendBlockEntityClientData(this);
+        }
+        return extracted;
     }
 
     public boolean canBlend() {
@@ -58,7 +63,7 @@ public class MixerBlockEntity extends RecipeRememberingBlockEntity<MixerRecipe> 
         FluidStack result = activeRecipe.getOutput();
         FluidStack check = result.copy();
         check.setAmount(1);
-        if (container.getFluids().size() > 0 && !container.hasFluid(check))
+        if (!container.getFluids().isEmpty() && !container.hasFluid(check))
             return false;
         return container.getAmount() + result.getAmount() <= container.getCapacity();
     }

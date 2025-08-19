@@ -47,8 +47,8 @@ public class JuicerBlockEntity extends RecipeRememberingBlockEntity<JuicerRecipe
     @Override
     public boolean extract(FluidStack fluid) {
         boolean result = container.extract(fluid);
-        setChanged();
         BlockEntityHelper.sendBlockEntityClientData(this);
+        setChanged();
         return result;
     }
 
