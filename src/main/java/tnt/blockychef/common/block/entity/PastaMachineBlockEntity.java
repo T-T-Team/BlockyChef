@@ -13,6 +13,7 @@ import tnt.blockychef.common.food.recipe.PastaMachineRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.common.init.BlockyChefSounds;
+import tnt.blockychef.common.menu.BlockEntityStackHandler;
 import tnt.blockychef.util.Helper;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.math.Interpolation;
@@ -83,7 +84,7 @@ public class PastaMachineBlockEntity extends RecipeRememberingBlockEntity<PastaM
 
     @Override
     public IItemHandlerModifiable setUpInventory() {
-        return new ItemStackHandler(INPUTS.length + OUTPUTS.length);
+        return new BlockEntityStackHandler(INPUTS.length + OUTPUTS.length, this::setChanged);
     }
 
     @Override

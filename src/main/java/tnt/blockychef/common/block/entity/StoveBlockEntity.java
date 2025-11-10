@@ -24,6 +24,7 @@ import tnt.blockychef.common.heat.RegulationHandler;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.common.init.BlockyChefSounds;
+import tnt.blockychef.common.menu.BlockEntityStackHandler;
 import tnt.blockychef.util.Helper;
 import tnt.tntlib.api.ArrayUtils;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
@@ -100,7 +101,7 @@ public class StoveBlockEntity extends RecipeRememberingBlockEntity<StoveRecipe> 
 
     @Override
     public IItemHandlerModifiable setUpInventory() {
-        return new ItemStackHandler(FUEL.length + INPUTS.length);
+        return new BlockEntityStackHandler(FUEL.length + INPUTS.length, this::setChanged);
     }
 
     @Override

@@ -25,6 +25,7 @@ import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.common.init.BlockyChefSounds;
 import tnt.blockychef.common.init.BlockyChefTags;
+import tnt.blockychef.common.menu.BlockEntityStackHandler;
 import tnt.blockychef.util.Helper;
 import tnt.tntlib.api.ArrayUtils;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
@@ -133,7 +134,7 @@ public class PanBlockEntity extends RecipeRememberingBlockEntity<PanRecipe> impl
 
     @Override
     public IItemHandlerModifiable setUpInventory() {
-        return new ItemStackHandler(6);
+        return new BlockEntityStackHandler(6, this::setChanged);
     }
 
     @Override

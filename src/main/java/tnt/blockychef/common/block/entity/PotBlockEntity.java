@@ -24,6 +24,7 @@ import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.common.init.BlockyChefSounds;
 import tnt.blockychef.common.init.BlockyChefTags;
+import tnt.blockychef.common.menu.BlockEntityStackHandler;
 import tnt.blockychef.util.Helper;
 import tnt.tntlib.api.ArrayUtils;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
@@ -132,7 +133,7 @@ public class PotBlockEntity extends RecipeRememberingBlockEntity<PotRecipe> impl
 
     @Override
     public IItemHandlerModifiable setUpInventory() {
-        return new ItemStackHandler(INPUTS.length + WATER.length);
+        return new BlockEntityStackHandler(INPUTS.length + WATER.length, this::setChanged);
     }
 
     @Override

@@ -19,6 +19,7 @@ import tnt.blockychef.common.food.mastery.CookingMastery;
 import tnt.blockychef.common.food.recipe.DryingRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
+import tnt.blockychef.common.menu.BlockEntityStackHandler;
 import tnt.blockychef.util.Helper;
 import tnt.tntlib.api.ArrayUtils;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
@@ -41,7 +42,7 @@ public class DryingRackBlockEntity extends RecipeRememberingBlockEntity<DryingRe
 
     @Override
     public IItemHandlerModifiable setUpInventory() {
-        return new ItemStackHandler(DRYING_CAPACITY);
+        return new BlockEntityStackHandler(DRYING_CAPACITY, this::setChanged);
     }
 
     public boolean isValidInput(ItemStack stack, Level level) {

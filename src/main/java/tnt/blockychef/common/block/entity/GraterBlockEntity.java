@@ -15,6 +15,7 @@ import tnt.blockychef.common.food.recipe.GratingRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.common.init.BlockyChefSounds;
+import tnt.blockychef.common.menu.BlockEntityStackHandler;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.blockentity.Synchronizable;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
@@ -108,7 +109,7 @@ public class GraterBlockEntity extends RecipeRememberingBlockEntity<GratingRecip
 
     @Override
     public IItemHandlerModifiable setUpInventory() {
-        return new ItemStackHandler(1);
+        return new BlockEntityStackHandler(1, this::setChanged);
     }
 
     @Override

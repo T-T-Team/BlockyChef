@@ -24,6 +24,7 @@ import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.common.init.BlockyChefSounds;
 import tnt.blockychef.common.init.BlockyChefTags;
+import tnt.blockychef.common.menu.BlockEntityStackHandler;
 import tnt.blockychef.util.Helper;
 import tnt.tntlib.api.ArrayUtils;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
@@ -148,7 +149,7 @@ public class GrillBlockEntity extends RecipeRememberingBlockEntity<GrillRecipe> 
 
     @Override
     public IItemHandlerModifiable setUpInventory() {
-        return new ItemStackHandler(7);
+        return new BlockEntityStackHandler(7, this::setChanged);
     }
 
     @Override

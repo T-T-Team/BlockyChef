@@ -14,6 +14,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import tnt.blockychef.common.food.recipe.BarrelRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
+import tnt.blockychef.common.menu.BlockEntityStackHandler;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.blockentity.Synchronizable;
 import tnt.tntlib.api.math.Interpolation;
@@ -96,7 +97,7 @@ public class BarrelBlockEntity extends RecipeRememberingBlockEntity<BarrelRecipe
 
     @Override
     public IItemHandlerModifiable setUpInventory() {
-        return new ItemStackHandler(INPUTS.length + OUTPUTS.length);
+        return new BlockEntityStackHandler(INPUTS.length + OUTPUTS.length, this::setChanged);
     }
 
     @Override

@@ -19,6 +19,7 @@ import tnt.blockychef.common.heat.HeatSource;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.common.init.BlockyChefSounds;
+import tnt.blockychef.common.menu.BlockEntityStackHandler;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.blockentity.Synchronizable;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
@@ -196,7 +197,7 @@ public class SaucepanBlockEntity extends RecipeRememberingBlockEntity<SaucepanRe
 
     @Override
     public IItemHandlerModifiable setUpInventory() {
-        return new ItemStackHandler(INPUTS.length + OUTPUTS.length);
+        return new BlockEntityStackHandler(INPUTS.length + OUTPUTS.length, this::setChanged);
     }
 
     @Override

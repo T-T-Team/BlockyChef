@@ -17,6 +17,7 @@ import tnt.blockychef.common.food.recipe.MixerRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.common.init.BlockyChefSounds;
+import tnt.blockychef.common.menu.BlockEntityStackHandler;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.blockentity.Synchronizable;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
@@ -112,7 +113,7 @@ public class MixerBlockEntity extends RecipeRememberingBlockEntity<MixerRecipe> 
 
     @Override
     public IItemHandlerModifiable setUpInventory() {
-        return new ItemStackHandler(INPUTS.length);
+        return new BlockEntityStackHandler(INPUTS.length, this::setChanged);
     }
 
     @Override

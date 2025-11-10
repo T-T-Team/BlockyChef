@@ -13,6 +13,7 @@ import tnt.blockychef.common.food.recipe.MortarRecipe;
 import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.common.init.BlockyChefSounds;
+import tnt.blockychef.common.menu.BlockEntityStackHandler;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.blockentity.Synchronizable;
 import tnt.tntlib.api.math.Interpolation;
@@ -99,7 +100,7 @@ public class MortarAndPestleBlockEntity extends RecipeRememberingBlockEntity<Mor
 
     @Override
     public IItemHandlerModifiable setUpInventory() {
-        return new ItemStackHandler(9);
+        return new BlockEntityStackHandler(9, this::setChanged);
     }
 
     @Override

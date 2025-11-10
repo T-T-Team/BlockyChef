@@ -22,6 +22,7 @@ import tnt.blockychef.common.init.BlockyChefBlockEntities;
 import tnt.blockychef.common.init.BlockyChefRecipeTypes;
 import tnt.blockychef.common.init.BlockyChefSounds;
 import tnt.blockychef.common.init.BlockyChefTags;
+import tnt.blockychef.common.menu.BlockEntityStackHandler;
 import tnt.tntlib.api.blockentity.BlockEntityHelper;
 import tnt.tntlib.api.blockentity.Synchronizable;
 import tnt.tntlib.api.menu.MenuInventoryHelper;
@@ -179,7 +180,7 @@ public class TeapotBlockEntity extends RecipeRememberingBlockEntity<TeapotRecipe
 
     @Override
     public IItemHandlerModifiable setUpInventory() {
-        return new ItemStackHandler(7);
+        return new BlockEntityStackHandler(7, this::setChanged);
     }
 
     @Override
