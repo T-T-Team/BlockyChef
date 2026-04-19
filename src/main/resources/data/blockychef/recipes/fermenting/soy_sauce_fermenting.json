@@ -30,12 +30,18 @@
       "ingredient": {
         "item": "blockychef:shredded_garlic"
       }
+    },
+    {
+      "count": 6,
+      "ingredient": {
+        "item": "blockychef:empty_bottle"
+      }
     }
   ],
   "outputs": [
     {
       "item": "blockychef:soy_sauce",
-      "count": 2
+      "count": 8
     }
   ],
   "craftRemainderConsumers": [
