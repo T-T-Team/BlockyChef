@@ -438,6 +438,22 @@ public final class DrinkList {
     public static final DrinkProperties VEGGIE_BURGER = DrinkProperties.Builder.create().stats(-3, 0).build();
     public static final DrinkProperties SAMURAI_BURGER = DrinkProperties.Builder.create().stats(-6, 0).build();
     public static final DrinkProperties FILET_O_FISH = DrinkProperties.Builder.create().stats(-3, 0).build();
+    public static final DrinkProperties PUMPKIN_SLICE = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties PUMPKIN_SEEDS = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties MOZZARELLA_CHEESE = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties MOZZARELLA_SLICE = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties CHEESE_CURDS = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties FETA_CHEESE = DrinkProperties.Builder.create().stats(-3, 0).build();
+    public static final DrinkProperties FETA_CUTS = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties QUARK = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties RAISINS = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties RAW_SAUSAGE = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties SAUSAGE = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties RAW_SALAMI = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties SALAMI = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties BOILED_SALAMI = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties SALAMI_SLICE = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties ROASTED_PUMPKIN_SEEDS = DrinkProperties.Builder.create().stats(-1, 0).build();
 
     private DrinkList() {}
 }

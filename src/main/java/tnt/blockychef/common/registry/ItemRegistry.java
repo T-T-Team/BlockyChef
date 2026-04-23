@@ -612,6 +612,25 @@ public final class ItemRegistry {
         helper.register("veggie_burger", new DrinkableConsumableItem(new Item.Properties().food(FoodList.VEGGIE_BURGER), DrinkList.VEGGIE_BURGER));
         helper.register("samurai_burger", new DrinkableConsumableItem(new Item.Properties().food(FoodList.SAMURAI_BURGER), DrinkList.SAMURAI_BURGER));
         helper.register("filet_o_fish", new DrinkableConsumableItem(new Item.Properties().food(FoodList.FILET_O_FISH), DrinkList.FILET_O_FISH));
+        helper.register("pumpkin_slice", new DrinkableConsumableItem(new Item.Properties().food(FoodList.PUMPKIN_SLICE), DrinkList.PUMPKIN_SLICE));
+        helper.register("pumpkin_seeds", new DrinkableConsumableItem(new Item.Properties().food(FoodList.PUMPKIN_SEEDS), DrinkList.PUMPKIN_SEEDS));
+        helper.register("roasted_pumpkin_seeds", new DrinkableConsumableItem(new Item.Properties().food(FoodList.ROASTED_PUMPKIN_SEEDS), DrinkList.ROASTED_PUMPKIN_SEEDS));
+        helper.register("burnt_pumpkin_seeds", new Item(new Item.Properties()));
+        helper.register("mozzarella_cheese", new DrinkableConsumableItem(new Item.Properties().food(FoodList.MOZZARELLA_CHEESE), DrinkList.MOZZARELLA_CHEESE));
+        helper.register("mozzarella_slice", new DrinkableConsumableItem(new Item.Properties().food(FoodList.MOZZARELLA_SLICE), DrinkList.MOZZARELLA_SLICE));
+        helper.register("cheese_curds", new DrinkableConsumableItem(new Item.Properties().food(FoodList.CHEESE_CURDS), DrinkList.CHEESE_CURDS));
+        helper.register("feta_cheese", new DrinkableConsumableItem(new Item.Properties().food(FoodList.FETA_CHEESE), DrinkList.FETA_CHEESE));
+        helper.register("feta_cuts", new DrinkableConsumableItem(new Item.Properties().food(FoodList.FETA_CUTS), DrinkList.FETA_CUTS));
+        helper.register("quark", new DrinkableConsumableItem(new Item.Properties().food(FoodList.QUARK), DrinkList.QUARK));
+        helper.register("raisins", new DrinkableConsumableItem(new Item.Properties().food(FoodList.RAISINS), DrinkList.RAISINS));
+        helper.register("raw_sausage", new DrinkableConsumableItem(new Item.Properties().food(FoodList.RAW_SAUSAGE), DrinkList.RAW_SAUSAGE));
+        helper.register("sausage", new DrinkableConsumableItem(new Item.Properties().food(FoodList.SAUSAGE), DrinkList.SAUSAGE));
+        helper.register("burnt_sausage", new Item(new Item.Properties()));
+        helper.register("burnt_salami", new Item(new Item.Properties()));
+        helper.register("raw_salami", new DrinkableConsumableItem(new Item.Properties().food(FoodList.RAW_SALAMI), DrinkList.RAW_SALAMI));
+        helper.register("boiled_salami", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BOILED_SALAMI), DrinkList.BOILED_SALAMI));
+        helper.register("salami", new DrinkableConsumableItem(new Item.Properties().food(FoodList.SALAMI), DrinkList.SALAMI));
+        helper.register("salami_slice", new DrinkableConsumableItem(new Item.Properties().food(FoodList.SALAMI_SLICE), DrinkList.SALAMI_SLICE));
 
 
 
