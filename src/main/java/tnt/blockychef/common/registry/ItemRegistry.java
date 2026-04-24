@@ -627,10 +627,15 @@ public final class ItemRegistry {
         helper.register("sausage", new DrinkableConsumableItem(new Item.Properties().food(FoodList.SAUSAGE), DrinkList.SAUSAGE));
         helper.register("burnt_sausage", new Item(new Item.Properties()));
         helper.register("burnt_salami", new Item(new Item.Properties()));
+        helper.register("burnt_cheese_curds", new Item(new Item.Properties()));
+        helper.register("collagen", new Item(new Item.Properties()));
+        helper.register("burnt_collagen", new Item(new Item.Properties()));
         helper.register("raw_salami", new DrinkableConsumableItem(new Item.Properties().food(FoodList.RAW_SALAMI), DrinkList.RAW_SALAMI));
         helper.register("boiled_salami", new DrinkableConsumableItem(new Item.Properties().food(FoodList.BOILED_SALAMI), DrinkList.BOILED_SALAMI));
         helper.register("salami", new DrinkableConsumableItem(new Item.Properties().food(FoodList.SALAMI), DrinkList.SALAMI));
         helper.register("salami_slice", new DrinkableConsumableItem(new Item.Properties().food(FoodList.SALAMI_SLICE), DrinkList.SALAMI_SLICE));
+        helper.register("hardened_gelatin", new DrinkableConsumableItem(new Item.Properties().food(FoodList.HARDENED_GELATIN), DrinkList.HARDENED_GELATIN));
+        helper.register("gelatin", new DrinkableConsumableItem(new Item.Properties().food(FoodList.GELATIN), DrinkList.GELATIN));
 
 
 

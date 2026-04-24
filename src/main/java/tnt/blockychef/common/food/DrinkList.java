@@ -454,6 +454,8 @@ public final class DrinkList {
     public static final DrinkProperties BOILED_SALAMI = DrinkProperties.Builder.create().stats(-2, 0).build();
     public static final DrinkProperties SALAMI_SLICE = DrinkProperties.Builder.create().stats(-1, 0).build();
     public static final DrinkProperties ROASTED_PUMPKIN_SEEDS = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties HARDENED_GELATIN = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties GELATIN = DrinkProperties.Builder.create().stats(-2, 0).build();
 
     private DrinkList() {}
 }

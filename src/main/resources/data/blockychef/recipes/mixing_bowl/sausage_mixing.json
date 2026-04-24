@@ -1,0 +1,36 @@
+{
+  "type": "blockychef:mixing_bowl",
+  "inputs": [
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "blockychef:grounded_pork_meat"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:salt"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:pepper_powder"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:leather"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:raw_sausage",
+      "count": 2
+    }
+  ],
+  "mixingTime": 120
+}

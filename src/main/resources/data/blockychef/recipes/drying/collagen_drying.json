@@ -1,0 +1,10 @@
+{
+  "type": "blockychef:drying",
+  "input": {
+    "item": "blockychef:collagen"
+  },
+  "output": {
+    "item": "blockychef:hardened_gelatin"
+  },
+  "dryingTime": 2400
+}

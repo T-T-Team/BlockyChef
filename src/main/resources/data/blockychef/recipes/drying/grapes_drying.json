@@ -1,0 +1,10 @@
+{
+  "type": "blockychef:drying",
+  "input": {
+    "item": "blockychef:grapes"
+  },
+  "output": {
+    "item": "blockychef:raisins"
+  },
+  "dryingTime": 2400
+}

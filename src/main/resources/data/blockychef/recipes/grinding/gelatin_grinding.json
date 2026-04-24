@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:grinding",
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "blockychef:hardened_gelatin"
+      },
+      "count": 1
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:gelatin",
+      "count": 3
+    }
+  ],
+  "processingTime": 120
+}

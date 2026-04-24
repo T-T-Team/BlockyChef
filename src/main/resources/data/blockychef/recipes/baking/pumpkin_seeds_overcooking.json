@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:stove",
+  "input": {
+    "item": "blockychef:roasted_pumpkin_seeds"
+  },
+  "result": {
+    "item": "blockychef:burnt_pumpkin_seeds"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_pumpkin_seeds"
+  },
+  "cookingConfiguration": {
+    "time": 260,
+    "minTemperature": 0.10,
+    "maxTemperature": 10.0
+  },
+  "overcooking": true
+}

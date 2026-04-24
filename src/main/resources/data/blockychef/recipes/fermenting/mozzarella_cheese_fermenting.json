@@ -1,0 +1,24 @@
+{
+  "type": "blockychef:barrel",
+  "inputs": [
+    {
+      "count": 2,
+      "ingredient": {
+        "item": "blockychef:cheese_curds"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:bottle_of_water"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:mozzarella_cheese",
+      "count": 1
+    }
+  ],
+  "fermentTime": 2400
+}

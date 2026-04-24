@@ -1,0 +1,35 @@
+{
+  "type": "blockychef:saucepan",
+  "inputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:milk"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:salt"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 3,
+      "item": "blockychef:cheese_curds"
+    }
+  ],
+  "burnOutputs": [
+    {
+      "count": 3,
+      "item": "blockychef:burnt_cheese_curds"
+    }
+  ],
+  "configuration": {
+    "time": 350,
+    "minTemperature": 1.0,
+    "maxTemperature": 1.5,
+    "burnSpeed": 0.40
+  }
+}

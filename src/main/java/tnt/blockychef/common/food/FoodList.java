@@ -474,7 +474,9 @@ public final class FoodList {
     public static final FoodProperties PUMPKIN_SEEDS = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties CHEESE_CURDS = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties RAW_SAUSAGE = food(3, 2).effect(HUNGER, PROBABILITY).build();
-    public static final FoodProperties RAW_SALAMI = food(3, 3).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties RAW_SALAMI = food(4, 3).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties HARDENED_GELATIN = food(2, 1).effect(HUNGER, PROBABILITY).build();
+    public static final FoodProperties GELATIN = food(1, 1).effect(HUNGER, PROBABILITY).build();
     public static final FoodProperties MOZZARELLA_CHEESE = food(3, 2).build();
     public static final FoodProperties MOZZARELLA_SLICE = food(2, 1).build();
     public static final FoodProperties FETA_CHEESE = food(3, 3).build();
@@ -482,8 +484,8 @@ public final class FoodList {
     public static final FoodProperties QUARK = food(2, 3).build();
     public static final FoodProperties RAISINS = food(1, 2).build();
     public static final FoodProperties SAUSAGE = food(4, 4).build();
-    public static final FoodProperties SALAMI = food(4, 5).build();
-    public static final FoodProperties BOILED_SALAMI = food(3, 4).build();
+    public static final FoodProperties SALAMI = food(5, 5).build();
+    public static final FoodProperties BOILED_SALAMI = food(4, 4).build();
     public static final FoodProperties SALAMI_SLICE = food(2, 3).build();
     public static final FoodProperties ROASTED_PUMPKIN_SEEDS = food(2, 2).build();
 

@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:raw_salami"
+  },
+  "result": {
+    "item": "blockychef:boiled_salami"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_salami"
+  },
+  "configuration": {
+    "time": 450,
+    "minTemperature": 6.5,
+    "maxTemperature": 7.5,
+    "minWaterLevel": 250,
+    "burnSpeed": 0.45
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "blockychef:drying",
+  "input": {
+    "item": "blockychef:boiled_salami"
+  },
+  "output": {
+    "item": "blockychef:salami"
+  },
+  "dryingTime": 2400
+}

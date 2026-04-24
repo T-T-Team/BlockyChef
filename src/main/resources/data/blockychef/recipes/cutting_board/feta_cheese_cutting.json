@@ -1,0 +1,14 @@
+{
+  "type": "blockychef:cutting_board",
+  "input": {
+    "item": "blockychef:feta_cheese"
+  },
+  "processingType": "blockychef:cutting",
+  "processingTime": 80,
+  "outputs": [
+    {
+      "item": "blockychef:feta_cuts",
+      "count": 2
+    }
+  ]
+}

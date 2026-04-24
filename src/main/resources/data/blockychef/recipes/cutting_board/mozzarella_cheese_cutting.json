@@ -1,0 +1,14 @@
+{
+  "type": "blockychef:cutting_board",
+  "input": {
+    "item": "blockychef:mozzarella_cheese"
+  },
+  "processingType": "blockychef:cutting",
+  "processingTime": 80,
+  "outputs": [
+    {
+      "item": "blockychef:mozzarella_slice",
+      "count": 2
+    }
+  ]
+}

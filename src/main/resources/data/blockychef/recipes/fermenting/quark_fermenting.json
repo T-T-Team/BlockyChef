@@ -1,0 +1,24 @@
+{
+  "type": "blockychef:barrel",
+  "inputs": [
+    {
+      "count": 8,
+      "ingredient": {
+        "item": "blockychef:cheese_curds"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "blockychef:plain_yogurt"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "item": "blockychef:quark",
+      "count": 4
+    }
+  ],
+  "fermentTime": 2400
+}

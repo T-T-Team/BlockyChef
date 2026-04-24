@@ -1,0 +1,19 @@
+{
+  "type": "blockychef:pot",
+  "input": {
+    "item": "blockychef:raw_sausage"
+  },
+  "result": {
+    "item": "blockychef:sausage"
+  },
+  "burntResult": {
+    "item": "blockychef:burnt_sausage"
+  },
+  "configuration": {
+    "time": 400,
+    "minTemperature": 5.5,
+    "maxTemperature": 6.0,
+    "minWaterLevel": 250,
+    "burnSpeed": 0.4
+  }
+}

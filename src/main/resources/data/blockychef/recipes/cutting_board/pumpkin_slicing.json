@@ -1,0 +1,18 @@
+{
+  "type": "blockychef:cutting_board",
+  "input": {
+    "item": "minecraft:pumpkin"
+  },
+  "processingType": "blockychef:slicing",
+  "processingTime": 80,
+  "outputs": [
+    {
+      "item": "blockychef:pumpkin_slice",
+      "count": 3
+    },
+    {
+      "item": "blockychef:pumpkin_seeds",
+      "count": 2
+    }
+  ]
+}
