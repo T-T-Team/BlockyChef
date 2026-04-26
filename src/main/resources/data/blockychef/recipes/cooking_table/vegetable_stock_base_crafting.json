@@ -32,13 +32,5 @@
       "item": "blockychef:vegetable_stock_base",
       "count": 1
     }
-  ],
-  "craftRemainderConsumers": [
-    {
-      "count": 1,
-      "ingredient": {
-        "item": "minecraft:bowl"
-      }
-    }
   ]
 }

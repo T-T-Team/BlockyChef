@@ -456,6 +456,44 @@ public final class DrinkList {
     public static final DrinkProperties ROASTED_PUMPKIN_SEEDS = DrinkProperties.Builder.create().stats(-1, 0).build();
     public static final DrinkProperties HARDENED_GELATIN = DrinkProperties.Builder.create().stats(-1, 0).build();
     public static final DrinkProperties GELATIN = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties UNCOOKED_POTATO_SOUP = DrinkProperties.Builder.create().stats(-1, 0).giveSingleEffect(PROBABILITY, THIRST).build();
+    public static final DrinkProperties POTATO_SOUP = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties UNCOOKED_CARROT_SOUP = DrinkProperties.Builder.create().stats(-1, 0).giveSingleEffect(PROBABILITY, THIRST).build();
+    public static final DrinkProperties CARROT_SOUP = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties UNCOOKED_MUSHROOM_SOUP = DrinkProperties.Builder.create().stats(-1, 0).giveSingleEffect(PROBABILITY, THIRST).build();
+    public static final DrinkProperties MUSHROOM_SOUP = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties UNCOOKED_CHICKEN_SOUP = DrinkProperties.Builder.create().stats(-1, 0).giveSingleEffect(PROBABILITY, THIRST).build();
+    public static final DrinkProperties CHICKEN_SOUP = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties UNCOOKED_BEEF_SOUP = DrinkProperties.Builder.create().stats(-1, 0).giveSingleEffect(PROBABILITY, THIRST).build();
+    public static final DrinkProperties BEEF_SOUP = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties UNCOOKED_BROCCOLI_SOUP = DrinkProperties.Builder.create().stats(-1, 0).giveSingleEffect(PROBABILITY, THIRST).build();
+    public static final DrinkProperties BROCCOLI_SOUP = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties UNCOOKED_BEAN_SOUP = DrinkProperties.Builder.create().stats(-1, 0).giveSingleEffect(PROBABILITY, THIRST).build();
+    public static final DrinkProperties BEAN_SOUP = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties UNCOOKED_PEA_SOUP = DrinkProperties.Builder.create().stats(-1, 0).giveSingleEffect(PROBABILITY, THIRST).build();
+    public static final DrinkProperties PEA_SOUP = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties UNCOOKED_LEEK_SOUP = DrinkProperties.Builder.create().stats(-1, 0).giveSingleEffect(PROBABILITY, THIRST).build();
+    public static final DrinkProperties LEEK_SOUP = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties UNCOOKED_GARLIC_SOUP = DrinkProperties.Builder.create().stats(-3, 0).giveSingleEffect(PROBABILITY, THIRST).build();
+    public static final DrinkProperties GARLIC_SOUP = DrinkProperties.Builder.create().stats(-3, 0).build();
+    public static final DrinkProperties UNCOOKED_FISH_SOUP = DrinkProperties.Builder.create().stats(-1, 0).giveSingleEffect(PROBABILITY, THIRST).build();
+    public static final DrinkProperties FISH_SOUP = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties UNCOOKED_GOULASH_SOUP = DrinkProperties.Builder.create().stats(-2, 0).giveSingleEffect(PROBABILITY, THIRST).build();
+    public static final DrinkProperties GOULASH_SOUP = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties UNCOOKED_VEGETABLE_SOUP = DrinkProperties.Builder.create().stats(-1, 0).giveSingleEffect(PROBABILITY, THIRST).build();
+    public static final DrinkProperties VEGETABLE_SOUP = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties UNCOOKED_CHICKEN_CORN_SOUP = DrinkProperties.Builder.create().stats(-1, 0).giveSingleEffect(PROBABILITY, THIRST).build();
+    public static final DrinkProperties CHICKEN_CORN_SOUP = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties UNCOOKED_TOMATO_SOUP = DrinkProperties.Builder.create().stats(-1, 0).giveSingleEffect(PROBABILITY, THIRST).build();
+    public static final DrinkProperties TOMATO_SOUP = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties UNCOOKED_PUMPKIN_SOUP = DrinkProperties.Builder.create().stats(-1, 0).giveSingleEffect(PROBABILITY, THIRST).build();
+    public static final DrinkProperties PUMPKIN_SOUP = DrinkProperties.Builder.create().stats(-1, 0).build();
+    public static final DrinkProperties CHICKEN_RAMEN = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties BEEF_RAMEN = DrinkProperties.Builder.create().stats(-2, 0).build();
+    public static final DrinkProperties CHICKEN_SPICY_RAMEN = DrinkProperties.Builder.create().stats(-4, 0).build();
+    public static final DrinkProperties BEEF_SPICY_RAMEN = DrinkProperties.Builder.create().stats(-4, 0).build();
+    public static final DrinkProperties TOM_YUM_SOUP = DrinkProperties.Builder.create().stats(-3, 0).build();
+    public static final DrinkProperties MISO_SOUP = DrinkProperties.Builder.create().stats(-2, 0).build();
 
     private DrinkList() {}
 }
